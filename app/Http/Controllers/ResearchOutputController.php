@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\ResearchOutputRequest;
 use App\ResearchOutput;
 
 class ResearchOutputController extends Controller
@@ -16,7 +15,8 @@ class ResearchOutputController extends Controller
      */
     public function index()
     {
-        return ResearchOutput::with('project')->get();
+        $researchOutputs = ResearchOutput::orderBy('title')->paginate(50);
+        return view('ResearchOutputs.index', compact('researchOutputs'));
     }
 
     /**
@@ -26,7 +26,7 @@ class ResearchOutputController extends Controller
      */
     public function create()
     {
-        //
+        return view('ResearchOutputs.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class ResearchOutputController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ResearchOutputRequest $request)
+    public function store(Request $request)
     {
         $researchOutput = new ResearchOutput();
         $researchOutput->title          = $request->get('title');
@@ -51,15 +51,12 @@ class ResearchOutputController extends Controller
             $researchOutput->file  = "research-outputs/$fileName";
         }
         $researchOutput->project()->associate($request->get('project_id'));
-        $researchOutput->save();
+        
+        if($researchOutput->save()){
+            $message = 'Your store processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('research-outputs.index')->with('status', $message);
     }
 
     /**
@@ -70,7 +67,8 @@ class ResearchOutputController extends Controller
      */
     public function show(ResearchOutput $researchOutput)
     {
-        return response()->json($researchOutput);
+        
+        return view('ResearchOutputs.show', compact('researchOutput'));
     }
 
     /**
@@ -81,7 +79,7 @@ class ResearchOutputController extends Controller
      */
     public function edit(ResearchOutput $researchOutput)
     {
-        return response()->json($researchOutput);
+        return view('ResearchOutputs.edit', compact('researchOutput'));
     }
 
     /**
@@ -91,7 +89,7 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function update(ResearchOutputRequest $request, ResearchOutput $researchOutput)
+    public function update(Request $request, ResearchOutput $researchOutput)
     {
         $researchOutput->title          = $request->get('title');
         $researchOutput->typology       = $request->get('typology');
@@ -104,15 +102,12 @@ class ResearchOutputController extends Controller
             $researchOutput->file = $path;
         }
         $researchOutput->project()->associate($request->get('project_id'));
-        $researchOutput->save();
+        
+        if($researchOutput->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('research-outputs.index')->with('status', $message);
     }
 
     /**
@@ -123,17 +118,10 @@ class ResearchOutputController extends Controller
      */
     public function destroy(ResearchOutput $researchOutput)
     {
-        try
-        {
-            if($researchOutput->delete()){
-                return 'Eliminado';
-            }
+        if($researchOutput->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return 'Error 23000';
-            }
-        }
+
+        return redirect()->route('research-outputs.index')->with('status', $message);
     }
 }

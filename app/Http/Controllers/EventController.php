@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use Illuminate\Http\Request;
-use App\Http\Requests\EventRequest;
 
 class EventController extends Controller
 {
@@ -15,7 +14,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        return Event::with('educationalInstitutionEvent.educationalInstitution', 'nodeEvent.node')->get();
+        $events = Event::orderBy('name')->paginate(50);
+        return view('Events.index', compact('events'));
     }
 
     /**
@@ -25,7 +25,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('Events.create');
     }
 
     /**
@@ -34,7 +34,7 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventRequest $request)
+    public function store(Request $request)
     {
         $event = new Event();
         $event->name        = $request->get('name');
@@ -56,14 +56,12 @@ class EventController extends Controller
                 'node_id'   => $request->get('node_id')
             ]);
         }
+        
+        if($event->save()){
+            $message = 'Your store processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('events.index')->with('status', $message);
     }
 
     /**
@@ -74,7 +72,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return response()->json($event);
+        return view('Events.show', compact('event'));
     }
 
     /**
@@ -85,7 +83,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return response()->json($event);
+        return view('Events.edit', compact('event'));
     }
 
     /**
@@ -95,7 +93,7 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(EventRequest $request, Event $event)
+    public function update(Request $request, Event $event)
     {
         $event->name        = $request->get('name');
         $event->location    = $request->get('location');
@@ -113,15 +111,12 @@ class EventController extends Controller
                 'node_id'   => $request->get('node_id')
             ]);
         }
-        $event->save();
+        
+        if($event->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('events.index')->with('status', $message);
     }
 
     /**
@@ -132,18 +127,10 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        try
-        {
-            $event = Event::find($event);
-            if($event->delete()){
-                return response()->json('Eliminado');
-            }
+        if($event->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return response()->json('Error 23000');
-            }
-        }
+
+        return redirect()->route('events.index')->with('status', $message);
     }
 }

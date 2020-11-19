@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Node;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreNodeRequest;
-use App\Http\Requests\UpdateNodeRequest;
 
 class NodeController extends Controller
 {
@@ -17,7 +15,8 @@ class NodeController extends Controller
      */
     public function index()
     {
-        return Node::with('administrator.user')->get();
+        $nodes = Node::orderBy('state')->paginate(50);
+        return view('Nodes.index', copmact('nodes'));
     }
 
     /**
@@ -27,7 +26,7 @@ class NodeController extends Controller
      */
     public function create()
     {
-        //
+        return view('Nodes.create');
     }
 
     /**
@@ -36,20 +35,17 @@ class NodeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNodeRequest $request)
+    public function store(Request $request)
     {
         $node           = new Node();
         $node->state    = $request->get('state');
         $node->administrator()->associate($request->get('administrator_id'));
-        $node->save();
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
+        if($node->save()){
+            $message = 'Your store processed correctly';
+        }
 
-        return response()->json($data);
+        return redirect()->route('nodes.index')->with('status', $message);
     }
 
     /**
@@ -60,8 +56,7 @@ class NodeController extends Controller
      */
     public function show(Node $node)
     {
-        return response()->json($node->with('administrator.user')->where('nodes.id', $node->id)->first());
-        
+        return view('Nodes.show', copmact('node'));
     }
 
     /**
@@ -72,7 +67,7 @@ class NodeController extends Controller
      */
     public function edit(Node $node)
     {
-        return response()->json($node);
+        return view('Nodes.edit', copmact('node'));
     }
 
     /**
@@ -82,19 +77,16 @@ class NodeController extends Controller
      * @param  \App\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNodeRequest $request, Node $node)
+    public function update(Request $request, Node $node)
     {
         $node->state    = $request->get('state');
         $node->administrator()->associate($request->get('administrator_id'));
-        $node->save();
+        
+        if($node->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('nodes.index')->with('status', $message);
     }
 
     /**
@@ -105,18 +97,11 @@ class NodeController extends Controller
      */
     public function destroy(Node $node)
     {
-        try
-        {
-            if($node->delete()){
-                return 'Eliminado';
-            }
+        if($node->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return 'Error 23000';
-            }
-        }
+
+        return redirect()->route('nodes.index')->with('status', $message);
     }
 
     /**

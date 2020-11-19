@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Project;
 use App\Event;
 use Illuminate\Http\Request;
-use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -17,7 +16,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Project::with('authors', 'researchTeams')->get();
+        $projects = Project::orderBy('name')->paginate(50);
+        return view('Projects.index', compact('projects'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('Projects.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectRequest $request)
+    public function store(Request $request)
     {
         $project = new Project();
         $project->title             = $request->get('title');
@@ -57,7 +57,10 @@ class ProjectController extends Controller
         $project->overall_objective = $request->get('overall_objective');
         $project->is_privated       = $request->get('is_privated');
         $project->is_published      = $request->get('is_published');
-        $project->save();
+
+        if($project->save()){
+            $message = 'Your store processed correctly';
+        }
 
         $project->researchTeams()->attach($request->get('research_team_id'), ['is_principal' => false]);
         $project->researchLines()->attach($request->get('research_line_id'));
@@ -65,13 +68,7 @@ class ProjectController extends Controller
         $project->academicPrograms()->attach($request->get('academic_program_id'));
         $project->authors()->attach($request->get('user_id'));
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('projects.index')->with('status', $message);
         
     }
 
@@ -83,7 +80,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return response()->json($project);
+        return view('Projects.show', compact('project'));
     }
 
     /**
@@ -94,7 +91,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return response()->json($project);
+        return view('Projects.edit', compact('project'));
     }
 
     /**
@@ -104,7 +101,7 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectRequest $request, Project $project)
+    public function update(Request $request, Project $project)
     {
         $project->title             = $request->get('title');
         $project->start_date        = $request->get('start_date');
@@ -122,7 +119,10 @@ class ProjectController extends Controller
         $project->overall_objective = $request->get('overall_objective');
         $project->is_privated       = $request->get('is_privated');
         $project->is_published      = $request->get('is_published');
-        $project->save();
+
+        if($project->save()){
+            $message = 'Your update processed correctly';
+        }
 
         $project->researchTeams()->wherePivot('project_id', '=', $project->id)->detach();
         $project->researchTeams()->attach($request->get('research_team_id'), ['is_principal' => false]);
@@ -135,13 +135,7 @@ class ProjectController extends Controller
         $project->authors()->wherePivot('project_id', '=', $project->id)->detach();
         $project->authors()->attach($request->get('user_id'));
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('projects.index')->with('status', $message);
     }
 
     /**
@@ -152,18 +146,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        try
-        {
-            if($project->delete()){
-                return 'Eliminado';
-            }
+        if($project->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return 'Error 23000';
-            }
-        }
+
+        return redirect()->route('projects.index')->with('status', $message);
     }
 
     /**
@@ -174,8 +161,6 @@ class ProjectController extends Controller
      */
     public function registerEvent(Project $project, Request $request)
     {
-        $project->events()->attach($request->get('event_id'));
+        return view('Projects.registerEvent', compact('project'));
     }
-
-
 }

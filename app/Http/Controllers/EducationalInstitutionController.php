@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\EducationalInstitution;
 use App\ResearchGroup;
-use App\Http\Requests\StoreEducationalInstitutionRequest;
-use App\Http\Requests\UpdateEducationalInstitutionRequest;
 use Exception;
 
 class EducationalInstitutionController extends Controller
@@ -17,7 +15,8 @@ class EducationalInstitutionController extends Controller
      */
     public function index()
     {
-        return EducationalInstitution::with('node', 'administrator.user')->get();
+        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
+        return view('EducationalInstitutions.index', compact('educationalInstitutions'));
     }
 
     /**
@@ -27,7 +26,7 @@ class EducationalInstitutionController extends Controller
      */
     public function create()
     {
-        //
+        return view('EducationalInstitutions.create');
     }
 
     /**
@@ -36,7 +35,7 @@ class EducationalInstitutionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEducationalInstitutionRequest $request)
+    public function store(Request $request)
     {
         $educationalInstitution = new EducationalInstitution();
         $educationalInstitution->name           = $request->get('name');
@@ -47,15 +46,12 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->website        = $request->get('website');
         $educationalInstitution->administrator()->associate($request->get('administrator_id'));
         $educationalInstitution->node()->associate($request->get('node_id'));
-        $educationalInstitution->save();
-
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        
+        if($educationalInstitution->save()){
+            $message = 'Your store processed correctly';
+        }
+        
+        return redirect()->route('educational-institutions.index')->with('status', $message);
     }
 
     /**
@@ -66,7 +62,7 @@ class EducationalInstitutionController extends Controller
      */
     public function show(EducationalInstitution $educationalInstitution)
     {
-        return response()->json( $educationalInstitution->with('administrator.user')->where('educational_institutions.id', $educationalInstitution->id)->first() );
+        return view('EducationalInstitutions.show', compact('educationalInstitution'));
     }
 
     /**
@@ -77,7 +73,7 @@ class EducationalInstitutionController extends Controller
      */
     public function edit(EducationalInstitution $educationalInstitution)
     {
-        return response()->json($educationalInstitution);
+        return view('EducationalInstitutions.show', compact('educationalInstitution'));
     }
 
     /**
@@ -87,7 +83,7 @@ class EducationalInstitutionController extends Controller
      * @param  \App\EducationalInstitution  $educationalInstitution
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEducationalInstitutionRequest $request, EducationalInstitution $educationalInstitution)
+    public function update(Request $request, EducationalInstitution $educationalInstitution)
     {
         $educationalInstitution->name           = $request->get('name');
         $educationalInstitution->nit            = $request->get('nit');
@@ -97,15 +93,12 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->website        = $request->get('website');
         $educationalInstitution->administrator()->associate($request->get('administrator_id'));
         $educationalInstitution->node()->associate($request->get('node_id'));
-        $educationalInstitution->save();
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
+        if($educationalInstitution->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        return response()->json($data);
+        return redirect()->route('educational-institutions.index')->with('status', $message);
     }
 
     /**
@@ -116,17 +109,11 @@ class EducationalInstitutionController extends Controller
      */
     public function destroy(EducationalInstitution $educationalInstitution)
     {
-        try
-        {
-            if($educationalInstitution->delete()){
-                return response()->json('Eliminado');
-            }
-        } catch (Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return response()->json('Error 23000');
-            }
+        if($educationalInstitution->delete()){
+            $message = 'Your delete processed correctly';
         }
+
+        return redirect()->route('educational-institutions.index')->with('status', $message);
     }
 
     /**

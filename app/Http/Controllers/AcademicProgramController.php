@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\AcademicProgram;
 use Illuminate\Http\Request;
-use App\Http\Requests\AcademicProgramRequest;
 use Exception;
 
 class AcademicProgramController extends Controller
@@ -16,7 +15,8 @@ class AcademicProgramController extends Controller
      */
     public function index()
     {
-        return AcademicProgram::with('educationalInstitution')->get();
+        $academicPrograms = AcademicProgram::orderBy('name')->paginate(50);
+        return view('AcademicPrograms.index', compact('academicPrograms'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AcademicProgramController extends Controller
      */
     public function create()
     {
-        //
+        return view('AcademicPrograms.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class AcademicProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AcademicProgramRequest $request)
+    public function store(Request $request)
     {
         $academicProgram = new AcademicProgram();
         $academicProgram->name              = $request->get('name');
@@ -46,15 +46,12 @@ class AcademicProgramController extends Controller
         $academicProgram->start_date        = $request->get('start_date');
         $academicProgram->end_date          = $request->get('end_date');
         $academicProgram->educationalInstitution()->associate($request->get('educational_institution_id'));
-        $academicProgram->save();
+        
+        if($academicProgram->save()) {
+            $message = 'Your store processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('academic-programs.index')->with('status', $message);
     }
 
     /**
@@ -65,7 +62,7 @@ class AcademicProgramController extends Controller
      */
     public function show(AcademicProgram $academicProgram)
     {
-        return response()->json($academicProgram);
+        return view('AcademicPrograms.show', compact('academicProgram'));
     }
 
     /**
@@ -76,7 +73,7 @@ class AcademicProgramController extends Controller
      */
     public function edit(AcademicProgram $academicProgram)
     {
-        return response()->json($academicProgram);
+        return view('AcademicPrograms.edit', compact('academicProgram'));
     }
 
     /**
@@ -86,7 +83,7 @@ class AcademicProgramController extends Controller
      * @param  \App\AcademicProgram  $academicProgram
      * @return \Illuminate\Http\Response
      */
-    public function update(AcademicProgramRequest $request, AcademicProgram $academicProgram)
+    public function update(Request $request, AcademicProgram $academicProgram)
     {
         $academicProgram->name              = $request->get('name');
         $academicProgram->code              = $request->get('code');
@@ -96,15 +93,12 @@ class AcademicProgramController extends Controller
         $academicProgram->start_date        = $request->get('start_date');
         $academicProgram->end_date          = $request->get('end_date');
         $academicProgram->educationalInstitution()->associate($request->get('educational_institution_id'));
-        $academicProgram->save();
+        
+        if($academicProgram->save()) {
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('academic-programs.index')->with('status', $message);
     }
 
     /**
@@ -115,17 +109,10 @@ class AcademicProgramController extends Controller
      */
     public function destroy(AcademicProgram $academicProgram)
     {
-        try
-        {
-            if($academicProgram->delete()){
-                return response()->json('Eliminado');
-            }
+        if($academicProgram->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return response()->json('Error 23000');
-            }
-        }
+
+        return redirect()->route('academic-programs.index')->with('status', $message);
     }
 }

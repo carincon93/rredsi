@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\AcademicWork;
 use Illuminate\Http\Request;
-use App\Http\Requests\AcademicWorkRequest;
 
 
 class AcademicWorkController extends Controller
@@ -16,7 +15,8 @@ class AcademicWorkController extends Controller
      */
     public function index()
     {
-        return AcademicWork::with('graduations', 'graduations.user')->get();
+        $academicWorks = AcademicWork::orderBy('title')->paginate(50);
+        return view('AcademicWorks.index', compact('academicWorks'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AcademicWorkController extends Controller
      */
     public function create()
     {
-        return view('academic-works.create');
+        return view('AcademicWorks.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class AcademicWorkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AcademicWorkRequest $request)
+    public function store(Request $request)
     {
         $academicWork = new AcademicWork();
         $academicWork->title                    = $request->get('title');
@@ -46,15 +46,12 @@ class AcademicWorkController extends Controller
         $academicWork->researchGroup()->associate($request->get('research_group_id'));
         $academicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
         $academicWork->graduation()->associate($request->get('graduation_id'));
-        $academicWork->save();
+        
+        if($academicWork->save()){
+            $message = 'Your store processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('academic-works.index')->with('status', $message);
     }
 
     /**
@@ -65,7 +62,7 @@ class AcademicWorkController extends Controller
      */
     public function show(AcademicWork $academicWork)
     {
-        return response()->json($academicWork);
+        return view('AcademicWorks.show', compact('academicWork'));
     }
 
     /**
@@ -76,7 +73,7 @@ class AcademicWorkController extends Controller
      */
     public function edit(AcademicWork $academicWork)
     {
-        return response()->json($academicWork);
+        return view('AcademicWorks.edit', compact('academicWork'));
     }
 
     /**
@@ -86,7 +83,7 @@ class AcademicWorkController extends Controller
      * @param  \App\AcademicWork  $academicWork
      * @return \Illuminate\Http\Response
      */
-    public function update(AcademicWorkRequest $request, AcademicWork $academicWork)
+    public function update(Request $request, AcademicWork $academicWork)
     {
         $academicWork->title                    = $request->get('title');
         $academicWork->type                     = $request->get('type');
@@ -96,15 +93,12 @@ class AcademicWorkController extends Controller
         $academicWork->researchGroup()->associate($request->get('research_group_id'));
         $academicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
         $academicWork->graduation()->associate($request->get('graduation_id'));
-        $academicWork->save();
+        
+        if($academicWork->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('academic-works.index')->with('status', $message);
     }
 
     /**
@@ -115,17 +109,10 @@ class AcademicWorkController extends Controller
      */
     public function destroy(AcademicWork $academicWork)
     {
-        try
-        {
-            if($academicWork->delete()){
-                return response()->json('Eliminado');
-            }
+        if($academicWork->delete()) {
+            $message = 'Your update processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return response()->json('Error 23000');
-            }
-        }
+
+        return redirect()->route('academic-works.index')->with('status', $message);
     }
 }

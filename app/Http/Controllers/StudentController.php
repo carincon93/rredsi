@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Student;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
 
 class StudentController extends Controller
 {
@@ -17,7 +15,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::with('user', 'isResearchTeamLeader', 'user.researchTeams')->get();
+        $students = Student::orderBy('name')->paginate(50);
+        return view('Students.index', compact('students'));
     }
 
     /**
@@ -27,7 +26,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('Students.create');
     }
 
     /**
@@ -36,7 +35,7 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStudentRequest $request)
+    public function store(Request $request)
     {
         $student = new User();
         $student->name               = $request->get('name');
@@ -48,9 +47,10 @@ class StudentController extends Controller
         $student->status             = $request->get('status');
         $student->interests          = $request->get('interests');
         $student->is_enabled         = $request->get('is_enabled');
-        $student->role()->associate($request->get('role_id'));
         
-        $student->save();
+        if($student->save()) {
+            $message = 'Your store processed correctly';
+        }
 
         $student->researchTeams()->attach($request->get('research_team_id'), ['is_external' => false]);
         $student->academicPrograms()->attach($request->get('academic_program_id'));
@@ -61,13 +61,7 @@ class StudentController extends Controller
             'is_accepted'   => $request->get('is_accepted'),
         ]);
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('students.index')->with('status', $message);
     }
 
     /**
@@ -78,7 +72,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return response()->json($student->user()->with('researchTeams')->first());
+        return view('Students.show', compact('student'));
     }
 
     /**
@@ -89,7 +83,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return response()->json($student->user()->with('researchTeams')->first());
+        return view('Students.edit', compact('student'));
     }
 
     /**
@@ -99,7 +93,7 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStudentRequest $request, Student $student)
+    public function update(Request $request, Student $student)
     {
         $student->user->name               = $request->get('name');
         $student->user->email              = $request->get('email');
@@ -110,8 +104,10 @@ class StudentController extends Controller
         $student->user->status             = $request->get('status');
         $student->user->interests          = $request->get('interests');
         $student->user->is_enabled         = $request->get('is_enabled');
-        $student->user->role()->associate($request->get('role_id'));
-        $student->user->save();
+        
+        if($student->user->save()) {
+            $message = 'Your update processed correctly';
+        }
 
         $student->isStudent()->update([
             'cvlac'         => $request->get('cvlac'),
@@ -123,13 +119,7 @@ class StudentController extends Controller
         $student->user->academicPrograms()->wherePivot('user_id', '=', $student->id)->detach();
         $student->user->academicPrograms()->attach($request->get('academic_program_id'));
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('students.index')->with('status', $message);
     }
 
     /**
@@ -140,17 +130,10 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        try
-        {
-            if($student->user->delete()){
-                return response()->json('Eliminado');
-            }
+        if($student->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return 'Error 23000';
-            }
-        }
+
+        return redirect()->route('students.index')->with('status', $message);
     }
 }

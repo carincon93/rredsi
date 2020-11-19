@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ResearchGroup;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreResearchGroupRequest;
-use App\Http\Requests\UpdateResearchGroupRequest;
+use App\Researcher;
 
 class ResearchGroupController extends Controller
 {
@@ -16,7 +15,8 @@ class ResearchGroupController extends Controller
      */
     public function index()
     {
-        return ResearchGroup::with('educationalInstitution')->get();
+        $researchGroups = ResearchGroup::orderBy('name')->paginate(50);
+        return view('ResearchGroups.index', compact('researchGroups'));
     }
 
     /**
@@ -26,7 +26,7 @@ class ResearchGroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('ResearchGroups.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class ResearchGroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreResearchGroupRequest $request)
+    public function store(Request $request)
     {
         $researchGroup = new ResearchGroup();
         $researchGroup->name                    = $request->get('name');
@@ -46,15 +46,12 @@ class ResearchGroupController extends Controller
         $researchGroup->minciencias_category    = $request->get('minciencias_category');
         $researchGroup->website                 = $request->get('website');
         $researchGroup->educationalInstitution()->associate($request->get('educational_institution_id'));
-        $researchGroup->save();
+        
+        if($researchGroup->save()){
+            $message = 'Your store processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('research-groups.index')->with('status', $message);
     }
 
     /**
@@ -65,7 +62,7 @@ class ResearchGroupController extends Controller
      */
     public function show(ResearchGroup $researchGroup)
     {
-        return response()->json($researchGroup);
+        return view('ResearchGroups.show', compact('researchGroup'));
     }
 
     /**
@@ -76,7 +73,7 @@ class ResearchGroupController extends Controller
      */
     public function edit(ResearchGroup $researchGroup)
     {
-        return response()->json($researchGroup);
+        return view('ResearchGroups.edit', compact('researchGroup'));
     }
 
     /**
@@ -86,7 +83,7 @@ class ResearchGroupController extends Controller
      * @param  \App\ResearchGroup  $researchGroup
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateResearchGroupRequest $request, ResearchGroup $researchGroup)
+    public function update(Request $request, ResearchGroup $researchGroup)
     {
         $researchGroup->name                    = $request->get('name');
         $researchGroup->email                   = $request->get('email');
@@ -96,15 +93,12 @@ class ResearchGroupController extends Controller
         $researchGroup->minciencias_category    = $request->get('minciencias_category');
         $researchGroup->website                 = $request->get('website');
         $researchGroup->educationalInstitution()->associate($request->get('educational_institution_id'));
-        $researchGroup->save();
+        
+        if($researchGroup->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('research-groups.index')->with('status', $message);
     }
 
     /**
@@ -115,18 +109,11 @@ class ResearchGroupController extends Controller
      */
     public function destroy(ResearchGroup $researchGroup)
     {
-        try
-        {
-            if($researchGroup->delete()){
-                return 'Eliminado';
-            }
+        if($researchGroup->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return 'Error 23000';
-            }
-        }
+
+        return redirect()->route('research-groups.index')->with('status', $message);
     }
 
     /**

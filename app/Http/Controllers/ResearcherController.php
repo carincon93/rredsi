@@ -17,7 +17,8 @@ class ResearcherController extends Controller
      */
     public function index()
     {
-        return Researcher::with('user', 'user.researchTeams')->get();
+        $researchers = Researcher::orderBy('name')->paginate(50);
+        return view('Researchers.index', compact('researchers'));
     }
 
     /**
@@ -27,7 +28,7 @@ class ResearcherController extends Controller
      */
     public function create()
     {
-        //
+        return view('Researchers.create');
     }
 
     /**
@@ -49,7 +50,10 @@ class ResearcherController extends Controller
         $researcher->interests          = $request->get('interests');
         $researcher->is_enabled         = $request->get('is_enabled');
         $researcher->role()->associate($request->get('role_id'));
-        $researcher->save();
+
+        if($researcher->save()){
+            $message = 'Your store processed correctly';
+        }
 
         $researcher->researchTeams()->attach($request->get('research_team_id'), ['is_external' => false]);
 
@@ -59,13 +63,7 @@ class ResearcherController extends Controller
             'is_accepted'   => $request->get('is_accepted'),
         ]);
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('researchers.index')->with('status', $message);
     }
 
     /**
@@ -76,7 +74,7 @@ class ResearcherController extends Controller
      */
     public function show(Researcher $researcher)
     {
-        return response()->json($researcher->with('user', 'user.isResearcher', 'user.researchTeams')->where('researchers.id', $researcher->id)->first());
+       return view('Researchers.show', compact('researcher'));
     }
 
     /**
@@ -87,7 +85,7 @@ class ResearcherController extends Controller
      */
     public function edit(Researcher $researcher)
     {
-        return response()->json($researcher->user()->with('researchTeams')->with('isResearcher')->first());
+       return view('Researchers.edit', compact('researcher'));
     }
 
     /**
@@ -109,22 +107,18 @@ class ResearcherController extends Controller
         $researcher->user->interests          = $request->get('interests');
         $researcher->user->is_enabled         = $request->get('is_enabled');
         $researcher->user->role()->associate($request->get('role_id'));
-        $researcher->user->save();
+
+        if($researcher->save()){
+            $message = 'Your update processed correctly';
+        }
 
         $researcher->cvlac          = $request->get('cvlac');
         $researcher->is_accepted    = $request->get('is_accepted');
-        $researcher->save();
 
         $researcher->user->researchTeams()->wherePivot('user_id', '=', $researcher->user->id)->detach();
         $researcher->user->researchTeams()->attach($request->get('research_team_id'), ['is_external' => false]);
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('researchers.index')->with('status', $message);
     }
 
     /**
@@ -135,17 +129,10 @@ class ResearcherController extends Controller
      */
     public function destroy(Researcher $researcher)
     {
-        try
-        {
-            if($researcher->delete()){
-                return response()->json('Eliminado');
-            }
+        if($researcher->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return 'Error 23000';
-            }
-        }
+
+        return redirect()->route('researchers.index')->with('status', $message);
     }
 }

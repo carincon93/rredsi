@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\KnowledgeArea;
 use Illuminate\Http\Request;
-use App\Http\Requests\KnowledgeAreaRequest;
 
 class KnowledgeAreaController extends Controller
 {
@@ -15,7 +14,8 @@ class KnowledgeAreaController extends Controller
      */
     public function index()
     {
-        return KnowledgeArea::all();
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
+        return view('KnowledgeAreas.index', compact('knowledgeAreas'));
     }
 
     /**
@@ -25,7 +25,7 @@ class KnowledgeAreaController extends Controller
      */
     public function create()
     {
-        //
+        return view('KnowledgeAreas.create');
     }
 
     /**
@@ -34,19 +34,16 @@ class KnowledgeAreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(KnowledgeAreaRequest $request)
+    public function store(Request $request)
     {
         $knowledgeArea          = new KnowledgeArea();
         $knowledgeArea->name    = $request->get('name');
-        $knowledgeArea->save();
+        
+        if($knowledgeArea->save()){
+            $message = 'Your store processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('konwledge-areas.index')->with('status', $message);
     }
 
     /**
@@ -57,7 +54,7 @@ class KnowledgeAreaController extends Controller
      */
     public function show(KnowledgeArea $knowledgeArea)
     {
-        return response()->json($knowledgeArea);
+        return view('KnowledgeAreas.show', compact('knowledgeArea'));
     }
 
     /**
@@ -68,7 +65,7 @@ class KnowledgeAreaController extends Controller
      */
     public function edit(KnowledgeArea $knowledgeArea)
     {
-        return response()->json($knowledgeArea);
+        return view('KnowledgeAreas.edit', compact('knowledgeArea'));
     }
 
     /**
@@ -78,18 +75,15 @@ class KnowledgeAreaController extends Controller
      * @param  \App\KnowledgeArea  $knowledgeArea
      * @return \Illuminate\Http\Response
      */
-    public function update(KnowledgeAreaRequest $request, KnowledgeArea $knowledgeArea)
+    public function update(Request $request, KnowledgeArea $knowledgeArea)
     {
         $knowledgeArea->name = $request->get('name');
-        $knowledgeArea->save();
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
+        if($knowledgeArea->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        return response()->json($data);
+        return redirect()->route('knowledge-areas.index')->with('status', $message);
     }
 
     /**
@@ -100,18 +94,9 @@ class KnowledgeAreaController extends Controller
      */
     public function destroy(KnowledgeArea $knowledgeArea)
     {
-        try
-        {
-            $knowledgeArea = KnowledgeArea::find($knowledgeArea);
-            if($knowledgeArea->delete()){
-                return 'Eliminado';
-            }
+        if($knowledgeArea->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return 'Error 23000';
-            }
-        }
+        return redirect()->route('knowledge-areas.index')->with('status', $message);
     }
 }

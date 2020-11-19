@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\EducationalEnvironment;
 use Illuminate\Http\Request;
-use App\Http\Requests\EducationalEnvironmentRequest;
 use Exception;
 
 class EducationalEnvironmentController extends Controller
@@ -16,7 +15,8 @@ class EducationalEnvironmentController extends Controller
      */
     public function index()
     {
-        return EducationalEnvironment::with('educationalInstitution')->get();
+        $educationalEnvironments = EducationalEnvironment::orderBy('name')->paginate(50);
+        return view('EducationalEnvironments.index', compact('educationalEnvironments'));
     }
 
     /**
@@ -26,7 +26,7 @@ class EducationalEnvironmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('EducationalEnvironments.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class EducationalEnvironmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EducationalEnvironmentRequest $request)
+    public function store(Request $request)
     {
         $educationalEnvironment = new EducationalEnvironment();
         $educationalEnvironment->name           = $request->get('name');
@@ -45,15 +45,12 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->is_enabled     = $request->get('is_enabled');
         $educationalEnvironment->is_available   = $request->get('is_available');
         $educationalEnvironment->educationalInstitution()->associate($request->get('educational_institution_id'));
-        $educationalEnvironment->save();
+        
+        if($educationalEnvironment->save()){
+            $message = 'Your store processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('educational-environments.index')->with('status', $message);
     }
 
     /**
@@ -64,8 +61,7 @@ class EducationalEnvironmentController extends Controller
      */
     public function show(EducationalEnvironment $educationalEnvironment)
     {
-        $educationalEnvironment->educationalInstitution;
-        return response()->json($educationalEnvironment);
+        return view('EducationalEnvironments.show', compact('educationalEnvironment'));
     }
 
     /**
@@ -76,7 +72,7 @@ class EducationalEnvironmentController extends Controller
      */
     public function edit(EducationalEnvironment $educationalEnvironment)
     {
-        return response()->json($educationalEnvironment);
+        return view('EducationalEnvironments.edit', compact('educationalEnvironment'));
     }
 
     /**
@@ -86,7 +82,7 @@ class EducationalEnvironmentController extends Controller
      * @param  \App\EducationalEnvironment  $educationalEnvironment
      * @return \Illuminate\Http\Response
      */
-    public function update(EducationalEnvironmentRequest $request, EducationalEnvironment $educationalEnvironment)
+    public function update(Request $request, EducationalEnvironment $educationalEnvironment)
     {
         $educationalEnvironment->name           = $request->get('name');
         $educationalEnvironment->type           = $request->get('type');
@@ -95,15 +91,12 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->is_enabled     = $request->get('is_enabled');
         $educationalEnvironment->is_available   = $request->get('is_available');
         $educationalEnvironment->educationalInstitution()->associate($request->get('educational_institution_id'));
-        $educationalEnvironment->save();
+        
+        if($educationalEnvironment->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('educational-environments.index')->with('status', $message);
     }
 
     /**
@@ -114,18 +107,11 @@ class EducationalEnvironmentController extends Controller
      */
     public function destroy(EducationalEnvironment $educationalEnvironment)
     {
-        try
-        {
-            if($educationalEnvironment->delete()){
-                return response()->json('Eliminado');
-            }
+        if($educationalEnvironment->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return response()->json('Error 23000');
-            }
-        }
+
+        return redirect()->route('educational-environments.index')->with('status', $message);
     }
 
     public function getByEducationalInstitution(Request $request, $id)

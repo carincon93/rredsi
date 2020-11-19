@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ResearchLineRequest;
+use App\Researcher;
+use App\ResearchGroup;
 use App\ResearchLine;
 
 class ResearchLineController extends Controller
@@ -15,7 +16,8 @@ class ResearchLineController extends Controller
      */
     public function index()
     {
-        return ResearchLine::with('researchGroup')->get();
+        $researchLines = ResearchGroup::orderBy('name')->paginate(50);
+        return view('ResearchLines.index', compact('researchLines'));
     }
 
     /**
@@ -25,7 +27,7 @@ class ResearchLineController extends Controller
      */
     public function create()
     {
-        //
+        return view('ResearchLines.create');
     }
 
     /**
@@ -34,7 +36,7 @@ class ResearchLineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ResearchLineRequest $request)
+    public function store(Request $request)
     {
         $researchLine = new ResearchLine();
         $researchLine->name         = $request->get('name');
@@ -44,15 +46,12 @@ class ResearchLineController extends Controller
         $researchLine->achievements = $request->get('achievements');
         $researchLine->knowledgeArea()->associate($request->get('knowledge_area_id'));
         $researchLine->researchGroup()->associate($request->get('research_group_id'));
-        $researchLine->save();
+        
+        if($researchLine->save()){
+            $message = 'Your store processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('research-lines.index')->with('status', $message);
     }
 
     /**
@@ -63,7 +62,7 @@ class ResearchLineController extends Controller
      */
     public function show(ResearchLine $researchLine)
     {
-        return response()->json($researchLine);
+        return view('ResearchLines.show', compact('researchLine'));
     }
 
     /**
@@ -74,7 +73,7 @@ class ResearchLineController extends Controller
      */
     public function edit(ResearchLine $researchLine)
     {
-        return response()->json($researchLine);
+        return view('ResearchLines.edit', compact('researchLine'));
     }
 
     /**
@@ -84,7 +83,7 @@ class ResearchLineController extends Controller
      * @param  \App\ResearchLine  $researchLine
      * @return \Illuminate\Http\Response
      */
-    public function update(ResearchLineRequest $request, ResearchLine $researchLine)
+    public function update(Request $request, ResearchLine $researchLine)
     {
         $researchLine->name         = $request->get('name');
         $researchLine->objectives   = $request->get('objectives');
@@ -93,15 +92,12 @@ class ResearchLineController extends Controller
         $researchLine->achievements = $request->get('achievements');
         $researchLine->knowledgeArea()->associate($request->get('knowledge_area_id'));
         $researchLine->researchGroup()->associate($request->get('research_group_id'));
-        $researchLine->save();
+        
+        if($researchLine->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('research-lines.index')->with('status', $message);
     }
 
     /**
@@ -112,17 +108,10 @@ class ResearchLineController extends Controller
      */
     public function destroy(ResearchLine $researchLine)
     {
-        try
-        {
-            if($researchLine->delete()){
-                return 'Eliminado';
-            }
+        if($researchLine->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return 'Error 23000';
-            }
-        }
+
+        return redirect()->route('research-lines.index')->with('status', $message);
     }
 }

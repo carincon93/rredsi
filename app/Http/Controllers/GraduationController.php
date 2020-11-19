@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Graduation;
 use Illuminate\Http\Request;
-use App\Http\Requests\GraduationRequest;
 
 class GraduationController extends Controller
 {
@@ -15,7 +14,8 @@ class GraduationController extends Controller
      */
     public function index()
     {
-        return Graduation::with('user')->get();
+        $graduations = Graduation::orderBy('is_graduated')->paginate(50);
+        return view('Graduations.index', compact('graduations'));
     }
 
     /**
@@ -25,7 +25,7 @@ class GraduationController extends Controller
      */
     public function create()
     {
-        //
+        return view('Graduations.create');
     }
 
     /**
@@ -34,22 +34,19 @@ class GraduationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GraduationRequest $request)
+    public function store(Request $request)
     {
         $graduation = new Graduation();
         $graduation->is_graduated   = $request->get('is_graduated');
         $graduation->year           = $request->get('year');
         $graduation->academicProgram()->associate($request->get('academic_program_id'));
         $graduation->user()->associate($request->get('user_id'));
-        $graduation->save();
+        
+        if($graduation->save()){
+            $message = 'Your store processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your store processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('graduations.index')->with('status', $message);
     }
 
     /**
@@ -60,7 +57,7 @@ class GraduationController extends Controller
      */
     public function show(Graduation $graduation)
     {
-        return response()->json($graduation);
+        return view('Graduations.show', compact('graduation'));
     }
 
     /**
@@ -71,7 +68,7 @@ class GraduationController extends Controller
      */
     public function edit(Graduation $graduation)
     {
-        return response()->json($graduation);
+        return view('Graduations.edit', compact('graduation'));
     }
 
     /**
@@ -81,21 +78,18 @@ class GraduationController extends Controller
      * @param  \App\Graduation  $Graduation
      * @return \Illuminate\Http\Response
      */
-    public function update(GraduationRequest $request, Graduation $graduation)
+    public function update(Request $request, Graduation $graduation)
     {
         $graduation->is_graduated   = $request->get('is_graduated');
         $graduation->year           = $request->get('year');
         $graduation->academicProgram()->associate($request->get('academic_program_id'));
         $graduation->user()->associate($request->get('user_id'));
-        $graduation->save();
+        
+        if($graduation->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('graduations.index')->with('status', $message);
     }
 
     /**
@@ -106,18 +100,10 @@ class GraduationController extends Controller
      */
     public function destroy(Graduation $graduation)
     {
-        try
-        {
-            $graduation = Graduation::find($graduation);
-            if($graduation->delete()){
-                return response()->json('Eliminado');
-            }
+        if($graduation->delete()){
+            $message = 'Your update processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return response()->json('Error 23000');
-            }
-        }
+
+        return redirect()->route('graduations.index')->with('status', $message);
     }
 }

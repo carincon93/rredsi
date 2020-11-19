@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\EducationalInstitution;
 use App\EducationalTool;
 use Illuminate\Http\Request;
-use App\Http\Requests\EducationalToolRequest;
 use Exception;
 
 class EducationalToolController extends Controller
@@ -16,7 +16,8 @@ class EducationalToolController extends Controller
      */
     public function index()
     {
-        return EducationalTool::with('educationalEnvironment', 'educationalEnvironment.educationalInstitution', 'educationalToolLoan')->get();
+        $educationalTools = EducationalTool::orderBy('name')->paginate(50);
+        return view('EducationalTools.index', compact('educationalTools'));
     }
 
     /**
@@ -26,7 +27,7 @@ class EducationalToolController extends Controller
      */
     public function create()
     {
-        //
+        return view('EducationalTools.create');
     }
 
     /**
@@ -35,7 +36,7 @@ class EducationalToolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EducationalToolRequest $request)
+    public function store(Request $request)
     {
         $educationalTool = new EducationalTool();
         $educationalTool->name          = $request->get('name');
@@ -44,15 +45,12 @@ class EducationalToolController extends Controller
         $educationalTool->is_available  = $request->get('is_available');
         $educationalTool->is_enabled    = $request->get('is_enabled');
         $educationalTool->educationalEnvironment()->associate($request->get('educational_environment_id'));
-        $educationalTool->save();
+        
+        if($educationalTool->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('educational-tools.index')->with('status', $message);
     }
 
     /**
@@ -63,9 +61,7 @@ class EducationalToolController extends Controller
      */
     public function show(EducationalTool $educationalTool)
     {
-        $educationalTool->educationalEnvironment;
-        $educationalTool->educationalEnvironment->educationalInstitution;
-        return response()->json($educationalTool);
+        return view('EducationalTools.show', compact('educationalTool'));
     }
 
     /**
@@ -76,7 +72,7 @@ class EducationalToolController extends Controller
      */
     public function edit(EducationalTool $educationalTool)
     {
-        return response()->json($educationalTool);
+        return view('EducationalTools.show', compact('educationalTool'));
     }
 
     /**
@@ -86,7 +82,7 @@ class EducationalToolController extends Controller
      * @param  \App\EducationalTool  $educationalTool
      * @return \Illuminate\Http\Response
      */
-    public function update(EducationalToolRequest $request, EducationalTool $educationalTool)
+    public function update(Request $request, EducationalTool $educationalTool)
     {
         $educationalTool->name          = $request->get('name');
         $educationalTool->description   = $request->get('description');
@@ -94,15 +90,12 @@ class EducationalToolController extends Controller
         $educationalTool->is_available  = $request->get('is_available');
         $educationalTool->is_enabled    = $request->get('is_enabled');
         $educationalTool->educationalEnvironment()->associate($request->get('educational_environment_id'));
-        $educationalTool->save();
+        
+        if($educationalTool->save()){
+            $message = 'Your update processed correctly';
+        }
 
-        $data = [
-            'success'   => true,
-            'status'    => 200,
-            'message'   => 'Your update processed correctly'
-        ];
-
-        return response()->json($data);
+        return redirect()->route('educational-tools.index')->with('status', $message);
     }
 
     /**
@@ -113,17 +106,11 @@ class EducationalToolController extends Controller
      */
     public function destroy(EducationalTool $educationalTool)
     {
-        try
-        {
-            if($educationalTool->delete()){
-                return response()->json('Eliminado');
-            }
+        if($educationalTool->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return response()->json('Error 23000');
-            }
-        }
+
+        return redirect()->route('educational-tools.index')->with('status', $message);
+
     }
 }

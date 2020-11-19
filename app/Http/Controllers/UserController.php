@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -16,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        $users = User::orderBy('name')->paginate(50);
+        return view('Users.index', compact('users'));
     }
 
     /**
@@ -26,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('Users.create');
     }
 
     /**
@@ -35,7 +34,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
         $user = new User();
         $user->name               = $request->get('name');
@@ -48,7 +47,11 @@ class UserController extends Controller
         $user->interests          = $request->get('interests');
         $user->is_enabled         = $request->get('is_enabled');
         $user->role()->associate($request->get('role_id'));
-        $user->save();
+
+        if($user->save()){
+        }
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -59,7 +62,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('Users.show', compact('user'));
     }
 
     /**
@@ -70,7 +73,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('Users.edit', compact('user'));
     }
 
     /**
@@ -80,7 +83,7 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
         $user->name               = $request->get('name');
         $user->email              = $request->get('email');
@@ -93,6 +96,11 @@ class UserController extends Controller
         $user->is_enabled         = $request->get('is_enabled');
         $user->role()->associate($request->get('role_id'));
         $user->save();
+
+        if($user->save()){
+        }
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -103,17 +111,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        try
-        {
-            if($user->delete()){
-                return 'Eliminado';
-            }
+        if($user->delete()){
+            $message = 'Your delete processed correctly';
         }
-        catch(Exception $e) {
-            //Log::error($e->getMessage());
-            if($e->getCode()==23000) {
-                return 'Error 23000';
-            }
-        }
+
+        return redirect()->route('users.index')->with('status', $message);
     }
 }
