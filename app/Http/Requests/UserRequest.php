@@ -4,12 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateStudentRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @return bool
+     * @return boolean
      */
     public function authorize()
     {
@@ -23,22 +23,31 @@ class UpdateStudentRequest extends FormRequest
      */
     public function rules()
     {
+        if($this->isMethod('PUT')){
         return [
-            'name'                  => 'required|string|max:191',
-            'email'                 => 'required|string|max:191|email|unique:users,email,'.$this->route('student')->id.',id',
-            'document_type'         => 'required|string| max:2',
-            'document_number'       => 'required|numeric|min:0|max:9999999999|unique:users,document_number,'.$this->route('student')->id.',id',
-            'cellphone_number'      => 'required|numeric|min:0|max:9999999999',
-            'status'                => 'required|string|max:191',
-            'interests'             => 'required|json',
-            'is_enabled'            => 'required|boolean',
-            'role_id'               => 'required|numeric|min:0|max:9999999999',
-            'research_team_id'      => 'required|array|exists:research_teams,id',
-            'is_external'           => 'required|boolean',
-            'academic_program_id'   => 'required|array|exists:academic_programs,id',
-            'cvlac'                 => 'required|url|max:191',
-            'is_accepted'           => 'required|boolean',
+            'name'              => 'required|string|max:191',
+            'email'             => 'required|string|max:191|email|unique:users,email,'.$this->route('user')->id.',id',
+            'document_type'     => 'required|string| max:2',
+            'document_number'   => 'required|numeric|min:0|max:9999999999|unique:users,document_number,'.$this->route('user')->id.',id',
+            'cellphone_number'  => 'required|numeric|min:0|max:9999999999',
+            'status'            => 'required|string|max:191',
+            'interests'         => 'required|json',
+            'is_enabled'        => 'required|boolean',
+            'role_id'           => 'required|numeric|min:0|max:9999999999|exists:roles,id',
         ];
+    } else {
+        return [
+            'name'              => 'required|string|max:191',
+            'email'             => 'required|string|max:191|email|unique:users,email',
+            'document_type'     => 'required|string| max:2',
+            'document_number'   => 'required|numeric|min:0|max:9999999999|unique:users,document_number',
+            'cellphone_number'  => 'required|numeric|min:0|max:9999999999',
+            'status'            => 'required|string|max:191',
+            'interests'         => 'required|json',
+            'is_enabled'        => 'required|boolean',
+            'role_id'           => 'required|numeric|min:0|max:9999999999|exists:roles,id',
+        ];
+    }
     }
 
     /**
@@ -99,18 +108,6 @@ class UpdateStudentRequest extends FormRequest
         if($this->role_id != null) {
             $this->merge([
                 'role_id' => filter_var($this->role_id, FILTER_SANITIZE_NUMBER_INT),
-            ]);
-        }
-        
-        if($this->cvlac != null) {
-            $this->merge([
-                'cvlac' => filter_var($this->cvlac, FILTER_SANITIZE_URL),
-            ]);
-        }
-
-        if($this->is_accepted != null) {
-            $this->merge([
-                'is_accepted' => (boolean) $this->is_accepted,
             ]);
         }
     }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreNodeRequest extends FormRequest
+class UpdateNodeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,18 @@ class StoreNodeRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'state'             => 'required|string|unique:nodes,state|max:191',
-            'administrator_id'  => 'required|numeric|min:0|max:9999999999',
-        ];
+            if ($this->isMethod('PUT')) {
+            return [
+                'state'             => 'required|string|unique:nodes,state,'.$this->route('node')->id.',id|max:191',
+                'administrator_id'  => 'required|numeric|min:0|max:9999999999|exists:users,id',
+            ];
+        } else {
+            return [
+                'state'             => 'required|string|unique:nodes,state|max:191',
+                'administrator_id'  => 'required|numeric|min:0|max:9999999999',
+            ];
+        }
+
     }
 
     /**

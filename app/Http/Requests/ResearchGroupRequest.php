@@ -23,16 +23,29 @@ class UpdateResearchGroupRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'                      => 'required|string|max:191',
-            'email'                     => 'required|email|unique:research_groups,email,'.$this->route('research_group')->id.',id|max:191',
-            'leader'                    => 'required|string|max:191',
-            'gruplac'                   => 'url|max:191',
-            'minciencias_code'          => 'required|string|max:191',
-            'minciencias_category'      => 'max:1',
-            'website'                   => 'url|max:191',
-            'educational_institution_id'=> 'required|numeric|min:0|max:9999999999|exists:educational_institutions,id',
-        ];
+            if ($this->isMethod('PUT')){
+            return [
+                'name'                      => 'required|string|max:191',
+                'email'                     => 'required|email|unique:research_groups,email,'.$this->route('research_group')->id.',id|max:191',
+                'leader'                    => 'required|string|max:191',
+                'gruplac'                   => 'url|max:191',
+                'minciencias_code'          => 'required|string|max:191',
+                'minciencias_category'      => 'max:1',
+                'website'                   => 'url|max:191',
+                'educational_institution_id'=> 'required|numeric|min:0|max:9999999999|exists:educational_institutions,id',
+            ];
+        } else {
+            return [
+                'name'                      => 'required|string|max:191',
+                'email'                     => 'required|email|unique:research_groups,email|max:191',
+                'leader'                    => 'required|string|max:191',
+                'gruplac'                   => 'url|max:191',
+                'minciencias_code'          => 'required|string|max:191',
+                'minciencias_category'      => 'max:1',
+                'website'                   => 'url|max:191',
+                'educational_institution_id' =>'required|numeric|min:0|max:9999999999|exists:educational_institutions,id',
+            ];
+        }
     }
 
     /**

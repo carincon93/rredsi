@@ -4,12 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateEducationalInstitutionRequest extends FormRequest
+class StoreEducationalInstitutionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @return boolean
+     * @return bool
      */
     public function authorize()
     {
@@ -23,16 +23,29 @@ class UpdateEducationalInstitutionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'              => 'required|string|max:191',
-            'nit'               => 'required|string|max:191|unique:educational_institutions,nit,'.$this->route('educational_institution')->id.',id',
-            'address'           => 'required|string|max:191',
-            'city'              => 'required|string|max:191',
-            'phone_number'      => 'integer|min:0|max:9999999999',
-            'website'           => 'required|url|max:191',
-            'administrator_id'  => 'required|numeric|min:0|max:9999999999|exists:educational_institution_admins,id',
-            'node_id'           => 'required|numeric|min:0|max:9999999999|exists:nodes,id',
-        ];
+            if ($this->isMethod('PUT')) {
+                return [
+                    'name'              => 'required|string|max:191',
+                    'nit'               => 'required|string|max:191|unique:educational_institutions,nit,'.$this->route('educational_institution')->id.',id',
+                    'address'           => 'required|string|max:191',
+                    'city'              => 'required|string|max:191',
+                    'phone_number'      => 'integer|min:0|max:9999999999',
+                    'website'           => 'required|url|max:191',
+                    'administrator_id'  => 'required|numeric|min:0|max:9999999999|exists:educational_institution_admins,id',
+                    'node_id'           => 'required|numeric|min:0|max:9999999999|exists:nodes,id',
+                ];
+        } else {
+            return [
+                'name'              => 'required|string|max:191',
+                'nit'               => 'required|max:191|unique:educational_institutions,nit',
+                'address'           => 'required|string|max:191',
+                'city'              => 'required|string|max:191',
+                'phone_number'      => 'integer|min:0|max:9999999999',
+                'website'           => 'required|url|max:191',
+                'administrator_id'  => 'required|numeric|min:0|max:9999999999|exists:educational_institution_admins,id',
+                'node_id'           => 'required|numeric|min:0|max:9999999999|exists:nodes,id',
+            ];
+        }
     }
 
     /**
@@ -50,7 +63,7 @@ class UpdateEducationalInstitutionRequest extends FormRequest
 
         if($this->nit != null) {
             $this->merge([
-                'nit' => (integer) filter_var(trim($this->nit), FILTER_SANITIZE_NUMBER_INT),
+                'nit' => filter_var(trim($this->nit), FILTER_SANITIZE_STRING),
             ]);
         }
 
@@ -74,7 +87,7 @@ class UpdateEducationalInstitutionRequest extends FormRequest
 
         if($this->website != null) {
             $this->merge([
-                'website' => filter_var($this->website, FILTER_SANITIZE_URL),
+                'website' => filter_var(trim($this->website), FILTER_SANITIZE_URL),
             ]);
         }        
 
