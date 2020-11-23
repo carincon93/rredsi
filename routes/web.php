@@ -2,6 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcademicProgramController;
+use App\Http\Controllers\AcademicWorkController;
+use App\Http\Controllers\EducationalEnvironmentController;
+use App\Http\Controllers\EducationalInstitutionController;
+use App\Http\Controllers\ResearchGroupController;
+use App\Http\Controllers\EducationalToolController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\NodeController;
+use App\Http\Controllers\KnowledgeAreaController;
+use App\Http\Controllers\ResearcherController;
+use App\Http\Controllers\ResearchLineController;
+use App\Http\Controllers\ResearchTeamController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +32,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\EducationalInstitution;
-use App\ResearchGroup;
+use App\Models\EducationalInstitution;
+use App\Models\Node;
+
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Exception;
 
 class EducationalInstitutionController extends Controller
@@ -26,7 +30,9 @@ class EducationalInstitutionController extends Controller
      */
     public function create()
     {
-        return view('EducationalInstitutions.create');
+        // $educationalInstitutionAdmins = DB::table('educational_institution_admins')->get();
+        $nodes = Node::orderBy('state')->paginate(50);
+        return view('EducationalInstitutions.create', compact('nodes'));
     }
 
     /**
@@ -46,11 +52,11 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->website        = $request->get('website');
         $educationalInstitution->administrator()->associate($request->get('administrator_id'));
         $educationalInstitution->node()->associate($request->get('node_id'));
-        
+
         if($educationalInstitution->save()){
             $message = 'Your store processed correctly';
         }
-        
+
         return redirect()->route('educational-institutions.index')->with('status', $message);
     }
 

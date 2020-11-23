@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ResearchGroup;
+use App\Models\ResearchGroup;
+use App\Models\EducationalInstitution;
+
 use Illuminate\Http\Request;
-use App\Researcher;
 
 class ResearchGroupController extends Controller
 {
@@ -26,7 +27,8 @@ class ResearchGroupController extends Controller
      */
     public function create()
     {
-        return view('ResearchGroups.create');
+        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
+        return view('ResearchGroups.create', compact('educationalInstitutions'));
     }
 
     /**
@@ -46,7 +48,7 @@ class ResearchGroupController extends Controller
         $researchGroup->minciencias_category    = $request->get('minciencias_category');
         $researchGroup->website                 = $request->get('website');
         $researchGroup->educationalInstitution()->associate($request->get('educational_institution_id'));
-        
+
         if($researchGroup->save()){
             $message = 'Your store processed correctly';
         }
@@ -93,7 +95,7 @@ class ResearchGroupController extends Controller
         $researchGroup->minciencias_category    = $request->get('minciencias_category');
         $researchGroup->website                 = $request->get('website');
         $researchGroup->educationalInstitution()->associate($request->get('educational_institution_id'));
-        
+
         if($researchGroup->save()){
             $message = 'Your update processed correctly';
         }

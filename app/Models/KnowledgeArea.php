@@ -18,18 +18,18 @@ class KnowledgeArea extends Model
     ];
 
     public function researchLine() {
-        return $this->hasOne('App\ResearchLine');
+        return $this->hasOne('App\Models\ResearchLine');
     }
 
     public function academicWork() {
-        return $this->hasMany('App\AcademicWork');
+        return $this->hasMany('App\Models\AcademicWork');
     }
 
     public function projects() {
-        return $this->belongsToMany('App\Project', 'project_knowledge_area', 'knowledge_area_id', 'project_id');
+        return $this->belongsToMany('App\Models\Project', 'project_knowledge_area', 'knowledge_area_id', 'project_id');
     }
 
     public function researchTeams() {
-        return $this->belongsToMany('App\ResearchTeam', 'research_team_knowledge_area', 'knowledge_area_id', 'research_team_id');
+        return $this->belongsToMany('App\Models\ResearchTeam', 'research_team_knowledge_area', 'knowledge_area_id', 'research_team_id');
     }
 }

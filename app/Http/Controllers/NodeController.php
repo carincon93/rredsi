@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Node;
+use App\Models\Node;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class NodeController extends Controller
     public function index()
     {
         $nodes = Node::orderBy('state')->paginate(50);
-        return view('Nodes.index', copmact('nodes'));
+        return view('Nodes.index', compact('nodes'));
     }
 
     /**
@@ -56,7 +56,7 @@ class NodeController extends Controller
      */
     public function show(Node $node)
     {
-        return view('Nodes.show', copmact('node'));
+        return view('Nodes.show', compact('node'));
     }
 
     /**
@@ -67,7 +67,7 @@ class NodeController extends Controller
      */
     public function edit(Node $node)
     {
-        return view('Nodes.edit', copmact('node'));
+        return view('Nodes.edit', compact('node'));
     }
 
     /**
@@ -81,7 +81,7 @@ class NodeController extends Controller
     {
         $node->state    = $request->get('state');
         $node->administrator()->associate($request->get('administrator_id'));
-        
+
         if($node->save()){
             $message = 'Your update processed correctly';
         }

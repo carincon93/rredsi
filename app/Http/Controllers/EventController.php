@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -47,7 +47,7 @@ class EventController extends Controller
 
         if($event->type == 'Institución educativa') {
             $event->educationalInstitutionEvent()->create([
-                'id'                            => $event->id, 
+                'id'                            => $event->id,
                 'educational_institution_id'    => $request->get('educational_institution_id')
             ]);
         } elseif($event->type == 'Nodo') {
@@ -56,7 +56,7 @@ class EventController extends Controller
                 'node_id'   => $request->get('node_id')
             ]);
         }
-        
+
         if($event->save()){
             $message = 'Your store processed correctly';
         }
@@ -101,7 +101,7 @@ class EventController extends Controller
         $event->start_date  = $request->get('start_date');
         $event->end_date    = $request->get('end_date');
         $event->link        = $request->get('link');
-        
+
         if($event->type == 'Institución educativa') {
             $event->educationalInstitutionEvent()->update([
                 'educational_institution_id'    => $request->get('educational_institution_id')
@@ -111,7 +111,7 @@ class EventController extends Controller
                 'node_id'   => $request->get('node_id')
             ]);
         }
-        
+
         if($event->save()){
             $message = 'Your update processed correctly';
         }

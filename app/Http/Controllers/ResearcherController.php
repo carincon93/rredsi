@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Researcher;
+use App\Models\User;
+use App\Models\Researcher;
+use App\Models\EducationalInstitution;
+use App\Models\ResearchGroup;
+use App\Models\ResearchTeam;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreResearcherRequest;
 use App\Http\Requests\UpdateResearcherRequest;
@@ -28,7 +32,10 @@ class ResearcherController extends Controller
      */
     public function create()
     {
-        return view('Researchers.create');
+        $educationalInstitutions = EducationalInstitution::orderBy('name');
+        $researchGroups = ResearchGroup::orderBy('name');
+        $researchTeams = ResearchTeam::orderBy('name');
+        return view('Researchers.create', compact('educationalInstitutions','researchGroups','researchTeams'));
     }
 
     /**

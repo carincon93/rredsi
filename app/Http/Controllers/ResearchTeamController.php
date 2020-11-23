@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\ResearchTeam;
+use App\Models\ResearchTeam;
+use App\Models\KnowledgeArea;
+use App\Models\EducationalInstitution;
+use App\Models\AcademicProgram;
+use App\Models\ResearchGroup;
+use App\Models\ResearchLine;
+
 use Illuminate\Http\Request;
 use Exception;
 
@@ -14,7 +20,7 @@ class ResearchTeamController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $researchTeams = ResearchTeam::orderBy('name')->paginate(50);
         return view('ResearchTeams.index', compact('researchTeams'));
     }
@@ -26,7 +32,12 @@ class ResearchTeamController extends Controller
      */
     public function create()
     {
-        return view('ResearchTeams.create');
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
+        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
+        $academicPrograms = AcademicProgram::orderBy('name')->paginate(50);
+        $researchGroups = ResearchGroup::orderBy('name')->paginate(50);
+        $researchLines = ResearchLine::orderBy('name')->paginate(50);
+        return view('ResearchTeams.create', compact('knowledgeAreas','educationalInstitutions','academicPrograms','researchGroups','researchLines'));
     }
 
     /**
@@ -61,7 +72,7 @@ class ResearchTeamController extends Controller
         $researchTeam->academicPrograms()->attach($request->get('academic_program_id'));
         $researchTeam->knowledgeAreas()->attach($request->get('knowledge_area_id'));
         $researchTeam->researchLines()->attach($request->get('research_line_id'));
-        
+
         return redirect()->route('research-teams.index')->with('status', $message);
     }
 
@@ -111,7 +122,7 @@ class ResearchTeamController extends Controller
         $researchTeam->administrator()->associate($request->get('administrator_id'));
         $researchTeam->researchGroup()->associate($request->get('research_group_id'));
         $researchTeam->studentLeader()->associate($request->get('student_leader_id'));
-        
+
         if($researchTeam->save()){
             $message = 'Your update processed correctly';
         }

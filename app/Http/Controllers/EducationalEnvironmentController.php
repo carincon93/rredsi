@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\EducationalEnvironment;
+use App\Models\EducationalEnvironment;
+use App\Models\EducationalInstitution;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -26,7 +27,8 @@ class EducationalEnvironmentController extends Controller
      */
     public function create()
     {
-        return view('EducationalEnvironments.create');
+        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
+        return view('EducationalEnvironments.create', compact('educationalInstitutions'));
     }
 
     /**
@@ -45,7 +47,7 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->is_enabled     = $request->get('is_enabled');
         $educationalEnvironment->is_available   = $request->get('is_available');
         $educationalEnvironment->educationalInstitution()->associate($request->get('educational_institution_id'));
-        
+
         if($educationalEnvironment->save()){
             $message = 'Your store processed correctly';
         }
@@ -91,7 +93,7 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->is_enabled     = $request->get('is_enabled');
         $educationalEnvironment->is_available   = $request->get('is_available');
         $educationalEnvironment->educationalInstitution()->associate($request->get('educational_institution_id'));
-        
+
         if($educationalEnvironment->save()){
             $message = 'Your update processed correctly';
         }

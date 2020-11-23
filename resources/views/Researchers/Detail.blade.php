@@ -6,9 +6,9 @@
     <div class="card p-4 detail">
       <div class="card-header">
           <h4>{researcher.user.name}</h4>
-          <a href="/app/researchers/edit/{{$researcher->user->id}}">
+          <x-jet-nav-link href="/app/researchers/edit/{{$researcher->user->id}}">
             Editar
-          </a>
+          </x-jet-nav-link>
       </div>
 
       <ul class="list-unstyled">

@@ -20291,6 +20291,7 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4198" parent="4162" name="academic_works">
       <ObjectId>2637228</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844668</StateNumber>
     </table>
@@ -20301,6 +20302,7 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4200" parent="4162" name="educational_environment_loans">
       <ObjectId>2637218</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844664</StateNumber>
     </table>
@@ -20311,6 +20313,7 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4202" parent="4162" name="educational_institution_admins">
       <ObjectId>2637202</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844657</StateNumber>
     </table>
@@ -20321,6 +20324,7 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4204" parent="4162" name="educational_institutions">
       <ObjectId>2637186</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844629</StateNumber>
     </table>
@@ -20331,6 +20335,7 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4206" parent="4162" name="educational_tools">
       <ObjectId>2637170</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844653</StateNumber>
     </table>
@@ -20341,6 +20346,7 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4208" parent="4162" name="events">
       <ObjectId>2637156</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844645</StateNumber>
     </table>
@@ -20356,6 +20362,7 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4211" parent="4162" name="knowledge_areas">
       <ObjectId>2637128</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844627</StateNumber>
     </table>
@@ -20366,21 +20373,25 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4213" parent="4162" name="migrations">
       <ObjectId>2637107</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844593</StateNumber>
     </table>
     <table id="4214" parent="4162" name="node_admins">
       <ObjectId>2637100</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844617</StateNumber>
     </table>
     <table id="4215" parent="4162" name="node_events">
       <ObjectId>2637094</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844645</StateNumber>
     </table>
     <table id="4216" parent="4162" name="nodes">
       <ObjectId>2636900</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844617</StateNumber>
     </table>
@@ -20446,6 +20457,7 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4229" parent="4162" name="research_groups">
       <ObjectId>2637002</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844621</StateNumber>
     </table>
@@ -20511,6 +20523,7 @@ sequence|table|2637240|2637242|1
     </table>
     <table id="4242" parent="4162" name="users">
       <ObjectId>2636915</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>jkvfobcfbgnsre</Owner>
       <StateNumber>1844618</StateNumber>
     </table>
