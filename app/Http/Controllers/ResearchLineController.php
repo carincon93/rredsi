@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ResearchLine;
+use App\Models\ResearchGroup;
+use App\Models\KnowledgeArea;
+
 use Illuminate\Http\Request;
-use App\Researcher;
-use App\ResearchGroup;
-use App\ResearchLine;
 
 class ResearchLineController extends Controller
 {
@@ -16,7 +17,7 @@ class ResearchLineController extends Controller
      */
     public function index()
     {
-        $researchLines = ResearchGroup::orderBy('name')->paginate(50);
+        $researchLines = ResearchLine::orderBy('name')->paginate(50);
         return view('ResearchLines.index', compact('researchLines'));
     }
 
@@ -27,7 +28,9 @@ class ResearchLineController extends Controller
      */
     public function create()
     {
-        return view('ResearchLines.create');
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
+        $researchGroups = ResearchGroup::orderBy('name')->paginate(50);
+        return view('ResearchLines.create', compact('knowledgeAreas','researchGroups'));
     }
 
     /**
@@ -46,7 +49,7 @@ class ResearchLineController extends Controller
         $researchLine->achievements = $request->get('achievements');
         $researchLine->knowledgeArea()->associate($request->get('knowledge_area_id'));
         $researchLine->researchGroup()->associate($request->get('research_group_id'));
-        
+
         if($researchLine->save()){
             $message = 'Your store processed correctly';
         }
@@ -92,7 +95,7 @@ class ResearchLineController extends Controller
         $researchLine->achievements = $request->get('achievements');
         $researchLine->knowledgeArea()->associate($request->get('knowledge_area_id'));
         $researchLine->researchGroup()->associate($request->get('research_group_id'));
-        
+
         if($researchLine->save()){
             $message = 'Your update processed correctly';
         }

@@ -25,18 +25,18 @@ class ResearchGroup extends Model
     ];
 
     public function educationalInstitution() {
-        return $this->belongsTo('App\EducationalInstitution');
+        return $this->belongsTo('App\Models\EducationalInstitution');
     }
 
     public function researchTeams() {
-        return $this->hasMany('App\ResearchTeam');
+        return $this->hasMany('App\Models\ResearchTeam');
     }
 
     public function researchLines() {
-        return $this->hasMany('App\ResearchLine');
+        return $this->hasMany('App\Models\ResearchLine');
     }
 
     public function academicWorks() {
-        return $this->hasMany('App\AcademicWork');
+        return $this->hasMany('App\Models\AcademicWork');
     }
 }

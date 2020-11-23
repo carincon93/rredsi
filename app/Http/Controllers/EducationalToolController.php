@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\EducationalInstitution;
-use App\EducationalTool;
+use App\Models\EducationalEnvironment;
+use App\Models\EducationalTool;
 use Illuminate\Http\Request;
-use Exception;
 
 class EducationalToolController extends Controller
 {
@@ -27,7 +26,9 @@ class EducationalToolController extends Controller
      */
     public function create()
     {
-        return view('EducationalTools.create');
+
+        $educationalEnvironments = EducationalEnvironment::orderBy('name')->paginate(50);
+        return view('EducationalTools.create', compact('educationalEnvironments'));
     }
 
     /**
@@ -45,7 +46,7 @@ class EducationalToolController extends Controller
         $educationalTool->is_available  = $request->get('is_available');
         $educationalTool->is_enabled    = $request->get('is_enabled');
         $educationalTool->educationalEnvironment()->associate($request->get('educational_environment_id'));
-        
+
         if($educationalTool->save()){
             $message = 'Your update processed correctly';
         }
@@ -90,7 +91,7 @@ class EducationalToolController extends Controller
         $educationalTool->is_available  = $request->get('is_available');
         $educationalTool->is_enabled    = $request->get('is_enabled');
         $educationalTool->educationalEnvironment()->associate($request->get('educational_environment_id'));
-        
+
         if($educationalTool->save()){
             $message = 'Your update processed correctly';
         }

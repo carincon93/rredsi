@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\KnowledgeArea;
+use App\Models\KnowledgeArea;
 use Illuminate\Http\Request;
 
 class KnowledgeAreaController extends Controller
@@ -38,12 +38,12 @@ class KnowledgeAreaController extends Controller
     {
         $knowledgeArea          = new KnowledgeArea();
         $knowledgeArea->name    = $request->get('name');
-        
+
         if($knowledgeArea->save()){
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('konwledge-areas.index')->with('status', $message);
+        return redirect()->route('knowledge-areas.index')->with('status', $message);
     }
 
     /**

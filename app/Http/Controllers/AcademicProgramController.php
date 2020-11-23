@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\AcademicProgram;
+use App\Models\KnowledgeArea;
+use App\Models\Node;
+use App\Models\EducationalInstitution;
+
 use Illuminate\Http\Request;
-use Exception;
 
 class AcademicProgramController extends Controller
 {
@@ -26,7 +29,10 @@ class AcademicProgramController extends Controller
      */
     public function create()
     {
-        return view('AcademicPrograms.create');
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
+        $nodes = Node::orderBy('administrator_id')->paginate(50);
+        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
+        return view('AcademicPrograms.create', compact('knowledgeAreas','nodes','educationalInstitutions'));
     }
 
     /**
@@ -46,7 +52,7 @@ class AcademicProgramController extends Controller
         $academicProgram->start_date        = $request->get('start_date');
         $academicProgram->end_date          = $request->get('end_date');
         $academicProgram->educationalInstitution()->associate($request->get('educational_institution_id'));
-        
+
         if($academicProgram->save()) {
             $message = 'Your store processed correctly';
         }
@@ -93,7 +99,7 @@ class AcademicProgramController extends Controller
         $academicProgram->start_date        = $request->get('start_date');
         $academicProgram->end_date          = $request->get('end_date');
         $academicProgram->educationalInstitution()->associate($request->get('educational_institution_id'));
-        
+
         if($academicProgram->save()) {
             $message = 'Your update processed correctly';
         }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\AcademicWork;
+use App\Models\AcademicWork;
+use App\Models\KnowledgeArea;
+use App\Models\Graduation;
+use App\Models\ResearchGroup;
 use Illuminate\Http\Request;
-
 
 class AcademicWorkController extends Controller
 {
@@ -26,7 +28,10 @@ class AcademicWorkController extends Controller
      */
     public function create()
     {
-        return view('AcademicWorks.create');
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
+        $graduations = Graduation::orderBy('user_id')->paginate(50);
+        $researchGroups = ResearchGroup::orderBy('name')->paginate(50);
+        return view('AcademicWorks.create', compact('knowledgeAreas','graduations','researchGroups'));
     }
 
     /**
@@ -46,7 +51,7 @@ class AcademicWorkController extends Controller
         $academicWork->researchGroup()->associate($request->get('research_group_id'));
         $academicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
         $academicWork->graduation()->associate($request->get('graduation_id'));
-        
+
         if($academicWork->save()){
             $message = 'Your store processed correctly';
         }
@@ -93,7 +98,7 @@ class AcademicWorkController extends Controller
         $academicWork->researchGroup()->associate($request->get('research_group_id'));
         $academicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
         $academicWork->graduation()->associate($request->get('graduation_id'));
-        
+
         if($academicWork->save()){
             $message = 'Your update processed correctly';
         }
