@@ -24,18 +24,18 @@ class ResearchLine extends Model
     ];
 
     public function knowledgeArea() {
-        return $this->belongsTo('App\KnowledgeArea');
+        return $this->belongsTo('App\Models\KnowledgeArea');
     }
 
     public function researchGroup() {
-        return $this->belongsTo('App\ResearchGroup');
+        return $this->belongsTo('App\Models\ResearchGroup');
     }
 
     public function projects() {
-        return $this->belongsToMany('App\Project', 'project_research_line', 'research_line_id', 'project_id');
+        return $this->belongsToMany('App\Models\Project', 'project_research_line', 'research_line_id', 'project_id');
     }
 
     public function researchTeams() {
-        return $this->belongsToMany('App\ResearchTeam', 'research_team_research_line', 'research_line_id', 'research_team_id');
+        return $this->belongsToMany('App\Models\ResearchTeam', 'research_team_research_line', 'research_line_id', 'research_team_id');
     }
 }

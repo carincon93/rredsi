@@ -25,14 +25,14 @@ class AcademicWork extends Model
     ];
 
     public function researchGroup() {
-        return $this->belongsTo('App\ResearchGroup');
+        return $this->belongsTo('App\Models\ResearchGroup');
     }
 
     public function knowledgeArea() {
-        return $this->belongsTo('App\KnowledgeArea');
+        return $this->belongsTo('App\Models\KnowledgeArea');
     }
 
     public function graduation() {
-        return $this->belongsTo('App\Graduation');
+        return $this->belongsTo('App\Models\Graduation');
     }
 }

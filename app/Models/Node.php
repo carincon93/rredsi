@@ -19,6 +19,6 @@ class Node extends Model
     ];
 
     public function educationalInstitutions() {
-        return $this->hasMany('App\EducationalInstitution');
+        return $this->hasMany('App\Models\EducationalInstitution');
     }
 }

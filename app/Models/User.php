@@ -70,19 +70,19 @@ class User extends Authenticatable
     }
 
     public function isResearcher() {
-        return $this->hasOne('App\Researcher', 'id');
+        return $this->hasOne('App\Models\Researcher', 'id');
     }
 
     public function graduations() {
-        return $this->hasMany('App\Graduation');
+        return $this->hasMany('App\Models\Graduation');
     }
 
     public function projects() {
-        return $this->belongsToMany('App\Project', 'authors', 'user_id', 'project_id');
+        return $this->belongsToMany('App\Models\Project', 'authors', 'user_id', 'project_id');
     }
 
     public function researchTeams() {
-        return $this->belongsToMany('App\ResearchTeam', 'research_team_members', 'user_id', 'research_team_id')
+        return $this->belongsToMany('App\Models\ResearchTeam', 'research_team_members', 'user_id', 'research_team_id')
             ->withPivot([
                 'comment',
                 'accepted_at',

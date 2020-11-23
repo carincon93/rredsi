@@ -19,10 +19,10 @@ class Student extends Model
     ];
 
     public function user() {
-        return $this->belongsTo('App\User', 'id');
+        return $this->belongsTo('App\Models\User', 'id');
     }
 
     public function isResearchTeamLeader() {
-        return $this->hasOne('App\ResearchTeam', 'student_leader_id');
+        return $this->hasOne('App\Models\ResearchTeam', 'student_leader_id');
     }
 }

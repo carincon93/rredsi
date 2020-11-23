@@ -23,14 +23,14 @@ class Event extends Model
     ];
 
     public function projects() {
-        return $this->belongsToMany('App\Project', 'event_project', 'event_id', 'project_id');
+        return $this->belongsToMany('App\Models\Project', 'event_project', 'event_id', 'project_id');
     }
 
     public function educationalInstitutionEvent() {
-        return $this->hasOne('App\EducationalInstitutionEvent', 'id');
+        return $this->hasOne('App\Models\EducationalInstitutionEvent', 'id');
     }
 
     public function nodeEvent() {
-        return $this->hasOne('App\NodeEvent', 'id');
+        return $this->hasOne('App\Models\NodeEvent', 'id');
     }
 }

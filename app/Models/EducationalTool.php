@@ -23,10 +23,10 @@ class EducationalTool extends Model
     ];
 
     public function educationalEnvironment() {
-        return $this->belongsTo('App\EducationalEnvironment');
+        return $this->belongsTo('App\Models\EducationalEnvironment');
     }
 
     public function educationalToolLoan() {
-        return $this->hasOne('App\EducationalToolLoan');
+        return $this->hasOne('App\Models\EducationalToolLoan');
     }
 }

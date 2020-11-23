@@ -33,7 +33,7 @@
                                         @forelse ($academicPrograms as $academicProgram)
                                                 <td>{{ $academicProgram->name }}</td>
                                                 <td>{{ $academicProgram->code }}</td>
-                                                <td>{{ $academicProgram->educational_institution->name }}</td>
+                                                <td>{{ $academicProgram->educationalInstitution->name }}</td>
                                                 <td>{{ $academicProgram->academic_level }}</td>
 
 

@@ -18,10 +18,10 @@ class NodeEvent extends Model
     ];
 
     public function isEvent() {
-        return $this->belongsTo('App\Event', 'id');
+        return $this->belongsTo('App\Models\Event', 'id');
     }
 
     public function node() {
-        return $this->belongsTo('App\Node');
+        return $this->belongsTo('App\Models\Node');
     }
 }

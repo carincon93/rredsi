@@ -18,10 +18,10 @@ class EducationalInstitutionEvent extends Model
     ];
 
     public function isEvent() {
-        return $this->belongsTo('App\Event', 'id');
+        return $this->belongsTo('App\Models\Event', 'id');
     }
 
     public function educationalInstitution() {
-        return $this->belongsTo('App\EducationalInstitution');
+        return $this->belongsTo('App\Models\EducationalInstitution');
     }
 }

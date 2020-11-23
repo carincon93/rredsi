@@ -24,14 +24,14 @@ class EducationalEnvironment extends Model
     ];
 
     public function educationalTools() {
-        return $this->hasMany('App\EducationalTool');
+        return $this->hasMany('App\Models\EducationalTool');
     }
 
     public function educationalInstitution() {
-        return $this->belongsTo('App\EducationalInstitution');
+        return $this->belongsTo('App\Models\EducationalInstitution');
     }
 
     public function educationalEnvironmentLoan() {
-        return $this->hasOne('App\EducationalEnvironmentLoan');
+        return $this->hasOne('App\Models\EducationalEnvironmentLoan');
     }
 }
