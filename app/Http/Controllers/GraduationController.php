@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Graduation;
+use App\Models\Graduation;
+use App\Models\EducationalInstitution;
+use App\Http\Requests\GraduationRequest;
 use Illuminate\Http\Request;
 
 class GraduationController extends Controller
@@ -15,6 +17,7 @@ class GraduationController extends Controller
     public function index()
     {
         $graduations = Graduation::orderBy('is_graduated')->paginate(50);
+
         return view('Graduations.index', compact('graduations'));
     }
 
@@ -25,7 +28,9 @@ class GraduationController extends Controller
      */
     public function create()
     {
-        return view('Graduations.create');
+        $educationalInstitutions = EducationalInstitution::orderBy('name')->get();
+
+        return view('Graduations.create', compact('educationalInstitutions'));
     }
 
     /**
@@ -34,13 +39,13 @@ class GraduationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GraduationRequest $request)
     {
         $graduation = new Graduation();
         $graduation->is_graduated   = $request->get('is_graduated');
         $graduation->year           = $request->get('year');
         $graduation->academicProgram()->associate($request->get('academic_program_id'));
-        $graduation->user()->associate($request->get('user_id'));
+        $graduation->user()->associate(auth()->user()->id);
         
         if($graduation->save()){
             $message = 'Your store processed correctly';
@@ -105,5 +110,17 @@ class GraduationController extends Controller
         }
 
         return redirect()->route('graduations.index')->with('status', $message);
+    }
+
+    /**
+     * 
+     * Show the form for saving graduation info.
+     *
+     * @param  \App\Graduation  $Graduation
+     * @return \Illuminate\Http\Response
+     */
+    public function showGraduationInfoRequestForm()
+    {
+        return view('Graduations.graduationInfoRequest');
     }
 }

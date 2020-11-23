@@ -16,6 +16,7 @@
         @livewireStyles
 
         <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     </head>
     <body class="font-sans antialiased">
@@ -23,8 +24,8 @@
             @livewire('navigation-dropdown')
 
             <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="bg-gradient-to-l from-purple-500 shadow to-color-1 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     {{ $header }}
                 </div>
             </header>
@@ -38,5 +39,6 @@
         @stack('modals')
 
         @livewireScripts
+        @stack('scripts')
     </body>
 </html>

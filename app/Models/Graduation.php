@@ -21,14 +21,14 @@ class Graduation extends Model
     ];
 
     public function user() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function academicProgram() {
-        return $this->belongsTo('App\AcademicProgram');
+        return $this->belongsTo('App\Models\AcademicProgram');
     }
 
     public function academicWork() {
-        return $this->hasOne('App\AcademicWork');
+        return $this->hasOne('App\Models\AcademicWork');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\AcademicProgram;
+use App\Models\AcademicProgram;
 use Illuminate\Http\Request;
 use Exception;
 

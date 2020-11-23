@@ -25,22 +25,22 @@ class EducationalInstitution extends Model
     ];
 
     public function node() {
-        return $this->belongsTo('App\Node');
+        return $this->belongsTo('App\Models\Node');
     }
 
     public function researchGroups() {
-        return $this->hasMany('App\ResearchGroup');
+        return $this->hasMany('App\Models\ResearchGroup');
     }
 
     public function educationalEnvironments() {
-        return $this->hasMany('App\EducationalEnvironment');
+        return $this->hasMany('App\Models\EducationalEnvironment');
     }
 
     public function academicPrograms() {
-        return $this->hasMany('App\AcademicProgram');
+        return $this->hasMany('App\Models\AcademicProgram');
     }
 
     public function educationalInstitutionEvents() {
-        return $this->hasMany('App\EducationalInstitutionEvent');
+        return $this->hasMany('App\Models\EducationalInstitutionEvent');
     }
 }

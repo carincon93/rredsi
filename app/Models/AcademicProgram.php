@@ -25,18 +25,18 @@ class AcademicProgram extends Model
     ];
 
     public function educationalInstitution() {
-        return $this->belongsTo('App\EducationalInstitution');
+        return $this->belongsTo('App\Models\EducationalInstitution');
     }
 
     public function graduation() {
-        return $this->hasOne('App\Graduation');
+        return $this->hasOne('App\Models\Graduation');
     }
 
     public function researchTeams() {
-        return $this->belongsToMany('App\ResearchTeam', 'research_team_academic_program', 'academic_program_id', 'research_team_id');
+        return $this->belongsToMany('App\Models\ResearchTeam', 'research_team_academic_program', 'academic_program_id', 'research_team_id');
     }
 
     public function projects() {
-        return $this->belongsToMany('App\Project', 'project_academic_program', 'academic_program_id', 'project_id');
+        return $this->belongsToMany('App\Models\Project', 'project_academic_program', 'academic_program_id', 'project_id');
     }
 }

@@ -1,7 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Dashboard') }}
+            <span class="sm:block text-purple-300">
+                lorem ipsum dolor.
+            </span>
         </h2>
     </x-slot>
 

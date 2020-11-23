@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcademicProgramController;
+use App\Http\Controllers\GraduationController;
+use App\Http\Controllers\EducationalInstitutionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +39,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/environment-loan-requests/{educationalEnvironmentLoan}', [LoanController::class, 'showEnvironmentLoanRequest']);
     Route::get('/tool-loan-requests', [LoanController::class, 'indexToolLoanRequest']);
     Route::get('/tool-loan-requests/{educationalToolLoan}', [LoanController::class, 'showToolLoanRequest']);
+    Route::get('/educational-institutions/get-academic-programs/{educationalInstitution}', [EducationalInstitutionController::class, 'getAcademicPrograms'])->name('educational-institutions.getAcademicPrograms');
     Route::post('/register-event', [ProjectController::class, 'registerEvent']);
+
+    // To request graduation info
+    Route::get('/request-grade-info', [GraduationController::class, 'requestGradeInfo']);
 
     Route::resources([
         'academic-programs'                 => AcademicProgramController::class,
@@ -50,7 +56,6 @@ Route::middleware(['auth'])->group(function () {
         'events'                            => EventController::class,
         'graduations'                       => GraduationController::class,
         'knowledge-areas'                   => KnowledgeAreaController::class,
-        'loans'                             => LoanController::class,
         'projects'                          => ProjectController::class,
         'researchers'                       => ResearcherController::class,
         'research-lines'                    => ResearchLineController::class,

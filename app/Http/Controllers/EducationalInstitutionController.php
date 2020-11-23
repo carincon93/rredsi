@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\EducationalInstitution;
-use App\ResearchGroup;
-use Exception;
+use App\Models\EducationalInstitution;
+use App\Models\ResearchGroup;
 
 class EducationalInstitutionController extends Controller
 {
@@ -127,9 +126,15 @@ class EducationalInstitutionController extends Controller
         return $educationalInstitution->researchGroups()->get();
     }
 
+    /**
+     * Filter academic programs by educational institution.
+     *
+     * @param  \App\EducationalInstitution  $educationalInstitution
+     * @return \Illuminate\Http\Response
+     */
     public function getAcademicPrograms(EducationalInstitution $educationalInstitution)
     {
-        return $educationalInstitution->academicPrograms()->get();
+        return response(['academicPrograms' => $educationalInstitution->academicPrograms()->get()]);
     }
 
     public function getResearchLines(ResearchGroup $researchGroup)
