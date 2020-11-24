@@ -1,0 +1,27 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Gradients */
+.to-color-1 {
+    --gradient-to-color: #5850ec;
+}
+
+/* DataTable */
+.icon_sorting_asc {
+    display: none;
+}
+
+.sorting_asc .icon_sorting_asc {
+    display: inline;
+    width: 20px;
+}
+
+.icon_sorting_desc {
+    display: none;
+}
+
+.sorting_desc .icon_sorting_desc {
+    display: inline;
+    width: 20px;
+}
