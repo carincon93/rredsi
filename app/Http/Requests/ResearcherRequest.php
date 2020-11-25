@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateResearcherRequest extends FormRequest
+class ResearcherRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -106,7 +106,7 @@ class UpdateResearcherRequest extends FormRequest
                 'interests' => json_encode(explode(',', $this->interests, true)),
             ]);
         }
-        
+
         if($this->is_enabled != null) {
             $this->merge([
                 'is_enabled' => (boolean) $this->is_enabled,
@@ -124,7 +124,7 @@ class UpdateResearcherRequest extends FormRequest
                 'is_external' => (boolean) $this->is_external,
             ]);
         }
-    
+
         if($this->cvlac != null) {
             $this->merge([
                 'cvlac' => filter_var($this->cvlac, FILTER_SANITIZE_URL),

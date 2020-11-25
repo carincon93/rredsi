@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEducationalInstitutionRequest extends FormRequest
+class EducationalInstitutionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -89,7 +89,7 @@ class StoreEducationalInstitutionRequest extends FormRequest
             $this->merge([
                 'website' => filter_var(trim($this->website), FILTER_SANITIZE_URL),
             ]);
-        }        
+        }
 
         if($this->administrator_id != null) {
             $this->merge([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResearchGroupRequest;
 use App\Models\ResearchGroup;
 use App\Models\EducationalInstitution;
 
@@ -37,7 +38,7 @@ class ResearchGroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ResearchGroupRequest $request)
     {
         $researchGroup = new ResearchGroup();
         $researchGroup->name                    = $request->get('name');
@@ -85,7 +86,7 @@ class ResearchGroupController extends Controller
      * @param  \App\ResearchGroup  $researchGroup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ResearchGroup $researchGroup)
+    public function update(ResearchGroupRequest $request, ResearchGroup $researchGroup)
     {
         $researchGroup->name                    = $request->get('name');
         $researchGroup->email                   = $request->get('email');

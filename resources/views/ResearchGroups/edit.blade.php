@@ -1,164 +1,95 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{ __('Research groups') }}
+            <span class="sm:block text-purple-300">
+                update research group info
+            </span>
+        </h2>
+        <div>
+            <a href="{{ route('research-groups.index') }}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    {{ __('Back')}}
+                </div>
+            </a>
+        </div>
+    </x-slot>
 
-@section('content')
-
-<div class="container">
-    <div class="form-wrapper">
-        <form class="form" action="" method="" id="form" >
-            <div class="form-group">
-                <label for="name">name</label>
-                <small id="nameHelp" class="form-text text-muted"> Campo requerido </small>
-                <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    id="name"
-                    defaultValue={{ $researchGroup->name }}
-                    aria-describedby="nameHelp"
-                    maxLength=""
-                    required
-                />
-                <span class="invalid-feedback">
-                    {{-- {rules.name.message ? rules.name.message : requestValidation.name ? requestValidation.name : ''} --}}
-                </span>
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="md:grid md:grid-cols-3 md:gap-4">
+            <div class="md:col-span-1">
+                <x-jet-section-title>
+                    <x-slot name="title">Descripción</x-slot>
+                    <x-slot name="description">Edita información</x-slot>
+                </x-jet-section-title>
             </div>
-            <div class="form-group">
-                <label for="email">email</label>
-                <small id="emailhelp" class="form-text text-muted">
-                    Campo requerido
-                </small>
-                <input
-                    type="email"
-                    name="email"
-                    class="form-control"
-                    id="email"
-                    defaultValue={{ $researchGroup->email }}
-                    aria-describedby="emailHelp"
-                    maxLength=""
-                    required
-                />
-                <span class="invalid-feedback">
-                    {{-- {rules.email.message ? rules.email.message : requestValidation.email ? requestValidation.email : ''} --}}
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="leader">leader</label>
-                <small id="leaderHelp" class="form-text text-muted">
-                    Campo requerido
-                </small>
-                <input
-                    type="text"
-                    name="leader"
-                    class="form-control"
-                    id="leader"
-                    defaultValue={{ $researchGroup->leader }}
-                    aria-describedby="leaderHelp"
-                    maxLength=""
-                    required
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <form method="POST" action="{{ route('research-groups.update',$researchGroup->id) }}">
+                    @csrf
+                    @method('PUT')
 
+                    <div>
+                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ $researchGroup->name }}" required />
+                        <x-jet-input-error for="name" class="mt-2" />
+                    </div>
 
-                />
-                <span class="invalid-feedback">
-                    {{-- {rules.leader.message ? rules.leader.message : requestValidation.leader ? requestValidation.leader : ''} --}}
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="gruplac">gruplac</label>
-                <small id="gruplacHelp" class="form-text text-muted">
-                    Campo requerido
-                </small>
-                <input
-                    type="url"
-                    name="gruplac"
-                    class="form-control"
-                    id="gruplac"
-                    defaultValue={{ $researchGroup->gruplac }}
-                    aria-describedby="gruplacHelp"
-                    maxLength=""
-                    required
+                    <div>
+                        <x-jet-label for="email" value="{{ __('Email') }}" />
+                        <x-jet-input id="email" class="block mt-1 w-full" type="email" min="" max="" name="email" value="{{ $researchGroup->email }}" required />
+                        <x-jet-input-error for="email" class="mt-2" />
+                    </div>
 
+                    <div>
+                        <x-jet-label for="leader" value="{{ __('Leader') }}" />
+                        <x-jet-input id="leader" class="block mt-1 w-full" type="text" min="" max="" name="leader" value="{{ $researchGroup->leader }}" required />
+                        <x-jet-input-error for="leader" class="mt-2" />
+                    </div>
 
-                />
-                <span class="invalid-feedback">
-                    {{-- {rules.gruplac.message ? rules.gruplac.message : requestValidation.gruplac ? requestValidation.gruplac : ''} --}}
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="minciencias_code">minciencias_code</label>
-                <small id="minciencias_codeHelp" class="form-text text-muted">
-                    Campo requerido
-                </small>
-                <input
-                    type="text"
-                    name="minciencias_code"
-                    class="form-control"
-                    id="minciencias_code"
-                    defaultValue={{ $researchGroup->minciencias_code }}
-                    aria-describedby="minciencias_codeHelp"
-                    maxLength=""
-                    required
+                    <div>
+                        <x-jet-label for="gruplac" value="{{ __('Gruplac') }}" />
+                        <x-jet-input id="gruplac" class="block mt-1 w-full" type="url" min="" max="" name="gruplac" value="{{ $researchGroup->gruplac }}" required />
+                        <x-jet-input-error for="gruplac" class="mt-2" />
+                    </div>
 
+                    <div>
+                        <x-jet-label for="minciencias_code" value="{{ __('Minciencias code') }}" />
+                        <x-jet-input id="minciencias_code" class="block mt-1 w-full" type="text" min="" max="" name="minciencias_code" value="{{ $researchGroup->minciencias_code }}" required />
+                        <x-jet-input-error for="minciencias_code" class="mt-2" />
+                    </div>
 
-                />
-                <span class="invalid-feedback">
-                    {{-- {rules.minciencias_code.message ? rules.minciencias_code.message : requestValidation.minciencias_code ? requestValidation.minciencias_code : ''} --}}
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="minciencias_category">Caterigoria de minciencias</label>
-                <small id="node_idHelp" class="form-text text-muted">Campo requerido</small>
-                <select
-                    id="minciencias_category"
-                    name="minciencias_category"
-                    class="form-control"
-                    defaultValue={{ $researchGroup->minciencias_category }}
-                    aria-describedby="node_idHelp"
-                    required
+                    <div class="mt-2">
+                        <x-jet-label for="minciencias_category" value="{{ __('Nodo') }}" />
+                        <select id="minciencias_category" name="minciencias_category" class="block mt-1 p-4 w-full" value="{{ $researchGroup->minciencias_category }}" required >
+                            <option value=''>Seleccione una categoria</option>
+                            <option {{ $researchGroup->minciencias_category  == "A" ? "selected" : ""  }} value="A">A</option>
+                            <option {{ $researchGroup->minciencias_category  == "B" ? "selected" : "" }} value="B">B</option>
+                        </select>
+                        <x-jet-input-error for="minciencias_category" class="mt-2" />
+                    </div>
 
+                    <div>
+                        <x-jet-label for="website" value="{{ __('Website') }}" />
+                        <x-jet-input id="website" class="block mt-1 w-full" type="url" min="" max="" name="website" value="{{ $researchGroup->website  }}" required />
+                        <x-jet-input-error for="website" class="mt-2" />
+                    </div>
 
-                >
-                    <option value=''>Seleccione una categoria</option>
+                    <div class="mt-4">
+                        <x-drop-down-academic-program :educationalInstitutions="$educationalInstitutions" />
+                    </div>
 
-                    <option value="A" key="A">A</option>
-                    <option value="B" key="B">B</option>
-
-                </select>
-                <span class="invalid-feedback">
-                    {{-- {rules.minciencias_category.message ? rules.minciencias_category.message : requestValidation.minciencias_category ? requestValidation.minciencias_category : ''} --}}
-
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="website">website</label>
-                <small id="websiteHelp" class="form-text text-muted">
-                    Campo requerido
-                </small>
-                <input
-                    type="url"
-                    name="website"
-                    class="form-control"
-                    id="website"
-                    defaultValue={{ $researchGroup->website }}
-                    aria-describedby="websiteHelp"
-                    maxLength=""
-                    required
-
-
-                />
-                <span class="invalid-feedback">
-                    {{-- {rules.website.message ? rules.website.message : requestValidation.website ? requestValidation.website : ''} --}}
-                </span>
+                    <div class="flex items-center justify-end mt-4">
+                        <x-jet-button class="ml-4">
+                            {{ __('Create') }}
+                        </x-jet-button>
+                    </div>
+                </form>
             </div>
 
-            <button
-                class="btn btn-primary"
-                type="submit"
-                form="form"
-            >
-                Guardar
-            </button>
-        </form>
+        </div>
     </div>
-</div>
 
-@endsection
+</x-app-layout>

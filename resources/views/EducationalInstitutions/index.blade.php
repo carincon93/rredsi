@@ -32,7 +32,7 @@
                                             <tr>
                                                 <td>{{ $educationalInstitution->name }}</td>
                                                 <td>{{ $educationalInstitution->city }}</td>
-                                                <td>{{ $educationalInstitution->administrator->user->name }}</td>
+                                                {{-- <td>{{ $educationalInstitution->administrator->user->name }}</td> --}}
                                                 <td class="actions">
                                                     <div class="actions-wrapper">
                                                         <a href="/app/educational-institutions/edit/{{ $educationalInstitution->id }}" >

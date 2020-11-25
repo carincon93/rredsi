@@ -9,8 +9,7 @@ use App\Models\ResearchGroup;
 use App\Models\ResearchTeam;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreResearcherRequest;
-use App\Http\Requests\UpdateResearcherRequest;
+use App\Http\Requests\ResearcherRequest;
 
 class ResearcherController extends Controller
 {
@@ -44,7 +43,7 @@ class ResearcherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreResearcherRequest $request)
+    public function store(ResearcherRequest $request)
     {
         $researcher = new User();
         $researcher->name               = $request->get('name');
@@ -102,7 +101,7 @@ class ResearcherController extends Controller
      * @param  \App\Researcher  $researcher
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateResearcherRequest $request, Researcher $researcher)
+    public function update(ResearcherRequest $request, Researcher $researcher)
     {
         $researcher->user->name               = $request->get('name');
         $researcher->user->email              = $request->get('email');

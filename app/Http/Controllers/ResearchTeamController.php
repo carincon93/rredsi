@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResearchTeamRequest;
 use App\Models\ResearchTeam;
 use App\Models\KnowledgeArea;
 use App\Models\EducationalInstitution;
@@ -45,7 +46,7 @@ class ResearchTeamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ResearchTeamRequest $request)
     {
         $researchTeam = new ResearchTeam();
         $researchTeam->name                             = $request->get('name');
@@ -104,7 +105,7 @@ class ResearchTeamController extends Controller
      * @param  \App\ResearchTeam  $researchTeam
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ResearchTeam $researchTeam)
+    public function update(ResearchTeamRequest $request, ResearchTeam $researchTeam)
     {
         $researchTeam->name                             = $request->get('name');
         $researchTeam->mentor_name                      = $request->get('mentor_name');

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -98,7 +98,7 @@ class UpdateUserRequest extends FormRequest
                 'interests' => json_encode(explode(',', $this->interests, true)),
             ]);
         }
-        
+
         if($this->is_enabled != null) {
             $this->merge([
                 'is_enabled' => (boolean) $this->is_enabled,

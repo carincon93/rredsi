@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AcademicWorkRequest;
 use App\Models\AcademicWork;
 use App\Models\KnowledgeArea;
 use App\Models\Graduation;
@@ -40,7 +41,7 @@ class AcademicWorkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AcademicWorkRequest $request)
     {
         $academicWork = new AcademicWork();
         $academicWork->title                    = $request->get('title');
@@ -88,7 +89,7 @@ class AcademicWorkController extends Controller
      * @param  \App\AcademicWork  $academicWork
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AcademicWork $academicWork)
+    public function update(AcademicWorkRequest $request, AcademicWork $academicWork)
     {
         $academicWork->title                    = $request->get('title');
         $academicWork->type                     = $request->get('type');

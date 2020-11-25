@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AcademicProgramRequest;
 use App\Models\AcademicProgram;
 use App\Models\KnowledgeArea;
 use App\Models\Node;
@@ -41,7 +42,7 @@ class AcademicProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AcademicProgramRequest $request)
     {
         $academicProgram = new AcademicProgram();
         $academicProgram->name              = $request->get('name');
@@ -79,7 +80,10 @@ class AcademicProgramController extends Controller
      */
     public function edit(AcademicProgram $academicProgram)
     {
-        return view('AcademicPrograms.edit', compact('academicProgram'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
+        $nodes = Node::orderBy('administrator_id')->paginate(50);
+        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
+        return view('AcademicPrograms.edit', compact('academicProgram','knowledgeAreas','nodes','educationalInstitutions'));
     }
 
     /**
@@ -89,7 +93,7 @@ class AcademicProgramController extends Controller
      * @param  \App\AcademicProgram  $academicProgram
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AcademicProgram $academicProgram)
+    public function update(AcademicProgramRequest $request, AcademicProgram $academicProgram)
     {
         $academicProgram->name              = $request->get('name');
         $academicProgram->code              = $request->get('code');

@@ -25,7 +25,7 @@ class AcademicProgramRequest extends FormRequest
     {
         return [
             'name'             => 'required|string|max:191',
-            'code'             => 'max:191',
+            'code'             => 'required|max:191',
             'academic_level'   => 'required|string|max:191',
             'modality'         => 'required|string|max:191',
             'daytime'          => 'required|string|max:191',
@@ -33,7 +33,7 @@ class AcademicProgramRequest extends FormRequest
             'end_date'         => 'required|date|date_format:Y-m-d|after:start_date',
         ];
     }
-    
+
     /**
      * Prepare the data for validation.
      *

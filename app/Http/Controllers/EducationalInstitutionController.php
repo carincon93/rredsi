@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EducationalInstitutionRequest;
 use App\Models\EducationalInstitution;
 use App\Models\ResearchGroup;
 use App\Models\Node;
@@ -39,7 +40,7 @@ class EducationalInstitutionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EducationalInstitutionRequest $request)
     {
         $educationalInstitution = new EducationalInstitution();
         $educationalInstitution->name           = $request->get('name');
@@ -87,7 +88,7 @@ class EducationalInstitutionController extends Controller
      * @param  \App\EducationalInstitution  $educationalInstitution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EducationalInstitution $educationalInstitution)
+    public function update(EducationalInstitutionRequest $request, EducationalInstitution $educationalInstitution)
     {
         $educationalInstitution->name           = $request->get('name');
         $educationalInstitution->nit            = $request->get('nit');

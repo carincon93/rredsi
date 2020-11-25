@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateNodeRequest extends FormRequest
+class NodeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -49,7 +49,7 @@ class UpdateNodeRequest extends FormRequest
                 'state' => filter_var($this->state, FILTER_SANITIZE_STRING),
             ]);
         }
-   
+
         if($this->administrator_id != null) {
             $this->merge([
                 'administrator_id' => (integer) filter_var($this->administrator_id, FILTER_SANITIZE_NUMBER_INT),

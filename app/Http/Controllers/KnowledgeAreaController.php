@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KnowledgeAreaRequest;
 use App\Models\KnowledgeArea;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class KnowledgeAreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KnowledgeAreaRequest $request)
     {
         $knowledgeArea          = new KnowledgeArea();
         $knowledgeArea->name    = $request->get('name');
@@ -75,7 +76,7 @@ class KnowledgeAreaController extends Controller
      * @param  \App\KnowledgeArea  $knowledgeArea
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KnowledgeArea $knowledgeArea)
+    public function update(KnowledgeAreaRequest $request, KnowledgeArea $knowledgeArea)
     {
         $knowledgeArea->name = $request->get('name');
 

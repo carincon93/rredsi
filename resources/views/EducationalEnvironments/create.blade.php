@@ -1,162 +1,94 @@
 <x-app-layout>
-
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Create educational environments
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{ __('Educational environment') }}
+            <span class="sm:block text-purple-300">
+                Add educational environment info
+            </span>
         </h2>
+        <div>
+            <a href="{{ route('educational-environments.index') }}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    {{ __('Back')}}
+                </div>
+            </a>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm-rounded-lg">
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="md:grid md:grid-cols-3 md:gap-4">
+            <div class="md:col-span-1">
+                <x-jet-section-title>
+                    <x-slot name="title">Descripción</x-slot>
+                    <x-slot name="description">Añade información académica</x-slot>
+                </x-jet-section-title>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <form method="POST" action="{{ route('educational-environments.store') }}">
+                    @csrf
 
-                <div class="container">
-                    <div class="form-wrapper">
-                        <form  action={{ route('educational-environments.store') }} method="POST" >
-                            @csrf
+                        <div>
+                            <x-jet-label for="name" value="{{ __('Name') }}" />
+                            <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ old('name') }}" required />
+                            <x-jet-input-error for="name" class="mt-2" />
+                        </div>
 
-                            <div class="form-group">
-                                <label for="name">name</label>
-                                {{-- <small id="nameHelp" class="form-text text-muted">
-                                    Campo requerido
-                                </small> --}}
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    name="name"
-                                    id="name"
-                                    maxlength=""
-                                    required
-                                />
-                                <span class="invalid-feedback">
-                                </span>
-                            </div>
+                        <div>
+                            <x-jet-label for="type" value="{{ __('Type') }}" />
+                            <x-jet-input id="type" class="block mt-1 w-full" type="text" min="" max="" name="type" value="{{ old('type') }}" required />
+                            <x-jet-input-error for="type" class="mt-2" />
+                        </div>
 
-                            <div class="form-group">
-                                <label for="type">type</label>
-                                {{-- <small id="typeHelp" class="form-text text-muted">
-                                    Campo requerido
-                                </small> --}}
-                                <select
-                                    name="type"
-                                    id="type"
-                                    class="form-control"
-                                >
-                                    <option value="">Seleccione uno</option>
-                                    <option value="salon">Salon</option>
-                                    <option value="laboratorio">Laboratorio</option>
-                                </select>
+                        <div class="mt-2">
+                            <x-jet-label for="description" value="{{ __('Description') }}" />
+                            <textarea id="description" name="description" class="block mt-1 p-4 w-full" value="{{ old('description') }}" required >{{ old('description') }}</textarea>
+                            <x-jet-input-error for="description" class="mt-2" />
+                        </div>
 
-                                <span class="invalid-feedback">
+                        <div>
+                            <x-jet-label for="capacity_aprox" value="{{ __('Capacity aprox') }}" />
+                            <x-jet-input id="capacity_aprox" class="block mt-1 w-full" type="number" min="" max="" name="capacity_aprox" value="{{ old('capacity_aprox') }}" required />
+                            <x-jet-input-error for="capacity_aprox" class="mt-2" />
+                        </div>
 
-                                </span>
-                            </div>
+                        <p class="mt-4">{{ __('Enabled?') }}</p>
+                        <div class="mt-4">
+                            <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" {{ old('is_enable_yes') == 1 ? 'checked' : '' }} value="1" />
+                            <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enable_yes">Si</label>
 
-                            <div class="form-group">
-                                <label for="description">
-                                    description
-                                </label>
-                                {{-- <small
-                                    id="cellphone_numberHelp"
-                                    class="form-text text-muted"
-                                >
-                                    Campo requerido
-                                </small> --}}
-                                <textarea
-                                    name="description"
-                                    id="description"
-                                    class="form-control"
-                                ></textarea>
+                            <input class="form-check-input" type="radio" name="is_enabled" id="is_enabled_no" {{ old('is_enabled_no') == 0 ? 'checked' : '' }} value="0" />
+                            <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enabled_no">No</label>
 
-                                <span class="invalid-feedback">
+                            <x-jet-input-error for="is_enabled" class="mt-2" />
+                        </div>
 
-                                </span>
-                            </div>
+                        <p class="mt-4">{{ __('Available?') }}</p>
+                        <div class="mt-4">
+                            <input class="form-check-input" type="radio" name="is_available" id="is_available_yes" {{ old('is_available_yes') == 1 ? 'checked' : '' }} value="1" />
+                            <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_yes">Si</label>
 
-                            <div class="form-group">
-                                <label for="capacity_aprox">capacity_aprox</label>
-                                {{-- <small id="capacity_aproxHelp"  class="form-text text-muted" >
-                                    Campo requerido
-                                </small> --}}
-                                <input
-                                    type="number"
-                                    name="capacity_aprox"
-                                    id="capacity_aprox"
-                                    class="form-control"
-                                />
-                                <span class="invalid-feedback">
+                            <input class="form-check-input" type="radio" name="is_available" id="is_available_no" {{ old('is_available_no') == 0 ? 'checked' : '' }} value="0" />
+                            <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_no">No</label>
 
-                                </span>
-                            </div>
+                            <x-jet-input-error for="is_available" class="mt-2" />
+                        </div>
 
-                            <div class="form-group">
-                                <label for="document_number">¿Habilitado?</label>
-                                {{-- <small
-                                    id="document_numberHelp"
-                                    class="form-text text-muted"
-                                >
-                                    Campo requerido
-                                </small> --}}
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" value="1" />
-                                    <label class="form-check-label" for="is_enable_yes">Si</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="is_enabled" id="is_enabled_no" value="0" />
-                                    <label class="form-check-label" for="is_enabled_no">No</label>
-                                </div>
-                                {{-- <span class={rules.is_enabled.isInvalid && rules.is_enabled.message !== '' || requestValidation.is_enabled ? 'invalid-feedback d-block' : 'invalid-feedback'} >
+                        <div class="mt-4">
+                            <x-drop-down-academic-program :educationalInstitutions="$educationalInstitutions" />
+                        </div>
 
-                                </span> --}}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="document_number">Disponible?</label>
-                                {{-- <small id="document_numberHelp"  class="form-text text-muted" >
-                                    Campo requerido
-                                </small> --}}
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="is_available" id="is_available_yes" value="1" />
-                                    <label class="form-check-label" for="is_available_yes">Si</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="is_available" id="is_available_no" value="0" />
-                                    <label class="form-check-label" for="is_available_no">No</label>
-                                </div>
-                                {{-- <span class={rules.is_available.isInvalid && rules.is_available.message !== '' || requestValidation.is_available ? 'invalid-feedback d-block' : 'invalid-feedback'} >
-
-                                </span> --}}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="educational_institution_id">Institucion educativa</label>
-                                {{-- <small
-                                    id="document_numberHelp"
-                                    class="form-text text-muted"
-                                >
-                                    Campo requerido
-                                </small> --}}
-                                <select name="educational_institution_id" id="educational_institution_id" class="form-control">
-
-                                    @forelse ($educationalInstitutions as $educationalInstitution)
-                                        <option value={{$educationalInstitution->id}}>  {{$educationalInstitution->name}} </option>
-                                    @empty
-                                        <option value="">No educational institutions</option>
-                                    @endforelse
-
-                                </select>
-                            </div>
-
-                            <button type="submit" > Guardar </button>
-                        </form>
-                    </div>
-                </div>
-
+                        <div class="flex items-center justify-end mt-4">
+                            <x-jet-button class="ml-4">
+                                {{ __('Create') }}
+                            </x-jet-button>
+                        </div>
+                    </form>
             </div>
 
         </div>
-
-
     </div>
 
 </x-app-layout>

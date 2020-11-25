@@ -46,7 +46,7 @@ class GraduationController extends Controller
         $graduation->year           = $request->get('year');
         $graduation->academicProgram()->associate($request->get('academic_program_id'));
         $graduation->user()->associate(auth()->user()->id);
-        
+
         if($graduation->save()){
             $message = 'Your store processed correctly';
         }
@@ -83,13 +83,13 @@ class GraduationController extends Controller
      * @param  \App\Graduation  $Graduation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Graduation $graduation)
+    public function update(GraduationRequest $request, Graduation $graduation)
     {
         $graduation->is_graduated   = $request->get('is_graduated');
         $graduation->year           = $request->get('year');
         $graduation->academicProgram()->associate($request->get('academic_program_id'));
         $graduation->user()->associate($request->get('user_id'));
-        
+
         if($graduation->save()){
             $message = 'Your update processed correctly';
         }
@@ -113,7 +113,7 @@ class GraduationController extends Controller
     }
 
     /**
-     * 
+     *
      * Show the form for saving graduation info.
      *
      * @param  \App\Graduation  $Graduation
