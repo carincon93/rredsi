@@ -28,8 +28,8 @@ class AcademicProgram extends Model
         return $this->belongsTo('App\Models\EducationalInstitution');
     }
 
-    public function graduation() {
-        return $this->hasOne('App\Models\Graduation');
+    public function userGraduation() {
+        return $this->hasOne('App\Models\UserGraduation');
     }
 
     public function researchTeams() {

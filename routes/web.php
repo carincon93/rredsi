@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcademicProgramController;
-use App\Http\Controllers\GraduationController;
-use App\Http\Controllers\AcademicWorkController;
+use App\Http\Controllers\UserGraduationController;
+use App\Http\Controllers\UserAcademicWorkController;
 use App\Http\Controllers\EducationalEnvironmentController;
 use App\Http\Controllers\EducationalInstitutionController;
 use App\Http\Controllers\ResearchGroupController;
@@ -14,8 +14,11 @@ use App\Http\Controllers\KnowledgeAreaController;
 use App\Http\Controllers\ResearcherController;
 use App\Http\Controllers\ResearchLineController;
 use App\Http\Controllers\ResearchTeamController;
-
-
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ResearchOutputController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,44 +42,54 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::get('/educational-environments/getByEducationalInstitution/{id}', [EducationalEnvironmentController::class, 'getByEducationalInstitution']);
-    Route::get('/nodes/get-educational-institutions/{node}', [NodeController::class, 'getEducationalInstitutions']);
     Route::get('/educational-institutions/get-research-groups/{educationalInstitution}', [EducationalInstitutionController::class, 'getResearchGroups']);
     Route::get('/educational-institutions/get-academic-programs/{educationalInstitution}', [EducationalInstitutionController::class, 'getAcademicPrograms']);
     Route::get('/educational-institutions/get-research-lines/{researchGroup}', [EducationalInstitutionController::class, 'getResearchLines']);
     Route::get('/research-groups/get-research-teams/{researchGroup}', [ResearchGroupController::class, 'getResearchTeams']);
-    Route::put('/loans/{loan}/check', [LoanController::class, 'check']);
-    Route::put('/loans/{loan}/return', [LoanController::class, 'return']);
-    Route::put('/loans/{loan}/returnCheck', [LoanController::class, 'returnCheck']);
-    Route::get('/environment-loan-requests', [LoanController::class, 'indexEnvironmentLoanRequest']);
-    Route::get('/environment-loan-requests/{educationalEnvironmentLoan}', [LoanController::class, 'showEnvironmentLoanRequest']);
-    Route::get('/tool-loan-requests', [LoanController::class, 'indexToolLoanRequest']);
-    Route::get('/tool-loan-requests/{educationalToolLoan}', [LoanController::class, 'showToolLoanRequest']);
-    Route::get('/educational-institutions/get-academic-programs/{educationalInstitution}', [EducationalInstitutionController::class, 'getAcademicPrograms'])->name('educational-institutions.getAcademicPrograms');
-    Route::post('/register-event', [ProjectController::class, 'registerEvent']);
 
-    // To request graduation info
-    Route::get('/request-grade-info', [GraduationController::class, 'requestGradeInfo']);
+    Route::get('/dashboard/nodes/{node}/educational-institutions/{educationalInstitution}', [EducationalInstitutionController::class, 'dashboard']);
+
+    Route::resource('/user/profile/graduations', UserGraduationController::class, [
+        'names' => [
+            'index'     => 'user.profile.graduations.index',
+            'show'      => 'user.profile.graduations.show',
+            'create'    => 'user.profile.graduations.create',
+            'edit'      => 'user.profile.graduations.edit',
+            'store'     => 'user.profile.graduations.store',
+            'update'    => 'user.profile.graduations.update',
+            'destroy'   => 'user.profile.graduations.destroy',
+        ]
+    ]);
+
+    Route::resource('/user/profile/graduations/academic-works', UserAcademicWorkController::class, [
+        'names' => [
+            'index'     => 'user.profile.academic-works.index',
+            'show'      => 'user.profile.academic-works.show',
+            'create'    => 'user.profile.academic-works.create',
+            'edit'      => 'user.profile.academic-works.edit',
+            'store'     => 'user.profile.academic-works.store',
+            'update'    => 'user.profile.academic-works.update',
+            'destroy'   => 'user.profile.academic-works.destroy',
+        ]
+    ]);
 
     Route::resources([
-        'academic-programs'                 => AcademicProgramController::class,
-        'academic-works'                    => AcademicWorkController::class,
-        'educational-environments'          => EducationalEnvironmentController::class,
-        'nodes'                             => NodeController::class,
-        'educational-institutions'          => EducationalInstitutionController::class,
-        'research-groups'                   => ResearchGroupController::class,
-        'educational-tools'                 => EducationalToolController::class,
-        'events'                            => EventController::class,
-        'graduations'                       => GraduationController::class,
+        'nodes'                                                             => NodeController::class,
+        'nodes.educational-institutions'                                    => EducationalInstitutionController::class,
+        'nodes.educational-institutions.academic-programs'                  => AcademicProgramController::class,
+        'nodes.educational-institutions.research-lines'                     => ResearchLineController::class,
+        'nodes.educational-institutions.research-groups'                    => ResearchGroupController::class,
+        'nodes.educational-institutions.research-teams'                     => ResearchTeamController::class,
+        'nodes.educational-institutions.educational-environments'           => EducationalEnvironmentController::class,
+        'nodes.educational-institutions.research-teams.research-outputs'    => ResearchOutputController::class,
+        'nodes.educational-institutions.projects'                           => ProjectController::class,
+        'nodes.educational-institutions.educational-tools'                  => EducationalToolController::class,
+        'nodes.educational-institutions.events'                             => EventController::class,
+        'nodes.educational-institutions.users'                              => UserController::class,
+
         'knowledge-areas'                   => KnowledgeAreaController::class,
-        'projects'                          => ProjectController::class,
         'researchers'                       => ResearcherController::class,
-        'research-lines'                    => ResearchLineController::class,
-        'research-outputs'                  => ResearchOutputController::class,
-        'research-teams'                    => ResearchTeamController::class,
         'students'                          => StudentController::class,
-        'users'                             => UserController::class,
-        'research-team-admins'              => ResearchTeamAdminController::class,
-        'educational-institution-admins'    => EducationalInstitutionAdminController::class,
-        'node-admins'                       => NodeAdminController::class,
+        'roles'                             => RoleController::class,
     ]);
 });

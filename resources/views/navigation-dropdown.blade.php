@@ -19,8 +19,9 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-jet-dropdown align="right" width="48">
+            <div class="hidden sm:flex sm:items-stretch sm:ml-6">
+                <x-drop-down-educational-institution />
+                <x-jet-dropdown align="right" classes="flex items-center" width="48">
                     <x-slot name="trigger">
                         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                             <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">

@@ -6,16 +6,16 @@ use Illuminate\View\Component;
 
 class DropDownAcademicProgram extends Component
 {
-    public $educationalInstitutions;
+    public $nodes;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($educationalInstitutions)
+    public function __construct($nodes)
     {
-        $this->educationalInstitutions = $educationalInstitutions;
+        $this->nodes = $nodes;
     }
 
     /**

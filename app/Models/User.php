@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -13,6 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens;
+    use HasRoles;
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
@@ -65,16 +67,16 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function roles() {
-        return $this->belongsToMany(Role::class);
+    public function role() {
+        return $this->belongsTo('App\Models\Role');
     }
 
     public function isResearcher() {
         return $this->hasOne('App\Models\Researcher', 'id');
     }
 
-    public function graduations() {
-        return $this->hasMany('App\Models\Graduation');
+    public function userGraduations() {
+        return $this->hasMany('App\Models\UserGraduation');
     }
 
     public function projects() {

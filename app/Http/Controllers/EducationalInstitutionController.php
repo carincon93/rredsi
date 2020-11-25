@@ -15,9 +15,10 @@ class EducationalInstitutionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Node $node)
     {
-        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
+        $educationalInstitutions = $node->educationalInstitutions->orderBy('name')->paginate(50);
+
         return view('EducationalInstitutions.index', compact('educationalInstitutions'));
     }
 
@@ -26,7 +27,7 @@ class EducationalInstitutionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Node $node)
     {
         // $educationalInstitutionAdmins = DB::table('educational_institution_admins')->get();
         $nodes = Node::orderBy('state')->paginate(50);
@@ -39,7 +40,7 @@ class EducationalInstitutionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Node $node)
     {
         $educationalInstitution = new EducationalInstitution();
         $educationalInstitution->name           = $request->get('name');
@@ -64,7 +65,7 @@ class EducationalInstitutionController extends Controller
      * @param  \App\EducationalInstitution  $educationalInstitution
      * @return \Illuminate\Http\Response
      */
-    public function show(EducationalInstitution $educationalInstitution)
+    public function show(Node $node, EducationalInstitution $educationalInstitution)
     {
         return view('EducationalInstitutions.show', compact('educationalInstitution'));
     }
@@ -75,7 +76,7 @@ class EducationalInstitutionController extends Controller
      * @param  \App\EducationalInstitution  $educationalInstitution
      * @return \Illuminate\Http\Response
      */
-    public function edit(EducationalInstitution $educationalInstitution)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution)
     {
         return view('EducationalInstitutions.show', compact('educationalInstitution'));
     }
@@ -87,7 +88,7 @@ class EducationalInstitutionController extends Controller
      * @param  \App\EducationalInstitution  $educationalInstitution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EducationalInstitution $educationalInstitution)
+    public function update(Request $request, Node $node, EducationalInstitution $educationalInstitution)
     {
         $educationalInstitution->name           = $request->get('name');
         $educationalInstitution->nit            = $request->get('nit');
@@ -111,7 +112,7 @@ class EducationalInstitutionController extends Controller
      * @param  \App\EducationalInstitution  $educationalInstitution
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EducationalInstitution $educationalInstitution)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution)
     {
         if($educationalInstitution->delete()){
             $message = 'Your delete processed correctly';
@@ -121,12 +122,27 @@ class EducationalInstitutionController extends Controller
     }
 
     /**
+     * Display a dashboard of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard(Node $node, EducationalInstitution $educationalInstitution)
+    {
+        return view('EducationalInstitutions.dashboard', compact('educationalInstitution'));
+    }
+
+    public function getResearchLines(ResearchGroup $researchGroup)
+    {
+        return $researchGroup->researchLines()->get();
+    }
+
+    /**
      * Get research groups by educational institution.
      *
      * @param  \App\EducationalInstitution  $educationalInstitution
      * @return \Illuminate\Http\Response
      */
-    public function getResearchGroups(EducationalInstitution $educationalInstitution)
+    public function getResearchGroups(Node $node, EducationalInstitution $educationalInstitution)
     {
         return $educationalInstitution->researchGroups()->get();
     }
@@ -137,13 +153,8 @@ class EducationalInstitutionController extends Controller
      * @param  \App\EducationalInstitution  $educationalInstitution
      * @return \Illuminate\Http\Response
      */
-    public function getAcademicPrograms(EducationalInstitution $educationalInstitution)
+    public function getAcademicPrograms(Node $node, EducationalInstitution $educationalInstitution)
     {
         return response(['academicPrograms' => $educationalInstitution->academicPrograms()->get()]);
-    }
-
-    public function getResearchLines(ResearchGroup $researchGroup)
-    {
-        return $researchGroup->researchLines()->get();
     }
 }

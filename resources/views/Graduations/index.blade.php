@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{ __('Graduations') }}
+            {{ __('User graduations') }}
             <span class="sm:block text-purple-300">
                 Add graduation info
             </span>
         </h2>
         <div>
-            <a href="{{ route('graduations.create') }}">
+            <a href="{{ url('/user/profile/graduations/create') }}">
                 <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create graduation info')}}
                 </div>
@@ -30,20 +30,20 @@
                     </x-slot>
                     
                     <x-slot name="tbodyData">
-                        @foreach ($graduations as $graduation)
+                        @foreach ($userGraduations as $userGraduation)
                             
                             <tr class="bg-white border-4 border-gray-200">
                     
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $graduation->academicProgram->name }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $userGraduation->academicProgram->name }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $graduation->academicProgram->educationalInstitution->name }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $userGraduation->academicProgram->educationalInstitution->name }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $graduation->year }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $userGraduation->year }}</span>
                                 </td>
                 
                                 <td class="py-2 text-left">
@@ -60,13 +60,13 @@
                                             </x-slot>
                         
                                             <x-slot name="content">                        
-                                                <x-jet-dropdown-link href="{{ route('graduations.show', $graduation->id) }}">
+                                                <x-jet-dropdown-link href="{{ route('user.profile.graduations.show', $userGraduation->id) }}">
                                                     {{ __('Details') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('graduations.edit', $graduation->id) }}">
+                                                <x-jet-dropdown-link href="{{ route('user.profile.graduations.edit', $userGraduation->id) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('graduations.destroy', $graduation->id) }}">
+                                                <x-jet-dropdown-link href="{{ route('user.profile.graduations.destroy', $userGraduation->id) }}">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>

@@ -25,3 +25,16 @@
     display: inline;
     width: 20px;
 }
+
+select.header-select:focus {
+    box-shadow: none;
+}
+
+select.header-select {
+    color: #fff;
+}
+
+select.header-select option{
+    background-color: transparent;
+    color: #000;
+}
