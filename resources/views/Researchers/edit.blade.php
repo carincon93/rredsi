@@ -1,259 +1,166 @@
-@extends('layouts.app')
-
-@section('content')
-
-<div class="container">
-    <div class="form-wrapper">
-      <form class="form" action="" method="" id="form" >
-        <div class="form-group">
-          <label for="name">name</label>
-          <small id="nameHelp" class="form-text text-muted">Campo requerido</small>
-          <input type="text"
-            name="name"
-            class="form-control"
-            id="name"
-            aria-describedby="nameHelp"
-            maxLength=""
-            autoFocus
-            required
-            defaultValue={{ $user->name }}
-          />
-          <span class="invalid-feedback">
-            {{-- {rules.name.message ? rules.name.message : requestValidation.name ? requestValidation.name : ''} --}}
-          </span>
-        </div>
-
-        <div class="form-group">
-          <label for="email">email</label>
-          <small id="emailHelp" class="form-text text-muted">Campo requerido</small>
-          <input type="email"
-            name="email"
-            class="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            maxLength=""
-            required
-            defaultValue={{$user->email}}
-          />
-          <span class="invalid-feedback">
-            {{-- {rules.email.message ? rules.email.message : requestValidation.email ? requestValidation.email : ''} --}}
-          </span>
-        </div>
-
-        <div class="form-group">
-          <label for="document_type">document_type</label>
-          <small id="document_typeHelp" class="form-text text-muted">Campo requerido</small>
-          <select id="document_type"
-            name="document_type"
-            class="form-control"
-            required
-            defaultValue={{ $user->document_type }}
-          >
-            <option value=''>Seleccione el tipo de documento</option>
-            <option value="CC">Cédula de ciudadanía</option>
-            <option value="CE">Cédula de extranjería</option>
-            <option value="TI">Tarjeta de identidad</option>
-          </select>
-          <span class="invalid-feedback">
-            {{-- {rules.document_type.message ? rules.document_type.message : requestValidation.document_type ? requestValidation.document_type : ''} --}}
-          </span>
-        </div>
-
-        <div class="form-group">
-          <label for="document_number">document_number</label>
-          <small id="document_numberHelp" class="form-text text-muted">Campo requerido</small>
-          <input type="number"
-            name="document_number"
-            class="form-control"
-            id="document_number"
-            aria-describedby="document_numberHelp"
-            min="0"
-            max=""
-            required
-            defaultValue={{ $user->document_number }}
-          />
-          <span class="invalid-feedback">
-            {{-- {rules.document_number.message ? rules.document_number.message : requestValidation.document_number ? requestValidation.document_number : ''} --}}
-          </span>
-        </div>
-
-        <div class="form-group">
-          <label for="cellphone_number">cellphone_number</label>
-          <small id="cellphone_numberHelp" class="form-text text-muted">Campo requerido</small>
-          <input type="number"
-            name="cellphone_number"
-            class="form-control"
-            id="cellphone_number"
-            aria-describedby="cellphone_numberHelp"
-            min="0"
-            max=""
-            required
-            defaultValue={{$user->cellphone_number}}
-          />
-          <span class="invalid-feedback">
-            {{-- {rules.cellphone_number.message ? rules.cellphone_number.message : requestValidation.cellphone_number ? requestValidation.cellphone_number : ''} --}}
-          </span>
-        </div>
-
-        <div class="form-group">
-          <label for="status">status</label>
-          <small id="statusHelp" class="form-text text-muted">Campo requerido</small>
-          <select id="status"
-            name="status"
-            class="form-control"
-            required
-            defaultValue={{$user->status}}
-          >
-            <option value=''>Seleccione el estado</option>
-            <option value="Aceptado">Aceptado</option>
-            <option value="En espera">En espera</option>
-            <option value="Rechazado">Rechazado</option>
-          </select>
-          <span class="invalid-feedback">
-            {{-- {rules.status.message ? rules.status.message : requestValidation.status ? requestValidation.status : ''} --}}
-          </span>
-        </div>
-
-        <div class="form-group">
-          <label for="interests">interests</label>
-          <small id="interestsHelp" class="form-text text-muted">Campo requerido</small>
-          <textarea
-            name="interests"
-            class="form-control"
-            id="interests"
-            rows="3"
-            defaultValue={{$interests}}
-          >
-          </textarea>
-          <span class="invalid-feedback">
-            {{-- {rules.interests.message ? rules.interests.message : requestValidation.interests ? requestValidation.interests : ''} --}}
-          </span>
-        </div>
-
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{ __('Researchers') }}
+            <span class="sm:block text-purple-300">
+                Update researcher info
+            </span>
+        </h2>
         <div>
-          <label>is_enabled</label>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="is_enabled_yes" name="is_enabled" class="custom-control-input"   value="1" defaultChecked={{ $isEnabledChecked == 1 ? true : false }} />
-            <label class="custom-control-label" for="is_enabled_yes">Si</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="is_enabled_no" name="is_enabled" class="custom-control-input"   value="0" defaultChecked={{ $isEnabledChecked == 0 ? true : false }} />
-            <label class="custom-control-label" for="is_enabled_no">No</label>
-          </div>
-
-          <span class={rules.is_enabled.isInvalid && rules.is_enabled.message !== '' || requestValidation.is_enabled ? 'invalid-feedback d-block': 'invalid-feedback'} >
-            {{-- {rules.is_enabled.message ? rules.is_enabled.message : requestValidation.is_enabled ? requestValidation.is_enabled : '' } --}}
-          </span>
-        </div>
-
-        <input type="hidden" name="role_id" defaultValue="5"  />
-
-        <div class="form-group">
-          <label for="educational_institution_id">educational_institution_id</label>
-          <small id="educational_institution_idHelp" class="form-text text-muted">Campo requerido</small>
-          <select id="educational_institution_id"
-            name="educational_institution_id"
-            class="form-control"
-            required
-          >
-            <option value=''>Seleccione una institución educativa</option>
-
-            @forelse ($educationalInstitutions as $educationalInstitution)
-                <option value={{$educationalInstitution->id}}> {{$educationalInstitution->name}} </option>
-            @empty
-                <option value="">No educational institutions</option>
-            @endforelse
-
-          </select>
-          <span class="invalid-feedback">
-            {{-- {rules.educational_institution_id.message ? rules.educational_institution_id.message : '' } --}}
-          </span>
-        </div>
-
-        <div class="form-group">
-          <label for="research_group_id">research_group_id</label>
-          <small id="research_group_idHelp" class="form-text text-muted">Campo requerido</small>
-          <select id="research_group_id"
-            name="research_group_id"
-            class="form-control"
-            required
-          >
-            <option value=''>Seleccione un grupo de investigación</option>
-
-            @forelse ($researchGroups as $researchGroup)
-                <option value={{ $researchGroup->id }} >{{ $researchGroup->name }}</option>
-            @empty
-                <option value="">No research groups</option>
-            @endforelse
-
-          </select>
-          <span class="invalid-feedback">
-            {{-- {rules.research_group_id.message ? rules.research_group_id.message : '' } --}}
-          </span>
-        </div>
-
-        <div>
-          <label>research_team_id</label>
-
-            @forelse ($researchTeams as $researchTeam)
-
-                <div class="custom-control custom-checkbox">
-                    <input
-                    type="checkbox"
-                    name="research_team_id[]"
-                    class="custom-control-input"
-                    id={{$researchTeam->name}}
-                    defaultValue={{$researchTeam->id}}
-                    defaultChecked={{$researchTeamsResearcher->includes($researchTeam->id) ? true : false }}
-                    />
-                    <label class="custom-control-label" for={{ $researchTeam->name }}>{{ $researchTeam->name }}</label>
+            <a href="{{ route('researchers.index') }}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    {{ __('Back')}}
                 </div>
-
-            @empty
-                <div>No research teams</div>
-            @endforelse
-
-          {{-- <span class={rules.research_team_id.isInvalid && rules.research_team_id.message !== '' || requestValidation.research_team_id ? 'invalid-feedback d-block': 'invalid-feedback'} >
-            {rules.research_team_id.message ? rules.research_team_id.message : requestValidation.research_team_id ? requestValidation.research_team_id : '' }
-          </span> --}}
+            </a>
         </div>
+    </x-slot>
 
-        <div class="form-group">
-          <label for="cvlac">cvlac</label>
-          <small id="cvlacHelp" class="form-text text-muted">Campo requerido</small>
-          <input type="url"
-            name="cvlac"
-            class="form-control"
-            id="cvlac"
-            defaultValue=""
-            aria-describedby="cvlacHelp"
-            maxLength="191"
-            required
-            defaultValue={{$researcher->cvlac}}
-          />
-          <span class="invalid-feedback">
-            {{-- {rules.cvlac.message ? rules.cvlac.message : requestValidation.cvlac ? requestValidation.cvlac : ''} --}}
-          </span>
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="md:grid md:grid-cols-3 md:gap-4">
+            <div class="md:col-span-1">
+                <x-jet-section-title>
+                    <x-slot name="title">Descripción</x-slot>
+                    <x-slot name="description">Edita información</x-slot>
+                </x-jet-section-title>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <form method="POST" action="{{ route('researchers.update',$user->id) }}">
+                    @csrf
+                    @method('PUT')
+
+                    <div>
+                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ $user->name }}" required />
+                        <x-jet-input-error for="name" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="email" value="{{ __('Email') }}" />
+                        <x-jet-input id="email" class="block mt-1 w-full" type="email" min="" max="" name="email" value="{{ $user->email }}" required />
+                        <x-jet-input-error for="email" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="document_type" value="{{ __('Document type') }}" />
+                        <select id="document_type" name="document_type" class="block mt-1 p-4 w-full" value="{{ $user->document_type }}" required >
+                            <option  value=''>Seleccione el tipo de documento</option>
+                            <option {{ $user->document_type == "CC" ? "selected" : "" }} value="CC">Cédula de ciudadanía</option>
+                            <option {{ $user->document_type == "CE" ? "selected" : "" }} value="CE">Cédula de extranjería</option>
+                            <option {{ $user->document_type == "TI" ? "selected" : "" }} value="TI">Tarjeta de identidad</option>
+                        </select>
+                        <x-jet-input-error for="document_type" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="document_number" value="{{ __('Document number') }}" />
+                        <x-jet-input id="document_number" class="block mt-1 w-full" type="number" min="" max="" name="document_number" value="{{ $user->document_number }}" required />
+                        <x-jet-input-error for="document_number" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="cellphone_number" value="{{ __('Cellphone number') }}" />
+                        <x-jet-input id="cellphone_number" class="block mt-1 w-full" type="number" min="" max="" name="cellphone_number" value="{{$user->cellphone_number}}" required />
+                        <x-jet-input-error for="cellphone_number" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="status" value="{{ __('Status') }}" />
+                        <select id="status" name="status" class="block mt-1 p-4 w-full" value="{{ $user->status }}" required >
+                            <option value=''>Seleccione el estado</option>
+                            <option {{ $user->status == "Aceptado" ? "selected" : "" }} value="Aceptado">Aceptado</option>
+                            <option {{ $user->status == "En espera" ? "selected" : "" }} value="En espera">En espera</option>
+                            <option {{ $user->status == "Rechazado" ? "selected" : "" }} value="Rechazado">Rechazado</option>
+                        </select>
+                        <x-jet-input-error for="status" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="interests" value="{{ __('Interests') }}" />
+                        <textarea id="interests" name="interests" class="block mt-1 p-4 w-full" value="{{ $user->interests }}" required >{{ $user->interests }} </textarea>
+                        <x-jet-input-error for="interests" class="mt-2" />
+                    </div>
+
+                    <p class="mt-4">{{ __('Is enabled?' ) }} </p>
+                    <div class="mt-4">
+                        <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" checked={{ $isEnabledChecked == 1 ? true : false }} value="1" />
+                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enable_yes">Si</label>
+
+                        <input class="form-check-input" type="radio" name="is_enabled" id="is_enabled_no" checked={{ $isEnabledChecked == 0 ? true : false }} value="0" />
+                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enabled_no">No</label>
+
+                        <x-jet-input-error for="is_enabled" class="mt-2" />
+                    </div>
+
+                    <input type="hidden" name="role_id" defaultValue="5"  />
+
+                    <div class="mt-2">
+                        <x-jet-label for="research_group_id" value="{{ __('Research group') }}" />
+                        <select id="research_group_id" name="research_group_id" class="block mt-1 p-4 w-full" value="{{ $user->research_group_id }}" required >
+                            <option value=''>Seleccione un grupo de investigación</option>
+                            @forelse ($researchGroups as $researchGroup)
+                                <option {{ $user->research_group_id == $researchGroup->id ? "selected" : "" }} value={{$researchGroup->id}}>  {{$researchGroup->name}} </option>
+                            @empty
+                                <option value="">No research group</option>
+                            @endforelse
+                        </select>
+                        <x-jet-input-error for="research_group_id" class="mt-2" />
+                    </div>
+
+
+                    <p class="mt-4">{{ __('Research team' ) }} </p>
+                    @forelse ($researchTeams as $researchTeam)
+                    <div class="mt-4">
+                        <input class="form-check-input" type="checkbox" name="research_team_id[]" checked={{$researchTeamsResearcher->includes($researchTeam->id) ? true : false }} id={{$researchTeam->name}} value={{$researchTeam->id}} />
+                        <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ $researchTeam->name }}">{{ $researchTeam->name }}</label>
+                        <x-jet-input-error for="research_team_id" class="mt-2" />
+                    </div>
+                    @empty
+                        <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No research teams' ) }} </p>
+                    @endforelse
+
+
+                    <p class="mt-4">{{ __('Is external?' ) }} </p>
+                    <div class="mt-4">
+                        <input class="form-check-input" type="radio" name="is_external" id="is_external_yes" checked={{ $isExternalChecked == 1 ? true : false }} value="1" />
+                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_external_yes">Si</label>
+
+                        <input class="form-check-input" type="radio" name="is_external" id="is_external_no" checked={{ $isExternalChecked == 0 ? true : false }} value="0" />
+                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_external_no">No</label>
+
+                        <x-jet-input-error for="is_external" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="cvlac" value="{{ __('Cvlac ') }}" />
+                        <x-jet-input id="cvlac" class="block mt-1 w-full" type="url" min="" max="" name="cvlac" value="{{$researcher->cvlac}}" required />
+                        <x-jet-input-error for="cvlac" class="mt-2" />
+                    </div>
+
+                    <p class="mt-4">{{ __('Is accepted?' ) }} </p>
+                    <div class="mt-4">
+                        <input class="form-check-input" type="radio" name="is_accepted" id="is_accepted_yes" checked={{ $isAcceptedChecked == 1 ? true : false }} value="1" />
+                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_accepted_yes">Si</label>
+
+                        <input class="form-check-input" type="radio" name="is_accepted" id="is_accepted_no" checked={{ $isAcceptedChecked == 0 ? true : false }} value="0" />
+                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_accepted_no">No</label>
+
+                        <x-jet-input-error for="is_accepted" class="mt-2" />
+                    </div>
+
+
+                    <div class="flex items-center justify-end mt-4">
+                        <x-jet-button class="ml-4">
+                            {{ __('Create') }}
+                        </x-jet-button>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
-
-        <div>
-          <label>is_accepted</label>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="is_accepted_yes" name="is_accepted" class="custom-control-input"   value="1" defaultChecked={{ $isAcceptedChecked == 1 ? true : false }} />
-            <label class="custom-control-label" for="is_accepted_yes">Si</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="is_accepted_no" name="is_accepted" class="custom-control-input"   value="0" defaultChecked={{ $isAcceptedChecked == 0 ? true : false }} />
-            <label class="custom-control-label" for="is_accepted_no">No</label>
-          </div>
-
-          {{-- <span class={rules.is_accepted.isInvalid && rules.is_accepted.message !== '' || requestValidation.is_accepted ? 'invalid-feedback d-block': 'invalid-feedback'} >
-            {rules.is_accepted.message ? rules.is_accepted.message : requestValidation.is_accepted ? requestValidation.is_accepted : ''}
-          </span> --}}
-        </div>
-        <button class="btn btn-primary" type="submit" form="form">Guardar</button>
-      </form>
     </div>
-  </div>
 
-@endsection
+</x-app-layout>

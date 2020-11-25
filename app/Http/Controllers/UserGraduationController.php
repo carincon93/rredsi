@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\UserGraduation;
 use App\Models\Node;
-use App\Http\Requests\GraduationRequest;
+
+use App\Http\Requests\UserGraduationRequest;
 use Illuminate\Http\Request;
 
 class UserGraduationController extends Controller
@@ -39,7 +40,7 @@ class UserGraduationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GraduationRequest $request)
+    public function store(UserGraduationRequest $request)
     {
         $userGraduation = new UserGraduation();
         $userGraduation->is_graduated   = $request->get('is_graduated');

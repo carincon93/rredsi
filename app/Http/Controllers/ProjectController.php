@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
+use App\Models\Project;
 use App\Event;
+use App\Http\Requests\ProjectRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,7 +37,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
         $project = new Project();
         $project->title             = $request->get('title');
@@ -69,7 +70,7 @@ class ProjectController extends Controller
         $project->authors()->attach($request->get('user_id'));
 
         return redirect()->route('projects.index')->with('status', $message);
-        
+
     }
 
     /**
@@ -101,7 +102,7 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(ProjectRequest $request, Project $project)
     {
         $project->title             = $request->get('title');
         $project->start_date        = $request->get('start_date');

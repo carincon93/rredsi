@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResearchLineRequest;
 use App\Models\ResearchLine;
 use App\Models\ResearchGroup;
 use App\Models\KnowledgeArea;
 
 use Illuminate\Http\Request;
+
 
 class ResearchLineController extends Controller
 {
@@ -39,7 +41,7 @@ class ResearchLineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ResearchLineRequest $request)
     {
         $researchLine = new ResearchLine();
         $researchLine->name         = $request->get('name');
@@ -86,7 +88,7 @@ class ResearchLineController extends Controller
      * @param  \App\ResearchLine  $researchLine
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ResearchLine $researchLine)
+    public function update(ResearchLineRequest $request, ResearchLine $researchLine)
     {
         $researchLine->name         = $request->get('name');
         $researchLine->objectives   = $request->get('objectives');

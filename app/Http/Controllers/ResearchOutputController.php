@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResearchOutputRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\ResearchOutput;
@@ -35,7 +36,7 @@ class ResearchOutputController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ResearchOutputRequest $request)
     {
         $researchOutput = new ResearchOutput();
         $researchOutput->title          = $request->get('title');
@@ -51,7 +52,7 @@ class ResearchOutputController extends Controller
             $researchOutput->file  = "research-outputs/$fileName";
         }
         $researchOutput->project()->associate($request->get('project_id'));
-        
+
         if($researchOutput->save()){
             $message = 'Your store processed correctly';
         }
@@ -67,7 +68,7 @@ class ResearchOutputController extends Controller
      */
     public function show(ResearchOutput $researchOutput)
     {
-        
+
         return view('ResearchOutputs.show', compact('researchOutput'));
     }
 
@@ -89,7 +90,7 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ResearchOutput $researchOutput)
+    public function update(ResearchOutputRequest $request, ResearchOutput $researchOutput)
     {
         $researchOutput->title          = $request->get('title');
         $researchOutput->typology       = $request->get('typology');
@@ -102,7 +103,7 @@ class ResearchOutputController extends Controller
             $researchOutput->file = $path;
         }
         $researchOutput->project()->associate($request->get('project_id'));
-        
+
         if($researchOutput->save()){
             $message = 'Your update processed correctly';
         }

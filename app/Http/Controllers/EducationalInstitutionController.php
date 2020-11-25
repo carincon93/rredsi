@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EducationalInstitutionRequest;
 use App\Models\EducationalInstitution;
 use App\Models\ResearchGroup;
 use App\Models\Node;
@@ -29,8 +30,8 @@ class EducationalInstitutionController extends Controller
      */
     public function create(Node $node)
     {
-        // $educationalInstitutionAdmins = DB::table('educational_institution_admins')->get();
         $nodes = Node::orderBy('state')->paginate(50);
+        
         return view('EducationalInstitutions.create', compact('nodes'));
     }
 
@@ -40,7 +41,7 @@ class EducationalInstitutionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Node $node)
+    public function store(EducationalInstitutionRequest $request, Node $node)
     {
         $educationalInstitution = new EducationalInstitution();
         $educationalInstitution->name           = $request->get('name');
@@ -88,7 +89,7 @@ class EducationalInstitutionController extends Controller
      * @param  \App\EducationalInstitution  $educationalInstitution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Node $node, EducationalInstitution $educationalInstitution)
+    public function update(EducationalInstitutionRequest $request, Node $node, EducationalInstitution $educationalInstitution)
     {
         $educationalInstitution->name           = $request->get('name');
         $educationalInstitution->nit            = $request->get('nit');

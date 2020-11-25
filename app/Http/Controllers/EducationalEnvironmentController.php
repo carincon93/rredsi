@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EducationalEnvironmentRequest;
 use App\Models\EducationalEnvironment;
 use App\Models\EducationalInstitution;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class EducationalEnvironmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EducationalEnvironmentRequest $request)
     {
         $educationalEnvironment = new EducationalEnvironment();
         $educationalEnvironment->name           = $request->get('name');
@@ -83,7 +84,7 @@ class EducationalEnvironmentController extends Controller
      * @param  \App\EducationalEnvironment  $educationalEnvironment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EducationalEnvironment $educationalEnvironment)
+    public function update(EducationalEnvironmentRequest $request, EducationalEnvironment $educationalEnvironment)
     {
         $educationalEnvironment->name           = $request->get('name');
         $educationalEnvironment->type           = $request->get('type');

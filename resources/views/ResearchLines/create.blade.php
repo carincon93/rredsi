@@ -1,149 +1,101 @@
 <x-app-layout>
-
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Crear línea de investigación
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{ __('Research lines') }}
+            <span class="sm:block text-purple-300">
+                Add research line info
+            </span>
         </h2>
+        <div>
+            <a href="{{ route('research-lines.index') }}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    {{ __('Back')}}
+                </div>
+            </a>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm-rounded-lg">
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="md:grid md:grid-cols-3 md:gap-4">
+            <div class="md:col-span-1">
+                <x-jet-section-title>
+                    <x-slot name="title">Descripción</x-slot>
+                    <x-slot name="description">Añade información</x-slot>
+                </x-jet-section-title>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <form method="POST" action="{{ route('research-lines.store') }}">
+                    @csrf
 
-                <div class="container">
-                    <div class="form-wrapper">
-                        <form action={{ route('research-lines.store')}} method="POST" >
-                            @csrf
-
-                            <div class="form-group">
-                                <label for="name">name</label>
-                                <small id="nameHelp" class="form-text text-muted">
-                                    Campo requerido
-                                </small>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    class="form-control"
-                                    id="name"
-                                    aria-describedby="nameHelp"
-                                    maxLength=""
-                                    required
-                                />
-                                <span class="invalid-feedback">
-                                    {{-- {rules.name.message ? rules.name.message : requestValidation.name ? requestValidation.name : ''} --}}
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label for="objectives">objectives</label>
-                                <small id="objectivesHelp" class="form-text text-muted">Campo requerido</small>
-                                <textarea
-                                    name="objectives"
-                                    class="form-control"
-                                    id="objectives"
-                                    rows="3"
-                                >
-                                </textarea>
-                                <span class="invalid-feedback">
-                                    {{-- {rules.objectives.message ? rules.objectives.message : requestValidation.objectives ? requestValidation.objectives : ''} --}}
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label for="mission">mission</label>
-                                <small id="missionHelp" class="form-text text-muted">Campo requerido</small>
-                                <textarea
-                                    name="mission"
-                                    class="form-control"
-                                    id="mission"
-                                    rows="3"
-                                >
-                                </textarea>
-                                <span class="invalid-feedback">
-                                    {{-- {rules.mission.message ? rules.mission.message : requestValidation.mission ? requestValidation.mission : ''} --}}
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label for="vision">vision</label>
-                                <small id="missionHelp" class="form-text text-muted">Campo requerido</small>
-                                <textarea
-                                    name="vision"
-                                    class="form-control"
-                                    id="vision"
-                                    rows="3"
-                                >
-                                </textarea>
-                                <span class="invalid-feedback">
-                                    {{-- {rules.vision.message ? rules.vision.message : requestValidation.vision ? requestValidation.vision : ''} --}}
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label for="achievements">Logros</label>
-                                <small id="achievementsHelp" class="form-text text-muted">Campo requerido</small>
-                                <textarea
-                                    name="achievements"
-                                    class="form-control"
-                                    id="achievements"
-                                    rows="3"
-                                >
-                                </textarea>
-                                <span class="invalid-feedback">
-                                    {{-- {rules.achievements.message ? rules.achievements.message : requestValidation.achievements ? requestValidation.achievements : ''} --}}
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label for="knowledgeArea">Área de conocimiento</label>
-                                <small id="administrador_idHelp" class="form-text text-muted">Campo requerido</small>
-                                <select id="knowledge_area"
-                                    name="knowledge_area"
-                                    class="form-control"
-                                    required
-                                >
-                                    <option value=''>Selecciones un area</option>
-
-                                    @forelse ($knowledgeAreas as $knowledgeArea)
-                                        <option value={{ $knowledgeArea->id }} >{{ $knowledgeArea->name }} </option>
-                                    @empty
-                                        <option value="">No knowledgearea</option>
-                                    @endforelse
-
-                                </select>
-                                <span class="invalid-feedback">
-                                    {{-- {rules.knowledgeArea.message ? rules.knowledgeArea.message : requestValidation.knowledgeArea ? requestValidation.knowledgeArea : ''} --}}
-                                </span>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="researchGroup">Grupo de investigación</label>
-                                <small id="researchGroupHelp" class="form-text text-muted">Campo requerido</small>
-                                <select id="researchGroup"
-                                    name="researchGroup"
-                                    class="form-control"
-                                    required
-                                >
-                                    <option value=''>Selecciones un grupo</option>
-
-                                    @forelse ($researchGroups as $researchGroup)
-                                        <option value={{ $researchGroup->id }} >{{ $researchGroup->name }} </option>
-                                    @empty
-                                        <option value="">No researchGroup</option>
-                                    @endforelse
-
-                                </select>
-                                <span class="invalid-feedback">
-                                    {{-- {rules.researchGroup.message ? rules.researchGroup.message : requestValidation.researchGroup ? requestValidation.researchGroup : ''} --}}
-                                </span>
-                            </div>
-
-                            <button type="submit"> Guardar </button>
-                        </form>
+                    <div>
+                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ old('name') }}" required />
+                        <x-jet-input-error for="name" class="mt-2" />
                     </div>
-                </div>
 
+                    <div class="mt-2">
+                        <x-jet-label for="objectives" value="{{ __('Objectives') }}" />
+                        <textarea id="objectives" name="objectives" class="block mt-1 p-4 w-full" value="{{ old('objectives') }}" required >{{ old('objectives') }}</textarea>
+                        <x-jet-input-error for="objectives" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="mission" value="{{ __('Mission') }}" />
+                        <textarea id="mission" name="mission" class="block mt-1 p-4 w-full" value="{{ old('mission') }}" required >{{ old('mission') }}</textarea>
+                        <x-jet-input-error for="mission" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="vision" value="{{ __('Vision') }}" />
+                        <textarea id="vision" name="vision" class="block mt-1 p-4 w-full" value="{{ old('vision') }}" required >{{ old('vision') }}</textarea>
+                        <x-jet-input-error for="vision" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="achievements" value="{{ __('Achievements') }}" />
+                        <textarea id="achievements" name="achievements" class="block mt-1 p-4 w-full" value="{{ old('achievements') }}" required >{{ old('achievements') }}</textarea>
+                        <x-jet-input-error for="achievements" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="knowledge_area_id" value="{{ __('knowledge area') }}" />
+                        <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" value="{{ old('knowledge_area_id') }}" required >
+                            <option value=''>Seleccione un área de conocimiento</option>
+                            @forelse ($knowledgeAreas as $knowledgeArea)
+                                <option {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" }} value={{$knowledgeArea->id}}>  {{$knowledgeArea->name}} </option>
+                            @empty
+                                <option value="">No knowledge areas</option>
+                            @endforelse
+                        </select>
+                        <x-jet-input-error for="knowledge_area_id" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="research_group_id" value="{{ __('Research group') }}" />
+                        <select id="research_group_id" name="research_group_id" class="block mt-1 p-4 w-full" value="{{ old('research_group_id') }}" required >
+                            <option value=''>Selecciones un grupo</option>
+                            @forelse ($researchGroups as $researchGroup)
+                                <option {{ old('research_group_id') == $researchGroup->id ? "selected" : "" }} value={{ $researchGroup->id }} >{{ $researchGroup->name }} </option>
+                            @empty
+                                <option value="">No researchGroup</option>
+                            @endforelse
+                        </select>
+                        <x-jet-input-error for="research_group_id" class="mt-2" />
+                    </div>
+
+
+                    <div class="flex items-center justify-end mt-4">
+                        <x-jet-button class="ml-4">
+                            {{ __('Create') }}
+                        </x-jet-button>
+                    </div>
+
+                </form>
             </div>
 
         </div>
-
     </div>
-
-
 </x-app-layout>

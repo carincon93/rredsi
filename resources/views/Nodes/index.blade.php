@@ -29,7 +29,7 @@
                                         @forelse ($nodes as $node)
                                             <tr>
                                                 <td>{{ $node->state }}</td>
-                                                <td>{{ $node->administrator->user->name }}</td>
+                                                {{-- <td>{{ $node->administrator->user->name }}</td> --}}
                                                 <td class="actions">
                                                     <div class="actions-wrapper">
                                                         <a href="/app/nodes/edit/{{ $node->id }}" > Editar </a>

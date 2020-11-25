@@ -1,220 +1,118 @@
-@extends('layouts.app')
-
-@section('content')
-
-<div class="container">
-    <div class="form-wrapper">
-        <form class="form" action="" method="" id="form" >
-            <div class="form-group">
-                <label for="name">name</label>
-                <small id="nameHelp" class="form-text text-muted">
-                    Campo requerido
-                </small>
-                <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    id="name"
-                    defaultValue={{ $academicProgram->name }}
-                    aria-describedby="nameHelp"
-                    maxLength=""
-                    required
-                />
-                <span class="invalid-feedback">
-
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="code">code</label>
-                <small id="nameHelp" class="form-text text-muted">
-                    Campo requerido
-                </small>
-                <input
-                    type="number"
-                    name="code"
-                    class="form-control"
-                    id="code"
-                    defaultValue={{ $academicProgram->code }}
-                    aria-describedby="nameHelp"
-                    maxLength=""
-                    required
-                />
-                <span class="invalid-feedback">
-
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="academic_level">Nivel Acádemico</label>
-                <small id="academic_levelHelp" class="form-text text-muted">Campo requerido</small>
-                <select id="academic_level"
-                    name="academic_level"
-                    class="form-control"
-                    required
-                    defaultValue={{ $academicProgram->academic_level }}
-                >
-                    <option value=''>Seleccione el estado</option>
-                    <option value="Técnico Profesional">Técnico Profesional</option>
-                    <option value="Técnologo">Técnologo</option>
-                    <option value="Profesional">Profesional</option>
-                    <option value="Especialización Técnica Profesional">Especialización Técnica Profesional</option>
-                    <option value="Especialización Técnologica">Especialización Técnologica</option>
-                    <option value="Maestría">Maestría</option>
-                    <option value="Doctorado">Doctorado</option>
-                </select>
-                <span class="invalid-feedback">
-
-                </span>
-            </div>
-            <div class="form-group">
-                <div class="form-row">
-                    <div class="col">
-                        <label for="start_date">Fecha de Inicio</label>
-                        <small id="start_datelHelp" class="form-text text-muted">Campo requerido</small>
-                        <input
-                            type="date"
-                            name="start_date"
-                            class="form-control"
-                            id="start_date"
-                            defaultValue={{ $academicProgram->start_date }}
-                            aria-describedby="nameHelp"
-                            maxLength=""
-                            required
-                        />
-                        <span class="invalid-feedback">
-
-                        </span>
-                    </div>
-                    <div class="col">
-                        <label for="end_date">Fecha Final</label>
-                        <small id="start_datelHelp" class="form-text text-muted">Campo requerido</small>
-                        <input
-                            type="date"
-                            name="end_date"
-                            class="form-control"
-                            id="end_date"
-                            defaultValue={{ $academicProgram->end_date }}
-                            aria-describedby="nameHelp"
-                            maxLength=""
-                            required
-                        />
-                        <span class="invalid-feedback">
-
-                        </span>
-                    </div>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{ __('Academic works') }}
+            <span class="sm:block text-purple-300">
+                Update academic work info
+            </span>
+        </h2>
+        <div>
+            <a href="{{ route('academic-works.index') }}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    {{ __('Back')}}
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="modality">Modalidad</label>
-                <small id="modalityHelp" class="form-text text-muted">Campo requerido</small>
-                <select id="modality"
-                    name="modality"
-                    class="form-control"
-                    required
-                    defaultValue={{ $academicProgram->modality }}
-                >
-                    <option value=''>Seleccione el estado</option>
-                    <option value="Presencial">Presencial</option>
-                    <option value="A distancia">A distancia</option>
-                </select>
-                <span class="invalid-feedback">
+            </a>
+        </div>
+    </x-slot>
 
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="daytime">Jornada</label>
-                <small id="daytimeHelp" class="form-text text-muted">Campo requerido</small>
-                <select id="daytime"
-                    name="daytime"
-                    class="form-control"
-                    required
-                    defaultValue={{ $academicProgram->daytime }}
-                >
-                    <option value=''>Seleccione el estado</option>
-                    <option value="Diurna">Diurna</option>
-                    <option value="Mixta">Mixta</option>
-                    <option value="Nocturna">Nocturna</option>
-                </select>
-                <span class="invalid-feedback">
-
-                </span>
-            </div>
-            <div class="form-group">
-                <label for="knowledge_area_id">Area De Conocimiento</label>
-                <small id="node_idHelp" class="form-text text-muted">Campo requerido</small>
-                <select
-                    id="knowledge_area_id"
-                    name="knowledge_area_id"
-                    class="form-control"
-                    defaultValue={{ $academicProgram->knowledge_area_id }}
-                    aria-describedby="node_idHelp"
-                    required
-                >
-                    <option value=''>Seleccione un area de conocimiento</option>
-
-                    @forelse ($knowledgeAreas as $knowledgeArea)
-                        <option value={{$knowledgeArea->id}}>  {{$knowledgeArea->name}} </option>
-                    @empty
-                        <option value="">No knowledge areas</option>
-                    @endforelse
-
-                </select>
-                <span class="invalid-feedback">
-
-
-                </span>
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="md:grid md:grid-cols-3 md:gap-4">
+            <div class="md:col-span-1">
+                <x-jet-section-title>
+                    <x-slot name="title">Descripción</x-slot>
+                    <x-slot name="description">Edita información académica</x-slot>
+                </x-jet-section-title>
             </div>
 
-            <div class="form-group">
-                <label for="node_id">Nodo</label>
-                <small id="node_idHelp" class="form-text text-muted">Campo requerido</small>
-                <select
-                    id="node_id"
-                    name="node_id"
-                    class="form-control"
-                    aria-describedby="node_idHelp"
-                    required
-                >
-                    <option value=''>Seleccione un Nodo</option>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <form method="POST" action="{{ route('academic-works.store', $academicWork->id ) }}">
+                    @csrf
+                    @method('PUT')
 
-                    @forelse ($nodes as $node)
-                        <option value={{$node->id}}>  {{$node->state}} </option>
-                    @empty
-                         <option value="">No Nodes</option>
-                    @endforelse
-                </select>
+                    <div>
+                        <x-jet-label for="title" value="{{ __('Title') }}" />
+                        <x-jet-input id="title" class="block mt-1 w-full" type="text" min="" max="" name="title" value="{{ $academicWork->title }}" required />
+                        <x-jet-input-error for="title" class="mt-2" />
+                    </div>
 
-                <span class="invalid-feedback">
+                    <div class="mt-2">
+                        <x-jet-label for="type" value="{{ __('Type') }}" />
+                        <x-jet-input id="type" class="block mt-1 w-full" type="text" min="" max="" name="type" value="{{ $academicWork->type }}" required />
+                        <x-jet-input-error for="type" class="mt-2" />
+                    </div>
 
-                </span>
+                    <div class="mt-2">
+                        <x-jet-label for="authors" value="{{ __('Authors') }}" />
+                        <x-jet-input id="authors" class="block mt-1 w-full" type="text" min="" max="" name="authors" value="{{ $academicWork->authors }}" required />
+                        <x-jet-input-error for="authors" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="grade" value="{{ __('Grade') }}" />
+                        <x-jet-input id="grade" class="block mt-1 w-full" type="text" min="" max="" name="grade" value="{{ $academicWork->grade }}" required />
+                        <x-jet-input-error for="grade" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="mentors" value="{{ __('Mentors') }}" />
+                        <x-jet-input id="mentors" class="block mt-1 w-full" type="text" min="" max="" name="mentors" value="{{ $academicWork->mentors }}" required />
+                        <x-jet-input-error for="mentors" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="knowledge_area_id" value="{{ __('knowledge area') }}" />
+                        <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" value="{{ $academicWork->knowledge_area_id }}" required >
+                            <option value=''>Seleccione un área de conocimiento</option>
+                            @forelse ($knowledgeAreas as $knowledgeArea)
+                                <option value={{$knowledgeArea->id}}>  {{$knowledgeArea->name}} </option>
+                            @empty
+                                <option value="">No knowledge areas</option>
+                            @endforelse
+                        </select>
+                        <x-jet-input-error for="knowledge_area_id" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="graduation_id" value="{{ __('Graduation') }}" />
+                        <select id="graduation_id" name="graduation_id" class="block mt-1 p-4 w-full" value="{{ $academicWork->graduation_id }}" required >
+                            <option value=''>Seleccione</option>
+                            @forelse ($graduations as $graduation)
+                                <option value={{$graduation->id}}>  {{$graduation->state}} </option>
+                            @empty
+                                <option value="">No graduation</option>
+                            @endforelse
+                        </select>
+                        <x-jet-input-error for="graduation_id" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="research_group_id" value="{{ __('Research group') }}" />
+                        <select id="research_group_id" name="research_group_id" class="block mt-1 p-4 w-full" value="{{ $academicWork->research_group_id }}" required >
+                            <option value=''>Seleccione un grupo de investigación</option>
+                            @forelse ($researchGroups as $researchGroup)
+                                <option value={{$researchGroup->id}}>  {{$researchGroup->name}} </option>
+                            @empty
+                                <option value="">No research group</option>
+                            @endforelse
+                        </select>
+                        <x-jet-input-error for="research_group_id" class="mt-2" />
+                    </div>
+
+
+
+                    <div class="flex items-center justify-end mt-4">
+                        <x-jet-button class="ml-4">
+                            {{ __('Create') }}
+                        </x-jet-button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="educational_institution_id">Institución educativa</label>
-                <small id="node_idHelp" class="form-text text-muted">Campo requerido</small>
-                <select
-                    id="educational_institution_id"
-                    name="educational_institution_id"
-                    class="form-control"
-                    defaultValue={{ $academicProgram->educational_institution_id }}
-                    aria-describedby="node_idHelp"
-                    required
-                >
-                    <option value=''>Seleccione una institución educativa</option>
 
-                    @forelse ($educationalInstitutions as $educationalInstitution)
-                        <option value={{$educationalInstitution->id}}>  {{$educationalInstitution->name}} </option>
-                    @empty
-                        <option value="">No educational institutions</option>
-                    @endforelse
-
-                </select>
-                <span class="invalid-feedback">
-
-                </span>
-            </div>
-            <button class="btn btn-primary" type="submit" form="form"> Guardar </button>
-        </form>
+        </div>
     </div>
-</div>
 
 
-@endsection
+</x-app-layout>

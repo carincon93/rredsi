@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NodeRequest;
 use App\Models\Node;
 use App\User;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class NodeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NodeRequest $request)
     {
         $node           = new Node();
         $node->state    = $request->get('state');
@@ -77,7 +78,7 @@ class NodeController extends Controller
      * @param  \App\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Node $node)
+    public function update(NodeRequest $request, Node $node)
     {
         $node->state    = $request->get('state');
         $node->administrator()->associate($request->get('administrator_id'));

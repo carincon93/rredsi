@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateResearchGroupRequest extends FormRequest
+class ResearchGroupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,7 @@ class UpdateResearchGroupRequest extends FormRequest
                 'leader'                    => 'required|string|max:191',
                 'gruplac'                   => 'url|max:191',
                 'minciencias_code'          => 'required|string|max:191',
-                'minciencias_category'      => 'max:1',
+                'minciencias_category'      => 'required|max:1',
                 'website'                   => 'url|max:191',
                 'educational_institution_id'=> 'required|numeric|min:0|max:9999999999|exists:educational_institutions,id',
             ];

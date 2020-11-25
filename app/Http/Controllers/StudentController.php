@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Student;
+use App\Http\Requests\StudentRequest;
+use App\Models\User;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -35,7 +36,7 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
         $student = new User();
         $student->name               = $request->get('name');
@@ -47,7 +48,7 @@ class StudentController extends Controller
         $student->status             = $request->get('status');
         $student->interests          = $request->get('interests');
         $student->is_enabled         = $request->get('is_enabled');
-        
+
         if($student->save()) {
             $message = 'Your store processed correctly';
         }
@@ -93,7 +94,7 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(StudentRequest $request, Student $student)
     {
         $student->user->name               = $request->get('name');
         $student->user->email              = $request->get('email');
@@ -104,7 +105,7 @@ class StudentController extends Controller
         $student->user->status             = $request->get('status');
         $student->user->interests          = $request->get('interests');
         $student->user->is_enabled         = $request->get('is_enabled');
-        
+
         if($student->user->save()) {
             $message = 'Your update processed correctly';
         }

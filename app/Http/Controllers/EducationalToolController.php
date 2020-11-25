@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EducationalToolRequest;
 use App\Models\EducationalEnvironment;
 use App\Models\EducationalTool;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class EducationalToolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EducationalToolRequest $request)
     {
         $educationalTool = new EducationalTool();
         $educationalTool->name          = $request->get('name');
@@ -83,7 +84,7 @@ class EducationalToolController extends Controller
      * @param  \App\EducationalTool  $educationalTool
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EducationalTool $educationalTool)
+    public function update(EducationalToolRequest $request, EducationalTool $educationalTool)
     {
         $educationalTool->name          = $request->get('name');
         $educationalTool->description   = $request->get('description');

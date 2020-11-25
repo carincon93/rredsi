@@ -1,157 +1,98 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{ __('Educational tools') }}
+            <span class="sm:block text-purple-300">
+                Update educational tool info
+            </span>
+        </h2>
+        <div>
+            <a href="{{ route('educational-tools.index') }}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    {{ __('Back')}}
+                </div>
+            </a>
+        </div>
+    </x-slot>
 
-@section('content')
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="md:grid md:grid-cols-3 md:gap-4">
+            <div class="md:col-span-1">
+                <x-jet-section-title>
+                    <x-slot name="title">Descripción</x-slot>
+                    <x-slot name="description">Edita información</x-slot>
+                </x-jet-section-title>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <form method="POST" action="{{ route('educational-tools.update', $educationalTool->id) }}" >
+                    @csrf
+                    @method('PUT')
 
-<div class="container">
-    <p>Editar equipo / herramienta</p>
-    <div class="row">
-        <div class="col-6 mx-auto">
-            <form action="" method="" id="form">
-            <div class="form-group">
-                    <label for="">Nombre</label>
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        class="form-control"
-                        defaultValue={{ $educationalTool->name }}
-                    />
-                    <div class="invalid-feedback">
-                        {{-- {rules.name.message ? rules.name.message : requestValidation.name ? requestValidation.name : ''} --}}
+                    <div>
+                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ $educationalTool->name }}" required />
+                        <x-jet-input-error for="name" class="mt-2" />
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="">Descripcion</label>
-                    <textarea
-                        name="description"
-                        id="description"
-                        class="form-control"
-                        defaultValue={{ $educationalTool->description }}
-                    ></textarea>
-                    <div class="invalid-feedback">
-                        {{-- {rules.description.message ? rules.description.message : requestValidation.description ? requestValidation.description : ''} --}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="">Cantidad</label>
-                    <input
-                        type="number"
-                        name="qty" id="qty"
-                        class="form-control"
-                        defaultValue={{ $educationalTool->qty }}
-                    />
-                    <div class="invalid-feedback">
-                        {{-- {rules.qty.message ? rules.qty.message : requestValidation.qty ? requestValidation.qty : ''} --}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="">¿Habilitado?</label>
-                    <br />
-                    <div class="form-check form-check-inline">
-                        <input
-                            class="form-check-input"
-                            type="radio"
-                            name="is_enabled"
-                            id="inlineRadio1"
-                            value="1"
-                            defaultChecked={{ $educationalTool->is_enabled?true:false }}
-                        />
-                        <label class="form-check-label" for="inlineRadio1">Si</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input
-                            class="form-check-input"
-                            type="radio"
-                            name="is_enabled"
-                            id="inlineRadio2"
-                            value="0"
-                            defaultChecked={{ $educationalTool->is_enabled?true:false }}
-                        />
-                        <label class="form-check-label" for="inlineRadio2">No</label>
-                    </div>
-                    {{-- <div class={rules.is_enabled.isInvalid && rules.is_enabled.message !== '' || requestValidation.is_enabled ? 'invalid-feedback d-block': 'invalid-feedback'}>
-                        {rules.is_enabled.message ? rules.is_enabled.message : requestValidation.is_enabled ? requestValidation.is_enabled : ''}
-                    </div> --}}
-                </div>
-                <div class="form-group">
-                    <label for="">¿Disponible?</label>
-                    <br />
-                    <div class="form-check form-check-inline">
-                        <input
-                            class="form-check-input"
-                            type="radio"
-                            name="is_available"
-                            id="inlineRadio3"
-                            value="1"
-                            defaultChecked={{ $educationalTool->is_available?true:false }}
-                        />
-                        <label class="form-check-label" for="inlineRadio3">Si</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input
-                            class="form-check-input"
-                            type="radio"
-                            name="is_available"
-                            id="inlineRadio4"
-                            value="0"
-                            defaultChecked={{ $educationalTool->is_available?true:false }}
-                        />
-                        <label class="form-check-label" for="inlineRadio4">No</label>
-                    </div>
-                    {{-- <div class={rules.is_available.isInvalid && rules.is_available.message !== '' || requestValidation.is_available ? 'invalid-feedback d-block': 'invalid-feedback'}>
-                        {rules.is_available.message ? rules.is_available.message : requestValidation.is_available ? requestValidation.is_available : ''}
-                    </div> --}}
-                </div>
-                <div class="form-group">
-                    <label for="">Institucion educativa</label>
-                    <select
-                        name="educational_institution_id"
-                        id="educational_institution_id"
-                        class="form-control"
-                        defaultValue={{ $educationalTool->educational_environment->educational_institution_id }}
-                    >
-                        <option value="">Seleccione uno</option>
 
-                        @forelse ($educationalInstitutions as $educationalInstitution)
-                             <option value={{ $educationalInstitution->id }}> {{ $educationalInstitution->name }} </option>
-                        @empty
-                            <option value="">No educational institutions</option>
-                        @endforelse
+                    <div class="mt-2">
+                        <x-jet-label for="description" value="{{ __('Description') }}" />
+                        <textarea id="description" name="description" class="block mt-1 p-4 w-full" value="{{ old('description') }}" required >{{ $educationalTool->description }}</textarea>
+                        <x-jet-input-error for="description" class="mt-2" />
+                    </div>
+
+                    <div>
+                        <x-jet-label for="qty" value="{{ __('qty') }}" />
+                        <x-jet-input id="qty" class="block mt-1 w-full" type="number" min="" max="" name="qty" value="{{ $educationalTool->qty }}" required />
+                        <x-jet-input-error for="qty" class="mt-2" />
+                    </div>
+
+                        <p class="mt-4">{{ __('Enabled?' ) }} </p>
+                        <div class="mt-4">
+                            <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" {{ $educationalTool->is_enabled == 1 ? 'checked' : '' }} value="1" />
+                            <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enable_yes">Si</label>
+
+                            <input class="form-check-input" type="radio" name="is_enabled" id="is_enabled_no" {{ $educationalTool->is_enabled == 0 ? 'checked' : '' }} value="0" />
+                            <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enabled_no">No</label>
+
+                            <x-jet-input-error for="is_enabled" class="mt-2" />
+                        </div>
+
+                        <p class="mt-4">{{ __('Available?') }}</p>
+                        <div class="mt-4">
+                            <input class="form-check-input" type="radio" name="is_available" id="is_available_yes" {{ $educationalTool->is_available == 1 ? 'checked' : '' }} value="1" />
+                            <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_yes">Si</label>
+
+                            <input class="form-check-input" type="radio" name="is_available" id="is_available_no" {{ $educationalTool->is_available == 0 ? 'checked' : '' }} value="0" />
+                            <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_no">No</label>
+
+                            <x-jet-input-error for="is_available" class="mt-2" />
+                        </div>
+
+                        <div class="mt-2">
+                            <x-jet-label for="educational_environment_id" value="{{ __('Node') }}" />
+                            <select id="educational_environment_id" name="educational_environment_id" class="block mt-1 p-4 w-full" value="{{ $educationalTool->educational_environment_id }}" required >
+                                <option value=''>Seleccione un ambiente </option>
+                                @forelse ($educationalEnvironments as $educationalEnvironment)
+                                    <option selected="{{ $educationalEnvironment->id ==  $educationalTool->educational_environment_id  ? 'selected' : '' }}" value={{$educationalEnvironment->id}}>  {{$educationalEnvironment->name}} </option>
+                                @empty
+                                    <option value="">No educational environments</option>
+                                @endforelse
+                            </select>
+                            <x-jet-input-error for="educational_environment_id" class="mt-2" />
+                        </div>
 
 
-                    </select>
-                    <div class="invalid-feedback">
-                        {{-- {rules.educational_institution_id.message ? rules.educational_institution_id.message : requestValidation.educational_institution_id ? requestValidation.educational_institution_id : ''} --}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="">Ambiente</label>
-                    <select
-                        name="educational_environment_id"
-                        id="educational_environment_id"
-                        class="form-control"
-                        defaultValue={{ $educationalTool->educational_environment_id }}
-                    >
-                        <option value="">Seleccion uno</option>
+                        <div class="flex items-center justify-end mt-4">
+                            <x-jet-button class="ml-4">
+                                {{ __('Create') }}
+                            </x-jet-button>
+                        </div>
+                </form>
+            </div>
 
-                        @forelse ($educationalEnvironments as $educationalEnvironment)
-                             <option value={{ $educationalEnvironment->id }} > {{ $educationalEnvironment->name }} </option>
-                        @empty
-                             <option value="">No educational environments</option>
-                        @endforelse
-
-                    </select>
-                    <div class="invalid-feedback">
-                        {{-- {rules.educational_environment_id.message ? rules.educational_environment_id.message : requestValidation.educational_environment_id ? requestValidation.educational_environment_id : ''} --}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary btn-block">Guardar</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
-
-
-@endsection
+</x-app-layout>
