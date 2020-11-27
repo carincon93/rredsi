@@ -20,7 +20,7 @@
             var SwitchEducationalInstitution = (function() {
                 let nodeId                           = null;
                 const nodeSelected                   = {{ request()->route('node') != null ? request()->route('node')->id : 0 }};
-                const educationalInstitutionSelected = {{ request()->route('educationalInstitution') != null ? request()->route('educationalInstitution')->id : 0 }};
+                const educationalInstitutionSelected = {{ request()->route('educational_institution') != null ? request()->route('educational_institution')->id : 0 }};
                 const nodesSelect                    = document.getElementById('h_node_id');
 
                 getAllNodes = async () => {

@@ -26,7 +26,7 @@ class EducationalEnvironmentRequest extends FormRequest
         return [
             'name'                          => 'required|string|max:191 ',
             'type'                          => 'required|string|max:191',
-            'capacity_aprox'                => 'required|numeric|min:0|max:9999999999',
+            'capacity_aprox'                => 'required|integer|min:0|max:9999999999',
             'is_enabled'                    => 'required|boolean',
             'is_available'                  => 'required|boolean',
             'educational_institution_id'    => 'integer|min:0|max:9999999999',

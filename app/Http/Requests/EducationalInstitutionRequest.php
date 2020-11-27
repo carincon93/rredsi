@@ -23,17 +23,15 @@ class EducationalInstitutionRequest extends FormRequest
      */
     public function rules()
     {
-            if ($this->isMethod('PUT')) {
-                return [
-                    'name'              => 'required|string|max:191',
-                    'nit'               => 'required|string|max:191|unique:educational_institutions,nit,'.$this->route('educational_institution')->id.',id',
-                    'address'           => 'required|string|max:191',
-                    'city'              => 'required|string|max:191',
-                    'phone_number'      => 'integer|min:0|max:9999999999',
-                    'website'           => 'required|url|max:191',
-                    'administrator_id'  => 'required|numeric|min:0|max:9999999999|exists:educational_institution_admins,id',
-                    'node_id'           => 'required|numeric|min:0|max:9999999999|exists:nodes,id',
-                ];
+        if ($this->isMethod('PUT')) {
+            return [
+                'name'              => 'required|string|max:191',
+                'nit'               => 'required|string|max:191|unique:educational_institutions,nit,'.$this->route('educational_institution')->id.',id',
+                'address'           => 'required|string|max:191',
+                'city'              => 'required|string|max:191',
+                'phone_number'      => 'integer|min:0|max:9999999999',
+                'website'           => 'required|url|max:191',
+            ];
         } else {
             return [
                 'name'              => 'required|string|max:191',
@@ -42,8 +40,6 @@ class EducationalInstitutionRequest extends FormRequest
                 'city'              => 'required|string|max:191',
                 'phone_number'      => 'integer|min:0|max:9999999999',
                 'website'           => 'required|url|max:191',
-                'administrator_id'  => 'required|numeric|min:0|max:9999999999|exists:educational_institution_admins,id',
-                'node_id'           => 'required|numeric|min:0|max:9999999999|exists:nodes,id',
             ];
         }
     }

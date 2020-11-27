@@ -32,7 +32,6 @@ class ResearchGroupRequest extends FormRequest
                 'minciencias_code'          => 'required|string|max:191',
                 'minciencias_category'      => 'required|max:1',
                 'website'                   => 'url|max:191',
-                'educational_institution_id'=> 'required|numeric|min:0|max:9999999999|exists:educational_institutions,id',
             ];
         } else {
             return [
@@ -43,7 +42,6 @@ class ResearchGroupRequest extends FormRequest
                 'minciencias_code'          => 'required|string|max:191',
                 'minciencias_category'      => 'max:1',
                 'website'                   => 'url|max:191',
-                'educational_institution_id' =>'required|numeric|min:0|max:9999999999|exists:educational_institutions,id',
             ];
         }
     }

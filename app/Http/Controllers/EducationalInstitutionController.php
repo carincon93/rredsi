@@ -18,9 +18,9 @@ class EducationalInstitutionController extends Controller
      */
     public function index(Node $node)
     {
-        $educationalInstitutions = $node->educationalInstitutions->orderBy('name')->paginate(50);
+        $educationalInstitutions = $node->educationalInstitutions()->orderBy('name')->get();
 
-        return view('EducationalInstitutions.index', compact('educationalInstitutions'));
+        return view('EducationalInstitutions.index', compact('node', 'educationalInstitutions'));
     }
 
     /**
@@ -30,9 +30,7 @@ class EducationalInstitutionController extends Controller
      */
     public function create(Node $node)
     {
-        $nodes = Node::orderBy('state')->paginate(50);
-        
-        return view('EducationalInstitutions.create', compact('nodes'));
+        return view('EducationalInstitutions.create', compact('node'));
     }
 
     /**
@@ -50,14 +48,13 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->city           = $request->get('city');
         $educationalInstitution->phone_number   = $request->get('phone_number');
         $educationalInstitution->website        = $request->get('website');
-        $educationalInstitution->administrator()->associate($request->get('administrator_id'));
-        $educationalInstitution->node()->associate($request->get('node_id'));
+        $educationalInstitution->node()->associate($node);
 
         if($educationalInstitution->save()){
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('educational-institutions.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);
     }
 
     /**
@@ -68,7 +65,7 @@ class EducationalInstitutionController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution)
     {
-        return view('EducationalInstitutions.show', compact('educationalInstitution'));
+        return view('EducationalInstitutions.show', compact('node', 'educationalInstitution'));
     }
 
     /**
@@ -79,7 +76,7 @@ class EducationalInstitutionController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution)
     {
-        return view('EducationalInstitutions.show', compact('educationalInstitution'));
+        return view('EducationalInstitutions.show', compact('node', 'educationalInstitution'));
     }
 
     /**
@@ -97,14 +94,13 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->city           = $request->get('city');
         $educationalInstitution->phone_number   = $request->get('phone_number');
         $educationalInstitution->website        = $request->get('website');
-        $educationalInstitution->administrator()->associate($request->get('administrator_id'));
-        $educationalInstitution->node()->associate($request->get('node_id'));
+        $educationalInstitution->node()->associate($node);
 
         if($educationalInstitution->save()){
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('educational-institutions.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);
     }
 
     /**
@@ -119,7 +115,7 @@ class EducationalInstitutionController extends Controller
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('educational-institutions.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);
     }
 
     /**
@@ -129,33 +125,6 @@ class EducationalInstitutionController extends Controller
      */
     public function dashboard(Node $node, EducationalInstitution $educationalInstitution)
     {
-        return view('EducationalInstitutions.dashboard', compact('educationalInstitution'));
-    }
-
-    public function getResearchLines(ResearchGroup $researchGroup)
-    {
-        return $researchGroup->researchLines()->get();
-    }
-
-    /**
-     * Get research groups by educational institution.
-     *
-     * @param  \App\EducationalInstitution  $educationalInstitution
-     * @return \Illuminate\Http\Response
-     */
-    public function getResearchGroups(Node $node, EducationalInstitution $educationalInstitution)
-    {
-        return $educationalInstitution->researchGroups()->get();
-    }
-
-    /**
-     * Filter academic programs by educational institution.
-     *
-     * @param  \App\EducationalInstitution  $educationalInstitution
-     * @return \Illuminate\Http\Response
-     */
-    public function getAcademicPrograms(Node $node, EducationalInstitution $educationalInstitution)
-    {
-        return response(['academicPrograms' => $educationalInstitution->academicPrograms()->get()]);
+        return view('EducationalInstitutions.dashboard', compact('node', 'educationalInstitution'));
     }
 }

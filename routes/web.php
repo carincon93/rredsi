@@ -41,13 +41,7 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/educational-environments/getByEducationalInstitution/{id}', [EducationalEnvironmentController::class, 'getByEducationalInstitution']);
-    Route::get('/educational-institutions/get-research-groups/{educationalInstitution}', [EducationalInstitutionController::class, 'getResearchGroups']);
-    Route::get('/educational-institutions/get-academic-programs/{educationalInstitution}', [EducationalInstitutionController::class, 'getAcademicPrograms']);
-    Route::get('/educational-institutions/get-research-lines/{researchGroup}', [EducationalInstitutionController::class, 'getResearchLines']);
-    Route::get('/research-groups/get-research-teams/{researchGroup}', [ResearchGroupController::class, 'getResearchTeams']);
-
-    Route::get('/dashboard/nodes/{node}/educational-institutions/{educationalInstitution}', [EducationalInstitutionController::class, 'dashboard']);
+    Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
 
     Route::resource('/user/profile/graduations', UserGraduationController::class, [
         'names' => [
@@ -74,18 +68,18 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     Route::resources([
-        'nodes'                                                             => NodeController::class,
-        'nodes.educational-institutions'                                    => EducationalInstitutionController::class,
-        'nodes.educational-institutions.academic-programs'                  => AcademicProgramController::class,
-        'nodes.educational-institutions.research-lines'                     => ResearchLineController::class,
-        'nodes.educational-institutions.research-groups'                    => ResearchGroupController::class,
-        'nodes.educational-institutions.research-teams'                     => ResearchTeamController::class,
-        'nodes.educational-institutions.educational-environments'           => EducationalEnvironmentController::class,
-        'nodes.educational-institutions.research-teams.research-outputs'    => ResearchOutputController::class,
-        'nodes.educational-institutions.projects'                           => ProjectController::class,
-        'nodes.educational-institutions.educational-tools'                  => EducationalToolController::class,
-        'nodes.educational-institutions.events'                             => EventController::class,
-        'nodes.educational-institutions.users'                              => UserController::class,
+        'nodes'                                                                         => NodeController::class,
+        'nodes.educational-institutions'                                                => EducationalInstitutionController::class,
+        'nodes.educational-institutions.academic-programs'                              => AcademicProgramController::class,
+        'nodes.educational-institutions.research-groups'                                => ResearchGroupController::class,
+        'nodes.educational-institutions.research-groups.research-lines'                 => ResearchLineController::class,
+        'nodes.educational-institutions.research-groups.research-teams'                 => ResearchTeamController::class,
+        'nodes.educational-institutions.educational-environments'                       => EducationalEnvironmentController::class,
+        'nodes.educational-institutions.educational-environments.educational-tools'     => EducationalToolController::class,
+        'nodes.educational-institutions.research-groups.research-teams.research-outputs'=> ResearchOutputController::class,
+        'nodes.educational-institutions.projects'                                       => ProjectController::class,
+        'nodes.educational-institutions.events'                                         => EventController::class,
+        'nodes.educational-institutions.users'                                          => UserController::class,
 
         'knowledge-areas'                   => KnowledgeAreaController::class,
         'researchers'                       => ResearcherController::class,

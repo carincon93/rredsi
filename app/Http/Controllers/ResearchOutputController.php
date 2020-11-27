@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Node;
+use App\Models\EducationalInstitution;
+use App\Models\ResearchGroup;
+use App\Models\ResearchTeam;
+use App\Models\ResearchOutput;
+
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\ResearchOutputRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use App\Models\ResearchOutput;
 
 class ResearchOutputController extends Controller
 {
@@ -14,10 +21,11 @@ class ResearchOutputController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        $researchOutputs = ResearchOutput::orderBy('title')->paginate(50);
-        return view('ResearchOutputs.index', compact('researchOutputs'));
+        $researchOutputs = $researchTeam->researchOutputs()->orderBy('title')->get();
+
+        return view('ResearchOutputs.index', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'researchOutputs'));
     }
 
     /**
@@ -25,9 +33,9 @@ class ResearchOutputController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        return view('ResearchOutputs.create');
+        return view('ResearchOutputs.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam'));
     }
 
     /**
@@ -57,7 +65,7 @@ class ResearchOutputController extends Controller
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('research-outputs.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.research-outputs.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
     }
 
     /**
@@ -66,10 +74,10 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function show(ResearchOutput $researchOutput)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, ResearchOutput $researchOutput)
     {
 
-        return view('ResearchOutputs.show', compact('researchOutput'));
+        return view('ResearchOutputs.show', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'researchOutput'));
     }
 
     /**
@@ -78,9 +86,9 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function edit(ResearchOutput $researchOutput)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, ResearchOutput $researchOutput)
     {
-        return view('ResearchOutputs.edit', compact('researchOutput'));
+        return view('ResearchOutputs.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'researchOutput'));
     }
 
     /**
@@ -90,7 +98,7 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function update(ResearchOutputRequest $request, ResearchOutput $researchOutput)
+    public function update(ResearchOutputRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, ResearchOutput $researchOutput)
     {
         $researchOutput->title          = $request->get('title');
         $researchOutput->typology       = $request->get('typology');
@@ -108,7 +116,7 @@ class ResearchOutputController extends Controller
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('research-outputs.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.research-outputs.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
     }
 
     /**
@@ -117,12 +125,12 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ResearchOutput $researchOutput)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, ResearchOutput $researchOutput)
     {
         if($researchOutput->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('research-outputs.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.research-outputs.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
     }
 }

@@ -20,7 +20,7 @@ class ResearcherController extends Controller
      */
     public function index()
     {
-        $researchers = Researcher::orderBy('name')->paginate(50);
+        $researchers = Researcher::orderBy('name')->get();
         return view('Researchers.index', compact('researchers'));
     }
 

@@ -7,7 +7,7 @@
             </span>
         </h2>
         <div>
-            <a href="{{ route('academic-programs.create') }}">
+            <a href="{{ route('nodes.educational-institutions.academic-programs.create', [$node, $educationalInstitution]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create academic program info')}}
                 </div>
@@ -69,13 +69,13 @@
                                                 </x-slot>
 
                                                 <x-slot name="content">
-                                                    <x-jet-dropdown-link href="{{ route('academic-programs.show', $academicProgram->id) }}">
+                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.show', [$node, $educationalInstitution, $academicProgram]) }}">
                                                         {{ __('Details') }}
                                                     </x-jet-dropdown-link>
-                                                    <x-jet-dropdown-link href="{{ route('academic-programs.edit', $academicProgram->id) }}">
+                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.edit', [$node, $educationalInstitution, $academicProgram]) }}">
                                                         {{ __('Edit') }}
                                                     </x-jet-dropdown-link>
-                                                    <x-jet-dropdown-link href="{{ route('academic-programs.destroy', $academicProgram->id) }}">
+                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.destroy', [$node, $educationalInstitution, $academicProgram]) }}">
                                                         {{ __('Delete') }}
                                                     </x-jet-dropdown-link>
                                                 </x-slot>

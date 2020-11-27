@@ -16,7 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::orderBy('name')->paginate(50);
+        $students = Student::orderBy('name')->get();
         return view('Students.index', compact('students'));
     }
 

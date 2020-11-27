@@ -29,9 +29,9 @@ class UserAcademicWorkRequest extends FormRequest
             'authors'                   => 'required|json',
             'grade'                     => 'required|between:0,99.99|max:9999999999',
             'mentors'                   => 'required|json',
-            'research_group_id'         => 'required|numeric|min:0|max:9999999999|exists:research_groups,id',
-            'knowledge_area_id'         => 'required|numeric|min:0|max:9999999999|exists:knowledge_areas,id',
-            'graduation_id'             => 'required|numeric|min:0|max:9999999999|exists:graduations,id',
+            'research_group_id'         => 'required|integer|min:0|max:9999999999|exists:research_groups,id',
+            'knowledge_area_id'         => 'required|integer|min:0|max:9999999999|exists:knowledge_areas,id',
+            'graduation_id'             => 'required|integer|min:0|max:9999999999|exists:graduations,id',
         ];
     }
 

@@ -31,7 +31,7 @@ class ResearchTeam extends Model
     ];
 
     public function administrator() {
-        return $this->belongsTo('App\Models\ResearchTeamAdmin');
+        return $this->belongsTo('App\Models\User', 'administrator_id');
     }
 
     public function researchGroup() {

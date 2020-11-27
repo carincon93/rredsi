@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ResearchGroupRequest;
-use App\Models\ResearchGroup;
+use App\Models\Node;
 use App\Models\EducationalInstitution;
+use App\Models\ResearchGroup;
 
+use App\Http\Requests\ResearchGroupRequest;
 use Illuminate\Http\Request;
 
 class ResearchGroupController extends Controller
@@ -15,10 +16,11 @@ class ResearchGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Node $node, EducationalInstitution $educationalInstitution)
     {
-        $researchGroups = ResearchGroup::orderBy('name')->paginate(50);
-        return view('ResearchGroups.index', compact('researchGroups'));
+        $researchGroups = $educationalInstitution->researchGroups()->orderBy('name')->get();
+
+        return view('ResearchGroups.index', compact('node', 'educationalInstitution', 'researchGroups'));
     }
 
     /**
@@ -26,10 +28,9 @@ class ResearchGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Node $node, EducationalInstitution $educationalInstitution)
     {
-        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
-        return view('ResearchGroups.create', compact('educationalInstitutions'));
+        return view('ResearchGroups.create', compact('node', 'educationalInstitution'));
     }
 
     /**
@@ -38,7 +39,7 @@ class ResearchGroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ResearchGroupRequest $request)
+    public function store(ResearchGroupRequest $request, Node $node, EducationalInstitution $educationalInstitution)
     {
         $researchGroup = new ResearchGroup();
         $researchGroup->name                    = $request->get('name');
@@ -48,13 +49,13 @@ class ResearchGroupController extends Controller
         $researchGroup->minciencias_code        = $request->get('minciencias_code');
         $researchGroup->minciencias_category    = $request->get('minciencias_category');
         $researchGroup->website                 = $request->get('website');
-        $researchGroup->educationalInstitution()->associate($request->get('educational_institution_id'));
+        $researchGroup->educationalInstitution()->associate($educationalInstitution);
 
         if($researchGroup->save()){
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('research-groups.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.research-groups.index', [$node, $educationalInstitution])->with('status', $message);
     }
 
     /**
@@ -63,9 +64,9 @@ class ResearchGroupController extends Controller
      * @param  \App\ResearchGroup  $researchGroup
      * @return \Illuminate\Http\Response
      */
-    public function show(ResearchGroup $researchGroup)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
     {
-        return view('ResearchGroups.show', compact('researchGroup'));
+        return view('ResearchGroups.show', compact('node', 'educationalInstitution', 'researchGroup'));
     }
 
     /**
@@ -74,9 +75,9 @@ class ResearchGroupController extends Controller
      * @param  \App\ResearchGroup  $researchGroup
      * @return \Illuminate\Http\Response
      */
-    public function edit(ResearchGroup $researchGroup)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
     {
-        return view('ResearchGroups.edit', compact('researchGroup'));
+        return view('ResearchGroups.edit', compact('node', 'educationalInstitution', 'researchGroup'));
     }
 
     /**
@@ -86,7 +87,7 @@ class ResearchGroupController extends Controller
      * @param  \App\ResearchGroup  $researchGroup
      * @return \Illuminate\Http\Response
      */
-    public function update(ResearchGroupRequest $request, ResearchGroup $researchGroup)
+    public function update(ResearchGroupRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
     {
         $researchGroup->name                    = $request->get('name');
         $researchGroup->email                   = $request->get('email');
@@ -95,13 +96,13 @@ class ResearchGroupController extends Controller
         $researchGroup->minciencias_code        = $request->get('minciencias_code');
         $researchGroup->minciencias_category    = $request->get('minciencias_category');
         $researchGroup->website                 = $request->get('website');
-        $researchGroup->educationalInstitution()->associate($request->get('educational_institution_id'));
+        $researchGroup->educationalInstitution()->associate($educationalInstitution);
 
         if($researchGroup->save()){
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('research-groups.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.research-groups.index', [$node, $educationalInstitution])->with('status', $message);
     }
 
     /**
@@ -110,23 +111,12 @@ class ResearchGroupController extends Controller
      * @param  \App\ResearchGroup  $researchGroup
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ResearchGroup $researchGroup)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
     {
         if($researchGroup->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('research-groups.index')->with('status', $message);
-    }
-
-    /**
-     * Get research teams by research group.
-     *
-     * @param  \App\ResearchGroup  $researchGroup
-     * @return \Illuminate\Http\Response
-     */
-    public function getResearchTeams(ResearchGroup $researchGroup)
-    {
-        return $researchGroup->researchTeams()->get();
+        return redirect()->route('nodes.educational-institutions.research-groups.index', [$node, $educationalInstitution])->with('status', $message);
     }
 }

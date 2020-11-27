@@ -15,7 +15,7 @@ class KnowledgeAreaController extends Controller
      */
     public function index()
     {
-        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
         return view('KnowledgeAreas.index', compact('knowledgeAreas'));
     }
 

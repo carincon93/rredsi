@@ -28,7 +28,7 @@ class ResearchOutputRequest extends FormRequest
             'typology'          => 'required|string|max:191',
             'description'       => 'required',
             'file'              => 'file|max:20000',
-            'project_id'        => 'required|numeric|min:0|max:9999999999|exists:projects,id',
+            'project_id'        => 'required|integer|min:0|max:9999999999|exists:projects,id',
         ];
     }
 

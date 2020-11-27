@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AcademicProgramRequest;
 use App\Models\AcademicProgram;
-use App\Models\KnowledgeArea;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 
@@ -17,10 +16,11 @@ class AcademicProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Node $node, EducationalInstitution $educationalInstitution)
     {
-        $academicPrograms = AcademicProgram::orderBy('name')->paginate(50);
-        return view('AcademicPrograms.index', compact('academicPrograms'));
+        $academicPrograms = $educationalInstitution->academicPrograms()->orderBy('name')->get();
+
+        return view('AcademicPrograms.index', compact('node', 'educationalInstitution', 'academicPrograms'));
     }
 
     /**
@@ -28,12 +28,9 @@ class AcademicProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Node $node, EducationalInstitution $educationalInstitution)
     {
-        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
-        $nodes = Node::orderBy('administrator_id')->paginate(50);
-        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
-        return view('AcademicPrograms.create', compact('knowledgeAreas','nodes','educationalInstitutions'));
+        return view('AcademicPrograms.create', compact('node', 'educationalInstitution'));
     }
 
     /**
@@ -42,7 +39,7 @@ class AcademicProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AcademicProgramRequest $request)
+    public function store(AcademicProgramRequest $request, Node $node, EducationalInstitution $educationalInstitution)
     {
         $academicProgram = new AcademicProgram();
         $academicProgram->name              = $request->get('name');
@@ -52,13 +49,13 @@ class AcademicProgramController extends Controller
         $academicProgram->daytime           = $request->get('daytime');
         $academicProgram->start_date        = $request->get('start_date');
         $academicProgram->end_date          = $request->get('end_date');
-        $academicProgram->educationalInstitution()->associate($request->get('educational_institution_id'));
+        $academicProgram->educationalInstitution()->associate($educationalInstitution);
 
         if($academicProgram->save()) {
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('academic-programs.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.academic-programs.index', [$node, $educationalInstitution])->with('status', $message);
     }
 
     /**
@@ -67,9 +64,9 @@ class AcademicProgramController extends Controller
      * @param  \App\AcademicProgram  $academicProgram
      * @return \Illuminate\Http\Response
      */
-    public function show(AcademicProgram $academicProgram)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, AcademicProgram $academicProgram)
     {
-        return view('AcademicPrograms.show', compact('academicProgram'));
+        return view('AcademicPrograms.show', compact('node', 'educationalInstitution', 'academicProgram'));
     }
 
     /**
@@ -78,12 +75,9 @@ class AcademicProgramController extends Controller
      * @param  \App\AcademicProgram  $academicProgram
      * @return \Illuminate\Http\Response
      */
-    public function edit(AcademicProgram $academicProgram)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, AcademicProgram $academicProgram)
     {
-        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
-        $nodes = Node::orderBy('administrator_id')->paginate(50);
-        $educationalInstitutions = EducationalInstitution::orderBy('name')->paginate(50);
-        return view('AcademicPrograms.edit', compact('academicProgram','knowledgeAreas','nodes','educationalInstitutions'));
+        return view('AcademicPrograms.edit', compact('node', 'educationalInstitution', 'academicProgram'));
     }
 
     /**
@@ -93,7 +87,7 @@ class AcademicProgramController extends Controller
      * @param  \App\AcademicProgram  $academicProgram
      * @return \Illuminate\Http\Response
      */
-    public function update(AcademicProgramRequest $request, AcademicProgram $academicProgram)
+    public function update(AcademicProgramRequest $request, Node $node, EducationalInstitution $educationalInstitution, AcademicProgram $academicProgram)
     {
         $academicProgram->name              = $request->get('name');
         $academicProgram->code              = $request->get('code');
@@ -102,13 +96,13 @@ class AcademicProgramController extends Controller
         $academicProgram->daytime           = $request->get('daytime');
         $academicProgram->start_date        = $request->get('start_date');
         $academicProgram->end_date          = $request->get('end_date');
-        $academicProgram->educationalInstitution()->associate($request->get('educational_institution_id'));
+        $academicProgram->educationalInstitution()->associate($educationalInstitution);
 
         if($academicProgram->save()) {
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('academic-programs.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.academic-programs.index', [$node, $educationalInstitution])->with('status', $message);
     }
 
     /**
@@ -117,12 +111,12 @@ class AcademicProgramController extends Controller
      * @param  \App\AcademicProgram  $academicProgram
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AcademicProgram $academicProgram)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, AcademicProgram $academicProgram)
     {
         if($academicProgram->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('academic-programs.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.academic-programs.index', [$node, $educationalInstitution])->with('status', $message);
     }
 }

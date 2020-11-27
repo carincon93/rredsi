@@ -30,7 +30,7 @@ class LoanRequest extends FormRequest
             'is_accepted'                   => 'boolean',
             'justification'                 => 'required',
             'authorization_letter'          => 'required|file|max:20000',
-            'project_id'                    => 'required|numeric|min:0|max:9999999999|exists:projects,id',
+            'project_id'                    => 'required|integer|min:0|max:9999999999|exists:projects,id',
             'educational_environment_id'    => 'integer|min:0|max:9999999999|exists:educational_environments,id',
             'educational_tool_id'           => 'integer|min:0|max:9999999999|exists:educational_tools,id',
         ];

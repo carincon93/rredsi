@@ -16,7 +16,7 @@ class NodeController extends Controller
      */
     public function index()
     {
-        $nodes = Node::orderBy('state')->paginate(50);
+        $nodes = Node::orderBy('state')->get();
         return view('Nodes.index', compact('nodes'));
     }
 

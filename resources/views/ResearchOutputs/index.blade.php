@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Research teams
+            Research outputs
         </h2>
     </x-slot>
 
@@ -14,32 +14,32 @@
                         <div class="flex-large">
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.create', [$node, $educationalInstitution, $researchGroup]) }}" class="btn btn-primary">Crear semillero de investigación</a>
+                                    <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.research-outputs.create', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}" class="btn btn-primary">Crear semillero de investigación</a>
                                 </div>
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Nombre</th>
+                                            <th>Descripción</th>
                                             <th>Institución educativa</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($researchTeams as $researchTeam)
+                                        @forelse ($researchOutputs as $researchOutput)
                                             <tr>
-                                                <td>{{ $researchTeam->name }}</td>
-                                                <td>{{ $researchTeam->researchGroup->educationalInstitution->name }}</td>
+                                                <td>{{ $researchOutput->title }}</td>
+                                                <td>{{ $researchOutput->researchTeam->name }}</td>
                                                 <td class="actions">
                                                     <div class="actions-wrapper">
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.show', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}"> Show </a>
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}"> Edit </a>
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}"> Delete </a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.research-outputs.show', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Show </a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.research-outputs.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Edit </a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.research-outputs.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Delete </a>
                                                     </div>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colSpan="6">No research teams data</td>
+                                                <td colSpan="6">No research outputs data</td>
                                             </tr>
                                         @endforelse
                                     </tbody>

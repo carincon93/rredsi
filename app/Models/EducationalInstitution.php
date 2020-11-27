@@ -43,4 +43,8 @@ class EducationalInstitution extends Model
     public function educationalInstitutionEvents() {
         return $this->hasMany('App\Models\EducationalInstitutionEvent');
     }
+
+    public function members() {
+        return $this->belongsToMany('App\Models\User', 'educational_institution_members', 'educational_institution_id', 'user_id');
+    }
 }

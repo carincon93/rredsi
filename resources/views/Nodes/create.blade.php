@@ -39,7 +39,7 @@
                     <div class="mt-2">
                         <x-jet-label for="administrator_id" value="{{ __('Node') }}" />
                         <select id="administrator_id" name="administrator_id" class="block mt-1 p-4 w-full" value="{{ old('administrator_id') }}" required >
-                            <option value=''>Seleccione un administrado</option>
+                            <option value="">Seleccione un administrado</option>
                             {{-- @forelse ($nodeAdmins as $nodeAdmin)
                                 <option selected="{{ $nodeAdmin->user->name ==  old('administrator_id')  ? 'selected' : '' }}" value={{$nodeAdmin->user->id}}>  {{$nodeAdmin->user->name}} </option>
                             @empty

@@ -28,7 +28,7 @@
             </div>
 
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('academic-works.store') }}" novalidate>
+                <form method="POST" action="{{ route('academic-works.store') }}">
                     @csrf
 
                     <div>
@@ -64,7 +64,7 @@
                     <div class="mt-2">
                         <x-jet-label for="knowledge_area_id" value="{{ __('knowledge area') }}" />
                         <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" value="{{ old('knowledge_area_id') }}" required >
-                            <option value=''>Seleccione un área de conocimiento</option>
+                            <option value="">Seleccione un área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
                                 <option value={{$knowledgeArea->id}}>  {{$knowledgeArea->name}} </option>
                             @empty
@@ -77,7 +77,7 @@
                     <div class="mt-2">
                         <x-jet-label for="graduation_id" value="{{ __('Graduation') }}" />
                         <select id="graduation_id" name="graduation_id" class="block mt-1 p-4 w-full" value="{{ old('graduation_id') }}" required >
-                            <option value=''>Seleccione</option>
+                            <option value="">Seleccione</option>
                             @forelse ($graduations as $graduation)
                                 <option value={{$graduation->id}}>  {{$graduation->state}} </option>
                             @empty
@@ -90,7 +90,7 @@
                     <div class="mt-2">
                         <x-jet-label for="research_group_id" value="{{ __('Research group') }}" />
                         <select id="research_group_id" name="research_group_id" class="block mt-1 p-4 w-full" value="{{ old('research_group_id') }}" required >
-                            <option value=''>Seleccione un grupo de investigación</option>
+                            <option value="">Seleccione un grupo de investigación</option>
                             @forelse ($researchGroups as $researchGroup)
                                 <option value={{$researchGroup->id}}>  {{$researchGroup->name}} </option>
                             @empty

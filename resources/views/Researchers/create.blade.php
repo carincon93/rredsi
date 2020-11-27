@@ -27,7 +27,7 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('researchers.store') }}" novalidate>
+                <form method="POST" action="{{ route('researchers.store') }}">
                     @csrf
 
                     <div>
@@ -45,7 +45,7 @@
                     <div class="mt-2">
                         <x-jet-label for="document_type" value="{{ __('Document type') }}" />
                         <select id="document_type" name="document_type" class="block mt-1 p-4 w-full" value="{{ old('document_type') }}" required >
-                            <option  value=''>Seleccione el tipo de documento</option>
+                            <option  value="">Seleccione el tipo de documento</option>
                             <option {{ old('document_type')== "CC" ? "selected" : "" }} value="CC">Cédula de ciudadanía</option>
                             <option {{ old('document_type')== "CE" ? "selected" : "" }} value="CE">Cédula de extranjería</option>
                             <option {{ old('document_type')== "TI" ? "selected" : "" }} value="TI">Tarjeta de identidad</option>
@@ -65,18 +65,18 @@
                         <x-jet-input-error for="cellphone_number" class="mt-2" />
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-4">
                         <x-jet-label for="status" value="{{ __('Status') }}" />
                         <select id="status" name="status" class="block mt-1 p-4 w-full" value="{{ old('status') }}" required >
-                            <option value=''>Seleccione el estado</option>
-                            <option {{ old('status')== "Aceptado" ? "selected" : "" }} value="Aceptado">Aceptado</option>
-                            <option {{ old('status')== "En espera" ? "selected" : "" }} value="En espera">En espera</option>
-                            <option {{ old('status')== "Rechazado" ? "selected" : "" }} value="Rechazado">Rechazado</option>
+                            <option value="">Seleccione el estado</option>
+                            <option {{ old('status') == "Aceptado" ? "selected" : "" }} value="Aceptado">Aceptado</option>
+                            <option {{ old('status') == "En espera" ? "selected" : "" }} value="En espera">En espera</option>
+                            <option {{ old('status') == "Rechazado" ? "selected" : "" }} value="Rechazado">Rechazado</option>
                         </select>
                         <x-jet-input-error for="status" class="mt-2" />
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-4">
                         <x-jet-label for="interests" value="{{ __('Interests') }}" />
                         <textarea id="interests" name="interests" class="block mt-1 p-4 w-full" value="{{ old('interests') }}" required >
 
@@ -95,22 +95,6 @@
                         <x-jet-input-error for="is_enabled" class="mt-2" />
                     </div>
 
-                    <div class="mt-2">
-                        <x-jet-label for="research_group_id" value="{{ __('Research group') }}" />
-                        <select id="research_group_id" name="research_group_id" class="block mt-1 p-4 w-full" value="{{ old('research_group_id') }}" required >
-                            <option value=''>Seleccione un grupo de investigación</option>
-                            @forelse ($researchGroups as $researchGroup)
-                                <option {{ old('research_group_id')== $researchGroup->name ? "selected" : "" }} value={{$researchGroup->id}}>  {{$researchGroup->name}} </option>
-                            @empty
-                                <option value="">No research group</option>
-                            @endforelse
-                        </select>
-                        <x-jet-input-error for="research_group_id" class="mt-2" />
-                    </div>
-
-                    {{-- ROL ID PREDEFINIDO --}}
-                    <input type="hidden" name="role_id" defaultValue="5"  />
-
 
                     <p class="mt-4">{{ __('Research team' ) }} </p>
                     @forelse ($researchTeams as $researchTeam)
@@ -120,7 +104,7 @@
                         <x-jet-input-error for="research_team_id" class="mt-2" />
                     </div>
                     @empty
-                        <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No research teams' ) }} </p>
+                        <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No research teams data' ) }} </p>
                     @endforelse
 
 
@@ -153,18 +137,13 @@
                         <x-jet-input-error for="is_accepted" class="mt-2" />
                     </div>
 
-
-
-
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Create') }}
                         </x-jet-button>
                     </div>
-
                 </form>
             </div>
-
         </div>
     </div>
 

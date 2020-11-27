@@ -18,7 +18,7 @@ class UserAcademicWorkController extends Controller
      */
     public function index()
     {
-        $userAcademicWorks = UserAcademicWork::orderBy('title')->paginate(50);
+        $userAcademicWorks = UserAcademicWork::orderBy('title')->get();
         return view('AcademicWorks.index', compact('academicWorks'));
     }
 
@@ -29,9 +29,9 @@ class UserAcademicWorkController extends Controller
      */
     public function create()
     {
-        $knowledgeAreas = KnowledgeArea::orderBy('name')->paginate(50);
-        $graduations    = UserGraduation::orderBy('user_id')->paginate(50);
-        $researchGroups = ResearchGroup::orderBy('name')->paginate(50);
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+        $graduations    = UserGraduation::orderBy('user_id')->get();
+        $researchGroups = ResearchGroup::orderBy('name')->get();
         return view('AcademicWorks.create', compact('knowledgeAreas','graduations','researchGroups'));
     }
 

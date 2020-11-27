@@ -1,9 +1,19 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Educational Environments
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{ __('Educational environments') }}
+            <span class="sm:block text-purple-300">
+                Add educational environment
+            </span>
         </h2>
+        <div>
+            <a href="{{ route('nodes.educational-institutions.educational-environments.create', [$node, $educationalInstitution]) }}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    {{ __('Create educational environment')}}
+                </div>
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -33,20 +43,13 @@
                                         </thead>
                                         <tbody>
 
-                                            @forelse ( $educationalEnvironments as $educationalEnvironment)
+                                            @forelse ($educationalEnvironments as $educationalEnvironment)
                                                 <tr>
                                                     <td>{{ $educationalEnvironment->name }}</td>
-                                                    <td>{{ $educationalEnvironment->educational_institution->name }}</td>
+                                                    <td>{{ $educationalEnvironment->educationalInstitution->name }}</td>
                                                     <td>{{ $educationalEnvironment->type }}</td>
                                                     <td class="actions">
                                                         <div class="actions-wrapper">
-                                                            {{-- {this.state.educationalEnvironmentsWithLoans.find(o => o.educational_environment_id === educationalEnvironment.id && !o.loan.returned_at)?(
-                                                                <a href="#" data-id={this.state.educationalEnvironmentsWithLoans.find(o => o.educational_environment_id === educationalEnvironment.id).id} onClick={this.handleReturn}>Devolver</a>
-                                                            ):(
-                                                                <a href={`/app/educational-environments/request/${educationalEnvironment.id}`}>
-                                                                    Solicitar prestamo
-                                                                </a>
-                                                            )} --}}
                                                             <a href="/app/educational-environments/edit/{{ $educationalEnvironment->id }}"> Editar </a>
                                                             <a href="/app/educational-environments/detail/{{ $educationalEnvironment->id }}"> Detalle </a>
                                                             <button class="btn btn-danger" type="button" >Eliminar </button>

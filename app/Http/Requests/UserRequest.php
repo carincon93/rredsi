@@ -28,24 +28,24 @@ class UserRequest extends FormRequest
             'name'              => 'required|string|max:191',
             'email'             => 'required|string|max:191|email|unique:users,email,'.$this->route('user')->id.',id',
             'document_type'     => 'required|string| max:2',
-            'document_number'   => 'required|numeric|min:0|max:9999999999|unique:users,document_number,'.$this->route('user')->id.',id',
-            'cellphone_number'  => 'required|numeric|min:0|max:9999999999',
+            'document_number'   => 'required|integer|min:0|max:9999999999|unique:users,document_number,'.$this->route('user')->id.',id',
+            'cellphone_number'  => 'required|integer|min:0|max:9999999999',
             'status'            => 'required|string|max:191',
             'interests'         => 'required|json',
             'is_enabled'        => 'required|boolean',
-            'role_id'           => 'required|numeric|min:0|max:9999999999|exists:roles,id',
+            'role_id'           => 'required|integer|min:0|max:9999999999|exists:roles,id',
         ];
     } else {
         return [
             'name'              => 'required|string|max:191',
             'email'             => 'required|string|max:191|email|unique:users,email',
             'document_type'     => 'required|string| max:2',
-            'document_number'   => 'required|numeric|min:0|max:9999999999|unique:users,document_number',
-            'cellphone_number'  => 'required|numeric|min:0|max:9999999999',
+            'document_number'   => 'required|integer|min:0|max:9999999999|unique:users,document_number',
+            'cellphone_number'  => 'required|integer|min:0|max:9999999999',
             'status'            => 'required|string|max:191',
             'interests'         => 'required|json',
             'is_enabled'        => 'required|boolean',
-            'role_id'           => 'required|numeric|min:0|max:9999999999|exists:roles,id',
+            'role_id'           => 'required|integer|min:0|max:9999999999|exists:roles,id',
         ];
     }
     }

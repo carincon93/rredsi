@@ -18,9 +18,7 @@
                                 <div class="card-header">
                                     <h2></h2>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="/educational-tools/create" class="btn btn-primary">Crear</a>
-                                        <a href="/educational-tools/loan-request" class="btn btn-secondary">Solicitudes de prestamos</a>
-                                        <a href="/educational-tools/loan-returns" class="btn btn-secondary">Devoluciones de equipos</a>
+                                        <a href="{{ route('nodes.educational-institutions.educational-environments.educational-tools.create', [$node, $educationalInstitution, $educationalEnvironment]) }}" class="btn btn-primary">Crear</a>
                                     </div>
                                 </div>
                                 <table class="table">
@@ -36,8 +34,8 @@
                                         @forelse ($educationalTools as $educationalTool)
                                             <tr>
                                                 <td>{{ $educationalTool->name }}</td>
-                                                <td>{{ $educationalTool->educational_environment->educational_institution->name }}</td>
-                                                <td>{{ $educationalTool->educational_environment->name }}</td>
+                                                <td>{{ $educationalTool->educationalEnvironment->educationalInstitution->name }}</td>
+                                                <td>{{ $educationalTool->educationalEnvironment->name }}</td>
                                                 <td class="actions">
                                                     <div class="actions-wrapper">
 
@@ -51,29 +49,22 @@
                                                             </a>
                                                         )} --}}
 
-                                                        <a href="/educational-tools/edit/{{ $educationalTool->id }}">
-                                                            Editar
+                                                        <a href="{{ route('nodes.educational-institutions.educational-environments.educational-tools.show', [$node, $educationalInstitution, $educationalEnvironment, $educationalTool]) }}">
+                                                            Show
                                                         </a>
-                                                        <a href="/educational-tools/detail/{{ $educationalTool->id }}">
-                                                            Detalle
+                                                        <a href="{{ route('nodes.educational-institutions.educational-environments.educational-tools.edit', [$node, $educationalInstitution, $educationalEnvironment, $educationalTool]) }}">
+                                                            Edit
                                                         </a>
-                                                        <button
-                                                            class="btn"
-                                                            type="button"
-                                                            data-id={educationalTool.id}
-                                                            onClick={this.handleDelete}
-                                                        >
-                                                            Eliminar
-                                                        </button>
+                                                        <a href="{{ route('nodes.educational-institutions.educational-environments.educational-tools.destroy', [$node, $educationalInstitution, $educationalEnvironment, $educationalTool]) }}">
+                                                            Delete
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
                                         @empty
-
                                             <tr>
-                                                <td colSpan="4" class="text-center"> No hay datos disponibles </td>
+                                                <td colSpan="4" class="text-center"> No hay datos disponibles</td>
                                             </tr>
-
                                         @endforelse
 
                                     </tbody>

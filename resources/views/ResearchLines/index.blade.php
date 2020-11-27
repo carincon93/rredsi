@@ -15,13 +15,13 @@
                         <div class="flex-large">
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="/research-lines/create" >Crear Linea de Investigación</a>
+                                    <a href="{{ route('nodes.educational-institutions.research-groups.research-lines.create', [$node, $educationalInstitution, $researchGroup]) }}" >Crear línea de investigación</a>
                                 </div>
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Línea de Investigación</th>
-                                            <th scope="col">Grupo de Investigación</th>
+                                            <th scope="col">Línea de investigación</th>
+                                            <th scope="col">Grupo de ínvestigación</th>
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
@@ -29,24 +29,23 @@
                                         @forelse ($researchLines as $researchLine)
                                             <tr>
                                                 <td>{{ $researchLine->name }}</td>
-                                                <td>{{ $researchLine->research_group->name }}</td>
                                                 <td class="actions">
                                                     <div class="actions-wrapper">
-                                                        <a href="/research-lines/edit/${{ $researchLine->id }}">
-                                                            Editar
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-lines.show', [$node, $educationalInstitution, $researchGroup, $researchLine]) }}">
+                                                            Show
                                                         </a>
-                                                        <a href="/research-lines/detail/${{ $researchLine->id }}">
-                                                            Detail
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-lines.edit', [$node, $educationalInstitution, $researchGroup, $researchLine]) }}">
+                                                            Edit
                                                         </a>
-                                                        <button class="btn" type="button" >
-                                                            Eliminar
-                                                        </button>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-lines.destroy', [$node, $educationalInstitution, $researchGroup, $researchLine]) }}">
+                                                            Delete
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colSpan="4">No Research Lines</td>
+                                                <td colSpan="4">No research lines data</td>
                                             </tr>
                                         @endforelse
 

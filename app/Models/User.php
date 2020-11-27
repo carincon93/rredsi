@@ -71,6 +71,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role');
     }
 
+    public function isResearchTeamAdmin() {
+        return $this->hasOne('App\Models\ResearchTeam', 'administrator_id');
+    }
+
     public function isResearcher() {
         return $this->hasOne('App\Models\Researcher', 'id');
     }
@@ -92,5 +96,9 @@ class User extends Authenticatable
                 'is_external',
                 'authorization_letter',
             ]);
+    }
+
+    public function educationalInstitutions() {
+        return $this->belongsToMany('App\Models\EducationalInstitution', 'educational_institution_members', 'user_id', 'educational_institution_id');
     }
 }

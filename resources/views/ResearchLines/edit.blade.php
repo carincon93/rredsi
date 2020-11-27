@@ -3,11 +3,11 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Research lines') }}
             <span class="sm:block text-purple-300">
-                update research line info
+                Update research line info
             </span>
         </h2>
         <div>
-            <a href="{{ route('research-lines.index') }}">
+            <a href="{{ route('nodes.educational-institutions.research-groups.research-lines.index', [$node, $educationalInstitution, $researchGroup]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
@@ -23,11 +23,11 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Edita información</x-slot>
+                    <x-slot name="description">Editar información de la línea de investigación</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('research-lines.update',$researchLine->id) }}">
+                <form method="POST" action="{{ route('nodes.educational-institutions.research-groups.research-lines.update', [$node, $educationalInstitution, $researchGroup, $researchLine]) }}">
                     @csrf
                     @method('PUT')
 
@@ -37,60 +37,46 @@
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-4">
                         <x-jet-label for="objectives" value="{{ __('Objectives') }}" />
                         <textarea id="objectives" name="objectives" class="block mt-1 p-4 w-full" value="{{ $researchLine->objectives }}" required >{{ $researchLine->objectives }}</textarea>
                         <x-jet-input-error for="objectives" class="mt-2" />
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-4">
                         <x-jet-label for="mission" value="{{ __('Mission') }}" />
                         <textarea id="mission" name="mission" class="block mt-1 p-4 w-full" value="{{ $researchLine->mission }}" required >{{ $researchLine->mission }}</textarea>
                         <x-jet-input-error for="mission" class="mt-2" />
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-4">
                         <x-jet-label for="vision" value="{{ __('Vision') }}" />
                         <textarea id="vision" name="vision" class="block mt-1 p-4 w-full" value="{{ $researchLine->vision }}" required >{{ $researchLine->vision }}</textarea>
                         <x-jet-input-error for="vision" class="mt-2" />
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-4">
                         <x-jet-label for="achievements" value="{{ __('Achievements') }}" />
                         <textarea id="achievements" name="achievements" class="block mt-1 p-4 w-full" value="{{ $researchLine->achievements }}" required >{{ $researchLine->achievements }}</textarea>
                         <x-jet-input-error for="achievements" class="mt-2" />
                     </div>
 
-                    <div class="mt-2">
-                        <x-jet-label for="knowledge_area_id" value="{{ __('knowledge area') }}" />
+                    <div class="mt-4">
+                        <x-jet-label for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
                         <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" value="{{ $researchLine->knowledge_area_id }}" required >
-                            <option value=''>Seleccione un área de conocimiento</option>
+                            <option value="">Seleccione un área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
                                 <option {{ $researchLine->knowledge_area_id == $knowledgeArea->id ? "selected" : "" }} value={{$knowledgeArea->id}}>  {{$knowledgeArea->name}} </option>
                             @empty
-                                <option value="">No knowledge areas</option>
+                                <option value="">No knowledge areas data</option>
                             @endforelse
                         </select>
                         <x-jet-input-error for="knowledge_area_id" class="mt-2" />
                     </div>
 
-                    <div class="mt-2">
-                        <x-jet-label for="research_group_id" value="{{ __('Research group') }}" />
-                        <select id="research_group_id" name="research_group_id" class="block mt-1 p-4 w-full" value="{{ $researchLine->research_group_id }}" required >
-                            <option value=''>Selecciones un grupo</option>
-                            @forelse ($researchGroups as $researchGroup)
-                                <option {{ $researchLine->research_group_id == $researchGroup->id ? "selected" : "" }} value={{ $researchGroup->id }} >{{ $researchGroup->name }} </option>
-                            @empty
-                                <option value="">No researchGroup</option>
-                            @endforelse
-                        </select>
-                        <x-jet-input-error for="research_group_id" class="mt-2" />
-                    </div>
-
-
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
-                            {{ __('Create') }}
+                            {{ __('Edit') }}
                         </x-jet-button>
                     </div>
 

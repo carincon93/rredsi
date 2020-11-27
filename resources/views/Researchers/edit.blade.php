@@ -46,7 +46,7 @@
                     <div class="mt-2">
                         <x-jet-label for="document_type" value="{{ __('Document type') }}" />
                         <select id="document_type" name="document_type" class="block mt-1 p-4 w-full" value="{{ $user->document_type }}" required >
-                            <option  value=''>Seleccione el tipo de documento</option>
+                            <option  value="">Seleccione el tipo de documento</option>
                             <option {{ $user->document_type == "CC" ? "selected" : "" }} value="CC">Cédula de ciudadanía</option>
                             <option {{ $user->document_type == "CE" ? "selected" : "" }} value="CE">Cédula de extranjería</option>
                             <option {{ $user->document_type == "TI" ? "selected" : "" }} value="TI">Tarjeta de identidad</option>
@@ -69,7 +69,7 @@
                     <div class="mt-2">
                         <x-jet-label for="status" value="{{ __('Status') }}" />
                         <select id="status" name="status" class="block mt-1 p-4 w-full" value="{{ $user->status }}" required >
-                            <option value=''>Seleccione el estado</option>
+                            <option value="">Seleccione el estado</option>
                             <option {{ $user->status == "Aceptado" ? "selected" : "" }} value="Aceptado">Aceptado</option>
                             <option {{ $user->status == "En espera" ? "selected" : "" }} value="En espera">En espera</option>
                             <option {{ $user->status == "Rechazado" ? "selected" : "" }} value="Rechazado">Rechazado</option>
@@ -99,7 +99,7 @@
                     <div class="mt-2">
                         <x-jet-label for="research_group_id" value="{{ __('Research group') }}" />
                         <select id="research_group_id" name="research_group_id" class="block mt-1 p-4 w-full" value="{{ $user->research_group_id }}" required >
-                            <option value=''>Seleccione un grupo de investigación</option>
+                            <option value="">Seleccione un grupo de investigación</option>
                             @forelse ($researchGroups as $researchGroup)
                                 <option {{ $user->research_group_id == $researchGroup->id ? "selected" : "" }} value={{$researchGroup->id}}>  {{$researchGroup->name}} </option>
                             @empty
