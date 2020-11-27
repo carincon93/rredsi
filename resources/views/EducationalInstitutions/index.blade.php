@@ -1,79 +1,76 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Educational institutions
+        <h2 class="font-semibold text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{__('EducationalInstitutions')}}
+            <span class="sm:block text-purple-300">
+                Add Educational institutions info
+            </span>
         </h2>
+        <div>
+            <a href="{{route('educational-institutions.create')}}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    {{__('Create educational institution info')}}
+                </div>
+            </a>
+        </div>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm-rounded-lg">
-
-                <div class="container">
-                    <div class="flex-row">
-                        <div class="flex-large">
-                            <div class="card">
-                                <div class="card-header">
-                                    <a href="/educational-institutions/create" > Crear institución educativa </a>
-                                </div>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Institución Educativa</th>
-                                            <th scope="col">Municipio / Departamento</th>
-                                            <th scope="col">Administrador</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($educationalInstitutions as $educationalInstitution)
-
-                                            <tr>
-                                                <td>{{ $educationalInstitution->name }}</td>
-                                                <td>{{ $educationalInstitution->city }}</td>
-                                                <td>{{ $educationalInstitution->administrator->user->name }}</td>
-                                                <td class="actions">
-                                                    <div class="actions-wrapper">
-                                                        <a href="/app/educational-institutions/edit/{{ $educationalInstitution->id }}" >
-                                                            Editar
-                                                        </a>
-                                                        <a href="/app/educational-institutions/detail/{{ $educationalInstitution->id }}" >
-                                                            Detail
-                                                        </a>
-                                                        <button
-                                                            class="btn btn-danger"
-                                                            type="button"
-                                                        >
-                                                            Eliminar
-                                                        </button>
+                <x-data-table>
+                    <x-slot name="firstTheadTitle">
+                        {{__('name')}}
+                    </x-slot>
+                    <x-slot name="secondTheadTitle">
+                        {{__('city')}}
+                    </x-slot>
+                    <x-slot name="thirdTheadTitle">
+                        {{__('administrator')}}
+                    </x-slot>
+                    <x-slot name="tbodyData">
+                        @foreach ($educationalInstitutions as $educationalInstitution)
+                            <tr class="bg-white border-4 border-gray-200">
+                                <td>
+                                    <span class="text-center ml-2 font-semibold">{{$educationalInstitution->name}}</span>
+                                </td>
+                                <td>
+                                    <span class="text-center ml-2 font-semibold">{{$educationalInstitution->city}}</span>
+                                </td>
+                                <td>
+                                    <span class="text-center ml-2 font-semibold">{{$educationalInstitution->administrator}}</span>
+                                </td>
+                                <td class="py-2 text-left">
+                                    <div class="hidden sm:flex sm:items-center justify-around">
+                                        <x-jet-dropdown align="right" width="48">
+                                            <x-slot name="trigger">
+                                                <button class="flex items-center text-sm font-medium text-gray hover:text-indigo-200 hover:border-gray-300 focus:outline-none focus:text-white focus:border-gray-300 transition duration-150 ease-in-out">
+                                                    <div class="ml-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-4 w-4">
+                                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                                        </svg>
                                                     </div>
-                                                </td>
-                                            </tr>
-
-                                        @empty
-                                            <tr>
-                                                <td colSpan="4">No Educational Institutions</td>
-                                            </tr>
-                                        @endforelse
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                                                </button>
+                                            </x-slot>
+                                                <x-jet-dropdown-link href="{{'academic-works.show', $educationalInstitution->id}}">
+                                                    {{__('Details')}}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="{{'academic-works.edit', $educationalInstitution->id}}">
+                                                    {{__('Edit')}}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="{{'academic-works.destroy', $educationalInstitution->id}}">
+                                                    {{__('Delete')}}
+                                                </x-jet-dropdown-link>
+                                            </x-slot>
+                                        </x-jet-dropdown>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </x-slot>
+                    </x-data-table>
             </div>
-
         </div>
-
-
     </div>
-
-
-
-
-
-
 </x-app-layout>
+                                                
