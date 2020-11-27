@@ -50,7 +50,7 @@
                                                     <td>{{ $educationalEnvironment->type }}</td>
                                                     <td class="actions">
                                                         <div class="actions-wrapper">
-                                                            <a href="/app/educational-environments/edit/{{ $educationalEnvironment->id }}"> Editar </a>
+                                                            <a href="{{ route('nodes.educational-institutions.educational-environments.edit',[$node, $educationalInstitution,$educationalEnvironment->id] )}}"> Editar </a>
                                                             <a href="/app/educational-environments/detail/{{ $educationalEnvironment->id }}"> Detalle </a>
                                                             <button class="btn btn-danger" type="button" >Eliminar </button>
                                                         </div>
