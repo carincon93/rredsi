@@ -31,9 +31,10 @@
                                                 <td>{{ $researchTeam->researchGroup->educationalInstitution->name }}</td>
                                                 <td class="actions">
                                                     <div class="actions-wrapper">
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.show', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}"> Show </a>
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}"> Edit </a>
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}"> Delete </a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.show', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">Show</a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">Edit</a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">Delete</a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">Manage projects</a>
                                                     </div>
                                                 </td>
                                             </tr>

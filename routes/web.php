@@ -76,8 +76,8 @@ Route::middleware(['auth'])->group(function () {
         'nodes.educational-institutions.research-groups.research-teams'                 => ResearchTeamController::class,
         'nodes.educational-institutions.educational-environments'                       => EducationalEnvironmentController::class,
         'nodes.educational-institutions.educational-environments.educational-tools'     => EducationalToolController::class,
-        'nodes.educational-institutions.research-groups.research-teams.research-outputs'=> ResearchOutputController::class,
-        'nodes.educational-institutions.projects'                                       => ProjectController::class,
+        'nodes.educational-institutions.research-groups.research-teams.projects'       => ProjectController::class,
+        'nodes.educational-institutions.research-groups.research-teams.projects.research-outputs'=> ResearchOutputController::class,
         'nodes.educational-institutions.events'                                         => EventController::class,
         'nodes.educational-institutions.users'                                          => UserController::class,
 

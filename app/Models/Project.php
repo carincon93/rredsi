@@ -14,6 +14,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
+        'project_type_id',
         'title',
         'start_date',
         'end_date',
@@ -59,5 +60,9 @@ class Project extends Model
 
     public function authors() {
         return $this->belongsToMany('App\Models\User', 'authors', 'project_id', 'user_id');
+    }
+
+    public function projectType() {
+        return $this->belongsTo('App\Models\ProjectType');
     }
 }

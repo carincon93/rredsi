@@ -55,7 +55,7 @@ class ResearchTeam extends Model
     }
 
     public function projects() {
-        return $this->belongsToMany('App\Models\ResearchTeam', 'project_research_team', 'research_team_id', 'project_id')
+        return $this->belongsToMany('App\Models\Project', 'project_research_team', 'research_team_id', 'project_id')
             ->withPivot([
                 'is_principal',
             ]);

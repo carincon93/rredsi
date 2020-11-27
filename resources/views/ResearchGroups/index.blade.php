@@ -43,6 +43,12 @@
                                                         <a href="{{ route('nodes.educational-institutions.research-groups.edit', [$node, $educationalInstitution, $researchGroup]) }}" >
                                                             Delete
                                                         </a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.index', [$node, $educationalInstitution, $researchGroup]) }}" >
+                                                            Manage research teams
+                                                        </a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-lines.index', [$node, $educationalInstitution, $researchGroup]) }}" >
+                                                            Manage research lines
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>

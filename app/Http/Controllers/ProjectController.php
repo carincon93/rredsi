@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Node;
+use App\Models\EducationalInstitution;
+use App\Models\ResearchGroup;
+use App\Models\ResearchTeam;
 use App\Models\Project;
-use App\Event;
+
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -15,10 +20,11 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        $projects = Project::orderBy('name')->get();
-        return view('Projects.index', compact('projects'));
+        $projects = $researchTeam->projects()->orderBy('title')->get();
+
+        return view('Projects.index',  compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projects'));
     }
 
     /**
@@ -26,9 +32,9 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        return view('Projects.create');
+        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam'));
     }
 
     /**
@@ -37,7 +43,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectRequest $request)
+    public function store(ProjectRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
         $project = new Project();
         $project->title             = $request->get('title');
@@ -69,7 +75,7 @@ class ProjectController extends Controller
         $project->academicPrograms()->attach($request->get('academic_program_id'));
         $project->authors()->attach($request->get('user_id'));
 
-        return redirect()->route('projects.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
 
     }
 
@@ -79,9 +85,9 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        return view('Projects.show', compact('project'));
+        return view('Projects.show', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project'));
     }
 
     /**
@@ -90,9 +96,9 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        return view('Projects.edit', compact('project'));
+        return view('Projects.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project'));
     }
 
     /**
@@ -102,7 +108,7 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectRequest $request, Project $project)
+    public function update(ProjectRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
         $project->title             = $request->get('title');
         $project->start_date        = $request->get('start_date');
@@ -136,7 +142,7 @@ class ProjectController extends Controller
         $project->authors()->wherePivot('project_id', '=', $project->id)->detach();
         $project->authors()->attach($request->get('user_id'));
 
-        return redirect()->route('projects.index')->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
     }
 
     /**
@@ -145,23 +151,12 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
         if($project->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('projects.index')->with('status', $message);
-    }
-
-    /**
-     * Register for an event
-     *
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function registerEvent(Project $project, Request $request)
-    {
-        return view('Projects.registerEvent', compact('project'));
+        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
     }
 }
