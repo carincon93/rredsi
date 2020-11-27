@@ -28,66 +28,66 @@
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
 
-                <form method="POST" action="{{ route('nodes.educational-institutions.academic-programs.update', [$node, $educationalInstitution, $academicProgram]) }}">
+                <form method="POST" action="{{ route('nodes.educational-institutions.academic-programs.update', [$node, $educationalInstitution, $academicProgram]) }}" novalidate>
                     @csrf
                     @method('PUT')
 
                     <div>
                         <x-jet-label for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ old('name') ?? $academicProgram->name }}" required />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') ?? $academicProgram->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="code" value="{{ __('Code') }}" />
-                        <x-jet-input id="code" class="block mt-1 w-full" type="number" min="" max="" name="code" value="{{ $academicProgram->code }}"  required />
+                        <x-jet-input id="code" class="block mt-1 w-full" type="number" maxlength="191" name="code" value="{{ old('code') ?? $academicProgram->code }}"  required />
                         <x-jet-input-error for="code" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="academic_level" value="{{ __('Academic level') }}" />
-                        <select id="academic_level" name="academic_level" class="block mt-1 p-4 w-full" value="{{ $academicProgram->academic_level }}"  required >
+                        <select id="academic_level" name="academic_level" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione el nivel académico</option>
-                            <option {{ $academicProgram->academic_level == "Técnico profesional" ? "selected" : "" }}  value="Técnico profesional">Técnico profesional</option>
-                            <option {{ $academicProgram->academic_level == "Técnologo" ? "selected" : "" }} value="Tecnólogo">Tecnólogo</option>
-                            <option {{ $academicProgram->academic_level == "Profesional" ? "selected" : "" }} value="Profesional">Profesional</option>
-                            <option {{ $academicProgram->academic_level == "Especialización técnica profesional" ? "selected" : "" }} value="Especialización técnica profesional">Especialización técnica profesional</option>
-                            <option {{ $academicProgram->academic_level == "Especialización tecnológica" ? "selected" : "" }} value="Especialización tecnológica">Especialización tecnológica</option>
-                            <option {{ $academicProgram->academic_level == "Maestría" ? "selected" : "" }} value="Maestría">Maestría</option>
-                            <option {{ $academicProgram->academic_level == "Doctorado" ? "selected" : "" }} value="Doctorado">Doctorado</option>
+                            <option {{ old('academic_level') == "Técnico profesional" ? "selected" : "" || $academicProgram->academic_level == "Técnico profesional" ? "selected" :"" }}  value="Técnico profesional">Técnico profesional</option>
+                            <option {{ old('academic_level') == "Técnologo" ? "selected" : "" || $academicProgram->academic_level == "Técnologo" ? "selected" : "" }} value="Tecnólogo">Tecnólogo</option>
+                            <option {{ old('academic_level') == "Profesional" ? "selected" : "" || $academicProgram->academic_level == "Profesional" ? "selected" : "" }} value="Profesional">Profesional</option>
+                            <option {{ old('academic_level') == "Especialización técnica profesional" ? "selected" : "" || $academicProgram->academic_level == "Especialización técnica profesional" ? "selected" : "" }} value="Especialización técnica profesional">Especialización técnica profesional</option>
+                            <option {{ old('academic_level') == "Especialización tecnológica" ? "selected" : "" || $academicProgram->academic_level == "Especialización tecnológica" ? "selected" : "" }} value="Especialización tecnológica">Especialización tecnológica</option>
+                            <option {{ old('academic_level') == "Maestría" ? "selected" : "" || $academicProgram->academic_level == "Maestría" ? "selected" : "" }} value="Maestría">Maestría</option>
+                            <option {{ old('academic_level') == "Doctorado" ? "selected" : "" || $academicProgram->academic_level == "Doctorado" ? "selected" : "" }} value="Doctorado">Doctorado</option>
                         </select>
                         <x-jet-input-error for="academic_level" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="start_date" value="{{ __('Start date') }}" />
-                        <x-jet-input id="start_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }}" name="start_date" value="{{ $academicProgram->start_date }}" required />
+                        <x-jet-input id="start_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }}" name="start_date" value="{{ old('start_date') ?? $academicProgram->start_date }}" required />
                         <x-jet-input-error for="start_date" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="end_date" value="{{ __('End date') }}" />
-                        <x-jet-input id="end_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }}" name="end_date" value="{{ $academicProgram->end_date }}" required />
+                        <x-jet-input id="end_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }}" name="end_date" value="{{ old('end_date') ?? $academicProgram->end_date }}" required />
                         <x-jet-input-error for="end_date" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="modality" value="{{ __('Modality') }}" />
-                        <select id="modality" name="modality" class="block mt-1 p-4 w-full" value="{{ $academicProgram->modality }}" required >
+                        <select id="modality" name="modality" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione la modalidad</option>
-                            <option {{ $academicProgram->modality == "Presencial" ? "selected" : "" }}  value="Presencial">Presencial</option>
-                            <option {{ $academicProgram->modality == "A distancia" ? "selected" : "" }}  value="A distancia">A distancia</option>
+                            <option {{ old('modality') == "Presencial" ? "selected" : "" || $academicProgram->modality == "Presencial" ? "selected" : "" }}  value="Presencial">Presencial</option>
+                            <option {{ old('modality') == "A distancia" ? "selected" : "" || $academicProgram->modality == "A distancia" ? "selected" : "" }}  value="A distancia">A distancia</option>
                         </select>
                         <x-jet-input-error for="modality" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="daytime" value="{{ __('Daytime') }}" />
-                        <select id="daytime" name="daytime" class="block mt-1 p-4 w-full" value="{{ $academicProgram->daytime }}" required >
+                        <select id="daytime" name="daytime" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione la jornada</option>
-                            <option {{ $academicProgram->daytime == "Diurna" ? "selected" : "" }}  value="Diurna">Diurna</option>
-                            <option {{ $academicProgram->daytime == "Mixta" ? "selected" : "" }}  value="Mixta">Mixta</option>
-                            <option {{ $academicProgram->daytime == "Nocturna" ? "selected" : "" }}  value="Nocturna">Nocturna</option>
+                            <option {{ old('daytime') == "Diurna" ? "selected" : "" || $academicProgram->daytime == "Diurna" ? "selected" : "" }}  value="Diurna">Diurna</option>
+                            <option {{ old('daytime') == "Mixta" ? "selected" : "" || $academicProgram->daytime == "Mixta" ? "selected" : "" }}  value="Mixta">Mixta</option>
+                            <option {{ old('daytime') == "Nocturna" ? "selected" : "" || $academicProgram->daytime == "Nocturna" ? "selected" : "" }}  value="Nocturna">Nocturna</option>
                         </select>
                         <x-jet-input-error for="daytime" class="mt-2" />
                     </div>

@@ -33,47 +33,47 @@
 
                     <div>
                         <x-jet-label for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ $researchGroup->name }}" required />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') ?? $researchGroup->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="email" value="{{ __('Email') }}" />
-                        <x-jet-input id="email" class="block mt-1 w-full" type="email" min="" max="" name="email" value="{{ $researchGroup->email }}" required />
+                        <x-jet-input id="email" class="block mt-1 w-full" type="email" max="191" name="email" value="{{ old('email') ??  $researchGroup->email }}" required />
                         <x-jet-input-error for="email" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="leader" value="{{ __('Leader') }}" />
-                        <x-jet-input id="leader" class="block mt-1 w-full" type="text" min="" max="" name="leader" value="{{ $researchGroup->leader }}" required />
+                        <x-jet-input id="leader" class="block mt-1 w-full" type="text" max="191" name="leader" value="{{ old('leader') ??  $researchGroup->leader }}" required />
                         <x-jet-input-error for="leader" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="gruplac" value="{{ __('Gruplac') }}" />
-                        <x-jet-input id="gruplac" class="block mt-1 w-full" type="url" min="" max="" name="gruplac" value="{{ $researchGroup->gruplac }}" required />
+                        <x-jet-input id="gruplac" class="block mt-1 w-full" type="url" max="191" name="gruplac" value="{{ old('gruplac') ??  $researchGroup->gruplac }}" required />
                         <x-jet-input-error for="gruplac" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="minciencias_code" value="{{ __('Minciencias code') }}" />
-                        <x-jet-input id="minciencias_code" class="block mt-1 w-full" type="text" min="" max="" name="minciencias_code" value="{{ $researchGroup->minciencias_code }}" required />
+                        <x-jet-input id="minciencias_code" class="block mt-1 w-full" type="text" max="191" name="minciencias_code" value="{{ old('minciencias_code') ?? $researchGroup->minciencias_code }}" required />
                         <x-jet-input-error for="minciencias_code" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="minciencias_category" value="{{ __('Minciencias category') }}" />
-                        <select id="minciencias_category" name="minciencias_category" class="block mt-1 p-4 w-full" value="{{ $researchGroup->minciencias_category }}" required >
+                        <select id="minciencias_category" name="minciencias_category" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione una categoría Minciencias</option>
-                            <option {{ $researchGroup->minciencias_category  == "A" ? "selected" : ""  }} value="A">A</option>
-                            <option {{ $researchGroup->minciencias_category  == "B" ? "selected" : "" }} value="B">B</option>
+                            <option {{ old('minciencias_category') == "A" ? "selected" : "" || $researchGroup->minciencias_category  == "A" ? "selected" : ""  }} value="A">A</option>
+                            <option {{ old('minciencias_category') == "B" ? "selected" : "" || $researchGroup->minciencias_category  == "B" ? "selected" : "" }} value="B">B</option>
                         </select>
                         <x-jet-input-error for="minciencias_category" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="website" value="{{ __('Website') }}" />
-                        <x-jet-input id="website" class="block mt-1 w-full" type="url" min="" max="" name="website" value="{{ $researchGroup->website  }}" required />
+                        <x-jet-input id="website" class="block mt-1 w-full" type="url" max="191" name="website" value="{{ old('website') ?? $researchGroup->website  }}" required />
                         <x-jet-input-error for="website" class="mt-2" />
                     </div>
 
