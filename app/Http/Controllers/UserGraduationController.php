@@ -52,7 +52,7 @@ class UserGraduationController extends Controller
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('user.profile.graduations.index')->with('status', $message);
+        return redirect()->route('user.profile.user-graduations.index')->with('status', $message);
     }
 
     /**
@@ -63,7 +63,7 @@ class UserGraduationController extends Controller
      */
     public function show(UserGraduation $userGraduation)
     {
-        return view('Graduations.show', compact('graduation'));
+        return view('Graduations.show', compact('userGraduation'));
     }
 
     /**
@@ -74,7 +74,9 @@ class UserGraduationController extends Controller
      */
     public function edit(UserGraduation $userGraduation)
     {
-        return view('Graduations.edit', compact('graduation'));
+        $nodes = Node::orderBy('state')->get();
+
+        return view('Graduations.edit', compact('nodes', 'userGraduation'));
     }
 
     /**
@@ -84,18 +86,18 @@ class UserGraduationController extends Controller
      * @param  \App\UserGraduation  $userGraduation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserGraduation $userGraduation)
+    public function update(UserGraduationRequest $request, UserGraduation $userGraduation)
     {
         $userGraduation->is_graduated   = $request->get('is_graduated');
         $userGraduation->year           = $request->get('year');
         $userGraduation->academicProgram()->associate($request->get('academic_program_id'));
-        $userGraduation->user()->associate($request->get('user_id'));
-        
+        $userGraduation->user()->associate(auth()->user()->id);
+
         if($userGraduation->save()){
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('user.profile.graduations.index')->with('status', $message);
+        return redirect()->route('user.profile.user-graduations.index')->with('status', $message);
     }
 
     /**
@@ -110,6 +112,6 @@ class UserGraduationController extends Controller
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('user.profile.graduations.index')->with('status', $message);
+        return redirect()->route('user.profile.user-graduations.index')->with('status', $message);
     }
 }

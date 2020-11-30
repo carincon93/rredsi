@@ -45,7 +45,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="description" value="{{ __('Description') }}" />
-                        <textarea id="description" name="description" class="block mt-1 p-4 w-full" value="{{ old('description') ??  $educationalEnvironment->description }}" required >{{ old('description') ?? $educationalEnvironment->description }}</textarea>
+                        <textarea id="description" name="description" class="block mt-1 p-4 w-full" value="{{ old('description') ??  $educationalEnvironment->description }}" >{{ old('description') ?? $educationalEnvironment->description }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
 
@@ -57,10 +57,10 @@
 
                     <p class="mt-4">{{ __('Enabled?') }}</p>
                     <div class="mt-4">
-                        <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" {{ old('is_enabled') == 1 ? "checked" : "" || $educationalEnvironment->is_enabled == 1 ? "checked" : "" }} value="1" />
+                        <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" {{ old('is_enabled') == 1 || $educationalEnvironment->is_enabled == 1 ? "checked" : "" }} value="1" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enable_yes">Si</label>
 
-                        <input class="form-check-input" type="radio" name="is_enabled" id="is_enabled_no"  {{ old('is_enabled') == 0 ? "checked" : "" || $educationalEnvironment->is_enabled == 0 ? "checked" : "" }}  value="0" />
+                        <input class="form-check-input" type="radio" name="is_enabled" id="is_enabled_no"  {{ old('is_enabled') != null && old('is_enabled') == 0 || $educationalEnvironment->is_enabled == 0 ? "checked" : "" }} value="0" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enabled_no">No</label>
 
                         <x-jet-input-error for="is_enabled" class="mt-2" />
@@ -68,10 +68,10 @@
 
                     <p class="mt-4">{{ __('Available?') }}</p>
                     <div class="mt-4">
-                        <input class="form-check-input" type="radio" name="is_available" id="is_available_yes"  {{ old('is_available') == 1 ? "checked" : "" || $educationalEnvironment->is_available == 1 ? "checked" : "" }}  value="1" />
+                        <input class="form-check-input" type="radio" name="is_available" id="is_available_yes"  {{ old('is_available') == 1 || $educationalEnvironment->is_available == 1 ? "checked" : "" }} value="1" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_yes">Si</label>
 
-                        <input class="form-check-input" type="radio" name="is_available" id="is_available_no" {{ old('is_available') == 0 ? "checked" : "" || $educationalEnvironment->is_available == 0 ? "checked" : "" }}  value="0" />
+                        <input class="form-check-input" type="radio" name="is_available" id="is_available_no" {{ old('is_available') != null && old('is_available') == 0 || $educationalEnvironment->is_available == 0 ? "checked" : "" }} value="0" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_no">No</label>
 
                         <x-jet-input-error for="is_available" class="mt-2" />

@@ -52,7 +52,7 @@
 
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
-                            {{ __('Create') }}
+                            {{ __('Edit') }}
                         </x-jet-button>
                     </div>
                 </form>

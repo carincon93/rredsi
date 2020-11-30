@@ -65,8 +65,8 @@
                         <x-jet-label for="minciencias_category" value="{{ __('Minciencias category') }}" />
                         <select id="minciencias_category" name="minciencias_category" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione una categoría Minciencias</option>
-                            <option {{ old('minciencias_category') == "A" ? "selected" : "" || $researchGroup->minciencias_category  == "A" ? "selected" : ""  }} value="A">A</option>
-                            <option {{ old('minciencias_category') == "B" ? "selected" : "" || $researchGroup->minciencias_category  == "B" ? "selected" : "" }} value="B">B</option>
+                            <option {{ old('minciencias_category') == "A" || $researchGroup->minciencias_category  == "A" ? "selected" : ""  }} value="A">A</option>
+                            <option {{ old('minciencias_category') == "B" || $researchGroup->minciencias_category  == "B" ? "selected" : "" }} value="B">B</option>
                         </select>
                         <x-jet-input-error for="minciencias_category" class="mt-2" />
                     </div>

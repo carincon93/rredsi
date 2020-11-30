@@ -7,15 +7,17 @@ use Illuminate\View\Component;
 class DropDownAcademicProgram extends Component
 {
     public $nodes;
+    public $academicProgram;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($nodes)
+    public function __construct($nodes, $academicProgram)
     {
         $this->nodes = $nodes;
+        $this->academicProgram = $academicProgram;
     }
 
     /**

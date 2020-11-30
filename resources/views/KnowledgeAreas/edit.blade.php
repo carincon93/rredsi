@@ -23,7 +23,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Edita información de areas</x-slot>
+                    <x-slot name="description">Editar la información de la área de conocimiento</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -37,15 +37,14 @@
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-
-                            <div class="flex items-center justify-end mt-4">
-                                <x-jet-button class="ml-4">
-                                    {{ __('Create') }}
-                                </x-jet-button>
-                            </div>
-                        </form>
+                    <div class="flex items-center justify-end mt-4">
+                        <x-jet-button class="ml-4">
+                            {{ __('Edit') }}
+                        </x-jet-button>
                     </div>
-                </div>
+                </form>
             </div>
+        </div>
+    </div>
 </x-app-layout>
 

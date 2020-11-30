@@ -3,7 +3,7 @@
     <select class="form-input rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="node_id" name="node_id" required onchange="AcademicProgramsFilter.onChangeNodeSelect(event)">
         <option value="">Seleccione un nodo</option>
         @foreach ($nodes as $node)
-            <option value="{{ $node->id }}" {{ old('node_id') == $node->id ? 'selected' : '' }}>{{ $node->state }}</option>
+            <option value="{{ $node->id }}" {{ old('node_id') == $node->id || optional(optional(optional($academicProgram)->educationalInstitution)->node)->id == $node->id ? 'selected' : '' }}>{{ $node->state }}</option>
         @endforeach
     </select>
 </div>
@@ -36,6 +36,11 @@
 @once
     @push('scripts')
         <script>
+            let academicProgramEdit = {{ $academicProgram ? $academicProgram->id : 0 }};
+            let nodeIdOld                     = {{ old('node_id') != '' ? old('node_id') : 0 }};
+            let educationalInstitutionIdOld   = {{ old('educational_institution_id') != '' ? old('educational_institution_id') : 0 }};
+            let academicProgramIdOld          = {{ old('academic_program_id') != '' ? old('academic_program_id') : 0 }};
+
             var AcademicProgramsFilter = (function() {
                 let nodeId = null;
                 const educationalInstitutionsSelect = document.getElementById('educational_institution_id');
@@ -77,10 +82,13 @@
                     }
                 }
 
-            
                 getAcademicPrograms = async (nodeId, educationalInstitutionId, academicProgramId) => {
                     academicProgramsSelect.setAttribute('disabled', 'disabled');
                     academicProgramsSelect.innerHTML = '<option value="">Seleccione un programa de formación</option>';
+
+                    console.log(nodeId);
+                    console.log(educationalInstitutionId);
+                    console.log(academicProgramId);
 
                     if (nodeId != null && educationalInstitutionId != null && nodeId != '' && educationalInstitutionId != '') {
                         academicProgramsSpin.classList.remove('hidden');
@@ -109,14 +117,21 @@
                         }
                     }
                 }
-                
-                const nodeIdOld                     = {{ old('node_id') != '' ? old('node_id') : 0 }};
-                const educationalInstitutionIdOld   = {{ old('educational_institution_id') != '' ? old('educational_institution_id') : 0 }};
-                const academicProgramIdOld          = {{ old('academic_program_id') != '' ? old('academic_program_id') : 0 }};
 
                 if (nodeIdOld != 0 && educationalInstitutionIdOld != 0 && academicProgramIdOld != 0) {
                     getEducationalInstitutions(nodeIdOld, educationalInstitutionIdOld);
                     getAcademicPrograms(nodeIdOld, educationalInstitutionIdOld, academicProgramIdOld);
+                }
+                
+                function retrieveData() {
+                    let nodeIdEdit = {{ optional(optional(optional($academicProgram)->educationalInstitution)->node)->id ?? 0 }};
+                    let academicProgramIdEdit = {{ optional($academicProgram)->id ?? 0 }};
+                    let educationalInstitutionIdEdit = {{ optional(optional($academicProgram)->educationalInstitution)->id ?? 0 }};
+
+                    if (nodeIdEdit != 0 && educationalInstitutionIdEdit != 0 && academicProgramIdEdit != 0) {
+                        getEducationalInstitutions(nodeIdEdit, educationalInstitutionIdEdit);
+                        getAcademicPrograms(nodeIdEdit, educationalInstitutionIdEdit, academicProgramIdEdit);
+                    }
                 }
 
                 return {
@@ -127,11 +142,20 @@
                     onChangeEducationalInstitutionSelect: function(e) {
                         if (nodeIdOld != null && nodeIdOld != 0) {
                             nodeId = nodeIdOld;
+                        } else {
+                            nodeId = document.getElementById('node_id').value;
                         }
                         getAcademicPrograms(nodeId, e.target.value, null);
                     },
+                    retrieveData: function() {
+                        retrieveData();
+                    }
                 }
             })();
+
+            if (academicProgramEdit > 0 && nodeIdOld == 0 && educationalInstitutionIdOld == 0 && academicProgramIdOld == 0) {
+                AcademicProgramsFilter.retrieveData();
+            }
         </script>
     @endpush
 @endonce
