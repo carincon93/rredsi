@@ -23,7 +23,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añadir información de la línea de investigación</x-slot>
+                    <x-slot name="description">Añadir una línea de investigación</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -63,9 +63,9 @@
                     <div class="mt-4">
                         <x-jet-label for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
                         <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" value="{{ old('knowledge_area_id') }}" required >
-                            <option value="">Seleccione un área de conocimiento</option>
+                            <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
-                                <option {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" }} value={{$knowledgeArea->id}}>  {{$knowledgeArea->name}} </option>
+                                <option {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" }} value={{ $knowledgeArea->id }}>  {{ $knowledgeArea->name }} </option>
                             @empty
                                 <option value="">No knowledge areas <datalist></datalist></option>
                             @endforelse

@@ -12,7 +12,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                     </svg>
-                    {{ __('Back')}}
+                    {{ __('Back') }}
                 </div>
             </a>
         </div>
@@ -64,7 +64,7 @@
                     <div class="mt-4">
                         <x-jet-label for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
                         <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" value="{{ $researchLine->knowledge_area_id }}" required >
-                            <option value="">Seleccione un área de conocimiento</option>
+                            <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
                                 <option {{ $researchLine->knowledge_area_id == $knowledgeArea->id ? "selected" : "" }} value={{$knowledgeArea->id}}>  {{$knowledgeArea->name}} </option>
                             @empty
