@@ -21,4 +21,8 @@ class Node extends Model
     public function educationalInstitutions() {
         return $this->hasMany('App\Models\EducationalInstitution');
     }
+
+    public function administrator() {
+        return $this->belongsTo('App\Models\User');
+    }
 }

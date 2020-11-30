@@ -1,64 +1,74 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Researchers
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{__('researchers')}}
+            <span class="sm:block text-purple-300">
+                Add Researchers info 
+            </span>
         </h2>
+        <div>
+            <a href="{{route('researchers.create')}}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    {{__('Create researchers info')}}
+                </div>
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm-rounded-lg">
+            <div class="bg-white shadow-xl sm-rounded-lg">
+                <x-data-table>
+                    <x-slot name="firstTheadTitle">
+                        {{__('name')}}
+                    </x-slot>
+                    <x-slot name="secondTheadTitle">
+                        {{__('email')}}
+                    </x-slot>
 
-                <div class="container">
-                    <div class="flex-row">
-                        <div class="flex-large">
-                            <div class="card">
-                            <div class="card-header">
-                                <a href="/researchers/create" class="btn btn-primary">Crear</a>
-                            </div>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Correo electrónico</th>
-                                    <th scope="col">Institución educativa / Grupo de investigación</th>
-                                    <th scope="col">Acciones</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($researchers as $researcher)
-                                        <tr>
-                                            <td>{{ $researcher->user->name  }}</td>
-                                            <td>{{ $researcher->user->email }}</td>
-                                            <td></td>
-                                            <td class="actions">
-                                            <div class="actions-wrapper">
-                                                <a href="/researchers/edit/{{ $researcher->id }}"> Editar </a>
-                                                <a href="/researchers/detail/{{ $researcher->id }}"> Detail </a>
-                                                <button class="btn" type="button" > Eliminar </button>
-                                            </div>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                        <td colSpan="4">No researchers</td>
-                                        </tr>
-                                    @endforelse
+                    <x-slot name="tbodyData">
+                        @foreach ($researchers as $researcher)
 
-                                </tbody>
-                            </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                            <tr class="bg-white border-4 border-gray-200">
+                                <td>
+                                    <span class="text-center ml-2 font-semibold">{{$researcher->name}}</span>
+                                </td>
+                                <td>
+                                    <span class="text-center ml-2 font-semibold">{{$researcher->email}}</span>
+                                </td>
+                                <td class="py-2 text-left">
+                                    <div class="hidden sm:flex sm:items-center justify-around">
+                                        <x-jet-dropdown align="right" width="48">
+                                            <x-slot name="trigger">
+                                                <button class="flex items-center text-sm font-medium text-gray hover:text-indigo-200 hover:border-gray-300 focus:outline-none focus:text-white focus:border-gray-300 transition duration-150 ease-in-out">
+                                                    <div class="ml-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-4 w-4">
+                                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                            </x-slot>
+                        
+                                            <x-slot name="content">                        
+                                                <x-jet-dropdown-link href="{{ route('researchers.show', $researcher->id) }}">
+                                                    {{ __('Details') }}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="{{ route('researchers.edit', $researcher->id) }}">
+                                                    {{ __('Edit') }}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="{{ route('researchers.destroy', $researcher->id) }}">
+                                                    {{ __('Delete') }}
+                                                </x-jet-dropdown-link>
+                                            </x-slot>
+                                        </x-jet-dropdown>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                    </x-slot>
+                </x-data-table>
             </div>
-
         </div>
-
     </div>
-
-
 </x-app-layout>
-

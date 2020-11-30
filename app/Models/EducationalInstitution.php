@@ -47,4 +47,8 @@ class EducationalInstitution extends Model
     public function members() {
         return $this->belongsToMany('App\Models\User', 'educational_institution_members', 'educational_institution_id', 'user_id');
     }
+
+    public function administrator() {
+        return $this->belongsTo('App\Models\User');
+    }
 }

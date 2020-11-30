@@ -67,8 +67,12 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function role() {
-        return $this->belongsTo('App\Models\Role');
+    public function isNodeAdmin() {
+        return $this->hasOne('App\Models\Node', 'administrator_id');
+    }
+
+    public function isEducationalInstitutionAdmin() {
+        return $this->belongsTo('App\Models\EducationalInstitution');
     }
 
     public function isResearchTeamAdmin() {
@@ -77,6 +81,10 @@ class User extends Authenticatable
 
     public function isResearcher() {
         return $this->hasOne('App\Models\Researcher', 'id');
+    }
+
+    public function role() {
+        return $this->belongsTo('App\Models\Role');
     }
 
     public function userGraduations() {

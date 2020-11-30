@@ -23,7 +23,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Editar información de la institución educativa</x-slot>
+                    <x-slot name="description">Editar la información de la institución educativa</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">

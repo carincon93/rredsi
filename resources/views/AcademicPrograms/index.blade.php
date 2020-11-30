@@ -18,85 +18,69 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg">
-
                 <x-data-table>
+                    <x-slot name="firstTheadTitle">
+                        {{ __('Academic program') }}
+                    </x-slot>
+                    <x-slot name="secondTheadTitle">
+                        {{ __('Educational institution') }}
+                    </x-slot>
+                    <x-slot name="thirdTheadTitle">
+                        {{ __('Code') }}
+                    </x-slot>
+                    <x-slot name="fourthTheadTitle">
+                        {{ __('Academic level') }}
+                    </x-slot>
 
-                        <x-slot name="firstTheadTitle">
-                            {{ __('Academic program') }}
-                        </x-slot>
-                        <x-slot name="secondTheadTitle">
-                            {{ __('Educational institution') }}
-                        </x-slot>
-                        <x-slot name="thirdTheadTitle">
-                            {{ __('Code') }}
-                        </x-slot>
-                        <x-slot name="fourthTheadTitle">
-                            {{ __('Academic level') }}
-                        </x-slot>
+                    <x-slot name="tbodyData">
+                        @foreach ($academicPrograms as $academicProgram)
+                            <tr class="bg-white border-4 border-gray-200">
+                                <td>
+                                    <span class="text-center ml-2 font-semibold">{{ $academicProgram->name }}</span>
+                                </td>
+                                <td>
+                                    <span class="text-center ml-2 font-semibold">{{ $academicProgram->educationalInstitution->name }}</span>
+                                </td>
+                                <td>
+                                    <span class="text-center ml-2 font-semibold">{{ $academicProgram->code }}</span>
+                                </td>
+                                <td>
+                                    <span class="text-center ml-2 font-semibold">{{ $academicProgram->academic_level }}</span>
+                                </td>
+                                <td class="py-2 text-left">
+                                    <div class="hidden sm:flex sm:items-center justify-around">
+                                        <x-jet-dropdown align="right" width="48">
+                                            <x-slot name="trigger">
+                                                <button class="flex items-center text-sm font-medium text-gray hover:text-indigo-200 hover:border-gray-300 focus:outline-none focus:text-white focus:border-gray-300 transition duration-150 ease-in-out">
+                                                    <div class="ml-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-4 w-4">
+                                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                            </x-slot>
 
-                        <x-slot name="tbodyData">
-                            @forelse ($academicPrograms as $academicProgram)
-
-                                <tr class="bg-white border-4 border-gray-200">
-
-                                    <td>
-                                        <span class="text-center ml-2 font-semibold">{{ $academicProgram->name }}</span>
-                                    </td>
-
-                                    <td>
-                                        <span class="text-center ml-2 font-semibold">{{ $academicProgram->educational_institution }}</span>
-                                    </td>
-
-                                    <td>
-                                        <span class="text-center ml-2 font-semibold">{{ $academicProgram->code }}</span>
-                                    </td>
-
-                                    <td>
-                                        <span class="text-center ml-2 font-semibold">{{ $academicProgram->academic_level }}</span>
-                                    </td>
-
-                                    <td class="py-2 text-left">
-                                        <div class="hidden sm:flex sm:items-center justify-around">
-                                            <x-jet-dropdown align="right" width="48">
-                                                <x-slot name="trigger">
-                                                    <button class="flex items-center text-sm font-medium text-gray hover:text-indigo-200 hover:border-gray-300 focus:outline-none focus:text-white focus:border-gray-300 transition duration-150 ease-in-out">
-                                                        <div class="ml-1">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-4 w-4">
-                                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                                                            </svg>
-                                                        </div>
-                                                    </button>
-                                                </x-slot>
-
-                                                <x-slot name="content">
-                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.show', [$node, $educationalInstitution, $academicProgram]) }}">
-                                                        {{ __('Details') }}
-                                                    </x-jet-dropdown-link>
-                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.edit', [$node, $educationalInstitution, $academicProgram]) }}">
-                                                        {{ __('Edit') }}
-                                                    </x-jet-dropdown-link>
-                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.destroy', [$node, $educationalInstitution, $academicProgram]) }}">
-                                                        {{ __('Delete') }}
-                                                    </x-jet-dropdown-link>
-                                                </x-slot>
-                                            </x-jet-dropdown>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <span class="text-center ml-2 font-semibold">No Academic Programs</span>
-                                </tr>
-                            @endforelse
-                        </x-slot>
-                    </x-data-table>
-
+                                            <x-slot name="content">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.show', [$node, $educationalInstitution, $academicProgram]) }}">
+                                                    {{ __('Show') }}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.edit', [$node, $educationalInstitution, $academicProgram]) }}">
+                                                    {{ __('Edit') }}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.destroy', [$node, $educationalInstitution, $academicProgram]) }}">
+                                                    {{ __('Delete') }}
+                                                </x-jet-dropdown-link>
+                                            </x-slot>
+                                        </x-jet-dropdown>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </x-slot>
+                </x-data-table>
             </div>
-
         </div>
-
     </div>
-
 </x-app-layout>
 
 

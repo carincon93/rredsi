@@ -23,7 +23,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añade información</x-slot>
+                    <x-slot name="description">Añade un nodo</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -38,17 +38,16 @@
 
                     <div class="mt-2">
                         <x-jet-label for="administrator_id" value="{{ __('Node') }}" />
-                        <select id="administrator_id" name="administrator_id" class="block mt-1 p-4 w-full" value="{{ old('administrator_id') }}" required >
-                            <option value="">Seleccione un administrado</option>
-                            {{-- @forelse ($nodeAdmins as $nodeAdmin)
-                                <option selected="{{ $nodeAdmin->user->name ==  old('administrator_id')  ? 'selected' : '' }}" value={{$nodeAdmin->user->id}}>  {{$nodeAdmin->user->name}} </option>
+                        <select id="administrator_id" name="administrator_id" class="block mt-1 p-4 w-full" required >
+                            <option value="">Seleccione un administrador de nodo</option>
+                            @forelse ($users as $user)
+                                <option {{ $user->id == old('administrator_id') ? 'selected' : '' }} value={{ $user->id }}>{{ $user->name }}</option>
                             @empty
-                                <option value="">No node admin</option>
-                            @endforelse --}}
+                                <option value="">No users data</option>
+                            @endforelse
                         </select>
                         <x-jet-input-error for="administrator_id" class="mt-2" />
                     </div>
-
 
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EducationalInstitutionRequest;
+use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\ResearchGroup;
-use App\Models\Node;
 
+use App\Http\Requests\EducationalInstitutionRequest;
 use Illuminate\Http\Request;
 
 class EducationalInstitutionController extends Controller

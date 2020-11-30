@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\NodeRequest;
+use App\Models\User;
 use App\Models\Node;
-use App\User;
+
+use App\Http\Requests\NodeRequest;
 use Illuminate\Http\Request;
 
 class NodeController extends Controller
@@ -17,6 +18,7 @@ class NodeController extends Controller
     public function index()
     {
         $nodes = Node::orderBy('state')->get();
+
         return view('Nodes.index', compact('nodes'));
     }
 
@@ -27,7 +29,9 @@ class NodeController extends Controller
      */
     public function create()
     {
-        return view('Nodes.create');
+        $users = User::orderBy('name')->get();
+
+        return view('Nodes.create', compact('users'));
     }
 
     /**
@@ -38,8 +42,8 @@ class NodeController extends Controller
      */
     public function store(NodeRequest $request)
     {
-        $node           = new Node();
-        $node->state    = $request->get('state');
+        $node        = new Node();
+        $node->state = $request->get('state');
         $node->administrator()->associate($request->get('administrator_id'));
 
         if($node->save()){
@@ -68,7 +72,9 @@ class NodeController extends Controller
      */
     public function edit(Node $node)
     {
-        return view('Nodes.edit', compact('node'));
+        $users = User::orderBy('name')->get();
+
+        return view('Nodes.edit', compact('node', 'users'));
     }
 
     /**
@@ -80,7 +86,7 @@ class NodeController extends Controller
      */
     public function update(NodeRequest $request, Node $node)
     {
-        $node->state    = $request->get('state');
+        $node->state = $request->get('state');
         $node->administrator()->associate($request->get('administrator_id'));
 
         if($node->save()){
@@ -103,16 +109,5 @@ class NodeController extends Controller
         }
 
         return redirect()->route('nodes.index')->with('status', $message);
-    }
-
-    /**
-     * Get educational institutions by node.
-     *
-     * @param  \App\Node  $node
-     * @return \Illuminate\Http\Response
-     */
-    public function getEducationalInstitutions(Node $node)
-    {
-        return $node->educationalInstitutions()->get();
     }
 }

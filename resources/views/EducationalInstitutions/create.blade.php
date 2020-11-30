@@ -23,7 +23,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añadir información de la institución educativa</x-slot>
+                    <x-slot name="description">Añadir una institución educativa</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="nit" value="{{ __('Nit') }}" />
+                        <x-jet-label for="nit" value="{{ __('NIT') }}" />
                         <x-jet-input id="nit" class="block mt-1 w-full" type="number" min="" max="" name="nit" value="{{ old('nit') }}" required />
                         <x-jet-input-error for="nit" class="mt-2" />
                     </div>
@@ -62,7 +62,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="website" value="{{ __('Website') }}" />
-                        <x-jet-input id="website" class="block mt-1 w-full" type="text" min="" max="" name="website" value="{{ old('website') }}" required />
+                        <x-jet-input id="website" class="block mt-1 w-full" type="url" min="" max="" name="website" value="{{ old('website') }}" required />
                         <x-jet-input-error for="website" class="mt-2" />
                     </div>
 
