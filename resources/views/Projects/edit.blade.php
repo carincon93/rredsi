@@ -117,7 +117,7 @@
                         <p>{{ __('Authors' ) }} </p>
                         @forelse ($authors as $author)
                             <div class="mt-4">
-                                <input class="form-check-input" type="checkbox" name="user_id[]" {{ old('user_id[]') }} id="{{ "author-$author->id" }}" value="{{ $author->id }}" />
+                                <input class="form-check-input" type="checkbox" name="user_id[]" @if(is_array(old('user_id')) && in_array($author->id, old('user_id'))) checked @elseif($project->authors->pluck('id')->contains($author->id)) checked  @endif id="{{ "author-$author->id" }}" value="{{ $author->id }}" />
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "author-$author->id" }}">{{ $author->name }}</label>
                             </div>
                         @empty
@@ -130,7 +130,7 @@
                         <p>{{ __('Academic programs' ) }} </p>
                         @forelse ($academicPrograms as $academicProgram)
                             <div class="mt-4">
-                                <input class="form-check-input" type="checkbox" name="academic_program_id[]" {{ old('academic_program_id[]') }} id="{{ "academic-program-$academicProgram->id" }}" value="{{ $academicProgram->id }}" />
+                                <input class="form-check-input" type="checkbox" name="academic_program_id[]" @if(is_array(old('academic_program_id')) && in_array($academicProgram->id, old('academic_program_id'))) checked @elseif($project->academicPrograms->pluck('id')->contains($academicProgram->id)) checked  @endif id="{{ "academic-program-$academicProgram->id" }}" value="{{ $academicProgram->id }}" />
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "academic-program-$academicProgram->id" }}">{{ $academicProgram->name }}</label>
                             </div>
                         @empty
@@ -143,7 +143,7 @@
                         <p>{{ __('Knowledge areas' ) }} </p>
                         @forelse ($knowledgeAreas as $knowledgeArea)
                             <div class="mt-4">
-                                <input class="form-check-input" type="checkbox" name="knowledge_area_id[]" {{ old('knowledge_area_id[]') }} id="{{ "knowledge-area-$knowledgeArea->id" }}" value="{{ $knowledgeArea->id }}" />
+                                <input class="form-check-input" type="checkbox" name="knowledge_area_id[]"  @if(is_array(old('knowledge_area_id')) && in_array($knowledgeArea->id, old('knowledge_area_id'))) checked @elseif($project->knowledgeAreas->pluck('id')->contains($knowledgeArea->id)) checked  @endif id="{{ "knowledge-area-$knowledgeArea->id" }}" value="{{ $knowledgeArea->id }}" />
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "knowledge-area-$knowledgeArea->id" }}">{{ $knowledgeArea->name }}</label>
                             </div>
                         @empty
@@ -156,7 +156,7 @@
                         <p>{{ __('Research teams' ) }} </p>
                         @forelse ($researchTeams as $researchTeam)
                             <div class="mt-4">
-                                <input class="form-check-input" type="checkbox" name="research_team_id[]" {{ old('research_team_id[]') }} id="{{ "research-team-$researchTeam->id" }}" value="{{ $researchTeam->id }}" />
+                                <input class="form-check-input" type="checkbox" name="research_team_id[]" @if(is_array(old('research_team_id')) && in_array($researchTeam->id, old('research_team_id'))) checked @elseif($project->researchTeams->pluck('id')->contains($researchTeam->id)) checked  @endif id="{{ "research-team-$researchTeam->id" }}" value="{{ $researchTeam->id }}" />
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-team-$researchTeam->id" }}">{{ $researchTeam->name }}</label>
                             </div>
                         @empty
@@ -169,7 +169,7 @@
                         <p>{{ __('Research lines' ) }} </p>
                         @forelse ($researchLines as $researchLine)
                             <div class="mt-4">
-                                <input class="form-check-input" type="checkbox" name="research_line_id[]" {{ old('research_line_id[]') }} id="{{ "research-line-$researchLine->id" }}" value="{{ $researchLine->id }}" />
+                                <input class="form-check-input" type="checkbox" name="research_line_id[]" @if(is_array(old('user_id')) && in_array($author->id, old('user_id'))) checked @elseif($project->researchLines->pluck('id')->contains($researchLine->id)) checked  @endif id="{{ "research-line-$researchLine->id" }}" value="{{ $researchLine->id }}" />
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-line-$researchLine->id" }}">{{ $researchLine->name }}</label>
                             </div>
                         @empty

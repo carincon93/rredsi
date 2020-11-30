@@ -114,7 +114,7 @@
                     <div class="block mt-4">
                         @foreach ($researchLines as $researchLine)
                             <label for="{{ "research-line-$researchLine->id" }}" class="flex items-center">
-                                <input {{ $researchTeam->researchLines->pluck('id')->contains($researchLine->id) ? "checked" : "" }} id="{{ "research-line-$researchLine->id" }}" value="{{ $researchLine->id }}" type="checkbox" class="form-checkbox" name="research_line_id[]">
+                                <input @if(is_array(old('user_id')) && in_array($researchLine->id, old('user_id'))) checked @elseif($researchTeam->researchLines->pluck('id')->contains($researchLine->id)) checked  @endif id="{{ "research-line-$researchLine->id" }}" value="{{ $researchLine->id }}" type="checkbox" class="form-checkbox" name="research_line_id[]">
                                 <span class="ml-2 text-sm text-gray-600">{{ $researchLine->name }}</span>
                             </label>
                         @endforeach
@@ -125,7 +125,7 @@
                     <div class="block mt-4">
                         @foreach ($knowledgeAreas as $knowledgeArea)
                             <label for="{{ "knowledge-area-$knowledgeArea->id" }}" class="flex items-center">
-                                <input {{ $researchTeam->knowledgeAreas->pluck('id')->contains($knowledgeArea->id) ? "checked" : "" }} id="{{ "knowledge-area-$knowledgeArea->id" }}" value="{{ $knowledgeArea->id }}" type="checkbox" class="form-checkbox" name="knowledge_area_id[]">
+                                <input @if(is_array(old('knowledge_area_id')) && in_array($knowledgeArea->id, old('knowledge_area_id'))) checked @elseif($researchTeam->knowledgeAreas->pluck('id')->contains($knowledgeArea->id)) checked  @endif id="{{ "knowledge-area-$knowledgeArea->id" }}" value="{{ $knowledgeArea->id }}" type="checkbox" class="form-checkbox" name="knowledge_area_id[]">
                                 <span class="ml-2 text-sm text-gray-600">{{ $knowledgeArea->name }}</span>
                             </label>
                         @endforeach
@@ -136,7 +136,7 @@
                     <div class="block mt-4">
                         @foreach ($academicPrograms as $academicProgram)
                             <label for="{{ "academic-program-$academicProgram->id" }}" class="flex items-center">
-                                <input {{ $researchTeam->academicPrograms->pluck('id')->contains($academicProgram->id) ? "checked" : "" }}  id="{{ "academic-program-$academicProgram->id" }}" value="{{ $academicProgram->id }}" type="checkbox" class="form-checkbox" name="academic_program_id[]">
+                                <input @if(is_array(old('academic_program_id')) && in_array($academicProgram->id, old('academic_program_id'))) checked @elseif($researchTeam->academicPrograms->pluck('id')->contains($academicProgram->id)) checked  @endif   id="{{ "academic-program-$academicProgram->id" }}" value="{{ $academicProgram->id }}" type="checkbox" class="form-checkbox" name="academic_program_id[]">
                                 <span class="ml-2 text-sm text-gray-600">{{ $academicProgram->name }}</span>
                             </label>
                         @endforeach
