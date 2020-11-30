@@ -52,8 +52,8 @@
 
                                                 <td class="action">
                                                     <div class="actions-wrapper">
-                                                        <a class="text-indigo-600 hover:text-indigo-900" href={{ route('events.edit',$event->id) }}> Editar </a>
-                                                        <a class="text-indigo-600 hover:text-indigo-900" href={{ route('events.show',$event->id) }}> Detail </a>
+                                                        <a class="text-indigo-600 hover:text-indigo-900" href="{{ route('events.edit',$event->id) }}"> Editar </a>
+                                                        <a class="text-indigo-600 hover:text-indigo-900" href="{{ route('events.show',$event->id) }}"> Detail </a>
 
                                                         <a class="text-red-600 hover:text-red-900" href="#" >Eliminar </a>
                                                     </div>

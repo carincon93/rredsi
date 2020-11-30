@@ -53,7 +53,7 @@
                                         </x-slot>
                                         <x-slot name="content">                        
                                             <x-jet-dropdown-link href="{{ route('knowledge-areas.show', $knowledgeArea->id) }}">
-                                                {{ __('Details') }}
+                                                {{ __('Show') }}
                                             </x-jet-dropdown-link>
                                             <x-jet-dropdown-link href="{{ route('knowledge-areas.edit', $knowledgeArea->id) }}">
                                                 {{ __('Edit') }}

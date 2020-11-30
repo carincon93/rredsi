@@ -60,14 +60,17 @@
                                             </x-slot>
                         
                                             <x-slot name="content">                        
-                                                <x-jet-dropdown-link href="{{ route('user.profile.graduations.show', $userGraduation->id) }}">
-                                                    {{ __('Details') }}
+                                                <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.show', [$userGraduation]) }}">
+                                                    {{ __('Show') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('user.profile.graduations.edit', $userGraduation->id) }}">
+                                                <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.edit', [$userGraduation]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('user.profile.graduations.destroy', $userGraduation->id) }}">
+                                                <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.destroy', [$userGraduation]) }}">
                                                     {{ __('Delete') }}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.user-academic-works.index', [$userGraduation]) }}">
+                                                    {{ __('Manage academic works') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
                                         </x-jet-dropdown>

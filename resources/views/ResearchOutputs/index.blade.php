@@ -31,9 +31,9 @@
                                                 <td>{{ $researchOutput->researchTeam->name }}</td>
                                                 <td class="actions">
                                                     <div class="actions-wrapper">
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.research-outputs.show', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Show </a>
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.research-outputs.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Edit </a>
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.research-outputs.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Delete </a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.show', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Show </a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Edit </a>
+                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Delete </a>
                                                     </div>
                                                 </td>
                                             </tr>

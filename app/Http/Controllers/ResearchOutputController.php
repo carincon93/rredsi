@@ -7,6 +7,7 @@ use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\ResearchGroup;
 use App\Models\ResearchTeam;
+use App\Models\Project;
 use App\Models\ResearchOutput;
 
 use Illuminate\Support\Facades\Storage;
@@ -21,11 +22,11 @@ class ResearchOutputController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
+    public function index(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        $researchOutputs = $researchTeam->researchOutputs()->orderBy('title')->get();
+        $researchOutputs = $project->researchOutputs()->orderBy('title')->get();
 
-        return view('ResearchOutputs.index', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'researchOutputs'));
+        return view('ResearchOutputs.index', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project', 'researchOutputs'));
     }
 
     /**
@@ -33,9 +34,9 @@ class ResearchOutputController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
+    public function create(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        return view('ResearchOutputs.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam'));
+        return view('ResearchOutputs.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project'));
     }
 
     /**
@@ -74,10 +75,10 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function show(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, ResearchOutput $researchOutput)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project, ResearchOutput $researchOutput)
     {
 
-        return view('ResearchOutputs.show', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'researchOutput'));
+        return view('ResearchOutputs.show', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project', 'researchOutput'));
     }
 
     /**
@@ -86,9 +87,9 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, ResearchOutput $researchOutput)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project, ResearchOutput $researchOutput)
     {
-        return view('ResearchOutputs.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'researchOutput'));
+        return view('ResearchOutputs.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project', 'researchOutput'));
     }
 
     /**
@@ -98,7 +99,7 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function update(ResearchOutputRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, ResearchOutput $researchOutput)
+    public function update(ResearchOutputRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project, ResearchOutput $researchOutput)
     {
         $researchOutput->title          = $request->get('title');
         $researchOutput->typology       = $request->get('typology');
@@ -125,7 +126,7 @@ class ResearchOutputController extends Controller
      * @param  \App\ResearchOutput  $researchOutput
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, ResearchOutput $researchOutput)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project, ResearchOutput $researchOutput)
     {
         if($researchOutput->delete()){
             $message = 'Your delete processed correctly';

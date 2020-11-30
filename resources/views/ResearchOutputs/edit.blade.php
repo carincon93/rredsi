@@ -102,7 +102,7 @@
                         <select id="administrator_id" name="administrator_id" class="block mt-1 p-4 w-full" value="{{ old('administrator_id') }}" required >
                             <option value="">Seleccione un administrador de semillero</option>
                             @forelse ($educationalInstitutionMembers as $educationalInstitutionMember)
-                                <option {{ old('administrator_id') == $educationalInstitutionMember->id || $educationalInstitutionMember->id == $researchTeam->administrator->id ? "selected" : "" }} value={{$educationalInstitutionMember->id}}>  {{$educationalInstitutionMember->name}} </option>
+                                <option {{ old('administrator_id') == $educationalInstitutionMember->id || $educationalInstitutionMember->id == $researchTeam->administrator->id ? "selected" : "" }} value="{{ $educationalInstitutionMember->id }}">{{ $educationalInstitutionMember->name }}</option>
                             @empty
                                 <option value="">No users data</option>
                             @endforelse

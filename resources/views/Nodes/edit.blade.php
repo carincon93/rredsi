@@ -42,7 +42,7 @@
                         <select id="administrator_id" name="administrator_id" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione un administrador de nodo</option>
                             @forelse ($users as $user)
-                                <option {{ $user->id == old('administrator_id') || $user->id == $node->administrator->id ? 'selected' : '' }} value={{ $user->id }}>{{ $user->name }}</option>
+                                <option {{ $user->id == old('administrator_id') || $user->id == $node->administrator->id ? 'selected' : '' }} value="{{ $user->id }}">{{ $user->name }}</option>
                             @empty
                                 <option value="">No users data</option>
                             @endforelse

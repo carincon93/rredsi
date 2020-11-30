@@ -31,6 +31,6 @@ class UserGraduation extends Model
     }
 
     public function userAcademicWork() {
-        return $this->hasOne('App\Models\UserAcademicWork');
+        return $this->hasOne('App\Models\UserAcademicWork', 'graduation_id');
     }
 }

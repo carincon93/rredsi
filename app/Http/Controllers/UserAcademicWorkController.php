@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserAcademicWorkRequest;
-use App\Models\UserAcademicWork;
 use App\Models\KnowledgeArea;
 use App\Models\UserGraduation;
-use App\Models\ResearchGroup;
+use App\Models\UserAcademicWork;
+
+use App\Http\Requests\UserAcademicWorkRequest;
 use Illuminate\Http\Request;
 
 class UserAcademicWorkController extends Controller
@@ -16,10 +16,11 @@ class UserAcademicWorkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserGraduation $userGraduation)
     {
-        $userAcademicWorks = UserAcademicWork::orderBy('title')->get();
-        return view('AcademicWorks.index', compact('academicWorks'));
+        $userAcademicWork = $userGraduation->userAcademicWork()->orderBy('title')->first();
+
+        return view('AcademicWorks.index', compact('userGraduation', 'userAcademicWork'));
     }
 
     /**
@@ -27,12 +28,11 @@ class UserAcademicWorkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UserGraduation $userGraduation)
     {
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
-        $graduations    = UserGraduation::orderBy('user_id')->get();
-        $researchGroups = ResearchGroup::orderBy('name')->get();
-        return view('AcademicWorks.create', compact('knowledgeAreas','graduations','researchGroups'));
+
+        return view('AcademicWorks.create', compact('userGraduation', 'knowledgeAreas'));
     }
 
     /**
@@ -41,7 +41,7 @@ class UserAcademicWorkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserAcademicWorkRequest $request)
+    public function store(UserAcademicWorkRequest $request, UserGraduation $userGraduation)
     {
         $userAcademicWork = new UserAcademicWork();
         $userAcademicWork->title                    = $request->get('title');
@@ -49,15 +49,14 @@ class UserAcademicWorkController extends Controller
         $userAcademicWork->authors                  = $request->get('authors');
         $userAcademicWork->grade                    = $request->get('grade');
         $userAcademicWork->mentors                  = $request->get('mentors');
-        $userAcademicWork->researchGroup()->associate($request->get('research_group_id'));
         $userAcademicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
-        $userAcademicWork->graduation()->associate($request->get('graduation_id'));
+        $userAcademicWork->userGraduation()->associate($userGraduation);
 
         if($userAcademicWork->save()){
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('academic-works.index')->with('status', $message);
+        return redirect()->route('user.profile.user-graduations.user-academic-works.index', [$userGraduation])->with('status', $message);
     }
 
     /**
@@ -66,9 +65,9 @@ class UserAcademicWorkController extends Controller
      * @param  \App\UserAcademicWork  $userAcademicWork
      * @return \Illuminate\Http\Response
      */
-    public function show(UserAcademicWork $userAcademicWork)
+    public function show(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
-        return view('AcademicWorks.show', compact('academicWork'));
+        return view('AcademicWorks.show', compact('userGraduation', 'userAcademicWork'));
     }
 
     /**
@@ -77,9 +76,11 @@ class UserAcademicWorkController extends Controller
      * @param  \App\UserAcademicWork  $userAcademicWork
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserAcademicWork $userAcademicWork)
+    public function edit(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
-        return view('AcademicWorks.edit', compact('academicWork'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        return view('AcademicWorks.edit', compact('userGraduation', 'userAcademicWork', 'knowledgeAreas'));
     }
 
     /**
@@ -89,22 +90,21 @@ class UserAcademicWorkController extends Controller
      * @param  \App\UserAcademicWork  $userAcademicWork
      * @return \Illuminate\Http\Response
      */
-    public function update(UserAcademicWorkRequest $request, UserAcademicWork $userAcademicWork)
+    public function update(UserAcademicWorkRequest $request, UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
         $userAcademicWork->title                    = $request->get('title');
         $userAcademicWork->type                     = $request->get('type');
         $userAcademicWork->authors                  = $request->get('authors');
         $userAcademicWork->grade                    = $request->get('grade');
         $userAcademicWork->mentors                  = $request->get('mentors');
-        $userAcademicWork->researchGroup()->associate($request->get('research_group_id'));
         $userAcademicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
-        $userAcademicWork->graduation()->associate($request->get('graduation_id'));
+        $userAcademicWork->userGraduation()->associate($userGraduation);
 
         if($userAcademicWork->save()){
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('academic-works.index')->with('status', $message);
+        return redirect()->route('user.profile.user-graduations.user-academic-works.index', [$userGraduation])->with('status', $message);
     }
 
     /**
@@ -113,12 +113,12 @@ class UserAcademicWorkController extends Controller
      * @param  \App\UserAcademicWork  $userAcademicWork
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserAcademicWork $userAcademicWork)
+    public function destroy(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
         if($userAcademicWork->delete()) {
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('academic-works.index')->with('status', $message);
+        return redirect()->route('user.profile.user-graduations.user-academic-works.index', [$userGraduation])->with('status', $message);
     }
 }

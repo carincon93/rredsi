@@ -98,10 +98,10 @@
 
                     <div class="mt-2">
                         <x-jet-label for="research_group_id" value="{{ __('Research group') }}" />
-                        <select id="research_group_id" name="research_group_id" class="block mt-1 p-4 w-full" value="{{ $user->research_group_id }}" required >
+                        <select id="research_group_id" name="research_group_id" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione un grupo de investigación</option>
                             @forelse ($researchGroups as $researchGroup)
-                                <option {{ $user->research_group_id == $researchGroup->id ? "selected" : "" }} value={{$researchGroup->id}}>  {{$researchGroup->name}} </option>
+                                <option {{ $user->research_group_id == $researchGroup->id ? "selected" : "" }} value="{{ $researchGroup->id }}">{{ $researchGroup->name }}</option>
                             @empty
                                 <option value="">No research group</option>
                             @endforelse
@@ -109,18 +109,16 @@
                         <x-jet-input-error for="research_group_id" class="mt-2" />
                     </div>
 
-
                     <p class="mt-4">{{ __('Research team' ) }} </p>
                     @forelse ($researchTeams as $researchTeam)
-                    <div class="mt-4">
-                        <input class="form-check-input" type="checkbox" name="research_team_id[]" checked={{$researchTeamsResearcher->includes($researchTeam->id) ? true : false }} id={{$researchTeam->name}} value={{$researchTeam->id}} />
-                        <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ $researchTeam->name }}">{{ $researchTeam->name }}</label>
-                        <x-jet-input-error for="research_team_id" class="mt-2" />
-                    </div>
+                        <div class="mt-4">
+                            <input class="form-check-input" type="checkbox" name="research_team_id[]" checked="{{ $researchTeamsResearcher->includes($researchTeam->id) ? true : false }}" id="{{ $researchTeam->name }}" value="{{ $researchTeam->id }} />
+                            <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ $researchTeam->name }}">{{ $researchTeam->name }}</label>
+                            <x-jet-input-error for="research_team_id" class="mt-2" />
+                        </div>
                     @empty
                         <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No research teams' ) }} </p>
                     @endforelse
-
 
                     <p class="mt-4">{{ __('Is external?' ) }} </p>
                     <div class="mt-4">
@@ -134,7 +132,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="cvlac" value="{{ __('Cvlac ') }}" />
+                        <x-jet-label for="cvlac" value="{{ __('cvLac ') }}" />
                         <x-jet-input id="cvlac" class="block mt-1 w-full" type="url" min="" max="" name="cvlac" value="{{$researcher->cvlac}}" required />
                         <x-jet-input-error for="cvlac" class="mt-2" />
                     </div>
@@ -150,17 +148,13 @@
                         <x-jet-input-error for="is_accepted" class="mt-2" />
                     </div>
 
-
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
-                            {{ __('Create') }}
+                            {{ __('Edit') }}
                         </x-jet-button>
                     </div>
-
                 </form>
             </div>
-
         </div>
     </div>
-
 </x-app-layout>

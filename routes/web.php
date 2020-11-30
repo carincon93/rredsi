@@ -43,27 +43,27 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
 
-    Route::resource('/user/profile/graduations', UserGraduationController::class, [
+    Route::resource('/user/profile/user-graduations', UserGraduationController::class, [
         'names' => [
-            'index'     => 'user.profile.graduations.index',
-            'show'      => 'user.profile.graduations.show',
-            'create'    => 'user.profile.graduations.create',
-            'edit'      => 'user.profile.graduations.edit',
-            'store'     => 'user.profile.graduations.store',
-            'update'    => 'user.profile.graduations.update',
-            'destroy'   => 'user.profile.graduations.destroy',
+            'index'     => 'user.profile.user-graduations.index',
+            'show'      => 'user.profile.user-graduations.show',
+            'create'    => 'user.profile.user-graduations.create',
+            'edit'      => 'user.profile.user-graduations.edit',
+            'store'     => 'user.profile.user-graduations.store',
+            'update'    => 'user.profile.user-graduations.update',
+            'destroy'   => 'user.profile.user-graduations.destroy',
         ]
     ]);
 
-    Route::resource('/user/profile/graduations/academic-works', UserAcademicWorkController::class, [
+    Route::resource('/user/profile/user-graduations/{user_graduation}/user-academic-works', UserAcademicWorkController::class, [
         'names' => [
-            'index'     => 'user.profile.academic-works.index',
-            'show'      => 'user.profile.academic-works.show',
-            'create'    => 'user.profile.academic-works.create',
-            'edit'      => 'user.profile.academic-works.edit',
-            'store'     => 'user.profile.academic-works.store',
-            'update'    => 'user.profile.academic-works.update',
-            'destroy'   => 'user.profile.academic-works.destroy',
+            'index'     => 'user.profile.user-graduations.user-academic-works.index',
+            'show'      => 'user.profile.user-graduations.user-academic-works.show',
+            'create'    => 'user.profile.user-graduations.user-academic-works.create',
+            'edit'      => 'user.profile.user-graduations.user-academic-works.edit',
+            'store'     => 'user.profile.user-graduations.user-academic-works.store',
+            'update'    => 'user.profile.user-graduations.user-academic-works.update',
+            'destroy'   => 'user.profile.user-graduations.user-academic-works.destroy',
         ]
     ]);
 

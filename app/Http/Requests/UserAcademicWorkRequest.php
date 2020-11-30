@@ -29,9 +29,7 @@ class UserAcademicWorkRequest extends FormRequest
             'authors'                   => 'required|json',
             'grade'                     => 'required|between:0,99.99|max:9999999999',
             'mentors'                   => 'required|json',
-            'research_group_id'         => 'required|integer|min:0|max:9999999999|exists:research_groups,id',
             'knowledge_area_id'         => 'required|integer|min:0|max:9999999999|exists:knowledge_areas,id',
-            'graduation_id'             => 'required|integer|min:0|max:9999999999|exists:graduations,id',
         ];
     }
 
@@ -42,52 +40,15 @@ class UserAcademicWorkRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        #Use IF statement only if the input is required
-        if($this->title != null) {
-            $this->merge([
-                'title' => filter_var($this->title, FILTER_SANITIZE_STRING),
-            ]);
-        }
-
-        if($this->type != null) {
-            $this->merge([
-                'type' => filter_var($this->type, FILTER_SANITIZE_STRING),
-            ]);
-        }
-
-        if($this->authors != null) {
+        if ($this->authors != null) {
             $this->merge([
                 'authors' => json_encode(explode(',', $this->authors, true)),
             ]);
         }
 
-        if($this->grade != null) {
-            $this->merge([
-                'grade' => (float) $this->grade,
-            ]);
-        }
-
-        if($this->mentors != null) {
+        if ($this->mentors != null) {
             $this->merge([
                 'mentors' => json_encode(explode(',', $this->mentors, true)),
-            ]);
-        }
-
-        if($this->research_group_id != null) {
-            $this->merge([
-                'research_group_id' => (integer) filter_var($this->research_group_id, FILTER_SANITIZE_NUMBER_INT),
-            ]);
-        }
-
-        if($this->knowledge_area_id != null) {
-            $this->merge([
-                'knowledge_area_id' => (integer) filter_var($this->knowledge_area_id, FILTER_SANITIZE_NUMBER_INT),
-            ]);
-        }
-
-        if($this->graduation_id != null) {
-            $this->merge([
-                'graduation_id' => (integer) filter_var($this->graduation_id, FILTER_SANITIZE_NUMBER_INT),
             ]);
         }
     }

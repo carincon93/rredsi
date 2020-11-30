@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectType extends Model
 {
     use HasFactory;
-
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'type',
+    ];
 
     public function project() {
         return $this->hasMany('App\Models\Project');

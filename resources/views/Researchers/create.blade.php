@@ -94,19 +94,17 @@
 
                         <x-jet-input-error for="is_enabled" class="mt-2" />
                     </div>
-
-
+                    
                     <p class="mt-4">{{ __('Research team' ) }} </p>
                     @forelse ($researchTeams as $researchTeam)
-                    <div class="mt-4">
-                        <input class="form-check-input" type="checkbox" name="research_team_id[]" {{ old('research_team_id[]')}} id={{$researchTeam->name}} value={{$researchTeam->id}} />
-                        <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ $researchTeam->name }}">{{ $researchTeam->name }}</label>
-                        <x-jet-input-error for="research_team_id" class="mt-2" />
-                    </div>
+                        <div class="mt-4">
+                            <input class="form-check-input" type="checkbox" name="research_team_id[]" {{ old('research_team_id[]')}} id="{{ $researchTeam->name }}" value="{{ $researchTeam->id }}" />
+                            <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ $researchTeam->name }}">{{ $researchTeam->name }}</label>
+                            <x-jet-input-error for="research_team_id" class="mt-2" />
+                        </div>
                     @empty
-                        <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No research teams data' ) }} </p>
+                        <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No research teams data' ) }}</p>
                     @endforelse
-
 
                     <p class="mt-4">{{ __('Is external?' ) }} </p>
                     <div class="mt-4">
@@ -120,7 +118,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="cvlac" value="{{ __('Cvlac ') }}" />
+                        <x-jet-label for="cvlac" value="{{ __('cvLac ') }}" />
                         <x-jet-input id="cvlac" class="block mt-1 w-full" type="url" min="" max="" name="cvlac" value="{{ old('cvlac') }}" required />
                         <x-jet-input-error for="cvlac" class="mt-2" />
                     </div>

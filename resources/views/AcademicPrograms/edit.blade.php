@@ -28,7 +28,7 @@
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
 
-                <form method="POST" action="{{ route('nodes.educational-institutions.academic-programs.update', [$node, $educationalInstitution, $academicProgram]) }}" novalidate>
+                <form method="POST" action="{{ route('nodes.educational-institutions.academic-programs.update', [$node, $educationalInstitution, $academicProgram]) }}">
                     @csrf
                     @method('PUT')
 

@@ -47,7 +47,7 @@
                         
                                             <x-slot name="content">                        
                                                 <x-jet-dropdown-link href="{{ route('roles.show', $role->id) }}">
-                                                    {{ __('Details') }}
+                                                    {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('roles.edit', $role->id) }}">
                                                     {{ __('Edit') }}

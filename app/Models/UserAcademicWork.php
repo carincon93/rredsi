@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserAcademicWork extends Model
 {
+    protected $table = 'academic_works';
+
     use HasFactory;
     /**
      * The attributes that are mass assignable.
@@ -19,20 +21,16 @@ class UserAcademicWork extends Model
         'authors',
         'grade',
         'mentors',
-        'research_group_id',
+        'research_group_name',
         'knowledge_area_id',
         'graduation_id',
     ];
-
-    public function researchGroup() {
-        return $this->belongsTo('App\Models\ResearchGroup');
-    }
 
     public function knowledgeArea() {
         return $this->belongsTo('App\Models\KnowledgeArea');
     }
 
     public function userGraduation() {
-        return $this->belongsTo('App\Models\UserGraduation');
+        return $this->belongsTo('App\Models\UserGraduation', 'graduation_id');
     }
 }

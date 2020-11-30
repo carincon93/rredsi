@@ -18,7 +18,6 @@ class Project extends Model
         'title',
         'start_date',
         'end_date',
-        'type',
         'abstract',
         'keywords',
         'file',

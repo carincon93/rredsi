@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProjectType;
+Use App\Models\KnowledgeArea;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\ResearchGroup;
@@ -34,7 +36,14 @@ class ProjectController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam'));
+        $projectTypes       = ProjectType::orderBy('type')->get();
+        $researchTeams      = $researchGroup->researchTeams()->get();
+        $researchLines      = $researchGroup->researchLines()->get();
+        $knowledgeAreas     = KnowledgeArea::orderBy('name')->get();
+        $academicPrograms   = $educationalInstitution->academicPrograms()->orderBy('name')->get();
+        $authors            = $educationalInstitution->members()->orderBy('name')->get();
+
+        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeAreas', 'academicPrograms', 'authors'));
     }
 
     /**
@@ -49,7 +58,6 @@ class ProjectController extends Controller
         $project->title             = $request->get('title');
         $project->start_date        = $request->get('start_date');
         $project->end_date          = $request->get('end_date');
-        $project->type              = $request->get('type');
         $project->abstract          = $request->get('abstract');
         $project->keywords          = $request->get('keywords');
         if ($request->hasFile('file')) {
@@ -64,6 +72,7 @@ class ProjectController extends Controller
         $project->overall_objective = $request->get('overall_objective');
         $project->is_privated       = $request->get('is_privated');
         $project->is_published      = $request->get('is_published');
+        $project->projectType()->associate($request->get('project_type_id'));
 
         if($project->save()){
             $message = 'Your store processed correctly';
@@ -98,7 +107,14 @@ class ProjectController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        return view('Projects.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project'));
+        $projectTypes       = ProjectType::orderBy('type')->get();
+        $researchTeams      = $researchGroup->researchTeams()->get();
+        $researchLines      = $researchGroup->researchLines()->get();
+        $knowledgeAreas     = KnowledgeArea::orderBy('name')->get();
+        $academicPrograms   = $educationalInstitution->academicPrograms()->orderBy('name')->get();
+        $authors            = $educationalInstitution->members()->orderBy('name')->get();
+
+        return view('Projects.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeAreas', 'academicPrograms', 'authors'));
     }
 
     /**
@@ -113,7 +129,6 @@ class ProjectController extends Controller
         $project->title             = $request->get('title');
         $project->start_date        = $request->get('start_date');
         $project->end_date          = $request->get('end_date');
-        $project->type              = $request->get('type');
         $project->abstract          = $request->get('abstract');
         $project->keywords          = $request->get('keywords');
         if ($request->hasFile('file')) {
@@ -126,20 +141,16 @@ class ProjectController extends Controller
         $project->overall_objective = $request->get('overall_objective');
         $project->is_privated       = $request->get('is_privated');
         $project->is_published      = $request->get('is_published');
+        $project->projectType()->associate($request->get('project_type_id'));
 
         if($project->save()){
             $message = 'Your update processed correctly';
         }
 
-        $project->researchTeams()->wherePivot('project_id', '=', $project->id)->detach();
         $project->researchTeams()->attach($request->get('research_team_id'), ['is_principal' => false]);
-        $project->researchLines()->wherePivot('project_id', '=', $project->id)->detach();
         $project->researchLines()->attach($request->get('research_line_id'));
-        $project->knowledgeAreas()->wherePivot('project_id', '=', $project->id)->detach();
         $project->knowledgeAreas()->attach($request->get('knowledge_area_id'));
-        $project->academicPrograms()->wherePivot('project_id', '=', $project->id)->detach();
         $project->academicPrograms()->attach($request->get('academic_program_id'));
-        $project->authors()->wherePivot('project_id', '=', $project->id)->detach();
         $project->authors()->attach($request->get('user_id'));
 
         return redirect()->route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);

@@ -65,9 +65,9 @@
                         <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" value="{{ old('knowledge_area_id') }}" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
-                                <option {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" }} value={{ $knowledgeArea->id }}>  {{ $knowledgeArea->name }} </option>
+                                <option {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" }} value="{{ $knowledgeArea->id }}">{{ $knowledgeArea->name }}</option>
                             @empty
-                                <option value="">No knowledge areas <datalist></datalist></option>
+                                <option value="">No knowledge areas data</option>
                             @endforelse
                         </select>
                         <x-jet-input-error for="knowledge_area_id" class="mt-2" />
@@ -78,10 +78,8 @@
                             {{ __('Create') }}
                         </x-jet-button>
                     </div>
-
                 </form>
             </div>
-
         </div>
     </div>
 </x-app-layout>

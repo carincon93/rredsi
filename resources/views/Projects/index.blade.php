@@ -66,7 +66,7 @@
 
                                             <x-slot name="content">
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.show', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
-                                                    {{ __('Details') }}
+                                                    {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
                                                     {{ __('Edit') }}

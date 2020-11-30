@@ -23,7 +23,7 @@ class ResearchGroupRequest extends FormRequest
      */
     public function rules()
     {
-            if ($this->isMethod('PUT')){
+        if ($this->isMethod('PUT')){
             return [
                 'name'                      => 'required|string|max:191',
                 'email'                     => 'required|email|unique:research_groups,email,'.$this->route('research_group')->id.',id|max:191',
