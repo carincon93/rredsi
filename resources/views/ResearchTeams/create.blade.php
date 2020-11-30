@@ -27,30 +27,30 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('nodes.educational-institutions.research-groups.research-teams.store', [$node, $educationalInstitution, $researchGroup]) }}">
+                <form method="POST" action="{{ route('nodes.educational-institutions.research-groups.research-teams.store', [$node, $educationalInstitution, $researchGroup]) }}" novalidate>
                     @csrf
 
                     <div>
                         <x-jet-label for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ old('name') }}" required />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text"  max="191" name="name" value="{{ old('name') }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="mentor_name" value="{{ __('Mentor name') }}" />
-                        <x-jet-input id="mentor_name" class="block mt-1 w-full" type="text" min="" max="" name="mentor_name" value="{{ old('mentor_name') }}" required />
+                        <x-jet-input id="mentor_name" class="block mt-1 w-full" type="text" max="191" name="mentor_name" value="{{ old('mentor_name') }}" required />
                         <x-jet-input-error for="mentor_name" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="mentor_email" value="{{ __('Mentor email') }}" />
-                        <x-jet-input id="mentor_email" class="block mt-1 w-full" type="email" min="" max="" name="mentor_email" value="{{ old('mentor_email') }}" required />
+                        <x-jet-input id="mentor_email" class="block mt-1 w-full" type="email" max="191" name="mentor_email" value="{{ old('mentor_email') }}" required />
                         <x-jet-input-error for="mentor_email" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="mentor_cellphone" value="{{ __('Mentor cellphone') }}" />
-                        <x-jet-input id="mentor_cellphone" class="block mt-1 w-full" type="number" min="" max="" name="mentor_cellphone" value="{{ old('mentor_cellphone') }}" required />
+                        <x-jet-input id="mentor_cellphone" class="block mt-1 w-full" type="number" min="0" maxlength="9999999999" name="mentor_cellphone" value="{{ old('mentor_cellphone') }}" required />
                         <x-jet-input-error for="mentor_cellphone" class="mt-2" />
                     </div>
 
@@ -124,7 +124,7 @@
                     <div class="block mt-4">
                         @foreach ($knowledgeAreas as $knowledgeArea)
                             <label for="{{ "knowledge-area-$knowledgeArea->id" }}" class="flex items-center">
-                                <input id="{{ "knowledge-area-$knowledgeArea->id" }}" value="{{ $knowledgeArea->id }}" type="checkbox" class="form-checkbox" name="knowledge_area_id[]">
+                                <input  id="{{ "knowledge-area-$knowledgeArea->id" }}" value="{{ $knowledgeArea->id }}" type="checkbox" class="form-checkbox" name="knowledge_area_id[]">
                                 <span class="ml-2 text-sm text-gray-600">{{ $knowledgeArea->name }}</span>
                             </label>
                         @endforeach

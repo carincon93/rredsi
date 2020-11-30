@@ -33,40 +33,40 @@
 
                     <div>
                         <x-jet-label for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ $researchLine->name }}" required />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') ?? $researchLine->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="objectives" value="{{ __('Objectives') }}" />
-                        <textarea id="objectives" name="objectives" class="block mt-1 p-4 w-full" value="{{ $researchLine->objectives }}" required >{{ $researchLine->objectives }}</textarea>
+                        <textarea id="objectives" name="objectives" class="block mt-1 p-4 w-full" value="{{old('objectives') ?? $researchLine->objectives }}" required >{{ old('objectives') ?? $researchLine->objectives }}</textarea>
                         <x-jet-input-error for="objectives" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="mission" value="{{ __('Mission') }}" />
-                        <textarea id="mission" name="mission" class="block mt-1 p-4 w-full" value="{{ $researchLine->mission }}" required >{{ $researchLine->mission }}</textarea>
+                        <textarea id="mission" name="mission" class="block mt-1 p-4 w-full" value="{{ old('mission') ?? $researchLine->mission }}" required >{{ old('mission') ?? $researchLine->mission }}</textarea>
                         <x-jet-input-error for="mission" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="vision" value="{{ __('Vision') }}" />
-                        <textarea id="vision" name="vision" class="block mt-1 p-4 w-full" value="{{ $researchLine->vision }}" required >{{ $researchLine->vision }}</textarea>
+                        <textarea id="vision" name="vision" class="block mt-1 p-4 w-full" value="{{ old('vision') ??  $researchLine->vision }}" required >{{ old('vision') ?? $researchLine->vision }}</textarea>
                         <x-jet-input-error for="vision" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="achievements" value="{{ __('Achievements') }}" />
-                        <textarea id="achievements" name="achievements" class="block mt-1 p-4 w-full" value="{{ $researchLine->achievements }}" required >{{ $researchLine->achievements }}</textarea>
+                        <textarea id="achievements" name="achievements" class="block mt-1 p-4 w-full" value="{{ old('achievements') ?? $researchLine->achievements }}" required >{{ old('achievements') ?? $researchLine->achievements }}</textarea>
                         <x-jet-input-error for="achievements" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
-                        <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" value="{{ $researchLine->knowledge_area_id }}" required >
+                        <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
-                                <option {{ $researchLine->knowledge_area_id == $knowledgeArea->id ? "selected" : "" }} value={{$knowledgeArea->id}}>  {{$knowledgeArea->name}} </option>
+                                <option {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" || $researchLine->knowledge_area_id == $knowledgeArea->id ? "selected" : "" }} value={{ $knowledgeArea->id }}>{{ $knowledgeArea->name }}</option>
                             @empty
                                 <option value="">No knowledge areas data</option>
                             @endforelse
@@ -82,7 +82,6 @@
 
                 </form>
             </div>
-
         </div>
     </div>
 </x-app-layout>
