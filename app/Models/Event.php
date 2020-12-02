@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -22,6 +23,8 @@ class Event extends Model
         'link',
     ];
 
+    protected $appends = ['datesForHumans'];
+
     public function projects() {
         return $this->belongsToMany('App\Models\Project', 'event_project', 'event_id', 'project_id');
     }
@@ -32,5 +35,12 @@ class Event extends Model
 
     public function nodeEvent() {
         return $this->hasOne('App\Models\NodeEvent', 'id');
+    }
+
+    public function getDatesForHumansAttribute() 
+    {
+        $start_date = Carbon::parse($this->start_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+        $end_date   = Carbon::parse($this->end_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+        return "Del $start_date al $end_date";
     }
 }

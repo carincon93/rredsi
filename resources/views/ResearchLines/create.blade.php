@@ -62,7 +62,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
-                        <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" value="{{ old('knowledge_area_id') }}" required >
+                        <select id="knowledge_area_id" name="knowledge_area_id" class="form-select w-full" value="{{ old('knowledge_area_id') }}" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
                                 <option {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" }} value="{{ $knowledgeArea->id }}">{{ $knowledgeArea->name }}</option>

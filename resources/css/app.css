@@ -2,6 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+
 /* Gradients */
 .to-color-1 {
     --gradient-to-color: #5850ec;

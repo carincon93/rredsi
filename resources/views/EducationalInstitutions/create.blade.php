@@ -44,6 +44,17 @@
 
                     <div class="mt-4">
                         <x-jet-label for="city" value="{{ __('City') }}" />
+                        <select id="city" name="city" class="form-select w-full" required >
+                            <option value="">Seleccione una ciudad</option>
+                            @foreach ($cities as $city)
+                                <option value="{{ $city['name'] }}" {{ old('city') == $city['name'] ? "selected" : "" }}>{{ $city['name'] }}</option>
+                            @endforeach
+                        </select>
+                        <x-jet-input-error for="city" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="city" value="{{ __('City') }}" />
                         <x-jet-input id="city" class="block mt-1 w-full" type="text" min="" max="" name="city" value="{{ old('city') }}" required />
                         <x-jet-input-error for="city" class="mt-2" />
                     </div>

@@ -1,6 +1,6 @@
 <div class="mt-4">
     <x-jet-label for="node_id" value="{{ __('Node') }}" />
-    <select class="form-input rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="node_id" name="node_id" required onchange="AcademicProgramsFilter.onChangeNodeSelect(event)">
+    <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="node_id" name="node_id" required onchange="AcademicProgramsFilter.onChangeNodeSelect(event)">
         <option value="">Seleccione un nodo</option>
         @foreach ($nodes as $node)
             <option value="{{ $node->id }}" {{ old('node_id') == $node->id || optional(optional(optional($academicProgram)->educationalInstitution)->node)->id == $node->id ? 'selected' : '' }}>{{ $node->state }}</option>
@@ -15,7 +15,7 @@
         </svg>
         <x-jet-label for="educational_institution_id" value="{{ __('Educational institution') }}" />
     </div>
-    <select class="form-input rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="educational_institution_id" name="educational_institution_id" required onchange="AcademicProgramsFilter.onChangeEducationalInstitutionSelect(event)">
+    <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="educational_institution_id" name="educational_institution_id" required onchange="AcademicProgramsFilter.onChangeEducationalInstitutionSelect(event)">
         <option value="">Seleccione una institución educativa</option>
     </select>
 </div>
@@ -27,7 +27,7 @@
         </svg>
         <x-jet-label for="academic_program_id" value="{{ __('Academic program') }}" />
     </div>
-    <select class="form-input rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="academic_program_id" name="academic_program_id" required>
+    <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="academic_program_id" name="academic_program_id" required>
         <option value="">Seleccione un programa de formación</option>
     </select>
     <x-jet-input-error for="academic_program_id" class="mt-2" />

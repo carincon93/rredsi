@@ -34,7 +34,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="project_type_id" value="{{ __('Project type') }}" />
-                        <select id="project_type_id" name="project_type_id" class="block mt-1 p-4 w-full" required >
+                        <select id="project_type_id" name="project_type_id" class="form-select w-full" required >
                             <option value="">Seleccione un tipo de proyecto</option>
                             @forelse ($projectTypes as $projectType)
                                 <option value="{{ $projectType->id }}" {{ old('project_type_id') == $projectType->id || $project->projectType->id == $projectType->id ? "selected" : "" }}>{{ $projectType->type }}</option>

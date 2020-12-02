@@ -17,7 +17,7 @@ class EducationalInstitutionEvent extends Model
         'educational_institution_id',
     ];
 
-    public function isEvent() {
+    public function event() {
         return $this->belongsTo('App\Models\Event', 'id');
     }
 

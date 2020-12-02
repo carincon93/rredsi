@@ -19,7 +19,7 @@ class ResearchLine extends Model
         'mission',
         'vision',
         'achievements',
-        'knowledge_area_id',
+        'knowledge_subarea_discipline_id',
         'research_group_id',
     ];
 

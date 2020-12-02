@@ -9,6 +9,8 @@ use App\Models\ResearchGroup;
 use App\Http\Requests\EducationalInstitutionRequest;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
 class EducationalInstitutionController extends Controller
 {
     /**
@@ -30,7 +32,9 @@ class EducationalInstitutionController extends Controller
      */
     public function create(Node $node)
     {
-        return view('EducationalInstitutions.create', compact('node'));
+        $cities = json_decode(Storage::get('public/json/caldas_cities.json'), true);
+
+        return view('EducationalInstitutions.create', compact('node', 'cities'));
     }
 
     /**
@@ -76,7 +80,9 @@ class EducationalInstitutionController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution)
     {
-        return view('EducationalInstitutions.show', compact('node', 'educationalInstitution'));
+        $cities = json_decode(Storage::get('public/json/caldas_cities.json'), true);
+
+        return view('EducationalInstitutions.edit', compact('node', 'educationalInstitution', 'cities'));
     }
 
     /**
@@ -126,5 +132,23 @@ class EducationalInstitutionController extends Controller
     public function dashboard(Node $node, EducationalInstitution $educationalInstitution)
     {
         return view('EducationalInstitutions.dashboard', compact('node', 'educationalInstitution'));
+    }
+
+    /**
+     * Display BI.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bi(Node $node, EducationalInstitution $educationalInstitution)
+    {
+        $educationalInstitution->projectsByKnowledgeArea    = $educationalInstitution->projectsByKnowledgeArea();
+        $educationalInstitution->projectsByYear             = $educationalInstitution->projectsByYear();
+        $educationalInstitution->qtyGraduationsRegistered   = $educationalInstitution->qtyGraduationsRegistered()->count;
+        $educationalInstitution->qtyResearchTeamsRegistered = $educationalInstitution->qtyResearchTeamsRegistered();
+        $educationalInstitution->qtyProjectsRegistered      = $educationalInstitution->qtyProjectsRegistered();
+        $educationalInstitution->projectsByProjectTypes     = $educationalInstitution->projectsByProjectTypes();
+        $educationalInstitution->qtyResearchOutputsRegistered = $educationalInstitution->qtyResearchOutputsRegistered();
+
+        return view('EducationalInstitutions.bi', compact('node', 'educationalInstitution'));
     }
 }

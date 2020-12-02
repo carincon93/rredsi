@@ -30,6 +30,15 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="document_type" value="{{ __('Document type') }}" />
+                <select id="document_type" class="form-select w-full" name="document_type" required>
+                    <option value="">Seleccione un tipo de documento</option>
+                    <option value="cc">Cédula de ciudadanía</option>
+                    <option value="ti">Tarjeta de identidad</option>
+                </select>
+            </div>
+
+            <div class="mt-4">
                 <x-jet-label for="document_number" value="{{ __('Document number') }}" />
                 <x-jet-input id="document_number" class="block mt-1 w-full" type="number" name="document_number" required />
             </div>
@@ -37,15 +46,6 @@
             <div class="mt-4">
                 <x-jet-label for="cellphone_number" value="{{ __('Cellphone number') }}" />
                 <x-jet-input id="cellphone_number" class="block mt-1 w-full" type="number" name="cellphone_number" required />
-            </div>
-            
-            <div class="mt-4">
-                <x-jet-label for="document_type" value="{{ __('Document type') }}" />
-                <select id="document_type" class="form-input w-full" name="document_type" required>
-                    <option value="">Seleccione un tipo de documento</option>
-                    <option value="cc">Cédula de ciudadanía</option>
-                    <option value="ti">Tarjeta de identidad</option>
-                </select>
             </div>
             
             <p class="mt-4">{{ __('Interests') }}</p>

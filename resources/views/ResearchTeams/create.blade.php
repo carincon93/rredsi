@@ -98,7 +98,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="administrator_id" value="{{ __('Administrator') }}" />
-                        <select id="administrator_id" name="administrator_id" class="block mt-1 p-4 w-full" required >
+                        <select id="administrator_id" name="administrator_id" class="form-select w-full" required >
                             <option value="">Seleccione un administrador de semillero</option>
                             @forelse ($educationalInstitutionMembers as $educationalInstitutionMember)
                                 <option {{ old('administrator_id') == $educationalInstitutionMember->id ? "selected" : "" }} value="{{ $educationalInstitutionMember->id }}">{{ $educationalInstitutionMember->name }}</option>

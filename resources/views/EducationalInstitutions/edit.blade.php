@@ -33,37 +33,42 @@
 
                     <div>
                         <x-jet-label for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ $educationalInstitution->name }}" required />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ old('name') ?? $educationalInstitution->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="nit" value="{{ __('Nit') }}" />
-                        <x-jet-input id="nit" class="block mt-1 w-full" type="number" min="" max="" name="nit" value="{{ $educationalInstitution->nit }}" required />
+                        <x-jet-input id="nit" class="block mt-1 w-full" type="number" min="" max="" name="nit" value="{{ old('nit') ?? $educationalInstitution->nit }}" required />
                         <x-jet-input-error for="nit" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="city" value="{{ __('City') }}" />
-                        <x-jet-input id="city" class="block mt-1 w-full" type="text" min="" max="" name="city" value="{{ $educationalInstitution->city }}" required />
+                        <select id="city" name="city" class="form-select w-full" required >
+                            <option value="">Seleccione una ciudad</option>
+                            @foreach ($cities as $city)
+                                <option value="{{ $city['name'] }}" {{ old('city') == $city['name'] || $educationalInstitution->city == $city['name'] ? "selected" : "" }}>{{ $city['name'] }}</option>
+                            @endforeach
+                        </select>
                         <x-jet-input-error for="city" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="address" value="{{ __('Address') }}" />
-                        <x-jet-input id="address" class="block mt-1 w-full" type="text" min="" max="" name="address" value="{{ $educationalInstitution->address }}" required />
+                        <x-jet-input id="address" class="block mt-1 w-full" type="text" min="" max="" name="address" value="{{ old('address') ?? $educationalInstitution->address }}" required />
                         <x-jet-input-error for="address" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="phone_number" value="{{ __('Phone number') }}" />
-                        <x-jet-input id="phone_number" class="block mt-1 w-full" type="number" min="" max="" name="phone_number" value="{{ $educationalInstitution->phone_number }}" required />
+                        <x-jet-input id="phone_number" class="block mt-1 w-full" type="number" min="" max="" name="phone_number" value="{{ old('phone_number') ?? $educationalInstitution->phone_number }}" required />
                         <x-jet-input-error for="phone_number" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="website" value="{{ __('Website') }}" />
-                        <x-jet-input id="website" class="block mt-1 w-full" type="text" min="" max="" name="website" value="{{ $educationalInstitution->website }}" required />
+                        <x-jet-input id="website" class="block mt-1 w-full" type="text" min="" max="" name="website" value="{{ old('website') ?? $educationalInstitution->website }}" required />
                         <x-jet-input-error for="website" class="mt-2" />
                     </div>
 

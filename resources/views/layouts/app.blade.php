@@ -24,7 +24,7 @@
             @livewire('navigation-dropdown')
 
             <!-- Page Heading -->
-            <header class="bg-gradient-to-l from-purple-500 shadow to-color-1 shadow">
+            <header class="bg-gradient-to-l from-blue-900 to-blue-900 shadow shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     {{ $header }}
                 </div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Project extends Model
 {
@@ -26,6 +27,8 @@ class Project extends Model
         'is_published',
     ];
 
+    protected $appends = ['datesForHumans'];
+
     public function researchOutputs() {
         return $this->hasMany('App\Models\ResearchOutput');
     }
@@ -34,8 +37,8 @@ class Project extends Model
         return $this->hasMany('App\Models\Loan');
     }
 
-    public function knowledgeAreas() {
-        return $this->belongsToMany('App\Models\KnowledgeArea', 'project_knowledge_area', 'project_id', 'knowledge_area_id');
+    public function knowledgeSubareaDisciplines() {
+        return $this->belongsToMany('App\Models\KnowledgeSubareaDiscipline', 'project_knowledge_subarea_discipline', 'project_id', 'knowledge_subarea_discipline_id');
     }
 
     public function events() {
@@ -63,5 +66,12 @@ class Project extends Model
 
     public function projectType() {
         return $this->belongsTo('App\Models\ProjectType');
+    }
+
+    public function getDatesForHumansAttribute() 
+    {
+        $start_date = Carbon::parse($this->start_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+        $end_date   = Carbon::parse($this->end_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+        return "Del $start_date al $end_date";
     }
 }

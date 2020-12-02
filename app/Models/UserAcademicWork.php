@@ -22,12 +22,12 @@ class UserAcademicWork extends Model
         'grade',
         'mentors',
         'research_group_name',
-        'knowledge_area_id',
+        'knowledge_subarea_discipline_id',
         'graduation_id',
     ];
 
     public function knowledgeArea() {
-        return $this->belongsTo('App\Models\KnowledgeArea');
+        return $this->belongsTo('App\Models\KnowledgeSubareaDiscipline');
     }
 
     public function userGraduation() {

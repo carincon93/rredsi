@@ -28,33 +28,6 @@ class ResearchOutputRequest extends FormRequest
             'typology'          => 'required|string|max:191',
             'description'       => 'required',
             'file'              => 'file|max:20000',
-            'project_id'        => 'required|integer|min:0|max:9999999999|exists:projects,id',
         ];
-    }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        if($this->title != null) {
-            $this->merge([
-                'title' => filter_var($this->title, FILTER_SANITIZE_STRING),
-            ]);
-        }
-
-        if($this->typology != null) {
-            $this->merge([
-                'typology' => filter_var($this->typology, FILTER_SANITIZE_STRING),
-            ]);
-        }
-
-        if($this->project_id != null) {
-            $this->merge([
-                'project_id' => (integer) filter_var($this->project_id, FILTER_SANITIZE_NUMBER_INT),
-            ]);
-        }
     }
 }

@@ -83,10 +83,6 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Researcher', 'id');
     }
 
-    public function role() {
-        return $this->belongsTo('App\Models\Role');
-    }
-
     public function userGraduations() {
         return $this->hasMany('App\Models\UserGraduation');
     }

@@ -39,7 +39,7 @@
                                     <span class="text-center ml-2 font-semibold">{{ $educationalInstitution->city }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $educationalInstitution->administrator()->name }}</span>
+                                    <span class="text-center ml-2 font-semibold"><span class="capitalize">{{ optional($educationalInstitution->administrator)->name }}</span></span>
                                 </td>
                                 <td class="py-2 text-left">
                                     <div class="hidden sm:flex sm:items-center justify-around">

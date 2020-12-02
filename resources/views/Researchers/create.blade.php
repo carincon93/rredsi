@@ -44,7 +44,7 @@
 
                     <div class="mt-2">
                         <x-jet-label for="document_type" value="{{ __('Document type') }}" />
-                        <select id="document_type" name="document_type" class="block mt-1 p-4 w-full" value="{{ old('document_type') }}" required >
+                        <select id="document_type" name="document_type" class="form-select w-full" value="{{ old('document_type') }}" required >
                             <option  value="">Seleccione el tipo de documento</option>
                             <option {{ old('document_type')== "CC" ? "selected" : "" }} value="CC">Cédula de ciudadanía</option>
                             <option {{ old('document_type')== "CE" ? "selected" : "" }} value="CE">Cédula de extranjería</option>
@@ -67,7 +67,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="status" value="{{ __('Status') }}" />
-                        <select id="status" name="status" class="block mt-1 p-4 w-full" value="{{ old('status') }}" required >
+                        <select id="status" name="status" class="form-select w-full" value="{{ old('status') }}" required >
                             <option value="">Seleccione el estado</option>
                             <option {{ old('status') == "Aceptado" ? "selected" : "" }} value="Aceptado">Aceptado</option>
                             <option {{ old('status') == "En espera" ? "selected" : "" }} value="En espera">En espera</option>

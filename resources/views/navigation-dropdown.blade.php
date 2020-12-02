@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-gradient-to-l from-purple-500 shadow to-color-1">
+<nav x-data="{ open: false }" class="bg-gradient-to-l shadow to-color-1">
     <!-- Primary Navigation Menu -->
     <div class="border-b border-indigo-600 lg:px-8 max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex justify-between h-16">
@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if (request()->route('node') && request()->route('educational_institution'))
-                        <x-jet-nav-link href="{{ route('nodes.educational-institutions.dashboard', [request()->route('node')->id, request()->route('educational_institution')->id]) }}" :active="request()->routeIs('dashboard')">
+                        <x-jet-nav-link href="{{ route('nodes.educational-institutions.dashboard', [request()->route('node')->id, request()->route('educational_institution')->id]) }}" :active="request()->routeIs('dashboard')" class="text-gray-600 hover:text-gray-400">
                             {{ __('Dashboard') }} 
                         </x-jet-nav-link>
                     @endif
@@ -30,7 +30,7 @@
                                 <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                             </button>
                         @else
-                            <button class="flex items-center text-sm font-medium text-white hover:text-indigo-200 hover:border-gray-300 focus:outline-none focus:text-white focus:border-gray-300 transition duration-150 ease-in-out">
+                            <button class="flex items-center text-sm font-medium text-gray-600 hover:text-gray-400 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                 <div>{{ Auth::user()->name }}</div>
 
                                 <div class="ml-1">

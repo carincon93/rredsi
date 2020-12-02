@@ -39,7 +39,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="type" value="{{ __('Type') }}" />
-                        <select id="type" name="type" class="block mt-1 p-4 w-full" required >
+                        <select id="type" name="type" class="form-select w-full" required >
                             <option value="">Seleccione un tipo de trabajo académico</option>
                             <option {{ old('type') == "tesis de doctorado" ? "selected" : "" }} value="tesis de doctorado">Tesis de doctorado</option>
                             <option {{ old('type') == "tesis de maestría" ? "selected" : "" }} value="tesis de maestría">Tesis de maestría</option>
@@ -58,7 +58,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="grade" value="{{ __('Grade') }}" />
-                        <select id="grade" name="grade" class="block mt-1 p-4 w-full" required >
+                        <select id="grade" name="grade" class="form-select w-full" required >
                             <option value="">Seleccione una nota</option>
                             @for ($i = 0; $i < 5; $i+=0.1)
                                 <option value="{{ $i }}" {{ old('grade') == "$i" ? "selected" : "" }}>{{ $i }}</option>
@@ -75,7 +75,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
-                        <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" required >
+                        <select id="knowledge_area_id" name="knowledge_area_id" class="form-select w-full" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
                                 <option value="{{ $knowledgeArea->id }}" {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" }}>{{ $knowledgeArea->name }}</option>

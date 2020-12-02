@@ -25,11 +25,7 @@ class KnowledgeArea extends Model
         return $this->hasMany('App\Models\AcademicWork');
     }
 
-    public function projects() {
-        return $this->belongsToMany('App\Models\Project', 'project_knowledge_area', 'knowledge_area_id', 'project_id');
-    }
-
-    public function researchTeams() {
-        return $this->belongsToMany('App\Models\ResearchTeam', 'research_team_knowledge_area', 'knowledge_area_id', 'research_team_id');
+    public function knowledgeSubareas() {
+        return $this->hasMany('App\Models\KnowledgeSubarea');
     }
 }

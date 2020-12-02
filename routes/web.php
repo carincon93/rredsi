@@ -8,7 +8,7 @@ use App\Http\Controllers\EducationalEnvironmentController;
 use App\Http\Controllers\EducationalInstitutionController;
 use App\Http\Controllers\ResearchGroupController;
 use App\Http\Controllers\EducationalToolController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\EducationalInstitutionEventController;
 use App\Http\Controllers\NodeController;
 use App\Http\Controllers\KnowledgeAreaController;
 use App\Http\Controllers\ResearcherController;
@@ -17,8 +17,9 @@ use App\Http\Controllers\ResearchTeamController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ResearchOutputController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\EducationalInstitutionUserController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,9 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/nodes/{node}/welcome', [WelcomeController::class, 'index'])->name('/');
+Route::get('/', function() {
+    return redirect()->route('/', 1);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -42,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
+    Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');
 
     Route::resource('/user/profile/user-graduations', UserGraduationController::class, [
         'names' => [
@@ -70,16 +73,16 @@ Route::middleware(['auth'])->group(function () {
     Route::resources([
         'nodes'                                                                         => NodeController::class,
         'nodes.educational-institutions'                                                => EducationalInstitutionController::class,
+        'nodes.educational-institutions.events'                                         => EducationalInstitutionEventController::class,
         'nodes.educational-institutions.academic-programs'                              => AcademicProgramController::class,
         'nodes.educational-institutions.research-groups'                                => ResearchGroupController::class,
         'nodes.educational-institutions.research-groups.research-lines'                 => ResearchLineController::class,
         'nodes.educational-institutions.research-groups.research-teams'                 => ResearchTeamController::class,
         'nodes.educational-institutions.educational-environments'                       => EducationalEnvironmentController::class,
         'nodes.educational-institutions.educational-environments.educational-tools'     => EducationalToolController::class,
-        'nodes.educational-institutions.research-groups.research-teams.projects'       => ProjectController::class,
+        'nodes.educational-institutions.research-groups.research-teams.projects'        => ProjectController::class,
         'nodes.educational-institutions.research-groups.research-teams.projects.research-outputs'=> ResearchOutputController::class,
-        'nodes.educational-institutions.events'                                         => EventController::class,
-        'nodes.educational-institutions.users'                                          => UserController::class,
+        'nodes.educational-institutions.users'                                          => EducationalInstitutionUserController::class,
 
         'knowledge-areas'                   => KnowledgeAreaController::class,
         'researchers'                       => ResearcherController::class,

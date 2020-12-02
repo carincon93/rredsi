@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{ __('Projects') }}
+            {{ __('Educational institution events') }}
             <span class="sm:block text-purple-300">
-                Projects info
+                Add educational institution event
             </span>
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.create', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
+            <a href="{{ route('nodes.educational-institutions.events.create', [$node, $educationalInstitution]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Create project')}}
+                    {{ __('Create educational institution event')}}
                 </div>
             </a>
         </div>
@@ -20,37 +20,32 @@
             <div class="bg-white shadow-xl sm:rounded-lg">
                 <x-data-table>
                     <x-slot name="firstTheadTitle">
-                        {{ __('Title') }}
+                        {{ __('Name') }}
                     </x-slot>
                     <x-slot name="secondTheadTitle">
-                        {{ __('Type') }}
+                        {{ __('Location') }}
                     </x-slot>
                     <x-slot name="thirdTheadTitle">
-                        {{ __('Keywords') }}
+                        {{ __('Date') }}
                     </x-slot>
-                    <x-slot name="fourthTheadTitle">
-                        {{ __('Is published?') }}
-                    </x-slot>
-
+                    
                     <x-slot name="tbodyData">
-                        @foreach ($projects as $project)
+                        @foreach ($events as $event)
+                            
                             <tr class="bg-white border-4 border-gray-200">
+                    
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->title }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $event->event->name }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->type }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $event->event->location }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->keywords }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $event->event->start_date }}</span>
                                 </td>
-
-                                <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->is_published }}</span>
-                                </td>
-
+                
                                 <td class="py-2 text-left">
                                     <div class="hidden sm:flex sm:items-center justify-around">
                                         <x-jet-dropdown align="right" width="48">
@@ -63,19 +58,16 @@
                                                     </div>
                                                 </button>
                                             </x-slot>
-
-                                            <x-slot name="content">
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.show', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
+                        
+                                            <x-slot name="content">                        
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.events.show', [$node, $educationalInstitution, $event])}}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.events.edit', [$node, $educationalInstitution, $event]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.events.destroy', [$node, $educationalInstitution, $event]) }}">
                                                     {{ __('Delete') }}
-                                                </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
-                                                    {{ __('Manage research outputs') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
                                         </x-jet-dropdown>
@@ -89,6 +81,3 @@
         </div>
     </div>
 </x-app-layout>
-
-
-

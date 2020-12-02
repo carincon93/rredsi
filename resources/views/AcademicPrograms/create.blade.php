@@ -44,7 +44,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="academic_level" value="{{ __('Academic level') }}" />
-                        <select id="academic_level" name="academic_level" class="block mt-1 p-4 w-full" value="{{ old('academic_level') }}" required >
+                        <select id="academic_level" name="academic_level" class="form-select w-full" value="{{ old('academic_level') }}" required >
                             <option value="">Seleccione el nivel académico</option>
                             <option {{ old('academic_level') == "Técnico profesional" ? "selected" : "" }} value="Técnico profesional">Técnico profesional</option>
                             <option {{ old('academic_level') == "Tecnólogo" ? "selected" : "" }} value="Tecnólogo">Tecnólogo</option>
@@ -71,7 +71,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="modality" value="{{ __('Modality') }}" />
-                        <select id="modality" name="modality" class="block mt-1 p-4 w-full" value="{{ old('modality') }}" required >
+                        <select id="modality" name="modality" class="form-select w-full" value="{{ old('modality') }}" required >
                             <option value="">Seleccione la modalidad</option>
                             <option {{ old('modality') == "Presencial" ? "selected" : "" }} value="Presencial">Presencial</option>
                             <option {{ old('modality') == "A distancia" ? "selected" : "" }} value="A distancia">A distancia</option>
@@ -81,7 +81,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="daytime" value="{{ __('Daytime') }}" />
-                        <select id="daytime" name="daytime" class="block mt-1 p-4 w-full" value="{{ old('daytime') }}" required >
+                        <select id="daytime" name="daytime" class="form-select w-full" value="{{ old('daytime') }}" required >
                             <option value="">Seleccione la jornada</option>
                             <option {{ old('daytime') == "Mixta" ? "selected" : "" }} value="Mixta">Mixta</option>
                             <option {{ old('daytime') == "Nocturna" ? "selected" : "" }} value="Nocturna">Nocturna</option>
