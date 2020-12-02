@@ -94,8 +94,6 @@ Route::middleware(['auth'])->group(function () {
         'knowledge-areas'                   => KnowledgeAreaController::class,
         'knowledge-subareas'                => KnowledgeSubareaController::class,
         'knowledge-subarea-disciplines'     => KnowledgeSubareaDisciplinesController::class,
-        'researchers'                       => ResearcherController::class,
-        'students'                          => StudentController::class,
         'roles'                             => RoleController::class,
     ]);
 });

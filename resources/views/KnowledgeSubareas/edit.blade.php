@@ -23,17 +23,17 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Edita información de subareas</x-slot>
+                    <x-slot name="description">Editar la información de la sub-área de conocimiento</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('knowledge-subareas.update',$KnowledgeSubarea->id)}}">
+                <form method="POST" action="{{ route('knowledge-subareas.update', $knowledgeSubarea->id)}}">
                     @csrf
                     @method('PUT')
 
                     <div>
                         <x-jet-label for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') ?? $KnowledgeSubarea->name  }} " required />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') ?? $knowledgeSubarea->name  }} " required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
@@ -42,7 +42,7 @@
                         <select id="knowledge_area_id" name="knowledge_area_id" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
-                                <option value="{{ $knowledgeArea->id }}" {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" || $KnowledgeSubarea->knowledge_area_id == $knowledgeArea->id ? "selected" : ""  }}>{{ $knowledgeArea->name }}</option>
+                                <option value="{{ $knowledgeArea->id }}" {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" || $knowledgeSubarea->knowledgeArea()->id == $knowledgeArea->id ? "selected" : ""  }}>{{ $knowledgeArea->name }}</option>
                             @empty
                                 <option value="">No knowledge areas</option>
                             @endforelse
@@ -50,15 +50,14 @@
                         <x-jet-input-error for="knowledge_area_id" class="mt-2" />
                     </div>
 
-
-                            <div class="flex items-center justify-end mt-4">
-                                <x-jet-button class="ml-4">
-                                    {{ __('Create') }}
-                                </x-jet-button>
-                            </div>
-                        </form>
+                    <div class="flex items-center justify-end mt-4">
+                        <x-jet-button class="ml-4">
+                            {{ __('Edit') }}
+                        </x-jet-button>
                     </div>
-                </div>
+                </form>
             </div>
+        </div>
+    </div>
 </x-app-layout>
 

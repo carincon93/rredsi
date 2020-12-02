@@ -23,7 +23,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añade información de subarea dicipline</x-slot>
+                    <x-slot name="description">Añadir disciplina de sub-área de conocimiento</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -39,7 +39,7 @@
                     <div class="mt-4">
                         <x-jet-label for="knowledge_subarea_id" value="{{ __('Knowledge area') }}" />
                         <select id="knowledge_subarea_id" name="knowledge_subarea_id" class="block mt-1 p-4 w-full" required >
-                            <option value="">Seleccione una subarea de conocimiento</option>
+                            <option value="">Seleccione una sub-área de conocimiento</option>
                             @forelse ($knowledgeSubareas as $knowledgeSubarea)
                                 <option value="{{ $knowledgeSubarea->id }}" {{ old('knowledge_subarea_id') == $knowledgeSubarea->id ? "selected" : "" }}>{{ $knowledgeSubarea->name }}</option>
                             @empty
@@ -49,15 +49,14 @@
                         <x-jet-input-error for="knowledge_subarea_id" class="mt-2" />
                     </div>
 
-
-                            <div class="flex items-center justify-end mt-4">
-                                <x-jet-button class="ml-4">
-                                    {{ __('Create') }}
-                                </x-jet-button>
-                            </div>
-                        </form>
+                    <div class="flex items-center justify-end mt-4">
+                        <x-jet-button class="ml-4">
+                            {{ __('Create') }}
+                        </x-jet-button>
                     </div>
-                </div>
+                </form>
             </div>
+        </div>
+    </div>
 </x-app-layout>
 

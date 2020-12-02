@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\KnowledgeSubareaRequest;
-use App\Models\knowledgeSubarea;
 use App\Models\KnowledgeArea;
+use App\Models\KnowledgeSubarea;
 
+use App\Http\Requests\KnowledgeSubareaRequest;
 use Illuminate\Http\Request;
 
 class KnowledgeSubareaController extends Controller
@@ -17,7 +17,8 @@ class KnowledgeSubareaController extends Controller
      */
     public function index()
     {
-        $knowledgeSubareas = knowledgeSubarea::orderBy('name')->get();
+        $knowledgeSubarea = KnowledgeSubarea::orderBy('name')->get();
+
         return view('KnowledgeSubareas.index', compact('knowledgeSubareas'));
     }
 
@@ -29,6 +30,7 @@ class KnowledgeSubareaController extends Controller
     public function create()
     {
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
         return view('KnowledgeSubareas.create', compact('knowledgeAreas'));
     }
 
@@ -38,14 +40,13 @@ class KnowledgeSubareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(KnowledgeSubareaRequest $request, KnowledgeSubarea $knowledgeSubareas )
+    public function store(KnowledgeSubareaRequest $request)
     {
+        $knowledgeSubarea          = new KnowledgeSubarea();
+        $knowledgeSubarea->name    = $request->get('name');
+        $knowledgeSubarea->knowledgeArea()->associate($request->get('knowledge_area_id'));
 
-        $knowledgeSubareas          = new KnowledgeSubarea();
-        $knowledgeSubareas->name    = $request->get('name');
-        $knowledgeSubareas->knowledgeArea()->associate($request->get('knowledge_area_id'));
-
-        if($knowledgeSubareas->save()){
+        if($knowledgeSubarea->save()){
             $message = 'Your store processed correctly';
         }
 
@@ -56,10 +57,10 @@ class KnowledgeSubareaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\knwoledge_subareas  $knwoledge_subareas
+     * @param  \App\Models\KnwoledgeSubarea  $knwoledgeSubarea
      * @return \Illuminate\Http\Response
      */
-    public function show(knowledgeSubarea $knowledgeSubarea)
+    public function show(KnowledgeSubarea $knowledgeSubarea)
     {
         return view('KnowledgeSubareas.show', compact('knowledgeSubarea'));
     }
@@ -67,29 +68,29 @@ class KnowledgeSubareaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\knwoledge_subareas  $knwoledge_subareas
+     * @param  \App\Models\KnwoledgeSubarea  $knwoledgeSubarea
      * @return \Illuminate\Http\Response
      */
-    public function edit(KnowledgeSubarea $KnowledgeSubarea)
+    public function edit(KnowledgeSubarea $knowledgeSubarea)
     {
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
-        return view('KnowledgeSubareas.edit', compact('KnowledgeSubarea','knowledgeAreas'));
+
+        return view('KnowledgeSubareas.edit', compact('knowledgeSubarea','knowledgeAreas'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\knwoledge_subareas  $knwoledge_subareas
+     * @param  \App\Models\KnwoledgeSubarea  $knwoledgeSubarea
      * @return \Illuminate\Http\Response
      */
-    public function update(KnowledgeSubareaRequest $request, KnowledgeSubarea $knowledgeSubareas)
+    public function update(KnowledgeSubareaRequest $request, KnowledgeSubarea $knowledgeSubarea)
     {
+        $knowledgeSubarea->name = $request->get('name');
+        $knowledgeSubarea->KnowledgeArea()->associate($request->get('knowledge_area_id'));
 
-        $knowledgeSubareas->name    = $request->get('name');
-        $knowledgeSubareas->KnowledgeArea()->associate($request->get('knowledge_area_id'));
-
-        if($knowledgeSubareas->save()){
+        if($knowledgeSubarea->save()){
             $message = 'Your update processed correctly';
         }
 
@@ -99,12 +100,12 @@ class KnowledgeSubareaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\knwoledge_subareas  $knwoledge_subareas
+     * @param  \App\Models\KnwoledgeSubarea  $knwoledgeSubarea
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KnowledgeSubarea $knowledgeSubareas)
+    public function destroy(KnowledgeSubarea $knowledgeSubarea)
     {
-        if($knowledgeSubareas->delete()){
+        if($knowledgeSubarea->delete()){
             $message = 'Your delete processed correctly';
         }
         return redirect()->route('knowledge-subareas.index')->with('status', $message);

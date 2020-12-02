@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class knowledgeSubarea extends Model
+class KnowledgeSubarea extends Model
 {
     use HasFactory;
 
@@ -18,7 +18,7 @@ class knowledgeSubarea extends Model
         return $this->belongsTo('App\Models\KnowledgeArea');
     }
 
-    public function knowledgeSubareaDiscipline() {
-        return $this->hasMany('App\Models\knowledgeSubareaDiscipline');
+    public function knowledgeSubareaDisciplines() {
+        return $this->hasMany('App\Models\KnowledgeSubareaDiscipline');
     }
 }

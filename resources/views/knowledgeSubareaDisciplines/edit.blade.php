@@ -23,11 +23,11 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Edita información de subareas</x-slot>
+                    <x-slot name="description">Editar la información de la disciplina de sub-área de conocimiento</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('knowledge-subarea-disciplines.update',$knowledgeSubareaDiscipline->id)}}">
+                <form method="POST" action="{{ route('knowledge-subarea-disciplines.update', $knowledgeSubareaDiscipline->id)}}">
                     @csrf
                     @method('PUT')
 
@@ -42,23 +42,22 @@
                         <select id="knowledge_subarea_id" name="knowledge_subarea_id" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeSubareas as $knowledgeSubarea)
-                                <option value="{{ $knowledgeSubarea->id }}" {{ old('knowledge_subarea_id') == $knowledgeSubareaDiscipline->id ? "selected" : "" || $knowledgeSubareaDiscipline->knowledge_subarea_id == $knowledgeSubarea->id ? "selected" : ""  }}>{{ $knowledgeSubarea->name }}</option>
+                                <option value="{{ $knowledgeSubarea->id }}" {{ old('knowledge_subarea_id') == $knowledgeSubareaDiscipline->id ? "selected" : "" || $knowledgeSubareaDiscipline->knowledgeSubarea()->id == $knowledgeSubarea->id ? "selected" : ""  }}>{{ $knowledgeSubarea->name }}</option>
                             @empty
-                                <option value="">No knowledge areas</option>
+                                <option value="">No knowledge subareas</option>
                             @endforelse
                         </select>
                         <x-jet-input-error for="knowledge_subarea_id" class="mt-2" />
                     </div>
 
-
-                            <div class="flex items-center justify-end mt-4">
-                                <x-jet-button class="ml-4">
-                                    {{ __('Create') }}
-                                </x-jet-button>
-                            </div>
-                        </form>
+                    <div class="flex items-center justify-end mt-4">
+                        <x-jet-button class="ml-4">
+                            {{ __('Edit') }}
+                        </x-jet-button>
                     </div>
-                </div>
+                </form>
             </div>
+        </div>
+    </div>
 </x-app-layout>
 

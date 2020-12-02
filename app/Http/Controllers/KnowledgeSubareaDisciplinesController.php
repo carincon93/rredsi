@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\KnowledgeSubareaDiciplineRequest;
-use App\Models\knowledgeSubareaDiscipline;
-use App\Models\knowledgeSubarea;
+use App\Models\KnowledgeSubarea;
+use App\Models\KnowledgeSubareaDiscipline;
 
+use App\Http\Requests\KnowledgeSubareaDiciplineRequest;
 use Illuminate\Http\Request;
 
 class KnowledgeSubareaDisciplinesController extends Controller
@@ -17,8 +17,9 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function index()
     {
-        $knowledgeSubareaDisciplines = knowledgeSubareaDiscipline::orderBy('name')->get();
-        return view('knowledgeSubareaDisciplines.index', compact('knowledgeSubareaDisciplines'));
+        $knowledgeSubareaDisciplines = KnowledgeSubareaDiscipline::orderBy('name')->get();
+
+        return view('KnowledgeSubareaDisciplines.index', compact('knowledgeSubareaDisciplines'));
     }
 
     /**
@@ -28,8 +29,9 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function create()
     {
-        $knowledgeSubareas = knowledgeSubarea::orderBy('name')->get();
-        return view('knowledgeSubareaDisciplines.create', compact('knowledgeSubareas'));
+        $knowledgeSubareas = KnowledgeSubarea::orderBy('name')->get();
+
+        return view('KnowledgeSubareaDisciplines.create', compact('knowledgeSubareas'));
     }
 
     /**
@@ -38,7 +40,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(KnowledgeSubareaDiciplineRequest $request,  KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
+    public function store(KnowledgeSubareaDiciplineRequest $request)
     {
         $knowledgeSubareaDiscipline          = new KnowledgeSubareaDiscipline();
         $knowledgeSubareaDiscipline->name    = $request->get('name');
@@ -54,36 +56,37 @@ class KnowledgeSubareaDisciplinesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\knowledge_subarea_disciplines  $knowledge_subarea_disciplines
+     * @param  \App\Models\KnowledgeSubareaDiscipline  $knowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
     public function show(knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
-        return view('knowledgeSubareaDisciplines.show', compact('knowledgeSubareaDiscipline'));
+        return view('KnowledgeSubareaDisciplines.show', compact('knowledgeSubareaDiscipline'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\knowledge_subarea_disciplines  $knowledge_subarea_disciplines
+     * @param  \App\Models\KnowledgeSubareaDiscipline  $knowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
     public function edit(knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
         $knowledgeSubareas = KnowledgeSubarea::orderBy('name')->get();
-        return view('knowledgeSubareaDisciplines.edit', compact('knowledgeSubareaDiscipline','knowledgeSubareas'));
+
+        return view('KnowledgeSubareaDisciplines.edit', compact('knowledgeSubareaDiscipline','knowledgeSubareas'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\knowledge_subarea_disciplines  $knowledge_subarea_disciplines
+     * @param  \App\Models\KnowledgeSubareaDiscipline  $knowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
-    public function update(KnowledgeSubareaDiciplineRequest $request, knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
+    public function update(KnowledgeSubareaDiciplineRequest $request, KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
-        $knowledgeSubareaDiscipline->name    = $request->get('name');
+        $knowledgeSubareaDiscipline->name = $request->get('name');
         $knowledgeSubareaDiscipline->knowledgeSubarea()->associate($request->get('knowledge_subarea_id'));
 
         if($knowledgeSubareaDiscipline->save()){
@@ -96,14 +99,15 @@ class KnowledgeSubareaDisciplinesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\knowledge_subarea_disciplines  $knowledge_subarea_disciplines
+     * @param  \App\Models\KnowledgeSubareaDiscipline  $knowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
-    public function destroy(knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
+    public function destroy(KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
         if($knowledgeSubareaDiscipline->delete()){
             $message = 'Your delete processed correctly';
         }
+
         return redirect()->route('knowledge-subarea-disciplines.index')->with('status', $message);
     }
 }
