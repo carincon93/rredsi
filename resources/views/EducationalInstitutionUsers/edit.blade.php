@@ -27,7 +27,7 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('nodes.educational-institutions.users.update', [$node, $educationalInstitution, $user]) }}" novalidate>
+                <form method="POST" action="{{ route('nodes.educational-institutions.users.update', [$node, $educationalInstitution, $user]) }}">
                     @csrf
                     @method('PUT')
 
