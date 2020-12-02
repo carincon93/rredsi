@@ -10,9 +10,17 @@ class KnowledgeSubareaDiscipline extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'knowledge_subarea_id',
+        'name'
     ];
+
+    public function projects() {
+        return $this->belongsToMany('App\Models\Project', 'project_knowledge_subarea_discipline', 'knowledge_subarea_discipline_id', 'project_id');
+    }
+
+    public function researchTeams() {
+        return $this->belongsToMany('App\Models\ResearchTeam', 'research_team_knowledge_subarea_discipline', 'knowledge_subarea_discipline_id', 'research_team_id');
+    }
 
     public function knowledgeSubarea() {
         return $this->belongsTo('App\Models\KnowledgeSubarea');

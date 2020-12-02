@@ -10,8 +10,8 @@ class KnowledgeSubarea extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'knowledge_area_id',
+        'name',
     ];
 
     public function knowledgeArea() {
