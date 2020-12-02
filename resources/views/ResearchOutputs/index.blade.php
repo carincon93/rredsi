@@ -33,7 +33,7 @@
                                                     <div class="actions-wrapper">
                                                         <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.show', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Show </a>
                                                         <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Edit </a>
-                                                        <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}"> Delete </a>
+                                                        <a class="modal-open" onclick="modal(' {{route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}')"> Delete </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -51,5 +51,11 @@
             </div>
         </div>
     </div>
+
+    {{-- #Component modal --}}
+    <x-dialog-modal>
+
+    </x-dialog-modal>
+
 
 </x-app-layout>

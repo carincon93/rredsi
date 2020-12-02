@@ -28,12 +28,12 @@
                     <x-slot name="thirdTheadTitle">
                         {{ __('Year') }}
                     </x-slot>
-                    
+
                     <x-slot name="tbodyData">
                         @foreach ($userGraduations as $userGraduation)
-                            
+
                             <tr class="bg-white border-4 border-gray-200">
-                    
+
                                 <td>
                                     <span class="text-center ml-2 font-semibold">{{ $userGraduation->academicProgram->name }}</span>
                                 </td>
@@ -45,7 +45,7 @@
                                 <td>
                                     <span class="text-center ml-2 font-semibold">{{ $userGraduation->year }}</span>
                                 </td>
-                
+
                                 <td class="py-2 text-left">
                                     <div class="hidden sm:flex sm:items-center justify-around">
                                         <x-jet-dropdown align="right" width="48">
@@ -58,15 +58,15 @@
                                                     </div>
                                                 </button>
                                             </x-slot>
-                        
-                                            <x-slot name="content">                        
+
+                                            <x-slot name="content">
                                                 <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.show', [$userGraduation]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.edit', [$userGraduation]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.destroy', [$userGraduation]) }}">
+                                                <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('user.profile.user-graduations.destroy', [$userGraduation]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.user-academic-works.index', [$userGraduation]) }}">
@@ -83,4 +83,11 @@
             </div>
         </div>
     </div>
+
+
+    {{-- #Component modal --}}
+    <x-dialog-modal>
+
+    </x-dialog-modal>
+
 </x-app-layout>

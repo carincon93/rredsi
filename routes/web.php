@@ -11,6 +11,8 @@ use App\Http\Controllers\EducationalToolController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NodeController;
 use App\Http\Controllers\KnowledgeAreaController;
+use App\Http\Controllers\KnowledgeSubareaDisciplinesController;
+use App\Http\Controllers\KnowledgeSubareaController;
 use App\Http\Controllers\ResearcherController;
 use App\Http\Controllers\ResearchLineController;
 use App\Http\Controllers\ResearchTeamController;
@@ -19,6 +21,7 @@ use App\Http\Controllers\ResearchOutputController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
+use App\Http\Livewire\ModelForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +43,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/model-form', function () {
+        return view('livewire.model-form');
+    })->name('model-form');
 
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
 
@@ -82,6 +89,8 @@ Route::middleware(['auth'])->group(function () {
         'nodes.educational-institutions.users'                                          => UserController::class,
 
         'knowledge-areas'                   => KnowledgeAreaController::class,
+        'knowledge-subareas'                => KnowledgeSubareaController::class,
+        'knowledge-subarea-disciplines'     => KnowledgeSubareaDisciplinesController::class,
         'researchers'                       => ResearcherController::class,
         'students'                          => StudentController::class,
         'roles'                             => RoleController::class,

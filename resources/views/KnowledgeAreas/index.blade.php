@@ -33,10 +33,10 @@
 
                         <tr class="bg-white border-4 border-gray-200">
                             <td>
-                                <span class="text-center ml-2 font-semibold">{{$knowledgeArea->name}}</span> 
+                                <span class="text-center ml-2 font-semibold">{{$knowledgeArea->name}}</span>
                             </td>
                             <td>
-                                <span class="text-center ml-2 font-semibold">{{$knowledgeArea->id}}</span> 
+                                <span class="text-center ml-2 font-semibold">{{$knowledgeArea->id}}</span>
                              </td>
 
                              <td class="py-2 text-left">
@@ -51,14 +51,14 @@
                                                 </div>
                                             </button>
                                         </x-slot>
-                                        <x-slot name="content">                        
+                                        <x-slot name="content">
                                             <x-jet-dropdown-link href="{{ route('knowledge-areas.show', $knowledgeArea->id) }}">
                                                 {{ __('Show') }}
                                             </x-jet-dropdown-link>
                                             <x-jet-dropdown-link href="{{ route('knowledge-areas.edit', $knowledgeArea->id) }}">
                                                 {{ __('Edit') }}
                                             </x-jet-dropdown-link>
-                                            <x-jet-dropdown-link href="{{ route('knowledge-areas.destroy', $knowledgeArea->id) }}">
+                                            <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('knowledge-areas.destroy', $knowledgeArea->id) }}')">
                                                 {{ __('Delete') }}
                                             </x-jet-dropdown-link>
                                         </x-slot>
@@ -72,4 +72,10 @@
         </div>
     </div>
 </div>
+
+{{-- #Component modal --}}
+<x-dialog-modal>
+
+</x-dialog-modal>
+
 </x-app-layout>

@@ -4,7 +4,7 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Educational tools') }}
             <span class="sm:block text-purple-300">
-                Add educational tools info 
+                Add educational tools info
             </span>
         </h2>
         <div>
@@ -56,14 +56,14 @@
                                                 </button>
                                             </x-slot>
 
-                                            <x-slot name="content">                        
+                                            <x-slot name="content">
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.educational-environments.educational-tools.show', [$node, $educationalInstitution, $educationalEnvironment, $educationalTool]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.educational-environments.educational-tools.edit', [$node, $educationalInstitution, $educationalEnvironment, $educationalTool]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.educational-environments.educational-tools.destroy', [$node, $educationalInstitution, $educationalEnvironment, $educationalTool]) }}">
+                                                <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('nodes.educational-institutions.educational-environments.educational-tools.destroy', [$node, $educationalInstitution, $educationalEnvironment, $educationalTool]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
@@ -77,4 +77,10 @@
             </div>
         </div>
     </div>
+
+    {{-- #Component modal --}}
+    <x-dialog-modal>
+
+    </x-dialog-modal>
+
 </x-app-layout>
