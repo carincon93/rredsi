@@ -71,7 +71,7 @@
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
+                                                <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('nodes.educational-institutions.research-groups.research-teams.projects.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
@@ -88,6 +88,12 @@
             </div>
         </div>
     </div>
+
+    {{-- #Component modal --}}
+    <x-dialog-modal>
+
+    </x-dialog-modal>
+
 </x-app-layout>
 
 

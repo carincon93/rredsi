@@ -67,7 +67,7 @@
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.edit', [$node, $educationalInstitution, $academicProgram]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.destroy', [$node, $educationalInstitution, $academicProgram]) }}">
+                                                <x-jet-dropdown-link  class="modal-open" onclick="modal('{{ route('nodes.educational-institutions.academic-programs.destroy', [$node, $educationalInstitution, $academicProgram]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
@@ -81,6 +81,12 @@
             </div>
         </div>
     </div>
+
+    {{-- #Component modal --}}
+    <x-dialog-modal>
+
+    </x-dialog-modal>
+
 </x-app-layout>
 
 

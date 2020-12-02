@@ -4,7 +4,7 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{__('researchers')}}
             <span class="sm:block text-purple-300">
-                Add Researchers info 
+                Add Researchers info
             </span>
         </h2>
         <div>
@@ -49,17 +49,17 @@
                                                     </div>
                                                 </button>
                                             </x-slot>
-                        
-                                            <x-slot name="content">                        
+
+                                            <x-slot name="content">
                                                 <x-jet-dropdown-link href="{{ route('researchers.show', $researcher->id) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('researchers.edit', $researcher->id) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('researchers.destroy', $researcher->id) }}">
+                                                <x-jet-dropdown-linkclass="modal-open" onclick="modal('{{ route('researchers.destroy', $researcher->id) }}')">
                                                     {{ __('Delete') }}
-                                                </x-jet-dropdown-link>
+                                                </x-jet-dropdown-linkclass=>
                                             </x-slot>
                                         </x-jet-dropdown>
                                     </div>
@@ -71,4 +71,10 @@
             </div>
         </div>
     </div>
+
+    {{-- #Component modal --}}
+    <x-dialog-modal>
+
+    </x-dialog-modal>
+
 </x-app-layout>

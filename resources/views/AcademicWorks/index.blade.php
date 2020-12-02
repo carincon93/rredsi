@@ -61,14 +61,14 @@
                                                     </div>
                                                 </button>
                                             </x-slot>
-                                            <x-slot name="content">     
+                                            <x-slot name="content">
                                                 <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.user-academic-works.show', [$userGraduation, $userAcademicWork]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.user-academic-works.edit', [$userGraduation, $userAcademicWork]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.user-academic-works.destroy', [$userGraduation, $userAcademicWork]) }}">
+                                                <x-jet-dropdown-link class="modal-open" onclick="modal('{{  route('user.profile.user-graduations.user-academic-works.destroy', [$userGraduation, $userAcademicWork]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
@@ -82,4 +82,10 @@
             </div>
         </div>
     </div>
+
+    {{-- #Component modal --}}
+    <x-dialog-modal>
+
+    </x-dialog-modal>
+
 </x-app-layout>

@@ -45,7 +45,7 @@ class KnowledgeAreaController extends Controller
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('knowledge-areas.index')->with('status', $message);
+        return redirect()->route('knowledgeAreas.index')->with('status', $message);
     }
 
     /**

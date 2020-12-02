@@ -1,47 +1,48 @@
 <x-app-layout>
+
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{ __('Research outputs') }}
+            {{__('knowledge subarea disciplines ')}}
             <span class="sm:block text-purple-300">
-                Research outputs info
+                Add knowledge subarea disciplines info
             </span>
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.create', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
+            <a href="{{route('knowledge-subarea-disciplines.create')}}">
                 <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Create research output')}}
+                    {{__('Create knowledge subarea discipline info')}}
                 </div>
             </a>
         </div>
     </x-slot>
 
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-xl sm:rounded-lg">
-                <x-data-table>
-                    <x-slot name="firstTheadTitle">
-                        {{ __('Title') }}
-                    </x-slot>
-                    <x-slot name="secondTheadTitle">
-                        {{ __('Minciencia typology') }}
-                    </x-slot>
-                    <x-slot name="thirdTheadTitle">
-                        {{ __('File') }}
-                    </x-slot>
+            <div class="bg-white shadow-xl sm-rounded-lg">
+                    <x-data-table>
+                        <x-slot name="firstTheadTitle">
+                            {{__('name')}}
+                        </x-slot>
+                        <x-slot name="secondTheadTitle">
+                            {{ __('id') }}
+                        </x-slot>
+                        <x-slot name="thirdTheadTitle">
+                            {{ __('knowledge subarea id') }}
+                        </x-slot>
 
-                    <x-slot name="tbodyData">
-                        @foreach ($researchOutputs as $researchOutput)
+                        <x-slot name="tbodyData">
+                            @foreach ($knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
+
                             <tr class="bg-white border-4 border-gray-200">
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $researchOutput->title }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{$knowledgeSubareaDiscipline->name}}</span>
                                 </td>
-
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $researchOutput->typology }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{$knowledgeSubareaDiscipline->id}}</span>
                                 </td>
-
                                 <td>
-                                    <span class="text-center ml-2 font-semibold"><a href="{{ url("storage/$researchOutput->file") }}" target="_blank" download="">Descargar</a></span>
+                                    <span class="text-center ml-2 font-semibold">{{$knowledgeSubareaDiscipline->knowledge_subarea_id}}</span>
                                 </td>
 
                                 <td class="py-2 text-left">
@@ -56,15 +57,14 @@
                                                     </div>
                                                 </button>
                                             </x-slot>
-
                                             <x-slot name="content">
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.show', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project, $researchOutput]) }}">
+                                                <x-jet-dropdown-link href="{{ route('knowledge-subarea-disciplines.show', $knowledgeSubareaDiscipline->id) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project, $researchOutput]) }}">
+                                                <x-jet-dropdown-link href="{{ route('knowledge-subarea-disciplines.edit', $knowledgeSubareaDiscipline->id) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $researchOutput]) }}')">
+                                                <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('knowledge-subarea-disciplines.destroy', $knowledgeSubareaDiscipline->id) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
@@ -72,8 +72,8 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
-                    </x-slot>
+                            @endforeach
+                        </x-slot>
                 </x-data-table>
             </div>
         </div>
@@ -83,6 +83,5 @@
     <x-dialog-modal>
 
     </x-dialog-modal>
-
 
 </x-app-layout>

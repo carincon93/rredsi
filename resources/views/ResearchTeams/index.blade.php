@@ -49,15 +49,15 @@
                                                     </div>
                                                 </button>
                                             </x-slot>
-                        
-                                            <x-slot name="content">     
+
+                                            <x-slot name="content">
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.show', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
+                                                <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('nodes.educational-institutions.research-groups.research-teams.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
@@ -74,4 +74,10 @@
             </div>
         </div>
     </div>
+
+    {{-- #Component modal --}}
+    <x-dialog-modal>
+
+    </x-dialog-modal>
+
 </x-app-layout>
