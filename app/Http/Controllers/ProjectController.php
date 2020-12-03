@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProjectType;
-Use App\Models\KnowledgeArea;
+Use App\Models\KnowledgeSubareaDiscipline;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\ResearchGroup;
@@ -39,11 +39,11 @@ class ProjectController extends Controller
         $projectTypes       = ProjectType::orderBy('type')->get();
         $researchTeams      = $researchGroup->researchTeams()->get();
         $researchLines      = $researchGroup->researchLines()->get();
-        $knowledgeAreas     = KnowledgeArea::orderBy('name')->get();
+        $knowledgeSubareaDisciplines     = knowledgeSubareaDiscipline::orderBy('name')->get();
         $academicPrograms   = $educationalInstitution->academicPrograms()->orderBy('name')->get();
         $authors            = $educationalInstitution->members()->orderBy('name')->get();
 
-        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeAreas', 'academicPrograms', 'authors'));
+        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors'));
     }
 
     /**
@@ -80,7 +80,7 @@ class ProjectController extends Controller
 
         $project->researchTeams()->attach($request->get('research_team_id'), ['is_principal' => false]);
         $project->researchLines()->attach($request->get('research_line_id'));
-        $project->knowledgeAreas()->attach($request->get('knowledge_area_id'));
+        $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
         $project->academicPrograms()->attach($request->get('academic_program_id'));
         $project->authors()->attach($request->get('user_id'));
 
@@ -110,11 +110,11 @@ class ProjectController extends Controller
         $projectTypes       = ProjectType::orderBy('type')->get();
         $researchTeams      = $researchGroup->researchTeams()->get();
         $researchLines      = $researchGroup->researchLines()->get();
-        $knowledgeAreas     = KnowledgeArea::orderBy('name')->get();
+        $knowledgeSubareaDisciplines     = KnowledgeSubareaDiscipline::orderBy('name')->get();
         $academicPrograms   = $educationalInstitution->academicPrograms()->orderBy('name')->get();
         $authors            = $educationalInstitution->members()->orderBy('name')->get();
 
-        return view('Projects.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeAreas', 'academicPrograms', 'authors'));
+        return view('Projects.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors'));
     }
 
     /**
@@ -149,7 +149,7 @@ class ProjectController extends Controller
 
         $project->researchTeams()->attach($request->get('research_team_id'), ['is_principal' => false]);
         $project->researchLines()->attach($request->get('research_line_id'));
-        $project->knowledgeAreas()->attach($request->get('knowledge_area_id'));
+        $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
         $project->academicPrograms()->attach($request->get('academic_program_id'));
         $project->authors()->attach($request->get('user_id'));
 

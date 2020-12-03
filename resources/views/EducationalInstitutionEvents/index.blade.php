@@ -28,12 +28,12 @@
                     <x-slot name="thirdTheadTitle">
                         {{ __('Date') }}
                     </x-slot>
-                    
+
                     <x-slot name="tbodyData">
                         @foreach ($events as $event)
-                            
+
                             <tr class="bg-white border-4 border-gray-200">
-                    
+
                                 <td>
                                     <span class="text-center ml-2 font-semibold">{{ $event->event->name }}</span>
                                 </td>
@@ -45,7 +45,7 @@
                                 <td>
                                     <span class="text-center ml-2 font-semibold">{{ $event->event->start_date }}</span>
                                 </td>
-                
+
                                 <td class="py-2 text-left">
                                     <div class="hidden sm:flex sm:items-center justify-around">
                                         <x-jet-dropdown align="right" width="48">
@@ -58,15 +58,15 @@
                                                     </div>
                                                 </button>
                                             </x-slot>
-                        
-                                            <x-slot name="content">                        
+
+                                            <x-slot name="content">
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.events.show', [$node, $educationalInstitution, $event])}}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.events.edit', [$node, $educationalInstitution, $event]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.events.destroy', [$node, $educationalInstitution, $event]) }}">
+                                                <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('nodes.educational-institutions.events.destroy', [$node, $educationalInstitution, $event]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
@@ -80,4 +80,10 @@
             </div>
         </div>
     </div>
+
+     {{-- #Component modal --}}
+     <x-dialog-modal>
+
+    </x-dialog-modal>
+
 </x-app-layout>
