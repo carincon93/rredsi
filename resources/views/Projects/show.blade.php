@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="header">
-<<<<<<< HEAD
       <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
         {{ __('Project') }}
         <span class="sm:block text-purple-300">
@@ -25,21 +24,6 @@
                 </button>
             </form>
       </div>
-=======
-        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{__('Projects')}}
-            <span class="sm:block text-purple-300">
-                Show project info
-            </span>
-        </h2>
-        <div>
-            <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
-                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Edit project') }}
-                </div>
-            </a>
-        </div>
->>>>>>> 19630641c2b60d8b8565b6545f82936c4af17022
     </x-slot>
     
     <div class="py-12">
@@ -390,43 +374,30 @@
                                     <div>
                                         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                             <div class="md:col-span-1">
-                                                <h3 class="text-lg font-medium text-gray-900">Información de events</h3>
+                                                <h3 class="text-lg font-medium text-gray-900">Información de los eventos</h3>
                                             </div>
-<<<<<<< HEAD
-                                                @foreach ($project->events as $event)
-
-                                                    <div class="md:grid md:grid-cols-3 md:gap-6">
-                                                        <div class="md:col-span-1">
-
-                                                        </div>
-                                                        <div class="mt-5 md:mt-0 md:col-span-2">
+                                            @foreach ($project->events as $event)
+                                                <div class="md:grid md:grid-cols-3 md:gap-6">
+                                                    <div class="md:col-span-1">
+                                                        
+                                                    </div>
+                                                    <div class="mt-5 md:mt-0 md:col-span-2">
                                                         <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                                                             <h3 class="text-lg font-medium text-gray-900">{{ __('Name') }}</h3>
                                                             <div class="mt-3 max-w-xl text-sm text-gray-600">
-=======
-                                            @foreach ($project->events as $event)
-                                            <div class="md:grid md:grid-cols-3 md:gap-6">
-                                                <div class="md:col-span-1">
-                                                    
-                                                </div>
-                                                <div class="mt-5 md:mt-0 md:col-span-2">
-                                                    <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
-                                                        <h3 class="text-lg font-medium text-gray-900">{{ __('Name') }}</h3>
-                                                        <div class="mt-3 max-w-xl text-sm text-gray-600">
->>>>>>> 19630641c2b60d8b8565b6545f82936c4af17022
-                                                            <p>
-                                                                {{ $event->name }}
-                                                            </p>
+                                                                <p>
+                                                                    {{ $event->name }}
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
-                                            <div class="hidden sm:block">
-                                                <div class="py-8">
-                                                    <div class="border-t border-gray-200"></div>
+                                                
+                                                <div class="hidden sm:block">
+                                                    <div class="py-8">
+                                                        <div class="border-t border-gray-200"></div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             @endforeach
                                         </div>
                                     </div>
@@ -436,7 +407,7 @@
                                     <div>
                                         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                             <div class="md:col-span-1">
-                                                <h3 class="text-lg font-medium text-gray-900">Información de líneas de investigación</h3>
+                                                <h3 class="text-lg font-medium text-gray-900">Información de las líneas de investigación</h3>
                                             </div>
                                             
                                             @foreach ($project->researchLines as $researchLine)
