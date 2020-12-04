@@ -1,130 +1,125 @@
-@extends('layouts.app')
+<x-app-layout>
+  <x-slot name="header">
+    <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+      {{ __('Research Outputs') }}
+      <span class="sm:block text-purple-300">
+        Show research output info
+      </span>
+    </h2>
+    <div>
+      <a href="{{ route('nodes.update', [$researchOutputs]) }}">
+        <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+          {{ __('Edit research outputs') }}
+        </div>
+      </a>
+    </div>
+  </x-slot>
 
-@section('content')
-
-<div className="container">
-    <div className="card p-4 detail">
-      <div className="card-header">
-        <h4>{{ $researchTeam->name }}</h4>
-        <a href="/app/research-teams/edit/{{ $researchTeam->id }}"">
-          Editar
-          </a>
+  <div>
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+      <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+          <h3 class="text-lg font-medium text-gray-900">Información de resultados de investigadores <span class="text-capitalize">{{ $node->state }}</span></h3>
+        </div>
+        <div class="mt-5 md:mt-0 md:col-span-2">
+          <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+            <h3 class="text-lg font-medium text-gray-900">{{ __('Project') }}</h3>
+            <div class="mt-3 max-w-xl text-sm text-gray-600">
+              <p>
+                {{ $researchOutput->project->id }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <ul className="list-unstyled">
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Nombre del mentor</h5>
-            {{ $researchTeam->mentor_name }}
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Correo electrónico del mentor</h5>
-            {{ $researchTeam->mentor_email }}
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Número celular del mentor</h5>
-            {{ $researchTeam->mentor_cellphone }}
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Objetivo general</h5>
-            {{ $researchTeam->overall_objective }}
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Misión</h5>
-            {{ $researchTeam->mission }}
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Visión</h5>
-            {{ $researchTeam->vision }}
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Proyección regional</h5>
-            {{ $researchTeam->regional_projection }}
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Estrategia de producción de conocimiento</h5>
-            {{ $researchTeam->knowledge_production_strategy }}
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Temáticas de investigación</h5>
-            {{ $thematicResearch }}
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Áreas de conocimiento</h5>
-            <ul>
-                @forelse ($researchTeam->knowledge_areas? as $knowledge_area)
-                    <li>{{ $knowledge_area->name }}</li>
-                @empty
-                    <li></li>
-                @endforelse
-            </ul>
-          </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Líneas de investigación</h5>
-            <ul>
-                @forelse ($researchTeam->research_lines? as $researchLine)
-                    <li >{{ $researchLine->name }}</li>
-                @empty
-                    <li></li>
-                @endforelse
+      <div class="hidden sm:block">
+        <div class="py-8">
+            <div class="border-t border-gray-200"></div>
+        </div>
+      </div>
 
-            </ul>
+      <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+          
+        </div>
+        <div class="mt-5 md:mt-0 md:col-span-2">
+          <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+            <h3 class="text-lg font-medium text-gray-900">{{ __('title') }}</h3>
+            <div class="mt-3 max-w-xl text-sm text-gray-600">
+              <p>
+                {{ $researchOutput->title }}
+              </p>
+            </div>
           </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Administrador</h5>
-            {{ $researchTeam->administrator?->user->name }}
+        </div>
+      </div>
+
+      <div class="hidden sm:block">
+        <div class="py-8">
+            <div class="border-t border-gray-200"></div>
+        </div>
+      </div>
+
+      <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+          
+        </div>
+        <div class="mt-5 md:mt-0 md:col-span-2">
+          <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+            <h3 class="text-lg font-medium text-gray-900">{{ __('typology') }}</h3>
+            <div class="mt-3 max-w-xl text-sm text-gray-600">
+              <p>
+                {{ $researchOutput->typology }}
+              </p>
+            </div>
           </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Estudiante lider</h5>
-            {{ $researchTeam->student_leader === null? 'Aun no tiene':'Si tiene' }}
+        </div>
+      </div>
+
+      <div class="hidden sm:block">
+        <div class="py-8">
+            <div class="border-t border-gray-200"></div>
+        </div>
+      </div>
+
+      <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+          
+        </div>
+        <div class="mt-5 md:mt-0 md:col-span-2">
+          <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+            <h3 class="text-lg font-medium text-gray-900">{{ __('description') }}</h3>
+            <div class="mt-3 max-w-xl text-sm text-gray-600">
+              <p>
+                {{ $researchOutput->description }}
+              </p>
+            </div>
           </div>
-        </li>
-        <li className="media my-4">
-          <img className="mr-3" src="images/shapes/circle.png" alt="circle" />
-          <div className="media-body">
-            <h5 className="mt-0 mb-1">Grupo de investigacion</h5>
-            {{ $researchTeam->research_group->name }}
+        </div>
+      </div>
+
+      <div class="hidden sm:block">
+        <div class="py-8">
+            <div class="border-t border-gray-200"></div>
+        </div>
+      </div>
+
+      <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+          
+        </div>
+        <div class="mt-5 md:mt-0 md:col-span-2">
+          <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+            <h3 class="text-lg font-medium text-gray-900">{{ __('file') }}</h3>
+            <div class="mt-3 max-w-xl text-sm text-gray-600">
+              <p>
+                {{ $researchOutput->file }}
+              </p>
+            </div>
           </div>
-        </li>
-      </ul>
-    </div>
+        </div>
+      </div>
+      </div>
   </div>
-
-@endsection
+</x-app-layout>

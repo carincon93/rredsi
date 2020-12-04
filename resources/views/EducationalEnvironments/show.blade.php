@@ -1,60 +1,167 @@
-@extends('layouts.app')
-
-@section('content')
-
-<div class="container">
-    <div class="card p-4 detail">
-        <div class="card-header">
-            <h4>{{ $educationalEnvironment->name }}</h4>
-            <a href="/app/educational-institution-admins/edit/{{ $educationalEnvironment->id }}"> Editar </a>
+<x-app-layout>
+    <x-slot name=header>
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{__('Educational Environments')}}
+            <span class="sm:block text-purple-300">
+                Show educational envoronment info
+            </span>
+        </h2>
+        <div>
+            <a href="{{route('nodes.update', [$educationalEnvironment])}}">
+                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    {{__('Edit educational environment')}}
+                </div>
+            </a>
         </div>
-        <hr />
-        <ul class="list-unstyled">
-            <li class="media">
-                <img class="mr-3" src="" alt="circle" />
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1">Tipo</h5>
-                    {{ $educationalEnvironment->type }}
+    </x-slot>
+    <div>
+        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="md:grid md:grid-cols-3 md:gap-6">
+                <div class="md:col-span-1">
+                    <h3 class="text.lg font-medium text-gray-900">Informacion de los ambientes educativos <span class="text-capitalize">{{ $node->state }}</span></h3>
                 </div>
-            </li>
-            <li class="media my-4">
-                <img class="mr-3" src="" alt="circle" />
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1">Descripcion</h5>
-                    {{ $educationalEnvironment->description }}
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                    <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+                        <h3 class="text-lg font-medium text-gray-900">{{__('Name')}}</h3>
+                        <div class="mt-3 max-w-xl text-sm text-gray-600">
+                            <p>
+                                {{$educationalEnvironment->name}}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </li>
-            <li class="media my-4">
-                <img class="mr-3" src="" alt="circle" />
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1">Capacidad aproximada</h5>
-                    {{ $educationalEnvironment->capacity_aprox }}
+            </div>
+
+            <div class="hidden sm:block">
+                <div class="py-8">
+                    <div class="border-t border-gray-200"></div>
                 </div>
-            </li>
-            <li class="media my-4">
-                <img class="mr-3" src="" alt="circle" />
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1">Esta habilitado?</h5>
-                    {{ $educationalEnvironment->is_enabled?'Si':'No' }}
+              </div>
+        
+              <div class="md:grid md:grid-cols-3 md:gap-6">
+                <div class="md:col-span-1">
+                  
                 </div>
-            </li>
-            <li class="media my-4">
-                <img class="mr-3" src="" alt="circle" />
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1">Esta disponible?</h5>
-                    {{ $educationalEnvironment->is_available?'Si':'No' }}
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                  <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+                    <h3 class="text-lg font-medium text-gray-900">{{ __('Type') }}</h3>
+                    <div class="mt-3 max-w-xl text-sm text-gray-600">
+                      <p>
+                        {{ $educationalEnvironment->type }}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-            </li>
-            <li class="media my-4">
-                <img class="mr-3" src="" alt="circle" />
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1">Institución educativa</h5>
-                    {{ $educationalEnvironment->educational_institution->name }}
+              </div>
+
+              <div class="hidden sm:block">
+                <div class="py-8">
+                    <div class="border-t border-gray-200"></div>
                 </div>
-            </li>
-        </ul>
+              </div>
+        
+              <div class="md:grid md:grid-cols-3 md:gap-6">
+                <div class="md:col-span-1">
+                  
+                </div>
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                  <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+                    <h3 class="text-lg font-medium text-gray-900">{{ __('Description') }}</h3>
+                    <div class="mt-3 max-w-xl text-sm text-gray-600">
+                      <p>
+                        {{ $educationalEnvironment->description}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hidden sm:block">
+                <div class="py-8">
+                    <div class="border-t border-gray-200"></div>
+                </div>
+              </div>
+        
+              <div class="md:grid md:grid-cols-3 md:gap-6">
+                <div class="md:col-span-1">
+                  
+                </div>
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                  <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+                    <h3 class="text-lg font-medium text-gray-900">{{ __('Capacity aprox') }}</h3>
+                    <div class="mt-3 max-w-xl text-sm text-gray-600">
+                      <p>
+                        {{ $educationalEnvironment->capacity_aprox }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hidden sm:block">
+                <div class="py-8">
+                    <div class="border-t border-gray-200"></div>
+                </div>
+              </div>
+        
+              <div class="md:grid md:grid-cols-3 md:gap-6">
+                <div class="md:col-span-1">
+                  
+                </div>
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                  <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+                    <h3 class="text-lg font-medium text-gray-900">{{ __('Is enabled') }}</h3>
+                    <div class="mt-3 max-w-xl text-sm text-gray-600">
+                      <p>
+                        {{ $educationalEnvironment->is_enabled?'Si':'No' }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hidden sm:block">
+                <div class="py-8">
+                    <div class="border-t border-gray-200"></div>
+                </div>
+              </div>
+        
+              <div class="md:grid md:grid-cols-3 md:gap-6">
+                <div class="md:col-span-1">
+                  
+                </div>
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                  <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+                    <h3 class="text-lg font-medium text-gray-900">{{ __('Is available') }}</h3>
+                    <div class="mt-3 max-w-xl text-sm text-gray-600">
+                      <p>
+                        {{ $educationalEnvironment->is_available?'Si':'No' }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="hidden sm:block">
+                <div class="py-8">
+                    <div class="border-t border-gray-200"></div>
+                </div>
+              </div>
+        
+              <div class="md:grid md:grid-cols-3 md:gap-6">
+                <div class="md:col-span-1">
+                  
+                </div>
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                  <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+                    <h3 class="text-lg font-medium text-gray-900">{{ __('Educational institution') }}</h3>
+                    <div class="mt-3 max-w-xl text-sm text-gray-600">
+                      <p>
+                        {{ $educationalEnvironment->educationalinstitution->name }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
     </div>
-</div>
-
-
-@endsection
+</x-app-layout>
