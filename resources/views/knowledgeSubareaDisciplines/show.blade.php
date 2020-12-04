@@ -21,22 +21,22 @@
                 <div class="w-full">
                     <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
                         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-indigo-600" onclick="changeAtiveTab(event,'tab-profile')">
+                            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-blue-900" onclick="changeActiveTab(event,'tab-profile')">
                                 <i class="fas fa-space-shuttle text-base mr-1"></i>  knowledge subarea dicipline
                             </a>
                         </li>
                         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-indigo-600 bg-white" onclick="changeAtiveTab(event,'tab-settings')">
+                            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-blue-900 bg-white" onclick="changeActiveTab(event,'tab-settings')">
                                 <i class="fas fa-cog text-base mr-1"></i>  knowledge area
                             </a>
                         </li>
                         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-indigo-600 bg-white" onclick="changeAtiveTab(event,'tab-options')">
+                            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-blue-900 bg-white" onclick="changeActiveTab(event,'tab-options')">
                                 <i class="fas fa-briefcase text-base mr-1"></i>  Research Teams
                             </a>
                         </li>
                         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-indigo-600 bg-white" onclick="changeAtiveTab(event,'tab-projects')">
+                            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-blue-900 bg-white" onclick="changeActiveTab(event,'tab-projects')">
                                 <i class="fas fa-briefcase text-base mr-1"></i>  Projects
                             </a>
                         </li>
@@ -180,32 +180,6 @@
                     </div>
                 </div>
             </div>
-            
-            <script type="text/javascript">
-                function changeAtiveTab(event,tabID){
-                    let element = event.target;
-                    while(element.nodeName !== "A"){
-                        element = element.parentNode;
-                    }
-                    ulElement = element.parentNode.parentNode;
-                    aElements = ulElement.querySelectorAll("li > a");
-                    tabContents = document.getElementById("tabs-id").querySelectorAll(".tab-content > div");
-                    for(let i = 0 ; i < aElements.length; i++){
-                        aElements[i].classList.remove("text-white");
-                        aElements[i].classList.remove("bg-indigo-600");
-                        aElements[i].classList.add("text-indigo-600");
-                        aElements[i].classList.add("bg-white");
-                        tabContents[i].classList.add("hidden");
-                        tabContents[i].classList.remove("block");
-                    }
-                    element.classList.remove("text-indigo-600");
-                    element.classList.remove("bg-white");
-                    element.classList.add("text-white");
-                    element.classList.add("bg-indigo-600");
-                    document.getElementById(tabID).classList.remove("hidden");
-                    document.getElementById(tabID).classList.add("block");
-                }
-            </script>
         </div>
     </div>
 </x-app-layout>
