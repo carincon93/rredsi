@@ -23,6 +23,7 @@ use App\Http\Controllers\EducationalInstitutionUserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PruebaController;
 use App\Http\Livewire\ModelForm;
 
 /*
@@ -59,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/model-form', function () {
         return view('livewire.model-form');
     })->name('model-form');
+
+    Route::post('export-word',[PruebaController::class,'exportWord'])->name('export-word');
 
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');
@@ -104,6 +107,6 @@ Route::middleware(['auth'])->group(function () {
         'knowledge-areas'                   => KnowledgeAreaController::class,
         'knowledge-subareas'                => KnowledgeSubareaController::class,
         'knowledge-subarea-disciplines'     => KnowledgeSubareaDisciplinesController::class,
-        'roles'                             => RoleController::class,
+        'roles'                             => RoleController::class
     ]);
 });
