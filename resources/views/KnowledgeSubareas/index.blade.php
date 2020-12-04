@@ -1,50 +1,42 @@
 <x-app-layout>
-
+    
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{__('Knowledge Subareas')}}
+            {{ __('Knowledge subareas') }}
             <span class="sm:block text-purple-300">
                 Add knowledge subareas areas info
             </span>
         </h2>
         <div>
             <a href="{{route('knowledge-subareas.create')}}">
-                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{__('Create knowledge subareas info')}}
+                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    {{ __('Create knowledge subareas info') }}
                 </div>
             </a>
         </div>
     </x-slot>
-
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white shadow-xl sm-rounded-lg">
-                    <x-data-table>
-                        <x-slot name="firstTheadTitle">
-                            {{__('name')}}
-                        </x-slot>
-                        <x-slot name="secondTheadTitle">
-                            {{ __('id') }}
-                        </x-slot>
-                        <x-slot name="thirdTheadTitle">
-                            {{ __('knowledge area id') }}
-                        </x-slot>
-
-                        <x-slot name="tbodyData">
-                            @foreach ($knowledgeSubareas as $knowledgeSubarea)
-
+    
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white shadow-xl sm-rounded-lg">
+                <x-data-table>
+                    <x-slot name="firstTheadTitle">
+                        {{ __('Name') }}
+                    </x-slot>
+                    <x-slot name="secondTheadTitle">
+                        {{ __('Knowledge area') }}
+                    </x-slot>
+                    
+                    <x-slot name="tbodyData">
+                        @foreach ($knowledgeSubareas as $knowledgeSubarea)
                             <tr class="bg-white border-4 border-gray-200">
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{$knowledgeSubarea->name}}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $knowledgeSubarea->name }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{$knowledgeSubarea->id}}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $knowledgeSubarea->knowledgeArea->name }}</span>
                                 </td>
-                                <td>
-                                    <span class="text-center ml-2 font-semibold">{{$knowledgeSubarea->knowledge_area_id}}</span>
-                                </td>
-
+                                
                                 <td class="py-2 text-left">
                                     <div class="hidden sm:flex sm:items-center justify-around">
                                         <x-jet-dropdown align="right" width="48">
@@ -58,10 +50,10 @@
                                                 </button>
                                             </x-slot>
                                             <x-slot name="content">
-                                                <x-jet-dropdown-link href="{{ route('knowledge-subareas.show', $knowledgeSubarea->id) }}">
+                                                <x-jet-dropdown-link href="{{ route('knowledge-subareas.show', [$knowledgeSubarea]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('knowledge-subareas.edit', $knowledgeSubarea->id) }}">
+                                                <x-jet-dropdown-link href="{{ route('knowledge-subareas.edit', [$knowledgeSubarea]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('knowledge-subareas.destroy', $knowledgeSubarea->id) }}')">
@@ -78,10 +70,10 @@
             </div>
         </div>
     </div>
-
+    
     {{-- #Component modal --}}
     <x-dialog-modal>
-
+        
     </x-dialog-modal>
-
+    
 </x-app-layout>

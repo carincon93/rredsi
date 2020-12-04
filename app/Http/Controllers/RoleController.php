@@ -71,7 +71,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('Roles.edit', compact('role'));
+        $permissions = Permission::orderBy('model')->get();
+
+        return view('Roles.edit', compact('role', 'permissions'));
     }
 
     /**

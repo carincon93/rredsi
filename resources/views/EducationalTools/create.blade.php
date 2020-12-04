@@ -8,7 +8,7 @@
         </h2>
         <div>
             <a href="{{ route('nodes.educational-institutions.educational-environments.educational-tools.index', [$node, $educationalInstitution, $educationalInstitution]) }}">
-                <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                     </svg>
@@ -43,12 +43,12 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="qty" value="{{ __('qty') }}" />
+                        <x-jet-label for="qty" value="{{ __('Qty') }}" />
                         <x-jet-input id="qty" class="block mt-1 w-full" type="number" max="9999999999" name="qty" value="{{ old('qty') }}" required />
                         <x-jet-input-error for="qty" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Enabled?' ) }} </p>
+                    <p class="mt-4">{{ __('Is enabled?' ) }} </p>
                     <div class="mt-4">
                         <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" {{ old('is_enabled') == 1 ? "checked" : "" }} value="1" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enable_yes">Si</label>
@@ -59,7 +59,7 @@
                         <x-jet-input-error for="is_enabled" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Available?') }}</p>
+                    <p class="mt-4">{{ __('Is available?') }}</p>
                     <div class="mt-4">
                         <input class="form-check-input" type="radio" name="is_available" id="is_available_yes" {{ old('is_available') == 1 ? "checked" : "" }} value="1" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_yes">Si</label>

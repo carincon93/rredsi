@@ -3,7 +3,7 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Roles') }}
             <span class="sm:block text-purple-300">
-                Add role
+                Update role
             </span>
         </h2>
         <div>
@@ -23,22 +23,23 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">{{ __('Description') }}</x-slot>
-                    <x-slot name="description">Add role</x-slot>
+                    <x-slot name="description">Editar la información del rol</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('roles.store') }}">
+                <form method="POST" action="{{ route('roles.update', [$role]) }}">
                     @csrf
+                    @method('PUT')
         
                     <div>
                         <x-jet-label for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" maxlength="255" name="name" value="{{ old('name') }}" required />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" maxlength="255" name="name" value="{{ old('name') ?? $role->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="description" value="{{ __('Description') }}" />
-                        <textarea name="description" id="description" class="form-input rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" required>{{ old('description') }}</textarea>
+                        <textarea name="description" id="description" class="form-input rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" required>{{ old('description') ?? $role->description }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
                     
@@ -79,7 +80,7 @@
                     
                     <div class="flex items-center justify-end mt-4">        
                         <x-jet-button class="ml-4">
-                            {{ __('Create') }}
+                            {{ __('Edit') }}
                         </x-jet-button>
                     </div>
                 </form>
