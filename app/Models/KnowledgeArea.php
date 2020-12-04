@@ -21,12 +21,12 @@ class KnowledgeArea extends Model
         return $this->hasOne('App\Models\ResearchLine');
     }
 
-    public function academicWork() {
+    public function academicWorks() {
         return $this->hasMany('App\Models\AcademicWork');
     }
 
-    public function knowledgeSubarea() {
-        return $this->hasMany('App\Models\knowledgeSubarea');
+    public function knowledgeSubareas() {
+        return $this->hasMany('App\Models\KnowledgeSubarea');
     }
 
     public function projects() {

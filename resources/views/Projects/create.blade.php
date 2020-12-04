@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <p>{{ __('Knowledge subareas diciplines' ) }} </p>
+                        <p>{{ __('Knowledge subareas disciplines' ) }} </p>
                         @forelse ($knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="knowledge_subarea_dicipline_id[]" @if(is_array(old('knowledge_subarea_dicipline_id')) && in_array($knowledgeSubareaDiscipline->id , old('knowledge_subarea_dicipline_id'))) checked @endif  id="{{ "knowledge-subarea-dicipline-$knowledgeSubareaDiscipline->id" }}" value="{{ $knowledgeSubareaDiscipline->id }}" />

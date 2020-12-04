@@ -16,6 +16,12 @@
                         <x-jet-nav-link href="{{ route('nodes.educational-institutions.dashboard', [request()->route('node')->id, request()->route('educational_institution')->id]) }}" :active="request()->routeIs('dashboard')" class="text-gray-600 hover:text-gray-400">
                             {{ __('Dashboard') }} 
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('/', request()->route('node')->id) }}" :active="request()->routeIs('/')" class="text-gray-600 hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" class="mr-2">
+                                <path regular" d="M14.03,12.914l-5.82,2.66a1.288,1.288,0,0,0-.636.636l-2.66,5.82A.8.8,0,0,0,5.97,23.086l5.82-2.66a1.288,1.288,0,0,0,.636-.636l2.66-5.82a.8.8,0,0,0-1.056-1.056Zm-3.119,6a1.288,1.288,0,1,1,0-1.821A1.288,1.288,0,0,1,10.91,18.91ZM10,8A10,10,0,1,0,20,18,10,10,0,0,0,10,8Zm0,18.065A8.065,8.065,0,1,1,18.065,18,8.074,8.074,0,0,1,10,26.065Z" transform="translate(0 -8)"/>
+                            </svg>
+                            {{ __('Explorer') }} 
+                        </x-jet-nav-link>
                     @endif
                 </div>
             </div>

@@ -13,6 +13,17 @@
           </div>
         </a>
       </div>
+
+      <div>
+        <form action="{{ route('export-word') }}" method="POST" >
+            @csrf
+                <input hidden name="project_id" value="{{ $project->id }}"></input>
+
+                <button class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150" type="submit">
+                        {{ __('Export word') }}
+                </button>
+            </form>
+      </div>
     </x-slot>
 
 
@@ -74,7 +85,7 @@
 
                             <div class="block" id="tab-profile">
 
-                                {{-- tab info knowledge subarea diciplines --}}
+                                {{-- tab info knowledge subarea disciplines --}}
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                       <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -370,7 +381,6 @@
                                             <div class="md:col-span-1">
                                                 <h3 class="text-lg font-medium text-gray-900">Información de events</h3>
                                             </div>
-
                                                 @foreach ($project->events as $event)
 
                                                     <div class="md:grid md:grid-cols-3 md:gap-6">

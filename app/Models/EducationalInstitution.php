@@ -151,7 +151,7 @@ class EducationalInstitution extends Model
     }
 
     public function projectsByYear() {
-        return DB::table('projects')->select(DB::raw("date_part('year', end_date), COUNT(date_part('year', end_date))"))->groupBy(DB::raw("date_part('year', end_date)"))->get();
+        return DB::table('projects')->select(DB::raw("date_part('year', projects.end_date), COUNT(date_part('year', projects.end_date))"))->join("project_research_team", "projects.id", "project_research_team.project_id")->join("research_teams", "project_research_team.research_team_id", "research_teams.id")->join("research_groups", "research_teams.research_group_id", "research_groups.id")->join("educational_institutions", "research_groups.educational_institution_id", "educational_institutions.id")->where("educational_institutions.id", $this->id)->groupBy(DB::raw("date_part('year', projects.end_date)"))->get();
     }
 
     public function qtyGraduationsRegistered() {
