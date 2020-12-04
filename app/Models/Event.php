@@ -29,7 +29,7 @@ class Event extends Model
         return $this->belongsToMany('App\Models\Project', 'event_project', 'event_id', 'project_id');
     }
 
-    public function educationalInstitutionEvent() {
+    public function educationalInstitutionEvents() {
         return $this->hasOne('App\Models\EducationalInstitutionEvent', 'id');
     }
 
@@ -37,7 +37,7 @@ class Event extends Model
         return $this->hasOne('App\Models\NodeEvent', 'id');
     }
 
-    public function getDatesForHumansAttribute() 
+    public function getDatesForHumansAttribute()
     {
         $start_date = Carbon::parse($this->start_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         $end_date   = Carbon::parse($this->end_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');

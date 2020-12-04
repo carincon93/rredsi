@@ -18,7 +18,7 @@ class EducationalInstitutionEventController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution)
     {
-        $events = $educationalInstitution->educationalInstitutionEvent()->where('educational_institution_id', $educationalInstitution->id)->with('event')->get();
+        $events = $educationalInstitution->educationalInstitutionEvents()->where('educational_institution_id', $educationalInstitution->id)->with('event')->get();
 
         return view('EducationalInstitutionEvents.index', compact('node', 'educationalInstitution', 'events'));
     }
@@ -50,7 +50,7 @@ class EducationalInstitutionEventController extends Controller
         $event->link        = $request->get('link');
         $event->save();
 
-        $event->educationalInstitutionEvent()->create([
+        $event->educationalInstitutionEvents()->create([
             'id'                            => $event->id,
             'educational_institution_id'    => $educationalInstitution->id
         ]);
@@ -100,7 +100,7 @@ class EducationalInstitutionEventController extends Controller
         $event->end_date    = $request->get('end_date');
         $event->link        = $request->get('link');
 
-        $event->educationalInstitutionEvent()->update([
+        $event->educationalInstitutionEvents()->update([
             'educational_institution_id' => $educationalInstitution->id
         ]);
 

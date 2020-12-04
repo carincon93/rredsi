@@ -16,7 +16,7 @@ class KnowledgeAreaController extends Controller
     public function index()
     {
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
-        
+
         return view('KnowledgeAreas.index', compact('knowledgeAreas'));
     }
 
@@ -45,7 +45,7 @@ class KnowledgeAreaController extends Controller
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('knowledgeAreas.index')->with('status', $message);
+        return redirect()->route('knowledge-areas.index')->with('status', $message);
     }
 
     /**

@@ -29,16 +29,16 @@
             <div class="mt-5 md:mt-0 md:col-span-2">
                 <form method="POST" action="{{ route('nodes.educational-institutions.events.store', [$node, $educationalInstitution]) }}">
                     @csrf
-        
+
                     <div>
                         <x-jet-label for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" maxlength="191" name="name" value="{{ old('name') }}" required />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="location" value="{{ __('Location') }}" />
-                        <x-jet-input id="location" class="block mt-1 w-full" type="text" maxlength="191" name="location" value="{{ old('location') }}" required />
+                        <x-jet-input id="location" class="block mt-1 w-full" type="text" max="191" name="location" value="{{ old('location') }}" required />
                         <x-jet-input-error for="location" class="mt-2" />
                     </div>
 
@@ -62,11 +62,11 @@
 
                     <div class="mt-4">
                         <x-jet-label for="link" value="{{ __('Link') }}" />
-                        <x-jet-input id="link" class="block mt-1 w-full" type="url" maxlength="191" name="link" value="{{ old('link') }}" required />
+                        <x-jet-input id="link" class="block mt-1 w-full" type="url" max="191" name="link" value="{{ old('link') }}" required />
                         <x-jet-input-error for="link" class="mt-2" />
                     </div>
-        
-                    <div class="flex items-center justify-end mt-4">        
+
+                    <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Create') }}
                         </x-jet-button>

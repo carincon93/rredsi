@@ -47,7 +47,7 @@ class EventController extends Controller
         $event->save();
 
         if($event->type == 'Institución educativa') {
-            $event->educationalInstitutionEvent()->create([
+            $event->educationalInstitutionEvents()->create([
                 'id'                            => $event->id,
                 'educational_institution_id'    => $request->get('educational_institution_id')
             ]);
@@ -104,7 +104,7 @@ class EventController extends Controller
         $event->link        = $request->get('link');
 
         if($event->type == 'Institución educativa') {
-            $event->educationalInstitutionEvent()->update([
+            $event->educationalInstitutionEvents()->update([
                 'educational_institution_id'    => $request->get('educational_institution_id')
             ]);
         } elseif($event->type == 'Nodo') {

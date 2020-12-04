@@ -14,7 +14,7 @@ class KnowledgeSubarea extends Model
         'name',
     ];
 
-    public function knowledgeArea() {
+    public function KnowledgeArea() {
         return $this->belongsTo('App\Models\KnowledgeArea');
     }
 

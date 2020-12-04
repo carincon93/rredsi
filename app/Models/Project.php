@@ -60,6 +60,7 @@ class Project extends Model
         return $this->belongsToMany('App\Models\AcademicProgram', 'project_academic_program', 'project_id', 'academic_program_id');
     }
 
+
     public function authors() {
         return $this->belongsToMany('App\Models\User', 'authors', 'project_id', 'user_id');
     }
@@ -68,7 +69,7 @@ class Project extends Model
         return $this->belongsTo('App\Models\ProjectType');
     }
 
-    public function getDatesForHumansAttribute() 
+    public function getDatesForHumansAttribute()
     {
         $start_date = Carbon::parse($this->start_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         $end_date   = Carbon::parse($this->end_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');

@@ -17,7 +17,7 @@ class KnowledgeSubareaController extends Controller
      */
     public function index()
     {
-        $knowledgeSubarea = KnowledgeSubarea::orderBy('name')->get();
+        $knowledgeSubareas = KnowledgeSubarea::orderBy('name')->get();
 
         return view('KnowledgeSubareas.index', compact('knowledgeSubareas'));
     }

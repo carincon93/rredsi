@@ -42,7 +42,7 @@
                         <select id="knowledge_subarea_id" name="knowledge_subarea_id" class="block mt-1 p-4 w-full" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeSubareas as $knowledgeSubarea)
-                                <option value="{{ $knowledgeSubarea->id }}" {{ old('knowledge_subarea_id') == $knowledgeSubareaDiscipline->id ? "selected" : "" || $knowledgeSubareaDiscipline->knowledgeSubarea()->id == $knowledgeSubarea->id ? "selected" : ""  }}>{{ $knowledgeSubarea->name }}</option>
+                                <option value="{{ $knowledgeSubarea->id }}" {{ old('knowledge_subarea_id') == $knowledgeSubareaDiscipline->id ? "selected" : "" || $knowledgeSubareaDiscipline->knowledgeSubarea->id == $knowledgeSubarea->id ? "selected" : ""  }}>{{ $knowledgeSubarea->name }}</option>
                             @empty
                                 <option value="">No knowledge subareas</option>
                             @endforelse

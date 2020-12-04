@@ -35,7 +35,7 @@
                         <select id="project_type_id" name="project_type_id" class="form-select w-full" required >
                             <option value="">Seleccione un tipo de proyecto</option>
                             @forelse ($projectTypes as $projectType)
-                                <option value="{{ $projectType->id }}" {{ old('project_type_id') == $projectType->id }}>{{ $projectType->type }}</option>
+                                <option value="{{ $projectType->id }}" {{ old('project_type_id') == $projectType->id ? "selected" : "" }}>{{ $projectType->type }}</option>
                             @empty
                                 <option value="">No project types data</option>
                             @endforelse
@@ -45,7 +45,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="title" value="{{ __('Title') }}" />
-                        <textarea id="title" name="title" class="block mt-1 p-4 w-full" required >{{ old('title') }}</textarea>
+                        <textarea id="title" name="title" max="255" class="block mt-1 p-4 w-full" required >{{ old('title') }}</textarea>
                         <x-jet-input-error for="title" class="mt-2" />
                     </div>
 
@@ -138,16 +138,16 @@
                     </div>
 
                     <div class="mt-4">
-                        <p>{{ __('Knowledge areas' ) }} </p>
-                        @forelse ($knowledgeAreas as $knowledgeArea)
+                        <p>{{ __('Knowledge subareas disciplines' ) }} </p>
+                        @forelse ($knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
                             <div class="mt-4">
-                                <input class="form-check-input" type="checkbox" name="knowledge_area_id[]" @if(is_array(old('knowledge_area_id')) && in_array($knowledgeArea->id , old('knowledge_area_id'))) checked @endif id="{{ "knowledge-area-$knowledgeArea->id" }}" value="{{ $knowledgeArea->id }}" />
-                                <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "knowledge-area-$knowledgeArea->id" }}">{{ $knowledgeArea->name }}</label>
+                                <input class="form-check-input" type="checkbox" name="knowledge_subarea_dicipline_id[]" @if(is_array(old('knowledge_subarea_dicipline_id')) && in_array($knowledgeSubareaDiscipline->id , old('knowledge_subarea_dicipline_id'))) checked @endif  id="{{ "knowledge-subarea-dicipline-$knowledgeSubareaDiscipline->id" }}" value="{{ $knowledgeSubareaDiscipline->id }}" />
+                                <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "knowledge-subarea-dicipline-$knowledgeSubareaDiscipline->id" }}">{{ $knowledgeSubareaDiscipline->name }}</label>
                             </div>
                         @empty
                             <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
                         @endforelse
-                        <x-jet-input-error for="knowledge_area_id" class="mt-2" />
+                        <x-jet-input-error for="knowledge_subarea_dicipline_id" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
