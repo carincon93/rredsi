@@ -45640,6 +45640,34 @@ document.addEventListener('DOMContentLoaded', function () {
   if (document.querySelector('.dataTables_filter input')) {
     document.querySelector('.dataTables_filter input').classList.add('form-input', 'rounded-b-none', 'border-0', 'shadow-sm', 'block', 'w-full');
   }
+
+  window.changeActiveTab = function (event, tabID) {
+    var element = event.target;
+
+    while (element.nodeName !== "A") {
+      element = element.parentNode;
+    }
+
+    var ulElement = element.parentNode.parentNode;
+    var aElements = ulElement.querySelectorAll("li > a");
+    var tabContents = document.getElementById("tabs-id").querySelectorAll(".tab-content > div");
+
+    for (var i = 0; i < aElements.length; i++) {
+      aElements[i].classList.remove("text-white");
+      aElements[i].classList.remove("bg-blue-900");
+      aElements[i].classList.add("text-blue-900");
+      aElements[i].classList.add("bg-white");
+      tabContents[i].classList.add("hidden");
+      tabContents[i].classList.remove("block");
+    }
+
+    element.classList.remove("text-blue-900");
+    element.classList.remove("bg-white");
+    element.classList.add("text-white");
+    element.classList.add("bg-blue-900");
+    document.getElementById(tabID).classList.remove("hidden");
+    document.getElementById(tabID).classList.add("block");
+  };
 }, false);
 
 /***/ }),

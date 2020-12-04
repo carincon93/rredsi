@@ -14,7 +14,7 @@
                     <div class="card p-4 detail">
                         <div class="card-header">
                             <h4>{{ $event->name }}</h4>
-                            <a class="text-indigo-600 hover:text-blue-900"  href={{ route('events.edit',$event->id) }} > Editar </a>
+                            <a class="text-blue-900 hover:text-blue-900"  href={{ route('events.edit',$event->id) }} > Editar </a>
                         </div>
                         <hr></hr>
                         <ul class="list-unstyled">

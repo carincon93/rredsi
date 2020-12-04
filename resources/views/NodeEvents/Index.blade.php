@@ -16,7 +16,7 @@
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 
                             <div>
-                                <a class="text-indigo-600 hover:text-blue-900" href="/events/create">Crear evento</a>
+                                <a class="text-blue-900 hover:text-blue-900" href="/events/create">Crear evento</a>
                             </div>
 
                             <table class="min-w-full divide-y divide-gray-200">
@@ -52,8 +52,8 @@
 
                                                 <td class="action">
                                                     <div class="actions-wrapper">
-                                                        <a class="text-indigo-600 hover:text-blue-900" href="{{ route('events.edit',$event->id) }}"> Editar </a>
-                                                        <a class="text-indigo-600 hover:text-blue-900" href="{{ route('events.show',$event->id) }}"> Detail </a>
+                                                        <a class="text-blue-900 hover:text-blue-900" href="{{ route('events.edit',$event->id) }}"> Editar </a>
+                                                        <a class="text-blue-900 hover:text-blue-900" href="{{ route('events.show',$event->id) }}"> Detail </a>
 
                                                         <a class="text-red-600 hover:text-red-900" href="#" >Eliminar </a>
                                                     </div>
