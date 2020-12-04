@@ -51,10 +51,10 @@
                 @csrf()
                 @method('DELETE')
 
-             <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">Action</button>
+             <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">{{ __('Delete') }}</button>
             </form>
-            <button type="button"" class=" modal-close mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Close</button>
-            <input id="codigo" hidden >
+            <button type="button"" class=" modal-close mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">{{ __('Close') }}</button>
+            <input id="code" hidden >
         </div>
 
       </div>
@@ -66,7 +66,7 @@
     var id = null;
 
     function modal(id){
-       var input = document.getElementById('codigo');
+       var input = document.getElementById('code');
        input.setAttribute('value',id);
 
     }
@@ -102,10 +102,10 @@
 
 
     function toggleModal () {
-      const body = document.querySelector('body')
+      const body  = document.querySelector('body')
       const modal = document.querySelector('.modal')
-      const form = document.querySelector('#form')
-      const input = document.getElementById('codigo');
+      const form  = document.querySelector('#form')
+      const input = document.getElementById('code');
 
       modal.classList.toggle('opacity-0')
       modal.classList.toggle('pointer-events-none')

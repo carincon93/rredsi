@@ -22,6 +22,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EducationalInstitutionUserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Livewire\ModelForm;
 
 /*
@@ -35,7 +36,16 @@ use App\Http\Livewire\ModelForm;
 |
 */
 
-Route::get('/nodes/{node}/welcome', [WelcomeController::class, 'index'])->name('/');
+Route::get('/nodes/{node}/explorer', [WelcomeController::class, 'index'])->name('/');
+Route::get('/nodes/{node}/explorer/roles', [WelcomeController::class, 'roles'])->name('nodes.explorer.roles');
+Route::get('/nodes/{node}/explorer/roles/{academicProgram}', [WelcomeController::class, 'searchRoles'])->name('nodes.explorer.searchRoles');
+Route::get('/nodes/{node}/explorer/contact-form/{user}', [WelcomeController::class, 'contactForm'])->name('nodes.explorer.contactForm')->middleware(['auth']);
+Route::post('/nodes/{node}/explorer/contact-form/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification')->middleware(['auth']);
+Route::get('preview-emails', function () {
+    return (new App\Notifications\RoleInvitation(3,1,3))
+        ->toMail('carincon93@gmail.com');
+});
+
 Route::get('/', function() {
     return redirect()->route('/', 1);
 });

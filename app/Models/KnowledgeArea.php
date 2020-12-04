@@ -26,7 +26,7 @@ class KnowledgeArea extends Model
     }
 
     public function knowledgeSubareas() {
-        return $this->hasMany('App\Models\knwoledgeSubarea');
+        return $this->hasMany('App\Models\KnowledgeSubarea');
     }
 
     public function projects() {

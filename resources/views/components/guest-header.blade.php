@@ -1,5 +1,21 @@
-<a href="/">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="63.961" height="35.197" viewBox="0 0 63.961 35.197" class="m-auto">
+<div class="relative flex items-top justify-center sm:items-center sm:pt-0">
+    @if (Route::has('login'))
+        <div class="hidden fixed top-0 h-16 right-0 px-6 py-4 sm:block">
+            @auth
+                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">{{ __('Dashboard') }}</a>
+            @else
+                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">{{ __('Login') }}</a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">{{ __('Register') }}</a>
+                @endif
+            @endif
+        </div>
+    @endif
+</div>
+
+<a href="{{ route('/', [$node]) }}">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="63.961" height="35.197" viewBox="0 0 63.961 35.197" class="mt-20 m-auto mb-20">
         <defs>
         <linearGradient id="linear-gradient" x1="0.5" x2="1.131" y2="1.374" gradientUnits="objectBoundingBox">
             <stop offset="0" stop-color="#163a70"/>
