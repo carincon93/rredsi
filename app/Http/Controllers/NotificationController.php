@@ -9,6 +9,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Notification;
 use App\Notifications\RoleInvitation;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class NotificationController extends Controller
 {
@@ -19,5 +20,16 @@ class NotificationController extends Controller
         Notification::send($user, new RoleInvitation($project, $researchTeam, $user));
    
         route('nodes.explorer.roles', [$node])->with('status', 'Invitación enviada con éxito');
+    }
+
+    public function makeDocInvitation($project, $researchTeam, $user)
+    {
+        $templateProcessor = new TemplateProcessor('templates/contact-template.docx');
+
+        $title      = $project->title;
+        $templateProcessor->setValue('title', $title);
+        $templateProcessor->saveAs("$title.docx");
+
+        return response()->download(storage_path("$title.docx"));
     }
 }

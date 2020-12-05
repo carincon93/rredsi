@@ -2,15 +2,15 @@
 
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{__('KnowledgeAreas')}}
+            {{__('Knowledge areas')}}
             <span class="sm:block text-purple-300">
                 Add knowledge areas info
             </span>
         </h2>
         <div>
-            <a href="{{route('knowledge-areas.create')}}">
+            <a href="{{ route('knowledge-areas.create') }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{__('Create knowledge areas info')}}
+                    {{ __('Create knowledge areas info') }}
                 </div>
             </a>
         </div>
@@ -24,20 +24,14 @@
                     <x-slot name="firstTheadTitle">
                         {{__('name')}}
                     </x-slot>
-                    <x-slot name="secondTheadTitle">
-                        {{ __('id') }}
-                    </x-slot>
 
                     <x-slot name="tbodyData">
                         @foreach ($knowledgeAreas as $knowledgeArea)
 
                         <tr class="bg-white border-4 border-gray-200">
                             <td>
-                                <span class="text-center ml-2 font-semibold">{{$knowledgeArea->name}}</span>
+                                <span class="text-center ml-2 font-semibold">{{ $knowledgeArea->name }}</span>
                             </td>
-                            <td>
-                                <span class="text-center ml-2 font-semibold">{{$knowledgeArea->id}}</span>
-                             </td>
 
                              <td class="py-2 text-left">
                                 <div class="hidden sm:flex sm:items-center justify-around">
@@ -52,13 +46,13 @@
                                             </button>
                                         </x-slot>
                                         <x-slot name="content">
-                                            <x-jet-dropdown-link href="{{ route('knowledge-areas.show', $knowledgeArea->id) }}">
+                                            <x-jet-dropdown-link href="{{ route('knowledge-areas.show', [$knowledgeArea]) }}">
                                                 {{ __('Show') }}
                                             </x-jet-dropdown-link>
-                                            <x-jet-dropdown-link href="{{ route('knowledge-areas.edit', $knowledgeArea->id) }}">
+                                            <x-jet-dropdown-link href="{{ route('knowledge-areas.edit', [$knowledgeArea]) }}">
                                                 {{ __('Edit') }}
                                             </x-jet-dropdown-link>
-                                            <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('knowledge-areas.destroy', $knowledgeArea->id) }}')">
+                                            <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('knowledge-areas.destroy', [$knowledgeArea]) }}')">
                                                 {{ __('Delete') }}
                                             </x-jet-dropdown-link>
                                         </x-slot>

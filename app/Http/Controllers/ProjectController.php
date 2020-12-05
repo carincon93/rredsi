@@ -9,7 +9,6 @@ use App\Models\ResearchGroup;
 use App\Models\ResearchTeam;
 use App\Models\Project;
 
-
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\ProjectRequest;
@@ -169,21 +168,5 @@ class ProjectController extends Controller
         }
 
         return redirect()->route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
-    }
-
-    public function exportWord($id)
-    {
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('templates/pantilla.docx');
-
-        $project = Project::with('node', 'educationalInstitution', 'researchGroup','ResearchTeam')->findOrFail($id);
-
-        $title= $project->title;
-
-        $templateProcessor->setValue('title',$title);
-
-        $templateProcessor->saveAs($title.'.docx');;
-
-        return response()->download(storage_path($title.'docx'));
-
     }
 }
