@@ -4,7 +4,7 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ $educationalInstitution->name }}
             <span class="sm:block text-purple-300">
-                
+
             </span>
         </h2>
     </x-slot>
@@ -15,7 +15,7 @@
             <h1 class="text-gray-400 mb-4">Administre los módulos relacionados con la institución educativa <span class="text-uppercase">{{ $educationalInstitution->name }}</span> del nodo <span clas="text-capitalize">{{ $node->state }}</span>.</h1>
             <div class="grid md:grid-cols-3 gap-4">
 
-                <div class="h-64 bg-white overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
+            <div class="transition duration-500 ease-in-out transform hover:-translate-y-1 h-64 bg-white  hover:bg-gray-200 overflow-hidden shadow-xl sm-rounded-lg p-4 flex" >
                     <a href="{{ route('nodes.educational-institutions.academic-programs.index', [$node, $educationalInstitution]) }}" class="flex flex-col h-56 items-center justify-around w-96">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-14 h-14 text-gray-400">
                             <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -27,7 +27,7 @@
                     </a>
                 </div>
 
-                <div class="h-64 bg-white overflow-hidden shadow-xl sm-rounded-lg p-4">
+                <div class="transition duration-500 ease-in-out transform hover:-translate-y-1 h-64 bg-white hover:bg-gray-200 overflow-hidden shadow-xl sm-rounded-lg p-4">
                     <a href="{{ route('nodes.educational-institutions.research-groups.index', [$node, $educationalInstitution]) }}" class="flex flex-col h-56 items-center justify-around w-96">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-14 h-14 text-gray-400">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -38,7 +38,7 @@
                     </a>
                 </div>
 
-                <div class="h-64 bg-white overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
+                <div class="transition duration-500 ease-in-out transform hover:-translate-y-1 h-64 bg-white hover:bg-gray-200 overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
                     <a href="{{ route('nodes.educational-institutions.educational-environments.index', [$node, $educationalInstitution]) }}" class="flex flex-col h-56 items-center justify-around w-96">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-14 h-14 text-gray-400">
                             <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -56,7 +56,7 @@
 
             <div class="grid md:grid-cols-3 gap-4">
 
-                <div class="h-64 bg-white overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
+                <div class="transition duration-500 ease-in-out transform hover:-translate-y-1 h-64 bg-white hover:bg-gray-200 overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
                     <a href="{{ route('nodes.educational-institutions.events.index', [$node, $educationalInstitution]) }}" class="flex flex-col h-56 items-center justify-around w-96">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-14 h-14 text-gray-400">
                             <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -68,7 +68,7 @@
                     </a>
                 </div>
 
-                <div class="h-64 bg-white overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
+                <div class="transition duration-500 ease-in-out transform hover:-translate-y-1 h-64 bg-white hover:bg-gray-200 overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
                     <a href="{{ route('nodes.educational-institutions.users.index', [$node, $educationalInstitution]) }}" class="flex flex-col h-56 items-center justify-around w-96">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-14 h-14 text-gray-400">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -78,7 +78,7 @@
                     </a>
                 </div>
 
-                <div class="h-64 bg-white overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
+                <div class=" transition duration-500 ease-in-out transform hover:-translate-y-1 h-64 bg-white hover:bg-gray-200 overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
                     <a href="{{ route('nodes.educational-institutions.dashboard.bi', [$node, $educationalInstitution]) }}" class="flex flex-col h-56 items-center justify-around w-96">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-14 h-14 text-gray-400">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -90,5 +90,6 @@
             </div>
         </div>
     </div>
+
 
 </x-app-layout>
