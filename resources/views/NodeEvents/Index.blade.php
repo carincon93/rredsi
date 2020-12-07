@@ -1,5 +1,5 @@
 <x-app-layout>
-    
+
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Node events') }}
@@ -80,10 +80,14 @@
         </div>
     </div>
 
-     {{-- #Component modal --}}
-     <x-dialog-modal>
+    {{-- #Component modal --}}
+    <x-dialog-modal />
 
-    </x-dialog-modal>
+    {{--Alert component --}}
+    @if (session('status'))
+        <x-data-alert />
+    @endif
+
 </x-app-layout>
 
 

@@ -22,12 +22,12 @@
                     <x-slot name="firstTheadTitle">
                         {{ __('Type') }}
                     </x-slot>
-                    
+
                     <x-slot name="tbodyData">
                         @foreach ($roles as $role)
-                            
+
                             <tr class="bg-white border-4 border-gray-200">
-                    
+
                                 <td>
                                     <span class="text-center ml-2 font-semibold">{{ $role->name }}</span>
                                 </td>
@@ -44,8 +44,8 @@
                                                     </div>
                                                 </button>
                                             </x-slot>
-                        
-                                            <x-slot name="content">                        
+
+                                            <x-slot name="content">
                                                 <x-jet-dropdown-link href="{{ route('roles.show', $role->id) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
@@ -66,4 +66,14 @@
             </div>
         </div>
     </div>
+
+    {{-- #Component modal --}}
+    <x-dialog-modal />
+
+    {{--Alert component --}}
+    @if (session('status'))
+        <x-data-alert />
+    @endif
+
+
 </x-app-layout>
