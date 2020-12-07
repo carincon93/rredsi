@@ -84,7 +84,6 @@
         </div>
     </div>
 
-
     {{-- #Component modal --}}
     <x-dialog-modal />
 
@@ -92,6 +91,5 @@
     @if (session('status'))
         <x-data-alert />
     @endif
-
 
 </x-app-layout>
