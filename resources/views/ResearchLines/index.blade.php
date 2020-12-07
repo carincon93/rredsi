@@ -73,8 +73,11 @@
     </div>
 
     {{-- #Component modal --}}
-    <x-dialog-modal>
+    <x-dialog-modal />
 
-    </x-dialog-modal>
+    {{--Alert component --}}
+    @if (session('status'))
+        <x-data-alert />
+    @endif
 
 </x-app-layout>

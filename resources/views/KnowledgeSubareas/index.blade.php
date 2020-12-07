@@ -1,5 +1,5 @@
 <x-app-layout>
-    
+
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Knowledge subareas') }}
@@ -15,7 +15,7 @@
             </a>
         </div>
     </x-slot>
-    
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm-rounded-lg">
@@ -26,7 +26,7 @@
                     <x-slot name="secondTheadTitle">
                         {{ __('Knowledge area') }}
                     </x-slot>
-                    
+
                     <x-slot name="tbodyData">
                         @foreach ($knowledgeSubareas as $knowledgeSubarea)
                             <tr class="bg-white border-4 border-gray-200">
@@ -36,7 +36,7 @@
                                 <td>
                                     <span class="text-center ml-2 font-semibold">{{ $knowledgeSubarea->knowledgeArea->name }}</span>
                                 </td>
-                                
+
                                 <td class="py-2 text-left">
                                     <div class="hidden sm:flex sm:items-center justify-around">
                                         <x-jet-dropdown align="right" width="48">
@@ -70,10 +70,14 @@
             </div>
         </div>
     </div>
-    
+
     {{-- #Component modal --}}
-    <x-dialog-modal>
-        
-    </x-dialog-modal>
-    
+    <x-dialog-modal />
+
+    {{--Alert component --}}
+    @if (session('status'))
+        <x-data-alert />
+    @endif
+
+
 </x-app-layout>
