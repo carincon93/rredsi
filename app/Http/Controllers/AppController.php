@@ -72,15 +72,26 @@ class AppController extends Controller
     }
 
     /**
-     * Show contact form.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function searchProjects(Request $request, Node $node)
     {
-        $search   = $request->get('search');
-        $projects = Project::searchProjects($search)->get();
+        $search         = $request->get('search');
+        $projects       = Project::searchProjects($search)->get();
+        $allKeywords    = Project::allKeywords($node);
+        
+        return view('Explorer.index-projects', compact('node', 'projects', 'search', 'allKeywords'));
+    }
 
-        return view('Explorer.index-projects', compact('node', 'projects', 'search'));
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showProject(Request $request, Node $node, Project $project)
+    {
+        return view('Explorer.show-project', compact('node', 'project'));
     }
 }

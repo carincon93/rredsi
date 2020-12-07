@@ -1,7 +1,7 @@
 <x-guest-layout>
-
+    
     <x-guest-header :node="$node" />
-
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-14 pt-4" style="background: url(/storage/images/net.png)">
@@ -25,21 +25,50 @@
                 @forelse ($projects->chunk(3) as $chunk)
                     <div class="md:grid md:grid-cols-3 md:gap-4">
                         @foreach ($chunk as $project)
-                            <div class="shadow p-2">
-                                <div style="padding-top: 0.2em; padding-bottom: 0.2rem" class="inline-flex items-center space-x-1 text-xs px-2 bg-gray-200 text-gray-800 rounded-full mb-4">
-                                    <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-50 rounded-full"></div>
-                                    <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $project->projectType->type]) }}" class="text-gray-400 uppercase ml-2"><small>{{ $project->projectType->type }}</small></a>
+                            <div class="p-10 md:mb-0 mb-6 flex flex-col">
+                                <div class="rounded bg-gray-50 p-4 transform translate-x-6 -translate-y-6 shadow">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-200 text-blue-800 mb-5 flex-shrink-0 p-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                            </svg>
+                                        </div>
+                                        <div style="padding-top: 0.2em; padding-bottom: 0.2rem" class="ml-2 inline-flex items-center space-x-1 text-xs px-2 bg-gray-200 text-gray-800 rounded-full mb-4">
+                                            <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-50 rounded-full"></div>
+                                            <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $project->projectType->type]) }}" class="text-gray-400 uppercase ml-2"><small>{{ $project->projectType->type }}</small></a>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow ">
+                                        <a href="{{ route('nodes.explorer.searchProjects.showProject', [$node, $project]) }}" class="text-center">
+                                            <h2 class=" text-xl title-font font-medium mb-3">{{ $project->title }}</h2>
+                                            
+                                            <p class="leading-relaxed text-sm text-justify">
+                                                <small>{{ substr($project->abstract, 0, 250) }}...</small>
+                                            </p>
+                                        </a>
+                                        @php
+                                            $researchTeam = $project->researchTeams()->where('is_principal', 1)->first();
+                                        @endphp
+                                        <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitution->name }}</small></p>
+                                        <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->name }}</small></p>
+                                        <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
+                                    </div>
                                 </div>
-                                <a href="" class="text-center">
-                                    <p class="mb-4">{{ $project->title }}</p>
-                                    <p class="text-gray-400"><small>{{ $project->abstract }}</small></p>
-                                </a>
                             </div>
                         @endforeach
                     </div>
                 @empty
                     <p>{{ __('No data recorded') }}</p>
                 @endforelse
+            </div>
+            <div class="p-6 mt-4">
+                @foreach ($allKeywords->chunk(5) as $chunk)
+                <div class="flex justify-around mt-4 sm:items-center sm:justify-around text-center text-sm text-gray-500 sm:text-left">
+                    @foreach ($chunk as $keyword)
+                    <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $keyword]) }}" class="ml-1 underline">{{ $keyword }}</a>
+                    @endforeach
+                </div>
+                @endforeach
             </div>
         </div>
     </div>

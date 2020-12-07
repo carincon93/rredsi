@@ -35,14 +35,15 @@ class ProjectController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        $projectTypes       = ProjectType::orderBy('type')->get();
-        $researchTeams      = $researchGroup->researchTeams()->get();
-        $researchLines      = $researchGroup->researchLines()->get();
-        $knowledgeSubareaDisciplines     = knowledgeSubareaDiscipline::orderBy('name')->get();
-        $academicPrograms   = $educationalInstitution->academicPrograms()->orderBy('name')->get();
-        $authors            = $educationalInstitution->members()->orderBy('name')->get();
+        $projectTypes                           = ProjectType::orderBy('type')->get();
+        $knowledgeSubareaDisciplines            = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $educationalInstitutionResearchTeams    = $researchGroup->researchTeams()->get();
+        $researchTeams                          = ResearchTeam::orderBy('name')->get();
+        $researchLines                          = $researchGroup->researchLines()->get();
+        $academicPrograms                       = $educationalInstitution->academicPrograms()->orderBy('name')->get();
+        $authors                                = $educationalInstitution->members()->orderBy('name')->get();
 
-        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors'));
+        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionResearchTeams'));
     }
 
     /**
@@ -77,7 +78,13 @@ class ProjectController extends Controller
             $message = 'Your store processed correctly';
         }
 
-        $project->researchTeams()->attach($request->get('research_team_id'), ['is_principal' => false]);
+        $arrayResearchTeamsIds = $request->get('research_team_id');
+        if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+            unset($arrayResearchTeamsIds[$key]);
+        }
+
+        $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
+        $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
         $project->researchLines()->attach($request->get('research_line_id'));
         $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
         $project->academicPrograms()->attach($request->get('academic_program_id'));
@@ -106,14 +113,15 @@ class ProjectController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        $projectTypes       = ProjectType::orderBy('type')->get();
-        $researchTeams      = $researchGroup->researchTeams()->get();
-        $researchLines      = $researchGroup->researchLines()->get();
-        $knowledgeSubareaDisciplines     = KnowledgeSubareaDiscipline::orderBy('name')->get();
-        $academicPrograms   = $educationalInstitution->academicPrograms()->orderBy('name')->get();
-        $authors            = $educationalInstitution->members()->orderBy('name')->get();
+        $projectTypes                           = ProjectType::orderBy('type')->get();
+        $knowledgeSubareaDisciplines            = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $educationalInstitutionResearchTeams    = $researchGroup->researchTeams()->get();
+        $researchTeams                          = ResearchTeam::orderBy('name')->get();
+        $researchLines                          = $researchGroup->researchLines()->get();
+        $academicPrograms                       = $educationalInstitution->academicPrograms()->orderBy('name')->get();
+        $authors                                = $educationalInstitution->members()->orderBy('name')->get();
 
-        return view('Projects.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors'));
+        return view('Projects.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionResearchTeams'));
     }
 
     /**
@@ -146,7 +154,13 @@ class ProjectController extends Controller
             $message = 'Your update processed correctly';
         }
 
-        $project->researchTeams()->attach($request->get('research_team_id'), ['is_principal' => false]);
+        $arrayResearchTeamsIds = $request->get('research_team_id');
+        if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+            unset($arrayResearchTeamsIds[$key]);
+        }
+
+        $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
+        $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
         $project->researchLines()->attach($request->get('research_line_id'));
         $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
         $project->academicPrograms()->attach($request->get('academic_program_id'));

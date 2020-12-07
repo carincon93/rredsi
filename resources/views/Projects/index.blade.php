@@ -29,7 +29,7 @@
                         {{ __('Keywords') }}
                     </x-slot>
                     <x-slot name="fourthTheadTitle">
-                        {{ __('Is published?') }}
+                        {{ __('Is privated?') }}
                     </x-slot>
 
                     <x-slot name="tbodyData">
@@ -40,15 +40,15 @@
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->type }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $project->projectType->type }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->keywords }}</span>
+                                    <span class="text-center ml-2 font-semibold">@foreach(json_decode($project->keywords) as $keyword){{substr($keyword, 0, -1)}}@endforeach</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->is_published }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $project->is_privated ? __('Yes') : __('No') }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

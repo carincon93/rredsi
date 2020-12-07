@@ -151,6 +151,17 @@
                     </div>
 
                     <div class="mt-4">
+                        <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />
+                        <select id="principal_research_team_id" name="principal_research_team_id" class="form-select w-full" required >
+                            <option value="">Seleccione un semillero de investigación principal</option>
+                            @foreach ($educationalInstitutionResearchTeams as $educationalInstitutionResearchTeam)
+                                <option {{ old('principal_research_team_id') == $educationalInstitutionResearchTeam->id ? "selected" : ""  }} value="{{ $educationalInstitutionResearchTeam->id }}">{{ $educationalInstitutionResearchTeam->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-jet-input-error for="principal_research_team_id" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
                         <p>{{ __('Research teams' ) }} </p>
                         @forelse ($researchTeams as $researchTeam)
                             <div class="mt-4">

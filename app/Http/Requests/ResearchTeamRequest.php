@@ -35,6 +35,7 @@ class ResearchTeamRequest extends FormRequest
             'knowledge_production_strategy' => 'required',
             'thematic_research'             => 'required|json',
             'administrator_id'              => 'required|integer|min:0|max:9999999999|exists:users,id',
+            'principal_research_team_id'    => 'required|integer|min:0|max:9999999999|exists:research_teams,id',
             'academic_program_id.*'         => 'required|integer|min:0|max:9999999999|exists:academic_programs,id',
             'knowledge_area_id.*'           => 'required|integer|min:0|max:9999999999|exists:knowledge_areas,id',
             'research_line_id.*'            => 'required|integer|min:0|max:9999999999|exists:research_lines,id',
