@@ -35,13 +35,21 @@
         </div>
     </div>
 
-{{-- <script>
-function closeAlert(event){
-    let element = event.target;
-    console.log('alertCerrando')
-    // while(element.nodeName !== "BUTTON"){
-    // element = element.parentNode;
-    // }
-    // element.parentNode.parentNode.removeChild(element.parentNode);
-}
-</script> --}}
+<script>
+    var cont = 0;
+    var input = document.getElementById('footeralert');
+
+    var id = setInterval(function(){
+        cont++;
+        if(cont == 10)
+        {
+            input.setAttribute('checked','checked');
+            clearInterval(id);
+        }
+    }, 1000);
+
+    function closeAlert(event){
+        let element = event.target;
+
+    }
+</script>
