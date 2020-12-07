@@ -45644,29 +45644,29 @@ document.addEventListener('DOMContentLoaded', function () {
   window.changeActiveTab = function (event, tabID) {
     var element = event.target;
 
-    while (element.nodeName !== "A") {
+    while (element.nodeName !== 'A') {
       element = element.parentNode;
     }
 
     var ulElement = element.parentNode.parentNode;
-    var aElements = ulElement.querySelectorAll("li > a");
-    var tabContents = document.getElementById("tabs-id").querySelectorAll(".tab-content > div");
+    var aElements = ulElement.querySelectorAll('li > a');
+    var tabContents = document.getElementById('tabs-id').querySelectorAll('.tab-content > div');
 
     for (var i = 0; i < aElements.length; i++) {
-      aElements[i].classList.remove("text-white");
-      aElements[i].classList.remove("bg-blue-900");
-      aElements[i].classList.add("text-blue-900");
-      aElements[i].classList.add("bg-white");
-      tabContents[i].classList.add("hidden");
-      tabContents[i].classList.remove("block");
+      aElements[i].classList.remove('text-white');
+      aElements[i].classList.remove('bg-blue-900');
+      aElements[i].classList.add('text-blue-900');
+      aElements[i].classList.add('bg-white');
+      tabContents[i].classList.add('hidden');
+      tabContents[i].classList.remove('block');
     }
 
-    element.classList.remove("text-blue-900");
-    element.classList.remove("bg-white");
-    element.classList.add("text-white");
-    element.classList.add("bg-blue-900");
-    document.getElementById(tabID).classList.remove("hidden");
-    document.getElementById(tabID).classList.add("block");
+    element.classList.remove('text-blue-900');
+    element.classList.remove('bg-white');
+    element.classList.add('text-white');
+    element.classList.add('bg-blue-900');
+    document.getElementById(tabID).classList.remove('hidden');
+    document.getElementById(tabID).classList.add('block');
   };
 }, false);
 
@@ -45711,8 +45711,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\SENNOVA\rredsi\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\SENNOVA\rredsi\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\Camilo\WebProjects\rredsi\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Camilo\WebProjects\rredsi\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

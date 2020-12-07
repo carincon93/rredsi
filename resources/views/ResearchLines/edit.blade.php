@@ -39,25 +39,25 @@
 
                     <div class="mt-4">
                         <x-jet-label for="objectives" value="{{ __('Objectives') }}" />
-                        <textarea id="objectives" name="objectives" class="block mt-1 p-4 w-full" value="{{old('objectives') ?? $researchLine->objectives }}" required >{{ old('objectives') ?? $researchLine->objectives }}</textarea>
+                        <textarea id="objectives" name="objectives" class="form-textarea border-0 w-full" value="{{old('objectives') ?? $researchLine->objectives }}" required >{{ old('objectives') ?? $researchLine->objectives }}</textarea>
                         <x-jet-input-error for="objectives" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="mission" value="{{ __('Mission') }}" />
-                        <textarea id="mission" name="mission" class="block mt-1 p-4 w-full" value="{{ old('mission') ?? $researchLine->mission }}" required >{{ old('mission') ?? $researchLine->mission }}</textarea>
+                        <textarea id="mission" name="mission" class="form-textarea border-0 w-full" value="{{ old('mission') ?? $researchLine->mission }}" required >{{ old('mission') ?? $researchLine->mission }}</textarea>
                         <x-jet-input-error for="mission" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="vision" value="{{ __('Vision') }}" />
-                        <textarea id="vision" name="vision" class="block mt-1 p-4 w-full" value="{{ old('vision') ??  $researchLine->vision }}" required >{{ old('vision') ?? $researchLine->vision }}</textarea>
+                        <textarea id="vision" name="vision" class="form-textarea border-0 w-full" value="{{ old('vision') ??  $researchLine->vision }}" required >{{ old('vision') ?? $researchLine->vision }}</textarea>
                         <x-jet-input-error for="vision" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="achievements" value="{{ __('Achievements') }}" />
-                        <textarea id="achievements" name="achievements" class="block mt-1 p-4 w-full" value="{{ old('achievements') ?? $researchLine->achievements }}" required >{{ old('achievements') ?? $researchLine->achievements }}</textarea>
+                        <textarea id="achievements" name="achievements" class="form-textarea border-0 w-full" value="{{ old('achievements') ?? $researchLine->achievements }}" required >{{ old('achievements') ?? $researchLine->achievements }}</textarea>
                         <x-jet-input-error for="achievements" class="mt-2" />
                     </div>
 
@@ -68,7 +68,7 @@
                             @forelse ($knowledgeAreas as $knowledgeArea)
                                 <option {{ old('knowledge_area_id') == $knowledgeArea->id || $researchLine->knowledge_area_id == $knowledgeArea->id ? "selected" : "" }} value="{{ $knowledgeArea->id }}">{{ $knowledgeArea->name }}</option>
                             @empty
-                                <option value="">No knowledge areas data</option>
+                                <option value="">{{ __('No data recorded') }}</option>
                             @endforelse
                         </select>
                         <x-jet-input-error for="knowledge_area_id" class="mt-2" />

@@ -37,7 +37,7 @@
                             @forelse ($projectTypes as $projectType)
                                 <option value="{{ $projectType->id }}" {{ old('project_type_id') == $projectType->id ? "selected" : "" }}>{{ $projectType->type }}</option>
                             @empty
-                                <option value="">No project types data</option>
+                                <option value="">{{ __('No data recorded') }}</option>
                             @endforelse
                         </select>
                         <x-jet-input-error for="project_type_id" class="mt-2" />
@@ -45,7 +45,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="title" value="{{ __('Title') }}" />
-                        <textarea id="title" name="title" max="255" class="block mt-1 p-4 w-full" required >{{ old('title') }}</textarea>
+                        <textarea id="title" name="title" max="255" class="form-textarea border-0 w-full" required >{{ old('title') }}</textarea>
                         <x-jet-input-error for="title" class="mt-2" />
                     </div>
 
@@ -63,19 +63,19 @@
 
                     <div class="mt-4">
                         <x-jet-label for="abstract" value="{{ __('Abstract') }}" />
-                        <textarea id="abstract" name="abstract" class="block mt-1 p-4 w-full" required >{{ old('abstract') }}</textarea>
+                        <textarea id="abstract" name="abstract" class="form-textarea border-0 w-full" required >{{ old('abstract') }}</textarea>
                         <x-jet-input-error for="abstract" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="overall_objective" value="{{ __('Overall objective') }}" />
-                        <textarea id="overall_objective" name="overall_objective" class="block mt-1 p-4 w-full" required >{{ old('overall_objective') }}</textarea>
+                        <textarea id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full" required >{{ old('overall_objective') }}</textarea>
                         <x-jet-input-error for="overall_objective" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="keywords" value="{{ __('Keywords') }}" />
-                        <textarea id="keywords" name="keywords" class="block mt-1 p-4 w-full" required >{{ old('keywords') }}</textarea>
+                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" required >{{ old('keywords') }}</textarea>
                         <x-jet-input-error for="keywords" class="mt-2" />
                     </div>
 

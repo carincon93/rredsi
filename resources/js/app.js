@@ -34,25 +34,25 @@ document.addEventListener('DOMContentLoaded', function () {
     
     window.changeActiveTab = function (event, tabID){
         let element = event.target;
-        while(element.nodeName !== "A"){
+        while(element.nodeName !== 'A'){
             element = element.parentNode;
         }
         let ulElement = element.parentNode.parentNode;
-        let aElements = ulElement.querySelectorAll("li > a");
-        let tabContents = document.getElementById("tabs-id").querySelectorAll(".tab-content > div");
+        let aElements = ulElement.querySelectorAll('li > a');
+        let tabContents = document.getElementById('tabs-id').querySelectorAll('.tab-content > div');
         for(let i = 0 ; i < aElements.length; i++){
-            aElements[i].classList.remove("text-white");
-            aElements[i].classList.remove("bg-blue-900");
-            aElements[i].classList.add("text-blue-900");
-            aElements[i].classList.add("bg-white");
-            tabContents[i].classList.add("hidden");
-            tabContents[i].classList.remove("block");
+            aElements[i].classList.remove('text-white');
+            aElements[i].classList.remove('bg-blue-900');
+            aElements[i].classList.add('text-blue-900');
+            aElements[i].classList.add('bg-white');
+            tabContents[i].classList.add('hidden');
+            tabContents[i].classList.remove('block');
         }
-        element.classList.remove("text-blue-900");
-        element.classList.remove("bg-white");
-        element.classList.add("text-white");
-        element.classList.add("bg-blue-900");
-        document.getElementById(tabID).classList.remove("hidden");
-        document.getElementById(tabID).classList.add("block");
+        element.classList.remove('text-blue-900');
+        element.classList.remove('bg-white');
+        element.classList.add('text-white');
+        element.classList.add('bg-blue-900');
+        document.getElementById(tabID).classList.remove('hidden');
+        document.getElementById(tabID).classList.add('block');
     }
 }, false);

@@ -14,18 +14,18 @@ class RoleInvitation extends Notification
     private $project;
     private $researchTeam;
     private $user;
-    private $pathFile;
+    private $file;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($project, $researchTeam, $user, $pathFile)
+    public function __construct($project, $researchTeam, $user, $file)
     {
         $this->project      = $project;
         $this->researchTeam = $researchTeam;
         $this->user         = $user;
-        $this->pathFile     = $pathFile;
+        $this->file         = $file;
     }
 
     /**
@@ -53,7 +53,7 @@ class RoleInvitation extends Notification
                     ->line("El semillero de investigación {$this->researchTeam->name} de la institución educativa {$this->researchTeam->researchGroup->educationalInstitution->name} quiere invitarlo para que participe en el desarrollo del proyecto {$this->project->title}")
                     ->action('Más información del proyecto', url('/'))
                     ->line('Gracias y esperamos su pronta respuesta')
-                    ->attach($this->pathFile);
+                    ->attach($this->file);
     }
 
     /**

@@ -50,7 +50,7 @@ class EducationalInstitutionEventController extends Controller
         $event->link        = $request->get('link');
         $event->save();
 
-        $event->educationalInstitutionEvents()->create([
+        $event->educationalInstitutionEvent()->create([
             'id'                            => $event->id,
             'educational_institution_id'    => $educationalInstitution->id
         ]);
@@ -100,7 +100,7 @@ class EducationalInstitutionEventController extends Controller
         $event->end_date    = $request->get('end_date');
         $event->link        = $request->get('link');
 
-        $event->educationalInstitutionEvents()->update([
+        $event->educationalInstitutionEvent()->update([
             'educational_institution_id' => $educationalInstitution->id
         ]);
 

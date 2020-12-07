@@ -43,7 +43,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colSpan="6">No educational environments loan returns</td>
+                                <td colSpan="6">{{ __('No data recorded') }}</td>
                             </tr>
                         @endforelse
 

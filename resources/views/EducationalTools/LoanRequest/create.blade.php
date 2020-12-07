@@ -46,7 +46,7 @@
                         @forelse ($projects as $project)
                              <option value={{ $project->id }} >{{ $project->title }}</option>
                         @empty
-                            <option value="">No projects</option>
+                            <option value="">{{ __('No data recorded') }}</option>
                         @endforelse
 
                     </select>
@@ -90,7 +90,7 @@
                         @forelse ($tools as $tool)
                              <option value={{ $tool->id }}> {{ $tool->name }}</option>
                         @empty
-                            <option value="">No tools</option>
+                            <option value="">{{ __('No data recorded') }}</option>
                         @endforelse
                     </select>
                     <div class="invalid-feedback">

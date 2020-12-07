@@ -40,7 +40,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colSpan="4" class="text-center">No hay datos disponibles</td>
+                                <td colSpan="4" class="text-center">{{ __('No data recorded') }}</td>
                             </tr>
                         @endforelse
 

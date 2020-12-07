@@ -39,3 +39,7 @@ select.header-select option{
     background-color: transparent;
     color: #000;
 }
+
+.hover\:cursor-pointer:hover {
+    cursor: pointer;
+}

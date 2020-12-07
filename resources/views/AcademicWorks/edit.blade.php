@@ -53,7 +53,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="authors" value="{{ __('Authors') }}" />
-                        <textarea id="authors" name="authors" class="block mt-1 p-4 w-full" required >{{ old('authors') ?? $userAcademicWork->mentors}}</textarea>
+                        <textarea id="authors" name="authors" class="form-textarea border-0 w-full" required >{{ old('authors') ?? $userAcademicWork->mentors}}</textarea>
                         <x-jet-input-error for="authors" class="mt-2" />
                     </div>
 
@@ -70,7 +70,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="mentors" value="{{ __('Mentors') }}" />
-                        <textarea id="mentors" name="mentors" class="block mt-1 p-4 w-full" required >{{ old('mentors') ?? $userAcademicWork->mentors}}</textarea>
+                        <textarea id="mentors" name="mentors" class="form-textarea border-0 w-full" required >{{ old('mentors') ?? $userAcademicWork->mentors}}</textarea>
                         <x-jet-input-error for="mentors" class="mt-2" />
                     </div>
 
@@ -81,7 +81,7 @@
                             @forelse ($knowledgeAreas as $knowledgeArea)
                                 <option value="{{ $knowledgeArea->id }}" {{ old('knowledge_area_id') == $knowledgeArea->id || $userAcademicWork->knowledgeArea->id == $knowledgeArea->id ? "selected" : "" }}>{{ $knowledgeArea->name }}</option>
                             @empty
-                                <option value="">No knowledge areas data</option>
+                                <option value="">{{ __('No data recorded') }}</option>
                             @endforelse
                         </select>
                         <x-jet-input-error for="knowledge_area_id" class="mt-2" />

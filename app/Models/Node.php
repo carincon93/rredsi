@@ -27,6 +27,10 @@ class Node extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function nodeEvents() {
+        return $this->hasMany('App\Models\NodeEvent');
+    }
+
     /**
      * Shuffle 4 projects for Welcome view.
      *

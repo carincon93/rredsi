@@ -55,7 +55,7 @@
                                     <div class="hidden sm:flex sm:items-center justify-around">
                                         <x-jet-dropdown align="right" width="48">
                                             <x-slot name="trigger">
-                                                <button class="flex items-center text-sm font-medium text-gray hover:text-indigo-200 hover:border-gray-300 focus:outline-none focus:text-white focus:border-gray-300 transition duration-150 ease-in-out">
+                                                <button class="flex items-center text-sm font-medium text-gray hover:text-blue-900 hover:border-gray-300 focus:outline-none focus:text-black focus:border-gray-300 transition duration-150 ease-in-out">
                                                     <div class="ml-1">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-4 w-4">
                                                             <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
@@ -71,7 +71,7 @@
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link class="modal-open" onclick="modal('{{ route('nodes.educational-institutions.research-groups.research-teams.projects.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}')">
+                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.research-groups.research-teams.projects.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}">

@@ -78,7 +78,7 @@
                     
                     <div class="mt-4">
                         <x-jet-label for="interests" value="{{ __('Interests') }}" />
-                        <textarea id="interests" name="interests" class="block mt-1 p-4 w-full" value="{{ old('interests') }}" required >{{ old('interests') }}</textarea>
+                        <textarea id="interests" name="interests" class="form-textarea border-0 w-full" value="{{ old('interests') }}" required >{{ old('interests') }}</textarea>
                         <x-jet-input-error for="interests" class="mt-2" />
                     </div>
 

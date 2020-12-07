@@ -38,12 +38,12 @@
 
                     <div class="mt-4">
                         <x-jet-label for="knowledge_subarea_id" value="{{ __('Knowledge area') }}" />
-                        <select id="knowledge_subarea_id" name="knowledge_subarea_id" class="block mt-1 p-4 w-full" required >
+                        <select id="knowledge_subarea_id" name="knowledge_subarea_id" class="form-select w-full" required >
                             <option value="">Seleccione una sub-área de conocimiento</option>
                             @forelse ($knowledgeSubareas as $knowledgeSubarea)
                                 <option value="{{ $knowledgeSubarea->id }}" {{ old('knowledge_subarea_id') == $knowledgeSubarea->id ? "selected" : "" }}>{{ $knowledgeSubarea->name }}</option>
                             @empty
-                                <option value="">No knowledge areas</option>
+                                <option value="">{{ __('No data recorded') }}</option>
                             @endforelse
                         </select>
                         <x-jet-input-error for="knowledge_subarea_id" class="mt-2" />

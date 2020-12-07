@@ -29,7 +29,7 @@ class Event extends Model
         return $this->belongsToMany('App\Models\Project', 'event_project', 'event_id', 'project_id');
     }
 
-    public function educationalInstitutionEvents() {
+    public function educationalInstitutionEvent() {
         return $this->hasOne('App\Models\EducationalInstitutionEvent', 'id');
     }
 

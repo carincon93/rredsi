@@ -33,10 +33,6 @@ class Project extends Model
         return $this->hasMany('App\Models\ResearchOutput');
     }
 
-    public function loans() {
-        return $this->hasMany('App\Models\Loan');
-    }
-
     public function knowledgeSubareaDisciplines() {
         return $this->belongsToMany('App\Models\KnowledgeSubareaDiscipline', 'project_knowledge_subarea_discipline', 'project_id', 'knowledge_subarea_discipline_id');
     }
@@ -69,10 +65,14 @@ class Project extends Model
         return $this->belongsTo('App\Models\ProjectType');
     }
 
-    public function getDatesForHumansAttribute()
-    {
+    public function getDatesForHumansAttribute() {
         $start_date = Carbon::parse($this->start_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         $end_date   = Carbon::parse($this->end_date, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         return "Del $start_date al $end_date";
+    }
+
+    public function scopeSearchProjects($query, $titleOrKeyword) {
+        $titleOrKeyword = mb_strtolower($titleOrKeyword);
+        return $query->join('project_types', 'projects.project_type_id', 'project_types.id')->whereRaw('lower(projects.title) LIKE (?)', "%$titleOrKeyword%")->orWhereRaw('(select lower(jsonb_array_elements_text(projects.keywords::jsonb))) LIKE (?)', "%$titleOrKeyword%")->where('projects.is_privated', 0)->orWhere('project_types.type', $titleOrKeyword);
     }
 }

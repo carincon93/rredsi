@@ -45,7 +45,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colSpan="4">No environment loan requests</td>
+                                <td colSpan="4">{{ __('No data recorded') }}</td>
                             </tr>
                         @endforelse
 

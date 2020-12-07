@@ -38,13 +38,13 @@
                     </div>
 
                     <div class="mt-2">
-                        <x-jet-label for="administrator_id" value="{{ __('Node') }}" />
+                        <x-jet-label for="administrator_id" value="{{ __('Node admin') }}" />
                         <select id="administrator_id" name="administrator_id" class="form-select w-full" required >
                             <option value="">Seleccione un administrador de nodo</option>
                             @forelse ($users as $user)
                                 <option {{ $user->id == old('administrator_id') || $user->id == $node->administrator->id ? 'selected' : '' }} value="{{ $user->id }}">{{ $user->name }}</option>
                             @empty
-                                <option value="">No users data</option>
+                                <option value="">{{ __('No data recorded') }}</option>
                             @endforelse
                         </select>
                         <x-jet-input-error for="administrator_id" class="mt-2" />
@@ -57,7 +57,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 

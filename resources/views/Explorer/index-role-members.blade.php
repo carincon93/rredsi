@@ -22,7 +22,7 @@
             </div>
             <div class="p-6 mt-4">
                 <h1 class="text-center text-2xl mt-4 mb-12">{{ $academicProgram->name }}</h1>
-                @foreach ($node->roleMembers->chunk(3) as $chunk)
+                @forelse ($node->roleMembers->chunk(3) as $chunk)
                     <div class="md:grid md:grid-cols-3 md:gap-4">
                         @foreach ($chunk as $roleMember)
                             <div class="shadow p-2">
@@ -39,19 +39,38 @@
                                 @empty
                                     <p class="mt-4"><small>{{ __('No data recorded' ) }}</small></p>
                                 @endforelse
-                                <a href="{{ route('nodes.explorer.contactForm', [$node, $roleMember]) }}">
-                                    <div class="mt-3 flex items-center text-sm font-semibold text-blue-900 justify-center">
-                                        <div>Contactar</div>
+                                <form method="POST" action="{{ route('nodes.explorer.sendRoleNotification', [$node, $roleMember]) }}">
+                                    @csrf
                 
-                                        <div class="ml-1 text-blue-900">
-                                            <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                        </div>
+                                    <div class="mt-4">
+                                        <x-jet-label for="project_id" value="{{ __('Projects') }}" />
+                                        <select id="project_id" name="project_id" class="form-select w-full" required >
+                                            <option value="">Seleccione un proyecto</option>
+                                            @forelse ($projects as $project)
+                                                <option value="{{ $project->id }}" {{ old('project_id') == $project->id ? "selected" : "" }}>{{ $project->title }}</option>
+                                            @empty
+                                                <option value="">{{ __('No data recorded') }}</option>
+                                            @endforelse
+                                        </select>
+                                        <x-jet-input-error for="project_id" class="mt-2" />
                                     </div>
-                                </a>
+                
+                                    <div class="flex items-center justify-end mt-4">
+                                        <x-jet-button class="ml-4">
+                                            {{ __('Contact') }}
+                
+                                            <div class="ml-1 text-white">
+                                                <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                            </div>
+                                        </x-jet-button>
+                                    </div>
+                                </form>
                             </div>
                         @endforeach
                     </div>
-                @endforeach
+                @empty
+                    <p>{{ __('No data recorded') }}</p>
+                @endforelse
             </div>
         </div>
     </div>

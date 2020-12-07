@@ -38,7 +38,7 @@
                     
                     <div class="mt-4">
                         <x-jet-label for="description" value="{{ __('Description') }}" />
-                        <textarea id="description" name="description" class="block mt-1 p-4 w-full" value="{{ old('description') }}" required >{{ old('description') }}</textarea>
+                        <textarea id="description" name="description" class="form-textarea border-0 w-full" value="{{ old('description') }}" required >{{ old('description') }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
 

@@ -17,11 +17,11 @@
     
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            <div class="md:grid md:grid-cols-3 md:gap-6">
-                <div class="md:col-span-1">
+            <div class="md:grid md:grid-cols-2 md:gap-4">
+                <div>
                     <h3 class="text-lg font-medium text-gray-900">Información del área de conocimiento</h3>
                 </div>
-                <div class="mt-5 md:mt-0 md:col-span-2">
+                <div>
                     <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                         <h3 class="text-lg font-medium text-gray-900">{{ __('Name') }}</h3>
                         <div class="mt-3 max-w-xl text-sm text-gray-600">

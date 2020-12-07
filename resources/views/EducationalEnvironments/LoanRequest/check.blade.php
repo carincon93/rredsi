@@ -14,9 +14,9 @@
             <label for="">Responsables</label>
             <p class="text-muted">
                     @forelse ($loan->project->authors as $author)
-                    {{$author->name}}
+                        {{$author->name}}
                     @empty
-                      No author
+                        {{ __('No data recorded') }}
                     @endforelse
             </p>
             <label for="">Estudiante lider del semillero</label>

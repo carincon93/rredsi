@@ -57,31 +57,31 @@
 
                     <div class="mt-4">
                         <x-jet-label for="overall_objective" value="{{ __('Overall objective') }}" />
-                        <textarea id="overall_objective" name="overall_objective" class="block mt-1 p-4 w-full" required >{{ old('overall_objective') ?? $researchTeam->overall_objective }}</textarea>
+                        <textarea id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full" required >{{ old('overall_objective') ?? $researchTeam->overall_objective }}</textarea>
                         <x-jet-input-error for="overall_objective" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="mission" value="{{ __('Mission') }}" />
-                        <textarea id="mission" name="mission" class="block mt-1 p-4 w-full" required >{{ old('mission') ?? $researchTeam->mission }}</textarea>
+                        <textarea id="mission" name="mission" class="form-textarea border-0 w-full" required >{{ old('mission') ?? $researchTeam->mission }}</textarea>
                         <x-jet-input-error for="mission" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="vision" value="{{ __('Vision') }}" />
-                        <textarea id="vision" name="vision" class="block mt-1 p-4 w-full" required >{{ old('vision') ?? $researchTeam->vision  }}</textarea>
+                        <textarea id="vision" name="vision" class="form-textarea border-0 w-full" required >{{ old('vision') ?? $researchTeam->vision  }}</textarea>
                         <x-jet-input-error for="vision" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="regional_projection" value="{{ __('Regional projection') }}" />
-                        <textarea id="regional_projection" name="regional_projection" class="block mt-1 p-4 w-full" required >{{ old('projection') ??  $researchTeam->regional_projection }}</textarea>
+                        <textarea id="regional_projection" name="regional_projection" class="form-textarea border-0 w-full" required >{{ old('projection') ??  $researchTeam->regional_projection }}</textarea>
                         <x-jet-input-error for="regional_projection" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="knowledge_production_strategy" value="{{ __('knowledge production strategy') }}" />
-                        <textarea id="knowledge_production_strategy" name="knowledge_production_strategy" class="block mt-1 p-4 w-full" required >{{ old('knowledge_production_strategy') ?? $researchTeam->knowledge_production_strategy  }}</textarea>
+                        <textarea id="knowledge_production_strategy" name="knowledge_production_strategy" class="form-textarea border-0 w-full" required >{{ old('knowledge_production_strategy') ?? $researchTeam->knowledge_production_strategy  }}</textarea>
                         <x-jet-input-error for="knowledge_production_strategy" class="mt-2" />
                     </div>
 
@@ -93,7 +93,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="thematic_research" value="{{ __('Thematic research (Separados por coma)') }}" />
-                        <textarea id="thematic_research" name="thematic_research" class="block mt-1 p-4 w-full" required >{{ old('thematic_research') ?? $researchTeam->thematic_research }}</textarea>
+                        <textarea id="thematic_research" name="thematic_research" class="form-textarea border-0 w-full" required >{{ old('thematic_research') ?? $researchTeam->thematic_research }}</textarea>
                         <x-jet-input-error for="thematic_research" class="mt-2" />
                     </div>
 
@@ -104,7 +104,7 @@
                             @forelse ($educationalInstitutionMembers as $educationalInstitutionMember)
                                 <option {{ old('administrator_id') == $educationalInstitutionMember->id || $educationalInstitutionMember->id == $researchTeam->administrator->id ? "selected" : "" }} value="{{ $educationalInstitutionMember->id }}">{{ $educationalInstitutionMember->name }}</option>
                             @empty
-                                <option value="">No users data</option>
+                                <option value="">{{ __('No data recorded') }}</option>
                             @endforelse
                         </select>
                         <x-jet-input-error for="administrator_id" class="mt-2" />

@@ -21,9 +21,9 @@ use App\Http\Controllers\ResearchOutputController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EducationalInstitutionUserController;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\AppController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\NodeEventController;
 use App\Http\Livewire\ModelForm;
 
 /*
@@ -37,10 +37,10 @@ use App\Http\Livewire\ModelForm;
 |
 */
 
-Route::get('/nodes/{node}/explorer', [WelcomeController::class, 'index'])->name('/');
-Route::get('/nodes/{node}/explorer/roles', [WelcomeController::class, 'roles'])->name('nodes.explorer.roles');
-Route::get('/nodes/{node}/explorer/roles/{academicProgram}', [WelcomeController::class, 'searchRoles'])->name('nodes.explorer.searchRoles');
-Route::get('/nodes/{node}/explorer/contact-form/{user}', [WelcomeController::class, 'contactForm'])->name('nodes.explorer.contactForm')->middleware(['auth']);
+Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('/');
+Route::get('/nodes/{node}/explorer/roles', [AppController::class, 'roles'])->name('nodes.explorer.roles');
+Route::get('/nodes/{node}/explorer/roles/{academicProgram}', [AppController::class, 'searchRoles'])->name('nodes.explorer.searchRoles');
+Route::get('/nodes/{node}/explorer/projects', [AppController::class, 'searchProjects'])->name('nodes.explorer.searchProjects')->middleware(['auth']);
 Route::post('/nodes/{node}/explorer/contact-form/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification')->middleware(['auth']);
 Route::get('preview-emails', function () {
     return (new App\Notifications\RoleInvitation(3,1,3))
@@ -53,15 +53,15 @@ Route::get('/', function() {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/nodes/{node}/dashboard', [AppController::class, 'dashboard'])->name('nodes.dashboard');
+
+    Route::get('/dashboard', function() {
+        return redirect()->route('nodes.dashboard', 1);
+    });
 
     Route::get('/model-form', function () {
         return view('livewire.model-form');
     })->name('model-form');
-
-    Route::post('export-word',[PruebaController::class,'exportWord'])->name('export-word');
 
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');
@@ -92,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resources([
         'nodes'                                                                         => NodeController::class,
+        'nodes.events'                                                                  => NodeEventController::class,
         'nodes.educational-institutions'                                                => EducationalInstitutionController::class,
         'nodes.educational-institutions.events'                                         => EducationalInstitutionEventController::class,
         'nodes.educational-institutions.academic-programs'                              => AcademicProgramController::class,

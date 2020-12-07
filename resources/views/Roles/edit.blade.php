@@ -72,7 +72,7 @@
                             </div>    
                         @empty
                             <div class="mt-4">
-                                <p>No hay permisos registrados</p>
+                                <p>{{ __('No data recorded') }}</p>
                             </div>
                         @endforelse
                         <x-jet-input-error for="permissions" class="mt-2" />

@@ -38,6 +38,7 @@
 
                             if (nodeSelected != 0) {
                                 nodesSelect.querySelector(`option[value="${nodeSelected}"]`).setAttribute('selected', 'selected');
+                                getAllEducationalInstitutions(nodeSelected, null);
                             }
                         } catch (error) {
                             console.log(error);

@@ -34,9 +34,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-4" style="background: url(/storage/images/net.png)">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <form class="flex-1 ml-1/12 mt-2 shadow">
+                    <form class="flex-1 ml-1/12 mt-2 shadow" method="GET" action="{{ route('nodes.explorer.searchProjects', [$node]) }}">
                         <div>
-                            <x-jet-input id="state" class="block w-full" type="text" min="" max="" name="state" value="{{ old('state') }}" placeholder="Busque proyectos por: título, palabras clave" required />
+                            <x-jet-input id="search" class="block w-full" type="search" name="search" value="{{ old('search') }}" placeholder="Busque proyectos por: título, palabras clave" required />
                         </div>
                     </form>
                 </div>
@@ -59,12 +59,12 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->title  : '' }}</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->title  : __('No data recorded') }}</a></div>
                             </div>
 
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    {{ isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->abstract : '' }}
+                                    {{ isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->abstract : __('No data recorded') }}
                                 </div>
                             </div>
                         </div>
@@ -85,12 +85,12 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->title  : '' }}</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->title  : __('No data recorded') }}</a></div>
                             </div>
 
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    {{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->abstract : '' }}
+                                    {{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->abstract : __('No data recorded') }}
                                 </div>
                             </div>
                         </div>
@@ -111,12 +111,12 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->title  : '' }}</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->title  : __('No data recorded') }}</a></div>
                             </div>
 
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    {{ isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->abstract : '' }}
+                                    {{ isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->abstract : __('No data recorded') }}
                                 </div>
                             </div>
                         </div>
@@ -137,12 +137,12 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[3]) ? $node->shuffleProjects[3]->title  : '' }}</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[3]) ? $node->shuffleProjects[3]->title  : __('No data recorded') }}</a></div>
                             </div>
 
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    {{ isset($node->shuffleProjects[3]) ? $node->shuffleProjects[3]->abstract : '' }}
+                                    {{ isset($node->shuffleProjects[3]) ? $node->shuffleProjects[3]->abstract : __('No data recorded') }}
                                 </div>
                             </div>
                         </div>
@@ -173,13 +173,13 @@
     </div>
     <div class="grid grid-cols-2 md:grid-cols-2">
         <div class="h-64 bg-cool-gray-600 p-11">
-            <h1 class="text-4xl text-gray-300 leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->name : '' }}</h1>
-            <p class="text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->datesForHumans : '' }}</p>
+            <h1 class="text-4xl text-gray-300 leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->name : __('No data recorded') }}</h1>
+            <p class="text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->datesForHumans : __('No data recorded') }}</p>
             <a href="#" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
         </div>
         <div class="h-64 bg-cool-gray-700 p-11">
-            <h1 class="text-4xl text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[1]) ? $node->shuffleEducationalInstitutionEvents[1]->name : '' }}</h1>
-            <p class="text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[1]) ? $node->shuffleEducationalInstitutionEvents[1]->datesForHumans : '' }}</p>
+            <h1 class="text-4xl text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[1]) ? $node->shuffleEducationalInstitutionEvents[1]->name : __('No data recorded') }}</h1>
+            <p class="text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[1]) ? $node->shuffleEducationalInstitutionEvents[1]->datesForHumans : __('No data recorded') }}</p>
             <a href="#" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
         </div>
     </div>
@@ -191,8 +191,8 @@
             <text id="Proyectos_de_vigencia_2020-2" data-name="Proyectos registrados" transform="translate(568.248 339.251)" fill="#848484" font-size="16" font-family="Tahoma"><tspan x="0" y="0">Proyectos registrados</tspan></text>
             <text id="Manizales" transform="translate(429.248 465.251)" fill="#848484" font-size="16" font-family="Tahoma"><tspan x="0" y="0">Manizales</tspan></text>
             <text id="Pensilvania" transform="translate(568.248 314.251)" fill="#848484" font-size="16" font-family="Tahoma"><tspan x="0" y="0">Pensilvania</tspan></text>
-            <text id="_235_proyectos" data-name="235 proyectos" transform="translate(429.248 514.251)" fill="#5b5b5b" font-size="16" font-family="Tahoma"><tspan x="0" y="0">{{ $node->qtyProjectsByCity->where('city', 'Manizales')->first()->city == 'Manizales' ? $node->qtyProjectsByCity->where('city', 'Manizales')->first()->count : 0 }} proyecto(s)</tspan></text>
-            <text id="_35_proyectos" data-name="35 proyectos" transform="translate(568.248 363.251)" fill="#5b5b5b" font-size="16" font-family="Tahoma"><tspan x="0" y="0">{{ $node->qtyProjectsByCity->where('city', 'Pensilvania')->first()->city == 'Pensilvania' ? $node->qtyProjectsByCity->where('city', 'Pensilvania')->first()->count : 0 }} proyecto(s)</tspan></text>
+            <text id="_235_proyectos" data-name="235 proyectos" transform="translate(429.248 514.251)" fill="#5b5b5b" font-size="16" font-family="Tahoma"><tspan x="0" y="0">{{ $node->qtyProjectsManizales }} proyecto(s)</tspan></text>
+            <text id="_35_proyectos" data-name="35 proyectos" transform="translate(568.248 363.251)" fill="#5b5b5b" font-size="16" font-family="Tahoma"><tspan x="0" y="0">{{ $node->qtyProjectsPensilvania }} proyecto(s)</tspan></text>
             <g id="Componente_35_1" data-name="Componente 35 – 1" transform="translate(1.248 1.25)">
             <g id="layer9" transform="translate(0 0.001)">
                 <path id="path3274" d="M417.483,638.512l-2.655,1.323v7.371l.968,1.105.121,1.6-3.752,3.317-3.873-1.105-2.421.614L401.149,652l-1.331-2.088h-1.574l-5.689-4.3-1.09-.369-1.695,1.105-6.9.369-2.542-2.211-2.3.369-.242,2.457-4.842,1.474-5.568-2.58-.968.123v1.965l-2.179.369L358.3,646.47l-6.052-1.351H347.4l-3.026-3.317-1.211-2.579-3.147-.86-3.268.737-.847.614-2.905-1.6s-1.937-4.3-2.421-4.3-2.3-.123-2.3-.123l-4.721,3.071.605,1.106-.605,2.948-2.784.491-1.936,2.211,1.211.491,2.058,2.825v2.334l-5.084,2.088.485,1.6.847,3.194-2.421-.615-1.331.983-1.816.123-1.452-.983-1.937-.369-1.211.737,1.331,1.351-1.089,3.808-2.179.737-3.027-.86-3.268,1.228L298.5,664.4l-2.058,1.6-2.118.43-1.513-2.15-2.542-.245-1.452,1.228-1.09-2.457,1.816-2.211-.363-4.545-1.574-2.211.484-.86.121-1.843-1.749-.123-1.035-2.211-.121-2.457,3.026-3.808v-2.211l-1.453-.982-.242-1.106,1.816.369,1.574-2.088-1.331-1.6-3.389-1.474-1.937-4.3-1.695-.983-2.3,1.474-1.09-1.474.726-.737.121-1.351-1.09-1.105-.726,1.351-1.574.123-1.211-.492-1.695-.245.121,1.843-1.452,1.105h-1.09v-1.474l-.847-.614-1.452-.491-.485-1.105-1.452-.615-3.752-3.931H261.22l-.6.737h-4.479l1.937-1.843-1.332-1.228-.242-1.843-.847-.123-.363,1.6-2.663-.246.121-1.843-.363-1.474.847-1.229,2.3-.245,1.695-2.211-.847-1.351,2.686-1.938-1.2-.608-.428-1.65-.685-.087-1.2,1.651-.941-.348-1.2.435-.856-.956,1.283-2,.086-1.564,1.54-.608.086-1.477-1.284,1.129-1.284-1.39,1.712-1.3-1.455-1.651.6-1.65H252.56l-1.113-3.388-1.549-.96,1.448-2.133,1.375-2.6,2.517-5.96,3.108-2.156,1.544,2.34,4.6-.737,1.695,7.371,7.5-2.211,4.842,3.685,9.441-5.405,3.873.246,6.779,3.685,7.263-2.457.242,1.965,5.81,2.948.242,3.931-.726,3.686,3.874-.492,3.873.983,1.21,3.931,4.6,2.212,3.147-2.7,1.695-.491.969-1.719-.485-1.474,1.937-3.194,2.179,1.474,5.084-2.7-1.452-2.211,1.211-1.965,2.663,2.457h3.389l2.905,6.634,3.632-.982,3.147,2.457,1.936-1.966,3.632-.491,1.936.982-.968,1.474,5.568.737.242-3.685,6.537-5.16,2.421.246,3.873-2.457,5.326,1.228,4.357-2.211,1.695,1.228h3.632l1.937-.983,2.179.491h3.631l2.179,1.72.242,3.194,1.211.983-1.695,7.862,1.937,2.457,2.039,3.057-.223.383-2.179-.246-1.816,1.351,1.09,1.72-.363,1.228-1.331.983.363,1.6-.485.245-2.057-.123-.485.983.606.86-1.331,2.334-.969,4.423-1.452,1.474-.847,2.7,1.815,1.72,1.574-.369,3.389,3.194-.968,1.965,1.089,1.351,2.542-1.229,1.211-.245.847.86,2.687,1.356.778,1.189,3.424-.174,1.7,1.1Z" transform="translate(-135.045 -288.992)" fill="#e0e0e0" stroke="#646464" stroke-linejoin="round" stroke-width="0.4"/>

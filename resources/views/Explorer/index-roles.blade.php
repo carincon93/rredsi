@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="p-6 mt-4">
-                @foreach ($node->academicPrograms->chunk(3) as $chunk)
+                @forelse ($node->academicPrograms->chunk(3) as $chunk)
                     <div class="flex items-center justify-between mb-4">
                         @foreach ($chunk as $academicProgram)
                             <div>
@@ -32,7 +32,9 @@
                             </div>
                         @endforeach
                     </div>
-                @endforeach
+                @empty
+                 <p>{{ __('No data recorded') }}</p>
+                @endforelse
             </div>
         </div>
     </div>
