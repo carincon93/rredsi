@@ -30,7 +30,7 @@
                                     <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-50 rounded-full"></div>
                                     <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $project->projectType->type]) }}" class="text-gray-400 uppercase ml-2"><small>{{ $project->projectType->type }}</small></a>
                                 </div>
-                                <a href="{{ route('nodes.explorer.searchProjects.showProject', [$node, $project]) }}" class="text-center">
+                                <a href="" class="text-center">
                                     <p class="mb-4">{{ $project->title }}</p>
                                     <p class="text-gray-400"><small>{{ substr($project->abstract, 0, 250) }}...</small></p>
                                     <hr class="mt-4 mb-4">
@@ -38,9 +38,6 @@
                                 @php
                                     $researchTeam = $project->researchTeams()->where('is_principal', 1)->first();
                                 @endphp
-                                @foreach (explode(',', implode(',', json_decode($project->keywords))) as $keyword)
-                                    <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $keyword]) }}">{{ $keyword }}</a>
-                                @endforeach
                                 <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitution->name }}</small></p>
                                 <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->name }}</small></p>
                                 <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>

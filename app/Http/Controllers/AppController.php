@@ -72,7 +72,7 @@ class AppController extends Controller
     }
 
     /**
-     * Show contact form.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -82,5 +82,15 @@ class AppController extends Controller
         $projects = Project::searchProjects($search)->get();
 
         return view('Explorer.index-projects', compact('node', 'projects', 'search'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showProject(Request $request, Node $node, Project $project)
+    {
+        return view('Explorer.show-project', compact('node', 'project'));
     }
 }

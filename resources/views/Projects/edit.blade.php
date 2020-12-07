@@ -47,7 +47,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="title" value="{{ __('Title') }}" />
-                        <textarea id="title" name="title" max="255" class="form-textarea border-0 w-full" required >{{ old('title') ?? $project->title }}</textarea>
+                        <textarea id="title" name="title" max="255" class="form-textarea border-0 w-full" rows="4" required >{{ old('title') ?? $project->title }}</textarea>
                         <x-jet-input-error for="title" class="mt-2" />
                     </div>
 
@@ -65,19 +65,19 @@
 
                     <div class="mt-4">
                         <x-jet-label for="abstract" value="{{ __('Abstract') }}" />
-                        <textarea id="abstract" name="abstract" class="form-textarea border-0 w-full" required >{{ old('abstract') ?? $project->abstract }}</textarea>
+                        <textarea id="abstract" name="abstract" class="form-textarea border-0 w-full" rows="4" required >{{ old('abstract') ?? $project->abstract }}</textarea>
                         <x-jet-input-error for="abstract" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="overall_objective" value="{{ __('Overall objective') }}" />
-                        <textarea id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full" required >{{ old('overall_objective') ?? $project->overall_objective }}</textarea>
+                        <textarea id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full"  rows="8" required >{{ old('overall_objective') ?? $project->overall_objective }}</textarea>
                         <x-jet-input-error for="overall_objective" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="keywords" value="{{ __('Keywords') }}" />
-                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" required >{{ old('keywords') ?? $project->keywords }}</textarea>
+                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="4" required >@if(old('keywords')){{ old('keywords')}}@else @foreach(json_decode($project->keywords) as $keyword){{substr($keyword, 0, -1).','}}@endforeach @endif</textarea>
                         <x-jet-input-error for="keywords" class="mt-2" />
                     </div>
 
@@ -94,7 +94,7 @@
                             <span class="ml-2 text-sm text-gray-600">{{ __('Yes') }}</span>
                         </label>
                         <label for="is_privated_no" class="flex items-center">
-                            <input id="is_privated_no" value="0" type="radio" class="form-radio" name="is_privated" {{ old('is_privated') != null && old('is_privated') == 0 || $project->is_privated != null && $project->is_privated == 0 ? "checked" : "" }}>
+                            <input id="is_privated_no" value="0" type="radio" class="form-radio" name="is_privated" {{ old('is_privated') != null && old('is_privated') == 0 || $project->is_privated == 0 ? "checked" : "" }}>
                             <span class="ml-2 text-sm text-gray-600">{{ __('No') }}</span>
                         </label>
                         <x-jet-input-error for="is_privated" class="mt-2" />
@@ -107,7 +107,7 @@
                             <span class="ml-2 text-sm text-gray-600">{{ __('Yes') }}</span>
                         </label>
                         <label for="is_published_no" class="flex items-center">
-                            <input id="is_published_no" value="0" type="radio" class="form-radio" name="is_published" {{ old('is_published') != null && old('is_published') == 0 || $project->is_published != null && $project->is_published == 0 ? "checked" : "" }}>
+                            <input id="is_published_no" value="0" type="radio" class="form-radio" name="is_published" {{ old('is_published') != null && old('is_published') == 0 || $project->is_published == false ? "checked" : "" }}>
                             <span class="ml-2 text-sm text-gray-600">{{ __('No') }}</span>
                         </label>
                         <x-jet-input-error for="is_published" class="mt-2" />
@@ -150,6 +150,17 @@
                             <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
                         @endforelse
                         <x-jet-input-error for="knowledge_subarea_dicipline_id" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />
+                        <select id="principal_research_team_id" name="principal_research_team_id" class="form-select w-full" required >
+                            <option value="">Seleccione un semillero de investigación principal</option>
+                            @foreach ($educationalInstitutionResearchTeams as $educationalInstitutionResearchTeam)
+                                <option {{ old('principal_research_team_id') == $educationalInstitutionResearchTeam->id || $project->researchTeams()->where('is_principal', 1)->first()->id == $educationalInstitutionResearchTeam->id ? "selected" : ""  }} value="{{ $educationalInstitutionResearchTeam->id }}">{{ $educationalInstitutionResearchTeam->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-jet-input-error for="principal_research_team_id" class="mt-2" />
                     </div>
 
                     <div class="mt-4">

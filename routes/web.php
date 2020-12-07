@@ -41,6 +41,7 @@ Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('/
 Route::get('/nodes/{node}/explorer/roles', [AppController::class, 'roles'])->name('nodes.explorer.roles');
 Route::get('/nodes/{node}/explorer/roles/{academicProgram}', [AppController::class, 'searchRoles'])->name('nodes.explorer.searchRoles');
 Route::get('/nodes/{node}/explorer/projects', [AppController::class, 'searchProjects'])->name('nodes.explorer.searchProjects')->middleware(['auth']);
+Route::get('/nodes/{node}/explorer/projects/{project}', [AppController::class, 'showProject'])->name('nodes.explorer.searchProjects.showProject')->middleware(['auth']);
 Route::post('/nodes/{node}/explorer/contact-form/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification')->middleware(['auth']);
 Route::get('preview-emails', function () {
     return (new App\Notifications\RoleInvitation(3,1,3))
