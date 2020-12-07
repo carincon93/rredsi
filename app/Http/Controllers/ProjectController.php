@@ -78,7 +78,13 @@ class ProjectController extends Controller
             $message = 'Your store processed correctly';
         }
 
-        $project->researchTeams()->attach($request->get('research_team_id'), ['is_principal' => false]);
+        $arrayResearchTeamsIds = $request->get('research_team_id');
+        if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+            unset($arrayResearchTeamsIds[$key]);
+        }
+
+        $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
+        $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
         $project->researchLines()->attach($request->get('research_line_id'));
         $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
         $project->academicPrograms()->attach($request->get('academic_program_id'));
@@ -148,8 +154,13 @@ class ProjectController extends Controller
             $message = 'Your update processed correctly';
         }
 
-        $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => false]);
-        $project->researchTeams()->attach($request->get('research_team_id'), ['is_principal' => false]);
+        $arrayResearchTeamsIds = $request->get('research_team_id');
+        if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+            unset($arrayResearchTeamsIds[$key]);
+        }
+
+        $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
+        $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
         $project->researchLines()->attach($request->get('research_line_id'));
         $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
         $project->academicPrograms()->attach($request->get('academic_program_id'));

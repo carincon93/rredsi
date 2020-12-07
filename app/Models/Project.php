@@ -8,6 +8,8 @@ use Carbon\Carbon;
 
 class Project extends Model
 {
+    public static $projects;
+
     use HasFactory;
     /**
      * The attributes that are mass assignable.
@@ -74,5 +76,26 @@ class Project extends Model
     public function scopeSearchProjects($query, $titleOrKeyword) {
         $titleOrKeyword = mb_strtolower($titleOrKeyword);
         return $query->select('projects.*', 'project_types.type')->join('project_types', 'projects.project_type_id', 'project_types.id')->whereRaw('lower(projects.title) LIKE (?)', "%$titleOrKeyword%")->orWhereRaw('(select lower(jsonb_array_elements_text(projects.keywords::jsonb))) LIKE (?)', "%$titleOrKeyword%")->where('projects.is_privated', 0)->orWhere('project_types.type', $titleOrKeyword);
+    }
+
+    public function scopeAllKeywords($query, $node) {
+        $allKeyWords = collect([]);
+        
+        foreach ($node->educationalInstitutions as $educationalInstitution) {
+            foreach ($educationalInstitution->researchGroups as $researchGroup) {
+                foreach ($researchGroup->researchTeams as $researchTeam) {
+                    foreach ($researchTeam->projects as $project) {
+                        foreach (json_decode($project->keywords) as $keywords){ 
+                            foreach (explode(',', $keywords) as $keyword) {
+                                $allKeyWords->push(trim($keyword)); 
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return $allKeyWords->filter()->unique();
     }
 }

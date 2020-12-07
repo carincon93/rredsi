@@ -78,10 +78,11 @@ class AppController extends Controller
      */
     public function searchProjects(Request $request, Node $node)
     {
-        $search   = $request->get('search');
-        $projects = Project::searchProjects($search)->get();
-
-        return view('Explorer.index-projects', compact('node', 'projects', 'search'));
+        $search         = $request->get('search');
+        $projects       = Project::searchProjects($search)->get();
+        $allKeywords    = Project::allKeywords($node);
+        
+        return view('Explorer.index-projects', compact('node', 'projects', 'search', 'allKeywords'));
     }
 
     /**
