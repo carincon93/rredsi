@@ -12,4 +12,24 @@
             </svg>
         </label>
     </div>
+
+<script>
+    var cont = 0;
+    var input = document.getElementById('footeralert');
+
+    var id = setInterval(function(){
+        cont++;
+        if(cont == 10)
+        {
+            input.setAttribute('checked','checked');
+            clearInterval(id);
+        }
+    }, 1000);
+
+    function closeAlert(event){
+        let element = event.target;
+
+    }
+</script>
+
 </div>
