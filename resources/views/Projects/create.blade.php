@@ -125,7 +125,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <p>{{ __('Academic programs' ) }} </p>
+                        <p>{{ __('Academic programs') }} </p>
                         @forelse ($academicPrograms as $academicProgram)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="academic_program_id[]" @if(is_array(old('academic_program_id')) && in_array($academicProgram->id , old('academic_program_id'))) checked @endif id="{{ "academic-program-$academicProgram->id" }}" value="{{ $academicProgram->id }}" />

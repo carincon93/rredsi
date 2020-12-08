@@ -5,49 +5,58 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-14 pt-4" style="background: url(/storage/images/net.png)">
-                <div class="mt-8 dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg mt-4 h-64" style="background: url(/storage/images/cowork.jpg); background: url(/storage/images/cowork.jpg);background-size: cover;background-repeat: no-repeat;">
+                <div class="mt-8 dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg mt-4 h-64 bg-white">
                     <div class="p-6">
                         <div class="flex items-center mt-4">
-                            <div>
-                                <h1 class="text-5xl text-center leading-none text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-12 w-12 inline mb-2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                    Encuentre proyectos de su interés y trabaje de forma colaborativa con otros semilleros de investigación
+                            <div class="w-full">
+                                <h1 class="text-5xl text-center leading-none text-gray-900">
+                                    {{ $project->title }}
                                 </h1>
+                                <p class="mt-10 text-gray-400">
+                                    {{ __('Authors')}}
+                                    @foreach ($project->authors as $author)
+                                        @if ($author !== $project->authors->last())
+                                            {{ $author->name }},
+                                        @else
+                                            {{ $author->name }}
+                                        @endif
+                                    @endforeach
+                                </p>
+                                <p class="mt-2 text-gray-400">
+                                    Fecha de ejecución: {{ $project->datesForHumans }}
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="p-6 mt-4">
-                <h1 class="mb-10 text-gray-400">Resultados para: {{ $search }}</h1>
-                @forelse ($projects->chunk(3) as $chunk)
-                    <div class="md:grid md:grid-cols-3 md:gap-4">
-                        @foreach ($chunk as $project)
-                            <div class="shadow p-2">
-                                <div style="padding-top: 0.2em; padding-bottom: 0.2rem" class="inline-flex items-center space-x-1 text-xs px-2 bg-gray-200 text-gray-800 rounded-full mb-4">
-                                    <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-50 rounded-full"></div>
-                                    <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $project->projectType->type]) }}" class="text-gray-400 uppercase ml-2"><small>{{ $project->projectType->type }}</small></a>
-                                </div>
-                                <a href="" class="text-center">
-                                    <p class="mb-4">{{ $project->title }}</p>
-                                    <p class="text-gray-400"><small>{{ substr($project->abstract, 0, 250) }}...</small></p>
-                                    <hr class="mt-4 mb-4">
-                                </a>
-                                @php
-                                    $researchTeam = $project->researchTeams()->where('is_principal', 1)->first();
-                                @endphp
-                                <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitution->name }}</small></p>
-                                <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->name }}</small></p>
-                                <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
-                            </div>
-                        @endforeach
+            <div class="p-8 mt-4">
+                <h1 class="text-2xl">{{ __('Abstract') }}</h1>
+                <p class="mt-4">{{ $project->abstract }}</p>
+                <p class="mt-10 text-gray-400">
+                    {{ __('Keywords') }}:
+                    @foreach (explode(',', implode(json_decode($project->keywords))) as $keyword)
+                        <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $keyword]) }}" class="ml-1 underline">{{ $keyword }}</a>
+                    @endforeach
+                </p>
+            </div>
+            <div class="p-8 mt-4">
+                <h1 class="text-2xl">{{ __('Overall objective') }}</h1>
+                <p class="mt-4">{{ $project->overall_objective }}</p>
+            </div>
+
+            <div class="mt-10 flex items-center">
+                <x-jet-button class="m-auto inline-flex">
+                    {{ __('Contact') }}
+
+                    <div class="ml-1 text-white">
+                        <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </div>
-                @empty
-                    <p>{{ __('No data recorded') }}</p>
-                @endforelse
+                </x-jet-button>
             </div>
         </div>
     </div>
+
+    <x-footer />
+
 </x-guest-layout>

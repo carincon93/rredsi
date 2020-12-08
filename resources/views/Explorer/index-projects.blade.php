@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="p-6 mt-4">
-                <h1 class="mb-10 text-gray-400">Resultados para: {{ $search }}</h1>
+                <h1 class="mb-10 text-gray-400">{{ count($projects) }} resultado(s) para: {{ $search }}</h1>
                 @forelse ($projects->chunk(3) as $chunk)
                     <div class="md:grid md:grid-cols-3 md:gap-4">
                         @foreach ($chunk as $project)
@@ -45,14 +45,25 @@
                                             <p class="leading-relaxed text-sm text-justify">
                                                 <small>{{ substr($project->abstract, 0, 250) }}...</small>
                                             </p>
+                                            <div class="mt-4 m-auto block">
+                                                <x-jet-button>
+                                                    {{ __('Show more') }}
+                        
+                                                    <div class="ml-1 text-white">
+                                                        <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                    </div>
+                                                </x-jet-button>
+                                            </div>
                                         </a>
                                         @php
                                             $researchTeam = $project->researchTeams()->where('is_principal', 1)->first();
                                         @endphp
-                                        <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitution->name }}</small></p>
-                                        <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->name }}</small></p>
-                                        <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
                                     </div>
+                                </div>
+                                <div class="rounded bg-white p-4 transform translate-x-6 -translate-y-6 shadow">
+                                    <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitution->name }}</small></p>
+                                    <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->name }}</small></p>
+                                    <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
                                 </div>
                             </div>
                         @endforeach
@@ -61,15 +72,17 @@
                     <p>{{ __('No data recorded') }}</p>
                 @endforelse
             </div>
-            <div class="p-6 mt-4">
-                @foreach ($allKeywords->chunk(5) as $chunk)
+        </div>
+    </div>
+    <div class="py-2 border-t">
+        <div class="p-6 mt-4">
+            @foreach ($allKeywords->chunk(5) as $chunk)
                 <div class="flex justify-around mt-4 sm:items-center sm:justify-around text-center text-sm text-gray-500 sm:text-left">
                     @foreach ($chunk as $keyword)
-                    <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $keyword]) }}" class="ml-1 underline">{{ $keyword }}</a>
+                        <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $keyword]) }}" class="ml-1 underline">{{ $keyword }}</a>
                     @endforeach
                 </div>
-                @endforeach
-            </div>
+            @endforeach
         </div>
     </div>
 </x-guest-layout>
