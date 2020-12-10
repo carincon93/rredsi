@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Node;
 use App\Models\EducationalInstitution;
+use App\Models\EducationalInstitutionFaculty;
 use App\Models\EducationalEnvironment;
 use App\Models\EducationalTool;
+
+
 use App\Http\Requests\EducationalToolRequest;
 use Illuminate\Http\Request;
 
@@ -16,11 +19,11 @@ class EducationalToolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalEnvironment $educationalEnvironment)
+    public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
         $educationalTools = $educationalEnvironment->educationalTools()->orderBy('name')->get();
 
-        return view('EducationalTools.index', compact('node', 'educationalInstitution', 'educationalEnvironment', 'educationalTools'));
+        return view('EducationalTools.index', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'educationalTools'));
     }
 
     /**
@@ -28,9 +31,9 @@ class EducationalToolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalEnvironment $educationalEnvironment)
+    public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
-        return view('EducationalTools.create', compact('node', 'educationalInstitution', 'educationalEnvironment'));
+        return view('EducationalTools.create', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment'));
     }
 
     /**
@@ -39,7 +42,7 @@ class EducationalToolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EducationalToolRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalEnvironment $educationalEnvironment)
+    public function store(EducationalToolRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
         $educationalTool = new EducationalTool();
         $educationalTool->name          = $request->get('name');
@@ -53,7 +56,7 @@ class EducationalToolController extends Controller
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.educational-environments.educational-tools.index', [$node, $educationalInstitution, $educationalEnvironment])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.educational-environments.educational-tools.index', [$node, $educationalInstitution, $faculty, $educationalEnvironment])->with('status', $message);
     }
 
     /**
@@ -62,9 +65,9 @@ class EducationalToolController extends Controller
      * @param  \App\EducationalTool  $educationalTool
      * @return \Illuminate\Http\Response
      */
-    public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
-        return view('EducationalTools.show', compact('node', 'educationalInstitution', 'educationalEnvironment','educationalTool'));
+        return view('EducationalTools.show', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'educationalTool'));
     }
 
     /**
@@ -73,9 +76,9 @@ class EducationalToolController extends Controller
      * @param  \App\EducationalTool  $educationalTool
      * @return \Illuminate\Http\Response
      */
-    public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
-        return view('EducationalTools.edit', compact('node', 'educationalInstitution', 'educationalEnvironment','educationalTool'));
+        return view('EducationalTools.edit', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'educationalTool'));
     }
 
     /**
@@ -85,7 +88,7 @@ class EducationalToolController extends Controller
      * @param  \App\EducationalTool  $educationalTool
      * @return \Illuminate\Http\Response
      */
-    public function update(EducationalToolRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
+    public function update(EducationalToolRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
         $educationalTool->name          = $request->get('name');
         $educationalTool->description   = $request->get('description');
@@ -98,7 +101,7 @@ class EducationalToolController extends Controller
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.educational-environments.educational-tools.index', [$node, $educationalInstitution, $educationalEnvironment])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.educational-environments.educational-tools.index', [$node, $educationalInstitution, $faculty, $educationalEnvironment])->with('status', $message);
     }
 
     /**
@@ -107,13 +110,12 @@ class EducationalToolController extends Controller
      * @param  \App\EducationalTool  $educationalTool
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
         if($educationalTool->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.educational-environments.educational-tools.index', [$node, $educationalInstitution, $educationalEnvironment])->with('status', $message);
-
+        return redirect()->route('nodes.educational-institutions.faculties.educational-environments.educational-tools.index', [$node, $educationalInstitution, $faculty, $educationalEnvironment])->with('status', $message);
     }
 }

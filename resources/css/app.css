@@ -44,6 +44,15 @@ select.header-select option{
     cursor: pointer;
 }
 
+.modal {
+    transition: opacity 0.25s ease;
+}
+body.modal-active {
+    overflow-x: hidden;
+    overflow-y: visible !important;
+}
+.opacity-95 {opacity: .95;}
+
 /*Toast open/load animation*/
 .alert-toast {
     -webkit-animation: fade-in-right 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;

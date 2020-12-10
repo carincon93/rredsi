@@ -26,6 +26,10 @@ class Project extends Model
         'overall_objective',
         'is_privated',
         'is_published',
+        'roles_requirements_description',        
+        'roles_requirements',
+        'tools_requirements_description',        
+        'tools_requirements',
         'project_type_id',
     ];
 
@@ -57,8 +61,7 @@ class Project extends Model
     public function academicPrograms() {
         return $this->belongsToMany('App\Models\AcademicProgram', 'project_academic_program', 'project_id', 'academic_program_id');
     }
-
-
+    
     public function authors() {
         return $this->belongsToMany('App\Models\User', 'authors', 'project_id', 'user_id');
     }
@@ -75,7 +78,17 @@ class Project extends Model
 
     public function scopeSearchProjects($query, $titleOrKeyword) {
         $titleOrKeyword = mb_strtolower($titleOrKeyword);
-        return $query->select('projects.*', 'project_types.type')->join('project_types', 'projects.project_type_id', 'project_types.id')->whereRaw('lower(projects.title) LIKE (?)', "%$titleOrKeyword%")->orWhereRaw('(select lower(jsonb_array_elements_text(projects.keywords::jsonb))) LIKE (?)', "%$titleOrKeyword%")->where('projects.is_privated', 0)->orWhere('project_types.type', $titleOrKeyword);
+        return $query->select('projects.*', 'project_types.type')
+            ->join('project_types', 'projects.project_type_id', 'project_types.id')
+            ->join('project_knowledge_subarea_discipline', 'projects.id', 'project_knowledge_subarea_discipline.project_id')
+            ->join('knowledge_subarea_disciplines', 'project_knowledge_subarea_discipline.knowledge_subarea_discipline_id', 'knowledge_subarea_disciplines.id')
+            ->join('knowledge_subareas', 'knowledge_subarea_disciplines.knowledge_subarea_id', 'knowledge_subareas.id')
+            ->join('knowledge_areas', 'knowledge_subareas.knowledge_area_id', 'knowledge_areas.id')
+            ->whereRaw('lower(projects.title) LIKE (?)', "%$titleOrKeyword%")
+            ->orWhereRaw('(select lower(jsonb_array_elements_text(projects.keywords::jsonb))) LIKE (?)', "%$titleOrKeyword%")
+            ->orWhereRaw('lower(knowledge_areas.name) LIKE (?)', "%$titleOrKeyword%")
+            ->where('projects.is_privated', 0)
+            ->orWhere('project_types.type', $titleOrKeyword);
     }
 
     public function scopeAllKeywords($query, $node) {

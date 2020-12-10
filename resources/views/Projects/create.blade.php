@@ -7,7 +7,7 @@
             </span>
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
+            <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
@@ -27,7 +27,7 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.store', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.store', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}" enctype="multipart/form-data" id="create-project">
                     @csrf
 
                     <div class="mt-4">
@@ -80,8 +80,32 @@
                     </div>
 
                     <div class="mt-4">
+                        <x-jet-label for="roles_requirements_description" value="{{ __('Roles requirements description') }}" />
+                        <textarea id="roles_requirements_description" name="roles_requirements_description" class="form-textarea border-0 w-full" >{{ old('roles_requirements_description') }}</textarea>
+                        <x-jet-input-error for="roles_requirements_description" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="roles_requirements" value="{{ __('Roles requirements') }}" />
+                        <textarea id="roles_requirements" name="roles_requirements" class="form-textarea border-0 w-full" >{{ old('roles_requirements') }}</textarea>
+                        <x-jet-input-error for="roles_requirements" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="tools_requirements_description" value="{{ __('Tools requirements description') }}" />
+                        <textarea id="tools_requirements_description" name="tools_requirements_description" class="form-textarea border-0 w-full" >{{ old('tools_requirements_description') }}</textarea>
+                        <x-jet-input-error for="tools_requirements_description" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="tools_requirements" value="{{ __('Tools requirements') }}" />
+                        <textarea id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" >{{ old('tools_requirements') }}</textarea>
+                        <x-jet-input-error for="tools_requirements" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
                         <x-jet-label for="file" value="{{ __('File') }}" />
-                        <x-jet-input id="file" class="block mt-1 w-full" type="file" name="file" value="{{ old('file') }}" required />
+                        <x-jet-input id="file" class="block mt-1 w-full" type="file" name="file" value="{{ old('file') }}" />
                         <x-jet-input-error for="file" class="mt-2" />
                     </div>
 
@@ -112,14 +136,14 @@
                     </div>
 
                     <div class="mt-4">
-                        <p>{{ __('Authors' ) }} </p>
+                        <p>{{ __('Authors') }}</p>
                         @forelse ($authors as $author)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="user_id[]" @if(is_array(old('user_id')) && in_array($author->id, old('user_id'))) checked @endif id="{{ "author-$author->id" }}" value="{{ $author->id }}" />
                                 <label  label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "author-$author->id" }}">{{ $author->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="user_id" class="mt-2" />
                     </div>
@@ -132,20 +156,20 @@
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "academic-program-$academicProgram->id" }}">{{ $academicProgram->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="academic_program_id" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
-                        <p>{{ __('Knowledge subareas disciplines' ) }} </p>
+                        <p>{{ __('Knowledge subareas disciplines') }}</p>
                         @forelse ($knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="knowledge_subarea_dicipline_id[]" @if(is_array(old('knowledge_subarea_dicipline_id')) && in_array($knowledgeSubareaDiscipline->id , old('knowledge_subarea_dicipline_id'))) checked @endif  id="{{ "knowledge-subarea-dicipline-$knowledgeSubareaDiscipline->id" }}" value="{{ $knowledgeSubareaDiscipline->id }}" />
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "knowledge-subarea-dicipline-$knowledgeSubareaDiscipline->id" }}">{{ $knowledgeSubareaDiscipline->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="knowledge_subarea_dicipline_id" class="mt-2" />
                     </div>
@@ -154,45 +178,41 @@
                         <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />
                         <select id="principal_research_team_id" name="principal_research_team_id" class="form-select w-full" required >
                             <option value="">Seleccione un semillero de investigación principal</option>
-                            @foreach ($educationalInstitutionResearchTeams as $educationalInstitutionResearchTeam)
-                                <option {{ old('principal_research_team_id') == $educationalInstitutionResearchTeam->id ? "selected" : ""  }} value="{{ $educationalInstitutionResearchTeam->id }}">{{ $educationalInstitutionResearchTeam->name }}</option>
+                            @foreach ($educationalInstitutionFacultyResearchTeams as $educationalInstitutionFacultyResearchTeam)
+                                <option {{ old('principal_research_team_id') == $educationalInstitutionFacultyResearchTeam->id ? "selected" : ""  }} value="{{ $educationalInstitutionFacultyResearchTeam->id }}">{{ $educationalInstitutionFacultyResearchTeam->name }}</option>
                             @endforeach
                         </select>
                         <x-jet-input-error for="principal_research_team_id" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
-                        <p>{{ __('Research teams' ) }} </p>
+                        <p>{{ __('Research teams') }}</p>
                         @forelse ($researchTeams as $researchTeam)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="research_team_id[]"  @if(is_array(old('research_team_id')) && in_array($researchTeam->id , old('research_team_id'))) checked @endif id="{{ "research-team-$researchTeam->id" }}" value="{{ $researchTeam->id }}" />
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-team-$researchTeam->id" }}">{{ $researchTeam->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="research_team_id" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
-                        <p>{{ __('Research lines' ) }} </p>
+                        <p>{{ __('Research lines') }}</p>
                         @forelse ($researchLines as $researchLine)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="research_line_id[]" @if(is_array(old('research_line_id')) && in_array($researchLine->id , old('research_line_id'))) checked @endif id="{{ "research-line-$researchLine->id" }}" value="{{ $researchLine->id }}" />
                                 <label label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-line-$researchLine->id" }}">{{ $researchLine->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="research_line_id" class="mt-2" />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button id="modal-open" type="button" class="ml-4 modal-open">
-                            {{ __('Create') }}
-                        </x-jet-button>
-
-                        <x-jet-button id="submit" type="submit"  class="ml-4 hidden">
                             {{ __('Create') }}
                         </x-jet-button>
                     </div>
@@ -202,40 +222,61 @@
     </div>
 
      {{-- #Component modal --}}
-    <x-dialog-modal-project
-    :message="'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur assumenda itaque,
-    corrupti nisi a beatae! Amet quia consectetur minima ab, voluptatum et, eaque itaque quo expedita nobis quam nam eum.
-    Provident recusandae tempore suscipit ullam repellendus error molestias qui nemo laborum officia labore debitis fuga
-    voluptas, pariatur eveniet dolore quo corporis commodi minus, aperiam sint non in! Sint, dolorum dignissimos.
-    Quae voluptates delectus, illum cum deleniti vitae consequuntur voluptatem, repellat temporibus libero nisi autem
-    eveniet officia impedit soluta laboriosam assumenda explicabo ex, sed tempora labore! Vero impedit ipsam repudiandae optio?
-    Corrupti, veritatis facilis delectus atque officia nihil accusantium laudantium eligendi. Pariatur, eveniet expedita.
-    Amet esse iusto vitae saepe ipsum dignissimos hic perspiciatis deleniti neque id. Quod placeat veniam aut quam?
-    Consequuntur neque est porro ipsam quisquam necessitatibus dolore id sapiente sunt perferendis quo in nesciunt qui
-    mollitia quibusdam asperiores doloribus nostrum officiis praesentium molestias exercitationem harum deleniti, expedita
-    laborum. Assumenda.'" />
+    <x-dialog-modal>
+        <x-slot name="title">
+            El trabajo que desea enviar tiene seleccionada la opción de 'Privacidad del proyecto' <span class="project-privacy"></span>, por favor lea atentamente la siguiente información y confirme si está de acuerdo o no.
+        </x-slot>
+        <x-slot name="body">
+            <p class="project-privacy-activated text-sm text-gray-500"> 
+                Al cargar un trabajo de manera pública en la plataforma {{ config('app.name') }}, usted nos otorga el derecho para publicar, poner a disposición, enlazar y utilizar dicho trabajo en medios (ya sean conocidos o desarrollados posteriormente por la Red Regional de Semilleros de Investigación). No podrá realizar ningún envío de forma anónima, así ​​garantiza y declara que dicho trabajo es original y ha sido escrito por usted. 
+            </p>
+            <p class="text-sm text-gray-500">
+                El trabajo que usted intenta cargar a la plataforma será revisado en algún momento por el delegado de su institución educativa y de ser pertinente podrá ser eliminado a criterio. Al publicar dicho trabajo, también garantiza y declara que posee o controla todos los derechos de su trabajo, incluidos, entre otros, todos los derechos necesarios para otorgar el permiso especificado anteriormente.
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+                No puede utilizar los servicios de la plataforma {{ config('app.name') }} para publicar o distribuir información que sea ilegal, que viole o infrinja los derechos de cualquier otra persona, que sea difamatoria, abusiva, odiosa, profana, pornográfica, amenazante o vulgar, que contiene errores, virus u otros componentes dañinos, o que de otro modo sea procesable por ley. {{ config('app.name') }} puede en cualquier momento ejercer control editorial sobre el contenido de los trabajos.
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+                Tendremos el derecho de monitorear los trabajos para determinar el cumplimiento de estos Términos y Condiciones y cualquier regla operativa que establezcamos y para satisfacer cualquier ley, reglamento o solicitud gubernamental autorizada. Tendremos el derecho, a nuestro exclusivo criterio, de editar, negarnos a publicar o eliminar cualquier trabajo.
+            </p>
+            <p class="project-privacy-activated text-sm mt-2 text-red-700">
+                Importante: si el trabajo está en proceso ser una patente, invención o modelo de utilidad se recomienda no ser enviado a la plataforma o debe tener la opción 'Privacidad del proyecto' en 'activada'.
+            </p>
+        </x-slot>
+
+        <x-slot name="footer">
+            <button class="modal-close mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">No estoy de acuerdo</button>
+            <button form="create-project" class="modal-close w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">De acuerdo</button>
+        </x-slot>
+    </x-dialog-modal>
 
     @push('scripts')
         <script>
-            document.getElementById("modal-open").onclick = function(event)
+            document.getElementById('modal-open').onclick = function(event)
             {
-                var privated_yes = document.getElementById("is_privated_yes");
-                var privated_no = document.getElementById("is_privated_no");
+                var privated_yes = document.getElementById('is_privated_yes');
+                var privated_no  = document.getElementById('is_privated_no');
+                var project_privacy_activated = document.getElementsByClassName('project-privacy-activated');
 
-                if(privated_yes.checked){
-                    title('es privado');
-                }else if(privated_no.checked){
-                    title('no es privado');
+                if (privated_yes.checked) {
+                    document.querySelector('.project-privacy').innerHTML = 'activada';
+
+                    for (const iterator of project_privacy_activated) {
+                        iterator.classList.add('block');
+                        iterator.classList.remove('hidden');
+                    }
+     
+                } else if (privated_no.checked) {
+                    
+                    for (const iterator of project_privacy_activated) {
+                        iterator.classList.add('hidden');
+                        iterator.classList.remove('block');
+                    }
+
+                    document.querySelector('.project-privacy').innerHTML = 'desactivada';
                 }
-            }
-
-            document.getElementById("accepted").onclick = function(event)
-            {
-                document.getElementById("submit").click();
             }
         </script>
     @endpush
-
-
 
 </x-app-layout>

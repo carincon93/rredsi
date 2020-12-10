@@ -59,7 +59,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ route('nodes.explorer.searchProjects.showProject', [$node, isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->id : null ]) }}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->title  : __('No data recorded') }}</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[0]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[0]->id ]) : '#' }}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->title  : __('No data recorded') }}</a></div>
                             </div>
 
                             <div class="ml-12">
@@ -85,7 +85,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ route('nodes.explorer.searchProjects.showProject', [$node, isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->id : null]) }}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->title  : __('No data recorded') }}</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[1]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[1]->id])  : '#'}}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->title  : __('No data recorded') }}</a></div>
                             </div>
 
                             <div class="ml-12">
@@ -111,7 +111,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ route('nodes.explorer.searchProjects.showProject', [$node, isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->id : null]) }}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->title  : __('No data recorded') }}</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[2]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[2]->id])  : '#'}}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->title  : __('No data recorded') }}</a></div>
                             </div>
 
                             <div class="ml-12">
@@ -137,7 +137,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[3]) ? $node->shuffleProjects[3]->title  : __('No data recorded') }}</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[3]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[3]->id])  : '#'}}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[3]) ? $node->shuffleProjects[3]->title  : __('No data recorded') }}</a></div>
                             </div>
 
                             <div class="ml-12">
@@ -152,7 +152,7 @@
                 @foreach ($knowledgeAreas->chunk(5) as $chunk)
                     <div class="flex justify-around mt-4 sm:items-center sm:justify-around text-center text-sm text-gray-500 sm:text-left">
                         @foreach ($chunk as $knowledgeArea)
-                            <a href="https://laravel.bigcartel.com" class="ml-1 underline">
+                            <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $knowledgeArea->name]) }}" class="ml-1 underline">
                                 {{ $knowledgeArea->name }}
                             </a>
                         @endforeach
@@ -167,7 +167,7 @@
             <div class="dark:bg-gray-800 overflow-hidden">
                 <h1 class="text-4xl text-gray-400 leading-10">#EventosRREDSI<strong>Caldas{{ date('Y') }}</strong></h1>
                 <p class="text-gray-800 leading-10">Consulte los eventos <strong>{{ date('Y') }}</strong> de las diferentes instituciones educativas e inscriba un proyecto para participar</p>
-                <a href="#" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información de próximos eventos</a>
+                <a href="{{ route('nodes.explorer.events', [$node]) }}" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información de próximos eventos</a>
             </div>
         </div>
     </div>
@@ -175,12 +175,12 @@
         <div class="h-64 bg-cool-gray-600 p-11">
             <h1 class="text-4xl text-gray-300 leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->name : __('No data recorded') }}</h1>
             <p class="text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->datesForHumans : __('No data recorded') }}</p>
-            <a href="#" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
+            <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[0]->id]) }}" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
         </div>
         <div class="h-64 bg-cool-gray-700 p-11">
             <h1 class="text-4xl text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[1]) ? $node->shuffleEducationalInstitutionEvents[1]->name : __('No data recorded') }}</h1>
             <p class="text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[1]) ? $node->shuffleEducationalInstitutionEvents[1]->datesForHumans : __('No data recorded') }}</p>
-            <a href="#" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
+            <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[1]->id]) }}" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
         </div>
     </div>
 

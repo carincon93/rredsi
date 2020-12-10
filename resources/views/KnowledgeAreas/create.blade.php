@@ -3,7 +3,7 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Knowledge areas') }}
             <span class="sm:block text-purple-300">
-                Add knowledge area info
+                Add knowledge area
             </span>
         </h2>
         <div>

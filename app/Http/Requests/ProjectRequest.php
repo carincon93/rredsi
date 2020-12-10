@@ -25,16 +25,15 @@ class ProjectRequest extends FormRequest
     {
         if ($this->isMethod('PUT')){
             return [
-                'title'             => 'required|string|max:255',
-                'start_date'        => 'required|date|date_format:Y-m-d|before:end_date',
-                'end_date'          => 'required|date|date_format:Y-m-d|after:start_date',
-                'abstract'          => 'required',
-                'keywords'          => 'required|json',
-                'file'              => 'max:20000|file|mimetypes:application/pdf',
-                'overall_objective' => 'required',
-                'is_privated'       => 'required|boolean',
-                'is_published'      => 'required|boolean',
-
+                'title'                 => 'required|string|max:255',
+                'start_date'            => 'required|date|date_format:Y-m-d|before:end_date',
+                'end_date'              => 'required|date|date_format:Y-m-d|after:start_date',
+                'abstract'              => 'required',
+                'keywords'              => 'required|json',
+                'file'                  => 'max:20000|file|mimetypes:application/pdf',
+                'overall_objective'     => 'required',
+                'is_privated'           => 'required|boolean',
+                'is_published'          => 'required|boolean',
                 'project_type_id'       => 'required|min:0|max:9999999999|exists:project_types,id',
                 'research_team_id.*'    => 'min:0|max:9999999999|exists:research_teams,id',
                 'research_line_id.*'    => 'required|min:0|max:9999999999|exists:research_lines,id',
@@ -44,16 +43,15 @@ class ProjectRequest extends FormRequest
             ];
         } else {
             return [
-                'title'             => 'required|string|max:255',
-                'start_date'        => 'required|date|date_format:Y-m-d|before:end_date',
-                'end_date'          => 'required|date|date_format:Y-m-d|after:start_date',
-                'abstract'          => 'required',
-                'keywords'          => 'required|json',
-                'file'              => 'required|file|max:20000|mimetypes:application/pdf',
-                'overall_objective' => 'required',
-                'is_privated'       => 'required|boolean',
-                'is_published'      => 'required|boolean',
-
+                'title'                 => 'required|string|max:255',
+                'start_date'            => 'required|date|date_format:Y-m-d|before:end_date',
+                'end_date'              => 'required|date|date_format:Y-m-d|after:start_date',
+                'abstract'              => 'required',
+                'keywords'              => 'required|json',
+                'file'                  => 'file|max:20000|mimetypes:application/pdf',
+                'overall_objective'     => 'required',
+                'is_privated'           => 'required|boolean',
+                'is_published'          => 'required|boolean',
                 'project_type_id'       => 'required|min:0|max:9999999999|exists:project_types,id',
                 'research_team_id.*'    => 'min:0|max:9999999999|exists:research_teams,id',
                 'research_line_id.*'    => 'required|min:0|max:9999999999|exists:research_lines,id',
@@ -74,6 +72,18 @@ class ProjectRequest extends FormRequest
         if($this->keywords != null) {
             $this->merge([
                 'keywords' => json_encode(explode(',', $this->keywords, true)),
+            ]);
+        }
+
+        if($this->roles_requirements != null) {
+            $this->merge([
+                'roles_requirements' => json_encode(explode(',', $this->roles_requirements, true)),
+            ]);
+        }
+
+        if($this->tools_requirements != null) {
+            $this->merge([
+                'tools_requirements' => json_encode(explode(',', $this->tools_requirements, true)),
             ]);
         }
     }

@@ -34,6 +34,8 @@ class User extends Authenticatable
         'cellphone_number',
         'status',
         'interests',
+        'biography',
+        'cvlac',
         'is_enabled',
     ];
 
@@ -79,10 +81,6 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\ResearchTeam', 'administrator_id');
     }
 
-    public function isResearcher() {
-        return $this->hasOne('App\Models\Researcher', 'id');
-    }
-
     public function userGraduations() {
         return $this->hasMany('App\Models\UserGraduation');
     }
@@ -102,7 +100,7 @@ class User extends Authenticatable
             ]);
     }
 
-    public function educationalInstitutions() {
-        return $this->belongsToMany('App\Models\EducationalInstitution', 'educational_institution_members', 'user_id', 'educational_institution_id');
+    public function educationalInstitutionFaculties() {
+        return $this->belongsToMany('App\Models\EducationalInstitution', 'educational_institution_faculty_members', 'user_id', 'educational_institution_faculty_id');
     }
 }

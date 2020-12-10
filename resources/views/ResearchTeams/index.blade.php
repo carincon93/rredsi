@@ -8,7 +8,7 @@
             </span>
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.create', [$node, $educationalInstitution, $researchGroup]) }}" class="btn btn-primary">
+            <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.create', [$node, $educationalInstitution, $faculty, $researchGroup]) }}" class="btn btn-primary">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create research team') }}
                 </div>
@@ -51,16 +51,16 @@
                                             </x-slot>
 
                                             <x-slot name="content">
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.show', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.show', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.edit', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.edit', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.research-groups.research-teams.destroy', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}')">
+                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.destroy', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
                                                     {{ __('Manage projects') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
@@ -76,7 +76,7 @@
     </div>
 
     {{-- #Component modal --}}
-    <x-dialog-modal />
+    <x-dialog-delete-item />
 
     {{--Alert component --}}
     @if (session('status'))

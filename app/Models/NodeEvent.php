@@ -24,4 +24,8 @@ class NodeEvent extends Model
     public function node() {
         return $this->belongsTo('App\Models\Node');
     }
+
+    public function annualNodeEvent() {
+        return $this->hasOne('App\Models\AnnualNodeEvent', 'id');
+    }
 }

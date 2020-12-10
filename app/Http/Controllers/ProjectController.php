@@ -5,6 +5,7 @@ use App\Models\ProjectType;
 Use App\Models\KnowledgeSubareaDiscipline;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
+use App\Models\EducationalInstitutionFaculty;
 use App\Models\ResearchGroup;
 use App\Models\ResearchTeam;
 use App\Models\Project;
@@ -21,11 +22,11 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
+    public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
         $projects = $researchTeam->projects()->orderBy('title')->get();
 
-        return view('Projects.index',  compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projects'));
+        return view('Projects.index',  compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projects'));
     }
 
     /**
@@ -33,17 +34,17 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
+    public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        $projectTypes                           = ProjectType::orderBy('type')->get();
-        $knowledgeSubareaDisciplines            = KnowledgeSubareaDiscipline::orderBy('name')->get();
-        $educationalInstitutionResearchTeams    = $researchGroup->researchTeams()->get();
-        $researchTeams                          = ResearchTeam::orderBy('name')->get();
-        $researchLines                          = $researchGroup->researchLines()->get();
-        $academicPrograms                       = $educationalInstitution->academicPrograms()->orderBy('name')->get();
-        $authors                                = $educationalInstitution->members()->orderBy('name')->get();
+        $projectTypes                               = ProjectType::orderBy('type')->get();
+        $knowledgeSubareaDisciplines                = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $educationalInstitutionFacultyResearchTeams = $researchGroup->researchTeams()->get();
+        $researchTeams                              = ResearchTeam::orderBy('name')->get();
+        $researchLines                              = $researchGroup->researchLines()->get();
+        $academicPrograms                           = $faculty->academicPrograms()->orderBy('name')->get();
+        $authors                                    = $faculty->members()->orderBy('name')->get();
 
-        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionResearchTeams'));
+        return view('Projects.create', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionFacultyResearchTeams'));
     }
 
     /**
@@ -52,14 +53,18 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
+    public function store(ProjectRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
         $project = new Project();
-        $project->title             = $request->get('title');
-        $project->start_date        = $request->get('start_date');
-        $project->end_date          = $request->get('end_date');
-        $project->abstract          = $request->get('abstract');
-        $project->keywords          = $request->get('keywords');
+        $project->title                             = $request->get('title');
+        $project->start_date                        = $request->get('start_date');
+        $project->end_date                          = $request->get('end_date');
+        $project->abstract                          = $request->get('abstract');
+        $project->keywords                          = $request->get('keywords');
+        $project->roles_requirements_description    = $request->get('roles_requirements_description');
+        $project->tools_requirements_description    = $request->get('tools_requirements_description');
+        $project->roles_requirements                = $request->get('roles_requirements');
+        $project->tools_requirements                = $request->get('tools_requirements');
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
@@ -90,7 +95,7 @@ class ProjectController extends Controller
         $project->academicPrograms()->attach($request->get('academic_program_id'));
         $project->authors()->attach($request->get('user_id'));
 
-        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);
 
     }
 
@@ -100,9 +105,9 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        return view('Projects.show', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project'));
+        return view('Projects.show', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'project'));
     }
 
     /**
@@ -111,17 +116,17 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        $projectTypes                           = ProjectType::orderBy('type')->get();
-        $knowledgeSubareaDisciplines            = KnowledgeSubareaDiscipline::orderBy('name')->get();
-        $educationalInstitutionResearchTeams    = $researchGroup->researchTeams()->get();
-        $researchTeams                          = ResearchTeam::orderBy('name')->get();
-        $researchLines                          = $researchGroup->researchLines()->get();
-        $academicPrograms                       = $educationalInstitution->academicPrograms()->orderBy('name')->get();
-        $authors                                = $educationalInstitution->members()->orderBy('name')->get();
+        $projectTypes                               = ProjectType::orderBy('type')->get();
+        $knowledgeSubareaDisciplines                = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $educationalInstitutionFacultyResearchTeams = $researchGroup->researchTeams()->get();
+        $researchTeams                              = ResearchTeam::orderBy('name')->get();
+        $researchLines                              = $researchGroup->researchLines()->get();
+        $academicPrograms                           = $faculty->academicPrograms()->orderBy('name')->get();
+        $authors                                    = $faculty->members()->orderBy('name')->get();
 
-        return view('Projects.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionResearchTeams'));
+        return view('Projects.edit', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'project', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionFacultyResearchTeams'));
     }
 
     /**
@@ -131,13 +136,17 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
+    public function update(ProjectRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        $project->title             = $request->get('title');
-        $project->start_date        = $request->get('start_date');
-        $project->end_date          = $request->get('end_date');
-        $project->abstract          = $request->get('abstract');
-        $project->keywords          = $request->get('keywords');
+        $project->title                             = $request->get('title');
+        $project->start_date                        = $request->get('start_date');
+        $project->end_date                          = $request->get('end_date');
+        $project->abstract                          = $request->get('abstract');
+        $project->keywords                          = $request->get('keywords');
+        $project->roles_requirements_description    = $request->get('roles_requirements_description');
+        $project->tools_requirements_description    = $request->get('tools_requirements_description');
+        $project->roles_requirements                = $request->get('roles_requirements');
+        $project->tools_requirements                = $request->get('tools_requirements');
         if ($request->hasFile('file')) {
             $path  = Storage::putFile(
                 'public/projects', $request->file('file')
@@ -166,7 +175,7 @@ class ProjectController extends Controller
         $project->academicPrograms()->attach($request->get('academic_program_id'));
         $project->authors()->attach($request->get('user_id'));
 
-        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);
     }
 
     /**
@@ -175,12 +184,12 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
         if($project->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);
     }
 }

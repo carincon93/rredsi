@@ -7,7 +7,7 @@
             </span> 
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.academic-programs.edit', [$node, $educationalInstitution, $academicProgram]) }}">
+            <a href="{{ route('nodes.educational-institutions.faculties.academic-programs.edit', [$node, $educationalInstitution, $faculty, $academicProgram]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{__('Edit academic program') }}
                 </div>
@@ -90,7 +90,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Modality') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{$academicProgram->modality}}
+                            {{ $academicProgram->modality }}
                         </p>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Daytime') }}</h3>
                     <div class="mt-3 max-w-xl text-gray-600">
                         <p>
-                            {{$academicProgram->daytime}}
+                            {{ $academicProgram->daytime }}
                         </p>
                     </div>
                 </div>

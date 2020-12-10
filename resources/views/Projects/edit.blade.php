@@ -7,7 +7,7 @@
             </span>
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $researchGroup, $researchTeam]) }}">
+            <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
@@ -28,7 +28,7 @@
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
 
-                <form method="POST" action="{{ route('nodes.educational-institutions.research-groups.research-teams.projects.update', [$node, $educationalInstitution, $researchGroup, $researchTeam, $project]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.update', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -77,8 +77,32 @@
 
                     <div class="mt-4">
                         <x-jet-label for="keywords" value="{{ __('Keywords') }}" />
-                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="4" required >@if(old('keywords')){{ old('keywords')}}@else @foreach(json_decode($project->keywords) as $keyword){{substr($keyword, 0, -1).','}}@endforeach @endif</textarea>
+                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="4" required >@if(old('keywords')){{ old('keywords')}}@else @foreach(json_decode($project->keywords) as $keyword){{ $keyword }}@endforeach @endif</textarea>
                         <x-jet-input-error for="keywords" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="roles_requirements_description" value="{{ __('Roles requirements description') }}" />
+                        <textarea id="roles_requirements_description" name="roles_requirements_description" class="form-textarea border-0 w-full" >{{ old('roles_requirements_description') ?? $project->roles_requirements_description }}</textarea>
+                        <x-jet-input-error for="roles_requirements_description" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="roles_requirements" value="{{ __('Roles requirements') }}" />
+                        <textarea id="roles_requirements" name="roles_requirements" class="form-textarea border-0 w-full" >@if(old('roles_requirements')){{ old('roles_requirements')}}@else @foreach(json_decode($project->roles_requirements) as $roles_requirement){{ $roles_requirement }}@endforeach @endif</textarea>
+                        <x-jet-input-error for="roles_requirements" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="tools_requirements_description" value="{{ __('Tools requirements description') }}" />
+                        <textarea id="tools_requirements_description" name="tools_requirements_description" class="form-textarea border-0 w-full" >{{ old('tools_requirements_description') ?? $project->tools_requirements_description }}</textarea>
+                        <x-jet-input-error for="tools_requirements_description" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="tools_requirements" value="{{ __('Tools requirements') }}" />
+                        <textarea id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" >@if(old('tools_requirements')){{ old('tools_requirements')}}@else @foreach(json_decode($project->tools_requirements) as $tools_requirement){{ $tools_requirement }}@endforeach @endif</textarea>
+                        <x-jet-input-error for="tools_requirements" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
@@ -121,7 +145,7 @@
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "author-$author->id" }}">{{ $author->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="user_id" class="mt-2" />
                     </div>
@@ -134,7 +158,7 @@
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "academic-program-$academicProgram->id" }}">{{ $academicProgram->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="academic_program_id" class="mt-2" />
                     </div>
@@ -147,7 +171,7 @@
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "knowledge-subarea-dicipline-$knowledgeSubareaDiscipline->id" }}">{{ $knowledgeSubareaDiscipline->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="knowledge_subarea_dicipline_id" class="mt-2" />
                     </div>
@@ -156,8 +180,8 @@
                         <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />
                         <select id="principal_research_team_id" name="principal_research_team_id" class="form-select w-full" required >
                             <option value="">Seleccione un semillero de investigación principal</option>
-                            @foreach ($educationalInstitutionResearchTeams as $educationalInstitutionResearchTeam)
-                                <option {{ old('principal_research_team_id') == $educationalInstitutionResearchTeam->id || $project->researchTeams()->where('is_principal', 1)->first()->id == $educationalInstitutionResearchTeam->id ? "selected" : ""  }} value="{{ $educationalInstitutionResearchTeam->id }}">{{ $educationalInstitutionResearchTeam->name }}</option>
+                            @foreach ($educationalInstitutionFacultyResearchTeams as $educationalInstitutionFacultyResearchTeam)
+                                <option {{ old('principal_research_team_id') == $educationalInstitutionFacultyResearchTeam->id || $project->researchTeams()->where('is_principal', 1)->first()->id == $educationalInstitutionFacultyResearchTeam->id ? "selected" : ""  }} value="{{ $educationalInstitutionFacultyResearchTeam->id }}">{{ $educationalInstitutionFacultyResearchTeam->name }}</option>
                             @endforeach
                         </select>
                         <x-jet-input-error for="principal_research_team_id" class="mt-2" />
@@ -171,7 +195,7 @@
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-team-$researchTeam->id" }}">{{ $researchTeam->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="research_team_id" class="mt-2" />
                     </div>
@@ -184,7 +208,7 @@
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-line-$researchLine->id" }}">{{ $researchLine->name }}</label>
                             </div>
                         @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded' ) }}</p>
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="research_line_id" class="mt-2" />
                     </div>

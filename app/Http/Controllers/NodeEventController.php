@@ -41,12 +41,13 @@ class NodeEventController extends Controller
     public function store(EventRequest $request, Node $node)
     {
         $event = new Event();
-        $event->name        = $request->get('name');
-        $event->location    = $request->get('location');
-        $event->description = $request->get('description');
-        $event->start_date  = $request->get('start_date');
-        $event->end_date    = $request->get('end_date');
-        $event->link        = $request->get('link');
+        $event->name            = $request->get('name');
+        $event->location        = $request->get('location');
+        $event->description     = $request->get('description');
+        $event->start_date      = $request->get('start_date');
+        $event->end_date        = $request->get('end_date');
+        $event->register_link   = $request->get('register_link');
+        $event->info_link       = $request->get('info_link');
         $event->save();
 
         $event->nodeEvent()->create([
@@ -92,12 +93,13 @@ class NodeEventController extends Controller
      */
     public function update(EventRequest $request, Node $node, Event $event)
     {
-        $event->name        = $request->get('name');
-        $event->location    = $request->get('location');
-        $event->description = $request->get('description');
-        $event->start_date  = $request->get('start_date');
-        $event->end_date    = $request->get('end_date');
-        $event->link        = $request->get('link');
+        $event->name            = $request->get('name');
+        $event->location        = $request->get('location');
+        $event->description     = $request->get('description');
+        $event->start_date      = $request->get('start_date');
+        $event->end_date        = $request->get('end_date');
+        $event->register_link   = $request->get('register_link');
+        $event->info_link       = $request->get('info_link');
 
         $event->nodeEvent()->update([
             'node_id'   => $node->id
@@ -123,5 +125,18 @@ class NodeEventController extends Controller
         }
 
         return redirect()->route('nodes.events.index', [$node])->with('status', $message);
+    }
+
+    /**
+     * Send project to event.
+     *
+     * @param  \App\Event  $event
+     * @return \Illuminate\Http\Response
+     */
+    public function sendProjectToEvent(Request $request, Node $node, Event $event)
+    {
+        $event->projects()->sync($request->get('project_id'));
+
+        return redirect()->away($event->register_link);
     }
 }

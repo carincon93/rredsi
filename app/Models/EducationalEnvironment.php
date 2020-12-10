@@ -20,18 +20,14 @@ class EducationalEnvironment extends Model
         'description',
         'is_enabled',
         'is_available',
-        'educational_institution_id',
+        'educational_institution_faculty_id',
     ];
 
     public function educationalTools() {
         return $this->hasMany('App\Models\EducationalTool');
     }
 
-    public function educationalInstitution() {
-        return $this->belongsTo('App\Models\EducationalInstitution');
-    }
-
-    public function educationalEnvironmentLoan() {
-        return $this->hasOne('App\Models\EducationalEnvironmentLoan');
+    public function educationalInstitutionFaculty() {
+        return $this->belongsTo('App\Models\EducationalInstitutionFaculty');
     }
 }

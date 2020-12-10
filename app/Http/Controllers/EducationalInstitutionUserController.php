@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
+use App\Models\EducationalInstitutionFaculty;
 use App\Models\User;
 
 use App\Http\Requests\UserRequest;
@@ -17,11 +18,11 @@ class EducationalInstitutionUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Node $node, EducationalInstitution $educationalInstitution)
+    public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
-        $users = $educationalInstitution->members()->orderBy('name')->get();
+        $users = $faculty->members()->orderBy('name')->get();
         
-        return view('EducationalInstitutionUsers.index', compact('node', 'educationalInstitution', 'users'));
+        return view('EducationalInstitutionUsers.index', compact('node', 'educationalInstitution', 'faculty', 'users'));
     }
 
     /**
@@ -29,11 +30,11 @@ class EducationalInstitutionUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Node $node, EducationalInstitution $educationalInstitution)
+    public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
         $roles = Role::orderBy('name')->get();
 
-        return view('EducationalInstitutionUsers.create', compact('node', 'educationalInstitution', 'roles'));
+        return view('EducationalInstitutionUsers.create', compact('node', 'educationalInstitution', 'faculty', 'roles'));
     }
 
     /**
@@ -42,7 +43,7 @@ class EducationalInstitutionUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution)
+    public function store(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
         $user = new User();
         $user->name               = $request->get('name');
@@ -56,11 +57,11 @@ class EducationalInstitutionUserController extends Controller
         $user->assignRole($request->get('role_id'));
         
         if($user->save()){
-            $educationalInstitution->members()->attach($user);
+            $user->educationalInstitutionFaculties()->attach($faculty);
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.users.index', [$node, $educationalInstitution])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty])->with('status', $message);
     }
 
     /**
@@ -69,9 +70,9 @@ class EducationalInstitutionUserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Node $node, EducationalInstitution $educationalInstitution, User $user)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
-        return view('EducationalInstitutionUsers.show', compact('node', 'educationalInstitution', 'user'));
+        return view('EducationalInstitutionUsers.show', compact('node', 'educationalInstitution', 'faculty', 'user'));
     }
 
     /**
@@ -80,11 +81,11 @@ class EducationalInstitutionUserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Node $node, EducationalInstitution $educationalInstitution, User $user)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
         $roles = Role::orderBy('name')->get();
 
-        return view('EducationalInstitutionUsers.edit', compact('node', 'educationalInstitution', 'user', 'roles'));
+        return view('EducationalInstitutionUsers.edit', compact('node', 'educationalInstitution', 'faculty', 'user', 'roles'));
     }
 
     /**
@@ -94,7 +95,7 @@ class EducationalInstitutionUserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution, User $user)
+    public function update(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
         $user->name               = $request->get('name');
         $user->email              = $request->get('email');
@@ -107,10 +108,11 @@ class EducationalInstitutionUserController extends Controller
 
         if($user->save()){
             $user->syncRoles($request->get('role_id'));
+            $user->educationalInstitutionFaculties()->attach($faculty);
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.users.index', [$node, $educationalInstitution])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty])->with('status', $message);
     }
 
     /**
@@ -119,12 +121,12 @@ class EducationalInstitutionUserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Node $node, EducationalInstitution $educationalInstitution, User $user)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
         if($user->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.users.index', [$node, $educationalInstitution])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty])->with('status', $message);
     }
 }

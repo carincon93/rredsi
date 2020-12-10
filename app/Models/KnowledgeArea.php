@@ -17,10 +17,6 @@ class KnowledgeArea extends Model
         'name',
     ];
 
-    public function researchLine() {
-        return $this->hasOne('App\Models\ResearchLine');
-    }
-
     public function academicWorks() {
         return $this->hasMany('App\Models\AcademicWork');
     }

@@ -20,7 +20,8 @@ class Event extends Model
         'description',
         'start_date',
         'end_date',
-        'link',
+        'register_link',
+        'info_link',
     ];
 
     protected $appends = ['datesForHumans'];
@@ -35,6 +36,10 @@ class Event extends Model
 
     public function nodeEvent() {
         return $this->hasOne('App\Models\NodeEvent', 'id');
+    }
+
+    public function knowledgeSubareaDisciplines() {
+        return $this->belongsToMany('App\Models\KnowledgeSubareaDiscipline', 'event_knowledge_subarea_discipline', 'event_id', 'knowledge_subarea_discipline_id');
     }
 
     public function getDatesForHumansAttribute()

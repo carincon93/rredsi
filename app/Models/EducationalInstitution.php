@@ -29,24 +29,12 @@ class EducationalInstitution extends Model
         return $this->belongsTo('App\Models\Node');
     }
 
-    public function researchGroups() {
-        return $this->hasMany('App\Models\ResearchGroup');
-    }
-
-    public function educationalEnvironments() {
-        return $this->hasMany('App\Models\EducationalEnvironment');
-    }
-
-    public function academicPrograms() {
-        return $this->hasMany('App\Models\AcademicProgram');
-    }
-
     public function educationalInstitutionEvents() {
         return $this->hasMany('App\Models\EducationalInstitutionEvent');
     }
 
-    public function members() {
-        return $this->belongsToMany('App\Models\User', 'educational_institution_members', 'educational_institution_id', 'user_id');
+    public function educationalInstitutionFaculties() {
+        return $this->hasMany('App\Models\EducationalInstitutionFaculty');
     }
 
     public function administrator() {
@@ -184,5 +172,9 @@ class EducationalInstitution extends Model
         }
 
         return $total;
+    }
+
+    public function eventsAndProjects() {
+        return DB::table('educational_institution_events')->select(DB::raw('events.name, count(event_project.event_id)'))->join('events', 'educational_institution_events.id', 'events.id')->join('event_project', 'events.id', 'event_project.event_id')->where('educational_institution_events.educational_institution_id', $this->id)->groupBy('event_project.event_id', 'events.name')->get();
     }
 }

@@ -39,10 +39,12 @@ class Node extends Model
     public function shuffleProjects() {
         $projects = collect([]);
         foreach ($this->educationalInstitutions as $educationalInstitution) {
-            foreach ($educationalInstitution->researchGroups as $researchGroup) {
-                foreach ($researchGroup->researchTeams as $researchTeam) {
-                    foreach($researchTeam->projects as $project) {
-                        $projects->add($project);
+            foreach ($educationalInstitution->educationalInstitutionFaculties as $educationalInstitutionFaculty) {
+                foreach ($educationalInstitutionFaculty->researchGroups as $researchGroup) {
+                    foreach ($researchGroup->researchTeams as $researchTeam) {
+                        foreach($researchTeam->projects as $project) {
+                            $projects->add($project);
+                        }
                     }
                 }
             }
@@ -56,15 +58,33 @@ class Node extends Model
      *
      * @return $events
      */
-    public function shuffleEducationalInstitutionEvents() {
+    public function educationalInstitutionAndNodeEvents($knowledgeSubareaDiscipline = null) {
         $events = collect([]);
+        $knowledgeSubareaDiscipline = mb_strtolower($knowledgeSubareaDiscipline);
+        
         foreach ($this->educationalInstitutions as $educationalInstitution) {
             foreach ($educationalInstitution->educationalInstitutionEvents as $educationalInstitutionEvent) {
-                $events->add($educationalInstitutionEvent->event);
+                if ($educationalInstitutionEvent->event->start_date > date('Y-m-d')) {
+                    $events->add($educationalInstitutionEvent->event);
+                }
             }
         }
 
-        return $events->take(2)->shuffle();
+        foreach ($this->nodeEvents as $nodeEvent) {
+            if ($nodeEvent->event->start_date > date('Y-m-d')) {
+                $events->add($nodeEvent->event);
+            }
+        }
+
+        if ($knowledgeSubareaDiscipline) {
+            return $events->map(function ($event) use($knowledgeSubareaDiscipline) {
+                return $event->whereHas('knowledgeSubareaDisciplines', function($query) use($knowledgeSubareaDiscipline) {
+                    return $query->whereRaw('lower(knowledge_subarea_disciplines.name) LIKE (?)', "%$knowledgeSubareaDiscipline%");
+                })->get();
+            })->unique()->flatten();
+        }
+        
+        return $events;
     }
 
     /**
@@ -73,6 +93,6 @@ class Node extends Model
      * @return $qty
      */
     public function qtyProjectsByCity() {
-        return DB::table('projects')->select(DB::raw('educational_institutions.city, count(educational_institutions.city)'))->join('project_research_team', 'projects.id', 'project_research_team.project_id')->join('research_teams', 'project_research_team.research_team_id', 'research_teams.id')->join('research_groups', 'research_teams.research_group_id', 'research_groups.id')->join('educational_institutions', 'research_groups.educational_institution_id', 'educational_institutions.id')->groupBy(DB::raw('educational_institutions.city'))->get();
+        return DB::table('projects')->select(DB::raw('educational_institutions.city, count(educational_institutions.city)'))->join('project_research_team', 'projects.id', 'project_research_team.project_id')->join('research_teams', 'project_research_team.research_team_id', 'research_teams.id')->join('research_groups', 'research_teams.research_group_id', 'research_groups.id')->join('educational_institution_faculties', 'research_groups.educational_institution_faculty_id', 'educational_institution_faculties.id')->join('educational_institutions', 'educational_institution_faculties.educational_institution_id', 'educational_institutions.id')->groupBy(DB::raw('educational_institutions.city'))->get();
     }
 }

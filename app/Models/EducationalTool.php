@@ -26,7 +26,7 @@ class EducationalTool extends Model
         return $this->belongsTo('App\Models\EducationalEnvironment');
     }
 
-    public function educationalToolLoan() {
-        return $this->hasOne('App\Models\EducationalToolLoan');
+    public function knowledgeSubareaDisciplines() {
+        return $this->belongsToMany('App\Models\KnowledgeSubareaDiscipline', 'educational_tool_knowledge_subarea_discipline', 'educational_tool_id', 'knowledge_subarea_discipline_id');
     }
 }

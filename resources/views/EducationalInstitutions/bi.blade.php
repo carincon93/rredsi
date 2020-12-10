@@ -144,23 +144,28 @@
             <x-jet-section-border />
 
             <div id="projectsByYear" class="mx-auto" style="width: 1100px; height: 500px"></div>
+
+            <x-jet-section-border />
+
+            <div id="eventsAndProjects" class="mx-auto" style="width: 1100px; height: 500px"></div>
         </div>
     </div>
 
     @push('scripts')
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
-            google.charts.load("current", {packages:['corechart']});
-            
-            var ProjectsByKnowledgeArea = (function() {
+            google.charts.load('current', {packages:['corechart']});
+
+            var EventsAndProjects = (function() {
                 google.charts.setOnLoadCallback(drawChart);
                 function drawChart() {
                     var options = {
-                        title: "Proyectos por área de conocimiento",
+                        title: 'Cantidad de proyectos registrados en eventos',
                         width: 1100,
                         height: 400,
-                        bar: {groupWidth: "95%"},
-                        legend: { position: "none" },
+                        bar: { groupWidth: '95%' },
+                        legend: { position: 'none' },
+                        vAxis: { format: ' ' },
                         animation: {
                             duration: 1500,
                             startup: true
@@ -168,26 +173,61 @@
                     };
                     var data = google.visualization.arrayToDataTable([
                         ["Element", "Cantidad", { role: "style" } ],
-                        ["Industrias creativas", {{ $educationalInstitution->projectsByKnowledgeArea['industriasCreativas'] }}, "color: #e5e4e2"],
-                        ["Ciencias naturales", {{ $educationalInstitution->projectsByKnowledgeArea['cienciasNaturales'] }}, "color: #e5e4e2"],
-                        ["Ingeniería y tecnología", {{ $educationalInstitution->projectsByKnowledgeArea['ingenieriaTecnologia'] }}, "color: #e5e4e2"],
-                        ["Cuarta revolución industrial", {{ $educationalInstitution->projectsByKnowledgeArea['cuartaRevolucionIndustrial'] }}, "color: #e5e4e2"],
-                        ["Ciencias médicas y de salud", {{ $educationalInstitution->projectsByKnowledgeArea['cienciasMedicasSalud'] }}, "color: #e5e4e2"],
-                        ["Ciencias agrícolas", {{ $educationalInstitution->projectsByKnowledgeArea['cienciasAgricolas'] }}, "color: #e5e4e2"],
-                        ["Ciencias veterinarias", {{ $educationalInstitution->projectsByKnowledgeArea['cienciasVeterinarias'] }}, "color: #e5e4e2"],
-                        ["Ciencias sociales", {{ $educationalInstitution->projectsByKnowledgeArea['cienciasSociales'] }}, "color: #e5e4e2"],
-                        ["Humanidades", {{ $educationalInstitution->projectsByKnowledgeArea['humanidades'] }}, "color: #e5e4e2"],
+                        @foreach ($educationalInstitution->eventsAndProjects as $event)
+                            ["{{ preg_replace('/\r|\n/', "", $event->name) }}", {{ $event->count }}, "color: #e5e4e2"],
+                        @endforeach
                     ]);
 
                     var view = new google.visualization.DataView(data);
                     view.setColumns([0, 1,
-                                    { calc: "stringify",
+                                    { calc: 'stringify',
                                         sourceColumn: 1,
-                                        type: "string",
-                                        role: "annotation" },
+                                        type: 'string',
+                                        role: 'annotation' },
                                     2]);
 
-                    var chart = new google.visualization.ColumnChart(document.getElementById("projectsByKnowledgeArea"));
+                    var chart = new google.visualization.ColumnChart(document.getElementById('eventsAndProjects'));
+                    chart.draw(view, options);
+                }
+            })();
+            
+            var ProjectsByKnowledgeArea = (function() {
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var options = {
+                        title: 'Proyectos por área de conocimiento',
+                        width: 1100,
+                        height: 400,
+                        bar: { groupWidth: '95%' },
+                        legend: { position: 'none' },
+                        vAxis: { format: ' ' },
+                        animation: {
+                            duration: 1500,
+                            startup: true
+                        }
+                    };
+                    var data = google.visualization.arrayToDataTable([
+                        ['Element', 'Cantidad', { role: 'style' } ],
+                        ['Industrias creativas', {{ $educationalInstitution->projectsByKnowledgeArea['industriasCreativas'] }}, "color: #e5e4e2"],
+                        ['Ciencias naturales', {{ $educationalInstitution->projectsByKnowledgeArea['cienciasNaturales'] }}, "color: #e5e4e2"],
+                        ['Ingeniería y tecnología', {{ $educationalInstitution->projectsByKnowledgeArea['ingenieriaTecnologia'] }}, "color: #e5e4e2"],
+                        ['Cuarta revolución industrial', {{ $educationalInstitution->projectsByKnowledgeArea['cuartaRevolucionIndustrial'] }}, "color: #e5e4e2"],
+                        ['Ciencias médicas y de salud', {{ $educationalInstitution->projectsByKnowledgeArea['cienciasMedicasSalud'] }}, "color: #e5e4e2"],
+                        ['Ciencias agrícolas', {{ $educationalInstitution->projectsByKnowledgeArea['cienciasAgricolas'] }}, "color: #e5e4e2"],
+                        ['Ciencias veterinarias', {{ $educationalInstitution->projectsByKnowledgeArea['cienciasVeterinarias'] }}, "color: #e5e4e2"],
+                        ['Ciencias sociales', {{ $educationalInstitution->projectsByKnowledgeArea['cienciasSociales'] }}, "color: #e5e4e2"],
+                        ['Humanidades', {{ $educationalInstitution->projectsByKnowledgeArea['humanidades'] }}, "color: #e5e4e2"],
+                    ]);
+
+                    var view = new google.visualization.DataView(data);
+                    view.setColumns([0, 1,
+                                    { calc: 'stringify',
+                                        sourceColumn: 1,
+                                        type: 'string',
+                                        role: 'annotation' },
+                                    2]);
+
+                    var chart = new google.visualization.ColumnChart(document.getElementById('projectsByKnowledgeArea'));
                     chart.draw(view, options);
                 }
             })();
@@ -202,9 +242,9 @@
                     };
                     var data = google.visualization.arrayToDataTable([
                         ['Tipo de proyecto', 'Cantidad'],
-                        ["Investigación aplicada", {{ $educationalInstitution->projectsByProjectTypes['investigacionAplicada'] }}],
-                        ["Investigación básica", {{ $educationalInstitution->projectsByProjectTypes['investigacionBasica'] }}],
-                        ["Desarrollo tecnológico", {{ $educationalInstitution->projectsByProjectTypes['desarrolloTecnologico'] }}],
+                        ['Investigación aplicada', {{ $educationalInstitution->projectsByProjectTypes['investigacionAplicada'] }}],
+                        ['Investigación básica', {{ $educationalInstitution->projectsByProjectTypes['investigacionBasica'] }}],
+                        ['Desarrollo tecnológico', {{ $educationalInstitution->projectsByProjectTypes['desarrolloTecnologico'] }}],
                     ]);
 
                     var chart = new google.visualization.PieChart(document.getElementById('projectsByProjectTypes'));
@@ -218,6 +258,7 @@
                     var options = {
                         title: 'Proyectos registrados por año',
                         legend: { position: 'bottom' },
+                        vAxis: { format: ' ' },
                         animation: {
                             duration: 1500,
                             startup: true
@@ -225,9 +266,11 @@
                     };
                     var data = google.visualization.arrayToDataTable([
                         ['Año', 'Proyectos registrados'],
-                        @foreach ($educationalInstitution->projectsByYear->sortBy('date_part') as $projectByYear)
+                        @forelse ($educationalInstitution->projectsByYear->sortBy('date_part') as $projectByYear)
                             ["{{ $projectByYear->date_part }}",  {{ $projectByYear->count }}],
-                        @endforeach
+                        @empty
+                            ["{{ date('Y') }}",  0],
+                        @endforelse
                     ]);
 
                     var chart = new google.visualization.LineChart(document.getElementById('projectsByYear'));

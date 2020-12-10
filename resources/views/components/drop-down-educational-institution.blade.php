@@ -61,7 +61,7 @@
                                 educationalInstitutionsSelect.innerHTML += option;
                             })
 
-                            if (educationalInstitutionId != 0) {
+                            if (educationalInstitutionId != 0 && educationalInstitutionId != null) {
                                 educationalInstitutionsSelect.querySelector(`option[value="${educationalInstitutionId}"]`).setAttribute('selected', 'selected');
                             }
                         } catch (error) {

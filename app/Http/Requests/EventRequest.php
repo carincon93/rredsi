@@ -29,7 +29,8 @@ class EventRequest extends FormRequest
             'description'                   => 'required',
             'start_date'                    => 'required|date|date_format:Y-m-d|before:end_date',
             'end_date'                      => 'required|date|date_format:Y-m-d|after:start_date',
-            'link'                          => 'required|url|max:255',
+            'register_link'                 => 'required|url|max:255',
+            'info_link'                     => 'required|url|max:255',
             // 'educational_institution_id'    => 'integer|min:0|max:9999999999|exists:educational_institutions,id',
             // 'node_id'                       => 'integer|min:0|max:9999999999|exists:nodes,id',
         ];

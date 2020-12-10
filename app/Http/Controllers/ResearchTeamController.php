@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KnowledgeArea;
+use App\Models\KnowledgeSubareaDiscipline;
 
 use App\Models\Node;
 use App\Models\EducationalInstitution;
+use App\Models\EducationalInstitutionFaculty;
 use App\Models\ResearchGroup;
 use App\Models\ResearchLine;
 use App\Models\ResearchTeam;
@@ -20,11 +21,11 @@ class ResearchTeamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
+    public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
         $researchTeams = $researchGroup->researchTeams()->orderBy('name')->get();
 
-        return view('ResearchTeams.index', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeams'));
+        return view('ResearchTeams.index', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeams'));
     }
 
     /**
@@ -32,14 +33,14 @@ class ResearchTeamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
+    public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
-        $knowledgeAreas   = KnowledgeArea::orderBy('name')->get();
-        $academicPrograms = $educationalInstitution->academicPrograms()->orderBy('name')->get();
-        $researchLines    = $researchGroup->researchLines()->orderBy('name')->get();
-        $educationalInstitutionMembers = $educationalInstitution->members()->get();
+        $knowledgeSubareaDisciplines    = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $academicPrograms               = $faculty->academicPrograms()->orderBy('name')->get();
+        $researchLines                  = $researchGroup->researchLines()->orderBy('name')->get();
+        $educationalInstitutionMembers  = $faculty->members()->get();
 
-        return view('ResearchTeams.create', compact('node', 'educationalInstitution', 'researchGroup', 'knowledgeAreas', 'academicPrograms', 'researchLines', 'educationalInstitutionMembers'));
+        return view('ResearchTeams.create', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'knowledgeSubareaDisciplines', 'academicPrograms', 'researchLines', 'educationalInstitutionMembers'));
     }
 
     /**
@@ -48,7 +49,7 @@ class ResearchTeamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ResearchTeamRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
+    public function store(ResearchTeamRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
         $researchTeam = new ResearchTeam();
         $researchTeam->name                             = $request->get('name');
@@ -71,10 +72,10 @@ class ResearchTeamController extends Controller
         }
 
         $researchTeam->academicPrograms()->attach($request->get('academic_program_id'));
-        $researchTeam->knowledgeAreas()->attach($request->get('knowledge_area_id'));
+        $researchTeam->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
         $researchTeam->researchLines()->attach($request->get('research_line_id'));
 
-        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.index', [$node, $educationalInstitution, $researchGroup, $researchLine])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
     }
 
     /**
@@ -83,9 +84,9 @@ class ResearchTeamController extends Controller
      * @param  \App\ResearchTeam  $researchTeam
      * @return \Illuminate\Http\Response
      */
-    public function show(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchLine $researchLine, ResearchTeam $researchTeam)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        return view('ResearchTeams.show', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam'));
+        return view('ResearchTeams.show', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam'));
     }
 
     /**
@@ -94,14 +95,14 @@ class ResearchTeamController extends Controller
      * @param  \App\ResearchTeam  $researchTeam
      * @return \Illuminate\Http\Response
      */
-    public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchLine $researchLine, ResearchTeam $researchTeam)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        $knowledgeAreas   = KnowledgeArea::orderBy('name')->get();
-        $academicPrograms = $educationalInstitution->academicPrograms()->orderBy('name')->get();
-        $researchLines    = $researchGroup->researchLines()->orderBy('name')->get();
-        $educationalInstitutionMembers = $educationalInstitution->members()->get();
+        $knowledgeSubareaDisciplines    = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $academicPrograms               = $faculty->academicPrograms()->orderBy('name')->get();
+        $researchLines                  = $researchGroup->researchLines()->orderBy('name')->get();
+        $educationalInstitutionMembers  = $faculty->members()->get();
 
-        return view('ResearchTeams.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'knowledgeAreas',  'academicPrograms', 'researchLines', 'educationalInstitutionMembers'));
+        return view('ResearchTeams.edit', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'knowledgeSubareaDisciplines',  'academicPrograms', 'researchLines', 'educationalInstitutionMembers'));
     }
 
     /**
@@ -111,7 +112,7 @@ class ResearchTeamController extends Controller
      * @param  \App\ResearchTeam  $researchTeam
      * @return \Illuminate\Http\Response
      */
-    public function update(ResearchTeamRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
+    public function update(ResearchTeamRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
         $researchTeam->name                             = $request->get('name');
         $researchTeam->mentor_name                      = $request->get('mentor_name');
@@ -133,10 +134,10 @@ class ResearchTeamController extends Controller
         }
 
         $researchTeam->academicPrograms()->attach($request->get('academic_program_id'));
-        $researchTeam->knowledgeAreas()->attach($request->get('knowledge_area_id'));
+        $researchTeam->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
         $researchTeam->researchLines()->attach($request->get('research_line_id'));
 
-        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.index', [$node, $educationalInstitution, $researchGroup])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
     }
 
     /**
@@ -145,12 +146,12 @@ class ResearchTeamController extends Controller
      * @param  \App\ResearchTeam  $researchTeam
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
         if($researchTeam->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.research-groups.research-teams.index', [$node, $educationalInstitution, $researchGroup])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
     }
 }

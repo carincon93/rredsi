@@ -26,7 +26,7 @@
                         {{ __('Location') }}
                     </x-slot>
                     <x-slot name="thirdTheadTitle">
-                        {{ __('Date') }}
+                        {{ __('Dates') }}
                     </x-slot>
 
                     <x-slot name="tbodyData">
@@ -43,7 +43,7 @@
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $event->event->start_date }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $event->event->datesForHumans }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">
@@ -82,7 +82,7 @@
     </div>
 
     {{-- #Component modal --}}
-    <x-dialog-modal />
+    <x-dialog-delete-item />
 
     {{--Alert component --}}
     @if (session('status'))

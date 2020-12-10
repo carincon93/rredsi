@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Node;
 use App\Models\EducationalInstitution;
+use App\Models\EducationalInstitutionFaculty;
 use App\Models\ResearchGroup;
 use App\Models\ResearchLine;
 use App\Models\KnowledgeArea;
@@ -19,11 +20,11 @@ class ResearchLineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
+    public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
         $researchLines = $researchGroup->researchLines()->orderBy('name')->get();
 
-        return view('ResearchLines.index', compact('node', 'educationalInstitution', 'researchGroup', 'researchLines'));
+        return view('ResearchLines.index', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchLines'));
     }
 
     /**
@@ -31,11 +32,11 @@ class ResearchLineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
+    public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
-        return view('ResearchLines.create', compact('node', 'educationalInstitution', 'researchGroup', 'knowledgeAreas'));
+        return view('ResearchLines.create', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'knowledgeAreas'));
     }
 
     /**
@@ -44,7 +45,7 @@ class ResearchLineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ResearchLineRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup)
+    public function store(ResearchLineRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
         $researchLine = new ResearchLine();
         $researchLine->name         = $request->get('name');
@@ -59,7 +60,7 @@ class ResearchLineController extends Controller
             $message = 'Your store processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.research-groups.research-lines.index', [$node, $educationalInstitution, $researchGroup])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-lines.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
     }
 
     /**
@@ -68,9 +69,9 @@ class ResearchLineController extends Controller
      * @param  \App\ResearchLine  $researchLine
      * @return \Illuminate\Http\Response
      */
-    public function show(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchLine $researchLine)
+    public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchLine $researchLine)
     {
-        return view('ResearchLines.show', compact('node', 'educationalInstitution', 'researchGroup', 'researchLine'));
+        return view('ResearchLines.show', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchLine'));
     }
 
     /**
@@ -79,11 +80,11 @@ class ResearchLineController extends Controller
      * @param  \App\ResearchLine  $researchLine
      * @return \Illuminate\Http\Response
      */
-    public function edit(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchLine $researchLine)
+    public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchLine $researchLine)
     {
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
-        return view('ResearchLines.edit', compact('node', 'educationalInstitution', 'researchGroup', 'researchLine', 'knowledgeAreas'));
+        return view('ResearchLines.edit', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchLine', 'knowledgeAreas'));
     }
 
     /**
@@ -93,7 +94,7 @@ class ResearchLineController extends Controller
      * @param  \App\ResearchLine  $researchLine
      * @return \Illuminate\Http\Response
      */
-    public function update(ResearchLineRequest $request, Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchLine $researchLine)
+    public function update(ResearchLineRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchLine $researchLine)
     {
         $researchLine->name         = $request->get('name');
         $researchLine->objectives   = $request->get('objectives');
@@ -107,7 +108,7 @@ class ResearchLineController extends Controller
             $message = 'Your update processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.research-groups.research-lines.index', [$node, $educationalInstitution, $researchGroup])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-lines.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
     }
 
     /**
@@ -116,12 +117,12 @@ class ResearchLineController extends Controller
      * @param  \App\ResearchLine  $researchLine
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchLine $researchLine)
+    public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchLine $researchLine)
     {
         if($researchLine->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        return redirect()->route('nodes.educational-institutions.research-groups.research-lines.index', [$node, $educationalInstitution, $researchGroup])->with('status', $message);
+        return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-lines.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
     }
 }

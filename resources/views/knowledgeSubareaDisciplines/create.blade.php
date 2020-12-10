@@ -3,7 +3,7 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Knowledge subarea disciplines') }}
             <span class="sm:block text-purple-300">
-                Add knowledge subarea discipline info
+                Add knowledge subarea discipline
             </span>
         </h2>
         <div>

@@ -22,13 +22,13 @@ class AcademicProgram extends Model
         'daytime',
         'start_date',
         'end_date',
-        'educational_institution_id',
+        'educational_institution_faculty_id',
     ];
 
     protected $appends = ['datesForHumans'];
 
-    public function educationalInstitution() {
-        return $this->belongsTo('App\Models\EducationalInstitution');
+    public function educationalInstitutionFaculty() {
+        return $this->belongsTo('App\Models\EducationalInstitutionFaculty');
     }
 
     public function userGraduation() {

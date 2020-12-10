@@ -3,11 +3,11 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Educational institution users') }}
             <span class="sm:block text-purple-300">
-                Add educational institution user info
+                Add educational institution user
             </span>
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.users.index', [$node, $educationalInstitution]) }}">
+            <a href="{{ route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
@@ -27,7 +27,7 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('nodes.educational-institutions.users.store', [$node, $educationalInstitution]) }}">
+                <form method="POST" action="{{ route('nodes.educational-institutions.faculties.users.store', [$node, $educationalInstitution, $faculty]) }}">
                     @csrf
 
                     <div>
@@ -60,6 +60,7 @@
                             <option value="">Seleccione un tipo de documento</option>
                             <option value="cc" {{ old('document_type') == "cc" ? "selected" : "" }}>Cédula de ciudadanía</option>
                             <option value="ti" {{ old('document_type') == "ti" ? "selected" : "" }}>Tarjeta de identidad</option>
+                            <option value="ce" {{ old('document_type') == "ce" ? "selected" : "" }}>Cédula de extranjería</option>
                         </select>
                         <x-jet-input-error for="document_type" class="mt-2" />
                     </div>

@@ -26,14 +26,14 @@
                         @foreach ($chunk as $academicProgram)
                             <div>
                                 <a href="{{ route('nodes.explorer.searchRoles', [$node, $academicProgram]) }}">
-                                    {{ $academicProgram->name }}
+                                    <span class="underline">{{ $academicProgram->name }}</span>
                                     <p class="text-gray-400"><small>{{ $academicProgram->educationalInstitution->name }}</small></p>
                                 </a>
                             </div>
                         @endforeach
                     </div>
                 @empty
-                 <p>{{ __('No data recorded') }}</p>
+                    <p>{{ __('No data recorded') }}</p>
                 @endforelse
             </div>
         </div>

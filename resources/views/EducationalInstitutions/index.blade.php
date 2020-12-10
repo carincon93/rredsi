@@ -63,6 +63,9 @@
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.destroy', [$node, $educationalInstitution]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}">
+                                                    {{ __('Manage educational institution faculties') }}
+                                                </x-jet-dropdown-link>
                                             </x-slot>
                                         </x-jet-dropdown>
                                     </div>
@@ -76,7 +79,7 @@
     </div>
 
     {{-- #Component modal --}}
-    <x-dialog-modal />
+    <x-dialog-delete-item />
 
     {{--Alert component --}}
     @if (session('status'))

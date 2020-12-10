@@ -8,7 +8,7 @@
             </span>
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.educational-environments.create', [$node, $educationalInstitution]) }}">
+            <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.create', [$node, $educationalInstitution, $faculty]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 grgroup-hover:text-blue-500t-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create educational environment')}}
                 </div>
@@ -24,7 +24,7 @@
                         {{ __('Name') }}
                     </x-slot>
                     <x-slot name="secondTheadTitle">
-                        {{ __('Educational institution') }}
+                        {{ __('Educational institution faculty') }}
                     </x-slot>
                     <x-slot name="thirdTheadTitle">
                         {{ __('Type') }}
@@ -37,7 +37,7 @@
                                     <span class="text-center ml-2 font-semibold">{{ $educationalEnvironment->name }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $educationalEnvironment->educationalInstitution->name }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $educationalEnvironment->educationalInstitutionFaculty->name }}</span>
                                 </td>
                                 <td>
                                     <span class="text-center ml-2 font-semibold">{{ $educationalEnvironment->type }}</span>
@@ -55,16 +55,16 @@
                                                 </button>
                                             </x-slot>
                                             <x-slot name="content">
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.educational-environments.show', [$node, $educationalInstitution, $educationalEnvironment]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.educational-environments.show', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.educational-environments.edit', [$node, $educationalInstitution, $educationalEnvironment]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.educational-environments.edit', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.educational-environments.destroy', [$node, $educationalInstitution, $educationalEnvironment]) }}')">
+                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.faculties.educational-environments.destroy', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.educational-environments.educational-tools.index', [$node, $educationalInstitution, $educationalEnvironment]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.educational-environments.educational-tools.index', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
                                                     {{ __('Manage educational tools') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
@@ -80,7 +80,7 @@
     </div>
 
     {{-- #Component modal --}}
-    <x-dialog-modal />
+    <x-dialog-delete-item />
 
     {{--Alert component --}}
     @if (session('status'))

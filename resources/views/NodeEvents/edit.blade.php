@@ -63,9 +63,15 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="link" value="{{ __('Link') }}" />
-                        <x-jet-input id="link" class="block mt-1 w-full" type="url" max="191" name="link" value="{{ old('link') ?? $event->link }}" required />
-                        <x-jet-input-error for="link" class="mt-2" />
+                        <x-jet-label for="register_link" value="{{ __('Register link') }}" />
+                        <x-jet-input id="register_link" class="block mt-1 w-full" type="url" max="191" name="register_link" value="{{ old('register_link') ?? $event->register_link }}" required />
+                        <x-jet-input-error for="register_link" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="info_link" value="{{ __('Info link') }}" />
+                        <x-jet-input id="info_link" class="block mt-1 w-full" type="url" max="191" name="info_link" value="{{ old('info_link') ?? $event->info_link }}" required />
+                        <x-jet-input-error for="info_link" class="mt-2" />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">

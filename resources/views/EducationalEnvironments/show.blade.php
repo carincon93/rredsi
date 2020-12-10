@@ -7,7 +7,7 @@
             </span>
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.educational-environments.edit', [$node, $educationalInstitution, $educationalEnvironment]) }}">
+            <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.edit', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Edit educational environment') }}
                 </div>
@@ -156,7 +156,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Educational institution') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $educationalEnvironment->educationalinstitution->name }}
+                            {{ $educationalEnvironment->educationalinstitutionFaculty->name }}
                         </p>
                     </div>
                 </div>

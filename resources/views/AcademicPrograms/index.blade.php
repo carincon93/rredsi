@@ -7,7 +7,7 @@
             </span>
         </h2>
         <div>
-            <a href="{{ route('nodes.educational-institutions.academic-programs.create', [$node, $educationalInstitution]) }}">
+            <a href="{{ route('nodes.educational-institutions.faculties.academic-programs.create', [$node, $educationalInstitution, $faculty]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create academic program')}}
                 </div>
@@ -39,7 +39,7 @@
                                     <span class="text-center ml-2 font-semibold">{{ $academicProgram->name }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $academicProgram->educationalInstitution->name }}</span>
+                                    <span class="text-center ml-2 font-semibold">{{ $academicProgram->educationalInstitutionFaculty->name }}</span>
                                 </td>
                                 <td>
                                     <span class="text-center ml-2 font-semibold">{{ $academicProgram->code }}</span>
@@ -61,13 +61,13 @@
                                             </x-slot>
 
                                             <x-slot name="content">
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.show', [$node, $educationalInstitution, $academicProgram]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.academic-programs.show', [$node, $educationalInstitution, $faculty, $academicProgram]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.academic-programs.edit', [$node, $educationalInstitution, $academicProgram]) }}">
+                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.academic-programs.edit', [$node, $educationalInstitution, $faculty, $academicProgram]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.academic-programs.destroy', [$node, $educationalInstitution, $academicProgram]) }}')">
+                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.faculties.academic-programs.destroy', [$node, $educationalInstitution, $faculty, $academicProgram]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>
@@ -83,7 +83,7 @@
     </div>
 
     {{-- #Component modal --}}
-    <x-dialog-modal />
+    <x-dialog-delete-item />
 
     {{--Alert component --}}
     @if (session('status'))

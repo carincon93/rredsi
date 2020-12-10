@@ -21,11 +21,11 @@ class ResearchGroup extends Model
         'minciencias_code',
         'minciencias_category',
         'website',
-        'educational_institution_id',
+        'educational_institution_faculty_id',
     ];
 
-    public function educationalInstitution() {
-        return $this->belongsTo('App\Models\EducationalInstitution');
+    public function educationalInstitutionFaculty() {
+        return $this->belongsTo('App\Models\EducationalInstitutionFaculty');
     }
 
     public function researchTeams() {
