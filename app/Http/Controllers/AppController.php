@@ -37,8 +37,13 @@ class AppController extends Controller
         $node->shuffleEducationalInstitutionEvents = $node->educationalInstitutionAndNodeEvents()->shuffle()->take(2);
 
         if (count($node->qtyProjectsByCity) > 0) {
-            $node->qtyProjectsManizales     = $node->qtyProjectsByCity->where('city', 'Manizales')->first()->city == 'Manizales' ? $node->qtyProjectsByCity->where('city', 'Manizales')->first()->count : 0;
-            $node->qtyProjectsPensilvania   = $node->qtyProjectsByCity->where('city', 'Pensilvania')->first()->city == 'Pensilvania' ? $node->qtyProjectsByCity->where('city', 'Pensilvania')->first()->count : 0;
+            if ($node->qtyProjectsByCity->where('city', 'Manizales')->first()) {
+                $node->qtyProjectsManizales = $node->qtyProjectsByCity->where('city', 'Manizales')->first()->city == 'Manizales' ? $node->qtyProjectsByCity->where('city', 'Manizales')->first()->count : 0;
+            }
+
+            if ($node->qtyProjectsByCity->where('city', 'Pensilvania')->first()) {
+                $node->qtyProjectsPensilvania = $node->qtyProjectsByCity->where('city', 'Pensilvania')->first()->city == 'Pensilvania' ? $node->qtyProjectsByCity->where('city', 'Pensilvania')->first()->count : 0;
+            }
         } else {
             $node->qtyProjectsManizales     = 0;
             $node->qtyProjectsPensilvania   = 0;
