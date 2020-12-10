@@ -21,7 +21,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                             </svg>
                         </div>
-                        <h1 class="text-gray-400">{{ count($educationalInstitution->academicPrograms) }} programa(s) de formación</h1>
+                        <h1 class="text-gray-400">{{ $educationalInstitution->educationalInstitutionFaculties()->withCount('academicPrograms')->first()->academic_programs_count }} programa(s) de formación</h1>
                         <h1 class="text-2xl text-gray-400">{{ __('Academic programs') }}</h1>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                         </div>
-                        <h1 class="text-gray-400">{{ count($educationalInstitution->researchGroups) }} grupo(s) de investigación</h1>
+                        <h1 class="text-gray-400">{{ $educationalInstitution->educationalInstitutionFaculties()->withCount('researchGroups')->first()->research_groups_count }} grupo(s) de investigación</h1>
                         <h1 class="text-2xl text-gray-400">{{ __('Research groups') }}</h1>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                             </svg>
                         </div>
-                        <h1 class="text-gray-400">{{ count($educationalInstitution->educationalEnvironments) }} ambiente(s) de formación</h1>
+                        <h1 class="text-gray-400">{{ $educationalInstitution->educationalInstitutionFaculties()->withCount('educationalEnvironments')->first()->educational_environments_count }} ambiente(s) de formación</h1>
                         <h1 class="text-2xl text-gray-400">{{ __('Educational environments') }}</h1>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                             </svg>
                         </div>
-                        <h1 class="text-gray-400">{{ $educationalInstitution->educationalInstitutionEvents()->where('educational_institution_id', $educationalInstitution->id)->count() }} evento(s)</h1>
+                        <h1 class="text-gray-400">{{ $educationalInstitution->withCount('educationalInstitutionEvents')->first()->educational_institution_events_count }} evento(s)</h1>
                         <h1 class="text-2xl text-gray-400">{{ __('Events') }}</h1>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                         </div>
-                        <h1 class="text-gray-400">{{ $educationalInstitution->members()->where('educational_institution_id', $educationalInstitution->id)->count() }} usuario(s)</h1>
+                        <h1 class="text-gray-400">{{ $educationalInstitution->educationalInstitutionFaculties()->withCount('members')->first()->members_count }} usuario(s)</h1>
                         <h1 class="text-2xl text-gray-400">{{ __('Users') }}</h1>
                     </div>
                 </div>
