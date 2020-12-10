@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProjectType;
 Use App\Models\KnowledgeSubareaDiscipline;
+Use App\Models\KnowledgeArea;
+Use App\Models\KnowledgeSubarea;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\EducationalInstitutionFaculty;

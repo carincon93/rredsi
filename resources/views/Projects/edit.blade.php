@@ -163,7 +163,7 @@
                         <x-jet-input-error for="academic_program_id" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <p>{{ __('Knowledge subareas disciplines' ) }} </p>
                         @forelse ($knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
                             <div class="mt-4">
@@ -174,7 +174,11 @@
                             <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="knowledge_subarea_dicipline_id" class="mt-2" />
-                    </div>
+                    </div> --}}
+
+                    <x-drop-down-knowledge-subarea-dicipline>
+
+                    </x-drop-down-knowledge-subarea-dicipline>
 
                     <div class="mt-4">
                         <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />
