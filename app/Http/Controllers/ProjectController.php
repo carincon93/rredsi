@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProjectType;
 Use App\Models\KnowledgeSubareaDiscipline;
+Use App\Models\KnowledgeArea;
+Use App\Models\KnowledgeSubarea;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\ResearchGroup;
@@ -37,13 +39,14 @@ class ProjectController extends Controller
     {
         $projectTypes                           = ProjectType::orderBy('type')->get();
         $knowledgeSubareaDisciplines            = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $knowledgeAreas                         = knowledgeArea::orderBy('name')->get();
         $educationalInstitutionResearchTeams    = $researchGroup->researchTeams()->get();
         $researchTeams                          = ResearchTeam::orderBy('name')->get();
         $researchLines                          = $researchGroup->researchLines()->get();
         $academicPrograms                       = $educationalInstitution->academicPrograms()->orderBy('name')->get();
         $authors                                = $educationalInstitution->members()->orderBy('name')->get();
 
-        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionResearchTeams'));
+        return view('Projects.create', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines','knowledgeAreas', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionResearchTeams'));
     }
 
     /**
@@ -102,6 +105,13 @@ class ProjectController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
+        // $KnowledgeSubareasDiciplines = $project->knowledgeSubareaDisciplines()->get();
+        // $KnowledgeSubarea = KnowledgeSubarea::find(59);
+
+
+        // return $KnowledgeSubareasDiciplines;
+
+
         return view('Projects.show', compact('node', 'educationalInstitution', 'researchGroup', 'researchTeam', 'project'));
     }
 

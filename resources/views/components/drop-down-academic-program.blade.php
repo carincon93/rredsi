@@ -36,7 +36,7 @@
 @once
     @push('scripts')
         <script>
-            let academicProgramEdit = {{ $academicProgram ? $academicProgram->id : 0 }};
+            let academicProgramEdit            = {{ $academicProgram ? $academicProgram->id : 0 }};
             let nodeIdOld                     = {{ old('node_id') != '' ? old('node_id') : 0 }};
             let educationalInstitutionIdOld   = {{ old('educational_institution_id') != '' ? old('educational_institution_id') : 0 }};
             let academicProgramIdOld          = {{ old('academic_program_id') != '' ? old('academic_program_id') : 0 }};
@@ -61,7 +61,7 @@
                             const uri       = `/api/nodes/${nodeId}/educational-institutions`;
                             const response  = await fetch(uri);
                             const result    = await response.json();
-                            
+
                             result.educationalInstitutions.map(function(educationalInstitution) {
                                 educationalInstitutionsSelect.removeAttribute('disabled');
                                 let option = `<option value="${educationalInstitution.id}">${educationalInstitution.name}</option>`;
@@ -97,7 +97,7 @@
                             const uri       = `/api/nodes/${nodeId}/educational-institutions/${educationalInstitutionId}/academic-programs`;
                             const response  = await fetch(uri);
                             const result    = await response.json();
-                            
+
                             result.academicPrograms.map(function(academicProgram) {
                                 academicProgramsSelect.removeAttribute('disabled');
                                 let option = `<option value="${academicProgram.id}">${academicProgram.name}</option>`;
@@ -122,7 +122,7 @@
                     getEducationalInstitutions(nodeIdOld, educationalInstitutionIdOld);
                     getAcademicPrograms(nodeIdOld, educationalInstitutionIdOld, academicProgramIdOld);
                 }
-                
+
                 function retrieveData() {
                     let nodeIdEdit = {{ optional(optional(optional($academicProgram)->educationalInstitution)->node)->id ?? 0 }};
                     let academicProgramIdEdit = {{ optional($academicProgram)->id ?? 0 }};
