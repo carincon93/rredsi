@@ -27,7 +27,7 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.store', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}" enctype="multipart/form-data" id="create-project">
+                <form method="POST" action="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.store', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}" enctype="multipart/form-data" id="create-project" novalidate>
                     @csrf
 
                     <div class="mt-4">
@@ -216,8 +216,8 @@
             El trabajo que desea enviar tiene seleccionada la opción de 'Privacidad del proyecto' <span class="project-privacy"></span>, por favor lea atentamente la siguiente información y confirme si está de acuerdo o no.
         </x-slot>
         <x-slot name="body">
-            <p class="project-privacy-activated text-sm text-gray-500"> 
-                Al cargar un trabajo de manera pública en la plataforma {{ config('app.name') }}, usted nos otorga el derecho para publicar, poner a disposición, enlazar y utilizar dicho trabajo en medios (ya sean conocidos o desarrollados posteriormente por la Red Regional de Semilleros de Investigación). No podrá realizar ningún envío de forma anónima, así ​​garantiza y declara que dicho trabajo es original y ha sido escrito por usted. 
+            <p class="project-privacy-activated text-sm text-gray-500">
+                Al cargar un trabajo de manera pública en la plataforma {{ config('app.name') }}, usted nos otorga el derecho para publicar, poner a disposición, enlazar y utilizar dicho trabajo en medios (ya sean conocidos o desarrollados posteriormente por la Red Regional de Semilleros de Investigación). No podrá realizar ningún envío de forma anónima, así ​​garantiza y declara que dicho trabajo es original y ha sido escrito por usted.
             </p>
             <p class="text-sm text-gray-500">
                 El trabajo que usted intenta cargar a la plataforma será revisado en algún momento por el delegado de su institución educativa y de ser pertinente podrá ser eliminado a criterio. Al publicar dicho trabajo, también garantiza y declara que posee o controla todos los derechos de su trabajo, incluidos, entre otros, todos los derechos necesarios para otorgar el permiso especificado anteriormente.
@@ -254,9 +254,9 @@
                         iterator.classList.add('block');
                         iterator.classList.remove('hidden');
                     }
-     
+
                 } else if (privated_no.checked) {
-                    
+
                     for (const iterator of project_privacy_activated) {
                         iterator.classList.add('hidden');
                         iterator.classList.remove('block');
