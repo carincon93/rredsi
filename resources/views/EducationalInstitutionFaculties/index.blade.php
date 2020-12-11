@@ -8,7 +8,7 @@
             </span>
         </h2>
         <div>
-            @can('create_educational_institution_facultie')
+            @can('create_educational_institution_faculty')
             <a href="{{ route('nodes.educational-institutions.faculties.create', [$node, $educationalInstitution]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create educational institution faculty') }}
@@ -61,17 +61,17 @@
                                             </button>
                                         </x-slot>
                                         <x-slot name="content">
-                                            @can('show_educational_institution_facultie')
+                                            @can('show_educational_institution_faculty')
                                             <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.show', [$node, $educationalInstitution, $faculty]) }}">
                                                 {{ __('Show') }}
                                             </x-jet-dropdown-link>
                                             @endcan
-                                            @can('edit_educational_institution_facultie')
+                                            @can('edit_educational_institution_faculty')
                                             <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.edit', [$node, $educationalInstitution, $faculty]) }}">
                                                 {{ __('Edit') }}
                                             </x-jet-dropdown-link>
                                             @endcan
-                                            @can('destroy_educational_institution_facultie')
+                                            @can('destroy_educational_institution_faculty')
                                             <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.faculties.destroy', [$node, $educationalInstitution, $faculty]) }}')">
                                                 {{ __('Delete') }}
                                             </x-jet-dropdown-link>
