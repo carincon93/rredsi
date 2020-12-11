@@ -59,8 +59,8 @@ class AppController extends Controller
      */
     public function roles(Node $node)
     {
-        $node->academicPrograms = $node->educationalInstitutions()->with('educationalInstitutionFaculties')->get()->pluck('educationalInstitutionFaculties')->flatten();
-        dd($node->academicPrograms);
+        $node->academicPrograms = AcademicProgram::select('academic_programs.id', 'academic_programs.name', 'educational_institution_faculties.name as educationalInstitutionFacultyName', 'educational_institutions.name as educationalInstitutionName')->join('educational_institution_faculties', 'academic_programs.educational_institution_faculty_id', 'educational_institution_faculties.id')->join('educational_institutions', 'educational_institution_faculties.educational_institution_id', 'educational_institutions.id')->where('educational_institutions.node_id', $node->id)->get();
+
         return view('Explorer.index-roles', compact('node'));
     }
 

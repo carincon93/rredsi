@@ -91,11 +91,9 @@
                         
                         <select id="project_id" name="project_id" class="form-select w-full" required >
                             <option value="">Seleccione un proyecto</option>
-                            @forelse ($projects as $project)
+                            @foreach ($projects as $project)
                                 <option value="{{ $project->id }}" {{ old('project_id') == $project->id ? "selected" : "" }}>{{ $project->title }}</option>
-                            @empty
-                                <option value="">{{ __('No data recorded') }}</option>
-                            @endforelse
+                            @endforeach
                         </select>
                         <x-jet-input-error for="project_id" class="mt-2" />
 
