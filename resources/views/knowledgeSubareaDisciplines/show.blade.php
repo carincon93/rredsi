@@ -7,11 +7,13 @@
             </span>
         </h2>
         <div>
+            @can('edit_knowledge_subarea_discipline')
             <a href="{{ route('knowledge-subarea-disciplines.edit', $knowledgeSubareaDiscipline->id) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900roup-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Edit knowledge subarea dicipline') }}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
     

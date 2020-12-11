@@ -7,11 +7,13 @@
             </span>
         </h2>
         <div>
+            @can('edit_project')
             <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.edit', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-purple-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Edit project') }}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
     

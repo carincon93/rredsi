@@ -8,11 +8,13 @@
             </span>
         </h2>
         <div>
+            @can('create_knowledge_subarea_discipline')
             <a href="{{route('knowledge-subarea-disciplines.create') }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 grgroup-hover:text-blue-500t-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create knowledge subarea discipline info') }}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
     
@@ -52,15 +54,21 @@
                                             </button>
                                         </x-slot>
                                         <x-slot name="content">
+                                            @can('show_knowledge_subarea_discipline')
                                             <x-jet-dropdown-link href="{{ route('knowledge-subarea-disciplines.show', [$knowledgeSubareaDiscipline]) }}">
                                                 {{ __('Show') }}
                                             </x-jet-dropdown-link>
+                                            @endcan
+                                            @can('edit_knowledge_subarea_discipline')
                                             <x-jet-dropdown-link href="{{ route('knowledge-subarea-disciplines.edit', [$knowledgeSubareaDiscipline]) }}">
                                                 {{ __('Edit') }}
                                             </x-jet-dropdown-link>
+                                            @endcan
+                                            @can('destroy_knowledge_subarea_discipline')
                                             <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('knowledge-subarea-disciplines.destroy', [$knowledgeSubareaDiscipline]) }}')">
                                                 {{ __('Delete') }}
                                             </x-jet-dropdown-link>
+                                            @endcan
                                         </x-slot>
                                     </x-jet-dropdown>
                                 </div>

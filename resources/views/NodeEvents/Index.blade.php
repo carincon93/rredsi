@@ -8,11 +8,13 @@
             </span>
         </h2>
         <div>
+            @can('create_node_event')
             <a href="{{ route('nodes.events.create', [$node]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create node event')}}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
 
@@ -59,15 +61,21 @@
                                             </x-slot>
 
                                             <x-slot name="content">
+                                                @can('show_node_event')
                                                 <x-jet-dropdown-link href="{{ route('nodes.events.show', [$node, $event])}}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('edit_node_event')
                                                 <x-jet-dropdown-link href="{{ route('nodes.events.edit', [$node, $event]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('destroy_node_event')
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.events.destroy', [$node, $event]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
                                             </x-slot>
                                         </x-jet-dropdown>
                                     </div>

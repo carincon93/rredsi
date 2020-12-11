@@ -7,11 +7,13 @@
             </span> 
         </h2>
         <div>
+            @can('edit_academic_program')
             <a href="{{ route('nodes.educational-institutions.faculties.academic-programs.edit', [$node, $educationalInstitution, $faculty, $academicProgram]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{__('Edit academic program') }}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
     
