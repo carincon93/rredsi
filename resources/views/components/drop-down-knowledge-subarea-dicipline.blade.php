@@ -1,15 +1,12 @@
 
 <div class="mt-4">
-    {{-- <x-jet-label for="knowledge_area_id" value="{{ __('knowledge area') }}" /> --}}
     <p class="mt-4">{{ __('Knowledge subarea Diciplines')}} </p>
     <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="knowledge_area_id" name="knowledge_area_id" required onchange="SwitchknowledgeSubareasDiciplines.onChange(event)">
     </select>
 </div>
 <textarea id="areaOldId" class="hidden"></textarea>
 
-
 <div class="ml-4">
-    {{-- <x-jet-label for="knowledge_subarea_id" value="{{ __('educational institution') }}" /> --}}
     <select class="mr-10 focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="knowledge_subarea_id" name="knowledge_subarea_id" required onchange="SwitchknowledgeSubareasDiciplines.onChangeDiciplines(event)">
         <option value="">Seleccione un knowledge subarea</option>
     </select>
@@ -18,11 +15,7 @@
 
 <textarea id="subAreaOldId" class="hidden"></textarea>
 
-
 <div class="mt-4" id="check">
-    {{-- <x-jet-label for="knowledge_subarea_id" value="{{ __('educational institution') }}" /> --}}
-
-
     <x-jet-input-error for="knowledge_subarea_dicipline_id" class="mt-2" />
 </div>
 
@@ -56,15 +49,6 @@
             console.log(typeof('{{old('knowledge_subarea_dicipline_id')}}'));
 
 
-
-
-            // let subAreaDiciplineOldId = document.getElementById('subAreaDiciplineOldId');
-            // subAreaDiciplineOldId.innerHTML = '{{old('knowledge_subarea_dicipline_id')}}';
-
-            // if(subAreaDiciplineOldId.value != null && subAreaDiciplineOldId.value != 0 ){
-            //     knowledgeSubareaDiciplinesIdOld = subAreaDiciplineOldId.value;
-            //     console.log(knowledgeSubareaDiciplinesIdOld);
-            // }
 
             var SwitchknowledgeSubareasDiciplines = (function() {
                 let knowledgeAreaId                           = null;
@@ -132,7 +116,7 @@
                             const result    = await response.json();
 
                             result.KnowledgeSubareaDiscipline.map(function(KnowledgeSubareaDiscipline) {
-                                let check = ` <input class="form-check-input" type="checkbox" name="knowledge_subarea_dicipline_id[]" id="Knowledge-subarea-discipline-${KnowledgeSubareaDiscipline.id}" value="${KnowledgeSubareaDiscipline.id } required"/>
+                                let check = ` <input class="form-check-input" type="checkbox" name="knowledge_subarea_dicipline_id[]" id="Knowledge-subarea-discipline-${KnowledgeSubareaDiscipline.id}[]" value="${KnowledgeSubareaDiscipline.id } required"/>
                                 <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="Knowledge-subarea-discipline-${KnowledgeSubareaDiscipline.id}">${KnowledgeSubareaDiscipline.name }</label>`;
 
                                 knowledgeSubareaDiciplineidSelect.innerHTML += check;
@@ -152,22 +136,6 @@
                     getAllknowledgeSubareas(knowledgeAreaIdOld, knowledgeSubareaIdOld);
                     getAllknowledgeSubareaDiciplines(knowledgeAreaIdOld,knowledgeSubareaIdOld);
                 }
-
-                // let nodeIdEdit = {{ optional(optional(optional($knowledgeSubareaDiciplines)->knowledgeSubareas)->knowledgeAreas)->id ?? 0 }};
-                // console.log('edit optional '.nodeIdEdit);
-
-                // function retrieveData() {
-                //     let nodeIdEdit = {{ optional(optional(optional($academicProgram)->educationalInstitution)->node)->id ?? 0 }};
-                //     let academicProgramIdEdit = {{ optional($academicProgram)->id ?? 0 }};
-                //     let educationalInstitutionIdEdit = {{ optional(optional($academicProgram)->educationalInstitution)->id ?? 0 }};
-
-                //     // if (nodeIdEdit != 0 && educationalInstitutionIdEdit != 0 && academicProgramIdEdit != 0) {
-                //     //     getEducationalInstitutions(nodeIdEdit, educationalInstitutionIdEdit);
-                //     //     getAcademicPrograms(nodeIdEdit, educationalInstitutionIdEdit, academicProgramIdEdit);
-                //     // }
-                // }
-
-
 
 
 

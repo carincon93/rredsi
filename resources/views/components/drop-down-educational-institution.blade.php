@@ -5,6 +5,7 @@
             <option value="">Seleccione un nodo</option>
         </select>
     </div>
+
     <div class="ml-4">
         {{-- <x-jet-label for="h_educational_institution_id" value="{{ __('educational institution') }}" /> --}}
         <select class="mr-10 bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="h_educational_institution_id" name="h_educational_institution_id" required onchange="SwitchEducationalInstitution.redirect(event)">
@@ -44,7 +45,7 @@
                             console.log(error);
                         }
                 }
-            
+
                 getAllEducationalInstitutions = async (node, educationalInstitutionId) => {
                     const educationalInstitutionsSelect   = document.getElementById('h_educational_institution_id');
                     educationalInstitutionsSelect.innerHTML = '<option value="">Seleccione una institución educativa</option>';
@@ -69,7 +70,7 @@
                         }
                     }
                 }
-                
+
                 if (nodeSelected != 0 && educationalInstitutionSelected != 0) {
                     getAllEducationalInstitutions(nodeSelected, educationalInstitutionSelected);
                 }
