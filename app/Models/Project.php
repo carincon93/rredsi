@@ -95,17 +95,19 @@ class Project extends Model
         $allKeyWords = collect([]);
         
         foreach ($node->educationalInstitutions as $educationalInstitution) {
-            foreach ($educationalInstitution->researchGroups as $researchGroup) {
-                foreach ($researchGroup->researchTeams as $researchTeam) {
-                    foreach ($researchTeam->projects as $project) {
-                        foreach (json_decode($project->keywords) as $keywords){ 
-                            foreach (explode(',', $keywords) as $keyword) {
-                                $allKeyWords->push(trim($keyword)); 
+            foreach ($educationalInstitution->educationalInstitutionFaculties as $educationalInstitutionFaculty) {
+                foreach ($educationalInstitutionFaculty->researchGroups as $researchGroup) {
+                    foreach ($researchGroup->researchTeams as $researchTeam) {
+                        foreach ($researchTeam->projects as $project) {
+                            foreach (json_decode($project->keywords) as $keywords){ 
+                                foreach (explode(',', $keywords) as $keyword) {
+                                    $allKeyWords->push(trim($keyword)); 
+                                }
                             }
                         }
                     }
-                }
 
+                }
             }
         }
 

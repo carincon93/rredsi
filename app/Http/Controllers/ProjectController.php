@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProjectType;
-Use App\Models\KnowledgeSubareaDiscipline;
 Use App\Models\KnowledgeArea;
 Use App\Models\KnowledgeSubarea;
 use App\Models\Node;
@@ -39,14 +38,14 @@ class ProjectController extends Controller
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
         $projectTypes                               = ProjectType::orderBy('type')->get();
-        $knowledgeSubareaDisciplines                = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $knowledgeAreas                             = KnowledgeArea::orderBy('name')->get();
         $educationalInstitutionFacultyResearchTeams = $researchGroup->researchTeams()->get();
         $researchTeams                              = ResearchTeam::orderBy('name')->get();
         $researchLines                              = $researchGroup->researchLines()->get();
         $academicPrograms                           = $faculty->academicPrograms()->orderBy('name')->get();
         $authors                                    = $faculty->members()->orderBy('name')->get();
 
-        return view('Projects.create', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionFacultyResearchTeams'));
+        return view('Projects.create', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeAreas', 'academicPrograms', 'authors', 'educationalInstitutionFacultyResearchTeams'));
     }
 
     /**
@@ -82,20 +81,20 @@ class ProjectController extends Controller
         $project->projectType()->associate($request->get('project_type_id'));
 
         if($project->save()){
+            $arrayResearchTeamsIds = $request->get('research_team_id');
+            if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+                unset($arrayResearchTeamsIds[$key]);
+            }
+    
+            $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
+            $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
+            $project->researchLines()->attach($request->get('research_line_id'));
+            $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
+            $project->academicPrograms()->attach($request->get('academic_program_id'));
+            $project->authors()->attach($request->get('user_id'));
             $message = 'Your store processed correctly';
         }
 
-        $arrayResearchTeamsIds = $request->get('research_team_id');
-        if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
-            unset($arrayResearchTeamsIds[$key]);
-        }
-
-        $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
-        $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
-        $project->researchLines()->attach($request->get('research_line_id'));
-        $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
-        $project->academicPrograms()->attach($request->get('academic_program_id'));
-        $project->authors()->attach($request->get('user_id'));
 
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);
 
@@ -121,14 +120,14 @@ class ProjectController extends Controller
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
         $projectTypes                               = ProjectType::orderBy('type')->get();
-        $knowledgeSubareaDisciplines                = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $knowledgeAreas                             = KnowledgeArea::orderBy('name')->get();
         $educationalInstitutionFacultyResearchTeams = $researchGroup->researchTeams()->get();
         $researchTeams                              = ResearchTeam::orderBy('name')->get();
         $researchLines                              = $researchGroup->researchLines()->get();
         $academicPrograms                           = $faculty->academicPrograms()->orderBy('name')->get();
         $authors                                    = $faculty->members()->orderBy('name')->get();
 
-        return view('Projects.edit', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'project', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeSubareaDisciplines', 'academicPrograms', 'authors', 'educationalInstitutionFacultyResearchTeams'));
+        return view('Projects.edit', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'project', 'projectTypes', 'researchTeams', 'researchLines', 'knowledgeAreas', 'academicPrograms', 'authors', 'educationalInstitutionFacultyResearchTeams'));
     }
 
     /**
@@ -162,20 +161,19 @@ class ProjectController extends Controller
         $project->projectType()->associate($request->get('project_type_id'));
 
         if($project->save()){
+            $arrayResearchTeamsIds = $request->get('research_team_id');
+            if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+                unset($arrayResearchTeamsIds[$key]);
+            }
+    
+            $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
+            $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
+            $project->researchLines()->attach($request->get('research_line_id'));
+            $project->knowledgeAreas()->attach($request->get('knowledge_subarea_dicipline_id'));
+            $project->academicPrograms()->attach($request->get('academic_program_id'));
+            $project->authors()->attach($request->get('user_id'));
             $message = 'Your update processed correctly';
         }
-
-        $arrayResearchTeamsIds = $request->get('research_team_id');
-        if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
-            unset($arrayResearchTeamsIds[$key]);
-        }
-
-        $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
-        $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
-        $project->researchLines()->attach($request->get('research_line_id'));
-        $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
-        $project->academicPrograms()->attach($request->get('academic_program_id'));
-        $project->authors()->attach($request->get('user_id'));
 
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);
     }

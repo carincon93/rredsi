@@ -70,6 +70,8 @@
                         <x-jet-input-error for="is_available" class="mt-2" />
                     </div>
 
+                    <x-drop-down-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="null" />
+
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Create') }}

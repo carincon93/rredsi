@@ -130,16 +130,7 @@
                         <x-jet-input-error for="research_line_id" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Knowledge subarea disciplines') }} </p>
-                    <div class="block mt-4">
-                        @foreach ($knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
-                            <label for="{{ "knowledge-area-$knowledgeSubareaDiscipline->id" }}" class="flex items-center">
-                                <input @if(is_array(old('knowledge_subarea_discipline_id')) && in_array($knowledgeSubareaDiscipline->id , old('knowledge_subarea_discipline_id'))) checked @endif id="{{ "knowledge-area-$knowledgeSubareaDiscipline->id" }}" value="{{ $knowledgeSubareaDiscipline->id }}" type="checkbox" class="form-checkbox" name="knowledge_subarea_discipline_id[]">
-                                <span class="ml-2 text-sm text-gray-600">{{ $knowledgeSubareaDiscipline->name }}</span>
-                            </label>
-                        @endforeach
-                        <x-jet-input-error for="knowledge_subarea_discipline_id" class="mt-2" />
-                    </div>
+                    <x-drop-down-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="null" />
 
                     <p class="mt-4">{{ __('Academic programs') }} </p>
                     <div class="block mt-4">

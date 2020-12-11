@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KnowledgeArea;
+
 use App\Models\Node;
 use App\Models\Event;
 
@@ -29,7 +31,9 @@ class NodeEventController extends Controller
      */
     public function create(Node $node)
     {
-        return view('NodeEvents.create', compact('node'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        return view('NodeEvents.create', compact('node', 'knowledgeAreas'));
     }
 
     /**
@@ -56,6 +60,7 @@ class NodeEventController extends Controller
         ]);
        
         if($event->save()){
+            $event->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your store processed correctly';
         }
 
@@ -81,7 +86,9 @@ class NodeEventController extends Controller
      */
     public function edit(Node $node, Event $event)
     {
-        return view('NodeEvents.edit', compact('node', 'event'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        return view('NodeEvents.edit', compact('node', 'event', 'knowledgeAreas'));
     }
 
     /**
@@ -106,6 +113,7 @@ class NodeEventController extends Controller
         ]);
 
         if($event->save()){
+            $event->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your update processed correctly';
         }
 

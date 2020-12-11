@@ -49,7 +49,7 @@
                         <x-jet-input-error for="qty" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Enabled?' ) }} </p>
+                    <p class="mt-4">{{ __('is enabled?') }} </p>
                     <div class="mt-4">
                         <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" {{ old('is_enabled') == 1 || $educationalTool->is_enabled == 1 ? "checked" : "" }} value="1" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enable_yes">Si</label>
@@ -60,7 +60,7 @@
                         <x-jet-input-error for="is_enabled" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Available?') }}</p>
+                    <p class="mt-4">{{ __('Is available?') }}</p>
                     <div class="mt-4">
                         <input class="form-check-input" type="radio" name="is_available" id="is_available_yes" {{ old('is_available') == 1 || $educationalTool->is_available == 1 ? "checked" : "" }} value="1" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_yes">Si</label>
@@ -70,6 +70,8 @@
 
                         <x-jet-input-error for="is_available" class="mt-2" />
                     </div>
+
+                    <x-drop-down-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="$educationalTool" />
 
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">

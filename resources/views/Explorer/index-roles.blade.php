@@ -27,7 +27,7 @@
                             <div>
                                 <a href="{{ route('nodes.explorer.searchRoles', [$node, $academicProgram]) }}">
                                     <span class="underline">{{ $academicProgram->name }}</span>
-                                    <p class="text-gray-400"><small>{{ $academicProgram->educationalInstitution->name }}</small></p>
+                                    <p class="text-gray-400"><small>{{ $academicProgram->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
                                 </a>
                             </div>
                         @endforeach

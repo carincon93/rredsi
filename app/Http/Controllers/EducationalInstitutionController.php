@@ -143,11 +143,7 @@ class EducationalInstitutionController extends Controller
     {
         $educationalInstitution->projectsByKnowledgeArea        = $educationalInstitution->projectsByKnowledgeArea();
         $educationalInstitution->projectsByYear                 = $educationalInstitution->projectsByYear();
-        $educationalInstitution->qtyGraduationsRegistered       = $educationalInstitution->qtyGraduationsRegistered()->count;
-        $educationalInstitution->qtyResearchTeamsRegistered     = $educationalInstitution->qtyResearchTeamsRegistered();
-        $educationalInstitution->qtyProjectsRegistered          = $educationalInstitution->qtyProjectsRegistered();
         $educationalInstitution->projectsByProjectTypes         = $educationalInstitution->projectsByProjectTypes();
-        $educationalInstitution->qtyResearchOutputsRegistered   = $educationalInstitution->qtyResearchOutputsRegistered();
         $educationalInstitution->eventsAndProjects              = $educationalInstitution->eventsAndProjects();
 
         return view('EducationalInstitutions.bi', compact('node', 'educationalInstitution'));

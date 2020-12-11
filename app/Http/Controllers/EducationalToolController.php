@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KnowledgeArea;
+
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\EducationalInstitutionFaculty;
@@ -33,7 +35,9 @@ class EducationalToolController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
-        return view('EducationalTools.create', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        return view('EducationalTools.create', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'knowledgeAreas'));
     }
 
     /**
@@ -52,7 +56,8 @@ class EducationalToolController extends Controller
         $educationalTool->is_enabled    = $request->get('is_enabled');
         $educationalTool->educationalEnvironment()->associate($educationalEnvironment);
 
-        if($educationalTool->save()){
+        if ($educationalTool->save()) {
+            $educationalTool->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your update processed correctly';
         }
 
@@ -78,7 +83,9 @@ class EducationalToolController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
-        return view('EducationalTools.edit', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'educationalTool'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        return view('EducationalTools.edit', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'educationalTool', 'knowledgeAreas'));
     }
 
     /**
@@ -97,7 +104,8 @@ class EducationalToolController extends Controller
         $educationalTool->is_enabled    = $request->get('is_enabled');
         $educationalTool->educationalEnvironment()->associate($educationalEnvironment);
 
-        if($educationalTool->save()){
+        if ($educationalTool->save()) {
+            $educationalTool->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your update processed correctly';
         }
 

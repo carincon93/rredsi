@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KnowledgeSubareaDiscipline;
+use App\Models\KnowledgeArea;
 
 use App\Models\Node;
 use App\Models\EducationalInstitution;
@@ -35,12 +35,12 @@ class ResearchTeamController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
-        $knowledgeSubareaDisciplines    = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $knowledgeAreas                 = KnowledgeArea::orderBy('name')->get();
         $academicPrograms               = $faculty->academicPrograms()->orderBy('name')->get();
         $researchLines                  = $researchGroup->researchLines()->orderBy('name')->get();
         $educationalInstitutionMembers  = $faculty->members()->get();
 
-        return view('ResearchTeams.create', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'knowledgeSubareaDisciplines', 'academicPrograms', 'researchLines', 'educationalInstitutionMembers'));
+        return view('ResearchTeams.create', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'knowledgeAreas', 'academicPrograms', 'researchLines', 'educationalInstitutionMembers'));
     }
 
     /**
@@ -68,12 +68,12 @@ class ResearchTeamController extends Controller
         $researchTeam->researchGroup()->associate($researchGroup);
 
         if($researchTeam->save()){
+            $researchTeam->academicPrograms()->attach($request->get('academic_program_id'));
+            $researchTeam->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
+            $researchTeam->researchLines()->attach($request->get('research_line_id'));
             $message = 'Your store processed correctly';
         }
 
-        $researchTeam->academicPrograms()->attach($request->get('academic_program_id'));
-        $researchTeam->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
-        $researchTeam->researchLines()->attach($request->get('research_line_id'));
 
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
     }
@@ -97,12 +97,12 @@ class ResearchTeamController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
-        $knowledgeSubareaDisciplines    = KnowledgeSubareaDiscipline::orderBy('name')->get();
+        $knowledgeAreas                 = KnowledgeArea::orderBy('name')->get();
         $academicPrograms               = $faculty->academicPrograms()->orderBy('name')->get();
         $researchLines                  = $researchGroup->researchLines()->orderBy('name')->get();
         $educationalInstitutionMembers  = $faculty->members()->get();
 
-        return view('ResearchTeams.edit', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'knowledgeSubareaDisciplines',  'academicPrograms', 'researchLines', 'educationalInstitutionMembers'));
+        return view('ResearchTeams.edit', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'knowledgeAreas',  'academicPrograms', 'researchLines', 'educationalInstitutionMembers'));
     }
 
     /**
@@ -130,12 +130,12 @@ class ResearchTeamController extends Controller
         $researchTeam->researchGroup()->associate($researchGroup);
 
         if($researchTeam->save()){
+            $researchTeam->academicPrograms()->attach($request->get('academic_program_id'));
+            $researchTeam->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
+            $researchTeam->researchLines()->attach($request->get('research_line_id'));
             $message = 'Your update processed correctly';
         }
 
-        $researchTeam->academicPrograms()->attach($request->get('academic_program_id'));
-        $researchTeam->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
-        $researchTeam->researchLines()->attach($request->get('research_line_id'));
 
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
     }

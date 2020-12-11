@@ -153,7 +153,7 @@
                         @forelse ($academicPrograms as $academicProgram)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="academic_program_id[]" @if(is_array(old('academic_program_id')) && in_array($academicProgram->id , old('academic_program_id'))) checked @endif id="{{ "academic-program-$academicProgram->id" }}" value="{{ $academicProgram->id }}" />
-                                <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "academic-program-$academicProgram->id" }}">{{ $academicProgram->name }}</label>
+                                <label label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "academic-program-$academicProgram->id" }}">{{ $academicProgram->name }}</label>
                             </div>
                         @empty
                             <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
@@ -161,10 +161,7 @@
                         <x-jet-input-error for="academic_program_id" class="mt-2" />
                     </div>
 
-                    <x-drop-down-knowledge-subarea-dicipline>
-
-                    </x-drop-down-knowledge-subarea-dicipline>
-
+                    <x-drop-down-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="null" />
 
                     <div class="mt-4">
                         <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />
@@ -182,7 +179,7 @@
                         @forelse ($researchTeams as $researchTeam)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="research_team_id[]"  @if(is_array(old('research_team_id')) && in_array($researchTeam->id , old('research_team_id'))) checked @endif id="{{ "research-team-$researchTeam->id" }}" value="{{ $researchTeam->id }}" />
-                                <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-team-$researchTeam->id" }}">{{ $researchTeam->name }}</label>
+                                <label label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-team-$researchTeam->id" }}">{{ $researchTeam->name }}</label>
                             </div>
                         @empty
                             <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
@@ -232,7 +229,7 @@
                 Tendremos el derecho de monitorear los trabajos para determinar el cumplimiento de estos Términos y Condiciones y cualquier regla operativa que establezcamos y para satisfacer cualquier ley, reglamento o solicitud gubernamental autorizada. Tendremos el derecho, a nuestro exclusivo criterio, de editar, negarnos a publicar o eliminar cualquier trabajo.
             </p>
             <p class="project-privacy-activated text-sm mt-2 text-red-700">
-                Importante: si el trabajo está en proceso ser una patente, invención o modelo de utilidad se recomienda no ser enviado a la plataforma o debe tener la opción 'Privacidad del proyecto' en 'activada'.
+                Importante: si el trabajo está en proceso de ser una patente, invención o modelo de utilidad se recomienda no ser enviado a la plataforma o debe tener la opción 'Privacidad del proyecto' en 'activada'.
             </p>
         </x-slot>
 

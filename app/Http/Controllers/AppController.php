@@ -59,8 +59,8 @@ class AppController extends Controller
      */
     public function roles(Node $node)
     {
-        $node->academicPrograms = $node->educationalInstitutions()->with('academicPrograms')->get()->pluck('academicPrograms')->flatten();
-
+        $node->academicPrograms = $node->educationalInstitutions()->with('educationalInstitutionFaculties')->get()->pluck('educationalInstitutionFaculties')->flatten();
+        dd($node->academicPrograms);
         return view('Explorer.index-roles', compact('node'));
     }
 
@@ -71,7 +71,7 @@ class AppController extends Controller
      */
     public function searchRoles(Node $node, AcademicProgram $academicProgram)
     {
-        $node->roleMembers = $academicProgram->educationalInstitution->members()->whereHas('userGraduations', function($query) use($academicProgram) {
+        $node->roleMembers = $academicProgram->educationalInstitutionFaculty->members()->whereHas('userGraduations', function($query) use($academicProgram) {
             return $query->where('graduations.academic_program_id', $academicProgram->id);
         })->get();
         $projects = auth()->user()->projects;

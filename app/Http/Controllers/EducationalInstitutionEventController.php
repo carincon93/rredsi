@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KnowledgeArea;
+
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\Event;
@@ -30,7 +32,9 @@ class EducationalInstitutionEventController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution)
     {
-        return view('EducationalInstitutionEvents.create', compact('node', 'educationalInstitution'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        return view('EducationalInstitutionEvents.create', compact('node', 'educationalInstitution', 'knowledgeAreas'));
     }
 
     /**
@@ -42,12 +46,13 @@ class EducationalInstitutionEventController extends Controller
     public function store(EventRequest $request, Node $node, EducationalInstitution $educationalInstitution)
     {
         $event = new Event();
-        $event->name        = $request->get('name');
-        $event->location    = $request->get('location');
-        $event->description = $request->get('description');
-        $event->start_date  = $request->get('start_date');
-        $event->end_date    = $request->get('end_date');
-        $event->link        = $request->get('link');
+        $event->name            = $request->get('name');
+        $event->location        = $request->get('location');
+        $event->description     = $request->get('description');
+        $event->start_date      = $request->get('start_date');
+        $event->end_date        = $request->get('end_date');
+        $event->register_link   = $request->get('link');
+        $event->info_link       = $request->get('link');
         $event->save();
 
         $event->educationalInstitutionEvent()->create([
@@ -55,7 +60,8 @@ class EducationalInstitutionEventController extends Controller
             'educational_institution_id'    => $educationalInstitution->id
         ]);
 
-        if($event->save()){
+        if ($event->save()) {
+            $event->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your store processed correctly';
         }
 
@@ -81,7 +87,9 @@ class EducationalInstitutionEventController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, Event $event)
     {
-        return view('EducationalInstitutionEvents.edit', compact('node', 'educationalInstitution', 'event'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        return view('EducationalInstitutionEvents.edit', compact('node', 'educationalInstitution', 'event', 'knowledgeAreas'));
     }
 
     /**
@@ -93,18 +101,20 @@ class EducationalInstitutionEventController extends Controller
      */
     public function update(EventRequest $request, Node $node, EducationalInstitution $educationalInstitution, Event $event)
     {
-        $event->name        = $request->get('name');
-        $event->location    = $request->get('location');
-        $event->description = $request->get('description');
-        $event->start_date  = $request->get('start_date');
-        $event->end_date    = $request->get('end_date');
-        $event->link        = $request->get('link');
+        $event->name            = $request->get('name');
+        $event->location        = $request->get('location');
+        $event->description     = $request->get('description');
+        $event->start_date      = $request->get('start_date');
+        $event->end_date        = $request->get('end_date');
+        $event->register_link   = $request->get('register_link');
+        $event->info_link       = $request->get('info_link');
 
         $event->educationalInstitutionEvent()->update([
             'educational_institution_id' => $educationalInstitution->id
         ]);
 
-        if($event->save()){
+        if( $event->save()) {
+            $event->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your update processed correctly';
         }
 

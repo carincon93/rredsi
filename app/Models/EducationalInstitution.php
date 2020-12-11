@@ -146,40 +146,56 @@ class EducationalInstitution extends Model
         return DB::table('projects')->select(DB::raw("date_part('year', projects.end_date), COUNT(date_part('year', projects.end_date))"))->join("project_research_team", "projects.id", "project_research_team.project_id")->join("research_teams", "project_research_team.research_team_id", "research_teams.id")->join("research_groups", "research_teams.research_group_id", "research_groups.id")->join("educational_institution_faculties", "research_groups.educational_institution_faculty_id", "educational_institution_faculties.id")->join("educational_institutions", "educational_institution_faculties.educational_institution_id", "educational_institutions.id")->where("educational_institutions.id", $this->id)->groupBy(DB::raw("date_part('year', projects.end_date)"))->get();
     }
 
-    public function qtyGraduationsRegistered() {
-        return DB::table('graduations')->select(DB::raw('count(DISTINCT educational_institution_faculty_members.user_id)'))->join('educational_institution_faculty_members', 'graduations.user_id', 'educational_institution_faculty_members.user_id')->join("educational_institution_faculties", "educational_institution_faculty_members.educational_institution_faculty_id", "educational_institution_faculties.id")->join("educational_institutions", "educational_institution_faculties.educational_institution_id", "educational_institutions.id")->where('educational_institutions.id', $this->id)->first();
+    public function qtyGraduationsInfo() {
+        return DB::table('graduations')->select(DB::raw('count(DISTINCT educational_institution_faculty_members.user_id)'))->join('educational_institution_faculty_members', 'graduations.user_id', 'educational_institution_faculty_members.user_id')->join("educational_institution_faculties", "educational_institution_faculty_members.educational_institution_faculty_id", "educational_institution_faculties.id")->join("educational_institutions", "educational_institution_faculties.educational_institution_id", "educational_institutions.id")->where('educational_institutions.id', $this->id)->count();
     }
 
-    public function qtyResearchTeamsRegistered() {
-        return $this->educationalInstitutionFaculties()->with('researchGroups.researchTeams')->get()->pluck('researchGroups.researchTeams')->flatten()->count();
+    public function qtyResearchTeams() {
+        return DB::table('research_teams')
+            ->join('research_groups', 'research_teams.research_group_id', 'research_groups.id')
+            ->join('educational_institution_faculties', 'research_groups.educational_institution_faculty_id','educational_institution_faculties.id')->where('educational_institution_faculties.educational_institution_id', $this->id)->count();
     }
 
-    public function qtyProjectsRegistered() {
-        $total = 0;
-        foreach ($this->educationalInstitutionFaculties as $educationalInstitutionFaculty) {
-            foreach ($educationalInstitutionFaculty->researchGroups as $researchGroup) {
-                foreach ($researchGroup->researchTeams as $researchTeam) {
-                    $total += count($researchTeam->projects);
-                }
-            }
-        }
-
-        return $total;
+    public function qtyResearchGroups() {
+        return DB::table('research_groups')
+            ->join('educational_institution_faculties', 'research_groups.educational_institution_faculty_id','educational_institution_faculties.id')->where('educational_institution_faculties.educational_institution_id', $this->id)->count();
     }
 
-    public function qtyResearchOutputsRegistered() {
-        $total = 0;
-        foreach ($this->educationalInstitutionFaculties as $educationalInstitutionFaculty) {
-            foreach ($educationalInstitutionFaculty->researchGroups as $researchGroup) {
-                foreach ($researchGroup->researchTeams as $researchTeam) {
-                    foreach ($researchTeam->projects as $project) {
-                        $total += count($project->researchOutputs);
-                    }
-                }
-            }
-        }
+    public function qtyEducationalEnvironments() {
+        return DB::table('educational_environments')
+            ->join('educational_institution_faculties', 'educational_environments.educational_institution_faculty_id','educational_institution_faculties.id')->where('educational_institution_faculties.educational_institution_id', $this->id)->count();
+    }
 
-        return $total;
+    public function qtyProjects() {
+        return DB::table('projects')
+            ->join('project_research_team', 'projects.id', 'project_research_team.project_id')
+            ->join('research_teams', 'project_research_team.research_team_id', 'research_teams.id')
+            ->join('research_groups', 'research_teams.research_group_id', 'research_groups.id')
+            ->join('educational_institution_faculties', 'research_groups.educational_institution_faculty_id','educational_institution_faculties.id')->where('educational_institution_faculties.educational_institution_id', $this->id)->count();
+    }
+
+    public function qtyResearchOutputs() {
+        return DB::table('research_outputs')
+            ->join('projects', 'research_outputs.project_id', 'projects.id')
+            ->join('project_research_team', 'projects.id', 'project_research_team.project_id')
+            ->join('research_teams', 'project_research_team.research_team_id', 'research_teams.id')
+            ->join('research_groups', 'research_teams.research_group_id', 'research_groups.id')
+            ->join('educational_institution_faculties', 'research_groups.educational_institution_faculty_id','educational_institution_faculties.id')->where('educational_institution_faculties.educational_institution_id', $this->id)->count();
+    }
+
+    public function qtyAcademicPrograms() {
+        return DB::table('academic_programs')->join('educational_institution_faculties', 'academic_programs.educational_institution_faculty_id','educational_institution_faculties.id')->where('educational_institution_faculties.educational_institution_id', $this->id)->count();
+    }
+
+    public function qtyUsers() {
+        return DB::table('users')
+            ->join('educational_institution_faculty_members', 'users.id', 'educational_institution_faculty_members.user_id')
+            ->join('educational_institution_faculties', 'educational_institution_faculty_members.educational_institution_faculty_id', 'educational_institution_faculties.id')
+            ->where('educational_institution_faculties.educational_institution_id', $this->id)->count();
+    }
+
+    public function qtyEvents() {
+        return DB::table('educational_institution_events')->where('educational_institution_events.educational_institution_id', $this->id)->count();
     }
 
     public function eventsAndProjects() {
