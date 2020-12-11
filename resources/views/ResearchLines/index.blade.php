@@ -8,11 +8,13 @@
             </span>
         </h2>
         <div>
+            @can('create_reserach_line')
             <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-lines.create', [$node, $educationalInstitution, $faculty, $researchGroup]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create research line') }}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
 
@@ -51,15 +53,21 @@
                                             </x-slot>
 
                                             <x-slot name="content">
+                                                @can('show_reserach_line')
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-lines.show', [$node, $educationalInstitution, $faculty, $researchGroup, $researchLine]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('edit_reserach_line')
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-lines.edit', [$node, $educationalInstitution, $faculty, $researchGroup, $researchLine]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('destroy_reserach_line')
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.faculties.research-groups.research-lines.destroy', [$node, $educationalInstitution, $faculty, $researchGroup, $researchLine]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
                                             </x-slot>
                                         </x-jet-dropdown>
                                     </div>

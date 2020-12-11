@@ -7,11 +7,13 @@
             </span>
         </h2>
         <div>
+            @can('create_role')
             <a href="{{ route('roles.create') }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create role')}}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
 
@@ -46,15 +48,21 @@
                                             </x-slot>
 
                                             <x-slot name="content">
+                                                @can('show_role')
                                                 <x-jet-dropdown-link href="{{ route('roles.show', $role->id) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('edit_role')
                                                 <x-jet-dropdown-link href="{{ route('roles.edit', $role->id) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('destroy_role')
                                                 <x-jet-dropdown-link href="{{ route('roles.destroy', $role->id) }}">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
                                             </x-slot>
                                         </x-jet-dropdown>
                                     </div>

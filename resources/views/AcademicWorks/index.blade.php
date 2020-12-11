@@ -8,11 +8,13 @@
             </span>
         </h2>
         <div>
+            @can('create_academic_work')
             <a href="{{ route('user.profile.user-graduations.user-academic-works.create', [$userGraduation]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create academic work info') }}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
 
@@ -62,15 +64,21 @@
                                                 </button>
                                             </x-slot>
                                             <x-slot name="content">
+                                                @can('show_academic_work')
                                                 <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.user-academic-works.show', [$userGraduation, $userAcademicWork]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('edit_academic_work')
                                                 <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.user-academic-works.edit', [$userGraduation, $userAcademicWork]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('destroy_academic_work')
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{  route('user.profile.user-graduations.user-academic-works.destroy', [$userGraduation, $userAcademicWork]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
                                             </x-slot>
                                         </x-jet-dropdown>
                                     </div>
