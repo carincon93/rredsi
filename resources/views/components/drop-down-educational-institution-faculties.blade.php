@@ -1,7 +1,11 @@
+@props(['form'=> "no"])
+
 <div class="mt-1">
     <select class="text-base md:text-xs mr-10 bg-transparent  focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block w-full" id="node_id" name="node_id" required onchange="SwitchFaculties.onChange(event)">
     </select>
 </div>
+
+<input class="hidden" id="is_form" value="{{$form}}" >
 
 <div class="mt-1">
     {{-- <p class="mt-4">{{ __('Educational institutions')}} </p> --}}
@@ -18,10 +22,8 @@
 </div>
 
 
-
-
-@once
-    @push('scripts')
+ @once
+     {{-- @push('scripts') --}}
         <script>
                 const nodeSelected                          = {{ request()->route('node') != null ? request()->route('node')->id : 0 }};
                 const educationalInstitutionSelected        = {{ request()->route('educational_institution') != null ? request()->route('educational_institution')->id : 0 }};
@@ -130,9 +132,17 @@
 
                         },
                         redirect: function(e) {
-                            nodeId = document.getElementById('node_id').value;
-                            educationalInstitutionId = document.getElementById('educational_institution_id').value;
-                            window.location = `/dashboard/nodes/${nodeId}/educational-institutions/${educationalInstitutionId}/faculties/${e.target.value}`;
+                            var is_form = document.getElementById('is_form');
+
+                            if( is_form.value != "yes")
+                            {
+                                nodeId = document.getElementById('node_id').value;
+                                educationalInstitutionId = document.getElementById('educational_institution_id').value;
+                                window.location = `/dashboard/nodes/${nodeId}/educational-institutions/${educationalInstitutionId}/faculties/${e.target.value}`;
+
+                            }
+
+
                         }
                     }
 
@@ -148,5 +158,5 @@
 
 
         </script>
-    @endpush
+     {{-- @endpush --}}
 @endonce
