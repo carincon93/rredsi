@@ -46,8 +46,18 @@
                     </div>
 
                     <div class="mt-4">
+                        <x-jet-label for="main_image" value="{{ __('Main image') }}" />
+                        <x-jet-input id="main_image" class="block mt-1 w-full overflow-hidden" type="file" accept="image/*" name="main_image" value="{{ old('main_image') }}" />
+                        @if (Storage::disk('public')->exists($project->main_image))
+                            <a href="{{ url("storage/$project->main_image") }}" class="mt-4 inline-flex text-blue-600 underline" target="_black">Ver imagen principal</a>
+                            <x-jet-section-border />
+                        @endif
+                        <x-jet-input-error for="main_image" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
                         <x-jet-label for="title" value="{{ __('Title') }}" />
-                        <textarea id="title" name="title" max="255" class="form-textarea border-0 w-full" rows="4" required >{{ old('title') ?? $project->title }}</textarea>
+                        <textarea id="title" name="title" max="255" class="form-textarea border-0 w-full" rows="8" required >{{ old('title') ?? $project->title }}</textarea>
                         <x-jet-input-error for="title" class="mt-2" />
                     </div>
 
@@ -65,19 +75,19 @@
 
                     <div class="mt-4">
                         <x-jet-label for="abstract" value="{{ __('Abstract') }}" />
-                        <textarea id="abstract" name="abstract" class="form-textarea border-0 w-full" rows="4" required >{{ old('abstract') ?? $project->abstract }}</textarea>
+                        <textarea id="abstract" name="abstract" class="form-textarea border-0 w-full" rows="8" required >{{ old('abstract') ?? $project->abstract }}</textarea>
                         <x-jet-input-error for="abstract" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="overall_objective" value="{{ __('Overall objective') }}" />
-                        <textarea id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full"  rows="8" required >{{ old('overall_objective') ?? $project->overall_objective }}</textarea>
+                        <textarea id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full" rows="8" required >{{ old('overall_objective') ?? $project->overall_objective }}</textarea>
                         <x-jet-input-error for="overall_objective" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="keywords" value="{{ __('Keywords') }}" />
-                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="4" required >@if(old('keywords')){{ old('keywords')}}@else @foreach(json_decode($project->keywords) as $keyword){{ $keyword }}@endforeach @endif</textarea>
+                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="8" required >@if(old('keywords')){{ old('keywords')}}@else @foreach(json_decode($project->keywords) as $keyword){{ $keyword }}@endforeach @endif</textarea>
                         <x-jet-input-error for="keywords" class="mt-2" />
                     </div>
 
@@ -107,7 +117,16 @@
 
                     <div class="mt-4">
                         <x-jet-label for="file" value="{{ __('File') }}" />
-                        <x-jet-input id="file" class="block mt-1 w-full" type="file" name="file" value="{{ old('file') }}" />
+                        <x-jet-input id="file" class="block mt-1 w-full overflow-hidden" type="file" accept="application/pdf" name="file" value="{{ old('file') }}" />
+                        @if (Storage::disk('public')->exists($project->file))
+                            <a href="{{ url("storage/$project->file") }}" class="mt-4 underline" target="_blank" download>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 inline-flex">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar archivo
+                            </a>
+                            <x-jet-section-border />
+                        @endif
                         <x-jet-input-error for="file" class="mt-2" />
                     </div>
 

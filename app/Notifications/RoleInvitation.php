@@ -11,6 +11,7 @@ class RoleInvitation extends Notification
 {
     use Queueable;
 
+    private $node;
     private $project;
     private $researchTeam;
     private $user;
@@ -20,8 +21,9 @@ class RoleInvitation extends Notification
      *
      * @return void
      */
-    public function __construct($project, $researchTeam, $user, $file)
+    public function __construct($node, $project, $researchTeam, $user, $file)
     {
+        $this->node         = $node;
         $this->project      = $project;
         $this->researchTeam = $researchTeam;
         $this->user         = $user;
@@ -50,8 +52,8 @@ class RoleInvitation extends Notification
         return (new MailMessage)
                     ->subject("Invitación de participación en proyecto de {$this->project->projectType->type} - Ibis")
                     ->greeting("¡Hola {$this->user->name}!")
-                    ->line("El semillero de investigación {$this->researchTeam->name} de la institución educativa {$this->researchTeam->researchGroup->educationalInstitution->name} quiere invitarlo para que participe en el desarrollo del proyecto {$this->project->title}")
-                    ->action('Más información del proyecto', url('/'))
+                    ->line("El semillero de investigación {$this->researchTeam->name} de la institución educativa {$this->researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name} quiere invitarlo para que participe en el desarrollo del proyecto {$this->project->title}. Por favor revise el documento adjunto, si esta de acuerdo firme y posteriormente cargar el documento en pdf en la sección 'Enviar respuesta' haciendo clic en 'Más información del proyecto'.")
+                    ->action('Más información del proyecto', route('nodes.explorer.searchProjects.showProject', [$this->node, $this->project]))
                     ->line('Gracias y esperamos su pronta respuesta')
                     ->attach($this->file);
     }
@@ -66,8 +68,8 @@ class RoleInvitation extends Notification
     {
         return [
             "subject"       => "Invitación de participación en proyecto de {$this->project->projectType->type} - Ibis",
-            "message"       => "El semillero de investigación {$this->researchTeam->name} de la institución educativa {$this->researchTeam->researchGroup->educationalInstitution->name} quiere invitarlo para que participe en el desarrollo del proyecto {$this->project->title}",
-            "action"        => url('/'),
+            "message"       => "El semillero de investigación {$this->researchTeam->name} de la institución educativa {$this->researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name} quiere invitarlo para que participe en el desarrollo del proyecto {$this->project->title}. Por favor revise el documento adjunto, si esta de acuerdo firme y posteriormente cargar el documento en pdf en la sección 'Enviar respuesta' haciendo clic en 'Más información del proyecto'.",
+            "action"        => route('nodes.explorer.searchProjects.showProject', [$this->node, $this->project]),
             "thanksMessage" => "Gracias y esperamos su pronta respuesta!'"
         ];
     }

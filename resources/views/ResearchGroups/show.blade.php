@@ -178,7 +178,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Educational Institution') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $researchGroup->educationalInstitution->name }}
+                            {{ $researchGroup->educationalInstitutionFaculty->educationalInstitution->name }}
                         </p>
                     </div>
                 </div>

@@ -27,13 +27,19 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('nodes.store') }}">
+                <form method="POST" action="{{ route('nodes.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div>
                         <x-jet-label for="state" value="{{ __('State') }}" />
                         <x-jet-input id="state" class="block mt-1 w-full" type="text" min="" max="" name="state" value="{{ old('state') }}" required />
                         <x-jet-input-error for="state" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-jet-label for="logo" value="{{ __('Logo') }}" />
+                        <x-jet-input id="logo" class="block mt-1 w-full overflow-hidden" type="file" accept="image/*" name="logo" value="{{ old('logo') }}" />
+                        <x-jet-input-error for="logo" class="mt-2" />
                     </div>
 
                     <div class="mt-2">

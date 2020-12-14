@@ -25,7 +25,8 @@ class ProjectRequest extends FormRequest
     {
         if ($this->isMethod('PUT')){
             return [
-                'title'                 => 'required|string|max:255',
+                'main_image'            => 'mimes:jpeg,png,bmp,tiff |max:4096',
+                'title'                 => 'required',
                 'start_date'            => 'required|date|date_format:Y-m-d|before:end_date',
                 'end_date'              => 'required|date|date_format:Y-m-d|after:start_date',
                 'abstract'              => 'required',
@@ -43,7 +44,8 @@ class ProjectRequest extends FormRequest
             ];
         } else {
             return [
-                'title'                 => 'required|string|max:255',
+                'main_image'            => 'mimes:jpeg,png,bmp,tiff|max:4096',
+                'title'                 => 'required',
                 'start_date'            => 'required|date|date_format:Y-m-d|before:end_date',
                 'end_date'              => 'required|date|date_format:Y-m-d|after:start_date',
                 'abstract'              => 'required',

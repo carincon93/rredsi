@@ -101,6 +101,9 @@ class User extends Authenticatable
     }
 
     public function educationalInstitutionFaculties() {
-        return $this->belongsToMany('App\Models\EducationalInstitution', 'educational_institution_faculty_members', 'user_id', 'educational_institution_faculty_id');
+        return $this->belongsToMany('App\Models\EducationalInstitutionFaculty', 'educational_institution_faculty_members', 'user_id', 'educational_institution_faculty_id')
+            ->withPivot([
+                'is_principal'
+            ]);
     }
 }

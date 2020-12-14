@@ -29,12 +29,12 @@
 
                     <x-slot name="tbodyData">
                         @foreach ($nodes as $node)
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $node->state }}</span>
+                                    <span>{{ $node->state }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $node->administrator->name }}</span>
+                                    <span>{{ $node->administrator->name }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

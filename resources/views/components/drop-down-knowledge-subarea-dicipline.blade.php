@@ -1,13 +1,13 @@
 
 <div class="mt-4">
-    <p class="mt-4">{{ __('Knowledge subarea Diciplines')}} </p>
-    <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="knowledge_area_id" name="knowledge_area_id" required onchange="SwitchknowledgeSubareasDiciplines.onChange(event)">
+    <p class="mt-4">{{ __('Knowledge subarea disciplines')}} </p>
+    <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="knowledge_area_id" name="knowledge_area_id" required onchange="SwitchknowledgeSubareasDisciplines.onChange(event)">
     </select>
 </div>
 <textarea id="areaOldId" class="hidden"></textarea>
 
 <div class="ml-4">
-    <select class="mr-10 focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="knowledge_subarea_id" name="knowledge_subarea_id" required onchange="SwitchknowledgeSubareasDiciplines.onChangeDiciplines(event)">
+    <select class="mr-10 focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="knowledge_subarea_id" name="knowledge_subarea_id" required onchange="SwitchknowledgeSubareasDisciplines.onChangeDisciplines(event)">
         <option value="">Seleccione un knowledge subarea</option>
     </select>
     <x-jet-input-error for="knowledge_subarea_id" class="mt-2" />
@@ -27,7 +27,7 @@
         <script>
             let knowledgeAreaIdOld  = null;
             let knowledgeSubareaIdOld  = null;
-            // let knowledgeSubareaDiciplinesIdOld  = null;
+            // let knowledgeSubareaDisciplinesIdOld  = null;
 
             // areaOld asignacion
             let areaOldId = document.getElementById('areaOldId');
@@ -50,11 +50,11 @@
 
 
 
-            var SwitchknowledgeSubareasDiciplines = (function() {
+            var SwitchknowledgeSubareasDisciplines = (function() {
                 let knowledgeAreaId                           = null;
                 // const knowledgeAreaSelected                   = {{ request()->route('knowledge-areas') != null ? request()->route('knowledge-areas')->id : 0 }};
                 // const knowledgeSubareaSelected                = {{ request()->route('knowledge-subareas') != null ? request()->route('knowledge-subareas')->id : 0 }};
-                // const knowledgeSubareaDiciplineSelected       = {{ request()->route('knowledge-subarea-disciplines') != null ? request()->route('knowledge-subarea-disciplines')->id : 0 }};
+                // const knowledgeSubareaDisciplineselected       = {{ request()->route('knowledge-subarea-disciplines') != null ? request()->route('knowledge-subarea-disciplines')->id : 0 }};
 
                 getAllknowledgeAreas = async (knowledgeAreaselected) => {
                 const knowledgeAreasSelect                     = document.getElementById('knowledge_area_id');
@@ -106,7 +106,7 @@
                     }
                 }
 
-                getAllknowledgeSubareaDiciplines  = async (knowledgeArea, knowledgeSubarea, knowledgeSubareaDiciplineId) => {
+                getAllknowledgeSubareaDisciplines  = async (knowledgeArea, knowledgeSubarea, knowledgeSubareaDiciplineId) => {
                     const knowledgeSubareaDiciplineidSelect   = document.getElementById('check');
 
                     if (knowledgeArea != 0 && knowledgeSubarea != 0 ) {
@@ -134,7 +134,7 @@
                 if (knowledgeAreaIdOld != null && knowledgeSubareaIdOld != null) {
                     getAllknowledgeAreas(knowledgeAreaIdOld);
                     getAllknowledgeSubareas(knowledgeAreaIdOld, knowledgeSubareaIdOld);
-                    getAllknowledgeSubareaDiciplines(knowledgeAreaIdOld,knowledgeSubareaIdOld);
+                    getAllknowledgeSubareaDisciplines(knowledgeAreaIdOld,knowledgeSubareaIdOld);
                 }
 
 
@@ -147,14 +147,14 @@
                         knowledgeAreaId = e.target.value;
                         getAllknowledgeSubareas (knowledgeAreaId, null);
                     },
-                    onChangeDiciplines: function(e) {
+                    onChangeDisciplines: function(e) {
                         knowledgeSubareaId = e.target.value;
                         if (knowledgeAreaIdOld != null && knowledgeAreaIdOld != 0) {
                             knowledgeareaId = knowledgeAreaIdOld;
                         } else {
                             knowledgeareaId = document.getElementById('knowledge_area_id').value;
                         }
-                        getAllknowledgeSubareaDiciplines(knowledgeareaId, knowledgeSubareaId, null);
+                        getAllknowledgeSubareaDisciplines(knowledgeareaId, knowledgeSubareaId, null);
                     },
                     redirect: function(e) {
                         if (!knowledgeAreaId && knowledgeAreaSelected != 0) {
@@ -165,7 +165,7 @@
                 }
             })();
 
-            SwitchknowledgeSubareasDiciplines.getAllknowledgeAreas();
+            SwitchknowledgeSubareasDisciplines.getAllknowledgeAreas();
 
 
         </script>

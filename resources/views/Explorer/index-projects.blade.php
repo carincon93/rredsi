@@ -1,27 +1,27 @@
 <x-guest-layout>
     
-    <x-guest-header :node="$node" />
+    <x-guest-header :node="$node" image="">
+        <x-slot name="title">
+            <h1 class="text-3xl text-center sm:text-3xl tracking-tight font-extrabold leading-none">
+                <span class="block text-blue-900 xl:inline"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20" class="inline mb-2">
+                        <path regular" d="M14.03,12.914l-5.82,2.66a1.288,1.288,0,0,0-.636.636l-2.66,5.82A.8.8,0,0,0,5.97,23.086l5.82-2.66a1.288,1.288,0,0,0,.636-.636l2.66-5.82a.8.8,0,0,0-1.056-1.056Zm-3.119,6a1.288,1.288,0,1,1,0-1.821A1.288,1.288,0,0,1,10.91,18.91ZM10,8A10,10,0,1,0,20,18,10,10,0,0,0,10,8Zm0,18.065A8.065,8.065,0,1,1,18.065,18,8.074,8.074,0,0,1,10,26.065Z" transform="translate(0 -8)" fill="#233876" />
+                    </svg> 
+                    Explorer: Trabaje de forma colaborativa en proyectos de <br>investigación de semilleros de la red
+                </span>
+            </h1>
+        </x-slot>
+        <x-slot name="textBase">
+                {{ count($projects) }} resultado(s) para: {{ $search }}
+        </x-slot>
+        <x-slot name="actionButton">
+            
+        </x-slot>
+    </x-guest-header>
     
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-14 pt-4" style="background: url(/storage/images/net.png)">
-                <div class="mt-8 dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg mt-4 h-64" style="background: url(/storage/images/cowork.jpg); background: url(/storage/images/cowork.jpg);background-size: cover;background-repeat: no-repeat;">
-                    <div class="p-6">
-                        <div class="flex items-center mt-4">
-                            <div>
-                                <h1 class="text-5xl text-center leading-none text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-12 w-12 inline mb-2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                    Encuentre proyectos de su interés y trabaje de forma colaborativa con otros semilleros de investigación
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 mt-4">
-                <h1 class="mb-10 text-gray-400">{{ count($projects) }} resultado(s) para: {{ $search }}</h1>
                 @forelse ($projects->chunk(3) as $chunk)
                     <div class="md:grid md:grid-cols-3 md:gap-4">
                         @foreach ($chunk as $project)
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="rounded bg-white p-4 transform translate-x-6 -translate-y-6 shadow">
-                                    <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitution->name }}</small></p>
+                                    <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
                                     <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->name }}</small></p>
                                     <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
                                 </div>

@@ -26,10 +26,10 @@
                     <x-slot name="tbodyData">
                         @foreach ($roles as $role)
 
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $role->name }}</span>
+                                    <span>{{ $role->name }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

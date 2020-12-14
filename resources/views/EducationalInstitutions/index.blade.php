@@ -31,15 +31,15 @@
 
                     <x-slot name="tbodyData">
                         @foreach ($educationalInstitutions as $educationalInstitution)
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $educationalInstitution->name }}</span>
+                                    <span>{{ $educationalInstitution->name }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $educationalInstitution->city }}</span>
+                                    <span>{{ $educationalInstitution->city }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold"><span class="capitalize">{{ optional($educationalInstitution->administrator)->name }}</span></span>
+                                    <span><span class="capitalize">{{ optional($educationalInstitution->administrator)->name }}</span></span>
                                 </td>
                                 <td class="py-2 text-left">
                                     <div class="hidden sm:flex sm:items-center justify-around">

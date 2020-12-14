@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Node;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\NodeRequest;
 use Illuminate\Http\Request;
 
@@ -44,6 +46,16 @@ class NodeController extends Controller
     {
         $node        = new Node();
         $node->state = $request->get('state');
+        if ($request->hasFile('logo')) {
+            $file       = $request->file('logo');
+            $extension  = $file->extension();
+            $fileName   = "RREDSI-$node->state-logo.$extension";
+            Storage::putFileAs(
+                'public/logos', $file, $fileName
+            );
+
+            $node->logo  = "logos/$fileName";
+        }
         $node->administrator()->associate($request->get('administrator_id'));
 
         if($node->save()){
@@ -87,6 +99,17 @@ class NodeController extends Controller
     public function update(NodeRequest $request, Node $node)
     {
         $node->state = $request->get('state');
+        if ($request->hasFile('logo')) {
+            Storage::delete("public/$node->logo");
+            $file       = $request->file('logo');
+            $extension  = $file->extension();
+            $fileName   = "RREDSI-$node->state-logo.$extension";
+            Storage::putFileAs(
+                'public/logos', $file, $fileName
+            );
+
+            $node->logo = "logos/$fileName";
+        }
         $node->administrator()->associate($request->get('administrator_id'));
 
         if($node->save()){

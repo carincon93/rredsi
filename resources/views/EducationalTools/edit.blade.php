@@ -44,12 +44,12 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="qty" value="{{ __('qty') }}" />
+                        <x-jet-label for="qty" value="{{ __('Qty') }}" />
                         <x-jet-input id="qty" class="block mt-1 w-full" type="number" max="9999999999" name="qty" value="{{ old('qty') ?? $educationalTool->qty }}" required />
                         <x-jet-input-error for="qty" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('is enabled?') }} </p>
+                    <p class="mt-4">{{ __('Is enabled?') }} </p>
                     <div class="mt-4">
                         <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" {{ old('is_enabled') == 1 || $educationalTool->is_enabled == 1 ? "checked" : "" }} value="1" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enable_yes">Si</label>

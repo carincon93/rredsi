@@ -20,6 +20,7 @@
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
         <div class="md:grid md:grid-cols-3 md:gap-4">
+
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
@@ -27,7 +28,7 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('nodes.update',$node->id) }}">
+                <form method="POST" action="{{ route('nodes.update',$node->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -35,6 +36,16 @@
                         <x-jet-label for="state" value="{{ __('State') }}" />
                         <x-jet-input id="state" class="block mt-1 w-full" type="text" min="" max="" name="state" value="{{ $node->state }}" required />
                         <x-jet-input-error for="state" class="mt-2" />
+                    </div>
+
+                    <div class="mt-2">
+                        <x-jet-label for="logo" value="{{ __('Logo') }}" />
+                        <x-jet-input id="logo" class="block mt-1 w-full overflow-hidden" type="file" accept="image/*" name="logo" value="{{ old('logo') }}" />
+                        @if (Storage::disk('public')->exists($node->logo))
+                            <a href="{{ url("storage/$node->logo") }}" class="mt-4 inline-flex text-blue-600 underline" target="_black">Ver logo</a>
+                            <x-jet-section-border />
+                        @endif
+                        <x-jet-input-error for="logo" class="mt-2" />
                     </div>
 
                     <div class="mt-2">

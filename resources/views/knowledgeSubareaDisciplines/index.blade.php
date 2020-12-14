@@ -10,7 +10,7 @@
         <div>
             <a href="{{route('knowledge-subarea-disciplines.create') }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 grgroup-hover:text-blue-500t-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Create knowledge subarea discipline info') }}
+                    {{ __('Create knowledge subarea discipline') }}
                 </div>
             </a>
         </div>
@@ -31,12 +31,12 @@
                     <x-slot name="tbodyData">
                         @foreach ($knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
                         
-                        <tr class="bg-white border-4 border-gray-200">
+                        <tr class="bg-white">
                             <td>
-                                <span class="text-center ml-2 font-semibold">{{ $knowledgeSubareaDiscipline->name }}</span>
+                                <span>{{ $knowledgeSubareaDiscipline->name }}</span>
                             </td>
                             <td>
-                                <span class="text-center ml-2 font-semibold">{{ $knowledgeSubareaDiscipline->knowledgeSubarea->name }}</span>
+                                <span>{{ $knowledgeSubareaDiscipline->knowledgeSubarea->name }}</span>
                             </td>
                             
                             <td class="py-2 text-left">

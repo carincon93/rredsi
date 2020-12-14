@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="gruplac" value="{{ __('Gruplac') }}" />
+                        <x-jet-label for="gruplac" value="{{ __('GrupLac') }}" />
                         <x-jet-input id="gruplac" class="block mt-1 w-full" type="url" max="191" name="gruplac" value="{{ old('gruplac') ??  $researchGroup->gruplac }}" required />
                         <x-jet-input-error for="gruplac" class="mt-2" />
                     </div>

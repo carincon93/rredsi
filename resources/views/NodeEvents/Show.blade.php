@@ -90,7 +90,7 @@
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                                                     <h3 class="text-lg font-medium text-gray-900">{{ __('Description') }}</h3>
                                                     <div class="mt-3 max-w-xl text-sm text-gray-600">
-                                                        <p>
+                                                        <p class="whitespace-pre-line">
                                                             {{ $event->description }}
                                                         </p>
                                                     </div>

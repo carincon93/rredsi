@@ -38,6 +38,9 @@ class EducationalInstitutionFaculty extends Model
     }
 
     public function members() {
-        return $this->belongsToMany('App\Models\User', 'educational_institution_faculty_members', 'educational_institution_faculty_id', 'user_id');
+        return $this->belongsToMany('App\Models\User', 'educational_institution_faculty_members', 'educational_institution_faculty_id', 'user_id')
+            ->withPivot([
+                'is_principal'
+            ]);
     }
 }

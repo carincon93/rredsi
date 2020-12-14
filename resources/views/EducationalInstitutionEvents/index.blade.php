@@ -32,18 +32,18 @@
                     <x-slot name="tbodyData">
                         @foreach ($events as $event)
 
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $event->event->name }}</span>
+                                    <span>{{ $event->event->name }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $event->event->location }}</span>
+                                    <span>{{ $event->event->location }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $event->event->datesForHumans }}</span>
+                                    <span>{{ $event->event->datesForHumans }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

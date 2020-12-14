@@ -30,6 +30,7 @@ class Project extends Model
         'roles_requirements',
         'tools_requirements_description',        
         'tools_requirements',
+        'main_image',
         'project_type_id',
     ];
 

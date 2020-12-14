@@ -9,7 +9,7 @@
         <div>
             <a href="{{ route('user.profile.user-graduations.create') }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Create graduation info')}}
+                    {{ __('Create graduation')}}
                 </div>
             </a>
         </div>
@@ -32,18 +32,18 @@
                     <x-slot name="tbodyData">
                         @foreach ($userGraduations as $userGraduation)
 
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $userGraduation->academicProgram->name }}</span>
+                                    <span>{{ $userGraduation->academicProgram->name }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $userGraduation->academicProgram->educationalInstitution->name }}</span>
+                                    <span>{{ $userGraduation->academicProgram->educationalInstitutionFaculty->educationalInstitution->name }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $userGraduation->year }}</span>
+                                    <span>{{ $userGraduation->year }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

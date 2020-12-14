@@ -22,7 +22,7 @@ class NotificationController extends Controller
 
         $file = $this->makeDocInvitation($project, $researchTeam, $user);
 
-        Notification::send($user, new RoleInvitation($project, $researchTeam, $user, $file));
+        Notification::send($user, new RoleInvitation($node, $project, $researchTeam, $user, $file));
    
         return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'Invitación enviada con éxito');
     }
@@ -31,12 +31,12 @@ class NotificationController extends Controller
     {
         $templateProcessor = new TemplateProcessor(url('/storage/templates/contact-template.docx'));
         
-        $city                   = $researchTeam->researchGroup->educationalInstitution->city;
+        $city                   = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->city;
         $dateForHumans          = Carbon::parse(date('Y-m-d'), 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         $authorName             = auth()->user()->name;
         $authorDocumentNumber   = auth()->user()->document_number;
         $title                  = $project->title;
-        $educationalInstitution = $researchTeam->researchGroup->educationalInstitution->name;
+        $educationalInstitution = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name;
         $userName               = $user->name;
         $researchTeam           = $researchTeam->name;
         $userDocumentNumber     = $user->document_number;
@@ -63,5 +63,11 @@ class NotificationController extends Controller
         }
 
         return $storagePath;
+    }
+
+    public function getAllNotifications() {
+        $notifications = auth()->user()->notifications;
+
+        return view('EducationalInstitutionUsers.index-notifications', compact('notifications'));
     }
 }

@@ -9,7 +9,7 @@
         <div>
             <a href="{{ route('knowledge-subarea-disciplines.edit', $knowledgeSubareaDiscipline->id) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900roup-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Edit knowledge subarea dicipline') }}
+                    {{ __('Edit knowledge subarea discipline') }}
                 </div>
             </a>
         </div>
@@ -22,7 +22,7 @@
                     <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
                         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                             <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-blue-900" onclick="changeActiveTab(event,'tab-profile')">
-                                {{ __('Knowledge subarea dicipline') }}
+                                {{ __('Knowledge subarea discipline') }}
                             </a>
                         </li>
                         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">

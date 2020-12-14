@@ -147,4 +147,22 @@ class NodeEventController extends Controller
 
         return redirect()->away($event->register_link);
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function rredsiEventRegister(Node $node)
+    {
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        $projects           = auth()->user()->projects;
+        $researchTeams      = auth()->user()->researchTeams;
+        $educationalInstitutionFacultiesacademicPrograms   = auth()->user()->educationalInstitutionFaculties()->with('academicPrograms')->get();
+        $educationalInstitutionFacultiesUsers              = auth()->user()->educationalInstitutionFaculties()->with('members')->get();
+
+        return view('Explorer.rredsi-event-register', compact('node', 'knowledgeAreas', 'educationalInstitutionFacultiesUsers', 'projects', 'researchTeams', 'educationalInstitutionFacultiesacademicPrograms'));
+    }
 }
+

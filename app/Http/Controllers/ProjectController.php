@@ -66,24 +66,41 @@ class ProjectController extends Controller
         $project->tools_requirements_description    = $request->get('tools_requirements_description');
         $project->roles_requirements                = $request->get('roles_requirements');
         $project->tools_requirements                = $request->get('tools_requirements');
+        $project->overall_objective                 = $request->get('overall_objective');
+        $project->is_privated                       = $request->get('is_privated');
+        $project->is_published                      = $request->get('is_published');
+        $project->projectType()->associate($request->get('project_type_id'));
+
+        $end_date = date('Y', strtotime($request->end_date));
+
+        if ($request->hasFile('main_image')) {
+            $file       = $request->file('main_image');
+            $extension  = $file->extension();
+            $fileName   = "$project->id-RREDSI-$end_date-main-image.$extension";
+            Storage::putFileAs(
+                'public/project-main-images', $file, $fileName
+            );
+
+            $project->main_image  = "project-main-images/$fileName";
+        }
+
         if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = $file->getClientOriginalName();
+            $file       = $request->file('file');
+            $extension  = $file->extension();
+            $fileName   = "$project->id-RREDSI-$end_date-file.$extension";
             Storage::putFileAs(
                 'public/projects', $file, $fileName
             );
 
             $project->file  = "projects/$fileName";
         }
-        $project->overall_objective = $request->get('overall_objective');
-        $project->is_privated       = $request->get('is_privated');
-        $project->is_published      = $request->get('is_published');
-        $project->projectType()->associate($request->get('project_type_id'));
 
         if($project->save()){
-            $arrayResearchTeamsIds = $request->get('research_team_id');
-            if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
-                unset($arrayResearchTeamsIds[$key]);
+            if ($request->has('research_team_id')) {
+                $arrayResearchTeamsIds = $request->get('research_team_id');
+                if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+                    unset($arrayResearchTeamsIds[$key]);
+                }
             }
     
             $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
@@ -148,30 +165,52 @@ class ProjectController extends Controller
         $project->tools_requirements_description    = $request->get('tools_requirements_description');
         $project->roles_requirements                = $request->get('roles_requirements');
         $project->tools_requirements                = $request->get('tools_requirements');
-        if ($request->hasFile('file')) {
-            $path  = Storage::putFile(
-                'public/projects', $request->file('file')
-            );
-
-            $project->file = $path;
-        }
-        $project->overall_objective = $request->get('overall_objective');
-        $project->is_privated       = $request->get('is_privated');
-        $project->is_published      = $request->get('is_published');
+        $project->overall_objective                 = $request->get('overall_objective');
+        $project->is_privated                       = $request->get('is_privated');
+        $project->is_published                      = $request->get('is_published');
         $project->projectType()->associate($request->get('project_type_id'));
 
+        $end_date = date('Y', strtotime($project->end_date));
+        
+        if ($request->hasFile('main_image')) {
+            Storage::delete("public/$project->main_image");
+            $file       = $request->file('main_image');
+            $extension  = $file->extension();
+            $fileName   = "$project->id-RREDSI-$end_date-main-image.$extension";
+            Storage::putFileAs(
+                'public/project-main-images', $file, $fileName
+            );
+
+            $project->main_image  = "project-main-images/$fileName";
+        }
+
+        if ($request->hasFile('file')) {
+            Storage::delete("public/$project->file");
+            $file       = $request->file('file');
+            $extension  = $file->extension();
+            $fileName   = "$project->id-RREDSI-$end_date-file.$extension";
+            Storage::putFileAs(
+                'public/projects', $file, $fileName
+            );
+
+            $project->file  = "projects/$fileName";
+        }
+
         if($project->save()){
-            $arrayResearchTeamsIds = $request->get('research_team_id');
-            if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
-                unset($arrayResearchTeamsIds[$key]);
+            if ($request->has('research_team_id')) {
+                $arrayResearchTeamsIds = $request->get('research_team_id');
+                $request->get('principal_research_team_id');
+                if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+                    unset($arrayResearchTeamsIds[$key]);
+                }
             }
     
-            $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
-            $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
-            $project->researchLines()->attach($request->get('research_line_id'));
-            $project->knowledgeAreas()->attach($request->get('knowledge_subarea_dicipline_id'));
-            $project->academicPrograms()->attach($request->get('academic_program_id'));
-            $project->authors()->attach($request->get('user_id'));
+            $project->researchTeams()->sync($request->get('principal_research_team_id'), ['is_principal' => true]);
+            $project->researchTeams()->sync($arrayResearchTeamsIds, ['is_principal' => false]);
+            $project->researchLines()->sync($request->get('research_line_id'));
+            $project->knowledgeSubareaDisciplines()->sync($request->get('knowledge_subarea_dicipline_id'));
+            $project->academicPrograms()->sync($request->get('academic_program_id'));
+            $project->authors()->sync($request->get('user_id'));
             $message = 'Your update processed correctly';
         }
 

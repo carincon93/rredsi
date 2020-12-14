@@ -32,18 +32,18 @@
                     <x-slot name="tbodyData">
                         @foreach ($users as $user)
 
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $user->name }}</span>
+                                    <span>{{ $user->name }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $user->email }}</span>
+                                    <span>{{ $user->email }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $user->cellphone_number }}</span>
+                                    <span>{{ $user->cellphone_number }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

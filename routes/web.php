@@ -39,15 +39,21 @@ use App\Http\Livewire\ModelForm;
 |
 */
 
+Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications')->middleware(['auth']);
 Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('/');
 Route::get('/nodes/{node}/explorer/roles', [AppController::class, 'roles'])->name('nodes.explorer.roles');
 Route::get('/nodes/{node}/explorer/events', [AppController::class, 'events'])->name('nodes.explorer.events');
+Route::get('/nodes/{node}/explorer/node-events/rredsi-event', [NodeEventController::class, 'rredsiEventRegister'])->name('nodes.explorer.events.rredsiEventRegister')->middleware(['auth']);
 Route::get('/nodes/{node}/explorer/events/{event}', [AppController::class, 'showEvent'])->name('nodes.explorer.showEvent')->middleware(['auth']);
 Route::post('/nodes/{node}/explorer/events/{event}', [NodeEventController::class, 'sendProjectToEvent'])->name('nodes.explorer.sendProjectToEvent')->middleware(['auth']);
 Route::get('/nodes/{node}/explorer/roles/{academicProgram}', [AppController::class, 'searchRoles'])->name('nodes.explorer.searchRoles')->middleware(['auth']);
+Route::get('/nodes/{node}/explorer/roles/show-user/{user}', [AppController::class, 'showUser'])->name('nodes.explorer.searchRoles.showUser')->middleware(['auth']);
 Route::get('/nodes/{node}/explorer/projects', [AppController::class, 'searchProjects'])->name('nodes.explorer.searchProjects')->middleware(['auth']);
 Route::get('/nodes/{node}/explorer/projects/{project}', [AppController::class, 'showProject'])->name('nodes.explorer.searchProjects.showProject')->middleware(['auth']);
+Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'])->name('nodes.explorer.nodeInfo')->middleware(['auth']);
+
 Route::post('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification')->middleware(['auth']);
+
 Route::get('preview-emails', function () {
     return (new App\Notifications\RoleInvitation(3,1,3))
         ->toMail('carincon93@gmail.com');

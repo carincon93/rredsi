@@ -4,14 +4,11 @@
     </div>
     
     <div class="mt-8 text-2xl">
-        Welcome to your {{ config('app.name') }} application!
+        Bienvenido a la aplicación RREDSI-{{ config('app.name') }}!
     </div>
     
     <div class="mt-6 text-gray-500">
-        Laravel {{ config('app.name') }} provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
-        to help you build your application using a development environment that is simple, powerful, and enjoyable. We believe
-        you should love expressing your creativity through programming, so we have spent time carefully crafting the Laravel
-        ecosystem to be a breath of fresh air. We hope you love it.
+        Con la nueva plataforma RREDSI-{{ config('app.name') }} ahora puede buscar proyectos de su interés que se esten trabajando en los semilleros de investigación de las 10 instituciones educativas de RREDSI Caldas y colaborar en su desarrollo o registre su proyecto y conecte con jóvenes investigadores de otras instituciones.
     </div>
 </div>
 

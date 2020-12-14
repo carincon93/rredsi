@@ -23,13 +23,15 @@
     <body class="font-sans antialiased leading-normal tracking-normal">
         <div class="min-h-screen bg-gray-100 flex flex-wrap">
 
-            <x-navigation-sidebar/>
+            @if (request()->route('node'))
+                <x-navigation-sidebar/>
+            @endif
             <!-- Page Content -->
-            <main class="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen">
+            <main class="w-full bg-gray-100 pl-0{{ request()->route('node') ? ' lg:pl-64' : '' }} min-h-screen">
                 @livewire('navigation-dropdown')
 
                  <!-- Page Heading -->
-                <header class="bg-gradient-to-l from-blue-900 to-blue-900 shadow shadow">
+                <header class="bg-gradient-to-l from-blue-900 to-blue-900 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                         {{ $header }}
                     </div>

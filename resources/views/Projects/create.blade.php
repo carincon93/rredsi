@@ -44,8 +44,14 @@
                     </div>
 
                     <div class="mt-4">
+                        <x-jet-label for="main_image" value="{{ __('Main image') }}" />
+                        <x-jet-input id="main_image" class="block mt-1 w-full" type="file" accept="image/*" name="main_image" value="{{ old('main_image') }}" />
+                        <x-jet-input-error for="main_image" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
                         <x-jet-label for="title" value="{{ __('Title') }}" />
-                        <textarea id="title" name="title" max="255" class="form-textarea border-0 w-full" required >{{ old('title') }}</textarea>
+                        <textarea id="title" name="title" max="255" class="form-textarea border-0 w-full" rows="8" required >{{ old('title') }}</textarea>
                         <x-jet-input-error for="title" class="mt-2" />
                     </div>
 
@@ -63,49 +69,49 @@
 
                     <div class="mt-4">
                         <x-jet-label for="abstract" value="{{ __('Abstract') }}" />
-                        <textarea id="abstract" name="abstract" class="form-textarea border-0 w-full" required >{{ old('abstract') }}</textarea>
+                        <textarea id="abstract" name="abstract" class="form-textarea border-0 w-full" rows="8" required >{{ old('abstract') }}</textarea>
                         <x-jet-input-error for="abstract" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="overall_objective" value="{{ __('Overall objective') }}" />
-                        <textarea id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full" required >{{ old('overall_objective') }}</textarea>
+                        <textarea id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full" rows="8" required >{{ old('overall_objective') }}</textarea>
                         <x-jet-input-error for="overall_objective" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="keywords" value="{{ __('Keywords') }}" />
-                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" required >{{ old('keywords') }}</textarea>
+                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="8" required >{{ old('keywords') }}</textarea>
                         <x-jet-input-error for="keywords" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="roles_requirements_description" value="{{ __('Roles requirements description') }}" />
-                        <textarea id="roles_requirements_description" name="roles_requirements_description" class="form-textarea border-0 w-full" >{{ old('roles_requirements_description') }}</textarea>
+                        <textarea id="roles_requirements_description" name="roles_requirements_description" class="form-textarea border-0 w-full" rows="8" >{{ old('roles_requirements_description') }}</textarea>
                         <x-jet-input-error for="roles_requirements_description" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="roles_requirements" value="{{ __('Roles requirements') }}" />
-                        <textarea id="roles_requirements" name="roles_requirements" class="form-textarea border-0 w-full" >{{ old('roles_requirements') }}</textarea>
+                        <textarea id="roles_requirements" name="roles_requirements" class="form-textarea border-0 w-full" rows="8" >{{ old('roles_requirements') }}</textarea>
                         <x-jet-input-error for="roles_requirements" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="tools_requirements_description" value="{{ __('Tools requirements description') }}" />
-                        <textarea id="tools_requirements_description" name="tools_requirements_description" class="form-textarea border-0 w-full" >{{ old('tools_requirements_description') }}</textarea>
+                        <textarea id="tools_requirements_description" name="tools_requirements_description" class="form-textarea border-0 w-full" rows="8" >{{ old('tools_requirements_description') }}</textarea>
                         <x-jet-input-error for="tools_requirements_description" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="tools_requirements" value="{{ __('Tools requirements') }}" />
-                        <textarea id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" >{{ old('tools_requirements') }}</textarea>
+                        <textarea id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" rows="8" >{{ old('tools_requirements') }}</textarea>
                         <x-jet-input-error for="tools_requirements" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-jet-label for="file" value="{{ __('File') }}" />
-                        <x-jet-input id="file" class="block mt-1 w-full" type="file" name="file" value="{{ old('file') }}" />
+                        <x-jet-input id="file" class="block mt-1 w-full" type="file" accept="application/pdf" name="file" value="{{ old('file') }}" />
                         <x-jet-input-error for="file" class="mt-2" />
                     </div>
 

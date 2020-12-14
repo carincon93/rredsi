@@ -87,6 +87,22 @@ body.modal-active {
     overflow: hidden;
 }
 
+#layer9 path:hover {
+    fill: beige;
+}
+
+th {
+    font-weight: 100;
+}
+
+td {
+    padding: 20px 0;
+}
+
+tr td:first-child {
+    padding: 0 10px;
+}
+
 /* -------------------------------------------------------------
 * Animations generated using Animista * w: http://animista.net,
 * ---------------------------------------------------------- */

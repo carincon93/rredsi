@@ -34,21 +34,21 @@
 
                     <x-slot name="tbodyData">
                         @foreach ($projects as $project)
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->title }}</span>
+                                    <span>{{ $project->title }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->projectType->type }}</span>
+                                    <span>{{ $project->projectType->type }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">@foreach(json_decode($project->keywords) as $keyword){{substr($keyword, 0, -1)}}@endforeach</span>
+                                    <span>{{ $project->datesForHumans }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $project->is_privated ? __('Yes') : __('No') }}</span>
+                                    <span>{{ $project->is_privated ? __('Yes') : __('No') }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

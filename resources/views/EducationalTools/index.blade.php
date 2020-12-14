@@ -32,15 +32,15 @@
 
                     <x-slot name="tbodyData">
                         @foreach ($educationalTools as $educationalTool)
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $educationalTool->name }}</span>
+                                    <span>{{ $educationalTool->name }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $educationalTool->description }}</span>
+                                    <span>{{ $educationalTool->description }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $educationalTool->qty }}</span>
+                                    <span>{{ $educationalTool->qty }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

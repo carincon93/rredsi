@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="thematic_research" value="{{ __('Thematic research (Separados por coma)') }}" />
+                        <x-jet-label for="thematic_research" value="{{ __('Thematic research') }}" />
                         <textarea id="thematic_research" name="thematic_research" class="form-textarea border-0 w-full" required >{{ old('thematic_research') }}</textarea>
                         <x-jet-input-error for="thematic_research" class="mt-2" />
                     </div>

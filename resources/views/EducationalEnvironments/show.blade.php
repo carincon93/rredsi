@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name=header>
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{ __('Educational Environments') }}
+            {{ __('Educational environments') }}
             <span class="sm:block text-purple-300">
                 Show educational envoronment info
             </span>

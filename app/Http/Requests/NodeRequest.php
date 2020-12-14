@@ -26,11 +26,13 @@ class NodeRequest extends FormRequest
             if ($this->isMethod('PUT')) {
             return [
                 'state'             => 'required|string|unique:nodes,state,'.$this->route('node')->id.',id|max:191',
+                'logo'              => 'mimes:jpeg,png,bmp,tiff|max:4096',
                 'administrator_id'  => 'required|integer|min:0|max:9999999999|exists:users,id',
             ];
         } else {
             return [
                 'state'             => 'required|string|unique:nodes,state|max:191',
+                'logo'              => 'mimes:jpeg,png,bmp,tiff|max:4096',
                 'administrator_id'  => 'required|integer|min:0|max:9999999999',
             ];
         }

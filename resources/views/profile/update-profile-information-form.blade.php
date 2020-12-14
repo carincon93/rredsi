@@ -13,6 +13,7 @@
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
                 <input type="file" class="hidden"
+                            accept="image/*"
                             wire:model="photo"
                             x-ref="photo"
                             x-on:change="

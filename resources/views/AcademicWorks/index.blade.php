@@ -10,7 +10,7 @@
         <div>
             <a href="{{ route('user.profile.user-graduations.user-academic-works.create', [$userGraduation]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Create academic work info') }}
+                    {{ __('Create academic work') }}
                 </div>
             </a>
         </div>
@@ -35,18 +35,18 @@
 
                     <x-slot name="tbodyData">
                         @if ($userAcademicWork)
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $userAcademicWork->title }}</span>
+                                    <span>{{ $userAcademicWork->title }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $userAcademicWork->knowledgeArea->name }}</span>
+                                    <span>{{ $userAcademicWork->knowledgeArea->name }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $userAcademicWork->type }}</span>
+                                    <span>{{ $userAcademicWork->type }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $userAcademicWork->authors }}</span>
+                                    <span>{{ $userAcademicWork->authors }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

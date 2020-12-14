@@ -7,14 +7,16 @@ use Illuminate\View\Component;
 class GuestHeader extends Component
 {
     public $node;
+    public $image;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($node)
+    public function __construct($node, $image)
     {
-        $this->node = $node;
+        $this->node     = $node;
+        $this->image    = $image;
     }
 
     /**

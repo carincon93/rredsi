@@ -31,17 +31,17 @@
 
                     <x-slot name="tbodyData">
                         @foreach ($researchOutputs as $researchOutput)
-                            <tr class="bg-white border-4 border-gray-200">
+                            <tr class="bg-white">
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $researchOutput->title }}</span>
+                                    <span>{{ $researchOutput->title }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold">{{ $researchOutput->typology }}</span>
+                                    <span>{{ $researchOutput->typology }}</span>
                                 </td>
 
                                 <td>
-                                    <span class="text-center ml-2 font-semibold"><a href="{{ url("storage/$researchOutput->file") }}" target="_blank" download="">Descargar</a></span>
+                                    <span><a href="{{ url("storage/$researchOutput->file") }}" target="_blank" download="">Descargar</a></span>
                                 </td>
 
                                 <td class="py-2 text-left">

@@ -178,7 +178,7 @@
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Overall objective') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
-                        <p>
+                        <p class="whitespace-pre-line">
                             {{ $researchTeam->overall_objective }}
                         </p>
                     </div>
@@ -200,7 +200,7 @@
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Mission') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
-                        <p>
+                        <p class="whitespace-pre-line">
                             {{ $researchTeam->mission }}
                         </p>
                     </div>
@@ -222,7 +222,7 @@
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Vision') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
-                        <p>
+                        <p class="whitespace-pre-line">
                             {{ $researchTeam->vision }}
                         </p>
                     </div>
@@ -244,7 +244,7 @@
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Regional projection') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
-                        <p>
+                        <p class="whitespace-pre-line">
                             {{ $researchTeam->regional_projection }}
                         </p>
                     </div>
@@ -266,7 +266,7 @@
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Knowledge production strategy') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
-                        <p>
+                        <p class="whitespace-pre-line">
                             {{ $researchTeam->knowledge_production_strategy }}
                         </p>
                     </div>
