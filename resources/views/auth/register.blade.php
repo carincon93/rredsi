@@ -42,17 +42,21 @@
                 <x-jet-label for="document_number" value="{{ __('Document number') }}" />
                 <x-jet-input id="document_number" class="block mt-1 w-full border" type="number" name="document_number" required />
             </div>
-            
+
             <div class="mt-4">
                 <x-jet-label for="cellphone_number" value="{{ __('Cellphone number') }}" />
                 <x-jet-input id="cellphone_number" class="block mt-1 w-full border" type="number" name="cellphone_number" required />
             </div>
-            
+
             <p class="mt-4">{{ __('Interests') }}</p>
             <div class="mt-4">
                 <input id="investigar" class="form-checkbox" type="checkbox" name="interests[]" value="investigar" required />
                 <label class="font-medium inline inline-flex text-gray-700 text-sm" for="investigar" >Investigar</label>
             </div>
+
+            {{-- <input class="hidden" id="status" name="status" :value="1"> --}}
+
+            <x-drop-down-educational-institution-faculties :form="'yes'" />
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">

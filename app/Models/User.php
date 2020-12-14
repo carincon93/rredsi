@@ -32,7 +32,6 @@ class User extends Authenticatable
         'document_type',
         'document_number',
         'cellphone_number',
-        'status',
         'interests',
         'biography',
         'cvlac',
