@@ -1,15 +1,16 @@
 <x-app-layout>
+
     <x-slot name="header">
-        <h2 class="ont-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{__('Knowledge areas')}}
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+            {{__('Legal information')}}
             <span class="sm:block text-purple-300">
-                Add knowledge area
+                Add legal information
             </span>
         </h2>
         <div>
-            <a href="{{ route('knowledge-areas.create') }}">
+            <a href="{{ route('legal-informations.create') }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Create knowledge area') }}
+                    {{ __('Create legal information') }}
                 </div>
             </a>
         </div>
@@ -21,15 +22,21 @@
             <div class="bg-white shadow-xl sm-rounded-lg">
                 <x-data-table>
                     <x-slot name="firstTheadTitle">
-                        {{ __('Name') }}
+                        {{ __('Type') }}
+                    </x-slot>
+                    <x-slot name="secondTheadTitle">
+                        {{ __('Description') }}
                     </x-slot>
 
                     <x-slot name="tbodyData">
-                        @foreach ($knowledgeAreas as $knowledgeArea)
+                        @foreach ($legalInformations as $legalInformation)
 
                         <tr class="bg-white">
                             <td>
-                                <span>{{ $knowledgeArea->name }}</span>
+                                <span>{{ $legalInformation->type }}</span>
+                            </td>
+                            <td>
+                                <div >{{ $legalInformation->description }}</div>
                             </td>
 
                             <td class="py-2 text-left">
@@ -45,13 +52,13 @@
                                             </button>
                                         </x-slot>
                                         <x-slot name="content">
-                                            <x-jet-dropdown-link href="{{ route('knowledge-areas.show', [$knowledgeArea]) }}">
+                                            <x-jet-dropdown-link href="{{ route('legal-informations.show', [$legalInformation]) }}">
                                                 {{ __('Show') }}
                                             </x-jet-dropdown-link>
-                                            <x-jet-dropdown-link href="{{ route('knowledge-areas.edit', [$knowledgeArea]) }}">
+                                            <x-jet-dropdown-link href="{{ route('legal-informations.edit', [$legalInformation]) }}">
                                                 {{ __('Edit') }}
                                             </x-jet-dropdown-link>
-                                            <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('knowledge-areas.destroy', [$knowledgeArea]) }}')">
+                                            <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('legal-informations.destroy', [$legalInformation]) }}')">
                                                 {{ __('Delete') }}
                                             </x-jet-dropdown-link>
                                         </x-slot>

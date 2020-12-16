@@ -72,6 +72,10 @@
                     getAllEducationalInstitutions(nodeSelected, educationalInstitutionSelected);
                 }
 
+                if (nodeSelected != 0 && educationalInstitutionSelected == 0) {
+                    getAllEducationalInstitutions(nodeSelected);
+                }
+
                 return {
                     getAllNodes: function() {
                         getAllNodes();

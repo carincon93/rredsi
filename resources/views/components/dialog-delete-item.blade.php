@@ -2,16 +2,16 @@
 
 <div class="z-50 modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
     <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-    
+
     <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-        
+
         <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
             <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                 <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
             </svg>
             <span class="text-sm">(Esc)</span>
         </div>
-        
+
         <!--Body-->
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div class="sm:flex sm:items-start">
@@ -32,13 +32,13 @@
                 </div>
             </div>
         </div>
-        
+
         <!--Footer-->
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <form method="POST" action="" id="form">
                 @csrf()
                 @method('DELETE')
-                
+
                 <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">{{ __('Delete') }}</button>
             </form>
             <button type="button"" class=" modal-close mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">{{ __('Close') }}</button>
@@ -52,29 +52,29 @@
         <script>
             var openmodal = document.getElementsByClassName('modal-open')
             var id = null;
-            
+
             function modal(id){
                 var input = document.getElementById('code');
                 input.setAttribute('value',id);
-                
+
             }
-            
+
             for (var i = 0; i < openmodal.length; i++) {
                 openmodal[i].addEventListener('click', function(event){
                     event.preventDefault()
                     toggleModal()
-                    
+
                 })
             }
-            
+
             const overlay = document.querySelector('.modal-overlay')
             overlay.addEventListener('click', toggleModal)
-            
+
             var closemodal = document.querySelectorAll('.modal-close')
             for (var i = 0; i < closemodal.length; i++) {
                 closemodal[i].addEventListener('click', toggleModal)
             }
-            
+
             document.onkeydown = function(evt) {
                 evt = evt || window.event
                 var isEscape = false
@@ -87,23 +87,23 @@
                     toggleModal()
                 }
             };
-            
-            
+
+
             function toggleModal () {
                 const body  = document.querySelector('body')
                 const modal = document.querySelector('.modal')
                 const form  = document.querySelector('#form')
                 const input = document.getElementById('code');
-                
+
                 modal.classList.toggle('opacity-0')
                 modal.classList.toggle('pointer-events-none')
                 modal.classList.toggle('transition')
                 modal.classList.toggle('delay-400')
                 modal.classList.toggle('duration-500')
                 modal.classList.toggle('ease-in-out')
-                
+
                 body.classList.toggle('modal-active')
-                
+
                 form.setAttribute('action', input.value)
             }
         </script>

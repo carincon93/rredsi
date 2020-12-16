@@ -23,11 +23,12 @@
     <body class="font-sans antialiased leading-normal tracking-normal">
         <div class="min-h-screen bg-gray-100 flex flex-wrap">
 
-            @if (request()->route('node'))
-                <x-navigation-sidebar/>
-            @endif
+
+            <x-navigation-sidebar/>
+
             <!-- Page Content -->
-            <main class="w-full bg-gray-100 pl-0{{ request()->route('node') ? ' lg:pl-64' : '' }} min-h-screen">
+            {{-- {{ request()->route('node') ? ' lg:pl-64' : '' }} --}}
+            <main class="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen">
                 @livewire('navigation-dropdown')
 
                  <!-- Page Heading -->

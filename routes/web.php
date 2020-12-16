@@ -25,6 +25,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NodeEventController;
+use App\Http\Controllers\LegalInformationController;
 use App\Http\Controllers\AnnualNodeEventController;
 use App\Http\Livewire\ModelForm;
 
@@ -122,6 +123,8 @@ Route::middleware(['auth'])->group(function () {
         'knowledge-areas'                   => KnowledgeAreaController::class,
         'knowledge-subareas'                => KnowledgeSubareaController::class,
         'knowledge-subarea-disciplines'     => KnowledgeSubareaDisciplinesController::class,
-        'roles'                             => RoleController::class
+        'roles'                             => RoleController::class,
+        'legal-informations'                => LegalInformationController::class
+
     ]);
 });

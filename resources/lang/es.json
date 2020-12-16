@@ -105,7 +105,7 @@
     "Educational institutions": "Insituciones educativas",
     "Educational institution": "Institución educativa",
     "Academic works": "Trabajos académicos",
-    "Academic work": "Trabajo académico", 
+    "Academic work": "Trabajo académico",
     "Educational environments": "Ambientes de formación",
     "Educational environment": "Ambiente de formación",
     "Educational tools": "Herramientas/Equipos",
@@ -214,5 +214,12 @@
     "Presentation type": "Tipo de presentación",
     "Register event": "Registrarse en el evento",
     "Speakers": "Ponentes",
-    "Manage projects": "Administrar proyectos"
+    "Manage projects": "Administrar proyectos",
+    "Tools requirements description": "Descripción de herramientas requeridas",
+    "Principal research team": "Semillero de investigación principal",
+    "Knowledge subareas": "Sub-áreas de conocimiento",
+    "Legal informations": "Informacion legal",
+    "Legal information": "Informacion legal",
+    "Create legal information": "Crear informacion legal",
+    "Administrator": "Administrador"
 }
