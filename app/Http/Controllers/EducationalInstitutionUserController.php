@@ -57,7 +57,7 @@ class EducationalInstitutionUserController extends Controller
         $user->assignRole($request->get('role_id'));
         
         if($user->save()){
-            $user->educationalInstitutionFaculties()->attach($faculty);
+            $user->educationalInstitutionFaculties()->attach($faculty, ['is_principal', true]);
             $message = 'Your store processed correctly';
         }
 
@@ -108,7 +108,7 @@ class EducationalInstitutionUserController extends Controller
 
         if($user->save()){
             $user->syncRoles($request->get('role_id'));
-            $user->educationalInstitutionFaculties()->attach($faculty);
+            // $user->educationalInstitutionFaculties()->attach($faculty, ['is_principal', true]);
             $message = 'Your update processed correctly';
         }
 

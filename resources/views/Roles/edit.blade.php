@@ -49,7 +49,7 @@
                             <div class="mt-4">
                                 @foreach ($chunk as $permission)
                                     <div>
-                                        <input id="{{ $permission->name }}" class="form-checkbox" type="checkbox" name="permissions" {{ old('permissions') == $permission->id ? 'checked' : '' }} value="{{ $permission->id }}" />
+                                        <input id="{{ $permission->name }}" class="form-checkbox" type="checkbox" name="permissions[]" {{ old('permissions') == $permission->id ? 'checked' : '' }} value="{{ $permission->id }}" />
                                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ $permission->name }}" >
                                             @if (explode('_', $permission->name)[0] == 'index')
                                                 Listar {{ __(str_replace('_', ' ', $permission->model)) }}

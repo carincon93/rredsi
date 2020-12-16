@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39950b1ad96150c51348b190bc60eab5",
+    "content-hash": "39bd80d956c6bd4bb41ae50869bd7eb4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3248,6 +3248,10 @@
                 "security",
                 "spatie"
             ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-permission/issues",
+                "source": "https://github.com/spatie/laravel-permission/tree/3.18.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/spatie",
@@ -8163,5 +8167,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
