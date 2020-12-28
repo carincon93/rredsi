@@ -17,6 +17,8 @@ class UserGraduationController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', UserGraduation::class);
+
         $userGraduations = auth()->user()->userGraduations()->get();
 
         return view('Graduations.index', compact('userGraduations'));
@@ -29,6 +31,8 @@ class UserGraduationController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', UserGraduation::class);
+
         $nodes = Node::orderBy('state')->get();
 
         return view('Graduations.create', compact('nodes'));
@@ -42,12 +46,14 @@ class UserGraduationController extends Controller
      */
     public function store(UserGraduationRequest $request)
     {
+        $this->authorize('create', UserGraduation::class);
+
         $userGraduation = new UserGraduation();
         $userGraduation->is_graduated   = $request->get('is_graduated');
         $userGraduation->year           = $request->get('year');
         $userGraduation->academicProgram()->associate($request->get('academic_program_id'));
         $userGraduation->user()->associate(auth()->user()->id);
-        
+
         if($userGraduation->save()){
             $message = 'Your store processed correctly';
         }
@@ -63,6 +69,8 @@ class UserGraduationController extends Controller
      */
     public function show(UserGraduation $userGraduation)
     {
+        $this->authorize('view', UserGraduation::class, $userGraduation);
+
         return view('Graduations.show', compact('userGraduation'));
     }
 
@@ -74,6 +82,8 @@ class UserGraduationController extends Controller
      */
     public function edit(UserGraduation $userGraduation)
     {
+        $this->authorize('update', UserGraduation::class, $userGraduation);
+
         $nodes = Node::orderBy('state')->get();
 
         return view('Graduations.edit', compact('nodes', 'userGraduation'));
@@ -88,6 +98,8 @@ class UserGraduationController extends Controller
      */
     public function update(UserGraduationRequest $request, UserGraduation $userGraduation)
     {
+        $this->authorize('update', UserGraduation::class, $userGraduation);
+
         $userGraduation->is_graduated   = $request->get('is_graduated');
         $userGraduation->year           = $request->get('year');
         $userGraduation->academicProgram()->associate($request->get('academic_program_id'));
@@ -108,6 +120,8 @@ class UserGraduationController extends Controller
      */
     public function destroy(UserGraduation $userGraduation)
     {
+        $this->authorize('delete', UserGraduation::class, $userGraduation);
+
         if($userGraduation->delete()){
             $message = 'Your update processed correctly';
         }

@@ -23,6 +23,8 @@ class ResearchTeamController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('viewAny', ResearchTeam::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         $researchTeams = $researchGroup->researchTeams()->orderBy('name')->get();
 
         return view('ResearchTeams.index', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeams'));
@@ -35,6 +37,8 @@ class ResearchTeamController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('create', ResearchTeam::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         $knowledgeAreas                 = KnowledgeArea::orderBy('name')->get();
         $academicPrograms               = $faculty->academicPrograms()->orderBy('name')->get();
         $researchLines                  = $researchGroup->researchLines()->orderBy('name')->get();
@@ -51,6 +55,8 @@ class ResearchTeamController extends Controller
      */
     public function store(ResearchTeamRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('create', ResearchTeam::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         $researchTeam = new ResearchTeam();
         $researchTeam->name                             = $request->get('name');
         $researchTeam->mentor_name                      = $request->get('mentor_name');
@@ -86,6 +92,8 @@ class ResearchTeamController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
+        $this->authorize('view', ResearchTeam::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         return view('ResearchTeams.show', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam'));
     }
 
@@ -97,6 +105,8 @@ class ResearchTeamController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
+        $this->authorize('update', ResearchTeam::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam);
+
         $knowledgeAreas                 = KnowledgeArea::orderBy('name')->get();
         $academicPrograms               = $faculty->academicPrograms()->orderBy('name')->get();
         $researchLines                  = $researchGroup->researchLines()->orderBy('name')->get();
@@ -114,6 +124,8 @@ class ResearchTeamController extends Controller
      */
     public function update(ResearchTeamRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
+        $this->authorize('update', ResearchTeam::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam);
+
         $researchTeam->name                             = $request->get('name');
         $researchTeam->mentor_name                      = $request->get('mentor_name');
         $researchTeam->mentor_email                     = $request->get('mentor_email');
@@ -148,6 +160,8 @@ class ResearchTeamController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
+        $this->authorize('delete', ResearchTeam::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam);
+
         if($researchTeam->delete()){
             $message = 'Your delete processed correctly';
         }

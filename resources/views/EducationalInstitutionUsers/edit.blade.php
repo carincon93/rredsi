@@ -36,19 +36,19 @@
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name') ?? $user->name" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
-        
+
                     <div class="mt-4">
                         <x-jet-label for="email" value="{{ __('Email') }}" />
                         <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email') ?? $user->email" required />
                         <x-jet-input-error for="email" class="mt-2" />
                     </div>
-        
+
                     <div class="mt-4">
                         <x-jet-label for="password" value="{{ __('Password') }}" />
                         <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
                         <x-jet-input-error for="password" class="mt-2" />
                     </div>
-        
+
                     <div class="mt-4">
                         <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                         <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
@@ -65,19 +65,19 @@
                         </select>
                         <x-jet-input-error for="document_type" class="mt-2" />
                     </div>
-        
+
                     <div class="mt-4">
                         <x-jet-label for="document_number" value="{{ __('Document number') }}" />
                         <x-jet-input id="document_number" class="block mt-1 w-full" type="number" name="document_number" :value="old('document_number') ?? $user->document_number" required />
                         <x-jet-input-error for="document_number" class="mt-2" />
                     </div>
-                    
+
                     <div class="mt-4">
                         <x-jet-label for="cellphone_number" value="{{ __('Cellphone number') }}" />
                         <x-jet-input id="cellphone_number" class="block mt-1 w-full" type="number" name="cellphone_number" :value="old('cellphone_number') ?? $user->cellphone_number" required />
                         <x-jet-input-error for="cellphone_number" class="mt-2" />
                     </div>
-                    
+
                     <div class="mt-4">
                         <x-jet-label for="interests" value="{{ __('Interests') }}" />
                         <textarea id="interests" name="interests" class="form-textarea border-0 w-full" value="{{ old('interests') }}" required >{{ old('interests') ?? $user->interests }}</textarea>
@@ -101,16 +101,16 @@
                     <div class="block mt-4">
                         @foreach ($roles as $role)
                             <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox" name="role_id[]" value="{{ $role->id }}" {{ old('role_id') == $role->id ? "checked" : "" }} />
+                                <input type="checkbox" class="form-checkbox" name="role_id[]" @if(is_array(old('role_id')) && in_array($role->id, old('role_id'))) checked @elseif($user->roles->pluck('id')->contains($role->id)) checked  @endif value="{{ $role->id }}" />
                                 <span class="ml-2 text-sm text-gray-600">{{ $role->name }}</span>
                             </label>
                         @endforeach
                         <x-jet-input-error for="role_id" class="mt-2" />
                     </div>
-                    
-                    <div class="flex items-center justify-end mt-4">        
+
+                    <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
-                            {{ __('Create') }}
+                            {{ __('Edit') }}
                         </x-jet-button>
                     </div>
                 </form>

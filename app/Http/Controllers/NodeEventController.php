@@ -8,6 +8,7 @@ use App\Models\Node;
 use App\Models\Event;
 
 use App\Http\Requests\EventRequest;
+use App\Models\NodeEvent;
 use Illuminate\Http\Request;
 
 class NodeEventController extends Controller
@@ -19,6 +20,8 @@ class NodeEventController extends Controller
      */
     public function index(Node $node)
     {
+        $this->authorize('viewAny', NodeEvent::class , $node);
+
         $events = $node->nodeEvents()->where('node_id', $node->id)->with('event')->get();
 
         return view('NodeEvents.index', compact('node', 'events'));
@@ -31,6 +34,8 @@ class NodeEventController extends Controller
      */
     public function create(Node $node)
     {
+        $this->authorize('create', NodeEvent::class , $node);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('NodeEvents.create', compact('node', 'knowledgeAreas'));
@@ -44,6 +49,8 @@ class NodeEventController extends Controller
      */
     public function store(EventRequest $request, Node $node)
     {
+        $this->authorize('create', NodeEvent::class , $node);
+
         $event = new Event();
         $event->name            = $request->get('name');
         $event->location        = $request->get('location');
@@ -58,7 +65,7 @@ class NodeEventController extends Controller
             'id'        => $event->id,
             'node_id'   => $node->id
         ]);
-       
+
         if($event->save()){
             $event->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your store processed correctly';
@@ -75,6 +82,8 @@ class NodeEventController extends Controller
      */
     public function show(Node $node, Event $event)
     {
+        $this->authorize('view', NodeEvent::class , $node, $event);
+
         return view('NodeEvents.show', compact('node', 'event'));
     }
 
@@ -86,6 +95,8 @@ class NodeEventController extends Controller
      */
     public function edit(Node $node, Event $event)
     {
+        $this->authorize('update', NodeEvent::class , $node, $event);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('NodeEvents.edit', compact('node', 'event', 'knowledgeAreas'));
@@ -100,6 +111,8 @@ class NodeEventController extends Controller
      */
     public function update(EventRequest $request, Node $node, Event $event)
     {
+        $this->authorize('update', NodeEvent::class , $node, $event);
+
         $event->name            = $request->get('name');
         $event->location        = $request->get('location');
         $event->description     = $request->get('description');
@@ -128,6 +141,8 @@ class NodeEventController extends Controller
      */
     public function destroy(Node $node, Event $event)
     {
+        $this->authorize('delete', NodeEvent::class , $node, $event);
+
         if($event->delete()){
             $message = 'Your delete processed correctly';
         }

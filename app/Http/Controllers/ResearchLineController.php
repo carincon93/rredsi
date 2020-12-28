@@ -22,6 +22,8 @@ class ResearchLineController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('viewAny', ResearchLine::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         $researchLines = $researchGroup->researchLines()->orderBy('name')->get();
 
         return view('ResearchLines.index', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchLines'));
@@ -34,6 +36,8 @@ class ResearchLineController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('create', ResearchLine::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('ResearchLines.create', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'knowledgeAreas'));
@@ -47,6 +51,8 @@ class ResearchLineController extends Controller
      */
     public function store(ResearchLineRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('create', ResearchLine::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         $researchLine = new ResearchLine();
         $researchLine->name         = $request->get('name');
         $researchLine->objectives   = $request->get('objectives');
@@ -71,6 +77,8 @@ class ResearchLineController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchLine $researchLine)
     {
+        $this->authorize('view', ResearchLine::class , $node, $educationalInstitution , $faculty, $researchGroup, $researchLine);
+
         return view('ResearchLines.show', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchLine'));
     }
 
@@ -82,6 +90,8 @@ class ResearchLineController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchLine $researchLine)
     {
+        $this->authorize('update', ResearchLine::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchLine);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('ResearchLines.edit', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchLine', 'knowledgeAreas'));
@@ -96,6 +106,8 @@ class ResearchLineController extends Controller
      */
     public function update(ResearchLineRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchLine $researchLine)
     {
+        $this->authorize('update', ResearchLine::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchLine);
+
         $researchLine->name         = $request->get('name');
         $researchLine->objectives   = $request->get('objectives');
         $researchLine->mission      = $request->get('mission');
@@ -119,6 +131,8 @@ class ResearchLineController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchLine $researchLine)
     {
+        $this->authorize('delete', ResearchLine::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchLine);
+
         if($researchLine->delete()){
             $message = 'Your delete processed correctly';
         }

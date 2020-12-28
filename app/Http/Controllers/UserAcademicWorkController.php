@@ -18,6 +18,8 @@ class UserAcademicWorkController extends Controller
      */
     public function index(UserGraduation $userGraduation)
     {
+        $this->authorize('viewAny', UserAcademicWork::class, $userGraduation);
+
         $userAcademicWork = $userGraduation->userAcademicWork()->orderBy('title')->first();
 
         return view('AcademicWorks.index', compact('userGraduation', 'userAcademicWork'));
@@ -30,6 +32,8 @@ class UserAcademicWorkController extends Controller
      */
     public function create(UserGraduation $userGraduation)
     {
+        $this->authorize('create', UserAcademicWork::class, $userGraduation);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('AcademicWorks.create', compact('userGraduation', 'knowledgeAreas'));
@@ -43,6 +47,8 @@ class UserAcademicWorkController extends Controller
      */
     public function store(UserAcademicWorkRequest $request, UserGraduation $userGraduation)
     {
+        $this->authorize('create', UserAcademicWork::class, $userGraduation);
+
         $userAcademicWork = new UserAcademicWork();
         $userAcademicWork->title                    = $request->get('title');
         $userAcademicWork->type                     = $request->get('type');
@@ -67,6 +73,8 @@ class UserAcademicWorkController extends Controller
      */
     public function show(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
+        $this->authorize('view', UserAcademicWork::class, $userGraduation, $userAcademicWork);
+
         return view('AcademicWorks.show', compact('userGraduation', 'userAcademicWork'));
     }
 
@@ -78,6 +86,8 @@ class UserAcademicWorkController extends Controller
      */
     public function edit(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
+        $this->authorize('update', UserAcademicWork::class, $userGraduation, $userAcademicWork);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('AcademicWorks.edit', compact('userGraduation', 'userAcademicWork', 'knowledgeAreas'));
@@ -92,6 +102,8 @@ class UserAcademicWorkController extends Controller
      */
     public function update(UserAcademicWorkRequest $request, UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
+        $this->authorize('update', UserAcademicWork::class, $userGraduation, $userAcademicWork);
+
         $userAcademicWork->title                    = $request->get('title');
         $userAcademicWork->type                     = $request->get('type');
         $userAcademicWork->authors                  = $request->get('authors');
@@ -115,6 +127,8 @@ class UserAcademicWorkController extends Controller
      */
     public function destroy(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
+        $this->authorize('delete', UserAcademicWork::class, $userGraduation, $userAcademicWork);
+
         if($userAcademicWork->delete()) {
             $message = 'Your update processed correctly';
         }

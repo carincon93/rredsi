@@ -80,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}', [EducationalInstitutionFacultyController::class, 'dashboard'])->name('nodes.educational-institutions.faculties.dashboard');
 
+    // Route::get('my-projects', [ProjectController::class, 'myProjects'])->name('my-projects');
+    Route::get('nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}/research-groups/{research_group}/research-teams/{research_team}/my-projects',[ProjectController::class, 'myProjects'])->name('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects');
+
     Route::resource('/user/profile/user-graduations', UserGraduationController::class, [
         'names' => [
             'index'     => 'user.profile.user-graduations.index',

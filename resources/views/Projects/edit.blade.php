@@ -109,11 +109,11 @@
                         <x-jet-input-error for="tools_requirements_description" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <x-jet-label for="tools_requirements" value="{{ __('Tools requirements') }}" />
                         <textarea id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" >@if(old('tools_requirements')){{ old('tools_requirements')}}@else @foreach(json_decode($project->tools_requirements) as $tools_requirement){{ $tools_requirement }}@endforeach @endif</textarea>
                         <x-jet-input-error for="tools_requirements" class="mt-2" />
-                    </div>
+                    </div> --}}
 
                     <div class="mt-4">
                         <x-jet-label for="file" value="{{ __('File') }}" />

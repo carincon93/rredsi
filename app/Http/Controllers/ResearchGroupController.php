@@ -19,6 +19,8 @@ class ResearchGroupController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('viewAny', ResearchGroup::class , $node, $educationalInstitution , $faculty);
+
         $researchGroups = $faculty->researchGroups()->orderBy('name')->get();
 
         return view('ResearchGroups.index', compact('node', 'educationalInstitution', 'faculty', 'researchGroups'));
@@ -31,6 +33,8 @@ class ResearchGroupController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('create', ResearchGroup::class , $node, $educationalInstitution , $faculty);
+
         return view('ResearchGroups.create', compact('node', 'educationalInstitution', 'faculty'));
     }
 
@@ -42,6 +46,8 @@ class ResearchGroupController extends Controller
      */
     public function store(ResearchGroupRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('create', ResearchGroup::class , $node, $educationalInstitution , $faculty);
+
         $researchGroup = new ResearchGroup();
         $researchGroup->name                    = $request->get('name');
         $researchGroup->email                   = $request->get('email');
@@ -67,6 +73,8 @@ class ResearchGroupController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('view', ResearchGroup::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         return view('ResearchGroups.show', compact('node', 'educationalInstitution', 'faculty', 'researchGroup'));
     }
 
@@ -78,6 +86,8 @@ class ResearchGroupController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('update', ResearchGroup::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         return view('ResearchGroups.edit', compact('node', 'educationalInstitution', 'faculty', 'researchGroup'));
     }
 
@@ -90,6 +100,8 @@ class ResearchGroupController extends Controller
      */
     public function update(ResearchGroupRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('update', ResearchGroup::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         $researchGroup->name                    = $request->get('name');
         $researchGroup->email                   = $request->get('email');
         $researchGroup->leader                  = $request->get('leader');
@@ -114,6 +126,8 @@ class ResearchGroupController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
+        $this->authorize('delete', ResearchGroup::class , $node, $educationalInstitution , $faculty, $researchGroup);
+
         if($researchGroup->delete()){
             $message = 'Your delete processed correctly';
         }

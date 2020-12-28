@@ -19,8 +19,9 @@ class NodeController extends Controller
      */
     public function index()
     {
-        $nodes = Node::orderBy('state')->get();
+        $this->authorize('viewAny', Node::class);
 
+        $nodes = Node::orderBy('state')->get();
         return view('Nodes.index', compact('nodes'));
     }
 
@@ -31,6 +32,8 @@ class NodeController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Node::class);
+
         $users = User::orderBy('name')->get();
 
         return view('Nodes.create', compact('users'));
@@ -44,6 +47,8 @@ class NodeController extends Controller
      */
     public function store(NodeRequest $request)
     {
+        $this->authorize('create', Node::class);
+
         $node        = new Node();
         $node->state = $request->get('state');
         if ($request->hasFile('logo')) {
@@ -73,6 +78,8 @@ class NodeController extends Controller
      */
     public function show(Node $node)
     {
+        $this->authorize('view', Node::class, $node);
+
         return view('Nodes.show', compact('node'));
     }
 
@@ -84,6 +91,8 @@ class NodeController extends Controller
      */
     public function edit(Node $node)
     {
+        $this->authorize('update', Node::class ,$node);
+
         $users = User::orderBy('name')->get();
 
         return view('Nodes.edit', compact('node', 'users'));
@@ -98,6 +107,8 @@ class NodeController extends Controller
      */
     public function update(NodeRequest $request, Node $node)
     {
+        $this->authorize('update', Node::class ,$node);
+
         $node->state = $request->get('state');
         if ($request->hasFile('logo')) {
             Storage::delete("public/$node->logo");
@@ -127,6 +138,8 @@ class NodeController extends Controller
      */
     public function destroy(Node $node)
     {
+        $this->authorize('delete', Node::class, $node);
+
         if($node->delete()){
             $message = 'Your delete processed correctly';
         }

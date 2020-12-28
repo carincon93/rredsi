@@ -66,7 +66,7 @@
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.users.edit', [$node, $educationalInstitution, $faculty, $user]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.users.destroy', [$node, $educationalInstitution, $faculty, $user]) }}">
+                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.faculties.users.destroy', [$node, $educationalInstitution, $faculty, $user]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
                                             </x-slot>

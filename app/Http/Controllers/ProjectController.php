@@ -25,10 +25,25 @@ class ProjectController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
+        $this->authorize('viewAny', Project::class , $node, $educationalInstitution , $faculty , $researchGroup , $researchTeam);
+
         $projects = $researchTeam->projects()->orderBy('title')->get();
 
         return view('Projects.index',  compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projects'));
     }
+
+
+    public function myProjects(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
+    {
+        $this->authorize('viewAny', Project::class , $node, $educationalInstitution , $faculty , $researchGroup , $researchTeam);
+
+        $projects = auth()->user()->projects;
+
+
+        return view('Projects.index',  compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projects'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -37,6 +52,8 @@ class ProjectController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
+        $this->authorize('create', Project::class , $node, $educationalInstitution , $faculty , $researchGroup , $researchTeam);
+
         $projectTypes                               = ProjectType::orderBy('type')->get();
         $knowledgeAreas                             = KnowledgeArea::orderBy('name')->get();
         $educationalInstitutionFacultyResearchTeams = $researchGroup->researchTeams()->get();
@@ -56,6 +73,8 @@ class ProjectController extends Controller
      */
     public function store(ProjectRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam)
     {
+        $this->authorize('create', Project::class , $node, $educationalInstitution , $faculty , $researchGroup , $researchTeam);
+
         $project = new Project();
         $project->title                             = $request->get('title');
         $project->start_date                        = $request->get('start_date');
@@ -102,7 +121,7 @@ class ProjectController extends Controller
                     unset($arrayResearchTeamsIds[$key]);
                 }
             }
-    
+
             $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
             $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
             $project->researchLines()->attach($request->get('research_line_id'));
@@ -125,6 +144,8 @@ class ProjectController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
+        $this->authorize('view', Project::class , $node, $educationalInstitution , $faculty , $researchGroup , $researchTeam,$project);
+
         return view('Projects.show', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'project'));
     }
 
@@ -136,6 +157,8 @@ class ProjectController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
+        $this->authorize('update', Project::class , $node, $educationalInstitution , $faculty , $researchGroup , $researchTeam,$project);
+
         $projectTypes                               = ProjectType::orderBy('type')->get();
         $knowledgeAreas                             = KnowledgeArea::orderBy('name')->get();
         $educationalInstitutionFacultyResearchTeams = $researchGroup->researchTeams()->get();
@@ -156,6 +179,8 @@ class ProjectController extends Controller
      */
     public function update(ProjectRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
+        $this->authorize('update', Project::class , $node, $educationalInstitution , $faculty , $researchGroup , $researchTeam,$project);
+
         $project->title                             = $request->get('title');
         $project->start_date                        = $request->get('start_date');
         $project->end_date                          = $request->get('end_date');
@@ -171,7 +196,7 @@ class ProjectController extends Controller
         $project->projectType()->associate($request->get('project_type_id'));
 
         $end_date = date('Y', strtotime($project->end_date));
-        
+
         if ($request->hasFile('main_image')) {
             Storage::delete("public/$project->main_image");
             $file       = $request->file('main_image');
@@ -204,7 +229,7 @@ class ProjectController extends Controller
                     unset($arrayResearchTeamsIds[$key]);
                 }
             }
-    
+
             $project->researchTeams()->sync($request->get('principal_research_team_id'), ['is_principal' => true]);
             $project->researchTeams()->sync($arrayResearchTeamsIds, ['is_principal' => false]);
             $project->researchLines()->sync($request->get('research_line_id'));
@@ -225,6 +250,8 @@ class ProjectController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
+        $this->authorize('delete', Project::class , $node, $educationalInstitution , $faculty , $researchGroup , $researchTeam,$project);
+
         if($project->delete()){
             $message = 'Your delete processed correctly';
         }

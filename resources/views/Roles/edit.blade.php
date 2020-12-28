@@ -30,7 +30,7 @@
                 <form method="POST" action="{{ route('roles.update', [$role]) }}">
                     @csrf
                     @method('PUT')
-        
+
                     <div>
                         <x-jet-label for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" maxlength="255" name="name" value="{{ old('name') ?? $role->name }}" required />
@@ -42,14 +42,14 @@
                         <textarea name="description" id="description" class="form-input rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" required>{{ old('description') ?? $role->description }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
-                    
+
                     <div class="mt-4">
                         <p>{{ __('Permissions') }}</p>
                         @forelse ($permissions->chunk(5) as $chunk)
                             <div class="mt-4">
                                 @foreach ($chunk as $permission)
                                     <div>
-                                        <input id="{{ $permission->name }}" class="form-checkbox" type="checkbox" name="permissions" {{ old('permissions') == $permission->id ? 'checked' : '' }} value="{{ $permission->id }}" />
+                                        <input id="{{ $permission->name }}" class="form-checkbox" type="checkbox" name="permissions[]" @if(is_array(old('permissions')) && in_array($permission->id, old('permissions'))) checked @elseif($role->permissions->pluck('id')->contains($permission->id)) checked  @endif value="{{ $permission->id }}" />
                                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ $permission->name }}" >
                                             @if (explode('_', $permission->name)[0] == 'index')
                                                 Listar {{ __(str_replace('_', ' ', $permission->model)) }}
@@ -69,7 +69,7 @@
                                         </label>
                                     </div>
                                 @endforeach
-                            </div>    
+                            </div>
                         @empty
                             <div class="mt-4">
                                 <p>{{ __('No data recorded') }}</p>
@@ -77,8 +77,8 @@
                         @endforelse
                         <x-jet-input-error for="permissions" class="mt-2" />
                     </div>
-                    
-                    <div class="flex items-center justify-end mt-4">        
+
+                    <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Edit') }}
                         </x-jet-button>

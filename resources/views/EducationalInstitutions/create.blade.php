@@ -53,11 +53,11 @@
                         <x-jet-input-error for="city" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <x-jet-label for="city" value="{{ __('City') }}" />
                         <x-jet-input id="city" class="block mt-1 w-full" type="text" min="" max="" name="city" value="{{ old('city') }}" required />
                         <x-jet-input-error for="city" class="mt-2" />
-                    </div>
+                    </div> --}}
 
                     <div class="mt-4">
                         <x-jet-label for="address" value="{{ __('Address') }}" />

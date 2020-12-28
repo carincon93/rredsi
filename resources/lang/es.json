@@ -218,8 +218,31 @@
     "Tools requirements description": "Descripción de herramientas requeridas",
     "Principal research team": "Semillero de investigación principal",
     "Knowledge subareas": "Sub-áreas de conocimiento",
-    "Legal informations": "Informacion legal",
-    "Legal information": "Informacion legal",
-    "Create legal information": "Crear informacion legal",
-    "Administrator": "Administrador"
+    "Legal informations": "Información legal",
+    "Legal information": "Información legal",
+    "Create legal information": "Crear información legal",
+    "Administrator": "Administrador",
+    "Create research group": "Crear grupo de investigación",
+    "Create research team": "Crear semillero de investigación",
+    "Create research line": "Crear línea de investigación",
+    "Create research output": "Crear producto de investigación",
+    "Create project": "Crear proyecto",
+    "Create educational environment": "Crear ambiente de formacion",
+    "Create educational tool": "Crear herramienta educativa",
+    "Create educational institution user": "Crear miembro de la institucion educativa",
+    "Create educational institution faculty": "Crear facultad de la institucion educativa",
+    "Create node event": "Crear evento de nodo",
+    "Create educational institution": "Crear institucion educativa",
+    "Create knowledge area": "Crear área de conocimiento",
+    "Create knowledge subarea": "Crear sub-área de conocimiento",
+    "Create knowledge subarea discipline": "Crear diciplina de sub-área de conocimiento",
+    "Knowledge sub-area": "Sub-área de conocimiento",
+    "Create role": "Crear role",
+    "Edit educational institution user": "Editar miembro de la institucion educativa",
+    "my projects": "Mis Proyectos"
+
+
+
+
+
 }

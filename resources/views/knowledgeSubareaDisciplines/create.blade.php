@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="knowledge_subarea_id" value="{{ __('Knowledge area') }}" />
+                        <x-jet-label for="knowledge_subarea_id" value="{{ __('Knowledge sub-area') }}" />
                         <select id="knowledge_subarea_id" name="knowledge_subarea_id" class="form-select w-full" required >
                             <option value="">Seleccione una sub-área de conocimiento</option>
                             @forelse ($knowledgeSubareas as $knowledgeSubarea)

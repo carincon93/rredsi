@@ -21,7 +21,7 @@ class EducationalInstitutionUserController extends Controller
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
         $users = $faculty->members()->orderBy('name')->get();
-        
+
         return view('EducationalInstitutionUsers.index', compact('node', 'educationalInstitution', 'faculty', 'users'));
     }
 
@@ -55,9 +55,9 @@ class EducationalInstitutionUserController extends Controller
         $user->interests          = $request->get('interests');
         $user->is_enabled         = $request->get('is_enabled');
         $user->assignRole($request->get('role_id'));
-        
+
         if($user->save()){
-            $user->educationalInstitutionFaculties()->attach($faculty);
+            $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true]);
             $message = 'Your store processed correctly';
         }
 
@@ -106,9 +106,9 @@ class EducationalInstitutionUserController extends Controller
         $user->interests          = $request->get('interests');
         $user->is_enabled         = $request->get('is_enabled');
 
-        if($user->save()){
+        if($user->update()){
             $user->syncRoles($request->get('role_id'));
-            $user->educationalInstitutionFaculties()->attach($faculty);
+            $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true] );
             $message = 'Your update processed correctly';
         }
 
