@@ -8,11 +8,13 @@
             </span>
         </h2>
         <div>
+            @can('create_reserach_group')
             <a  href="{{ route('nodes.educational-institutions.faculties.research-groups.create', [$node, $educationalInstitution, $faculty]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create research group') }}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
 
@@ -63,15 +65,21 @@
                                             </x-slot>
 
                                             <x-slot name="content">
+                                                @can('show_reserach_group')
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.show', [$node, $educationalInstitution, $faculty, $researchGroup]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('edit_reserach_group')
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.edit', [$node, $educationalInstitution, $faculty, $researchGroup]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('desctroy_reserach_group')
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.faculties.research-groups.destroy', [$node, $educationalInstitution, $faculty, $researchGroup]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.index', [$node, $educationalInstitution, $faculty, $researchGroup]) }}">
                                                     {{ __('Manage research teams') }}
                                                 </x-jet-dropdown-link>

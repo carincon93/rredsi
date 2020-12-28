@@ -8,11 +8,13 @@
             </span>
         </h2>
         <div>
+            @can('create_educational_institution')
             <a href="{{ route('nodes.educational-institutions.create', [$node]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create educational institution') }}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
     <div class="py-12">
@@ -54,15 +56,21 @@
                                                 </button>
                                             </x-slot>
                                             <x-slot name="content">
+                                                @can('show_educational_institution')
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.show', [$node, $educationalInstitution]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('edit_educational_institution')
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.edit', [$node, $educationalInstitution]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('destroy_educational_institution')
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.destroy', [$node, $educationalInstitution]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}">
                                                     {{ __('Manage educational institution faculties') }}
                                                 </x-jet-dropdown-link>

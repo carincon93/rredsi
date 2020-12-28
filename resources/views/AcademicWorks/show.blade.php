@@ -7,11 +7,13 @@
             </span>
         </h2>
         <div>
+            @can('edit_academic_work')
             <a href="{{ route('user.profile.user-graduations.user-academic-works.edit', [$userGraduation, $userAcademicWork]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Edit academic work') }}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
     
