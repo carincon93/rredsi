@@ -7,6 +7,7 @@
             </span>
         </h2>
         <div>
+            @can('index_project')
             <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
@@ -15,6 +16,7 @@
                     {{ __('Back')}}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
 
@@ -186,6 +188,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />
+
                         <select id="principal_research_team_id" name="principal_research_team_id" class="form-select w-full" required >
                             <option value="">Seleccione un semillero de investigación principal</option>
                             @foreach ($educationalInstitutionFacultyResearchTeams as $educationalInstitutionFacultyResearchTeam)

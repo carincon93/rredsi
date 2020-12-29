@@ -7,21 +7,13 @@
             </span>
         </h2>
         <div>
-<<<<<<< HEAD
-
-=======
             @can('create_project')
->>>>>>> simon
             <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.create', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create project')}}
                 </div>
             </a>
-<<<<<<< HEAD
-
-=======
             @endcan
->>>>>>> simon
         </div>
     </x-slot>
 

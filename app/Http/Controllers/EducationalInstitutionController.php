@@ -20,6 +20,8 @@ class EducationalInstitutionController extends Controller
      */
     public function index(Node $node)
     {
+        $this->authorize('viewAny', [EducationalInstitution::class, $node]);
+
         $educationalInstitutions = $node->educationalInstitutions()->orderBy('name')->get();
 
         return view('EducationalInstitutions.index', compact('node', 'educationalInstitutions'));
@@ -32,6 +34,8 @@ class EducationalInstitutionController extends Controller
      */
     public function create(Node $node)
     {
+        $this->authorize('create',[EducationalInstitution::class, $node]);
+
         $cities = json_decode(Storage::get('public/json/caldas_cities.json'), true);
 
         return view('EducationalInstitutions.create', compact('node', 'cities'));
@@ -45,6 +49,8 @@ class EducationalInstitutionController extends Controller
      */
     public function store(EducationalInstitutionRequest $request, Node $node)
     {
+        $this->authorize('create',[EducationalInstitution::class, $node]);
+
         $educationalInstitution = new EducationalInstitution();
         $educationalInstitution->name           = $request->get('name');
         $educationalInstitution->nit            = $request->get('nit');
@@ -69,6 +75,8 @@ class EducationalInstitutionController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('view', [EducationalInstitution::class, $node]);
+
         return view('EducationalInstitutions.show', compact('node', 'educationalInstitution'));
     }
 
@@ -80,6 +88,8 @@ class EducationalInstitutionController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('update', [EducationalInstitution::class, $node]);
+
         $cities = json_decode(Storage::get('public/json/caldas_cities.json'), true);
 
         return view('EducationalInstitutions.edit', compact('node', 'educationalInstitution', 'cities'));
@@ -94,6 +104,8 @@ class EducationalInstitutionController extends Controller
      */
     public function update(EducationalInstitutionRequest $request, Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('update', [EducationalInstitution::class,$node]);
+
         $educationalInstitution->name           = $request->get('name');
         $educationalInstitution->nit            = $request->get('nit');
         $educationalInstitution->address        = $request->get('address');
@@ -117,6 +129,8 @@ class EducationalInstitutionController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('delete', [EducationalInstitution::class, $node]);
+
         if($educationalInstitution->delete()){
             $message = 'Your delete processed correctly';
         }

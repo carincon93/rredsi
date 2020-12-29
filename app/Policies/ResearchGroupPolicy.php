@@ -4,6 +4,8 @@ namespace App\Policies;
 
 use App\Models\ResearchGroup;
 use App\Models\User;
+use App\Models\EducationalInstitution;
+
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ResearchGroupPolicy
@@ -16,14 +18,20 @@ class ResearchGroupPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user,EducationalInstitution $educationalInstitution)
     {
          if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('index_research_group')){
+        if(!$user->hasPermissionTo('index_research_group')){
+            return false;
+        }
+
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
+
         return false;
     }
 
@@ -34,12 +42,16 @@ class ResearchGroupPolicy
      * @param  \App\Models\ResearchGroup  $researchGroup
      * @return mixed
      */
-    public function view(User $user, ResearchGroup $researchGroup)
+    public function view(User $user,EducationalInstitution $educationalInstitution)
     {
          if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('show_research_group')){
+        if(!$user->hasPermissionTo('show_research_group')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
         return false;
@@ -51,12 +63,16 @@ class ResearchGroupPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user,EducationalInstitution $educationalInstitution)
     {
          if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('create_research_group')){
+        if(!$user->hasPermissionTo('create_research_group')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
         return false;
@@ -69,12 +85,16 @@ class ResearchGroupPolicy
      * @param  \App\Models\ResearchGroup  $researchGroup
      * @return mixed
      */
-    public function update(User $user, ResearchGroup $researchGroup)
+    public function update(User $user, EducationalInstitution $educationalInstitution)
     {
          if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('edit_research_group')){
+        if(!$user->hasPermissionTo('edit_research_group')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
         return false;
@@ -87,12 +107,16 @@ class ResearchGroupPolicy
      * @param  \App\Models\ResearchGroup  $researchGroup
      * @return mixed
      */
-    public function delete(User $user, ResearchGroup $researchGroup)
+    public function delete(User $user, EducationalInstitution $educationalInstitution)
     {
          if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('destroy_research_group')){
+        if(!$user->hasPermissionTo('destroy_research_group')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
         return false;

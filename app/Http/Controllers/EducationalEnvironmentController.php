@@ -19,6 +19,8 @@ class EducationalEnvironmentController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('viewAny',[EducationalEnvironment::class, $educationalInstitution]);
+
         $educationalEnvironments = $faculty->educationalEnvironments()->orderBy('name')->get();
 
         return view('EducationalEnvironments.index', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironments'));
@@ -31,6 +33,8 @@ class EducationalEnvironmentController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('create', [EducationalEnvironment::class, $educationalInstitution]);
+
         return view('EducationalEnvironments.create', compact('node', 'educationalInstitution', 'faculty'));
     }
 
@@ -42,6 +46,8 @@ class EducationalEnvironmentController extends Controller
      */
     public function store(EducationalEnvironmentRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('create', [EducationalEnvironment::class, $educationalInstitution]);
+
         $educationalEnvironment = new EducationalEnvironment();
         $educationalEnvironment->name           = $request->get('name');
         $educationalEnvironment->type           = $request->get('type');
@@ -66,6 +72,8 @@ class EducationalEnvironmentController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
+        $this->authorize('view', [EducationalEnvironment::class, $educationalInstitution]);
+
         return view('EducationalEnvironments.show', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment'));
     }
 
@@ -77,6 +85,8 @@ class EducationalEnvironmentController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
+        $this->authorize('update', [EducationalEnvironment::class, $educationalInstitution]);
+
         return view('EducationalEnvironments.edit', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment'));
     }
 
@@ -89,6 +99,8 @@ class EducationalEnvironmentController extends Controller
      */
     public function update(EducationalEnvironmentRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
+        $this->authorize('update', [EducationalEnvironment::class, $educationalInstitution]);
+
         $educationalEnvironment->name           = $request->get('name');
         $educationalEnvironment->type           = $request->get('type');
         $educationalEnvironment->capacity_aprox = $request->get('capacity_aprox');
@@ -112,6 +124,8 @@ class EducationalEnvironmentController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
+        $this->authorize('delete', [EducationalEnvironment::class, $educationalInstitution]);
+
         if($educationalEnvironment->delete()){
             $message = 'Your delete processed correctly';
         }

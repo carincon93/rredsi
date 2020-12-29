@@ -17,6 +17,8 @@ class KnowledgeSubareaController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', KnowledgeSubarea::class);
+
         $knowledgeSubareas = KnowledgeSubarea::orderBy('name')->get();
 
         return view('KnowledgeSubareas.index', compact('knowledgeSubareas'));
@@ -29,6 +31,8 @@ class KnowledgeSubareaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', KnowledgeSubarea::class);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('KnowledgeSubareas.create', compact('knowledgeAreas'));
@@ -42,6 +46,8 @@ class KnowledgeSubareaController extends Controller
      */
     public function store(KnowledgeSubareaRequest $request)
     {
+        $this->authorize('create', KnowledgeSubarea::class);
+
         $knowledgeSubarea          = new KnowledgeSubarea();
         $knowledgeSubarea->name    = $request->get('name');
         $knowledgeSubarea->knowledgeArea()->associate($request->get('knowledge_area_id'));
@@ -62,6 +68,8 @@ class KnowledgeSubareaController extends Controller
      */
     public function show(KnowledgeSubarea $knowledgeSubarea)
     {
+        $this->authorize('view', KnowledgeSubarea::class , $knowledgeSubarea);
+
         return view('KnowledgeSubareas.show', compact('knowledgeSubarea'));
     }
 
@@ -73,6 +81,8 @@ class KnowledgeSubareaController extends Controller
      */
     public function edit(KnowledgeSubarea $knowledgeSubarea)
     {
+        $this->authorize('update', KnowledgeSubarea::class , $knowledgeSubarea);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('KnowledgeSubareas.edit', compact('knowledgeSubarea','knowledgeAreas'));
@@ -87,6 +97,8 @@ class KnowledgeSubareaController extends Controller
      */
     public function update(KnowledgeSubareaRequest $request, KnowledgeSubarea $knowledgeSubarea)
     {
+        $this->authorize('update', KnowledgeSubarea::class , $knowledgeSubarea);
+
         $knowledgeSubarea->name = $request->get('name');
         $knowledgeSubarea->KnowledgeArea()->associate($request->get('knowledge_area_id'));
 
@@ -105,6 +117,8 @@ class KnowledgeSubareaController extends Controller
      */
     public function destroy(KnowledgeSubarea $knowledgeSubarea)
     {
+        $this->authorize('delete', KnowledgeSubarea::class , $knowledgeSubarea);
+
         if($knowledgeSubarea->delete()){
             $message = 'Your delete processed correctly';
         }

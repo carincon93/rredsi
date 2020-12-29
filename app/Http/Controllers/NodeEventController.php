@@ -20,7 +20,7 @@ class NodeEventController extends Controller
      */
     public function index(Node $node)
     {
-        $this->authorize('viewAny', NodeEvent::class , $node);
+        $this->authorize('viewAny', [NodeEvent::class , $node]);
 
         $events = $node->nodeEvents()->where('node_id', $node->id)->with('event')->get();
 
@@ -34,7 +34,7 @@ class NodeEventController extends Controller
      */
     public function create(Node $node)
     {
-        $this->authorize('create', NodeEvent::class , $node);
+        $this->authorize('create', [NodeEvent::class , $node]);
 
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
@@ -49,7 +49,7 @@ class NodeEventController extends Controller
      */
     public function store(EventRequest $request, Node $node)
     {
-        $this->authorize('create', NodeEvent::class , $node);
+        $this->authorize('create', [NodeEvent::class , $node]);
 
         $event = new Event();
         $event->name            = $request->get('name');
@@ -82,7 +82,7 @@ class NodeEventController extends Controller
      */
     public function show(Node $node, Event $event)
     {
-        $this->authorize('view', NodeEvent::class , $node, $event);
+        $this->authorize('view', [NodeEvent::class , $node]);
 
         return view('NodeEvents.show', compact('node', 'event'));
     }
@@ -95,7 +95,7 @@ class NodeEventController extends Controller
      */
     public function edit(Node $node, Event $event)
     {
-        $this->authorize('update', NodeEvent::class , $node, $event);
+        $this->authorize('update', [NodeEvent::class , $node]);
 
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
@@ -111,7 +111,7 @@ class NodeEventController extends Controller
      */
     public function update(EventRequest $request, Node $node, Event $event)
     {
-        $this->authorize('update', NodeEvent::class , $node, $event);
+        $this->authorize('update',[ NodeEvent::class , $node]);
 
         $event->name            = $request->get('name');
         $event->location        = $request->get('location');
@@ -141,7 +141,7 @@ class NodeEventController extends Controller
      */
     public function destroy(Node $node, Event $event)
     {
-        $this->authorize('delete', NodeEvent::class , $node, $event);
+        $this->authorize('delete', [NodeEvent::class , $node]);
 
         if($event->delete()){
             $message = 'Your delete processed correctly';

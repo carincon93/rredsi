@@ -19,7 +19,7 @@ class NodeController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Node::class);
+        $this->authorize('viewAny', [Node::class]);
 
         $nodes = Node::orderBy('state')->get();
         return view('Nodes.index', compact('nodes'));
@@ -47,7 +47,7 @@ class NodeController extends Controller
      */
     public function store(NodeRequest $request)
     {
-        $this->authorize('create', Node::class);
+        $this->authorize('create',[Node::class]);
 
         $node        = new Node();
         $node->state = $request->get('state');
@@ -78,7 +78,7 @@ class NodeController extends Controller
      */
     public function show(Node $node)
     {
-        $this->authorize('view', Node::class, $node);
+        $this->authorize('view', [Node::class, $node]);
 
         return view('Nodes.show', compact('node'));
     }

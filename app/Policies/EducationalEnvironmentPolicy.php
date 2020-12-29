@@ -2,12 +2,13 @@
 
 namespace App\Policies;
 
+use App\Models\EducationalEnvironment;
 use App\Models\User;
 use App\Models\EducationalInstitution;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class EducationalEnvironmentPolicy
 {
     use HandlesAuthorization;
 
@@ -17,12 +18,12 @@ class UserPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user,EducationalInstitution $educationalInstitution)
+    public function viewAny(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if(!$user->hasPermissionTo('index_educational_institution_user')){
+        if(!$user->hasPermissionTo('index_educational_environment')){
             return false;
         }
 
@@ -38,15 +39,15 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\EducationalEnvironment  $educationalEnvironment
      * @return mixed
      */
-    public function view(User $user,EducationalInstitution $educationalInstitution)
+    public function view(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if(!$user->hasPermissionTo('show_educational_institution_user')){
+        if(!$user->hasPermissionTo('show_educational_environment')){
             return false;
         }
 
@@ -66,10 +67,10 @@ class UserPolicy
      */
     public function create(User $user,EducationalInstitution $educationalInstitution)
     {
-           if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if(!$user->hasPermissionTo('create_educational_institution_user')){
+        if(!$user->hasPermissionTo('create_educational_environment')){
             return false;
         }
 
@@ -85,15 +86,15 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\EducationalEnvironment  $educationalEnvironment
      * @return mixed
      */
     public function update(User $user, EducationalInstitution $educationalInstitution)
     {
-           if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if(!$user->hasPermissionTo('edit_educational_institution_user')){
+        if(!$user->hasPermissionTo('edit_educational_environment')){
             return false;
         }
 
@@ -109,15 +110,15 @@ class UserPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\EducationalEnvironment  $educationalEnvironment
      * @return mixed
      */
-    public function delete(User $user,EducationalInstitution $educationalInstitution)
+    public function delete(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if(!$user->hasPermissionTo('destroy_educational_institution_user')){
+        if(!$user->hasPermissionTo('destroy_educational_environment')){
             return false;
         }
 
@@ -133,10 +134,10 @@ class UserPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\EducationalEnvironment  $educationalEnvironment
      * @return mixed
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, EducationalEnvironment $educationalEnvironment)
     {
         //
     }
@@ -145,10 +146,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\EducationalEnvironment  $educationalEnvironment
      * @return mixed
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, EducationalEnvironment $educationalEnvironment)
     {
         //
     }

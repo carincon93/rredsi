@@ -20,6 +20,8 @@ class EducationalInstitutionUserController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('viewAny',[ User::class,$educationalInstitution]);
+
         $users = $faculty->members()->orderBy('name')->get();
 
         return view('EducationalInstitutionUsers.index', compact('node', 'educationalInstitution', 'faculty', 'users'));
@@ -32,6 +34,8 @@ class EducationalInstitutionUserController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('create', [ User::class,$educationalInstitution]);
+
         $roles = Role::orderBy('name')->get();
 
         return view('EducationalInstitutionUsers.create', compact('node', 'educationalInstitution', 'faculty', 'roles'));
@@ -45,6 +49,8 @@ class EducationalInstitutionUserController extends Controller
      */
     public function store(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('create', [ User::class,$educationalInstitution]);
+
         $user = new User();
         $user->name               = $request->get('name');
         $user->email              = $request->get('email');
@@ -72,6 +78,8 @@ class EducationalInstitutionUserController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
+        $this->authorize('view', [ User::class,$educationalInstitution]);
+
         return view('EducationalInstitutionUsers.show', compact('node', 'educationalInstitution', 'faculty', 'user'));
     }
 
@@ -83,6 +91,8 @@ class EducationalInstitutionUserController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
+        $this->authorize('update',[ User::class,$educationalInstitution]);
+
         $roles = Role::orderBy('name')->get();
 
         return view('EducationalInstitutionUsers.edit', compact('node', 'educationalInstitution', 'faculty', 'user', 'roles'));
@@ -97,6 +107,8 @@ class EducationalInstitutionUserController extends Controller
      */
     public function update(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
+        $this->authorize('update', [ User::class,$educationalInstitution]);
+
         $user->name               = $request->get('name');
         $user->email              = $request->get('email');
         $user->password           = bcrypt($request->get('password'));
@@ -123,6 +135,8 @@ class EducationalInstitutionUserController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
+        $this->authorize('delete', [ User::class,$educationalInstitution]);
+
         if($user->delete()){
             $message = 'Your delete processed correctly';
         }

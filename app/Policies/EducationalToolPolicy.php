@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Node;
+use App\Models\EducationalTool;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class NodePolicy
+class EducationalToolPolicy
 {
     use HandlesAuthorization;
 
@@ -18,10 +18,10 @@ class NodePolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if($user->hasPermissionTo('index_node')){
+        if($user->hasPermissionTo('index_educational_tool')){
             return true;
         }
         return false;
@@ -31,19 +31,15 @@ class NodePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Node  $node
+     * @param  \App\Models\EducationalTool  $educationalTool
      * @return mixed
      */
-    public function view(User $user,Node $node)
+    public function view(User $user, EducationalTool $educationalTool)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if(!$user->hasPermissionTo('show_node')){
-            return false;
-        }
-        $admin = $node->administrator->id;
-        if($admin == $user->id){
+        if($user->hasPermissionTo('show_educational_tool')){
             return true;
         }
         return false;
@@ -57,11 +53,11 @@ class NodePolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if(!$user->hasPermissionTo('create_node')){
-            return false;
+        if($user->hasPermissionTo('create_educational_tool')){
+            return true;
         }
         return false;
     }
@@ -70,19 +66,15 @@ class NodePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Node  $node
+     * @param  \App\Models\EducationalTool  $educationalTool
      * @return mixed
      */
-    public function update(User $user, Node $node)
+    public function update(User $user, EducationalTool $educationalTool)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if($user->hasPermissionTo('edit_node')){
-            return true;
-        }
-        $admin = $node->administrator->id;
-        if($admin == $user->id){
+        if($user->hasPermissionTo('edit_educational_tool')){
             return true;
         }
         return false;
@@ -92,15 +84,15 @@ class NodePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Node  $node
+     * @param  \App\Models\EducationalTool  $educationalTool
      * @return mixed
      */
-    public function delete(User $user)
+    public function delete(User $user, EducationalTool $educationalTool)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole('Admin')){
             return true;
         }
-        if($user->hasPermissionTo('destroy_node')){
+        if($user->hasPermissionTo('destroy_educational_tool')){
             return true;
         }
         return false;
@@ -110,10 +102,10 @@ class NodePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Node  $node
+     * @param  \App\Models\EducationalTool  $educationalTool
      * @return mixed
      */
-    public function restore(User $user, Node $node)
+    public function restore(User $user, EducationalTool $educationalTool)
     {
         //
     }
@@ -122,10 +114,10 @@ class NodePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Node  $node
+     * @param  \App\Models\EducationalTool  $educationalTool
      * @return mixed
      */
-    public function forceDelete(User $user, Node $node)
+    public function forceDelete(User $user, EducationalTool $educationalTool)
     {
         //
     }

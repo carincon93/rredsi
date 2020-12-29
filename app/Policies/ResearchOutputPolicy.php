@@ -4,6 +4,10 @@ namespace App\Policies;
 
 use App\Models\ResearchOutput;
 use App\Models\User;
+use App\Models\ResearchTeam;
+use App\Models\EducationalInstitution;
+use App\Models\Project;
+
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ResearchOutputPolicy
@@ -16,14 +20,29 @@ class ResearchOutputPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
        if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('index_research_output')){
+        if(!$user->hasPermissionTo('index_research_output')){
+            return false;
+        }
+
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
+
+        $adminTeam = $researchTeam->administrator->id;
+        if($adminTeam == $user->id){
+            return true;
+        }
+
+        if($project->authors()->where('user_id', $user->id)->first()){
+            return true;
+        }
+
         return false;
     }
 
@@ -34,14 +53,29 @@ class ResearchOutputPolicy
      * @param  \App\Models\ResearchOutput  $researchOutput
      * @return mixed
      */
-    public function view(User $user, ResearchOutput $researchOutput)
+    public function view(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
        if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('show_research_output')){
+        if(!$user->hasPermissionTo('show_research_output')){
+            return false;
+        }
+
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
+
+        $adminTeam = $researchTeam->administrator->id;
+        if($adminTeam == $user->id){
+            return true;
+        }
+
+        if($project->authors()->where('user_id', $user->id)->first()){
+            return true;
+        }
+
         return false;
     }
 
@@ -51,12 +85,25 @@ class ResearchOutputPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
        if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('create_research_output')){
+        if(!$user->hasPermissionTo('create_research_output')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
+            return true;
+        }
+
+        $adminTeam = $researchTeam->administrator->id;
+        if($adminTeam == $user->id){
+            return true;
+        }
+
+        if($project->authors()->where('user_id', $user->id)->first()){
             return true;
         }
         return false;
@@ -69,12 +116,25 @@ class ResearchOutputPolicy
      * @param  \App\Models\ResearchOutput  $researchOutput
      * @return mixed
      */
-    public function update(User $user, ResearchOutput $researchOutput)
+    public function update(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
        if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('edit_research_output')){
+        if(!$user->hasPermissionTo('edit_research_output')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
+            return true;
+        }
+
+        $adminTeam = $researchTeam->administrator->id;
+        if($adminTeam == $user->id){
+            return true;
+        }
+
+        if($project->authors()->where('user_id', $user->id)->first()){
             return true;
         }
         return false;
@@ -87,12 +147,25 @@ class ResearchOutputPolicy
      * @param  \App\Models\ResearchOutput  $researchOutput
      * @return mixed
      */
-    public function delete(User $user, ResearchOutput $researchOutput)
+    public function delete(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
        if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('destroy_research_output')){
+        if(!$user->hasPermissionTo('destroy_research_output')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
+            return true;
+        }
+
+        $adminTeam = $researchTeam->administrator->id;
+        if($adminTeam == $user->id){
+            return true;
+        }
+
+        if($project->authors()->where('user_id', $user->id)->first()){
             return true;
         }
         return false;

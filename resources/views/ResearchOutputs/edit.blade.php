@@ -7,6 +7,7 @@
             </span>
         </h2>
         <div>
+            @can('index_research_output')
             <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
@@ -15,6 +16,7 @@
                     {{ __('Back')}}
                 </div>
             </a>
+            @endcan
         </div>
     </x-slot>
 
@@ -36,7 +38,7 @@
                         <x-jet-input id="title" class="block mt-1 w-full" type="text" min="" max="" name="title" value="{{ old('title') ?? $researchOutput->title }}" required />
                         <x-jet-input-error for="title" class="mt-2" />
                     </div>
-                    
+
                     <div class="mt-4">
                         <x-jet-label for="description" value="{{ __('Description') }}" />
                         <textarea id="description" name="description" class="form-textarea border-0 w-full" value="{{ old('description') ?? $researchOutput->description }}" required >{{ old('description') ?? $researchOutput->description }}</textarea>

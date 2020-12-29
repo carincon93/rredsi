@@ -4,6 +4,8 @@ namespace App\Policies;
 
 use App\Models\ResearchLine;
 use App\Models\User;
+use App\Models\EducationalInstitution;
+
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ResearchLinePolicy
@@ -16,14 +18,20 @@ class ResearchLinePolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user,EducationalInstitution $educationalInstitution)
     {
         if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('index_research_line')){
+        if(!$user->hasPermissionTo('index_research_line')){
+            return false;
+        }
+
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
+
         return false;
     }
 
@@ -34,14 +42,19 @@ class ResearchLinePolicy
      * @param  \App\Models\ResearchLine  $researchLine
      * @return mixed
      */
-    public function view(User $user, ResearchLine $researchLine)
+    public function view(User $user,EducationalInstitution $educationalInstitution)
     {
         if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('show_research_line')){
+        if(!$user->hasPermissionTo('show_research_line')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
+
         return false;
     }
 
@@ -51,14 +64,19 @@ class ResearchLinePolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user,EducationalInstitution $educationalInstitution)
     {
          if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('create_research_line')){
+        if(!$user->hasPermissionTo('create_research_line')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
+
         return false;
     }
 
@@ -69,14 +87,19 @@ class ResearchLinePolicy
      * @param  \App\Models\ResearchLine  $researchLine
      * @return mixed
      */
-    public function update(User $user, ResearchLine $researchLine)
+    public function update(User $user,EducationalInstitution $educationalInstitution)
     {
          if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('edit_research_line')){
+        if(!$user->hasPermissionTo('edit_research_line')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
+
         return false;
     }
 
@@ -87,14 +110,19 @@ class ResearchLinePolicy
      * @param  \App\Models\ResearchLine  $researchLine
      * @return mixed
      */
-    public function delete(User $user, ResearchLine $researchLine)
+    public function delete(User $user,EducationalInstitution $educationalInstitution)
     {
          if($user->hasRole('Administrador')){
             return true;
         }
-        if($user->hasPermissionTo('destroy_research_line')){
+        if(!$user->hasPermissionTo('destroy_research_line')){
+            return false;
+        }
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
             return true;
         }
+
         return false;
     }
 

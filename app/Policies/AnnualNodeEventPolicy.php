@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
+use App\Models\AnnualNodeEvent;
 use App\Models\User;
-use App\Models\EducationalInstitution;
-
+use App\Models\Node;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class AnnualNodeEventPolicy
 {
     use HandlesAuthorization;
 
@@ -17,20 +17,14 @@ class UserPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user,EducationalInstitution $educationalInstitution)
+    public function viewAny(User $user)
     {
         if($user->hasRole('Administrador')){
             return true;
         }
-        if(!$user->hasPermissionTo('index_educational_institution_user')){
-            return false;
-        }
-
-        $admin = $educationalInstitution->administrator->id;
-        if($admin == $user->id){
+        if($user->hasPermissionTo('index_annual_node_events')){
             return true;
         }
-
         return false;
     }
 
@@ -38,23 +32,21 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AnnualNodeEvent  $annualNodeEvent
      * @return mixed
      */
-    public function view(User $user,EducationalInstitution $educationalInstitution)
+    public function view(User $user, Node $node)
     {
         if($user->hasRole('Administrador')){
             return true;
         }
-        if(!$user->hasPermissionTo('show_educational_institution_user')){
+        if(!$user->hasPermissionTo('index_annual_node_events')){
             return false;
         }
-
-        $admin = $educationalInstitution->administrator->id;
+        $admin = $node->administrator->id;
         if($admin == $user->id){
             return true;
         }
-
         return false;
     }
 
@@ -64,44 +56,37 @@ class UserPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user,EducationalInstitution $educationalInstitution)
+    public function create(User $user)
     {
-           if($user->hasRole('Administrador')){
+        if($user->hasRole('Administrador')){
             return true;
         }
-        if(!$user->hasPermissionTo('create_educational_institution_user')){
+        if(!$user->hasPermissionTo('create_annual_node_events')){
             return false;
         }
 
-        $admin = $educationalInstitution->administrator->id;
-        if($admin == $user->id){
-            return true;
-        }
-
-        return false;
+         false;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AnnualNodeEvent  $annualNodeEvent
      * @return mixed
      */
-    public function update(User $user, EducationalInstitution $educationalInstitution)
+    public function update(User $user, Node $node)
     {
-           if($user->hasRole('Administrador')){
+        if($user->hasRole('Administrador')){
             return true;
         }
-        if(!$user->hasPermissionTo('edit_educational_institution_user')){
+        if(!$user->hasPermissionTo('edit_annual_node_events')){
             return false;
         }
-
-        $admin = $educationalInstitution->administrator->id;
+        $admin = $node->administrator->id;
         if($admin == $user->id){
             return true;
         }
-
         return false;
     }
 
@@ -109,23 +94,17 @@ class UserPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AnnualNodeEvent  $annualNodeEvent
      * @return mixed
      */
-    public function delete(User $user,EducationalInstitution $educationalInstitution)
+    public function delete(User $user, AnnualNodeEvent $annualNodeEvent)
     {
         if($user->hasRole('Administrador')){
             return true;
         }
-        if(!$user->hasPermissionTo('destroy_educational_institution_user')){
+        if(!$user->hasPermissionTo('destroy_annual_node_events')){
             return false;
         }
-
-        $admin = $educationalInstitution->administrator->id;
-        if($admin == $user->id){
-            return true;
-        }
-
         return false;
     }
 
@@ -133,10 +112,10 @@ class UserPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AnnualNodeEvent  $annualNodeEvent
      * @return mixed
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, AnnualNodeEvent $annualNodeEvent)
     {
         //
     }
@@ -145,10 +124,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AnnualNodeEvent  $annualNodeEvent
      * @return mixed
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, AnnualNodeEvent $annualNodeEvent)
     {
         //
     }

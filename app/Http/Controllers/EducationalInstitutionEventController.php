@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KnowledgeArea;
+use App\Models\EducationalInstitutionEvent;
 
 use App\Models\Node;
 use App\Models\EducationalInstitution;
@@ -20,6 +21,8 @@ class EducationalInstitutionEventController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('viewAny', EducationalInstitutionEvent::class, $node, $educationalInstitution);
+
         $events = $educationalInstitution->educationalInstitutionEvents()->where('educational_institution_id', $educationalInstitution->id)->with('event')->get();
 
         return view('EducationalInstitutionEvents.index', compact('node', 'educationalInstitution', 'events'));
@@ -32,6 +35,8 @@ class EducationalInstitutionEventController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('create', EducationalInstitutionEvent::class, $node, $educationalInstitution);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('EducationalInstitutionEvents.create', compact('node', 'educationalInstitution', 'knowledgeAreas'));
@@ -45,6 +50,8 @@ class EducationalInstitutionEventController extends Controller
      */
     public function store(EventRequest $request, Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('create', EducationalInstitutionEvent::class, $node, $educationalInstitution);
+
         $event = new Event();
         $event->name            = $request->get('name');
         $event->location        = $request->get('location');
@@ -76,6 +83,8 @@ class EducationalInstitutionEventController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, Event $event)
     {
+        $this->authorize('view', EducationalInstitutionEvent::class, $node, $educationalInstitution,$event);
+
         return view('EducationalInstitutionEvents.show', compact('node', 'educationalInstitution', 'event'));
     }
 
@@ -87,6 +96,8 @@ class EducationalInstitutionEventController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, Event $event)
     {
+        $this->authorize('update', EducationalInstitutionEvent::class, $node, $educationalInstitution,$event);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('EducationalInstitutionEvents.edit', compact('node', 'educationalInstitution', 'event', 'knowledgeAreas'));
@@ -101,6 +112,8 @@ class EducationalInstitutionEventController extends Controller
      */
     public function update(EventRequest $request, Node $node, EducationalInstitution $educationalInstitution, Event $event)
     {
+        $this->authorize('update', EducationalInstitutionEvent::class, $node, $educationalInstitution,$event);
+
         $event->name            = $request->get('name');
         $event->location        = $request->get('location');
         $event->description     = $request->get('description');
@@ -129,6 +142,8 @@ class EducationalInstitutionEventController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, Event $event)
     {
+        $this->authorize('delete', EducationalInstitutionEvent::class, $node, $educationalInstitution,$event);
+
         if($event->delete()){
             $message = 'Your delete processed correctly';
         }

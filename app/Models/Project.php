@@ -26,9 +26,9 @@ class Project extends Model
         'overall_objective',
         'is_privated',
         'is_published',
-        'roles_requirements_description',        
+        'roles_requirements_description',
         'roles_requirements',
-        'tools_requirements_description',        
+        'tools_requirements_description',
         'tools_requirements',
         'main_image',
         'project_type_id',
@@ -62,7 +62,7 @@ class Project extends Model
     public function academicPrograms() {
         return $this->belongsToMany('App\Models\AcademicProgram', 'project_academic_program', 'project_id', 'academic_program_id');
     }
-    
+
     public function authors() {
         return $this->belongsToMany('App\Models\User', 'authors', 'project_id', 'user_id');
     }
@@ -94,15 +94,15 @@ class Project extends Model
 
     public function scopeAllKeywords($query, $node) {
         $allKeyWords = collect([]);
-        
+
         foreach ($node->educationalInstitutions as $educationalInstitution) {
             foreach ($educationalInstitution->educationalInstitutionFaculties as $educationalInstitutionFaculty) {
                 foreach ($educationalInstitutionFaculty->researchGroups as $researchGroup) {
                     foreach ($researchGroup->researchTeams as $researchTeam) {
                         foreach ($researchTeam->projects as $project) {
-                            foreach (json_decode($project->keywords) as $keywords){ 
+                            foreach (json_decode($project->keywords) as $keywords){
                                 foreach (explode(',', $keywords) as $keyword) {
-                                    $allKeyWords->push(trim($keyword)); 
+                                    $allKeyWords->push(trim($keyword));
                                 }
                             }
                         }

@@ -73,7 +73,7 @@ class User extends Authenticatable
     }
 
     public function isEducationalInstitutionAdmin() {
-        return $this->belongsTo('App\Models\EducationalInstitution');
+        return $this->hasOne('App\Models\EducationalInstitution', 'administrator_id');
     }
 
     public function isResearchTeamAdmin() {

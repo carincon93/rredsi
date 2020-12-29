@@ -23,6 +23,8 @@ class EducationalToolController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
+        $this->authorize('viewAny', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment);
+
         $educationalTools = $educationalEnvironment->educationalTools()->orderBy('name')->get();
 
         return view('EducationalTools.index', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'educationalTools'));
@@ -35,6 +37,8 @@ class EducationalToolController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
+        $this->authorize('create', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('EducationalTools.create', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'knowledgeAreas'));
@@ -48,6 +52,8 @@ class EducationalToolController extends Controller
      */
     public function store(EducationalToolRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
+        $this->authorize('create', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment);
+
         $educationalTool = new EducationalTool();
         $educationalTool->name          = $request->get('name');
         $educationalTool->description   = $request->get('description');
@@ -72,6 +78,8 @@ class EducationalToolController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
+        $this->authorize('view', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment,$educationalTool);
+
         return view('EducationalTools.show', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'educationalTool'));
     }
 
@@ -83,6 +91,8 @@ class EducationalToolController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
+        $this->authorize('update', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment,$educationalTool);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('EducationalTools.edit', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'educationalTool', 'knowledgeAreas'));
@@ -97,6 +107,8 @@ class EducationalToolController extends Controller
      */
     public function update(EducationalToolRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
+        $this->authorize('update', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment,$educationalTool);
+
         $educationalTool->name          = $request->get('name');
         $educationalTool->description   = $request->get('description');
         $educationalTool->qty           = $request->get('qty');
@@ -120,6 +132,8 @@ class EducationalToolController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
+        $this->authorize('delete', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment,$educationalTool);
+
         if($educationalTool->delete()){
             $message = 'Your delete processed correctly';
         }

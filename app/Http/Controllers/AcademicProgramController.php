@@ -19,6 +19,8 @@ class AcademicProgramController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('viewAny',[AcademicProgram::class,$educationalInstitution]);
+
         $academicPrograms = $faculty->academicPrograms()->orderBy('name')->get();
 
         return view('AcademicPrograms.index', compact('node', 'educationalInstitution', 'faculty', 'academicPrograms'));
@@ -31,6 +33,8 @@ class AcademicProgramController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('create', [AcademicProgram::class,$educationalInstitution]);
+
         return view('AcademicPrograms.create', compact('node', 'educationalInstitution', 'faculty'));
     }
 
@@ -42,6 +46,8 @@ class AcademicProgramController extends Controller
      */
     public function store(AcademicProgramRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('create',[AcademicProgram::class,$educationalInstitution]);
+
         $academicProgram = new AcademicProgram();
         $academicProgram->name              = $request->get('name');
         $academicProgram->code              = $request->get('code');
@@ -67,6 +73,8 @@ class AcademicProgramController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, AcademicProgram $academicProgram)
     {
+        $this->authorize('view',[AcademicProgram::class,$educationalInstitution]);
+
         return view('AcademicPrograms.show', compact('node', 'educationalInstitution', 'faculty', 'academicProgram'));
     }
 
@@ -78,6 +86,8 @@ class AcademicProgramController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, AcademicProgram $academicProgram)
     {
+        $this->authorize('update', [AcademicProgram::class,$educationalInstitution]);
+
         return view('AcademicPrograms.edit', compact('node', 'educationalInstitution', 'faculty', 'academicProgram'));
     }
 
@@ -90,6 +100,8 @@ class AcademicProgramController extends Controller
      */
     public function update(AcademicProgramRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, AcademicProgram $academicProgram)
     {
+        $this->authorize('update',[AcademicProgram::class,$educationalInstitution]);
+
         $academicProgram->name              = $request->get('name');
         $academicProgram->code              = $request->get('code');
         $academicProgram->academic_level    = $request->get('academic_level');
@@ -114,6 +126,8 @@ class AcademicProgramController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, AcademicProgram $academicProgram)
     {
+        $this->authorize('delete', [AcademicProgram::class,$educationalInstitution]);
+
         if($academicProgram->delete()){
             $message = 'Your delete processed correctly';
         }

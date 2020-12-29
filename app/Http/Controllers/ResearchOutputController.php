@@ -24,7 +24,7 @@ class ResearchOutputController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        $this->authorize('viewAny', ResearchOutput::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam,$project);
+        $this->authorize('viewAny', [ResearchOutput::class ,$educationalInstitution,$researchTeam,$project]);
 
         $researchOutputs = $project->researchOutputs()->orderBy('title')->get();
 
@@ -38,7 +38,7 @@ class ResearchOutputController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        $this->authorize('create', ResearchOutput::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam,$project);
+        $this->authorize('create', [ResearchOutput::class ,$educationalInstitution,$researchTeam,$project]);
 
         $mincienciasTypologies = json_decode(Storage::get('public/json/minciencias_typologies.json'), true);
 
@@ -53,7 +53,7 @@ class ResearchOutputController extends Controller
      */
     public function store(ResearchOutputRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
     {
-        $this->authorize('create', ResearchOutput::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam,$project);
+        $this->authorize('create', [ResearchOutput::class ,$educationalInstitution,$researchTeam,$project]);
 
         $researchOutput = new ResearchOutput();
         $researchOutput->title          = $request->get('title');
@@ -85,7 +85,7 @@ class ResearchOutputController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project, ResearchOutput $researchOutput)
     {
-        $this->authorize('view', ResearchOutput::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam,$project,$researchOutput);
+        $this->authorize('view', [ResearchOutput::class ,$educationalInstitution,$researchTeam,$project]);
 
         return view('ResearchOutputs.show', compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'project', 'researchOutput'));
     }
@@ -98,7 +98,7 @@ class ResearchOutputController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project, ResearchOutput $researchOutput)
     {
-        $this->authorize('update', ResearchOutput::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam,$project,$researchOutput);
+        $this->authorize('update', [ResearchOutput::class ,$educationalInstitution,$researchTeam,$project]);
 
         $mincienciasTypologies = json_decode(Storage::get('public/json/minciencias_typologies.json'), true);
 
@@ -114,7 +114,7 @@ class ResearchOutputController extends Controller
      */
     public function update(ResearchOutputRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project, ResearchOutput $researchOutput)
     {
-        $this->authorize('update', ResearchOutput::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam,$project,$researchOutput);
+        $this->authorize('update', [ResearchOutput::class ,$educationalInstitution,$researchTeam,$project]);
 
         $researchOutput->title          = $request->get('title');
         $researchOutput->typology       = $request->get('typology');
@@ -143,7 +143,7 @@ class ResearchOutputController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project, ResearchOutput $researchOutput)
     {
-        $this->authorize('delete', ResearchOutput::class , $node, $educationalInstitution , $faculty, $researchGroup,$researchTeam,$project,$researchOutput);
+        $this->authorize('delete', [ResearchOutput::class ,$educationalInstitution,$researchTeam,$project]);
 
         if($researchOutput->delete()){
             $message = 'Your delete processed correctly';

@@ -15,6 +15,8 @@ class KnowledgeAreaController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', KnowledgeArea::class);
+
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
         return view('KnowledgeAreas.index', compact('knowledgeAreas'));
@@ -27,6 +29,8 @@ class KnowledgeAreaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', KnowledgeArea::class);
+
         return view('KnowledgeAreas.create');
     }
 
@@ -38,6 +42,8 @@ class KnowledgeAreaController extends Controller
      */
     public function store(KnowledgeAreaRequest $request)
     {
+        $this->authorize('create', KnowledgeArea::class);
+
         $knowledgeArea          = new KnowledgeArea();
         $knowledgeArea->name    = $request->get('name');
 
@@ -56,6 +62,8 @@ class KnowledgeAreaController extends Controller
      */
     public function show(KnowledgeArea $knowledgeArea)
     {
+        $this->authorize('view', KnowledgeArea::class,$knowledgeArea);
+
         return view('KnowledgeAreas.show', compact('knowledgeArea'));
     }
 
@@ -67,6 +75,8 @@ class KnowledgeAreaController extends Controller
      */
     public function edit(KnowledgeArea $knowledgeArea)
     {
+        $this->authorize('update', KnowledgeArea::class,$knowledgeArea);
+
         return view('KnowledgeAreas.edit', compact('knowledgeArea'));
     }
 
@@ -79,6 +89,8 @@ class KnowledgeAreaController extends Controller
      */
     public function update(KnowledgeAreaRequest $request, KnowledgeArea $knowledgeArea)
     {
+        $this->authorize('update', KnowledgeArea::class,$knowledgeArea);
+
         $knowledgeArea->name = $request->get('name');
 
         if($knowledgeArea->save()){
@@ -96,6 +108,8 @@ class KnowledgeAreaController extends Controller
      */
     public function destroy(KnowledgeArea $knowledgeArea)
     {
+        $this->authorize('delete', KnowledgeArea::class,$knowledgeArea);
+
         if($knowledgeArea->delete()){
             $message = 'Your delete processed correctly';
         }

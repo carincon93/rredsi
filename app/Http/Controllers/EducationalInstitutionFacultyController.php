@@ -17,6 +17,8 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('viewAny',[EducationalInstitutionFaculty::class, $educationalInstitution]);
+
         $educationalInstitutionFaculties = $educationalInstitution->educationalInstitutionFaculties()->orderBy('name')->get();
 
         return view('EducationalInstitutionFaculties.index', compact('node', 'educationalInstitution', 'educationalInstitutionFaculties'));
@@ -29,6 +31,8 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('create', EducationalInstitutionFaculty::class, $node, $educationalInstitution);
+
         return view('EducationalInstitutionFaculties.create', compact('node', 'educationalInstitution'));
     }
 
@@ -40,6 +44,8 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function store(Request $request, Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('create', [EducationalInstitutionFaculty::class, $educationalInstitution]);
+
         $faculty = new EducationalInstitutionFaculty();
         $faculty->name          = $request->get('name');
         $faculty->email         = $request->get('email');
@@ -62,6 +68,8 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('view', [EducationalInstitutionFaculty::class, $educationalInstitution]);
+
         return view('EducationalInstitutionFaculties.show', compact('node', 'educationalInstitution', 'faculty'));
     }
 
@@ -73,6 +81,8 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('update',[EducationalInstitutionFaculty::class, $educationalInstitution]);
+
         return view('EducationalInstitutionFaculties.edit', compact('node', 'educationalInstitution', 'faculty'));
     }
 
@@ -85,6 +95,8 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function update(Request $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('update', [EducationalInstitutionFaculty::class, $educationalInstitution]);
+
         $faculty->name          = $request->get('name');
         $faculty->email         = $request->get('email');
         $faculty->phone_number  = $request->get('phone_number');
@@ -106,6 +118,8 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+        $this->authorize('delete',[EducationalInstitutionFaculty::class, $educationalInstitution]);
+
         if ($faculty->delete()) {
             $message = 'Your delete processed correctly';
         }

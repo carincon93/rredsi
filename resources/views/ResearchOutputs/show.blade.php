@@ -7,7 +7,7 @@
             </span>
         </h2>
         <div>
-            @can('edit_research_ouput')
+            @can('edit_research_output')
             <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.edit', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project, $researchOutput]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Edit research output') }}
@@ -16,7 +16,7 @@
             @endcan
         </div>
     </x-slot>
-    
+
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
         <div class="md:grid md:grid-cols-2 md:gap-4">
             <div>
@@ -33,16 +33,16 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="hidden sm:block">
             <div class="py-8">
                 <div class="border-t border-gray-200"></div>
             </div>
         </div>
-        
+
         <div class="md:grid md:grid-cols-2 md:gap-4">
             <div>
-                
+
             </div>
             <div>
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -55,16 +55,16 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="hidden sm:block">
             <div class="py-8">
                 <div class="border-t border-gray-200"></div>
             </div>
         </div>
-        
+
         <div class="md:grid md:grid-cols-2 md:gap-4">
             <div>
-                
+
             </div>
             <div>
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -77,16 +77,16 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="hidden sm:block">
             <div class="py-8">
                 <div class="border-t border-gray-200"></div>
             </div>
         </div>
-        
+
         <div class="md:grid md:grid-cols-2 md:gap-4">
             <div>
-                
+
             </div>
             <div>
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -99,16 +99,16 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="hidden sm:block">
             <div class="py-8">
                 <div class="border-t border-gray-200"></div>
             </div>
         </div>
-        
+
         <div class="md:grid md:grid-cols-2 md:gap-4">
             <div>
-                
+
             </div>
             <div>
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">

@@ -76,7 +76,7 @@
         $userAdmin                     = Auth::user()->educationalInstitutionFaculties->first();
         $insitution                    = $userAdmin->educationalInstitution;
 
-        echo $insitution->administrator_id == Auth::user()->id ? 'si es' : 'No es' ;
+        // echo $insitution->administrator_id == Auth::user()->id ? 'si es' : 'No es' ;
 
         $researchTeam                     = Auth::user()->researchTeams->first();
         if(!is_null(Auth::user()->researchTeams->first()))
@@ -112,7 +112,7 @@
         <div class="mb-4 mt-3">
             <p class="capitalize text-center">Nodo <span class="capitalize">{{ $node->state }}</span></p>
         </div>
-            @if( Auth::user()->hasRole("Administrador"))
+            @if( Auth::user()->hasRole("Administrador") || Auth::user()->hasRole("Coordinador") )
             <p class="pl-4 text-sm font-semibold mb-1">{{ __('Manage node') }}</p>
             <a href="{{ route('nodes.dashboard', [$node]) }}" class="w-full flex items-center text-sm text-blue-900 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer">
                 <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
@@ -140,7 +140,7 @@
         <div class="mb-8 mt-4">
             <x-drop-down-educational-institution-faculties />
         </div>
-        @if( Auth::user()->hasRole('Administrador')  )
+        @if( Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Delegadoinstitución educativa')   )
 
             @if (request()->route('educational_institution'))
                 @php

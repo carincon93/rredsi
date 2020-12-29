@@ -16,7 +16,7 @@
             @endcan
         </div>
     </x-slot>
-    
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="flex flex-wrap" id="tabs-id">
@@ -65,17 +65,17 @@
                     </ul>
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
-                            
+
                             <div class="block" id="tab-profile">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                
+
                                             </div>
                                             <div>
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
-                                                    <h3 class="text-lg font-medium text-gray-900">{{ __('Start date') }}</h3>
+                                                    <h3 class="text-lg font-medium text-gray-900">{{ __('Project type') }}</h3>
                                                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                                                         <p>
                                                             {{ $project->projectType->type }}
@@ -84,13 +84,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
                                                 <h3 class="text-lg font-medium text-gray-900">Información del proyecto</h3>
@@ -106,16 +106,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -128,16 +128,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -150,16 +150,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -172,16 +172,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -194,16 +194,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -216,16 +216,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -238,16 +238,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -264,16 +264,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -302,7 +302,7 @@
                                         @foreach ($project->researchOutputs as $researchOutput)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -315,7 +315,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
@@ -325,18 +325,18 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="hidden" id="tab-options">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                         <div class="md:col-span-1">
                                             <h3 class="text-lg font-medium text-gray-900">Información de <br> las disciplinas de sub-área de conocimiento</h3>
                                         </div>
-                                        
+
                                         @foreach ($project->knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -349,7 +349,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
@@ -359,7 +359,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="hidden" id="tab-projects">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -369,7 +369,7 @@
                                         @foreach ($project->events as $event)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -382,7 +382,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
@@ -392,18 +392,18 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="hidden" id="tab-researchLines">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                         <div class="md:col-span-1">
                                             <h3 class="text-lg font-medium text-gray-900">Información de las líneas de investigación</h3>
                                         </div>
-                                        
+
                                         @foreach ($project->researchLines as $researchLine)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -416,7 +416,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
@@ -425,20 +425,20 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div class="hidden" id="tab-researchTeams">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                         <div class="md:col-span-1">
                                             <h3 class="text-lg font-medium text-gray-900">Información de los semilleros de investigación</h3>
                                         </div>
-                                        
+
                                         @foreach ($project->researchTeams as $researchTeam)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -451,7 +451,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
@@ -461,18 +461,18 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="hidden" id="tab-academicPrograms">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                         <div class="md:col-span-1">
                                             <h3 class="text-lg font-medium text-gray-900">Información de los programas académicos</h3>
                                         </div>
-                                        
+
                                         @foreach ($project->academicPrograms as $academicProgram)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -485,7 +485,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
@@ -495,18 +495,18 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="hidden" id="tab-authors">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                         <div class="md:col-span-1">
                                             <h3 class="text-lg font-medium text-gray-900">Información de los autores</h3>
                                         </div>
-                                        
+
                                         @foreach ($project->authors as $author)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
-                                                
+
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -519,7 +519,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
