@@ -58,7 +58,7 @@
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 @endcan
-                                                @can('edit_reserach_team')
+                                                @can('edit_research_team')
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.edit', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
