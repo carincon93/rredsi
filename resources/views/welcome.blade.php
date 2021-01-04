@@ -18,7 +18,7 @@
             </a>
         </x-slot>
     </x-guest-header>
-    
+
     <div class="mt-2/12 overflow-hidden relative" style="background: url(/storage/images/net.png)">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-14 pt-4">
             <div class="mt-8 dark:bg-gray-800 overflow-hidden sm:rounded-lg mt-4 h-64"  style="background: url(/storage/images/dots.png); background-size: cover; background-position: right; background-repeat: no-repeat;">
@@ -41,11 +41,11 @@
             </div>
         </div>
     </div>
-    
+
     <div class="py-12 bg-cool-gray-100">
         <p class="text-center mt-8 mb-6">o</p>
         <p class="text-center mb-8">realice una búsqueda de proyectos de su interés y trabaje de forma colaborativa con otros semilleros de investigación</p>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-4">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                     <form class="flex-1 ml-1/12 mt-2 shadow" method="GET" action="{{ route('nodes.explorer.searchProjects', [$node]) }}">
@@ -201,7 +201,7 @@
             <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[1]->id]) }}" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
         </div>
     </div>
-    
+
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="mt-8 dark:bg-gray-800 overflow-hidden">
             <figure class="mt-24 mb-24">
