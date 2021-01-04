@@ -17,6 +17,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> --}}
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     </head>
 
@@ -28,11 +29,11 @@
 
             <!-- Page Content -->
             {{-- {{ request()->route('node') ? ' lg:pl-64' : '' }} --}}
-            <main class="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen">
+            <main class="w-full bg-gray-100 pl-0 md:pl-64 lg:pl-64 min-h-screen">
                 @livewire('navigation-dropdown')
 
                  <!-- Page Heading -->
-                <header class="bg-gradient-to-l from-blue-900 to-blue-900 shadow">
+                <header class="bg-gradient-to-l pt-5 md:pt-0 from-blue-900 to-blue-900 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                         {{ $header }}
                     </div>
