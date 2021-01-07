@@ -62,7 +62,7 @@ class KnowledgeAreaController extends Controller
      */
     public function show(KnowledgeArea $knowledgeArea)
     {
-        $this->authorize('view', KnowledgeArea::class,$knowledgeArea);
+        $this->authorize('view', [KnowledgeArea::class,$knowledgeArea]);
 
         return view('KnowledgeAreas.show', compact('knowledgeArea'));
     }
@@ -75,7 +75,7 @@ class KnowledgeAreaController extends Controller
      */
     public function edit(KnowledgeArea $knowledgeArea)
     {
-        $this->authorize('update', KnowledgeArea::class,$knowledgeArea);
+        $this->authorize('update', [KnowledgeArea::class,$knowledgeArea]);
 
         return view('KnowledgeAreas.edit', compact('knowledgeArea'));
     }

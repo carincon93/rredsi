@@ -18,7 +18,7 @@ class LegalInformationPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(['Administrador','Coordinador'])){
             return true;
         }
         // if($user->hasPermissionTo('Administrador')){

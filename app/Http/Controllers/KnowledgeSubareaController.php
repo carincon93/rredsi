@@ -68,7 +68,7 @@ class KnowledgeSubareaController extends Controller
      */
     public function show(KnowledgeSubarea $knowledgeSubarea)
     {
-        $this->authorize('view', KnowledgeSubarea::class , $knowledgeSubarea);
+        $this->authorize('view', [KnowledgeSubarea::class , $knowledgeSubarea]);
 
         return view('KnowledgeSubareas.show', compact('knowledgeSubarea'));
     }
@@ -81,7 +81,7 @@ class KnowledgeSubareaController extends Controller
      */
     public function edit(KnowledgeSubarea $knowledgeSubarea)
     {
-        $this->authorize('update', KnowledgeSubarea::class , $knowledgeSubarea);
+        $this->authorize('update', [KnowledgeSubarea::class , $knowledgeSubarea]);
 
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 

@@ -44,7 +44,7 @@
                         <select id="knowledge_area_id" name="knowledge_area_id" class="form-select w-full" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
-                                <option value="{{ $knowledgeArea->id }}" {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" || $knowledgeSubarea->knowledgeArea->id == $knowledgeArea->id ? "selected" : ""  }}>{{ $knowledgeArea->name }}</option>
+                                {{-- <option value="{{ $knowledgeArea->id }}" {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" || $knowledgeSubarea->knowledgeArea->id == $knowledgeArea->id ? "selected" : ""  }}>{{ $knowledgeArea->name }}</option> --}}
                             @empty
                                 <option value="">{{ __('No data recorded') }}</option>
                             @endforelse

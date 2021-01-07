@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot>
+    <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Educational Institutions') }}
             <span class="sm:block text-purple-300">

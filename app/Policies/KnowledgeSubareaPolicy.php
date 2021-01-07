@@ -69,10 +69,10 @@ class KnowledgeSubareaPolicy
      * @param  \App\Models\KnowledgeSubarea  $knowledgeSubarea
      * @return mixed
      */
-    public function update(User $user, KnowledgeSubarea $knowledgeSubarea)
+    public function update(User $user)
     {
         if($user->hasRole('Admin')){
-            return true;
+            return true; 
         }
         if($user->hasPermissionTo('edit_knowledge_subarea')){
             return true;

@@ -67,7 +67,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function show(knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
-        $this->authorize('view', KnowledgeSubareaDiscipline::class,$knowledgeSubareaDiscipline);
+        $this->authorize('view', [KnowledgeSubareaDiscipline::class,$knowledgeSubareaDiscipline]);
 
         return view('KnowledgeSubareaDisciplines.show', compact('knowledgeSubareaDiscipline'));
     }
@@ -80,7 +80,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function edit(knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
-        $this->authorize('update', KnowledgeSubareaDiscipline::class,$knowledgeSubareaDiscipline);
+        $this->authorize('update', [KnowledgeSubareaDiscipline::class,$knowledgeSubareaDiscipline]);
 
         $knowledgeSubareas = KnowledgeSubarea::orderBy('name')->get();
 
