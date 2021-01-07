@@ -15,7 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Role::class);
+        $this->authorize('viewAny', [Role::class]);
 
         $roles = Role::orderBy('name')->get();
 
@@ -29,7 +29,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Role::class);
+        $this->authorize('create', [Role::class]);
 
         $permissions = Permission::orderBy('model')->get();
 
@@ -44,7 +44,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Role::class);
+        $this->authorize('create', [Role::class]);
 
         $role = new Role();
         $role->name        = $request->name;
@@ -66,7 +66,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        $this->authorize('view', Role::class, $role);
+        $this->authorize('view', [Role::class]);
 
         return view('Roles.show', compact('role'));
     }
@@ -79,7 +79,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        $this->authorize('update', Role::class, $role);
+        $this->authorize('update', [Role::class]);
 
         $permissions = Permission::orderBy('model')->get();
 
@@ -95,7 +95,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $this->authorize('update', Role::class, $role);
+        $this->authorize('update', [Role::class]);
 
         $role->name         = $request->name;
         $role->description  = $request->description;
@@ -116,7 +116,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $this->authorize('delete', Role::class, $role);
+        $this->authorize('delete',[Role::class]);
 
         if($role->delete()) {
             $message = 'Your delete processed correctly';

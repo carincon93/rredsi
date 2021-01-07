@@ -31,7 +31,7 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution)
     {
-        $this->authorize('create', EducationalInstitutionFaculty::class, $node, $educationalInstitution);
+        $this->authorize('create',[ EducationalInstitutionFaculty::class, $educationalInstitution]);
 
         return view('EducationalInstitutionFaculties.create', compact('node', 'educationalInstitution'));
     }

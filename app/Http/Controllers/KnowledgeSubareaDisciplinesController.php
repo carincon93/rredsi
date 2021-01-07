@@ -17,7 +17,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', KnowledgeSubareaDiscipline::class);
+        $this->authorize('viewAny', [KnowledgeSubareaDiscipline::class]);
 
         $knowledgeSubareaDisciplines = KnowledgeSubareaDiscipline::orderBy('name')->get();
 
@@ -31,7 +31,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', KnowledgeSubareaDiscipline::class);
+        $this->authorize('create', [KnowledgeSubareaDiscipline::class]);
 
         $knowledgeSubareas = KnowledgeSubarea::orderBy('name')->get();
 
@@ -46,7 +46,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function store(KnowledgeSubareaDiciplineRequest $request)
     {
-        $this->authorize('create', KnowledgeSubareaDiscipline::class);
+        $this->authorize('create', [KnowledgeSubareaDiscipline::class]);
 
         $knowledgeSubareaDiscipline          = new KnowledgeSubareaDiscipline();
         $knowledgeSubareaDiscipline->name    = $request->get('name');
@@ -67,7 +67,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function show(knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
-        $this->authorize('view', KnowledgeSubareaDiscipline::class,$knowledgeSubareaDiscipline);
+        $this->authorize('view', [KnowledgeSubareaDiscipline::class]);
 
         return view('KnowledgeSubareaDisciplines.show', compact('knowledgeSubareaDiscipline'));
     }
@@ -80,7 +80,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function edit(knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
-        $this->authorize('update', KnowledgeSubareaDiscipline::class,$knowledgeSubareaDiscipline);
+        $this->authorize('update', [KnowledgeSubareaDiscipline::class]);
 
         $knowledgeSubareas = KnowledgeSubarea::orderBy('name')->get();
 
@@ -96,7 +96,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function update(KnowledgeSubareaDiciplineRequest $request, KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
-        $this->authorize('update', KnowledgeSubareaDiscipline::class,$knowledgeSubareaDiscipline);
+        $this->authorize('update', [KnowledgeSubareaDiscipline::class]);
 
         $knowledgeSubareaDiscipline->name = $request->get('name');
         $knowledgeSubareaDiscipline->knowledgeSubarea()->associate($request->get('knowledge_subarea_id'));
@@ -116,7 +116,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      */
     public function destroy(KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
-        $this->authorize('delete', KnowledgeSubareaDiscipline::class,$knowledgeSubareaDiscipline);
+        $this->authorize('delete', [KnowledgeSubareaDiscipline::class]);
 
         if($knowledgeSubareaDiscipline->delete()){
             $message = 'Your delete processed correctly';

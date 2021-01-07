@@ -20,7 +20,7 @@ class AcademicProgramPolicy
      */
     public function viewAny(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('index_academic_program')){
@@ -44,7 +44,7 @@ class AcademicProgramPolicy
      */
     public function view(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('show_academic_program')){
@@ -67,7 +67,7 @@ class AcademicProgramPolicy
      */
     public function create(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('create_academic_program')){
@@ -91,7 +91,7 @@ class AcademicProgramPolicy
      */
     public function update(User $user,EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('edit_academic_program')){
@@ -115,7 +115,7 @@ class AcademicProgramPolicy
      */
     public function delete(User $user,EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('destroy_academic_program')){

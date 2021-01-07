@@ -1,27 +1,28 @@
 @props(['form'=> "no"])
 
-<style>
-    .sed {
-        -webkit-overflow-scrolling: touch;
-    }
-</style>
-
 <div class="mt-1">
-    <select class="text-base md:text-xs mr-10 bg-transparent  focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block w-full" id="node_id" name="node_id" required onchange="SwitchFaculties.onChange(event)">
+    <select class="text-xs md:text-xs mr-10 bg-transparent  focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block w-full" id="node_id" name="node_id" required onchange="SwitchFaculties.onChange(event)">
     </select>
 </div>
 
 <input class="hidden" id="is_form" value="{{$form}}" >
 
-<div class="mt-1">
+{{-- pantalla mobil --}}
+{{-- <div class="mt-1 block md:hidden"> --}}
     {{-- <p class="mt-4">{{ __('Educational institutions')}} </p> --}}
-    <select disabled class="sed text-base md:text-xs mr-10 bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block w-full" id="educational_institution_id" name="educational_institution_id" required onfocus="this.size=6" onblur="this.size=1" onchange="SwitchFaculties.onChangeInstitution(event); this.size=1; this.blur();">
-        <option value="">Seleccione un institucion</option>
+    {{-- <select disabled class="text-xs md:text-xs mr-10 bg-transparent focus:outline-none focus:border-indigo-500 rounded-md border-0 p-3.5 shadow-sm block w-full" id="educational_institution_id" name="educational_institution_id" required onfocus='this.size=6' onblur='this.size=1' onchange="SwitchFaculties.onChangeInstitution(event); this.size=1; this.blur()">
+        <option value="">Mobil</option>
+    </select>
+</div> --}}
+
+<div class="mt-1">
+    <select disabled class="text-xs md:text-xs mr-10 bg-transparent focus:outline-none focus:border-indigo-500 rounded-md border-0 p-3.5 shadow-sm block w-full" id="educational_institution_id" name="educational_institution_id" required onchange="SwitchFaculties.onChangeInstitution(event)">
+        <option value="">Seleccione una institución</option>
     </select>
 </div>
 
 <div class="mt-1">
-    <select class="text-base md:text-xs mr-10 bg-transparent  focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block w-full" disabled id="educational_institutions_faculties_id" name="educational_institutions_faculties_id" required onchange="SwitchFaculties.redirect(event)">
+    <select class="text-xs md:text-xs mr-10 bg-transparent  focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block w-full" disabled id="educational_institutions_faculties_id" name="educational_institutions_faculties_id" required onchange="SwitchFaculties.redirect(event)">
         <option value="">Seleccione una facultad</option>
     </select>
     <x-jet-input-error for="educational_institutions_faculties_id" class="mt-2" />
@@ -31,6 +32,26 @@
 @once
 {{-- @push('scripts') --}}
 <script>
+
+        setInterval(() => {
+            if(screen.width < 700){
+                const mobil = document.getElementById('educational_institution_id');
+                mobil.setAttribute('onfocus','this.size=6');
+                mobil.setAttribute('onblur','this.size=1');
+                mobil.setAttribute('onchange','SwitchFaculties.onChangeInstitution(event); this.size=1; this.blur()');
+                mobil.classList.remove('form-select');
+
+             }else if(screen.width > 700){
+                const mobil = document.getElementById('educational_institution_id');
+                mobil.removeAttribute('onfocus','this.size=6');
+                mobil.removeAttribute('onblur','this.size=1');
+                mobil.setAttribute('onchange','SwitchFaculties.onChangeInstitution(event)');
+                mobil.classList.add('form-select');
+            }
+        }, 1000);
+
+
+
     const nodeSelected                          = {{ request()->route('node') != null ? request()->route('node')->id : 0 }};
     const educationalInstitutionSelected        = {{ request()->route('educational_institution') != null ? request()->route('educational_institution')->id : 0 }};
     const facultySelected                       = {{ request()->route('faculty') != null ? request()->route('faculty')->id : 0 }};

@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+        <h2 class="font-display text-white text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Research outputs') }}
-            <span class="sm:block text-purple-300">
+            <span class="text-base sm:text-3xl block text-purple-300">
                 Update research output info
             </span>
         </h2>
         <div>
             @can('index_research_output')
             <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
-                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                     </svg>
@@ -57,8 +57,10 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="file" value="{{ __('File') }}" />
-                        <x-jet-input id="file" class="block mt-1 w-full" type="file" accept="application/pdf" name="file" value="{{ old('file') ?? $researchOutput->file }}" />
+                        <div class="mx-auto cursor-pointer w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150" id="yourBtn" onclick="getFile()">
+                            Click para subir el archivo
+                        </div>
+                        <input class="hidden" id="file" type="file" onchange="sub(this)" accept="application/pdf" name="file" value="{{ old('file') ?? $researchOutput->file }}" />
                         <x-jet-input-error for="file" class="mt-2" />
                     </div>
 
@@ -71,5 +73,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function getFile() {
+            document.getElementById("file").click();
+        }
+
+        function sub(obj) {
+            var file = obj.value;
+            var fileName = file.split("\\");
+            document.getElementById("yourBtn").innerHTML = fileName[fileName.length - 1];
+            document.myForm.submit();
+            event.preventDefault();
+        }
+    </script>
 
 </x-app-layout>

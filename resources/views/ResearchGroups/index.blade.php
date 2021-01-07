@@ -1,16 +1,16 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+        <h2 class="font-display text-white text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Research groups') }}
-            <span class="sm:block text-purple-300">
+            <span class="text-base sm:text-3xl block text-purple-300">
                 Add research groups info
             </span>
         </h2>
         <div>
             @can('create_research_group')
             <a  href="{{ route('nodes.educational-institutions.faculties.research-groups.create', [$node, $educationalInstitution, $faculty]) }}">
-                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                <div class="w-auto text-center text-sm sm:text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-2 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create research group') }}
                 </div>
             </a>
@@ -41,18 +41,18 @@
                                 <td>
                                     <span>{{ $researchGroup->name }}</span>
                                 </td>
-                                <td>
+                                <td class="hidden sm:table-cell">
                                     <span>{{ $researchGroup->educationalInstitutionFaculty->name }}</span>
                                 </td>
-                                <td>
+                                <td class="hidden lg:table-cell">
                                     <span>{{ $researchGroup->email }}</span>
                                 </td>
-                                <td>
+                                <td class="hidden lg:table-cell md:pl-1 xl:pl-0">
                                     <span>{{ $researchGroup->leader }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">
-                                    <div class="hidden sm:flex sm:items-center justify-around">
+                                    <div class="flex items-center justify-around">
                                         <x-jet-dropdown align="right" width="48">
                                             <x-slot name="trigger">
                                                 <button class="flex items-center text-sm font-medium text-gray hover:text-blue-900 hover:border-gray-300 focus:outline-none focus:text-black focus:border-gray-300 transition duration-150 ease-in-out">

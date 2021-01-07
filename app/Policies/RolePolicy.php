@@ -34,7 +34,7 @@ class RolePolicy
      * @param  \App\Models\Role  $role
      * @return mixed
      */
-    public function view(User $user, Role $role)
+    public function view(User $user)
     {
          if($user->hasRole('Administrador')){
             return true;
@@ -87,7 +87,7 @@ class RolePolicy
      * @param  \App\Models\Role  $role
      * @return mixed
      */
-    public function delete(User $user, Role $role)
+    public function delete(User $user)
     {
          if($user->hasRole('Administrador')){
             return true;

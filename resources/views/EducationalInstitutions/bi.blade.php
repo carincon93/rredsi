@@ -1,34 +1,34 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+        <h2 class="font-display text-center md:text-left  text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ $educationalInstitution->name }}
             <span class="sm:block text-purple-300">
-                
+
             </span>
         </h2>
     </x-slot>
 
-    <div class="p-12">
-        <div class="container mx-auto">
+    <div>
+        <div class="mx-auto">
             <h1 class="text-3xl mb-4">{{ __('Business Analytics') }}</h1>
             <div class="grid md:grid-cols-3 gap-4">
 
                 <div class="h-64 bg-white overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
                     <div class="flex flex-col h-56 items-center justify-around w-full">
-                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-indigo-200 sm:mx-0 sm:h-14 sm:w-14">    
+                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-indigo-200 sm:mx-0 sm:h-14 sm:w-14">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-10 h-10 text-blue-800">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                             </svg>
                         </div>
                         <h1 class="text-gray-400">{{ $educationalInstitution->qtyAcademicPrograms() }} programa(s) de formación</h1>
-                        <h1 class="text-2xl text-gray-400">{{ __('Academic programs') }}</h1>
+                        <h1 class="text-center text-2xl mx-auto text-gray-400">{{ __('Academic programs') }}</h1>
                     </div>
                 </div>
 
                 <div class="h-64 bg-white overflow-hidden shadow-xl sm-rounded-lg p-4">
                     <div class="flex flex-col h-56 items-center justify-around w-full">
-                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-indigo-200 sm:mx-0 sm:h-14 sm:w-14">    
+                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-indigo-200 sm:mx-0 sm:h-14 sm:w-14">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-10 h-10 text-blue-800">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
@@ -40,7 +40,7 @@
 
                 <div class="h-64 bg-white overflow-hidden shadow-xl sm-rounded-lg p-4 flex">
                     <div class="flex flex-col h-56 items-center justify-around w-full">
-                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-indigo-200 sm:mx-0 sm:h-14 sm:w-14">    
+                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-indigo-200 sm:mx-0 sm:h-14 sm:w-14">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-10 h-10 text-blue-800">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                             </svg>
@@ -190,7 +190,7 @@
                     chart.draw(view, options);
                 }
             })();
-            
+
             var ProjectsByKnowledgeArea = (function() {
                 google.charts.setOnLoadCallback(drawChart);
                 function drawChart() {
@@ -279,4 +279,7 @@
             })();
         </script>
     @endpush
+
+
 </x-app-layout>
+

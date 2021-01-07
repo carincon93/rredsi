@@ -23,7 +23,7 @@ class EducationalToolController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
-        $this->authorize('viewAny', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment);
+        $this->authorize('viewAny', [EducationalTool::class]);
 
         $educationalTools = $educationalEnvironment->educationalTools()->orderBy('name')->get();
 
@@ -37,7 +37,7 @@ class EducationalToolController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
-        $this->authorize('create', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment);
+        $this->authorize('create', [EducationalTool::class]);
 
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
@@ -52,7 +52,7 @@ class EducationalToolController extends Controller
      */
     public function store(EducationalToolRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment)
     {
-        $this->authorize('create', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment);
+        $this->authorize('create', [EducationalTool::class]);
 
         $educationalTool = new EducationalTool();
         $educationalTool->name          = $request->get('name');
@@ -78,7 +78,7 @@ class EducationalToolController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
-        $this->authorize('view', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment,$educationalTool);
+        $this->authorize('view', [EducationalTool::class]);
 
         return view('EducationalTools.show', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'educationalTool'));
     }
@@ -91,7 +91,7 @@ class EducationalToolController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
-        $this->authorize('update', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment,$educationalTool);
+        $this->authorize('update', [EducationalTool::class]);
 
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
@@ -107,7 +107,7 @@ class EducationalToolController extends Controller
      */
     public function update(EducationalToolRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
-        $this->authorize('update', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment,$educationalTool);
+        $this->authorize('update', [EducationalTool::class]);
 
         $educationalTool->name          = $request->get('name');
         $educationalTool->description   = $request->get('description');
@@ -132,7 +132,7 @@ class EducationalToolController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, EducationalEnvironment $educationalEnvironment, EducationalTool $educationalTool)
     {
-        $this->authorize('delete', EducationalTool::class, $node, $educationalInstitution,$faculty,$educationalEnvironment,$educationalTool);
+        $this->authorize('delete', [EducationalTool::class]);
 
         if($educationalTool->delete()){
             $message = 'Your delete processed correctly';

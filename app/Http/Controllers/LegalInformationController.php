@@ -28,7 +28,7 @@ class LegalInformationController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', legalInformation::class);
+        $this->authorize('create', [legalInformation::class]);
 
         return view('LegalInformations.create');
     }
@@ -41,7 +41,7 @@ class LegalInformationController extends Controller
      */
     public function store(LegalInformationRequest $request)
     {
-        $this->authorize('create', legalInformation::class);
+        $this->authorize('create', [legalInformation::class]);
 
         $legalInformation                 = new legalInformation();
         $legalInformation->type           = $request->get('type');
@@ -62,7 +62,7 @@ class LegalInformationController extends Controller
      */
     public function show(LegalInformation $legalInformation)
     {
-        $this->authorize('view', legalInformation::class);
+        $this->authorize('view', [legalInformation::class]);
 
         return view('LegalInformations.show', compact('legalInformation'));
     }
@@ -75,7 +75,7 @@ class LegalInformationController extends Controller
      */
     public function edit(LegalInformation $legalInformation)
     {
-        $this->authorize('update', legalInformation::class);
+        $this->authorize('update',[ legalInformation::class]);
 
         return view('LegalInformations.edit', compact('legalInformation'));
     }
@@ -89,7 +89,7 @@ class LegalInformationController extends Controller
      */
     public function update(LegalInformationRequest $request, LegalInformation $legalInformation)
     {
-        $this->authorize('update', legalInformation::class);
+        $this->authorize('update', [legalInformation::class]);
 
         $legalInformation->type = $request->get('type');
         $legalInformation->description = $request->get('description');
@@ -109,7 +109,7 @@ class LegalInformationController extends Controller
      */
     public function destroy(LegalInformation $legalInformation)
     {
-        $this->authorize('delete', legalInformation::class);
+        $this->authorize('delete', [legalInformation::class]);
 
         if($legalInformation->delete()){
             $message = 'Your delete processed correctly';

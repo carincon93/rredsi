@@ -18,7 +18,7 @@ class EducationalToolPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('index_educational_tool')){
@@ -34,9 +34,9 @@ class EducationalToolPolicy
      * @param  \App\Models\EducationalTool  $educationalTool
      * @return mixed
      */
-    public function view(User $user, EducationalTool $educationalTool)
+    public function view(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('show_educational_tool')){
@@ -53,7 +53,7 @@ class EducationalToolPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('create_educational_tool')){
@@ -69,9 +69,9 @@ class EducationalToolPolicy
      * @param  \App\Models\EducationalTool  $educationalTool
      * @return mixed
      */
-    public function update(User $user, EducationalTool $educationalTool)
+    public function update(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('edit_educational_tool')){
@@ -87,9 +87,9 @@ class EducationalToolPolicy
      * @param  \App\Models\EducationalTool  $educationalTool
      * @return mixed
      */
-    public function delete(User $user, EducationalTool $educationalTool)
+    public function delete(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('destroy_educational_tool')){

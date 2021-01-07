@@ -9,7 +9,7 @@
             @foreach ($knowledgeSubarea->knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
                 <div class="mt-4 mb-4">
                     <input class="form-check-input" type="checkbox" name="knowledge_subarea_discipline_id[]" @if(is_array(old('knowledge_subarea_discipline_id')) && in_array($knowledgeSubareaDiscipline->id, old('knowledge_subarea_discipline_id'))) checked @else @if ($model) {{ $model->knowledgeSubareaDisciplines->pluck('id')->contains($knowledgeSubareaDiscipline->id) ? 'checked' : '' }} @endif @endif id="{{ "knowledge-subarea-discipline-$knowledgeSubareaDiscipline->id" }}" value="{{ $knowledgeSubareaDiscipline->id }}" />
-                    <label label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "knowledge-subarea-discipline-$knowledgeSubareaDiscipline->id" }}">{{ $knowledgeSubareaDiscipline->name }}</label>
+                    <label label class="text-justify text-sm items-end text-gray-700" for="{{ "knowledge-subarea-discipline-$knowledgeSubareaDiscipline->id" }}">{{ $knowledgeSubareaDiscipline->name }}</label>
                 </div>
             @endforeach
             </div>
@@ -18,12 +18,12 @@
     <x-jet-section-border />
 @endforeach
 
-@once                    
+@once
     @push('scripts')
     <script>
         var acc = document.getElementsByClassName('accordion');
         var i;
-        
+
         for (i = 0; i < acc.length; i++) {
             acc[i].addEventListener('click', function() {
             this.classList.toggle('active');

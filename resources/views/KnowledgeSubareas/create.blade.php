@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+        <h2 class="font-display text-white text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Knowledge subareas') }}
-            <span class="sm:block text-purple-300">
+            <span class="text-base sm:text-3xl block text-purple-300">
                 Add knowledge subarea
             </span>
         </h2>
@@ -38,7 +38,7 @@
 
                     <div class="mt-4">
                         <x-jet-label for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
-                        <select id="knowledge_area_id" name="knowledge_area_id" class="form-select w-full" required >
+                        <select id="knowledge_area_id" name="knowledge_area_id" class="text-sm mr-10 focus:outline-none rounded-md border-0 p-3.5 shadow-sm block w-full" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)
                                 <option value="{{ $knowledgeArea->id }}" {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" }}>{{ $knowledgeArea->name }}</option>
@@ -58,5 +58,8 @@
             </div>
         </div>
     </div>
+
+    <x-responsive-select :selectName="'knowledge_area_id'" />
+
 </x-app-layout>
 

@@ -20,7 +20,7 @@ class EducationalEnvironmentPolicy
      */
     public function viewAny(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('index_educational_environment')){
@@ -44,7 +44,7 @@ class EducationalEnvironmentPolicy
      */
     public function view(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('show_educational_environment')){
@@ -67,7 +67,7 @@ class EducationalEnvironmentPolicy
      */
     public function create(User $user,EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('create_educational_environment')){
@@ -91,7 +91,7 @@ class EducationalEnvironmentPolicy
      */
     public function update(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('edit_educational_environment')){
@@ -115,7 +115,7 @@ class EducationalEnvironmentPolicy
      */
     public function delete(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if(!$user->hasPermissionTo('destroy_educational_environment')){

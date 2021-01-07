@@ -18,7 +18,7 @@ class KnowledgeSubareaPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('index_knowledge_subarea')){
@@ -34,9 +34,9 @@ class KnowledgeSubareaPolicy
      * @param  \App\Models\KnowledgeSubarea  $knowledgeSubarea
      * @return mixed
      */
-    public function view(User $user, KnowledgeSubarea $knowledgeSubarea)
+    public function view(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('show_knowledge_subarea')){
@@ -53,7 +53,7 @@ class KnowledgeSubareaPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('create_knowledge_subarea')){
@@ -71,7 +71,7 @@ class KnowledgeSubareaPolicy
      */
     public function update(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('edit_knowledge_subarea')){
@@ -87,9 +87,9 @@ class KnowledgeSubareaPolicy
      * @param  \App\Models\KnowledgeSubarea  $knowledgeSubarea
      * @return mixed
      */
-    public function delete(User $user, KnowledgeSubarea $knowledgeSubarea)
+    public function delete(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('destroy_knowledge_subarea')){

@@ -18,7 +18,7 @@ class KnowledgeAreaPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('index_knowledge_area')){
@@ -34,9 +34,9 @@ class KnowledgeAreaPolicy
      * @param  \App\Models\KnowledgeArea  $knowledgeArea
      * @return mixed
      */
-    public function view(User $user, KnowledgeArea $knowledgeArea)
+    public function view(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('show_knowledge_area')){
@@ -53,7 +53,7 @@ class KnowledgeAreaPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('create_knowledge_area')){
@@ -69,9 +69,9 @@ class KnowledgeAreaPolicy
      * @param  \App\Models\KnowledgeArea  $knowledgeArea
      * @return mixed
      */
-    public function update(User $user, KnowledgeArea $knowledgeArea)
+    public function update(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('edit_knowledge_area')){
@@ -87,9 +87,9 @@ class KnowledgeAreaPolicy
      * @param  \App\Models\KnowledgeArea  $knowledgeArea
      * @return mixed
      */
-    public function delete(User $user, KnowledgeArea $knowledgeArea)
+    public function delete(User $user)
     {
-        if($user->hasRole('Admin')){
+        if($user->hasRole('Administrador')){
             return true;
         }
         if($user->hasPermissionTo('destroy_knowledge_area')){

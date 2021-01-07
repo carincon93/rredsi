@@ -1,16 +1,16 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+        <h2 class="font-display text-white text-left text-lg leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Educational tools') }}
-            <span class="sm:block text-purple-300">
+            <span class="text-sm sm:text-3xl block text-purple-300">
                 Add educational tools info
             </span>
         </h2>
-        <div>
+        <div class="pl-2 lg:pl-0">
             @can('create_educational_tool')
-            <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.educational-tools.create', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}" class="btn btn-primary">
-                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+            <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.educational-tools.create', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}" class="btn btn-primary ">
+                <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-2 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create educational tool') }}
                 </div>
             </a>
@@ -38,15 +38,15 @@
                                 <td>
                                     <span>{{ $educationalTool->name }}</span>
                                 </td>
-                                <td>
+                                <td class="hidden sm:table-cell">
                                     <span>{{ $educationalTool->description }}</span>
                                 </td>
-                                <td>
+                                <td class="hidden lg:table-cell">
                                     <span>{{ $educationalTool->qty }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">
-                                    <div class="hidden sm:flex sm:items-center justify-around">
+                                    <div class="flex items-center justify-around">
                                         <x-jet-dropdown align="right" width="48">
                                             <x-slot name="trigger">
                                                 <button class="flex items-center text-sm font-medium text-gray hover:text-blue-900 hover:border-gray-300 focus:outline-none focus:text-black focus:border-gray-300 transition duration-150 ease-in-out">

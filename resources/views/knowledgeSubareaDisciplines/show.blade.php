@@ -1,22 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+        <h2 class="font-display text-white text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Knowledge subarea disciplines') }}
-            <span class="sm:block text-purple-300">
+            <span class="text-base sm:text-3xl block text-purple-300">
                 Show knowledge subarea dicipline info
             </span>
         </h2>
         <div>
             @can('edit_knowledge_subarea_discipline')
             <a href="{{ route('knowledge-subarea-disciplines.edit', $knowledgeSubareaDiscipline->id) }}">
-                <div class="w-full sm:w-auto items-center justify-center text-blue-900roup-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 sm:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Edit knowledge subarea discipline') }}
                 </div>
             </a>
             @endcan
         </div>
     </x-slot>
-    
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-wrap" id="tabs-id">
@@ -45,7 +45,7 @@
                     </ul>
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
-                            
+
                             <div class="block" id="tab-profile">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -64,7 +64,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
@@ -80,7 +80,7 @@
                                             <div>
                                                 <h3 class="text-lg font-medium text-gray-900">Información de la sub-área de conocimiento</h3>
                                             </div>
-                                            
+
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                                                     <h3 class="text-lg font-medium text-gray-900">{{ __('Name') }}</h3>
@@ -92,7 +92,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="hidden sm:block">
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
@@ -101,19 +101,19 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+
                             <div class="hidden" id="tab-options">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                         <div class="md:col-span-1">
                                             <h3 class="text-lg font-medium text-gray-900">Información de los semilleros de investigación</h3>
                                         </div>
-                                        
+
                                         @foreach ($knowledgeSubareaDiscipline->researchTeams as $researchTeam)
                                             <div class="md:grid md:grid-cols-2 md:gap-4">
                                                 <div class="md:col-span-1">
-                                                    
+
                                                 </div>
                                                 <div class="mt-5 md:mt-0 md:col-span-2">
                                                     <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -126,7 +126,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="hidden sm:block">
                                                 <div class="py-8">
                                                     <div class="border-t border-gray-200"></div>
@@ -136,18 +136,18 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="hidden" id="tab-projects">
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                         <div class="md:col-span-1">
                                             <h3 class="text-lg font-medium text-gray-900">Información de proyectos asociados</h3>
                                         </div>
-                                        
+
                                         @foreach ($knowledgeSubareaDiscipline->projects as $project)
                                             <div class="md:grid md:grid-cols-2 md:gap-4">
                                                 <div class="md:col-span-1">
-                                                    
+
                                                 </div>
                                                 <div class="mt-5 md:mt-0 md:col-span-2">
                                                     <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -160,7 +160,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="hidden sm:block">
                                                 <div class="py-8">
                                                     <div class="border-t border-gray-200"></div>

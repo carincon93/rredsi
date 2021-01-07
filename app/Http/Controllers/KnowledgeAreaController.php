@@ -15,7 +15,7 @@ class KnowledgeAreaController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', KnowledgeArea::class);
+        $this->authorize('viewAny',[ KnowledgeArea::class]);
 
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
@@ -29,7 +29,7 @@ class KnowledgeAreaController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', KnowledgeArea::class);
+        $this->authorize('create', [KnowledgeArea::class]);
 
         return view('KnowledgeAreas.create');
     }
@@ -42,7 +42,7 @@ class KnowledgeAreaController extends Controller
      */
     public function store(KnowledgeAreaRequest $request)
     {
-        $this->authorize('create', KnowledgeArea::class);
+        $this->authorize('create', [KnowledgeArea::class]);
 
         $knowledgeArea          = new KnowledgeArea();
         $knowledgeArea->name    = $request->get('name');
@@ -62,7 +62,7 @@ class KnowledgeAreaController extends Controller
      */
     public function show(KnowledgeArea $knowledgeArea)
     {
-        $this->authorize('view', [KnowledgeArea::class,$knowledgeArea]);
+        $this->authorize('view', [KnowledgeArea::class]);
 
         return view('KnowledgeAreas.show', compact('knowledgeArea'));
     }
@@ -75,7 +75,7 @@ class KnowledgeAreaController extends Controller
      */
     public function edit(KnowledgeArea $knowledgeArea)
     {
-        $this->authorize('update', KnowledgeArea::class,$knowledgeArea);
+        $this->authorize('update',[KnowledgeArea::class]);
 
         return view('KnowledgeAreas.edit', compact('knowledgeArea'));
     }
@@ -89,7 +89,7 @@ class KnowledgeAreaController extends Controller
      */
     public function update(KnowledgeAreaRequest $request, KnowledgeArea $knowledgeArea)
     {
-        $this->authorize('update', KnowledgeArea::class,$knowledgeArea);
+        $this->authorize('update', [KnowledgeArea::class]);
 
         $knowledgeArea->name = $request->get('name');
 
@@ -108,7 +108,7 @@ class KnowledgeAreaController extends Controller
      */
     public function destroy(KnowledgeArea $knowledgeArea)
     {
-        $this->authorize('delete', KnowledgeArea::class,$knowledgeArea);
+        $this->authorize('delete', [KnowledgeArea::class]);
 
         if($knowledgeArea->delete()){
             $message = 'Your delete processed correctly';

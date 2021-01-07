@@ -34,9 +34,9 @@ class LegalInformationPolicy
      * @param  \App\Models\legalInformation  $legalInformation
      * @return mixed
      */
-    public function view(User $user, legalInformation $legalInformation)
+    public function view(User $user)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(['Administrador','Coordinador'])){
             return true;
         }
         return false;
@@ -50,7 +50,7 @@ class LegalInformationPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(['Administrador','Coordinador'])){
             return true;
         }
         return false;
@@ -63,9 +63,9 @@ class LegalInformationPolicy
      * @param  \App\Models\legalInformation  $legalInformation
      * @return mixed
      */
-    public function update(User $user, legalInformation $legalInformation)
+    public function update(User $user)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(['Administrador','Coordinador'])){
             return true;
         }
         return false;
@@ -78,9 +78,9 @@ class LegalInformationPolicy
      * @param  \App\Models\legalInformation  $legalInformation
      * @return mixed
      */
-    public function delete(User $user, legalInformation $legalInformation)
+    public function delete(User $user)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(['Administrador','Coordinador'])){
             return true;
         }
         return false;

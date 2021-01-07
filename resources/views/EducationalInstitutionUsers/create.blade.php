@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+        <h2 class="font-display text-white text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Educational institution users') }}
-            <span class="sm:block text-purple-300">
+            <span class="text-base sm:text-3xl block text-purple-300">
                 Add educational institution user
             </span>
         </h2>
         <div>
             <a href="{{ route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty]) }}">
-                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                     </svg>
@@ -35,19 +35,19 @@
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
-        
+
                     <div class="mt-4">
                         <x-jet-label for="email" value="{{ __('Email') }}" />
                         <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
                         <x-jet-input-error for="email" class="mt-2" />
                     </div>
-        
+
                     <div class="mt-4">
                         <x-jet-label for="password" value="{{ __('Password') }}" />
                         <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
                         <x-jet-input-error for="password" class="mt-2" />
                     </div>
-        
+
                     <div class="mt-4">
                         <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                         <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
@@ -64,19 +64,19 @@
                         </select>
                         <x-jet-input-error for="document_type" class="mt-2" />
                     </div>
-        
+
                     <div class="mt-4">
                         <x-jet-label for="document_number" value="{{ __('Document number') }}" />
                         <x-jet-input id="document_number" class="block mt-1 w-full" type="number" name="document_number" :value="old('document_number')" required />
                         <x-jet-input-error for="document_number" class="mt-2" />
                     </div>
-                    
+
                     <div class="mt-4">
                         <x-jet-label for="cellphone_number" value="{{ __('Cellphone number') }}" />
                         <x-jet-input id="cellphone_number" class="block mt-1 w-full" type="number" name="cellphone_number" :value="old('cellphone_number')" required />
                         <x-jet-input-error for="cellphone_number" class="mt-2" />
                     </div>
-                    
+
                     <div class="mt-4">
                         <x-jet-label for="interests" value="{{ __('Interests') }}" />
                         <textarea id="interests" name="interests" class="form-textarea border-0 w-full" value="{{ old('interests') }}" required >{{ old('interests') }}</textarea>
@@ -106,8 +106,8 @@
                         @endforeach
                         <x-jet-input-error for="role_id" class="mt-2" />
                     </div>
-                    
-                    <div class="flex items-center justify-end mt-4">        
+
+                    <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Create') }}
                         </x-jet-button>

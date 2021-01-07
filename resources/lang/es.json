@@ -156,6 +156,7 @@
     "Manage educational tools": "Administrar herramientas/equipos",
     "Manage educational institutions": "Administrar instituciones educativas",
     "Manage educational institution faculties": "Administrar facultades/centros de formación",
+    "Edit educational institution faculty": "Editar facultad/centro de formación",
     "Location": "Ubicación",
     "Register link": "Enlace de registro",
     "Info link": "Enlace de información",
@@ -230,7 +231,7 @@
     "Create educational environment": "Crear ambiente de formacion",
     "Create educational tool": "Crear herramienta educativa",
     "Create educational institution user": "Crear miembro de la institucion educativa",
-    "Create educational institution faculty": "Crear facultad de la institucion educativa",
+    "Create educational institution faculty": "Crear facultad/centro de formación",
     "Create node event": "Crear evento de nodo",
     "Create educational institution": "Crear institucion educativa",
     "Create knowledge area": "Crear área de conocimiento",
@@ -243,7 +244,18 @@
     "Edit research line": "Editar línea de investigación",
     "Researcher lines": "Líneas de investigación",
     "Edit node event": "Editar evento de nodo",
-    "Edit knowledge area": "Editar área de conocimiento"
+    "Edit knowledge area": "Editar área de conocimiento",
+    "Edit knowledge subarea": "Editar sub-área de conocimiento",
+    "Edit educational institution": "Editar institución educativa",
+    "Educational Institutions": "Instituciones educativas",
+    "Edit legal information": "Editar información legal",
+    "Edit knowledge subarea discipline":"Editar diciplina de sub-área de conocimiento",
+    "Edit research group":"Editar grupo de investigación",
+    "Edit research team":"Editar semillero de investigación",
+    "Edit project":"Editar proyecto",
+    "Edit research output":"Editar producto de investigación",
+    "Edit educational tool": "Editar herramienta educativa",
+    "Edit role":"Editar role"
 
 
 
