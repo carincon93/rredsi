@@ -1,5 +1,11 @@
 @props(['form'=> "no"])
 
+<style>
+    .sed {
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
+
 <div class="mt-1">
     <select class="text-base md:text-xs mr-10 bg-transparent  focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block w-full" id="node_id" name="node_id" required onchange="SwitchFaculties.onChange(event)">
     </select>
@@ -9,7 +15,7 @@
 
 <div class="mt-1">
     {{-- <p class="mt-4">{{ __('Educational institutions')}} </p> --}}
-    <select disabled class="text-base md:text-xs mr-10 bg-transparent  focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block w-full" id="educational_institution_id" name="educational_institution_id" required onchange="SwitchFaculties.onChangeInstitution(event)">
+    <select disabled class="sed text-base md:text-xs mr-10 bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block w-full" id="educational_institution_id" name="educational_institution_id" required onfocus="this.size=6" onblur="this.size=1" onchange="SwitchFaculties.onChangeInstitution(event); this.size=1; this.blur();">
         <option value="">Seleccione un institucion</option>
     </select>
 </div>

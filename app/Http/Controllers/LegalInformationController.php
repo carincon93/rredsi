@@ -15,7 +15,7 @@ class LegalInformationController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', legalInformation::class);
+        $this->authorize('viewAny', [legalInformation::class]);
 
         $legalInformations = legalInformation::orderBy('type')->get();
         return view('LegalInformations.index', compact('legalInformations'));

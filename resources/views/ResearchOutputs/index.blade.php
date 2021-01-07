@@ -7,11 +7,7 @@
             </span>
         </h2>
         <div>
-<<<<<<< HEAD
             @can('create_research_output')
-=======
-            @can('create_research_ouput')
->>>>>>> simon
             <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.create', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
                 <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                     {{ __('Create research output')}}
@@ -64,29 +60,17 @@
                                             </x-slot>
 
                                             <x-slot name="content">
-<<<<<<< HEAD
                                                 @can('show_research_output')
-=======
-                                                @can('show_research_ouput')
->>>>>>> simon
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.show', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project, $researchOutput]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 @endcan
-<<<<<<< HEAD
                                                 @can('edit_research_output')
-=======
-                                                @can('edit_research_ouput')
->>>>>>> simon
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.edit', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project, $researchOutput]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
                                                 @endcan
-<<<<<<< HEAD
                                                 @can('destroy_research_output')
-=======
-                                                @can('destroy_research_ouput')
->>>>>>> simon
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.destroy', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project, $researchOutput]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
