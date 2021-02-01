@@ -1906,14 +1906,14 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1.10.22
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1.10.23
  * ©2008-2020 SpryMedia Ltd - datatables.net/license
  */
 
 /**
  * @summary     DataTables
  * @description Paginate, search and order HTML tables
- * @version     1.10.22
+ * @version     1.10.23
  * @file        jquery.dataTables.js
  * @author      SpryMedia Ltd
  * @contact     www.datatables.net
@@ -4651,7 +4651,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 				for ( var i=0, iLen=a.length-1 ; i<iLen ; i++ )
 				{
 					// Protect against prototype pollution
-					if (a[i] === '__proto__') {
+					if (a[i] === '__proto__' || a[i] === 'constructor') {
 						throw new Error('Cannot set prototype values');
 					}
 	
@@ -5033,7 +5033,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 				cells.push( nTd );
 	
 				// Need to create the HTML if new, or if a rendering function is defined
-				if ( create || ((!nTrIn || oCol.mRender || oCol.mData !== i) &&
+				if ( create || ((oCol.mRender || oCol.mData !== i) &&
 					 (!$.isPlainObject(oCol.mData) || oCol.mData._ !== i+'.display')
 				)) {
 					nTd.innerHTML = _fnGetCellData( oSettings, iRow, i, 'display' );
@@ -5065,10 +5065,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	
 			_fnCallbackFire( oSettings, 'aoRowCreatedCallback', null, [nTr, rowData, iRow, cells] );
 		}
-	
-		// Remove once webkit bug 131819 and Chromium bug 365619 have been resolved
-		// and deployed
-		row.nTr.setAttribute( 'role', 'row' );
 	}
 	
 	
@@ -11422,7 +11418,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	 *  @type string
 	 *  @default Version number
 	 */
-	DataTable.version = "1.10.22";
+	DataTable.version = "1.10.23";
 
 	/**
 	 * Private data store, containing all of the settings objects that are
@@ -45592,7 +45588,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/postcss-loader/src/index.js):\nError: Failed to find 'hint.min.css'\n  in [\n    E:\\SENNOVA\\rredsi\\resources\\css\n  ]\n    at resolveModule.catch.catch (E:\\SENNOVA\\rredsi\\node_modules\\postcss-import\\lib\\resolve-id.js:35:13)\n    at runLoaders (E:\\SENNOVA\\rredsi\\node_modules\\webpack\\lib\\NormalModule.js:316:20)\n    at E:\\SENNOVA\\rredsi\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at E:\\SENNOVA\\rredsi\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (E:\\SENNOVA\\rredsi\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at Promise.resolve.then.then.catch (E:\\SENNOVA\\rredsi\\node_modules\\postcss-loader\\src\\index.js:208:9)");
 
 /***/ }),
 
@@ -45711,8 +45707,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\SIMON\Desktop\rredsi\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\SIMON\Desktop\rredsi\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! E:\SENNOVA\rredsi\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\SENNOVA\rredsi\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
