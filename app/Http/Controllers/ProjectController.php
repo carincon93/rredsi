@@ -11,6 +11,7 @@ use App\Models\ResearchGroup;
 use App\Models\ResearchTeam;
 use App\Models\Project;
 
+
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\ProjectRequest;
@@ -132,6 +133,11 @@ class ProjectController extends Controller
         }
 
 
+
+        if(Auth()->user()->hasRole('Estudiante')){
+            return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$faculty,$researchGroup,$researchTeam])->with('status', $message);
+        }
+
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);
 
     }
@@ -239,6 +245,10 @@ class ProjectController extends Controller
             $message = 'Your update processed correctly';
         }
 
+        if(Auth()->user()->hasRole('Estudiante')){
+            return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$faculty,$researchGroup,$researchTeam])->with('status', $message);
+        }
+
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);
     }
 
@@ -254,6 +264,10 @@ class ProjectController extends Controller
 
         if($project->delete()){
             $message = 'Your delete processed correctly';
+        }
+
+        if(Auth()->user()->hasRole('Estudiante')){
+            return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$faculty,$researchGroup,$researchTeam])->with('status', $message);
         }
 
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);

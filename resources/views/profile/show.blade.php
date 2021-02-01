@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+        <h2 class="font-display text-white text-center text-2xl md:text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Profile') }}
-            <span class="sm:block text-purple-300">
+            <span class="lg:block ml-3 text-purple-300">
                 {{ Auth::user()->name }}
             </span>
         </h2>

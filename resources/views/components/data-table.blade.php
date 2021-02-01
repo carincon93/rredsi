@@ -1,9 +1,148 @@
 <!-- component -->
+<style>
+    .view-filter {
+        padding-bottom: 15px !important;
+        background-color: rgba(244, 245, 247, 0.842);
+        float:none !important;
+    }
+
+    input[type=search] {
+        border: 0px solid;
+        border-radius: 6px;
+    }
+
+    td {
+        overflow-wrap: break-word;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    p {
+        margin-left: 0.5rem;
+        width: 15rem;
+        height: 2.8rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    /* Segundas columnas mas pequeñas */
+    p.row-2 {
+        margin-left: 1rem !important;
+    }
+
+    p.row-3 {
+        margin-left: 1rem !important;
+        width: 15rem !important;
+        height: 3.2rem !important;
+    }
+
+    /* Fila de ancho ajustable valores definidos */
+    p.row-auto {
+        margin-left: 1.25rem !important;
+        width: auto !important;
+        height: 2.7rem !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* .line-clamp{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        margin-bottom: 10px;
+    } */
+
+    /* div esclusiva para estilo informacion legal */
+    p.legal{
+        margin-left: 1rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 11;
+        overflow: hidden;
+        margin-bottom: 10px;
+        width: auto;
+        height: 15rem;
+    }
+
+    @media (min-width: 640px) {
+        /* sm */
+            p {
+                width: 18rem;
+            }
+            p.row-3 {
+                width: 18rem;
+            }
+        }
+
+    @media (min-width: 768px) {
+        /* md */
+        p {
+            width: 20rem;
+        }
+        p.row-3 {
+            width: 20rem;
+        }
+        td {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+    }
+    @media (min-width: 1024px) {
+        /* lg */
+        p {
+            width: 16rem !important;
+            margin-left: 0 !important;
+        }
+        p.row-2 {
+            width: 14rem !important;
+            margin-left: 0 !important;
+        }
+        p.row-3 {
+            width: 10rem !important;
+            margin-left: 0.2rem !important;
+            height: 3.3rem !important;
+        }
+        p.row-auto {
+            margin-left: 0 !important;
+            margin-right: 1rem !important;
+        }
+        p.legal {
+            margin-left: 0 !important;
+        }
+        td {
+            padding-top: 1.25rem !important;
+            padding-bottom: 1.25rem !important;
+        }
+    }
+    @media (min-width: 1280px) {
+        p {
+            width: 20rem !important;
+        }
+        p.row-2 {
+            width: 16rem !important;
+            margin-left: 0 !important;
+        }
+        p.row-3 {
+            width: 14rem !important;
+            margin-left: 0 !important;
+        }
+        p.row-auto {
+            margin-left: 0 !important;
+        }
+        p.legal {
+            margin-left: 0 !important;
+        }
+}
+
+</style>
 <div>
-    <table class="min-w-full table-auto">
+    <table class="min-w-full table-auto ">
         <thead class="justify-between">
             <tr>
-                <th class="py-2 text-left focus:outline-none">
+                <th class="py-2 text-left focus:outline-none hidden lg:table-cell">
                     <span class="text-gray-300 pl-2.5">{{ $firstTheadTitle }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline text-gray-400 icon_sorting_asc">
                         <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z" />
@@ -14,7 +153,7 @@
                 </th>
 
                 @if (isset($secondTheadTitle))
-                    <th class="py-2 text-left focus:outline-none hidden sm:table-cell">
+                    <th class="py-2 text-left focus:outline-none hidden lg:table-cell">
                         <span class="text-gray-300">{{ $secondTheadTitle }}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline text-gray-400 icon_sorting_asc">
                             <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z" />
@@ -49,7 +188,7 @@
                     </th>
                 @endif
 
-                <th class="py-2 text-left focus:outline-none text-center">
+                <th class="py-2 text-left focus:outline-none text-center hidden lg:table-cell">
                     <span class="text-gray-300">{{ __('Actions') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline text-gray-400 icon_sorting_asc">
                         <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z" />
@@ -60,7 +199,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody class="bg-gray-200">
+        <tbody class="bg-gray-100">
             {{ $tbodyData }}
         </tbody>
     </table>

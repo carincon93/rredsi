@@ -1,12 +1,12 @@
 <div class="border-b flex mr-4">
     <div>
-        <select class="mr-10 bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="h_node_id" name="h_node_id" required onchange="SwitchEducationalInstitution.onChange(event)">
+        <select class=" overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="h_node_id" name="h_node_id" required onchange="SwitchEducationalInstitution.onChange(event)">
             <option value="">Seleccione un nodo</option>
         </select>
     </div>
 
     <div class="ml-4">
-        <select class="mr-10 bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="h_educational_institution_id" name="h_educational_institution_id" required onchange="SwitchEducationalInstitution.redirect(event)">
+        <select class=" overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="h_educational_institution_id" name="h_educational_institution_id" required onchange="SwitchEducationalInstitution.redirect(event)">
             <option value="">Seleccione una institución educativa</option>
         </select>
         <x-jet-input-error for="h_educational_institution_id" class="mt-2" />
