@@ -1,19 +1,23 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-display text-white text-left text-xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{ __('Educational institution faculties') }}
-            <span class="text-base sm:text-3xl block text-purple-300">
-                Update educational institution faculties
-            </span>
-        </h2>
-        <div>
-            @can('edit_educational_institution_faculty')
-            <a href="{{ route('nodes.educational-institutions.faculties.edit', [$node, $educationalInstitution, $faculty]) }}">
-                <div class="w-auto text-center text-sm sm:text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Edit educational institution faculty') }}
-                </div>
-            </a>
-            @endcan
+        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+            <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+                <h2 class="font-display text-white text-center md:text-left text-xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+                    {{ __('Educational institution faculties') }}
+                    <span class="text-base sm:text-3xl block text-purple-300">
+                        Update educational institution faculties
+                    </span>
+                </h2>
+            </div>
+            <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 xl:col-end-10 xl:col-span-2 m-auto">
+                @can('edit_educational_institution_faculty')
+                <a href="{{ route('nodes.educational-institutions.faculties.edit', [$node, $educationalInstitution, $faculty]) }}">
+                    <div class="w-auto text-center text-sm sm:text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                        {{ __('Edit educational institution faculty') }}
+                    </div>
+                </a>
+                @endcan
+            </div>
         </div>
     </x-slot>
 

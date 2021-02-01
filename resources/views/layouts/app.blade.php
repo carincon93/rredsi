@@ -14,14 +14,15 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         @livewireStyles
-
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> --}}
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.6.0/hint.min.css" defer></script>
     </head>
 
     <body class="font-sans antialiased leading-normal tracking-normal">
+
         <div class="min-h-screen bg-gray-100 flex flex-wrap">
 
 
@@ -34,6 +35,7 @@
 
                  <!-- Page Heading -->
                 <header class="bg-gradient-to-l pt-5 md:pt-0 from-blue-900 to-blue-900 shadow">
+
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                         {{ $header }}
                     </div>
