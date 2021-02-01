@@ -45588,7 +45588,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/postcss-loader/src/index.js):\nError: Failed to find 'hint.min.css'\n  in [\n    E:\\SENNOVA\\rredsi\\resources\\css\n  ]\n    at resolveModule.catch.catch (E:\\SENNOVA\\rredsi\\node_modules\\postcss-import\\lib\\resolve-id.js:35:13)\n    at runLoaders (E:\\SENNOVA\\rredsi\\node_modules\\webpack\\lib\\NormalModule.js:316:20)\n    at E:\\SENNOVA\\rredsi\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at E:\\SENNOVA\\rredsi\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (E:\\SENNOVA\\rredsi\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at Promise.resolve.then.then.catch (E:\\SENNOVA\\rredsi\\node_modules\\postcss-loader\\src\\index.js:208:9)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
