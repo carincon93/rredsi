@@ -23,7 +23,6 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.2",
-        "datatables.net-dt": "^1.10.23",
-        "hint.css": "^2.6.0"
+        "datatables.net-dt": "^1.10.23"
     }
 }
