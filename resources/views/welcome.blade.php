@@ -108,7 +108,7 @@
                             </div>
                         </div>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
+                        {{-- <div class="p-6 border-t border-gray-200 dark:border-gray-700">
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22.083" height="21" viewBox="0 0 22.083 21">
                                     <g id="project" transform="translate(13.455)">
@@ -132,9 +132,9 @@
                                     {{ isset($node->shuffleProjects[2]) ? substr($node->shuffleProjects[2]->abstract, 0, 250).'...' : __('No data recorded') }}
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
+                        {{-- <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22.083" height="21" viewBox="0 0 22.083 21">
                                     <g id="project" transform="translate(13.455)">
@@ -158,7 +158,7 @@
                                     {{ isset($node->shuffleProjects[3]) ? substr($node->shuffleProjects[3]->abstract, 0, 250).'...' : __('No data recorded') }}
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -188,7 +188,7 @@
         <p class="leading-10">Del 18 al 19 de agosto de 2020</p>
         <a href="{{ route('nodes.explorer.events.rredsiEventRegister', [$node]) }}" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-2">
+    {{-- <div class="grid grid-cols-2 md:grid-cols-2">
         <div class="h-64 bg-cool-gray-600 p-2 md:p-11" style="background: #475569 url(/storage/images/rectangles.png); background-repeat: no-repeat; background-position: 400px; background-blend-mode: color-burn;">
             <h1 class="text-lg md:text-4xl text-gray-300 leading-7 md:leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->name : __('No data recorded') }}</h1>
             <p class="text-white leading-5 md:leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->datesForHumans : __('No data recorded') }}</p>
@@ -199,7 +199,7 @@
             <p class="text-white leading-5 md:leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[1]) ? $node->shuffleEducationalInstitutionEvents[1]->datesForHumans : __('No data recorded') }}</p>
             <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[1]->id]) }}" class="mt-1 md:mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-1 md:px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
         </div>
-    </div>
+    </div> --}}
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="mt-8 dark:bg-gray-800 overflow-hidden">

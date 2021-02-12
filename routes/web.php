@@ -53,7 +53,22 @@ Route::get('/nodes/{node}/explorer/projects', [AppController::class, 'searchProj
 Route::get('/nodes/{node}/explorer/projects/{project}', [AppController::class, 'showProject'])->name('nodes.explorer.searchProjects.showProject')->middleware(['auth']);
 Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'])->name('nodes.explorer.nodeInfo')->middleware(['auth']);
 
-Route::post('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification')->middleware(['auth']);
+Route::get('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification')->middleware(['auth']);
+
+Route::post('/notifications/sendToParticipe', [NotificationController::class, 'sendToParticipe'])->name('notifications.sendToParticipe')->middleware(['auth']);
+Route::post('/notifications/acceptStudent', [NotificationController::class, 'acceptStudent'])->name('notifications.acceptStudent')->middleware(['auth']);
+
+Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show')->middleware(['auth']);
+Route::get('/notificationsIndexSend/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend')->middleware(['auth']);
+
+Route::resource('/notifications', NotificationController::class, [
+    'names' => [
+        'index'           => 'notifications.index',
+        // 'show'      => 'notifications.show',
+        'destroy'         => 'notifications.destroy'
+    ]
+]);
+
 
 Route::get('preview-emails', function () {
     return (new App\Notifications\RoleInvitation(3,1,3))
@@ -80,7 +95,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}', [EducationalInstitutionFacultyController::class, 'dashboard'])->name('nodes.educational-institutions.faculties.dashboard');
 
-    // Route::get('my-projects', [ProjectController::class, 'myProjects'])->name('my-projects');
     Route::get('nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}/research-groups/{research_group}/research-teams/{research_team}/my-projects',[ProjectController::class, 'myProjects'])->name('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects');
 
     Route::resource('/user/profile/user-graduations', UserGraduationController::class, [

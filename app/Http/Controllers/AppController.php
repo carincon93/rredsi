@@ -22,7 +22,7 @@ class AppController extends Controller
     {
         return view('dashboard', compact('node'));
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +32,7 @@ class AppController extends Controller
     {
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
-        $node->shuffleProjects      = $node->shuffleProjects();
+        $node->shuffleProjects = $node->shuffleProjects();
         $node->shuffleEducationalInstitutionEvents = $node->educationalInstitutionAndNodeEvents()->shuffle()->take(2);
 
         return view('welcome', compact('node', 'knowledgeAreas'));
@@ -74,7 +74,7 @@ class AppController extends Controller
     {
         $projects = auth()->user()->projects;
         $memberEducationalInstitution = $user->educationalInstitutionFaculties()->where('is_principal', true)->first();
-        
+
         return view('Explorer.show-user', compact('node', 'user', 'memberEducationalInstitution', 'projects'));
     }
 
@@ -88,7 +88,7 @@ class AppController extends Controller
         $search         = $request->get('search');
         $projects       = Project::searchProjects($search)->get();
         $allKeywords    = Project::allKeywords($node);
-        
+
         return view('Explorer.index-projects', compact('node', 'projects', 'search', 'allKeywords'));
     }
 
@@ -156,7 +156,7 @@ class AppController extends Controller
             $node->qtyProjectsManizales     = 0;
             $node->qtyProjectsPensilvania   = 0;
         }
-        
+
         return view('Explorer.show-node', compact('node'));
     }
 }
