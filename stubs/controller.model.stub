@@ -1,0 +1,124 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ rootNamespace }}Http\Controllers\Controller;
+use App\Http\Requests\{{ model }}Request;
+use Illuminate\Http\Request;
+
+class {{ class }} extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $this->authorize('viewAny', [{{ model }}::class]);
+
+        ${{ modelVariable }}s = {{ model }}::orderBy('', 'ASC')->paginate(100);
+
+        return view('resourceRoute.index', compact('{{ modelVariable }}s'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $this->authorize('create', [{{ model }}::class]);
+
+        return view('resourceRoute.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store({{ model }}Request $request)
+    {
+        $this->authorize('create', [{{ model }}::class]);
+
+        ${{ modelVariable }} = new {{ model }}();
+        ${{ modelVariable }}->fieldName = $request->get('fieldName');
+        ${{ modelVariable }}->fieldName = $request->get('fieldName');
+        ${{ modelVariable }}->fieldName = $request->get('fieldName');
+
+        if ( !${{ modelVariable }}->save() ) {
+            return redirect()->route('resourceRoute.create')->withInput()->with('status', __('An error has ocurred. Please try again later.'));
+        }
+
+        return redirect()->route('resourceRoute.index')->with('status', __('The resource has been created successfully.'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function show({{ model }} ${{ modelVariable }})
+    {
+        $this->authorize('view', [{{ model }}::class, ${{ modelVariable }}]);
+
+        return view('resourceRoute.show', compact('{{ modelVariable }}'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function edit({{ model }} ${{ modelVariable }})
+    {
+        $this->authorize('update', [{{ model }}::class, ${{ modelVariable }}]);
+
+        return view('resourceRoute.edit', compact('{{ modelVariable }}'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function update({{ model }}Request $request, {{ model }} ${{ modelVariable }})
+    {
+        $this->authorize('update', [{{ model }}::class, ${{ modelVariable }}]);
+
+        ${{ modelVariable }}->fieldName = $request->get('fieldName');
+        ${{ modelVariable }}->fieldName = $request->get('fieldName');
+        ${{ modelVariable }}->fieldName = $request->get('fieldName');
+
+        if ( !${{ modelVariable }}->save() ) {
+            return redirect()->route('resourceRoute.edit', [${{ modelVariable }}])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
+        }
+
+        return redirect()->route('resourceRoute.index')->with('status', __('The resource has been updated successfully.'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy({{ model }} ${{ modelVariable }})
+    {
+        $this->authorize('delete', [{{ model }}::class, ${{ modelVariable }}]);
+
+         if ( !${{ modelVariable }}->delete() ) {
+            return redirect()->route('resourceRoute.edit', [${{ modelVariable }}])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
+        }
+
+        return redirect()->route('resourceRoute.index')->with('status', __('The resource has been deleted successfully.'));
+    }
+}

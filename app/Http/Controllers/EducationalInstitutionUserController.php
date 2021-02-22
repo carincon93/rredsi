@@ -8,6 +8,9 @@ use App\Models\EducationalInstitution;
 use App\Models\EducationalInstitutionFaculty;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\InformationNotification;
+
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 
@@ -64,6 +67,17 @@ class EducationalInstitutionUserController extends Controller
 
         if($user->save()){
             $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true]);
+
+            // Send notification student create researchTeam
+            if($user->hasRole('Estudiante')){
+                $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+                $educationalInstitution = $faculty->educationalInstitution;
+                $adminInstitution = $educationalInstitution->administrator;
+
+                $type = "Estudiante";
+                Notification::send($adminInstitution, new InformationNotification($user,$type));
+            }
+
             $message = 'Your store processed correctly';
         }
 

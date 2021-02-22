@@ -11,6 +11,10 @@ use App\Models\ResearchGroup;
 use App\Models\ResearchLine;
 use App\Models\ResearchTeam;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\InformationNotification;
+
+
 use App\Http\Requests\ResearchTeamRequest;
 use Illuminate\Http\Request;
 
@@ -77,9 +81,27 @@ class ResearchTeamController extends Controller
             $researchTeam->academicPrograms()->attach($request->get('academic_program_id'));
             $researchTeam->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $researchTeam->researchLines()->attach($request->get('research_line_id'));
+
+            // Send notification student create researchTeam
+            $user = auth()->user();
+            $educationalInstitution = $user->isEducationalInstitutionAdmin;
+            $faculties = $educationalInstitution->educationalInstitutionFaculties;
+
+            $users = [];
+
+            foreach ($faculties as $key => $faculty) {
+            foreach ($faculty->members as $key => $user) {
+                if($user->hasRole('Estudiante')){
+                    array_push($users,$user);
+                }
+                }
+            }
+
+            $type = "Semillero de investigación";
+            Notification::send($users, new InformationNotification($researchTeam,$type));
+
             $message = 'Your store processed correctly';
         }
-
 
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
     }

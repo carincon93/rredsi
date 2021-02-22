@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification;
 
 use App\Notifications\RoleInvitation;
+use App\Notifications\InformationNotification;
 use App\Notifications\NotificationToParticipate;
 use App\Notifications\RequestResponse;
 
@@ -52,6 +53,36 @@ class NotificationController extends Controller
         return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'Solicitud enviada con éxito');
 
         // return $authors;
+    }
+
+    public function sendProjectToEvent(Request $request) {
+        $user = auth()->user();
+        $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+
+        if($faculty){
+            $node = $faculty->educationalInstitution->node;
+            $educationalInstitution = $faculty->educationalInstitution;
+            $adminInstitution = $educationalInstitution->administrator;
+        }
+
+        $project      = Project::findOrFail($request->get('project_id'));
+        $authors =  $project->authors;
+
+        $project->events()->attach($request->get('event_id'));
+        $event = $project->events->find($request->get('event_id'));
+
+        $type =[
+            "type" => "Registro de un proyecto a un evento",
+            "name_event" => $event->name
+        ];
+
+        #Send authors notification
+        Notification::send($authors, new InformationNotification($project,$type));
+        #Send admin institution notification
+        Notification::send($adminInstitution, new InformationNotification($project, $type));
+
+        return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'Solicitud enviada con éxito');
+
     }
 
 
@@ -95,7 +126,19 @@ class NotificationController extends Controller
     }
 
     public function index() {
+
         $user = auth()->user();
+
+        // $users = [];
+        // $node = $user->isNodeAdmin;
+        // $intitutions = $node->educationalInstitutions;
+        // $users = [];
+
+        // foreach ($intitutions as $intitution) {
+        //     array_push($users,$intitution->administrator);
+        // }
+
+        // return $users;
 
         return view('EducationalInstitutionUsers.index-notifications', compact('user'));
     }

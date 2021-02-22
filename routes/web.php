@@ -56,7 +56,9 @@ Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'
 Route::get('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification')->middleware(['auth']);
 
 Route::post('/notifications/sendToParticipe', [NotificationController::class, 'sendToParticipe'])->name('notifications.sendToParticipe')->middleware(['auth']);
+Route::post('/notifications/sendProjectToEvent', [NotificationController::class, 'sendProjectToEvent'])->name('notifications.sendProjectToEvent')->middleware(['auth']);
 Route::post('/notifications/acceptStudent', [NotificationController::class, 'acceptStudent'])->name('notifications.acceptStudent')->middleware(['auth']);
+
 
 Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show')->middleware(['auth']);
 Route::get('/notificationsIndexSend/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend')->middleware(['auth']);

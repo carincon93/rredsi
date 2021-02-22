@@ -25,7 +25,7 @@
                 @foreach ($notificationUnread as $notification)
                     {{-- <?php echo $notification; ?> --}}
                     <div class="px-4 py-3 border-b hover:bg-gray-100 -mx-2">
-                    @if( $notification->type !== 'App\Notifications\RequestResponse')
+                    @if( $notification->type !== 'App\Notifications\RequestResponse' && $notification->type !== 'App\Notifications\InformationNotification')
                         <a href="{{$notification->data['action']}}" class="flex items-center">
                     @else
                         <a href="{{route('notifications.indexResponseSend', [$notification->id])}}" class="flex items-center">
