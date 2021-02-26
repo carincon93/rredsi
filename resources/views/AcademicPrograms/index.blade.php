@@ -41,7 +41,7 @@
                                     <span>{{ $academicProgram->name }}</span>
                                 </td>
                                 <td class="hidden sm:table-cell">
-                                    <span>{{ $academicProgram->educationalInstitutionFaculty->name }}</span>
+                                    <span>{{ optional($academicProgram->educationalInstitutionFaculty)->name }}</span>
                                 </td>
                                 <td class="hidden lg:table-cell">
                                     <span>{{ $academicProgram->code }}</span>

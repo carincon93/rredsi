@@ -42,7 +42,7 @@
                                     <span>{{ $researchGroup->name }}</span>
                                 </td>
                                 <td class="hidden sm:table-cell">
-                                    <span>{{ $researchGroup->educationalInstitutionFaculty->name }}</span>
+                                    <span>{{ optional($researchGroup->educationalInstitutionFaculty)->name }}</span>
                                 </td>
                                 <td class="hidden lg:table-cell">
                                     <span>{{ $researchGroup->email }}</span>

@@ -85,12 +85,12 @@
                                     </div>
                                     <div class="flex-grow ">
                                         <h2 class=" text-xl title-font font-medium mb-3">
-                                            {{ $graduation->academicProgram->academic_level }} en {{ $graduation->academicProgram->name }}
+                                            {{ $graduation->academicProgram->academic_level }} en {{ optional($graduation->academicProgram)->name }}
                                         </h2>
                                     </div>
                                 </div>
                                 <div class="rounded bg-white p-4 transform translate-x-6 -translate-y-6 shadow">
-                                    <p class="text-gray-400"><small>Institución educativa: {{ $graduation->academicProgram->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
+                                    <p class="text-gray-400"><small>Institución educativa: {{ optional($graduation->academicProgram)->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
                                     <p class="leading-relaxed text-sm text-justify">
                                         <small>{{ $graduation->is_graduated ? "Año de grado $graduation->year" : 'Estudiante' }}</small>
                                     </p>
@@ -127,8 +127,8 @@
                                     </div>
                                 </div>
                                 <div class="rounded bg-white p-4 transform translate-x-6 -translate-y-6 shadow">
-                                    <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
-                                    <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->educationalInstitutionFaculty->name }}</small></p>
+                                    <p class="text-gray-400"><small>Institución educativa: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
+                                    <p class="text-gray-400"><small>Grupo de investigación: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->name }}</small></p>
                                 </div>
                             </div>
                         @endforeach
@@ -167,8 +167,8 @@
                                   $researchTeam = $project->researchTeams()->where('is_principal', 1)->first();
                                 @endphp
                                 <div class="rounded bg-white p-4 transform translate-x-6 -translate-y-6 shadow">
-                                    <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
-                                    <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->educationalInstitutionFaculty->name }}</small></p>
+                                    <p class="text-gray-400"><small>Institución educativa: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
+                                    <p class="text-gray-400"><small>Grupo de investigación: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->name }}</small></p>
                                     <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
                                 </div>
                             </div>

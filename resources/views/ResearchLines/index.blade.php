@@ -36,7 +36,7 @@
                                     <span>{{ $researchLine->name }}</span>
                                 </td>
                                 <td class="hidden sm:table-cell">
-                                    <span>{{ $researchLine->researchGroup->name }}</span>
+                                    <span>{{ optional($researchLine->researchGroup)->name }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

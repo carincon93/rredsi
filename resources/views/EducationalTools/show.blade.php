@@ -27,7 +27,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Educational environment') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $educationalTool->educationalEnvironment->name }}
+                            {{ optional($educationalTool->educationalEnvironment)->name }}
                         </p>
                     </div>
                 </div>

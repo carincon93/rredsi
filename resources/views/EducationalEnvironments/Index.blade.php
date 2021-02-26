@@ -39,7 +39,7 @@
                                     <span>{{ $educationalEnvironment->name }}</span>
                                 </td>
                                 <td class="hidden sm:table-cell">
-                                    <span>{{ $educationalEnvironment->educationalInstitutionFaculty->name }}</span>
+                                    <span>{{ optional($educationalEnvironment->educationalInstitutionFaculty)->name }}</span>
                                 </td>
                                 <td class="hidden lg:table-cell">
                                     <span>{{ $educationalEnvironment->type }}</span>

@@ -36,15 +36,15 @@
                         @foreach ($events as $event)
                             <tr class="bg-white">
                                 <td>
-                                    <span>{{ $event->event->name }}</span>
+                                    <span>{{ optional($event->event)->name }}</span>
                                 </td>
 
                                 <td class="hidden sm:table-cell">
-                                    <span>{{ $event->event->location }}</span>
+                                    <span>{{ optional($event->event)->location }}</span>
                                 </td>
 
                                 <td class="hidden lg:table-cell">
-                                    <span>{{ $event->event->datesForHumans }}</span>
+                                    <span>{{ optional($event->event)->datesForHumans }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

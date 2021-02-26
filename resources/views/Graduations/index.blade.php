@@ -37,11 +37,11 @@
                             <tr class="bg-white">
 
                                 <td>
-                                    <span>{{ $userGraduation->academicProgram->name }}</span>
+                                    <span>{{ optional($userGraduation->academicProgram)->name }}</span>
                                 </td>
 
                                 <td>
-                                    <span>{{ $userGraduation->academicProgram->educationalInstitutionFaculty->educationalInstitution->name }}</span>
+                                    <span>{{ optional($userGraduation->academicProgram)->educationalInstitutionFaculty->educationalInstitution->name }}</span>
                                 </td>
 
                                 <td>

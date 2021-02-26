@@ -42,7 +42,7 @@
                                 </td>
 
                                 <td class="hidden sm:table-cell">
-                                    <span>{{ $project->projectType->type }}</span>
+                                    <span>{{ optional($project->projectType)->type }}</span>
                                 </td>
 
                                 <td class="hidden pl-1 xl:pl-0 lg:table-cell">

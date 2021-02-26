@@ -27,7 +27,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Administrator') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $educationalInstitution->administrator->name }}
+                            {{ optional($educationalInstitution->administrator)->name }}
                         </p>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('State') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $educationalInstitution->node->state }}
+                            {{ optional($educationalInstitution->node)->state }}
                         </p>
                     </div>
                 </div>

@@ -37,7 +37,7 @@
                                     <span>{{ $knowledgeSubarea->name }}</span>
                                 </td>
                                 <td class="hidden sm:block">
-                                    <span>{{ $knowledgeSubarea->knowledgeArea->name }}</span>
+                                    <span>{{ optional($knowledgeSubarea->knowledgeArea)->name }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">
