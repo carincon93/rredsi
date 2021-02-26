@@ -28,9 +28,9 @@
     }
 
     .scroll:hover {
-        overflow-y: scroll;
+        vertical-align: bottom;
+        overflow: auto;
     }
-
 
     </style>
 
@@ -44,19 +44,44 @@
                     <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                 </svg>
             </button>
-            <a class="m-auto pr-3 md:pr-0 md:justify-center py-3" href="{{ route('nodes.dashboard', [request()->route('node') ? request()->route('node') : 1]) }}"><!-- Quemado -->
+            <a class="m-auto pl-14 md:pl-0 md:pr-0 md:justify-center py-3" href="{{ route('nodes.dashboard', [request()->route('node') ? request()->route('node') : 1]) }}"><!-- Quemado -->
                 <x-jet-application-mark class="block h-9 w-auto" />
             </a>
+
+            {{-- Logout//salir --}}
+            <div class="block md:hidden mt-1">
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <div class="flex justify-end">
+                        <div class="block">
+                            <x-jet-dropdown-link href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+
+                            {{ __('Logout') }}
+
+                            <svg class="inline-block p-0 m-0 h-6 w-6 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+
+                            </x-jet-dropdown-link>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
 
         </div>
         {{-- links_sidebar --}}
       <nav :class="{'block': open, 'hidden': !open}" class="scroll flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
 
         @if (request()->route('node'))
-        @php
-            $node = request()->route('node');
-        @endphp
-    @endif
+            @php
+                $node = request()->route('node');
+            @endphp
+        @endif
+
 
         @if (request()->route('node'))
             @if( Auth::user()->hasRole("Administrador") || Auth::user()->hasRole("Coordinador") )
@@ -98,7 +123,7 @@
 
         @if( Auth::user()->hasRole('Administrador')  )
 
-                <a href="{{ route('knowledge-areas.index') }}" class="w-full flex items-center mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                <a href="{{ route('knowledge-areas.index') }}" class="w-full flex items-center mt-2 md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                     <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
                         <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
                     </svg>
@@ -145,7 +170,7 @@
         @endphp
 
         @if( Auth::user()->hasRole('Estudiante') && $node != null )
-            <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$educationalInstitutionFaculty,$researchGroup,$researchTeam]) }}" class="w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$educationalInstitutionFaculty,$researchGroup,$researchTeam]) }}" class="mt-2 md:mt-0 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
                     <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
                 </svg>
@@ -164,17 +189,20 @@
                     <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </button>
                 <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg">
-                    <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+                    <div class="px-2 py-2 pb-10 md:pb-0 bg-white rounded-md shadow dark-mode:bg-gray-800">
 
                             @php
                                 $educationalInstitution = request()->route('educational_institution');
+                                $node = request()->route('node');
+                                $faculty = request()->route('faculty');
                             @endphp
-                            <a href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}" id="faculties" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
-                                    <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
-                                </svg>
-                                <span class="text-gray-700">{{ __('Faculties') }}</span>
-                            </a>
+
+                                <a href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}" id="faculties" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                                    <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
+                                        <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
+                                    </svg>
+                                    <span class="text-gray-700">{{ __('Faculties') }}</span>
+                                </a>
 
                         @if (request()->route('faculty'))
                             @php
@@ -217,6 +245,48 @@
 
         @endif
 
+        {{-- Administrar perfil --}}
+
+        <div class="block md:hidden mt-2">
+            {{-- <x-drop-down-profile /> --}}
+            <div class="ml-2 space-x-4 flex justify-start">
+                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                    <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                        <img class="inline-block object-cover w-12 h-12 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                    </button>
+                @else
+                    <button class="flex items-center text-sm font-medium text-gray-600 hover:text-gray-400 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                        <div>{{ Auth::user()->name }}</div>
+
+                        <div class="ml-1">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </button>
+                @endif
+                <p class="w-auto m-auto md:hidden">{{ Auth::user()->name }}</p>
+            </div>
+
+            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                {{ __('Profile') }}
+                <svg class="inline p-0 m-0 h-5 w-6 mr-2 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+            </x-jet-dropdown-link>
+
+            <!-- Authentication -->
+            {{-- <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                    {{ __('Logout') }}
+                </x-jet-dropdown-link>
+            </form> --}}
+
+        </div>
 
 
         {{-- dropdown ini --}}

@@ -1,24 +1,28 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-display text-white text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{ __('Project') }}
-            <span class="text-base sm:text-3xl block text-purple-300">
-                Show project info
-            </span>
-        </h2>
-        <div>
-            @can('edit_project')
-            <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.edit', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
-                <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Edit project') }}
-                </div>
-            </a>
+    <div class="mx-auto md:mx-0 grid grid-cols-6 gap-4   xl:grid-cols-9 xl:gap-3">
+        <div class="col-start-1 col-span-5 ml-5 md:ml-0 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+                <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+                    {{ __('Project') }}
+                    <span class="text-base sm:text-3xl block text-purple-300">
+                        Show project info
+                    </span>
+                </h2>
+            </div>
+            <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 lg:ml-16 xl:ml-80 xl:col-end-12 xl:col-span-2 m-auto">
+                @can('edit_project')
+                <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.edit', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
+                    <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                        {{ __('Edit project') }}
+                    </div>
+                </a>
             @endcan
         </div>
+    </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto py-2 md:py-10 sm:px-6 lg:px-8">
             <div class="flex flex-wrap" id="tabs-id">
                 <div class="w-full">
                     <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
@@ -93,7 +97,7 @@
 
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div>
-                                                <h3 class="text-lg font-medium text-gray-900">Información del proyecto</h3>
+                                                <h3 class="text-lg font-medium mt-2 md:mt-0 text-gray-900">Información del proyecto</h3>
                                             </div>
                                             <div class="mt-5 md:mt-0 md:col-span-2">
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -297,7 +301,7 @@
                                 <div>
                                     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                                         <div class="md:col-span-1">
-                                            <h3 class="text-lg font-medium text-gray-900">Información de <br> research outputs</h3>
+                                            <h3 class="text-lg font-medium text-gray-900">Información de <br> productos de investigación</h3>
                                         </div>
                                         @foreach ($project->researchOutputs as $researchOutput)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
