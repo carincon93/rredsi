@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\KnowledgeSubareaDiciplinesController;
 use App\Http\Controllers\Api\EducationalInstitutionController;
 use App\Http\Controllers\Api\AcademicProgramController;
 use App\Http\Controllers\Api\FacultiesController;
+use App\Http\Controllers\Api\ProjectController;
+
 
 
 /*
@@ -34,5 +36,6 @@ Route::apiResources([
     'knowledge-areas' => KnowledgeAreasController::class,
     'knowledge-areas.knowledge-subareas' => KnowledgeSubareasController::class,
     'knowledge-areas.knowledge-subareas.knowledge-subarea-disciplines' => KnowledgeSubareaDiciplinesController::class,
+    'projects.authors' => ProjectController::class,
 
 ]);

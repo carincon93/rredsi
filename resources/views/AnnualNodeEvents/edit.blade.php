@@ -80,19 +80,6 @@
                         <x-jet-input-error for="info_link" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Is annual event?') }} </p>
-                    <div class="block mt-4">
-                        <label for="is_annual_event_yes" class="flex items-center">
-                            <input id="is_annual_event_yes" value="1" type="radio" class="form-radio" name="is_annual_event" {{ old('is_annual_event') == 1 || $event->is_annual_event == 1 ? "checked" : "" }}}>
-                            <span class="ml-2 text-sm text-gray-600">{{ __('Yes') }}</span>
-                        </label>
-                        <label for="is_annual_event_no" class="flex items-center">
-                            <input id="is_annual_event_no" value="0" type="radio" class="form-radio" name="is_annual_event" {{ old('is_annual_event') != null && old('is_annual_event') == 0 || $event->is_annual_event == false ? "checked" : "" }}>
-                            <span class="ml-2 text-sm text-gray-600">{{ __('No') }}</span>
-                        </label>
-                        <x-jet-input-error for="is_annual_event" class="mt-2" />
-                    </div>
-
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Edit') }}

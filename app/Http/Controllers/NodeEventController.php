@@ -6,8 +6,15 @@ use App\Models\KnowledgeArea;
 
 use App\Models\Node;
 use App\Models\Event;
+use App\Models\AnnualNodeEvent;
+
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\AnnualNodeEventRequest;
+use App\Models\Project;
+
+
 use App\Models\NodeEvent;
 use Illuminate\Http\Request;
 
@@ -63,7 +70,8 @@ class NodeEventController extends Controller
 
         $event->nodeEvent()->create([
             'id'        => $event->id,
-            'node_id'   => $node->id
+            'node_id'   => $node->id,
+            'is_annual_event' => $request->get('is_annual_event')
         ]);
 
         if($event->save()){
@@ -120,6 +128,8 @@ class NodeEventController extends Controller
         $event->end_date        = $request->get('end_date');
         $event->register_link   = $request->get('register_link');
         $event->info_link       = $request->get('info_link');
+        $event->is_annual_event = $request->get('is_annual_event');
+
 
         $event->nodeEvent()->update([
             'node_id'   => $node->id
@@ -171,13 +181,42 @@ class NodeEventController extends Controller
     public function rredsiEventRegister(Node $node)
     {
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+        $events = Event::orderBy('name')->get();
+        $annualEvent ="";
 
-        $projects           = auth()->user()->projects;
-        $researchTeams      = auth()->user()->researchTeams;
-        $educationalInstitutionFacultiesacademicPrograms   = auth()->user()->educationalInstitutionFaculties()->with('academicPrograms')->get();
-        $educationalInstitutionFacultiesUsers              = auth()->user()->educationalInstitutionFaculties()->with('members')->get();
+        foreach ($events as $event ) {
 
-        return view('Explorer.rredsi-event-register', compact('node', 'knowledgeAreas', 'educationalInstitutionFacultiesUsers', 'projects', 'researchTeams', 'educationalInstitutionFacultiesacademicPrograms'));
+            $dateEvent = strtotime($event->start_date);
+            $yearEvent = date("Y", $dateEvent);
+
+
+            if($yearEvent == date('Y') ){
+
+                if($event->nodeEvent()->where('is_annual_event',1)){
+                    // return $annualEvent;
+
+                    $annualEvent = $event->nodeEvent()->where('is_annual_event',1)->first();
+
+                    $projects           = auth()->user()->projects;
+                    $researchTeams      = auth()->user()->researchTeams;
+                    $educationalInstitutionFacultiesacademicPrograms   = auth()->user()->educationalInstitutionFaculties()->with('academicPrograms')->get();
+                    $educationalInstitutionFacultiesUsers              = auth()->user()->educationalInstitutionFaculties()->with('members')->get();
+
+                     return view('Explorer.rredsi-event-register', compact('node', 'knowledgeAreas', 'educationalInstitutionFacultiesUsers', 'projects', 'researchTeams', 'educationalInstitutionFacultiesacademicPrograms','annualEvent'));
+
+                }
+            }
+
+        }
+
+
+
+
     }
+
+
+
+
+
 }
 

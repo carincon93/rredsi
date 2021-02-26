@@ -28,6 +28,7 @@ use App\Http\Controllers\NodeEventController;
 use App\Http\Controllers\LegalInformationController;
 use App\Http\Controllers\AnnualNodeEventController;
 use App\Http\Livewire\ModelForm;
+use App\Models\NodeEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ use App\Http\Livewire\ModelForm;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications')->middleware(['auth']);
 Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('/');
@@ -60,16 +62,29 @@ Route::post('/notifications/sendProjectToEvent', [NotificationController::class,
 Route::post('/notifications/acceptStudent', [NotificationController::class, 'acceptStudent'])->name('notifications.acceptStudent')->middleware(['auth']);
 
 
+Route::post('/annual-node-events/register-annual-node-events/{node}',[AnnualNodeEventController::class, 'registerAnnualNodeEvents'])->name('annualNodeEvent.registerAnnualNodeEvents')->middleware(['auth']);
+
+
 Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show')->middleware(['auth']);
 Route::get('/notificationsIndexSend/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend')->middleware(['auth']);
+Route::get('/annual-node-event/{project}', [AnnualNodeEventController::class, 'show'])->name('annualNodeEvent.show')->middleware(['auth']);
+
 
 Route::resource('/notifications', NotificationController::class, [
     'names' => [
         'index'           => 'notifications.index',
-        // 'show'      => 'notifications.show',
         'destroy'         => 'notifications.destroy'
     ]
 ]);
+
+
+Route::resource('/annual-node-event', AnnualNodeEventController::class,[
+    'names'=>[
+        'index'   => 'annualNodeEvent.index',
+        'update'  => 'annualNodeEvent.update'
+    ]
+])->middleware(['auth']);
+
 
 
 Route::get('preview-emails', function () {

@@ -36,7 +36,7 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.store', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}" enctype="multipart/form-data" id="create-project" novalidate>
+                <form method="POST" action="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.store', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}" enctype="multipart/form-data" id="create-project">
                     @csrf
 
                     <div class="mt-4">

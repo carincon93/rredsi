@@ -72,7 +72,7 @@ class NotificationController extends Controller
         $event = $project->events->find($request->get('event_id'));
 
         $type =[
-            "type" => "Registro de un proyecto a un evento",
+            "type" => "registrar un proyecto a un evento",
             "name_event" => $event->name
         ];
 
@@ -128,17 +128,6 @@ class NotificationController extends Controller
     public function index() {
 
         $user = auth()->user();
-
-        // $users = [];
-        // $node = $user->isNodeAdmin;
-        // $intitutions = $node->educationalInstitutions;
-        // $users = [];
-
-        // foreach ($intitutions as $intitution) {
-        //     array_push($users,$intitution->administrator);
-        // }
-
-        // return $users;
 
         return view('EducationalInstitutionUsers.index-notifications', compact('user'));
     }
