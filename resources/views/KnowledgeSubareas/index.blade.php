@@ -54,9 +54,8 @@
                                     <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Name') }}</span>
                                     <p>{{ $knowledgeSubarea->name }}</p>
                                 </td>
-                                <td>
-                                    <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Knowledge area') }}</span>
-                                    <p class="row-2">{{ $knowledgeSubarea->knowledgeArea->name }}</p>
+                                <td class="hidden sm:block">
+                                    <span>{{ optional($knowledgeSubarea->knowledgeArea)->name }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

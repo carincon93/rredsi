@@ -27,7 +27,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Name') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $node->administrator->name }}
+                            {{ optional($node->administrator)->name }}
                         </p>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Cellphone number') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $node->administrator->cellphone_number }}
+                            {{ optional($node->administrator)->cellphone_number }}
                         </p>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Email') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $node->administrator->email }}
+                            {{ optional($node->administrator)->email }}
                         </p>
                     </div>
                 </div>

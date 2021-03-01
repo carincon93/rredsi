@@ -9,6 +9,9 @@ use App\Models\ResearchGroup;
 use App\Http\Requests\EducationalInstitutionRequest;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\InformationNotification;
+
 use Illuminate\Support\Facades\Storage;
 
 class EducationalInstitutionController extends Controller
@@ -23,7 +26,6 @@ class EducationalInstitutionController extends Controller
         $this->authorize('viewAny', [EducationalInstitution::class, $node]);
 
         $educationalInstitutions = $node->educationalInstitutions()->orderBy('name')->get();
-
         return view('EducationalInstitutions.index', compact('node', 'educationalInstitutions'));
     }
 
@@ -61,8 +63,22 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->node()->associate($node);
 
         if($educationalInstitution->save()){
+
+            $intitutions = $node->educationalInstitutions;
+                $users = [];
+
+            foreach ($intitutions as $intitution) {
+                if(!is_null($intitution->administrator) ){
+                    array_push($users,$intitution->administrator);
+                }
+            }
+
+            $type = "Institución educativa";
+            Notification::send($users, new InformationNotification($educationalInstitution,$type));
+
             $message = 'Your store processed correctly';
         }
+
 
         return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);
     }
@@ -162,4 +178,5 @@ class EducationalInstitutionController extends Controller
 
         return view('EducationalInstitutions.bi', compact('node', 'educationalInstitution'));
     }
+
 }

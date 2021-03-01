@@ -12,6 +12,9 @@ use App\Models\ResearchTeam;
 use App\Models\Project;
 
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\InformationNotification;
+
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\ProjectRequest;
@@ -129,6 +132,16 @@ class ProjectController extends Controller
             $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
             $project->academicPrograms()->attach($request->get('academic_program_id'));
             $project->authors()->attach($request->get('user_id'));
+
+            // Send notification student create researchTeam
+            $user = auth()->user();
+            $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+            $educationalInstitution = $faculty->educationalInstitution;
+            $adminInstitution = $educationalInstitution->administrator;
+
+            $type = "Proyecto";
+            Notification::send($adminInstitution, new InformationNotification($project,$type));
+
             $message = 'Your store processed correctly';
         }
 

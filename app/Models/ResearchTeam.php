@@ -62,7 +62,7 @@ class ResearchTeam extends Model
     }
 
     public function members() {
-        return $this->belongsToMany('App\Models\User')
+        return $this->belongsToMany('App\Models\User','research_team_members')
             ->withPivot([
                 'comment',
                 'accepted_at',

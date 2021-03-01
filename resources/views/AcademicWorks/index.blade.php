@@ -42,7 +42,7 @@
                                     <span>{{ $userAcademicWork->title }}</span>
                                 </td>
                                 <td>
-                                    <span>{{ $userAcademicWork->knowledgeArea->name }}</span>
+                                    <span>{{ optional($userAcademicWork->knowledgeArea)->name }}</span>
                                 </td>
                                 <td>
                                     <span>{{ $userAcademicWork->type }}</span>

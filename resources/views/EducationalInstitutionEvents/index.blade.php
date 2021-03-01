@@ -37,15 +37,15 @@
                             <tr class="bg-white">
 
                                 <td>
-                                    <span>{{ $event->event->name }}</span>
+                                    <span>{{ optional($event->event)->name }}</span>
                                 </td>
 
                                 <td>
-                                    <span>{{ $event->event->location }}</span>
+                                    <span>{{ optional($event->event)->location }}</span>
                                 </td>
 
                                 <td>
-                                    <span>{{ $event->event->datesForHumans }}</span>
+                                    <span>{{ optional($event->event)->datesForHumans }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

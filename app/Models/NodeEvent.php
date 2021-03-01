@@ -15,6 +15,7 @@ class NodeEvent extends Model
      */
     protected $fillable = [
         'node_id',
+        'is_annual_event',
     ];
 
     public function event() {

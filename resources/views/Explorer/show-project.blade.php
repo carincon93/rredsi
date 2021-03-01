@@ -3,7 +3,7 @@
     <x-guest-header :node="$node" :image="$project->main_image">
         <x-slot name="title">
             <h1 class="text-3xl sm:text-3xl tracking-tight font-extrabold leading-none">
-                <span class="block text-blue-900 xl:inline"> 
+                <span class="block text-blue-900 xl:inline">
                     {{ $project->title }}
                 </span>
             </h1>
@@ -29,7 +29,7 @@
     </x-guest-header>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-8 mt-4">
                 <h1 class="text-2xl mt-12 ml-16">{{ __('Authors') }}</h1>
                 @forelse ($project->authors->chunk(3) as $chunk)
@@ -49,22 +49,22 @@
                                         @endif
                                     </div>
                                     <div class="flex-grow ">
-                                        
+
                                         <h2 class=" text-xl title-font font-medium mb-3">
                                             <a href="{{ route('nodes.explorer.searchRoles.showUser', [$node, $author]) }}" target="_blank">{{ $author->name }}</a>
                                         </h2>
                                         <p class="leading-relaxed text-sm text-justify">
                                             <small></small>
                                         </p>
-                                        
+
                                         @php
                                             $researchTeam = $project->researchTeams()->where('is_principal', 1)->first();
                                         @endphp
                                     </div>
                                 </div>
                                 <div class="rounded bg-white p-4 transform translate-x-6 -translate-y-6 shadow">
-                                    <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
-                                    <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->educationalInstitutionFaculty->name }}</small></p>
+                                    <p class="text-gray-400"><small>Institución educativa: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
+                                    <p class="text-gray-400"><small>Grupo de investigación: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->name }}</small></p>
                                     <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
     </div>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-8 mt-4">
 
                 <h1 class="text-2xl text-center mb-12 mt-12">{{ __('Roles requirements description') }}</h1>
@@ -145,7 +145,7 @@
                     </ul>
                 </div>
 
-                <div class="mt-10 flex items-center">
+                <div class="modal-open mt-10 flex items-center">
                     <x-jet-button class="m-auto inline-flex">
                         {{ __('I want to participate') }}
 
@@ -154,10 +154,17 @@
                         </div>
                     </x-jet-button>
                 </div>
+
             </div>
         </div>
     </div>
 
     <x-footer />
+
+    <x-dialog-modal-form-project :node="$node" :project="$project"/>
+
+    @if (session('status'))
+        <x-data-alert />
+    @endif
 
 </x-guest-layout>

@@ -46,9 +46,8 @@
                                     <p>{{ $project->title }}</p>
                                 </td>
 
-                                <td>
-                                    <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Type') }}</span>
-                                    <p class="row-auto">{{ $project->projectType->type }}</p>
+                                <td class="hidden sm:table-cell">
+                                    <span>{{ optional($project->projectType)->type }}</span>
                                 </td>
 
                                 <td>
