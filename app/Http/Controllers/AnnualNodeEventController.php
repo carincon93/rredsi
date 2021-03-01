@@ -9,6 +9,8 @@ use App\Models\Project;
 
 use App\Models\AnnualNodeEvent;
 use App\Http\Requests\AnnualNodeEventRequest;
+use App\Models\Event;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,12 +40,10 @@ class AnnualNodeEventController extends Controller
 
 
         $nodeEvents = $node->nodeEvents->where('is_annual_event',1)->first();
-        // $annualNodeEvent = NodeEvent::where('is_annual_event',1)->first();
+        $annualNodeEvent = $nodeEvents->annualNodeEvent;
 
-        // $projects = $annualNodeEvent->nodeEvent->event->projects;
-        // $event = $annualNodeEvent->nodeEvent->event;
-
-        // return NodeEvent::where('is_annual_event',1)->first() ;
+        $projects = $annualNodeEvent->nodeEvent->event->projects;
+        $event = $annualNodeEvent->nodeEvent->event;
 
         return view('AnnualNodeEvents.index', compact('node', 'projects','event'));
     }
@@ -138,7 +138,73 @@ class AnnualNodeEventController extends Controller
      */
     public function update(Request $request, AnnualNodeEvent $annualNodeEvent)
     {
-        return $request;
+        // return $annualNodeEvent;
+
+        try {
+            //code...
+            $project      = Project::findOrFail($request->get('project_id'));
+            $researchGroup  = $project->researchTeams()->where('is_principal',1)->first()->researchGroup;
+            $faculty = $researchGroup->educationalInstitutionFaculty;
+
+            if($faculty){
+                $educationalInstitution = $faculty->educationalInstitution;
+                $adminInstitution =  $educationalInstitution->administrator;
+            }
+
+            $first_speaker =  User::findOrFail($annualNodeEvent->first_speaker_id);
+            $second_speaker =  User::findOrFail($annualNodeEvent->second_speaker_id);
+
+            if(!is_null($request->get('comments'))){
+
+                $type = [
+                    "case" => "Respuesta a su solicitud de participación en el evento anual",
+                    "comments" => $request->get('comments'),
+                    "annualEventResponse" => "Rechazad@"
+                ];
+
+                $annualNodeEvent->update([ 'status' => $request->get('status') , 'comments' => $request->get('comments')]);
+
+                // notification admin institution
+                Notification::send($adminInstitution, new InformationNotification($project,$type));
+                // notification first_speaker
+                Notification::send($first_speaker, new InformationNotification($project,$type));
+                // notification second_speaker
+                Notification::send($second_speaker, new InformationNotification($project,$type));
+
+                $message = 'Solicitud denegada con exito';
+                return redirect()->route('annualNodeEvent.index')->with('status', $message);
+
+            }else{
+                $type = [
+                    "case" => "Respuesta a su solicitud de participación en el evento anual",
+                    "comments" => "de cumplir los requerimientos",
+                    "annualEventResponse" => "Aceptad@"
+                ];
+
+                $annualNodeEvent->update([ 'status' => $request->get('status')]);
+
+                // notification admin institution
+                Notification::send($adminInstitution, new InformationNotification($project,$type));
+                // notification first_speaker
+                Notification::send($first_speaker, new InformationNotification($project,$type));
+                // notification second_speaker
+                Notification::send($second_speaker, new InformationNotification($project,$type));
+
+                $message = 'Solicitud aceptada con exito';
+                return redirect()->route('annualNodeEvent.index')->with('status', $message);
+
+            }
+
+
+
+
+        } catch (Exception $e) {
+            return response()->json([
+                'errors' => $e->getMessage()
+            ]);
+        }
+
+
     }
 
     /**
@@ -156,6 +222,42 @@ class AnnualNodeEventController extends Controller
     public function registerAnnualNodeEvents(AnnualNodeEventRequest $request, Node $node)
     {
         try {
+            // Validamos si el proyecto ya esta registrado
+            $user = auth()->user();
+            $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+
+            if($faculty){
+                $node = $faculty->educationalInstitution->node;
+            }
+
+            $nodeEvents = $node->nodeEvents->where('is_annual_event',1)->first();
+            $annualNodeEventRegister = $nodeEvents->annualNodeEvent;
+            $project      = Project::findOrFail($request->get('project_id'));
+            $eventNew     = Event::findOrFail($request->get('event_id'));
+
+            if($annualNodeEventRegister){
+                // proyectos  ya registrados en el evento
+                $projectsRegister = $annualNodeEventRegister->nodeEvent->event->projects;
+
+                foreach ($projectsRegister as $projectRegister) {
+
+                    $eventsOld = $projectRegister->events;
+
+                    foreach ($eventsOld as  $eventOld) {
+
+                        if($eventOld->id == $eventNew->id){
+                            if($projectRegister->id == $project->id){
+                                return redirect()->route('nodes.explorer.roles', [$node])->with('status', "Este proyecto ya se encuentra registrado en este evento");
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+
+
 
             $annualNodeEvent = new AnnualNodeEvent();
             $annualNodeEvent->presentation_type      = $request->get('presentation_type');
@@ -193,13 +295,12 @@ class AnnualNodeEventController extends Controller
             $annualNodeEvent->nodeEvent()->associate($request->get('event_id'));
 
             if($annualNodeEvent->save()){
-                $project      = Project::findOrFail($request->get('project_id'));
                 $project->events()->attach($request->get('event_id'));
                 $message = 'El registro a el evento fue correcto';
 
                 // project authors
-                $authors =  $project->authors;
-                $event = $project->events->find($request->get('event_id'));
+                $authors    =  $project->authors;
+                $event      = Event::findOrFail($request->get('event_id'));
 
                 // admin institution notification
                 $user = auth()->user();

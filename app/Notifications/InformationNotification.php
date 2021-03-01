@@ -72,6 +72,12 @@ class InformationNotification extends Notification
                 "message"       => "Hola {$notifiable->name} se registro el proyecto {$this->data->title} a el evento {$this->type['name_event']}.",
                 "thanksMessage" => "Gracias por tu atención !"
             ];
+        }else if(isset($this->type['annualEventResponse'])){
+            return [
+                "subject"       => " {$this->type['case']} - Ibis",
+                "message"       => "Hola {$notifiable->name} la participacion del proyecto  {$this->data->title } a el evento anual fue {$this->type['annualEventResponse']} por motivos {$this->type['comments']}  .",
+                "thanksMessage" => "Agradecemos su participación !"
+            ];
         }else{
             return [
                 "subject"       => "Se acaba de crear un nuevo {$this->type} - Ibis",

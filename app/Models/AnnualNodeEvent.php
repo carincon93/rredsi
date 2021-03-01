@@ -18,9 +18,12 @@ class AnnualNodeEvent extends Model
         'project_status',
         'endorsement_letter',
         'project_article',
+        'status',
+        'comments',
+        'node_event_id',
     ];
 
     public function nodeEvent() {
-        return $this->belongsTo('App\Models\NodeEvent', 'id');
+        return $this->belongsTo('App\Models\NodeEvent', 'node_event_id');
     }
 }

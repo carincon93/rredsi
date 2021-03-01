@@ -511,26 +511,29 @@
             </div>
     </div>
 
+        @if (is_null($annualNodeEvent->status))
 
-        {{-- Enviar notificacion aceptacion --}}
-        <form method="POST" action="{{ route('annualNodeEvent.update',[$annualNodeEvent]) }}">
-            @csrf()
-            @method('PUT')
+            {{-- Enviar notificacion aceptacion --}}
+            <form method="POST" action="{{ route('annualNodeEvent.update',[$annualNodeEvent]) }}">
+                @csrf()
+                @method('PUT')
 
-            <input hidden id="status" name="status" value="1">
-            <input hidden id="project_id" name="project_id" value="{{$project->id}}">
+                <input hidden id="status" name="status" value="1">
+                <input hidden id="project_id" name="project_id" value="{{$project->id}}">
 
+                <div class="flex items-center justify-center mt-2">
+                    <x-jet-button type="submit">
+                        {{ __('Aceptar') }}
+                    </x-jet-button>
 
-            <div class="flex items-center justify-center mt-2">
-                <x-jet-button type="submit">
-                    {{ __('Aceptar') }}
-                </x-jet-button>
+                    <x-jet-button class="modal-open ml-4">
+                        {{ __('Denegar') }}
+                    </x-jet-button>
+                </div>
+            </form>
 
-                <x-jet-button class="modal-open ml-4">
-                    {{ __('Denegar') }}
-                </x-jet-button>
-            </div>
-        </form>
+        @endif
+
 
 
         {{-- Enviar notificacion de rechazo modal de comentarios --}}
@@ -579,8 +582,8 @@
 
                 <!--Footer-->
                 <div class="flex justify-end pt-2">
-                    <input hidden id="status" name="status" value="0">
-                    <input hidden id="project_id" name="project_id" value="{{$project->id}}">
+                    <input hidden  name="status" value="0">
+                    <input hidden  name="project_id" value="{{$project->id}}">
 
                     <button type="submit" class="px-4 bg-transparent p-3 rounded-lg text-white bg-blue-900 hover:bg-blue-800 mr-2">Enviar</button>
 
