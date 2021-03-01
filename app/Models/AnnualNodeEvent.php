@@ -18,6 +18,9 @@ class AnnualNodeEvent extends Model
         'project_status',
         'endorsement_letter',
         'project_article',
+        'status',
+        'comments',
+        'node_event_id',
     ];
 
     public function nodeEvent() {
