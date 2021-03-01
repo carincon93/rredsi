@@ -3,12 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\NodeController;
-use App\Http\Controllers\Api\KnowledgeAreasController;
-use App\Http\Controllers\Api\KnowledgeSubareasController;
-use App\Http\Controllers\Api\KnowledgeSubareaDiciplinesController;
+use App\Http\Controllers\Api\KnowledgeAreaController;
+use App\Http\Controllers\Api\KnowledgeSubareaController;
+use App\Http\Controllers\Api\KnowledgeSubareaDisciplineController;
 use App\Http\Controllers\Api\EducationalInstitutionController;
 use App\Http\Controllers\Api\AcademicProgramController;
-use App\Http\Controllers\Api\FacultiesController;
+use App\Http\Controllers\Api\EducationalInstitutionFacultyController;
 
 
 /*
@@ -29,10 +29,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResources([
     'nodes' => NodeController::class,
     'nodes.educational-institutions' => EducationalInstitutionController::class,
-    'nodes.educational-institutions.faculties' => FacultiesController::class,
+    'nodes.educational-institutions.faculties' => EducationalInstitutionFacultyController::class,
     'nodes.educational-institutions.academic-programs' => AcademicProgramController::class,
-    'knowledge-areas' => KnowledgeAreasController::class,
-    'knowledge-areas.knowledge-subareas' => KnowledgeSubareasController::class,
-    'knowledge-areas.knowledge-subareas.knowledge-subarea-disciplines' => KnowledgeSubareaDiciplinesController::class,
+    'knowledge-areas' => KnowledgeAreaController::class,
+    'knowledge-areas.knowledge-subareas' => KnowledgeSubareaController::class,
+    'knowledge-areas.knowledge-subareas.knowledge-subarea-disciplines' => KnowledgeSubareaDisciplineController::class,
 
 ]);

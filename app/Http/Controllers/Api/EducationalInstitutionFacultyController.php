@@ -8,7 +8,7 @@ use App\Models\EducationalInstitution;
 use App\Models\EducationalInstitutionFaculty;
 use Illuminate\Http\Request;
 
-class FacultiesController extends Controller
+class EducationalInstitutionFacultyController extends Controller
 {
     /**
      * Display a listing of the resource.

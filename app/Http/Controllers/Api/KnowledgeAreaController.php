@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\KnowledgeArea;
 use Illuminate\Http\Request;
 
-class KnowledgeAreasController extends Controller
+class KnowledgeAreaController extends Controller
 {
     /**
      * Display a listing of the resource.
