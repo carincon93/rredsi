@@ -82,7 +82,7 @@
                                                     <h3 class="text-lg font-medium text-gray-900">{{ __('Project type') }}</h3>
                                                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                                                         <p>
-                                                            {{ $project->projectType->type }}
+                                                            {{ optional($project->projectType)->type }}
                                                         </p>
                                                     </div>
                                                 </div>

@@ -36,7 +36,7 @@
                                     <span>{{ $node->state }}</span>
                                 </td>
                                 <td>
-                                    <span>{{ $node->administrator->name }}</span>
+                                    <span>{{ optional($node->administrator)->name }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

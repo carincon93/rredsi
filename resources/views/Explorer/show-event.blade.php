@@ -37,7 +37,7 @@
                   </svg>
                 <p class="mt-2 inline-flex">{{ __('Host') }}</p>
                 <p class="text-gray-400 ml-8">
-                    <small>{{ $event->nodeEvent->node->state ?? $event->educationalInstitutionEvent->educationalInstitution->name }}</small>
+                    <small>{{ optional($event->nodeEvent)->node->state ?? optional($event->educationalInstitutionEvent)->educationalInstitution->name }}</small>
                 </p>
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-7 mb-4 mt-2 inline-flex">
@@ -62,7 +62,7 @@
                 <h1 class="text-2xl inline-flex">{{ __('Knowledge subarea disciplines') }}</h1>
                 <p class="text-gray-400 ml-8">
                     @forelse ($event->knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
-                        @if ($knowledgeSubareaDiscipline !== $event->knowledgeSubareaDisciplines->last())
+                        @if ($knowledgeSubareaDiscipline !== optional($event->knowledgeSubareaDisciplines)->last())
                             <a class="underline" href="{{ route('nodes.explorer.events', [$node, 'search' => $knowledgeSubareaDiscipline->name]) }}"><small>{{ $knowledgeSubareaDiscipline->name }},</small></a>
                         @else
                             <a class="underline" href="{{ route('nodes.explorer.events', [$node, 'search' => $knowledgeSubareaDiscipline->name]) }}"><small>{{ $knowledgeSubareaDiscipline->name }}</small></a>
