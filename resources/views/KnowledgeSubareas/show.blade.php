@@ -33,7 +33,7 @@
                         </li>
                         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                             <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-blue-900 bg-white" onclick="changeActiveTab(event,'tab-settings')">
-                                {{ __('Knowledge area') }}
+                                {{ __('Knowledge area') }} 
                             </a>
                         </li>
                         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
@@ -82,7 +82,7 @@
                                                 <h3 class="text-lg font-medium text-gray-900">{{ __('Name') }}</h3>
                                                 <div class="mt-3 max-w-xl text-sm text-gray-600">
                                                     <p>
-                                                        {{ $knowledgeSubarea->knowledgeArea->name }}
+                                                        {{ optional($knowledgeSubarea->knowledgeArea)->name }}
                                                     </p>
                                                 </div>
                                             </div>

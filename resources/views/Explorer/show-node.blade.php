@@ -17,7 +17,7 @@
                     data.addRows([
                         [{'v': '{{ $node->administrator->name }}', 'f':'{{ $node->administrator->name }}<div style="color:red; font-style:italic">Coordinador(a)</div>'}, '', ''],
                         @foreach($node->educationalInstitutions as $educationalInstitution)
-                            @if($educationalInstitution->administrator->name == $node->administrator->name)
+                            @if(optional($educationalInstitution->administrator)->name == optional($node->administrator)->name)
                                 [{'v': '{{ $educationalInstitution->administrator->name }} ', 'f':'{{ $educationalInstitution->administrator->name }} <div style="color:red; font-style:italic">{{ $educationalInstitution->name }}</div>'}, '{{ $node->administrator->name }}', ''],
                             @else
                                 [{'v': '{{ $educationalInstitution->administrator->name }}', 'f':'{{ $educationalInstitution->administrator->name }}<div style="color:red; font-style:italic">{{ $educationalInstitution->name }}</div>'}, '{{ $node->administrator->name }}', ''],

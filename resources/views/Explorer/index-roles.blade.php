@@ -13,7 +13,7 @@
         </x-slot>
         <x-slot name="textBase">
             Fortalezca los resultados de su proyecto conectando con jóvenes investigadores de otras áreas de conocimiento y de instituciones educativas cómo:
-            @foreach ($node->educationalInstitutions->shuffle()->take(10) as $educationalInstitution)
+            @foreach (optional($node->educationalInstitutions)->shuffle()->take(10) as $educationalInstitution)
                 {{ $educationalInstitution->name }},
             @endforeach
         </x-slot>
@@ -28,7 +28,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 mt-4">
                 <h1 class="text-center text-2xl text-center mb-12">A continuación se muestran los programas de formación de las {{ $node->educationalInstitutions->count() }} instituciones educativas adscritas a RREDSI Nodo {{ $node->state }}. Selecciona un programa de formación y conecta con estudiantes o profesionales.</h1>
-                @forelse ($node->academicPrograms->chunk(3) as $chunk)
+                @forelse (optional($node->academicPrograms)->chunk(3) as $chunk)
                     <div class="flex items-center justify-between mb-4">
                         @foreach ($chunk as $academicProgram)
                             <div>

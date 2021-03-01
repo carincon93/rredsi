@@ -80,7 +80,7 @@
                                     </small>
                                 </p>
                                 <p class="mt-2">Información académica:</p>
-                                @forelse ($roleMember->userGraduations->take(3)->chunk(3) as $chunk)
+                                @forelse (optional($roleMember->userGraduations)->take(3)->chunk(3) as $chunk)
                                     <div class="mt-4 md:grid md:grid-cols-3 md:gap-4">
                                         @foreach ($chunk as $graduation)
                                             <div class="md:mb-0 mb-6 flex flex-col">
@@ -88,7 +88,7 @@
                                                     <div class="flex-grow ">
                                                         <h2 class=" text-xl title-font font-medium mb-3">
                                                             <a href="{{ route('nodes.explorer.searchRoles', [$node, $graduation->academicProgram]) }}">
-                                                                {{ $graduation->academicProgram->academic_level }} en {{ $graduation->academicProgram->name }}
+                                                                {{ optional($graduation->academicProgram)->academic_level }} en {{ optional($graduation->academicProgram)->name }}
                                                             </a>
                                                         </h2>
                                                     </div>

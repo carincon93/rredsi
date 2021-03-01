@@ -49,18 +49,15 @@
                         @foreach ($events as $event)
                             <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                                 <td>
-                                    <span class="p-0 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Name') }}</span>
-                                    <p>{{ $event->event->name }}</p>
+                                    <span>{{ optional($event->event)->name }}</span>
                                 </td>
 
-                                <td >
-                                    <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Location') }}</span>
-                                    <p class="row-3" >{{ $event->event->location }}</p>
+                                <td class="hidden sm:table-cell">
+                                    <span>{{ optional($event->event)->location }}</span>
                                 </td>
 
-                                <td >
-                                    <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 text-xs font-bold uppercase block">{{ __('Date') }}</span>
-                                    <p class="row-3">{{ $event->event->datesForHumans}}</p>
+                                <td class="hidden lg:table-cell">
+                                    <span>{{ optional($event->event)->datesForHumans }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

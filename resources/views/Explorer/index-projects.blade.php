@@ -35,7 +35,7 @@
                                         </div>
                                         <div style="padding-top: 0.2em; padding-bottom: 0.2rem" class="ml-2 inline-flex items-center space-x-1 text-xs px-2 bg-gray-200 text-gray-800 rounded-full mb-4">
                                             <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-50 rounded-full"></div>
-                                            <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $project->projectType->type]) }}" class="text-gray-400 uppercase ml-2"><small>{{ $project->projectType->type }}</small></a>
+                                            <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $project->projectType->type]) }}" class="text-gray-400 uppercase ml-2"><small>{{ optional($project->projectType)->type }}</small></a>
                                         </div>
                                     </div>
                                     <div class="flex-grow ">
@@ -61,8 +61,8 @@
                                     </div>
                                 </div>
                                 <div class="rounded bg-white p-4 transform translate-x-6 -translate-y-6 shadow">
-                                    <p class="text-gray-400"><small>Institución educativa: {{ $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
-                                    <p class="text-gray-400"><small>Grupo de investigación: {{ $researchTeam->researchGroup->name }}</small></p>
+                                    <p class="text-gray-400"><small>Institución educativa: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
+                                    <p class="text-gray-400"><small>Grupo de investigación: {{ optional($researchTeam->researchGroup)->name }}</small></p>
                                     <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
                                 </div>
                             </div>

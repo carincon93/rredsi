@@ -43,9 +43,8 @@
                                     <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Name') }}</span>
                                     <p>{{ $educationalEnvironment->name }}</p>
                                 </td>
-                                <td>
-                                    <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Educational institution faculty') }}</span>
-                                    <p class="row-auto">{{ $educationalEnvironment->educationalInstitutionFaculty->name }}</p>
+                                <td class="hidden sm:table-cell">
+                                    <span>{{ optional($educationalEnvironment->educationalInstitutionFaculty)->name }}</span>
                                 </td>
                                 <td>
                                     <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Type') }}</span>

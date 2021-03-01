@@ -31,7 +31,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Knowledge area') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $researchLine->knowledgeArea->name }}
+                            {{ optional($researchLine->knowledgeArea)->name }}
                         </p>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Research group') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{ $researchLine->researchGroup->name }}
+                            {{ optional($researchLine->researchGroup)->name }}
                         </p>
                     </div>
                 </div>

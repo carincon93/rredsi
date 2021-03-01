@@ -28,7 +28,7 @@
                         <h3 class="text-lg font-medium text-gray-900">{{ __('Academic program') }}</h3>
                         <div class="mt-3 max-w-xl text-sm text-gray-600">
                             <p>
-                                {{ $userGraduation->academicProgram->name }}
+                                {{ optional($userGraduation->academicProgram)->name }}
                             </p>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <h3 class="text-lg font-medium text-gray-900">{{ __('User') }}</h3>
                         <div class="mt-3 max-w-xl text-sm text-gray-600">
                             <p>
-                                {{ $userGraduation->user->id }}
+                                {{ optional($userGraduation->user)->id }}
                             </p>
                         </div>
                     </div>

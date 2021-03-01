@@ -36,11 +36,12 @@ class AnnualNodeEventController extends Controller
             $node = $faculty->educationalInstitution->node;
         }
 
-        // $nodeEvents = $node->nodeEvents->where('is_annual_event',1)->first();
-        $annualNodeEvent = NodeEvent::where('is_annual_event',1)->first();
 
-        $projects = $annualNodeEvent->nodeEvent->event->projects;
-        $event = $annualNodeEvent->nodeEvent->event;
+        $nodeEvents = $node->nodeEvents->where('is_annual_event',1)->first();
+        // $annualNodeEvent = NodeEvent::where('is_annual_event',1)->first();
+
+        // $projects = $annualNodeEvent->nodeEvent->event->projects;
+        // $event = $annualNodeEvent->nodeEvent->event;
 
         // return NodeEvent::where('is_annual_event',1)->first() ;
 

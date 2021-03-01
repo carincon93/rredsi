@@ -10,12 +10,12 @@ class LoginResponse implements LoginResponseContract
 
     public function toResponse($request)
     {
-        
+
         // below is the existing response
         // replace this with your own code
         // the user can be located with Auth facade
 
-        $role = Auth::user()->role; 
+        $role = Auth::user()->role;
         dd($role);
         switch ($role) {
             case 'admin':
@@ -23,12 +23,12 @@ class LoginResponse implements LoginResponseContract
                 break;
             case 'seller':
                 return '/seller_dashboard';
-                break; 
+                break;
             default:
-                return '/home'; 
+                return '/home';
                 break;
         }
-        
+
         return $request->wantsJson()
                     ? response()->json(['two_factor' => false])
                     : redirect()->intended(config('fortify.home'));

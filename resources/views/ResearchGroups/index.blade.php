@@ -46,9 +46,8 @@
                                     <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Name') }}</span>
                                     <p  class="row-auto">{{ $researchGroup->name }}</p>
                                 </td>
-                                <td>
-                                    <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Educational institution') }}</span>
-                                    <p class="row-auto">{{ $researchGroup->educationalInstitutionFaculty->name }}</p>
+                                <td class="hidden sm:table-cell">
+                                    <span>{{ optional($researchGroup->educationalInstitutionFaculty)->name }}</span>
                                 </td>
                                 <td>
                                     <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Email') }}</span>
