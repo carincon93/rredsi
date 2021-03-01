@@ -24,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\ResearchOutput' => 'App\Policies\ResearchOutputPolicy',
         'App\Models\ResearchTeam' => 'App\Policies\ResearchTeamPolicy',
         'App\Models\Role' => 'App\Policies\RolePolicy',
-        'App\Models\User' => 'App\Policies\UserPolicy',
+        'App\Models\User' => 'App\Policies\EducationalInstitutionUserPolicy',
         'App\Models\UserAcademicWork' => 'App\Policies\UserAcademicWorkPolicy',
         'App\Models\UserGraduation' => 'App\Policies\UserGraduationPolicy',
         'App\Models\AcademicProgram' => 'App\policies\AcademicProgramPolicy',

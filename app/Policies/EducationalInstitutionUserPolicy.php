@@ -7,7 +7,7 @@ use App\Models\EducationalInstitution;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class EducationalInstitutionUserPolicy
 {
     use HandlesAuthorization;
 
@@ -17,7 +17,7 @@ class UserPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user,EducationalInstitution $educationalInstitution)
+    public function viewAny(User $user, EducationalInstitution $educationalInstitution)
     {
         if($user->hasRole('Administrador')){
             return true;
@@ -41,7 +41,7 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function view(User $user,EducationalInstitution $educationalInstitution)
+    public function view(User $user, EducationalInstitution $educationalInstitution)
     {
         if($user->hasRole('Administrador')){
             return true;
@@ -64,7 +64,7 @@ class UserPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user,EducationalInstitution $educationalInstitution)
+    public function create(User $user, EducationalInstitution $educationalInstitution)
     {
            if($user->hasRole('Administrador')){
             return true;
@@ -112,7 +112,7 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function delete(User $user,EducationalInstitution $educationalInstitution)
+    public function delete(User $user, EducationalInstitution $educationalInstitution)
     {
         if($user->hasRole('Administrador')){
             return true;
