@@ -8,7 +8,7 @@ use App\Models\KnowledgeSubarea;
 use App\Models\KnowledgeSubareaDiscipline;
 use Illuminate\Http\Request;
 
-class KnowledgeSubareaDiciplinesController extends Controller
+class KnowledgeSubareaDisciplineController extends Controller
 {
     /**
      * Display a listing of the resource.

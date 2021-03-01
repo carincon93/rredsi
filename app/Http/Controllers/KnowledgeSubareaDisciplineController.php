@@ -8,7 +8,7 @@ use App\Models\KnowledgeSubareaDiscipline;
 use App\Http\Requests\KnowledgeSubareaDiciplineRequest;
 use Illuminate\Http\Request;
 
-class KnowledgeSubareaDisciplinesController extends Controller
+class KnowledgeSubareaDisciplineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -65,7 +65,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      * @param  \App\Models\KnowledgeSubareaDiscipline  $knowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
-    public function show(knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
+    public function show(KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
         $this->authorize('view', [KnowledgeSubareaDiscipline::class]);
 
@@ -78,7 +78,7 @@ class KnowledgeSubareaDisciplinesController extends Controller
      * @param  \App\Models\KnowledgeSubareaDiscipline  $knowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
-    public function edit(knowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
+    public function edit(KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
         $this->authorize('update', [KnowledgeSubareaDiscipline::class]);
 

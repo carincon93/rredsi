@@ -12,7 +12,7 @@ use App\Http\Controllers\EducationalToolController;
 use App\Http\Controllers\EducationalInstitutionEventController;
 use App\Http\Controllers\NodeController;
 use App\Http\Controllers\KnowledgeAreaController;
-use App\Http\Controllers\KnowledgeSubareaDisciplinesController;
+use App\Http\Controllers\KnowledgeSubareaDisciplineController;
 use App\Http\Controllers\KnowledgeSubareaController;
 use App\Http\Controllers\ResearcherController;
 use App\Http\Controllers\ResearchLineController;
@@ -156,7 +156,7 @@ Route::middleware(['auth'])->group(function () {
 
         'knowledge-areas'                   => KnowledgeAreaController::class,
         'knowledge-subareas'                => KnowledgeSubareaController::class,
-        'knowledge-subarea-disciplines'     => KnowledgeSubareaDisciplinesController::class,
+        'knowledge-subarea-disciplines'     => KnowledgeSubareaDisciplineController::class,
         'roles'                             => RoleController::class,
         'legal-informations'                => LegalInformationController::class
 
