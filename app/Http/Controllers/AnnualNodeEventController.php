@@ -14,7 +14,28 @@ class AnnualNodeEventController extends Controller
      */
     public function index()
     {
+<<<<<<< Updated upstream
         //
+=======
+        $this->authorize('viewAny', [AnnualNodeEvent::class]);
+
+        $user = auth()->user();
+        $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+
+        if($faculty){
+            $node = $faculty->educationalInstitution->node;
+        }
+
+        $nodeEvents = $node->nodeEvents->where('is_annual_event',1)->first();
+        // $annualNodeEvent = NodeEvent::where('is_annual_event',1)->first();
+
+        // $projects = $annualNodeEvent->nodeEvent->event->projects;
+        // $event = $annualNodeEvent->nodeEvent->event;
+
+        // return NodeEvent::where('is_annual_event',1)->first() ;
+
+        return view('AnnualNodeEvents.index', compact('node', 'projects','event'));
+>>>>>>> Stashed changes
     }
 
     /**
