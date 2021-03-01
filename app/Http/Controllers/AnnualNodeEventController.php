@@ -9,6 +9,7 @@ use App\Models\Project;
 
 use App\Models\AnnualNodeEvent;
 use App\Http\Requests\AnnualNodeEventRequest;
+use App\Models\Event;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Storage;
@@ -231,24 +232,25 @@ class AnnualNodeEventController extends Controller
 
             $nodeEvents = $node->nodeEvents->where('is_annual_event',1)->first();
             $annualNodeEventRegister = $nodeEvents->annualNodeEvent;
-
-            // proyectos  ya registrados en el evento
-            $projectsRegister = $annualNodeEventRegister->nodeEvent->event->projects;
             $project      = Project::findOrFail($request->get('project_id'));
-            $event = $project->events->find($request->get('event_id'));
+            $eventNew     = Event::findOrFail($request->get('event_id'));
 
+            if($annualNodeEventRegister){
+                // proyectos  ya registrados en el evento
+                $projectsRegister = $annualNodeEventRegister->nodeEvent->event->projects;
 
+                foreach ($projectsRegister as $projectRegister) {
 
-            foreach ($projectsRegister as $projectRegister) {
+                    $eventsOld = $projectRegister->events;
 
-                $eventsOld = $projectRegister->events;
+                    foreach ($eventsOld as  $eventOld) {
 
-                foreach ($eventsOld as  $eventOld) {
-
-                    if($eventOld->id == $event->id){
-                        if($projectRegister->id == $project->id){
-                            return redirect()->route('nodes.explorer.roles', [$node])->with('status', "Este proyecto ya se encuentra registrado en este evento");
+                        if($eventOld->id == $eventNew->id){
+                            if($projectRegister->id == $project->id){
+                                return redirect()->route('nodes.explorer.roles', [$node])->with('status', "Este proyecto ya se encuentra registrado en este evento");
+                            }
                         }
+
                     }
 
                 }
@@ -296,8 +298,8 @@ class AnnualNodeEventController extends Controller
                 $message = 'El registro a el evento fue correcto';
 
                 // project authors
-                $authors =  $project->authors;
-                $event = $project->events->find($request->get('event_id'));
+                $authors    =  $project->authors;
+                $event      = Event::findOrFail($request->get('event_id'));
 
                 // admin institution notification
                 $user = auth()->user();

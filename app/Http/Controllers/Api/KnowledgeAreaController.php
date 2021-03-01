@@ -4,22 +4,20 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\KnowledgeArea;
-use App\Models\KnowledgeSubarea;
-use App\Models\KnowledgeSubareaDiscipline;
 use Illuminate\Http\Request;
 
-class KnowledgeSubareaDiciplinesController extends Controller
+class KnowledgeAreaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(KnowledgeArea $knowledgeArea, KnowledgeSubarea $knowledgeSubarea)
+    public function index()
     {
-        $KnowledgeSubareaDiscipline = $knowledgeSubarea->knowledgeSubareaDisciplines()->get();
+        $KnowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
-        return response(['KnowledgeSubareaDiscipline' => $KnowledgeSubareaDiscipline]);
+        return response(['knowledgeAreas' => $KnowledgeAreas]);
     }
 
     /**
@@ -36,10 +34,10 @@ class KnowledgeSubareaDiciplinesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\KnowledgeSubareaDiscipline  $KnowledgeSubareaDiscipline
+     * @param  \App\Models\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function show(KnowledgeSubareaDiscipline $KnowledgeSubareaDiscipline)
+    public function show(Node $node)
     {
         //
     }
@@ -48,10 +46,10 @@ class KnowledgeSubareaDiciplinesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\KnowledgeSubareaDiscipline  $KnowledgeSubareaDiscipline
+     * @param  \App\Models\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KnowledgeSubareaDiscipline $KnowledgeSubareaDiscipline)
+    public function update(Request $request, Node $node)
     {
         //
     }
@@ -59,10 +57,10 @@ class KnowledgeSubareaDiciplinesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\KnowledgeSubareaDiscipline  $KnowledgeSubareaDiscipline
+     * @param  \App\Models\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KnowledgeSubareaDiscipline $KnowledgeSubareaDiscipline)
+    public function destroy(Node $node)
     {
         //
     }

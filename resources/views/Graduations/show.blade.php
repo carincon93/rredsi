@@ -16,7 +16,7 @@
             @endcan
         </div>
     </x-slot>
-    
+
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="md:grid md:grid-cols-2 md:gap-4">
@@ -34,16 +34,16 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="hidden sm:block">
                 <div class="py-8">
                     <div class="border-t border-gray-200"></div>
                 </div>
             </div>
-            
+
             <div class="md:grid md:grid-cols-2 md:gap-4">
                 <div>
-                    
+
                 </div>
                 <div>
                     <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -56,16 +56,16 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="hidden sm:block">
                 <div class="py-8">
                     <div class="border-t border-gray-200"></div>
                 </div>
             </div>
-            
+
             <div class="md:grid md:grid-cols-2 md:gap-4">
                 <div>
-                    
+
                 </div>
                 <div>
                     <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
@@ -78,16 +78,16 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="hidden sm:block">
                 <div class="py-8">
                     <div class="border-t border-gray-200"></div>
                 </div>
             </div>
-            
+
             <div class="md:grid md:grid-cols-2 md:gap-4">
                 <div>
-                    
+
                 </div>
                 <div>
                     <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">

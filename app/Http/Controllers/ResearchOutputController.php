@@ -12,6 +12,9 @@ use App\Models\ResearchOutput;
 
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\InformationNotification;
+
 use App\Http\Requests\ResearchOutputRequest;
 use Illuminate\Http\Request;
 
@@ -71,6 +74,12 @@ class ResearchOutputController extends Controller
         $researchOutput->project()->associate($project);
 
         if($researchOutput->save()){
+
+            // Send notification authors create researchOutput
+            $authors = $project->authors;
+            $type = "Producto de investigación";
+            Notification::send($authors, new InformationNotification($researchOutput,$type));
+
             $message = 'Your store processed correctly';
         }
 

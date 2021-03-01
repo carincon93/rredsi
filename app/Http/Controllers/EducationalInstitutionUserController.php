@@ -8,6 +8,9 @@ use App\Models\EducationalInstitution;
 use App\Models\EducationalInstitutionFaculty;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\InformationNotification;
+
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 
@@ -20,7 +23,7 @@ class EducationalInstitutionUserController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
-        $this->authorize('viewAny',[ User::class,$educationalInstitution]);
+        $this->authorize('viewAny',[ User::class, $educationalInstitution]);
 
         $users = $faculty->members()->orderBy('name')->get();
 
@@ -34,7 +37,7 @@ class EducationalInstitutionUserController extends Controller
      */
     public function create(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
-        $this->authorize('create', [ User::class,$educationalInstitution]);
+        $this->authorize('create', [ User::class, $educationalInstitution]);
 
         $roles = Role::orderBy('name')->get();
 
@@ -49,7 +52,7 @@ class EducationalInstitutionUserController extends Controller
      */
     public function store(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
-        $this->authorize('create', [ User::class,$educationalInstitution]);
+        $this->authorize('create', [ User::class, $educationalInstitution]);
 
         $user = new User();
         $user->name               = $request->get('name');
@@ -64,6 +67,17 @@ class EducationalInstitutionUserController extends Controller
 
         if($user->save()){
             $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true]);
+
+            // Send notification student create researchTeam
+            if($user->hasRole('Estudiante')){
+                $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+                $educationalInstitution = $faculty->educationalInstitution;
+                $adminInstitution = $educationalInstitution->administrator;
+
+                $type = "Estudiante";
+                Notification::send($adminInstitution, new InformationNotification($user,$type));
+            }
+
             $message = 'Your store processed correctly';
         }
 
@@ -78,7 +92,7 @@ class EducationalInstitutionUserController extends Controller
      */
     public function show(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
-        $this->authorize('view', [ User::class,$educationalInstitution]);
+        $this->authorize('view', [User::class, $educationalInstitution]);
 
         return view('EducationalInstitutionUsers.show', compact('node', 'educationalInstitution', 'faculty', 'user'));
     }
@@ -91,7 +105,7 @@ class EducationalInstitutionUserController extends Controller
      */
     public function edit(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
-        $this->authorize('update',[ User::class,$educationalInstitution]);
+        $this->authorize('update',[ User::class, $educationalInstitution]);
 
         $roles = Role::orderBy('name')->get();
 
@@ -107,7 +121,7 @@ class EducationalInstitutionUserController extends Controller
      */
     public function update(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
-        $this->authorize('update', [ User::class,$educationalInstitution]);
+        $this->authorize('update', [ User::class, $educationalInstitution]);
 
         $user->name               = $request->get('name');
         $user->email              = $request->get('email');
@@ -135,7 +149,7 @@ class EducationalInstitutionUserController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
-        $this->authorize('delete', [ User::class,$educationalInstitution]);
+        $this->authorize('delete', [ User::class, $educationalInstitution]);
 
         if($user->delete()){
             $message = 'Your delete processed correctly';

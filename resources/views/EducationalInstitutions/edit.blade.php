@@ -55,7 +55,7 @@
                         <select id="city" name="city" class="form-select w-full" required >
                             <option value="">Seleccione una ciudad</option>
                             @foreach ($cities as $city)
-                                <option value="{{ $city['name'] }}" {{ old('city') == $city['name'] || $educationalInstitution->city == $city['name'] ? "selected" : "" }}>{{ $city['name'] }}</option>
+                                <option value="{{ $city['name'] }}" {{ old('city') == $city['name'] || $educationalInstitution->city == $city['name'] ? 'selected' : '' }}>{{ $city['name'] }}</option>
                             @endforeach
                         </select>
                         <x-jet-input-error for="city" class="mt-2" />
@@ -77,6 +77,19 @@
                         <x-jet-label for="website" value="{{ __('Website') }}" />
                         <x-jet-input id="website" class="block mt-1 w-full" type="text" min="" max="" name="website" value="{{ old('website') ?? $educationalInstitution->website }}" required />
                         <x-jet-input-error for="website" class="mt-2" />
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-4">
+                        <x-jet-label for="administrator_id" value="{{ __('Educational institution admin') }}" />
+                        <select id="administrator_id" name="administrator_id" class="form-select w-full" required >
+                            <option value="">Seleccione el(la) delegado(a) de la institución educativa</option>
+                            @foreach ($admins as $admin)
+                                <option value="{{ $admin->id }}" {{ old('administrator_id') == $admin->id || optional($educationalInstitution->admin)->id == $admin->id ? 'selected' : '' }}>{{ $admin->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-jet-input-error for="administrator_id" class="mt-2" />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">

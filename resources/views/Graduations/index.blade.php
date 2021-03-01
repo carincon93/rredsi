@@ -34,54 +34,100 @@
                     <x-slot name="tbodyData">
                         @foreach ($userGraduations as $userGraduation)
 
-                            <tr class="bg-white">
+                            <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
 
                                 <td>
-                                    <span>{{ optional($userGraduation->academicProgram)->name }}</span>
+                                    <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Name') }}</span>
+                                    <p>{{ $userGraduation->academicProgram->name }}</p>
                                 </td>
 
                                 <td>
-                                    <span>{{ optional($userGraduation->academicProgram)->educationalInstitutionFaculty->educationalInstitution->name }}</span>
+                                    <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Educational institution') }}</span>
+                                    <p class="row-auto">{{ $userGraduation->academicProgram->educationalInstitutionFaculty->educationalInstitution->name }}</p>
                                 </td>
 
                                 <td>
-                                    <span>{{ $userGraduation->year }}</span>
+                                    <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Year') }}</span>
+                                    <p class="row-auto">{{ $userGraduation->year }}</p>
                                 </td>
 
                                 <td class="py-2 text-left">
-                                    <div class="hidden sm:flex sm:items-center justify-around">
-                                        <x-jet-dropdown align="right" width="48">
-                                            <x-slot name="trigger">
-                                                <button class="flex items-center text-sm font-medium text-gray hover:text-blue-900 hover:border-gray-300 focus:outline-none focus:text-black focus:border-gray-300 transition duration-150 ease-in-out">
-                                                    <div class="ml-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-4 w-4">
-                                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                                                        </svg>
-                                                    </div>
-                                                </button>
-                                            </x-slot>
+                                    <div class="lg:flex items-center lg:justify-around">
 
-                                            <x-slot name="content">
-                                                @can('show_graduation')
-                                                <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.show', [$userGraduation]) }}">
-                                                    {{ __('Show') }}
+                                        {{-- ICONOS SOLO VISIBLE EN MOVIL DE PANTALLA -> XS.. A.. MD  --}}
+
+                                        <div class="lg:hidden">
+                                            <span class="lg:hidden top-0 left-0 ml-2  px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Actions') }}</span>
+                                            @can('show_knowledge_subarea_discipline')
+                                                <x-jet-dropdown-link class="inline-block" href="{{ route('user.profile.user-graduations.show', [$userGraduation]) }}">
+                                                    <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+                                                    </svg>
                                                 </x-jet-dropdown-link>
-                                                @endcan
-                                                @can('edit_graduation')
-                                                <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.edit', [$userGraduation]) }}">
-                                                    {{ __('Edit') }}
+                                            @endcan
+                                            @can('edit_knowledge_subarea_discipline')
+                                                <x-jet-dropdown-link class="inline-block" href="{{ route('user.profile.user-graduations.edit', [$userGraduation]) }}">
+                                                    <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
                                                 </x-jet-dropdown-link>
-                                                @endcan
-                                                @can('destroy_graduation')
-                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('user.profile.user-graduations.destroy', [$userGraduation]) }}')">
-                                                    {{ __('Delete') }}
+                                            @endcan
+                                            @can('destroy_knowledge_subarea_discipline')
+                                                <x-jet-dropdown-link class="modal-open inline-block" onclick="modal('{{ route('user.profile.user-graduations.destroy', [$userGraduation]) }}')">
+                                                    <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
                                                 </x-jet-dropdown-link>
-                                                @endcan
-                                                <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.user-academic-works.index', [$userGraduation]) }}">
-                                                    {{ __('Manage academic works') }}
-                                                </x-jet-dropdown-link>
-                                            </x-slot>
-                                        </x-jet-dropdown>
+                                            @endcan
+
+                                            <x-jet-dropdown-link class="inline-block" href="{{ route('user.profile.user-graduations.user-academic-works.index', [$userGraduation]) }}">
+                                                <svg  class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" /><path fill="#fff" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                                                </svg>
+                                            </x-jet-dropdown-link>
+
+                                        </div>
+
+                                        {{------------------------------------------------------------------------------------------------------- --}}
+                                        {{-- //**********------------------------------------------------------------------------**************// --}}
+
+                                        <div class="hidden lg:table-cell">
+
+
+                                            <x-jet-dropdown align="right" width="48">
+                                                <x-slot name="trigger">
+                                                    <button class="flex items-center text-sm font-medium text-gray hover:text-blue-900 hover:border-gray-300 focus:outline-none focus:text-black focus:border-gray-300 transition duration-150 ease-in-out">
+                                                        <div class="ml-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-4 w-4">
+                                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                                            </svg>
+                                                        </div>
+                                                    </button>
+                                                </x-slot>
+
+                                                <x-slot name="content">
+                                                    @can('show_graduation')
+                                                    <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.show', [$userGraduation]) }}">
+                                                        {{ __('Show') }}
+                                                    </x-jet-dropdown-link>
+                                                    @endcan
+                                                    @can('edit_graduation')
+                                                    <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.edit', [$userGraduation]) }}">
+                                                        {{ __('Edit') }}
+                                                    </x-jet-dropdown-link>
+                                                    @endcan
+                                                    @can('destroy_graduation')
+                                                    <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('user.profile.user-graduations.destroy', [$userGraduation]) }}')">
+                                                        {{ __('Delete') }}
+                                                    </x-jet-dropdown-link>
+                                                    @endcan
+                                                    <x-jet-dropdown-link href="{{ route('user.profile.user-graduations.user-academic-works.index', [$userGraduation]) }}">
+                                                        {{ __('Manage academic works') }}
+                                                    </x-jet-dropdown-link>
+                                                </x-slot>
+                                            </x-jet-dropdown>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

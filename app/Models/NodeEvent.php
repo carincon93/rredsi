@@ -15,6 +15,7 @@ class NodeEvent extends Model
      */
     protected $fillable = [
         'node_id',
+        'is_annual_event',
     ];
 
     public function event() {
@@ -26,6 +27,6 @@ class NodeEvent extends Model
     }
 
     public function annualNodeEvent() {
-        return $this->hasOne('App\Models\AnnualNodeEvent', 'id');
+        return $this->hasOne('App\Models\AnnualNodeEvent', 'node_event_id');
     }
 }

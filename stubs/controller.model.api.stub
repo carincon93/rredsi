@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace {{ namespace }};
 
-use App\Http\Controllers\Controller;
-use App\Models\KnowledgeArea;
+use {{ namespacedModel }};
+use {{ rootNamespace }}Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class KnowledgeAreasController extends Controller
+class {{ class }} extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class KnowledgeAreasController extends Controller
      */
     public function index()
     {
-        $KnowledgeAreas = KnowledgeArea::orderBy('name')->get();
-
-        return response(['knowledgeAreas' => $KnowledgeAreas]);
+        //
     }
 
     /**
@@ -34,10 +32,10 @@ class KnowledgeAreasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Node  $node
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
      * @return \Illuminate\Http\Response
      */
-    public function show(Node $node)
+    public function show({{ model }} ${{ modelVariable }})
     {
         //
     }
@@ -46,10 +44,10 @@ class KnowledgeAreasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Node  $node
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Node $node)
+    public function update(Request $request, {{ model }} ${{ modelVariable }})
     {
         //
     }
@@ -57,10 +55,10 @@ class KnowledgeAreasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Node  $node
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Node $node)
+    public function destroy({{ model }} ${{ modelVariable }})
     {
         //
     }

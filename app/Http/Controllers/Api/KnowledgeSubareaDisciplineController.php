@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\KnowledgeSubarea;
 use App\Models\KnowledgeArea;
+use App\Models\KnowledgeSubarea;
+use App\Models\KnowledgeSubareaDiscipline;
 use Illuminate\Http\Request;
 
-class KnowledgeSubareasController extends Controller
+class KnowledgeSubareaDisciplineController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(KnowledgeArea $knowledgeArea)
+    public function index(KnowledgeArea $knowledgeArea, KnowledgeSubarea $knowledgeSubarea)
     {
-        $KnowledgeSubareas = $knowledgeArea->knowledgeSubareas()->get();
-        // $KnowledgeSubareas = KnowledgeSubarea::orderBy('name')
+        $KnowledgeSubareaDiscipline = $knowledgeSubarea->knowledgeSubareaDisciplines()->get();
 
-        return response(['KnowledgeSubareas' => $KnowledgeSubareas]);
+        return response(['KnowledgeSubareaDiscipline' => $KnowledgeSubareaDiscipline]);
     }
 
     /**
@@ -36,10 +36,10 @@ class KnowledgeSubareasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\KnowledgeSubarea  $KnowledgeSubarea
+     * @param  \App\Models\KnowledgeSubareaDiscipline  $KnowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
-    public function show(KnowledgeSubarea $KnowledgeSubarea)
+    public function show(KnowledgeSubareaDiscipline $KnowledgeSubareaDiscipline)
     {
         //
     }
@@ -48,10 +48,10 @@ class KnowledgeSubareasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\KnowledgeSubarea  $KnowledgeSubarea
+     * @param  \App\Models\KnowledgeSubareaDiscipline  $KnowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KnowledgeSubarea $KnowledgeSubarea)
+    public function update(Request $request, KnowledgeSubareaDiscipline $KnowledgeSubareaDiscipline)
     {
         //
     }
@@ -59,10 +59,10 @@ class KnowledgeSubareasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\KnowledgeSubarea  $KnowledgeSubarea
+     * @param  \App\Models\KnowledgeSubareaDiscipline  $KnowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KnowledgeSubarea $KnowledgeSubarea)
+    public function destroy(KnowledgeSubareaDiscipline $KnowledgeSubareaDiscipline)
     {
         //
     }

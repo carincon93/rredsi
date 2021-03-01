@@ -1,8 +1,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import 'hint.min.css';
-
 
 /* Gradients */
 .to-color-1 {

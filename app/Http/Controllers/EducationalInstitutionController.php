@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\ResearchGroup;
 
 use App\Http\Requests\EducationalInstitutionRequest;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\InformationNotification;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -37,8 +41,9 @@ class EducationalInstitutionController extends Controller
         $this->authorize('create',[EducationalInstitution::class, $node]);
 
         $cities = json_decode(Storage::get('public/json/caldas_cities.json'), true);
+        $admins = User::whereHas('roles', function($q){ $q->where('id', 3); })->get();
 
-        return view('EducationalInstitutions.create', compact('node', 'cities'));
+        return view('EducationalInstitutions.create', compact('node', 'cities', 'admins'));
     }
 
     /**
@@ -61,8 +66,24 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->node()->associate($node);
 
         if($educationalInstitution->save()){
+
+            $educationalInstitution->administrator()->associate($request->get('administrator_id'));
+
+            $intitutions = $node->educationalInstitutions;
+            $users = [];
+
+            foreach ($intitutions as $intitution) {
+                if(!is_null($intitution->administrator) ){
+                    array_push($users,$intitution->administrator);
+                }
+            }
+
+            $type = "Institución educativa";
+            Notification::send($users, new InformationNotification($educationalInstitution,$type));
+
             $message = 'Your store processed correctly';
         }
+
 
         return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);
     }
@@ -91,8 +112,9 @@ class EducationalInstitutionController extends Controller
         $this->authorize('update', [EducationalInstitution::class, $node]);
 
         $cities = json_decode(Storage::get('public/json/caldas_cities.json'), true);
+        $admins = User::whereHas('roles', function($q){ $q->where('id', 3); })->get();
 
-        return view('EducationalInstitutions.edit', compact('node', 'educationalInstitution', 'cities'));
+        return view('EducationalInstitutions.edit', compact('node', 'educationalInstitution', 'cities', 'admins'));
     }
 
     /**
@@ -113,6 +135,7 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->phone_number   = $request->get('phone_number');
         $educationalInstitution->website        = $request->get('website');
         $educationalInstitution->node()->associate($node);
+        $educationalInstitution->administrator()->associate($request->get('administrator_id'));
 
         if($educationalInstitution->save()){
             $message = 'Your update processed correctly';
@@ -162,4 +185,5 @@ class EducationalInstitutionController extends Controller
 
         return view('EducationalInstitutions.bi', compact('node', 'educationalInstitution'));
     }
+
 }

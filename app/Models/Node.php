@@ -15,7 +15,7 @@ class Node extends Model
      * @var array
      */
     protected $fillable = [
-        'state', 
+        'state',
         'administrator_id',
     ];
 
@@ -58,10 +58,11 @@ class Node extends Model
      *
      * @return $events
      */
+
     public function educationalInstitutionAndNodeEvents($knowledgeSubareaDiscipline = null) {
         $events = collect([]);
         $knowledgeSubareaDiscipline = mb_strtolower($knowledgeSubareaDiscipline);
-        
+
         foreach ($this->educationalInstitutions as $educationalInstitution) {
             foreach ($educationalInstitution->educationalInstitutionEvents as $educationalInstitutionEvent) {
                 if ($educationalInstitutionEvent->event->start_date > date('Y-m-d')) {
@@ -83,7 +84,7 @@ class Node extends Model
                 })->get();
             })->unique()->flatten();
         }
-        
+
         return $events;
     }
 

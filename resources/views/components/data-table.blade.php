@@ -16,7 +16,12 @@
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
     }
-    p {
+    td.pp0 {
+        overflow-wrap: break-word;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    /* p {
         margin-left: 0.5rem;
         width: 15rem;
         height: 2.8rem;
@@ -25,7 +30,7 @@
         -webkit-line-clamp: 2;
         overflow: hidden;
         margin-bottom: 10px;
-    }
+    } */
 
     /* Segundas columnas mas pequeñas */
     p.row-2 {
@@ -69,9 +74,9 @@
 
     @media (min-width: 640px) {
         /* sm */
-            p {
+            /* p {
                 width: 18rem;
-            }
+            } */
             p.row-3 {
                 width: 18rem;
             }
@@ -79,9 +84,9 @@
 
     @media (min-width: 768px) {
         /* md */
-        p {
+        /* p {
             width: 20rem;
-        }
+        } */
         p.row-3 {
             width: 20rem;
         }
@@ -92,10 +97,10 @@
     }
     @media (min-width: 1024px) {
         /* lg */
-        p {
+        /* p {
             width: 16rem !important;
             margin-left: 0 !important;
-        }
+        } */
         p.row-2 {
             width: 14rem !important;
             margin-left: 0 !important;
@@ -119,7 +124,7 @@
     }
     @media (min-width: 1280px) {
         p {
-            width: 20rem !important;
+            /* width: 20rem !important; */
         }
         p.row-2 {
             width: 16rem !important;
@@ -188,7 +193,7 @@
                     </th>
                 @endif
 
-                <th class="py-2 text-left focus:outline-none text-center hidden lg:table-cell">
+                <th class="pr-2 py-2 text-left focus:outline-none text-center hidden lg:table-cell">
                     <span class="text-gray-300">{{ __('Actions') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline text-gray-400 icon_sorting_asc">
                         <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z" />

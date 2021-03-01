@@ -31,6 +31,7 @@ class EventRequest extends FormRequest
             'end_date'                      => 'required|date|date_format:Y-m-d|after:start_date',
             'register_link'                 => 'required|url|max:255',
             'info_link'                     => 'required|url|max:255',
+            // 'is_annual_event'               => 'required|boolean',
             // 'educational_institution_id'    => 'integer|min:0|max:9999999999|exists:educational_institutions,id',
             // 'node_id'                       => 'integer|min:0|max:9999999999|exists:nodes,id',
         ];
