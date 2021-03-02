@@ -26,6 +26,8 @@
 
                     if($faculty){
                         $node = $faculty->educationalInstitution->node;
+                    }else{
+                        $node = request()->route('node');
                     }
                 ?>
 

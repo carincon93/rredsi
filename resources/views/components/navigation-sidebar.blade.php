@@ -143,11 +143,12 @@
 
         @php
             $userAdmin                     = Auth::user()->educationalInstitutionFaculties->first();
-            $insitution                    = $userAdmin->educationalInstitution;
+            // $insitution                    = $userAdmin->educationalInstitution;
 
             // echo $insitution->administrator_id == Auth::user()->id ? 'si es' : 'No es' ;
 
             $researchTeam                     = Auth::user()->researchTeams->first();
+            // traemos la informacion de el nodo de la institucion y faculta para los enlaces de redireccion
             if(!is_null(Auth::user()->researchTeams->first()))
             {
                 $researchGroup                    = $researchTeam->researchGroup;
