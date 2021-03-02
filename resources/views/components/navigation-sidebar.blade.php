@@ -83,10 +83,9 @@
                 @endphp
             @endif
 
-            {{-- Administrar perfil --}}
+            {{-- Administrar perfil en dispositivo mobil --}}
             <div class="block overflow-auto md:hidden mt-1">
             {{-- <x-drop-down-profile /> --}}
-
                 <p class="text-center mx-auto capitalize p-0 m-0">{{ Auth::user()->name }}</p>
 
                 <a href="{{ route('profile.show') }}" class="block">
@@ -147,9 +146,11 @@
             </div>
 
             @php
+
                 /**
-                ** Traemos la informacion del nodo de la institucion y facultad para los enlaces de redireccion para my projects de estudiantes
-                */
+                ** Traemos la informacion del nodo de la institucion y facultad para los enlaces de redireccion
+                **para my projects de estudiantes
+                **/
                 $researchTeam = Auth::user()->researchTeams->first();
                 if(!is_null(Auth::user()->researchTeams->first()))
                 {
@@ -172,6 +173,7 @@
                 </a>
             @endif
 
+            {{-- dropdown que  que puede visualizar el admin del sistema --}}
             @if( Auth::user()->hasRole('Administrador'))
                 <a href="{{ route('users.index') }}" class="w-full flex items-center  md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1" style="width: 18px;">
@@ -224,7 +226,16 @@
             @endif
 
             @if (request()->route('node'))
+                @php
+                    /***  se trae la variable node desde la ruta si existe en la instancia */
+                    $node = request()->route('node');
+                @endphp
+            @endif
+
+            {{-- dropdown que  que puede visualizar el coordinador de cada nodo--}}
+            @if (request()->route('node'))
                 @if( Auth::user()->hasRole("Administrador") || Auth::user()->hasRole("Coordinador") )
+
                     <div @click.away="open = false" class="static" x-data="{ open: false }">
                         <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                             <span class="capitalize">Nodo  {{ $node->state }}</span>
@@ -268,6 +279,8 @@
                 @endif
             @endif
 
+            {{-- dropdown que  puede visualizar el delegado de cada institucion
+                y administrar sus dependencias--}}
             @if( Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Delegado institución educativa')   )
                 @if (request()->route('educational_institution'))
                     {{-- dropdown ini --}}
@@ -332,6 +345,7 @@
                 @endif
             @endif
 
+            {{-- dropdown component para administrar datos de cada facultad --}}
             @if( !Auth::user()->hasRole('Estudiante'))
                 {{-- <x-drop-down-educational-institution-faculties /> --}}
             @endif
