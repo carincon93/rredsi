@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use Exception;
@@ -74,7 +76,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('Users.edit', compact('user'));
+        $roles = Role::orderBy('name')->get();
+
+        return view('Users.edit', compact('user','roles'));
     }
 
     /**
@@ -84,13 +88,31 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
+
+     /**
+      * * prueba daño
+      * ? comentarios pr
+      * ! comentarioos
+      * // asdasdasd
+      */
     public function update(UserRequest $request, User $user)
     {
-        $user->fieldName = $request->get('fieldName');
-        $user->fieldName = $request->get('fieldName');
-        $user->fieldName = $request->get('fieldName');
+        $user->name               = $request->get('name');
+        $user->email              = $request->get('email');
+        $user->password           = bcrypt($request->get('password'));
+        $user->document_type      = $request->get('document_type');
+        $user->document_number    = $request->get('document_number');
+        $user->cellphone_number   = $request->get('cellphone_number');
+        $user->interests          = $request->get('interests');
+        $user->is_enabled         = $request->get('is_enabled');
 
-        if ( !$user->save() ) {
+        if($user->update()){
+            $user->syncRoles($request->get('role_id'));
+            // $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true] );
+            $message = 'Your update processed correctly';
+        }
+
+        if ( !$user->update() ) {
             return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
         }
 
