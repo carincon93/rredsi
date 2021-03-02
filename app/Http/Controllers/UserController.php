@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use Exception;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,7 +19,6 @@ class UserController extends Controller
     {
 
         $this->authorize('index-users', [User::class]);
-
 
         $users = User::orderBy('name', 'ASC')->paginate(100);
 
@@ -105,10 +105,20 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if ( !$user->delete() ) {
-            return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
+        try {
+
+            if ( !$user->delete() ) {
+                return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
+            }
+
+            return redirect()->route('users.index')->with('status', __('The resource has been deleted successfully.'));
+
+        } catch (Exception $e) {
+            return response()->json([
+                'errors' => $e->getMessage()
+            ]);
         }
 
-        return redirect()->route('users.index')->with('status', __('The resource has been deleted successfully.'));
+
     }
 }
