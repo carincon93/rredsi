@@ -86,7 +86,7 @@
                         <select id="administrator_id" name="administrator_id" class="form-select w-full" required >
                             <option value="">Seleccione el(la) delegado(a) de la institución educativa</option>
                             @foreach ($admins as $admin)
-                                <option value="{{ $admin->id }}" {{ old('administrator_id') == $admin->id || optional($educationalInstitution->admin)->id == $admin->id ? 'selected' : '' }}>{{ $admin->name }}</option>
+                                <option value="{{ $admin->id }}" {{ old('administrator_id') == $admin->id || optional($educationalInstitution->administrator)->id == $admin->id ? 'selected' : '' }}>{{ $admin->name }}</option>
                             @endforeach
                         </select>
                         <x-jet-input-error for="administrator_id" class="mt-2" />
