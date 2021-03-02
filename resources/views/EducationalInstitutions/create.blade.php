@@ -58,12 +58,6 @@
                         <x-jet-input-error for="city" class="mt-2" />
                     </div>
 
-                    {{-- <div class="mt-4">
-                        <x-jet-label for="city" value="{{ __('City') }}" />
-                        <x-jet-input id="city" class="block mt-1 w-full" type="text" min="" max="" name="city" value="{{ old('city') }}" required />
-                        <x-jet-input-error for="city" class="mt-2" />
-                    </div> --}}
-
                     <div class="mt-4">
                         <x-jet-label for="address" value="{{ __('Address') }}" />
                         <x-jet-input id="address" class="block mt-1 w-full" type="text" min="" max="" name="address" value="{{ old('address') }}" required />
@@ -80,6 +74,19 @@
                         <x-jet-label for="website" value="{{ __('Website') }}" />
                         <x-jet-input id="website" class="block mt-1 w-full" type="url" min="" max="" name="website" value="{{ old('website') }}" required />
                         <x-jet-input-error for="website" class="mt-2" />
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-4">
+                        <x-jet-label for="administrator_id" value="{{ __('Educational institution admin') }}" />
+                        <select id="administrator_id" name="administrator_id" class="form-select w-full" required >
+                            <option value="">Seleccione el(la) delegado(a) de la institución educativa</option>
+                            @foreach ($admins as $admin)
+                                <option value="{{ $admin->id }}" {{ old('administrator_id') == $admin->id ? 'selected' : '' }}>{{ $admin->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-jet-input-error for="administrator_id" class="mt-2" />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">

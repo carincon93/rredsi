@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\ResearchGroup;
@@ -26,6 +27,7 @@ class EducationalInstitutionController extends Controller
         $this->authorize('viewAny', [EducationalInstitution::class, $node]);
 
         $educationalInstitutions = $node->educationalInstitutions()->orderBy('name')->get();
+
         return view('EducationalInstitutions.index', compact('node', 'educationalInstitutions'));
     }
 
@@ -39,8 +41,9 @@ class EducationalInstitutionController extends Controller
         $this->authorize('create',[EducationalInstitution::class, $node]);
 
         $cities = json_decode(Storage::get('public/json/caldas_cities.json'), true);
+        $admins = User::whereHas('roles', function($q){ $q->where('id', 3); })->get();
 
-        return view('EducationalInstitutions.create', compact('node', 'cities'));
+        return view('EducationalInstitutions.create', compact('node', 'cities', 'admins'));
     }
 
     /**
@@ -64,8 +67,10 @@ class EducationalInstitutionController extends Controller
 
         if($educationalInstitution->save()){
 
+            $educationalInstitution->administrator()->associate($request->get('administrator_id'));
+
             $intitutions = $node->educationalInstitutions;
-                $users = [];
+            $users = [];
 
             foreach ($intitutions as $intitution) {
                 if(!is_null($intitution->administrator) ){
@@ -107,8 +112,9 @@ class EducationalInstitutionController extends Controller
         $this->authorize('update', [EducationalInstitution::class, $node]);
 
         $cities = json_decode(Storage::get('public/json/caldas_cities.json'), true);
+        $admins = User::whereHas('roles', function($q){ $q->where('id', 3); })->get();
 
-        return view('EducationalInstitutions.edit', compact('node', 'educationalInstitution', 'cities'));
+        return view('EducationalInstitutions.edit', compact('node', 'educationalInstitution', 'cities', 'admins'));
     }
 
     /**
@@ -129,6 +135,7 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->phone_number   = $request->get('phone_number');
         $educationalInstitution->website        = $request->get('website');
         $educationalInstitution->node()->associate($node);
+        $educationalInstitution->administrator()->associate($request->get('administrator_id'));
 
         if($educationalInstitution->save()){
             $message = 'Your update processed correctly';
