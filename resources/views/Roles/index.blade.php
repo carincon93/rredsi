@@ -90,11 +90,14 @@
                                                         {{ __('Edit') }}
                                                     </x-jet-dropdown-link>
                                                     @endcan
-                                                    @can('destroy_role')
-                                                    <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('roles.destroy',[$role->id]) }}')">
-                                                        {{ __('Delete') }}
-                                                    </x-jet-dropdown-link>
-                                                    @endcan
+                                                    @if(auth()->user->hasRole('Adminstrador') && auth()->user->hasRole('Delegado institucion educativa')){
+                                                            @can('destroy_role')
+                                                        <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('roles.destroy',[$role->id]) }}')">
+                                                            {{ __('Delete') }}
+                                                        </x-jet-dropdown-link>
+                                                        @endcan
+                                                    }
+                                                    @endif
                                                 </x-slot>
                                             </x-jet-dropdown>
                                         </div>

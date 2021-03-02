@@ -145,9 +145,7 @@ class ProjectPolicy
         if($user->hasRole('Administrador')){
             return true;
         }
-        if(!$user->hasPermissionTo('destroy_project')){
-            return false;
-        }
+        
         $admin = $educationalInstitution->administrator->id;
         if($admin == $user->id){
             return true;
@@ -155,10 +153,6 @@ class ProjectPolicy
 
         $adminTeam = $researchTeam->administrator->id;
         if($adminTeam == $user->id){
-            return true;
-        }
-
-        if($project->authors()->where('user_id', $user->id)->first()){
             return true;
         }
         return false;
