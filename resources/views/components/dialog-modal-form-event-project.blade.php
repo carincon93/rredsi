@@ -47,10 +47,12 @@
                 Seleccione de nuevo el proyecto con el cual desea participar y envie su solicitud.
             </div>
 
+            {{-- Guardo en un input el id del evento al caul desea registrarse--}}
             <input hidden id="event_id" name="event_id" value="{{$eventId}}">
 
             <select id="project_id" name="project_id" class="form-select w-full" required >
                 <option value="">Seleccione un proyecto</option>
+                {{-- Recorro los projectos de el usuario--}}
                 @forelse ($projects as $project)
                     <option value="{{ $project->id }}" {{ old('project_id') == $project->id ? "selected" : "" }}>{{ $project->title }}</option>
                 @empty

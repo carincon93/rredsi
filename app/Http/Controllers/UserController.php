@@ -34,6 +34,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create-user', [User::class]);
+
         return view('Users.create');
     }
 
@@ -45,6 +47,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        $this->authorize('create-user', [User::class]);
+
         $user = new User();
         $user->fieldName = $request->get('fieldName');
         $user->fieldName = $request->get('fieldName');
@@ -65,6 +69,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('view-user', [User::class]);
+
         return view('Users.show', compact('user'));
     }
 
@@ -76,6 +82,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+
+        $this->authorize('update-user', [User::class]);
+
         $roles = Role::orderBy('name')->get();
 
         return view('Users.edit', compact('user','roles'));
@@ -89,14 +98,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     /**
-      * * prueba daño
-      * ? comentarios pr
-      * ! comentarioos
-      * // asdasdasd
-      */
     public function update(UserRequest $request, User $user)
     {
+
+        $this->authorize('update-user', [User::class]);
+
         $user->name               = $request->get('name');
         $user->email              = $request->get('email');
         $user->password           = bcrypt($request->get('password'));
@@ -127,8 +133,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        try {
+        $this->authorize('delete-user', [User::class]);
 
+        try {
             if ( !$user->delete() ) {
                 return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
             }
@@ -137,7 +144,8 @@ class UserController extends Controller
 
         } catch (Exception $e) {
             return response()->json([
-                'errors' => $e->getMessage()
+                'errors' => $e->getMessage(),
+                'e' => $e
             ]);
         }
 

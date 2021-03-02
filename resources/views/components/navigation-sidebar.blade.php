@@ -164,7 +164,7 @@
 
             @endphp
 
-            @if( Auth::user()->hasRole('Estudiante') && $node != null )
+            @if( Auth::user()->hasRole(4) && $node != null )
                 <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$educationalInstitutionFaculty,$researchGroup,$researchTeam]) }}" class="text-gray-600 hover:text-gray-400 mt-2">
                     <svg class="inline p-0 m-0 h-5 w-6 ml-2 mr-2 mb-2 text-black" viewBox="0 0 20 20">
                         <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
@@ -174,7 +174,7 @@
             @endif
 
             {{-- dropdown que  que puede visualizar el admin del sistema --}}
-            @if( Auth::user()->hasRole('Administrador'))
+            @if( Auth::user()->hasRole(1))
                 <a href="{{ route('users.index') }}" class="w-full flex items-center  md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1" style="width: 18px;">
                         <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
@@ -225,6 +225,7 @@
                 </a>
             @endif
 
+
             @if (request()->route('node'))
                 @php
                     /***  se trae la variable node desde la ruta si existe en la instancia */
@@ -234,7 +235,7 @@
 
             {{-- dropdown que  que puede visualizar el coordinador de cada nodo--}}
             @if (request()->route('node'))
-                @if( Auth::user()->hasRole("Administrador") || Auth::user()->hasRole("Coordinador") )
+                @if( Auth::user()->hasRole(1) || Auth::user()->hasRole(2) )
 
                     <div @click.away="open = false" class="static" x-data="{ open: false }">
                         <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
@@ -281,7 +282,7 @@
 
             {{-- dropdown que  puede visualizar el delegado de cada institucion
                 y administrar sus dependencias--}}
-            @if( Auth::user()->hasRole('Administrador') || Auth::user()->hasRole('Delegado institución educativa')   )
+            @if( Auth::user()->hasRole(1) || Auth::user()->hasRole(3)   )
                 @if (request()->route('educational_institution'))
                     {{-- dropdown ini --}}
                     <div @click.away="open = false" class="static" x-data="{ open: false }">
@@ -346,7 +347,7 @@
             @endif
 
             {{-- dropdown component para administrar datos de cada facultad --}}
-            @if( !Auth::user()->hasRole('Estudiante'))
+            @if( !Auth::user()->hasRole(4))
             <x-drop-down-educational-institution-faculties />
             @endif
 

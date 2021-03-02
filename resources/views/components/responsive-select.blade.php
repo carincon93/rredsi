@@ -8,6 +8,11 @@
                 var id_name = document.getElementById('id_name');
                     setInterval(() => {
                         if(screen.width < 700){
+                            /**
+                            tomamos el id o nombre de el id del select de el valor del input
+                            le damos los atributos de la vista donde se esta utilizando y nos da un select
+                            responsive para movil
+                            */
                             const mobil = document.getElementById(id_name.value);
                             mobil.setAttribute('onfocus','this.size=6');
                             mobil.setAttribute('onblur','this.size=1');

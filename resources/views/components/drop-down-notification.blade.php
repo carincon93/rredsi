@@ -1,7 +1,9 @@
 <x-jet-dropdown align="right" classes="flex items-center" width="48">
 
     <?php
+        /** contamos las notificaciones sin leeer para mostarrlar en el dropdown */
         $count              = auth()->user()->unreadNotifications->count();
+        /** traemos  las  notificaciones sin leer las ultimas 4 ponemos limite en ellas*/
         $notificationUnread = Auth::user()->unreadNotifications()->orderBy('created_at', 'desc')->take(4)->get();
     ?>
 
@@ -19,9 +21,7 @@
     <x-slot name="content">
         <div class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20" style="width:20rem;">
             <div class="py-2">
-                {{-- <?php
-                    echo $notificationUnread;
-                ?> --}}
+            {{-- aca recorremos el object de notificaciones sin leer y mostramos en el dropdown --}}
                 @foreach ($notificationUnread as $notification)
                     {{-- <?php echo $notification; ?> --}}
                     <div class="px-4 py-3 border-b hover:bg-gray-100 -mx-2">

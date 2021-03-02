@@ -52,6 +52,7 @@
 
         <!--Footer-->
         <div class="flex justify-end pt-2">
+            {{-- guardamos los datos de el estudiante y el projecto al que aplica tambien se envian los motivos de el porque en el textarea datos --}}
             <input hidden id="project_id" name="project_id" value="{{$project}}">
             <input hidden id="student_id" name="student_id" value="{{$student}}">
 

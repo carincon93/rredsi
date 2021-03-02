@@ -50,10 +50,13 @@
 @once
     @push('scripts')
         <script>
+            // toma el valor de el boton o enalce con la clase modal open
             var openmodal = document.getElementsByClassName('modal-open')
             var id = null;
 
+            // se manda la ruta por un evento onclick se pone id pero es la ruta completa de cada delete
             function modal(id){
+                //se agrega el value que es la ruta y el id que es el dato que se desea borrar
                 var input = document.getElementById('code');
                 input.setAttribute('value',id);
 
@@ -90,6 +93,7 @@
 
 
             function toggleModal () {
+                //se dan los estilos al abrir y cerrar para dar efectos de demora y duracion
                 const body  = document.querySelector('body')
                 const modal = document.querySelector('.modal')
                 const form  = document.querySelector('#form')
@@ -104,6 +108,7 @@
 
                 body.classList.toggle('modal-active')
 
+                //al activarse el toggle modal se setea el action de el form y se le agrega la ruta guardada en el input
                 form.setAttribute('action', input.value)
             }
         </script>

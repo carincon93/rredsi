@@ -3,6 +3,7 @@
 
     <div class="flex items-center justify-between w-full p-2 px-6 py-4 bg-blue-900 shadow text-white">
         <span class="inline-block align-middle mr-8">
+            {{--  imprimimos el mensaje que llega del controlador --}}
             <p> {{ session('status') }}</p>
         </span>
 
@@ -14,6 +15,9 @@
     </div>
 
 <script>
+    // ! el evento se repite indefinidamente para verificar en todo momento si existe una session status que mostrar
+    /* ! se demora unos segundos y lo cierra automaticamento este evento solo se muestra una vez al validar el evento
+    */
     var cont = 0;
     var input = document.getElementById('footeralert');
 

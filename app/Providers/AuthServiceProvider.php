@@ -49,31 +49,39 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // ! User controller policy
+       //* inicio Policy
         Gate::define('index-users', function ($user) {
-            if($user->hasRole('Administrador')){
+            if($user->hasRole(1)){
+                return true;
+            }
+            return false;
+        });
+        Gate::define('view-user', function ($user) {
+            if($user->hasRole(1)){
                 return true;
             }
             return false;
         });
         Gate::define('create-user', function ($user) {
-            if($user->hasRole('Administrador')){
+            if($user->hasRole(1)){
                 return true;
             }
             return false;
         });
         Gate::define('update-user', function ($user) {
-            if($user->hasRole('Administrador')){
+            if($user->hasRole(1)){
                 return true;
             }
             return false;
         });
         Gate::define('delete-user', function ($user) {
-            if($user->hasRole('Administrador')){
+            if($user->hasRole(1)){
                 return true;
             }
             return false;
         });
 
-
+       //* fin Policy
     }
 }

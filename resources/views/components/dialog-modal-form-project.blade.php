@@ -48,6 +48,7 @@
         <div class="flex justify-end pt-2">
             <form method="POST" action="{{ route('notifications.sendToParticipe') }}">
                 @csrf()
+                {{-- Guardamos el projecto en el que el aprendiz desea participar --}}
                 <input hidden id="project_id" name="project_id" value="{{$project->id}}">
 
                 <button type="submit" class="px-4 bg-transparent p-3 rounded-lg text-white bg-blue-900 hover:bg-blue-800 mr-2">Enviar solicitud</button>
