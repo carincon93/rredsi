@@ -333,7 +333,7 @@
             @endif
 
             @if( !Auth::user()->hasRole('Estudiante'))
-            <x-drop-down-educational-institution-faculties />
+                {{-- <x-drop-down-educational-institution-faculties /> --}}
             @endif
 
             {{-- dropdown ini --}}
