@@ -76,12 +76,12 @@
         {{-- links_sidebar --}}
       <nav :class="{'block': open, 'hidden': !open}" class="scroll flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
 
+        // se trae la variable node desde la ruta si existe en la instancia
         @if (request()->route('node'))
             @php
                 $node = request()->route('node');
             @endphp
         @endif
-
 
 
 
@@ -142,12 +142,10 @@
         </div>
 
         @php
-            $userAdmin                     = Auth::user()->educationalInstitutionFaculties->first();
-            // $insitution                    = $userAdmin->educationalInstitution;
-            // echo $insitution->administrator_id == Auth::user()->id ? 'si es' : 'No es' ;
+            /**
+            ** traemos la informacion de el nodo de la institucion y faculta para los enlaces de redireccion para my proyects de estudiantes
+            */
             $researchTeam                     = Auth::user()->researchTeams->first();
-
-            // traemos la informacion de el nodo de la institucion y faculta para los enlaces de redireccion para my proyects de estudiantes
             if(!is_null(Auth::user()->researchTeams->first()))
             {
                 $researchGroup                    = $researchTeam->researchGroup;
