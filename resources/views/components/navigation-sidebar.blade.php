@@ -76,9 +76,9 @@
         {{-- links_sidebar --}}
       <nav :class="{'block': open, 'hidden': !open}" class="scroll flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
 
-        // se trae la variable node desde la ruta si existe en la instancia
         @if (request()->route('node'))
             @php
+                /***  se trae la variable node desde la ruta si existe en la instancia */
                 $node = request()->route('node');
             @endphp
         @endif
@@ -366,5 +366,3 @@
       </nav>
     </div>
   </div>
-
-

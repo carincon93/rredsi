@@ -27,6 +27,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NodeEventController;
 use App\Http\Controllers\LegalInformationController;
 use App\Http\Controllers\AnnualNodeEventController;
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\ModelForm;
 use App\Models\NodeEvent;
 
@@ -139,6 +140,7 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     Route::resources([
+        'users'                                                                                             => UserController::class,
         'nodes'                                                                                             => NodeController::class,
         'nodes.events'                                                                                      => NodeEventController::class,
         'nodes.educational-institutions'                                                                    => EducationalInstitutionController::class,

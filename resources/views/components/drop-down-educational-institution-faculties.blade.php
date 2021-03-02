@@ -7,13 +7,6 @@
 
 <input class="hidden" id="is_form" value="{{$form}}" >
 
-{{-- pantalla mobil --}}
-{{-- <div class="mt-1 block md:hidden"> --}}
-    {{-- <p class="mt-4">{{ __('Educational institutions')}} </p> --}}
-    {{-- <select disabled class="text-xs md:text-xs mr-10 bg-transparent focus:outline-none focus:border-indigo-500 rounded-md border-0 p-3.5 shadow-sm block w-full" id="educational_institution_id" name="educational_institution_id" required onfocus='this.size=6' onblur='this.size=1' onchange="SwitchFaculties.onChangeInstitution(event); this.size=1; this.blur()">
-        <option value="">Mobil</option>
-    </select>
-</div> --}}
 
 <div class="static mt-1">
     <select disabled class="text-xs md:text-xs mr-10 bg-transparent focus:outline-none focus:border-indigo-500 rounded-md border-0 p-3.5 shadow-sm block w-full" id="educational_institution_id" name="educational_institution_id" required onchange="SwitchFaculties.onChangeInstitution(event)">

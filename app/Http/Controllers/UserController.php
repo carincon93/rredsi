@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KnowledgeArea;
-use App\Models\UserGraduation;
-use App\Models\UserAcademicWork;
-
-use App\Http\Requests\UserAcademicWorkRequest;
+use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 
-class UserAcademicWorkController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UserGraduation $userGraduation)
+    public function index()
     {
-        $this->authorize('viewAny', UserAcademicWork::class, $userGraduation);
 
-        $userAcademicWork = $userGraduation->userAcademicWork()->orderBy('title')->first();
+        $this->authorize('index-users', [User::class]);
 
-        return view('AcademicWorks.index', compact('userGraduation', 'userAcademicWork'));
+
+        $users = User::orderBy('name', 'ASC')->paginate(100);
+
+        return view('Users.index', compact('users'));
     }
 
     /**
@@ -30,13 +30,9 @@ class UserAcademicWorkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(UserGraduation $userGraduation)
+    public function create()
     {
-        $this->authorize('create', UserAcademicWork::class, $userGraduation);
-
-        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
-
-        return view('AcademicWorks.create', compact('userGraduation', 'knowledgeAreas'));
+        return view('Users.create');
     }
 
     /**
@@ -45,94 +41,74 @@ class UserAcademicWorkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserAcademicWorkRequest $request, UserGraduation $userGraduation)
+    public function store(UserRequest $request)
     {
-        $this->authorize('create', UserAcademicWork::class, $userGraduation);
+        $user = new User();
+        $user->fieldName = $request->get('fieldName');
+        $user->fieldName = $request->get('fieldName');
+        $user->fieldName = $request->get('fieldName');
 
-        $userAcademicWork = new UserAcademicWork();
-        $userAcademicWork->title                    = $request->get('title');
-        $userAcademicWork->type                     = $request->get('type');
-        $userAcademicWork->authors                  = $request->get('authors');
-        $userAcademicWork->grade                    = $request->get('grade');
-        $userAcademicWork->mentors                  = $request->get('mentors');
-        $userAcademicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
-        $userAcademicWork->userGraduation()->associate($userGraduation);
-
-        if($userAcademicWork->save()){
-            $message = 'Your store processed correctly';
+        if ( !$user->save() ) {
+            return redirect()->route('users.create')->withInput()->with('status', __('An error has ocurred. Please try again later.'));
         }
 
-        return redirect()->route('user.profile.user-graduations.user-academic-works.index', [$userGraduation])->with('status', $message);
+        return redirect()->route('users.index')->with('status', __('The resource has been created successfully.'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\UserAcademicWork  $userAcademicWork
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
+    public function show(User $user)
     {
-        $this->authorize('view', UserAcademicWork::class, $userGraduation, $userAcademicWork);
-
-        return view('AcademicWorks.show', compact('userGraduation', 'userAcademicWork'));
+        return view('Users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UserAcademicWork  $userAcademicWork
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
+    public function edit(User $user)
     {
-        $this->authorize('update', UserAcademicWork::class, $userGraduation, $userAcademicWork);
-
-        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
-
-        return view('AcademicWorks.edit', compact('userGraduation', 'userAcademicWork', 'knowledgeAreas'));
+        return view('Users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserAcademicWork  $userAcademicWork
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserAcademicWorkRequest $request, UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
+    public function update(UserRequest $request, User $user)
     {
-        $this->authorize('update', UserAcademicWork::class, $userGraduation, $userAcademicWork);
+        $user->fieldName = $request->get('fieldName');
+        $user->fieldName = $request->get('fieldName');
+        $user->fieldName = $request->get('fieldName');
 
-        $userAcademicWork->title                    = $request->get('title');
-        $userAcademicWork->type                     = $request->get('type');
-        $userAcademicWork->authors                  = $request->get('authors');
-        $userAcademicWork->grade                    = $request->get('grade');
-        $userAcademicWork->mentors                  = $request->get('mentors');
-        $userAcademicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
-        $userAcademicWork->userGraduation()->associate($userGraduation);
-
-        if($userAcademicWork->save()){
-            $message = 'Your update processed correctly';
+        if ( !$user->save() ) {
+            return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
         }
 
-        return redirect()->route('user.profile.user-graduations.user-academic-works.index', [$userGraduation])->with('status', $message);
+        return redirect()->route('users.index')->with('status', __('The resource has been updated successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserAcademicWork  $userAcademicWork
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
+    public function destroy(User $user)
     {
-        $this->authorize('delete', UserAcademicWork::class, $userGraduation, $userAcademicWork);
-
-        if($userAcademicWork->delete()) {
-            $message = 'Your update processed correctly';
+        if ( !$user->delete() ) {
+            return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
         }
 
-        return redirect()->route('user.profile.user-graduations.user-academic-works.index', [$userGraduation])->with('status', $message);
+        return redirect()->route('users.index')->with('status', __('The resource has been deleted successfully.'));
     }
 }

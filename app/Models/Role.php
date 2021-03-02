@@ -15,12 +15,8 @@ class Role extends SpatieRole
      * @var array
      */
     protected $fillable = [
-        'name', 
+        'name',
         'description',
         'guard_name',
     ];
-
-    public function user() {
-        return $this->belongsTo('App\Models\User');
-    }
 }
