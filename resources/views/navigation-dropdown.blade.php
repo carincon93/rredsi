@@ -19,7 +19,6 @@
                     @endif
                 </div>
 
-
                 <?php
                     /** traemos la informacion de el nodo directamente del usuario
                  * llegado al caso que halla error se trae de la ruta

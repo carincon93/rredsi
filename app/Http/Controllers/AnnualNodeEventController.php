@@ -258,7 +258,6 @@ class AnnualNodeEventController extends Controller
             }
 
 
-
             $annualNodeEvent = new AnnualNodeEvent();
             $annualNodeEvent->presentation_type      = $request->get('presentation_type');
             $annualNodeEvent->project_status         = $request->get('project_status');

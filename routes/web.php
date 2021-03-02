@@ -42,60 +42,14 @@ use App\Models\NodeEvent;
 |
 */
 
+Route::get('/', function() {
+    return redirect()->route('/', 1);
+    // Quemado
+});
 
-Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications')->middleware(['auth']);
 Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('/');
 Route::get('/nodes/{node}/explorer/roles', [AppController::class, 'roles'])->name('nodes.explorer.roles');
 Route::get('/nodes/{node}/explorer/events', [AppController::class, 'events'])->name('nodes.explorer.events');
-Route::get('/nodes/{node}/explorer/node-events/rredsi-event', [NodeEventController::class, 'rredsiEventRegister'])->name('nodes.explorer.events.rredsiEventRegister')->middleware(['auth']);
-Route::get('/nodes/{node}/explorer/events/{event}', [AppController::class, 'showEvent'])->name('nodes.explorer.showEvent')->middleware(['auth']);
-Route::post('/nodes/{node}/explorer/events/{event}', [NodeEventController::class, 'sendProjectToEvent'])->name('nodes.explorer.sendProjectToEvent')->middleware(['auth']);
-Route::get('/nodes/{node}/explorer/roles/{academicProgram}', [AppController::class, 'searchRoles'])->name('nodes.explorer.searchRoles')->middleware(['auth']);
-Route::get('/nodes/{node}/explorer/roles/show-user/{user}', [AppController::class, 'showUser'])->name('nodes.explorer.searchRoles.showUser')->middleware(['auth']);
-Route::get('/nodes/{node}/explorer/projects', [AppController::class, 'searchProjects'])->name('nodes.explorer.searchProjects')->middleware(['auth']);
-Route::get('/nodes/{node}/explorer/projects/{project}', [AppController::class, 'showProject'])->name('nodes.explorer.searchProjects.showProject')->middleware(['auth']);
-Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'])->name('nodes.explorer.nodeInfo')->middleware(['auth']);
-
-Route::get('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification')->middleware(['auth']);
-
-Route::post('/notifications/sendToParticipe', [NotificationController::class, 'sendToParticipe'])->name('notifications.sendToParticipe')->middleware(['auth']);
-Route::post('/notifications/sendProjectToEvent', [NotificationController::class, 'sendProjectToEvent'])->name('notifications.sendProjectToEvent')->middleware(['auth']);
-Route::post('/notifications/acceptStudent', [NotificationController::class, 'acceptStudent'])->name('notifications.acceptStudent')->middleware(['auth']);
-
-
-Route::post('/annual-node-events/register-annual-node-events/{node}',[AnnualNodeEventController::class, 'registerAnnualNodeEvents'])->name('annualNodeEvent.registerAnnualNodeEvents')->middleware(['auth']);
-
-
-Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show')->middleware(['auth']);
-Route::get('/notificationsIndexSend/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend')->middleware(['auth']);
-Route::get('/annual-node-event/{project}', [AnnualNodeEventController::class, 'show'])->name('annualNodeEvent.show')->middleware(['auth']);
-
-
-Route::resource('/notifications', NotificationController::class, [
-    'names' => [
-        'index'           => 'notifications.index',
-        'destroy'         => 'notifications.destroy'
-    ]
-]);
-
-
-Route::resource('/annual-node-event', AnnualNodeEventController::class,[
-    'names'=>[
-        'index'   => 'annualNodeEvent.index',
-        'update'  => 'annualNodeEvent.update'
-    ]
-])->middleware(['auth']);
-
-
-
-Route::get('preview-emails', function () {
-    return (new App\Notifications\RoleInvitation(3,1,3))
-        ->toMail('carincon93@gmail.com');
-});
-
-Route::get('/', function() {
-    return redirect()->route('/', 1);
-});
 
 Route::middleware(['auth'])->group(function () {
 
@@ -103,17 +57,50 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', function() {
         return redirect()->route('nodes.dashboard', 1);
+        // Quemado
     });
 
     Route::get('/model-form', function () {
         return view('livewire.model-form');
     })->name('model-form');
 
+    Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications');
+    Route::get('/nodes/{node}/explorer/node-events/rredsi-event', [NodeEventController::class, 'rredsiEventRegister'])->name('nodes.explorer.events.rredsiEventRegister');
+    Route::get('/nodes/{node}/explorer/events/{event}', [AppController::class, 'showEvent'])->name('nodes.explorer.showEvent');
+    Route::post('/nodes/{node}/explorer/events/{event}', [NodeEventController::class, 'sendProjectToEvent'])->name('nodes.explorer.sendProjectToEvent');
+    Route::get('/nodes/{node}/explorer/roles/{academicProgram}', [AppController::class, 'searchRoles'])->name('nodes.explorer.searchRoles');
+    Route::get('/nodes/{node}/explorer/roles/show-user/{user}', [AppController::class, 'showUser'])->name('nodes.explorer.searchRoles.showUser');
+    Route::get('/nodes/{node}/explorer/projects', [AppController::class, 'searchProjects'])->name('nodes.explorer.searchProjects');
+    Route::get('/nodes/{node}/explorer/projects/{project}', [AppController::class, 'showProject'])->name('nodes.explorer.searchProjects.showProject');
+    Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'])->name('nodes.explorer.nodeInfo');
+    Route::get('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification');
+    Route::post('/notifications/sendToParticipe', [NotificationController::class, 'sendToParticipe'])->name('notifications.sendToParticipe');
+    Route::post('/notifications/sendProjectToEvent', [NotificationController::class, 'sendProjectToEvent'])->name('notifications.sendProjectToEvent');
+    Route::post('/notifications/acceptStudent', [NotificationController::class, 'acceptStudent'])->name('notifications.acceptStudent');
+    Route::post('/annual-node-events/register-annual-node-events/{node}',[AnnualNodeEventController::class, 'registerAnnualNodeEvents'])->name('annualNodeEvent.registerAnnualNodeEvents');
+    Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+    Route::get('/notificationsIndexSend/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend');
+    Route::get('/annual-node-event/{project}', [AnnualNodeEventController::class, 'show'])->name('annualNodeEvent.show');
+
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}', [EducationalInstitutionFacultyController::class, 'dashboard'])->name('nodes.educational-institutions.faculties.dashboard');
 
     Route::get('nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}/research-groups/{research_group}/research-teams/{research_team}/my-projects',[ProjectController::class, 'myProjects'])->name('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects');
+
+    Route::resource('/notifications', NotificationController::class, [
+        'names' => [
+            'index'           => 'notifications.index',
+            'destroy'         => 'notifications.destroy'
+        ]
+    ]);
+
+    Route::resource('/annual-node-event', AnnualNodeEventController::class,[
+        'names'=>[
+            'index'   => 'annualNodeEvent.index',
+            'update'  => 'annualNodeEvent.update'
+        ]
+    ]);
 
     Route::resource('/user/profile/user-graduations', UserGraduationController::class, [
         'names' => [
@@ -161,6 +148,5 @@ Route::middleware(['auth'])->group(function () {
         'knowledge-subarea-disciplines'     => KnowledgeSubareaDisciplineController::class,
         'roles'                             => RoleController::class,
         'legal-informations'                => LegalInformationController::class
-
     ]);
 });
