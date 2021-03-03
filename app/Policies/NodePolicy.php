@@ -16,14 +16,21 @@ class NodePolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user,Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
-        if($user->hasPermissionTo('index_node')){
+
+        if(!$user->hasPermissionTo('index_node')){
+            return false;
+        }
+
+        $admin = $node->administrator->id;
+        if($admin == $user->id){
             return true;
         }
+
         return false;
     }
 
@@ -36,7 +43,7 @@ class NodePolicy
      */
     public function view(User $user,Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('show_node')){
@@ -57,7 +64,7 @@ class NodePolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('create_node')){
@@ -75,7 +82,7 @@ class NodePolicy
      */
     public function update(User $user, Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('edit_node')){
@@ -97,7 +104,7 @@ class NodePolicy
      */
     public function delete(User $user)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('destroy_node')){
@@ -105,6 +112,7 @@ class NodePolicy
         }
         return false;
     }
+
 
     /**
      * Determine whether the user can restore the model.

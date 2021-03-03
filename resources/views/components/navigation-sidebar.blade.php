@@ -8,6 +8,7 @@
     $educationalInstitution         = null;
     $educationalInstitutionFaculty  = null;
     $researchGroup                  = null;
+
     if ( request()->route('node') ) {
         $node = request()->route('node');
     }
@@ -26,6 +27,7 @@
      * luego validamos si es diferente a null para que no nos muestre error
      */
     $educationalInstitutionFaculty = $user->educationalInstitutionFaculties()->where('is_principal', 1)->first();
+
     if ( $educationalInstitutionFaculty ) {
         $node = $educationalInstitutionFaculty->educationalInstitution->node;
     } else {
@@ -37,12 +39,12 @@
         * Traemos la informacion del nodo de la institucion y facultad para los enlaces de redireccion
         * para Mis proyectos de estudiantes
         */
-        $researchTeam = $user->researchTeams->first();
-        if ( !is_null($user->researchTeams->first()) ) {
-            $node                             = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->node;
-            $educationalInstitution           = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution;
-            $educationalInstitutionFaculty    = $researchTeam->researchGroup->educationalInstitutionFaculty;
-            $researchGroup                    = $researchTeam->researchGroup;
+        if ( !is_null($user->my_projects ) ) {
+            $node                             = $user->my_projects['node'];
+            $educationalInstitution           = $user->my_projects['educationalInstitution'];
+            $educationalInstitutionFaculty    = $user->my_projects['educationalInstitutionFaculty'];
+            $researchGroup                    = $user->my_projects['researchGroup'];
+            $researchTeam                     = $user->my_projects['researchTeam'];
         }
     }
 

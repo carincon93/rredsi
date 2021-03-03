@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -20,11 +21,14 @@ class UserController extends Controller
     public function index()
     {
 
-        $this->authorize('index-users', [User::class]);
+        // $this->authorize('index-users', [User::class]);
 
-        $users = User::orderBy('name', 'ASC')->paginate(100);
+        // $users = User::orderBy('name', 'ASC')->paginate(100);
 
-        return view('Users.index', compact('users'));
+        // return view('Users.index', compact('users'));
+        $user = auth()->user();
+
+        return  $user;
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\EducationalInstitution;
-
+use App\Models\Node;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class EducationalInstitutionUserPolicy
@@ -122,6 +122,20 @@ class EducationalInstitutionUserPolicy
         }
 
         $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function dashboardNode(User $user, Node $node)
+    {
+        if($user->hasRole(1)){
+            return true;
+        }
+
+        $admin = $node->administrator_id;
         if($admin == $user->id){
             return true;
         }

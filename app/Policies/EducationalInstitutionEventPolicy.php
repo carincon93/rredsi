@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\EducationalInstitution;
 use App\Models\EducationalInstitutionEvent;
+use App\Models\Node;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -17,12 +18,22 @@ class EducationalInstitutionEventPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
-        if($user->hasPermissionTo('index_educational_institution_event')){
+        if(!$user->hasPermissionTo('index_educational_institution_event')){
+            return false;
+        }
+
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
+            return true;
+        }
+
+        $admin = $node->administrator->id;
+        if($admin == $user->id){
             return true;
         }
         return false;
@@ -35,15 +46,21 @@ class EducationalInstitutionEventPolicy
      * @param  \App\Models\EducationalInstitutionEvent  $educationalInstitutionEvent
      * @return mixed
      */
-    public function view(User $user, EducationalInstitution $educationalInstitution)
+    public function view(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
-        if(!$user->hasPermissionTo('show_educational_institution_event')){
+        if(!$user->hasPermissionTo('index_educational_institution_event')){
             return false;
         }
+
         $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
+            return true;
+        }
+
+        $admin = $node->administrator->id;
         if($admin == $user->id){
             return true;
         }
@@ -56,12 +73,22 @@ class EducationalInstitutionEventPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
-        if($user->hasPermissionTo('create_educational_institution_event')){
+        if(!$user->hasPermissionTo('index_educational_institution_event')){
+            return false;
+        }
+
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
+            return true;
+        }
+
+        $admin = $node->administrator->id;
+        if($admin == $user->id){
             return true;
         }
         return false;
@@ -74,15 +101,21 @@ class EducationalInstitutionEventPolicy
      * @param  \App\Models\EducationalInstitutionEvent  $educationalInstitutionEvent
      * @return mixed
      */
-    public function update(User $user, EducationalInstitution $educationalInstitution)
+    public function update(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
-        if(!$user->hasPermissionTo('edit_educational_institution_event')){
+        if(!$user->hasPermissionTo('index_educational_institution_event')){
             return false;
         }
+
         $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
+            return true;
+        }
+
+        $admin = $node->administrator->id;
         if($admin == $user->id){
             return true;
         }
@@ -96,13 +129,23 @@ class EducationalInstitutionEventPolicy
      * @param  \App\Models\EducationalInstitutionEvent  $educationalInstitutionEvent
      * @return mixed
      */
-    public function delete(User $user)
+    public function delete(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
-        if(!$user->hasPermissionTo('destroy_educational_institution_event')){
+        if(!$user->hasPermissionTo('index_educational_institution_event')){
             return false;
+        }
+
+        $admin = $educationalInstitution->administrator->id;
+        if($admin == $user->id){
+            return true;
+        }
+
+        $admin = $node->administrator->id;
+        if($admin == $user->id){
+            return true;
         }
         return false;
     }

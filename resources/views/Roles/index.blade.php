@@ -90,7 +90,7 @@
                                                         {{ __('Edit') }}
                                                     </x-jet-dropdown-link>
                                                     @endcan
-                                                    @if(Auth::user()->hasRole('Adminstrador') && Auth::user()->hasRole('Delegado institucion educativa')){
+                                                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(3))
                                                         @can('destroy_role')
                                                             <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('roles.destroy',[$role->id]) }}')">
                                                                 {{ __('Delete') }}

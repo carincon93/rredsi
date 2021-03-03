@@ -168,6 +168,9 @@ class EducationalInstitutionController extends Controller
      */
     public function dashboard(Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('isAdmin', [EducationalInstitution::class, $node , $educationalInstitution]);
+
+
         return view('EducationalInstitutions.dashboard', compact('node', 'educationalInstitution'));
     }
 
@@ -178,6 +181,8 @@ class EducationalInstitutionController extends Controller
      */
     public function bi(Node $node, EducationalInstitution $educationalInstitution)
     {
+        $this->authorize('isAdmin', [EducationalInstitution::class, $node , $educationalInstitution]);
+
         $educationalInstitution->projectsByKnowledgeArea        = $educationalInstitution->projectsByKnowledgeArea();
         $educationalInstitution->projectsByYear                 = $educationalInstitution->projectsByYear();
         $educationalInstitution->projectsByProjectTypes         = $educationalInstitution->projectsByProjectTypes();
