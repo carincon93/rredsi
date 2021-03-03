@@ -17,7 +17,7 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution)
     {
-        // $this->authorize('viewAny',[EducationalInstitutionFaculty::class, $educationalInstitution]);
+        $this->authorize('viewAny',[EducationalInstitutionFaculty::class, $educationalInstitution]);
 
         $educationalInstitutionFaculties = $educationalInstitution->educationalInstitutionFaculties()->orderBy('name')->get();
 
