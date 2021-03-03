@@ -59,7 +59,7 @@
                 <div class="transition duration-500 ease-in-out transform hover:-translate-y-1 h-64 bg-white hover:bg-gray-200 overflow-hidden shadow-xl lg-rounded-lg p-4 flex">
                     <a href="{{ route('nodes.educational-institutions.events.index', [$node, $educationalInstitution]) }}" class="flex flex-col h-56 items-center justify-around w-96">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-14 h-14 text-gray-400">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                         <h1 class="text-2xl text-gray-400">{{ __('Events') }}</h1>
                     </a>

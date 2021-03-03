@@ -39,7 +39,8 @@ class NotificationToParticipate extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        // Quemado Falta mail
+        return ['database'];
     }
 
     /**
@@ -50,12 +51,17 @@ class NotificationToParticipate extends Notification
      */
     public function toMail($notifiable)
     {
-        $faculty = $this->user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+        if ( $this->user->hasRole(4) ) {
+            $educationalInstitutionFaculty  = $this->user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+            $educationalInstitution         = $educationalInstitutionFaculty->educationalInstitution->name;
+        } elseif ( $this->user->hasRole(3) ) {
+            $educationalInstitution = $this->user->isEducationalInstitutionAdmin;
+        }
 
         return (new MailMessage)
                 ->subject("Solicitud de participación en proyecto de {$this->project->projectType->type} - Ibis")
                 ->greeting("¡Hola {$notifiable->name} !")
-                ->line("El estudiante {$this->user->name} de la institución educativa {$faculty->educationalInstitution->name} desea participar en el desarrollo del proyecto {$this->project->title}'.")
+                ->line("El estudiante {$this->user->name} de la institución educativa {$educationalInstitution} desea participar en el desarrollo del proyecto {$this->project->title}'.")
                 ->action('Más información del estudiante', route('notifications.indexResponseSend', [$this->id]))
                 ->line('Gracias y espero su pronta respuesta');
     }
@@ -68,11 +74,16 @@ class NotificationToParticipate extends Notification
      */
     public function toArray($notifiable)
     {
-        $faculty = $this->user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+        if ( $this->user->hasRole(4) ) {
+            $educationalInstitutionFaculty  = $this->user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+            $educationalInstitution         = $educationalInstitutionFaculty->educationalInstitution->name;
+        } elseif ( $this->user->hasRole(3) ) {
+            $educationalInstitution = $this->user->isEducationalInstitutionAdmin;
+        }
 
         return [
             "subject"       => "Solicutud de participación en proyecto de {$this->project->projectType->type} - Ibis",
-            "message"       => "El estudiante {$this->user->name} de la institución educativa {$faculty->educationalInstitution->name} quiere solicitar la participación en el desarrollo del proyecto {$this->project->title}'.",
+            "message"       => "El estudiante {$this->user->name} de la institución educativa {$educationalInstitution} quiere solicitar la participación en el desarrollo del proyecto {$this->project->title}'.",
             "action"        => route('notifications.indexResponseSend', [$this->id]),
             "student_id"    => $this->user->id,
             "project_id"    => $this->project->id,

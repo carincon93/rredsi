@@ -1,13 +1,46 @@
 @php
-    $user = Auth::user();
+    $authUser = Auth::user();
 
-    /**
-     * Trear id de nodo, facultad, e institucion si estas existen en la uri
-    */
     $node                           = null;
     $educationalInstitution         = null;
     $educationalInstitutionFaculty  = null;
     $researchGroup                  = null;
+
+     /**
+      * Explorer
+     * Traemos la informacion de el nodo directamente del usuario
+     * llegado al caso que haya error se trae de la ruta
+     * luego validamos si es diferente a null para que no nos muestre error
+     */
+    $educationalInstitutionFaculty = $authUser->educationalInstitutionFaculties()->where('is_principal', 1)->first();
+    if ( $educationalInstitutionFaculty ) {
+        $node = $educationalInstitutionFaculty->educationalInstitution->node;
+    } else {
+        $node = request()->route('node');
+    }
+
+    if ( $authUser->hasRole(3) ) {
+        $node                   = $authUser->isEducationalInstitutionAdmin->node;
+        $educationalInstitution = $authUser->isEducationalInstitutionAdmin;
+    }
+
+    if ( $authUser->hasRole(4) ) {
+        /**
+        * Traemos la informacion del nodo de la institucion y facultad para los enlaces de redireccion
+        * para Mis proyectos de estudiantes
+        */
+        $researchTeam = $authUser->researchTeams->first();
+        if ( !is_null($authUser->researchTeams->first()) ) {
+            $node                             = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->node;
+            $educationalInstitution           = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution;
+            $educationalInstitutionFaculty    = $researchTeam->researchGroup->educationalInstitutionFaculty;
+            $researchGroup                    = $researchTeam->researchGroup;
+        }
+    }
+
+    /**
+     * Trear id de nodo, facultad, e institucion si estas existen en la uri
+    */
     if ( request()->route('node') ) {
         $node = request()->route('node');
     }
@@ -20,33 +53,8 @@
         $educationalInstitutionFaculty = request()->route('faculty');
     }
 
-     /**
-     * Traemos la informacion de el nodo directamente del usuario
-     * llegado al caso que haya error se trae de la ruta
-     * luego validamos si es diferente a null para que no nos muestre error
-     */
-    $educationalInstitutionFaculty = $user->educationalInstitutionFaculties()->where('is_principal', 1)->first();
-    if ( $educationalInstitutionFaculty ) {
-        $node = $educationalInstitutionFaculty->educationalInstitution->node;
-    } else {
-        $node = request()->route('node');
-    }
+    $count = $authUser->unreadNotifications->count();
 
-    if ( $user->hasRole(4) ) {
-        /**
-        * Traemos la informacion del nodo de la institucion y facultad para los enlaces de redireccion
-        * para Mis proyectos de estudiantes
-        */
-        $researchTeam = $user->researchTeams->first();
-        if ( !is_null($user->researchTeams->first()) ) {
-            $node                             = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->node;
-            $educationalInstitution           = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution;
-            $educationalInstitutionFaculty    = $researchTeam->researchGroup->educationalInstitutionFaculty;
-            $researchGroup                    = $researchTeam->researchGroup;
-        }
-    }
-
-    $count = $user->unreadNotifications->count();
 @endphp
 
 <style>
@@ -95,12 +103,12 @@
                     <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                 </svg>
             </button>
-            @if ( $node && $user->hasRole(2) )
+            @if ( $node && $authUser->hasRole(2) )
                 <a class="m-auto pl-14 md:pl-0 md:pr-0 md:justify-center py-3" href="{{ route('nodes.dashboard', [$node]) }}">
                     <x-jet-application-mark class="block h-9 w-auto" />
                 </a>
-            @elseif ( $node && $user->hasRole(3) )
-                <a class="m-auto pl-14 md:pl-0 md:pr-0 md:justify-center py-3" href="{{ route('nodes.educational-institutions.dashboard', [$node, $user->isEducationalInstitutionAdmin->id]) }}">
+            @elseif ( $node && $authUser->hasRole(3) )
+                <a class="m-auto pl-14 md:pl-0 md:pr-0 md:justify-center py-3" href="{{ route('nodes.educational-institutions.dashboard', [$node, $authUser->isEducationalInstitutionAdmin->id]) }}">
                     <x-jet-application-mark class="block h-9 w-auto" />
                 </a>
             @endif
@@ -130,7 +138,7 @@
             {{-- Administrar perfil en dispositivo movil --}}
             <div class="block overflow-auto md:hidden mt-1">
             {{-- <x-drop-down-profile /> --}}
-                <p class="text-center mx-auto capitalize p-0 m-0">{{ $user->name }}</p>
+                <p class="text-center mx-auto capitalize p-0 m-0">{{ $authUser->name }}</p>
                 @can('show_profile')
                 <a href="{{ route('profile.show') }}" class="block">
                     <svg class="inline p-0 m-0 h-5 w-6 ml-2 mr-2 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -175,10 +183,10 @@
                     </a>
                 </div>
 
-                @if( $user->hasRole(4) && $educationalInstitution && $educationalInstitutionFaculty && $researchGroup && $researchTeam)
+                @if( $authUser->hasRole(4) && $educationalInstitution && $educationalInstitutionFaculty && $researchGroup && $researchTeam)
                     <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node, $educationalInstitution, $educationalInstitutionFaculty, $researchGroup, $researchTeam]) }}" class="text-gray-600 hover:text-gray-400 mt-2">
-                        <svg class="inline p-0 m-0 h-5 w-6 ml-2 mr-2 mb-2 text-black" viewBox="0 0 20 20">
-                            <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1" style="width: 18px;">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
                         </svg>
                         {{ __('my projects') }}
                     </a>
@@ -246,7 +254,7 @@
 
             {{-- dropdown que  que puede visualizar el coordinador de cada nodo--}}
             @if ($node)
-                @if( $user->hasRole("Coordinador") )
+                @if( $authUser->hasRole(2) )
                     <div @click.away="open = false" class="static" x-data="{ open: false }">
                         <button @click="open = !open" class="flex flex-row items-center justify-between w-full py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                             <span class="capitalize">Nodo {{ $node->state }}</span>
@@ -291,66 +299,64 @@
 
             {{-- dropdown que  puede visualizar el delegado de cada institucion
                 y administrar sus dependencias--}}
-            @if( $user->hasRole(3) )
+            @if( $authUser->hasRole(3) )
                 @if ( $educationalInstitution )
-                    {{-- dropdown ini --}}
-                    <div @click.away="open = false" class="static" x-data="{ open: false }">
-                        <button @click="open = !open" class="flex flex-row items-center justify-between w-full py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                            <span class="capitalize">{{ __('Manage educational institution faculties') }}</span>
-                            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </button>
-                        <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg z-10">
-                            <div class="px-2 py-2 md:pb-0 bg-white rounded-md shadow dark-mode:bg-gray-800">
-                                <a href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}" id="faculties" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1" style="width: 18px;">
-                                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                                    </svg>
-                                    <span class="text-gray-700">{{ __('Faculties') }}</span>
-                                </a>
-
-                                @if ($node && $educationalInstitutionFaculty)
-                                    @can('index_academic_program')
-                                    <a href="{{ route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="academic_programs" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                        <svg class="inline p-0 m-0 h-5 w-6 ml-2 mr-2 mb-2 text-black" viewBox="0 0 20 20">
-                                            <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
-                                        </svg>
-                                        <span class="text-gray-700">{{ __('Academic programs') }}</span>
-                                    </a>
-                                    @endcan
-                                    @can('index_research_group')
-                                    <a href="{{ route('nodes.educational-institutions.faculties.research-groups.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="research_groups" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                        <svg class="inline p-0 m-0 h-5 w-6 ml-2 mr-2 mb-2 text-black" viewBox="0 0 20 20">
-                                            <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
-                                        </svg>
-                                        <span class="text-gray-700">{{ __('Research groups') }}</span>
-                                    </a>
-                                    @endcan
-                                    @can('index_educational_environments')
-                                    <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="educational_environments" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                        <svg class="inline p-0 m-0 h-5 w-6 ml-2 mr-2 mb-2 text-black" viewBox="0 0 20 20">
-                                            <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
-                                        </svg>
-                                        <span class="text-gray-700">{{ __('Educational environments') }}</span>
-                                    </a>
-                                    @endcan
-                                    @can('index_user')
-                                    <a href="{{ route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="users" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                        <svg class="inline p-0 m-0 h-5 w-6 ml-2 mr-2 mb-2 text-black" viewBox="0 0 20 20">
-                                            <path d="M15.396,2.292H4.604c-0.212,0-0.385,0.174-0.385,0.386v14.646c0,0.212,0.173,0.385,0.385,0.385h10.792c0.211,0,0.385-0.173,0.385-0.385V2.677C15.781,2.465,15.607,2.292,15.396,2.292 M15.01,16.938H4.99v-2.698h1.609c0.156,0.449,0.586,0.771,1.089,0.771c0.638,0,1.156-0.519,1.156-1.156s-0.519-1.156-1.156-1.156c-0.503,0-0.933,0.321-1.089,0.771H4.99v-3.083h1.609c0.156,0.449,0.586,0.771,1.089,0.771c0.638,0,1.156-0.518,1.156-1.156c0-0.638-0.519-1.156-1.156-1.156c-0.503,0-0.933,0.322-1.089,0.771H4.99V6.531h1.609C6.755,6.98,7.185,7.302,7.688,7.302c0.638,0,1.156-0.519,1.156-1.156c0-0.638-0.519-1.156-1.156-1.156c-0.503,0-0.933,0.322-1.089,0.771H4.99V3.062h10.02V16.938z M7.302,13.854c0-0.212,0.173-0.386,0.385-0.386s0.385,0.174,0.385,0.386s-0.173,0.385-0.385,0.385S7.302,14.066,7.302,13.854 M7.302,10c0-0.212,0.173-0.385,0.385-0.385S8.073,9.788,8.073,10s-0.173,0.385-0.385,0.385S7.302,10.212,7.302,10 M7.302,6.146c0-0.212,0.173-0.386,0.385-0.386s0.385,0.174,0.385,0.386S7.899,6.531,7.688,6.531S7.302,6.358,7.302,6.146"></path>
-                                        </svg>
-                                        <span class="text-gray-700">{{ __('Users') }}</span>
-                                    </a>
-                                    @endcan
-                                @endif
-                            </div>
-                        </div>
+                    <div>
+                        {{-- dropdown ini --}}
+                        <x-drop-down-educational-institution />
                     </div>
+
+                    <hr class="mt-4 mb-4">
+
+                    <a href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}" id="faculties" class="mt-4 mb-4 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1" style="width: 18px;">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-gray-700">{{ __('Faculties') }}</span>
+                    </a>
+
+                    @if ($node && $educationalInstitutionFaculty)
+                        <hr class="mt-4 mb-4">
+                        <p class="mt-4 mb-4 text-center"><strong>{{ $educationalInstitutionFaculty->name }}</strong></p>
+                        @can('index_academic_program')
+                        <a href="{{ route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="academic_programs" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1" style="width: 18px;">
+                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-700">{{ __('Academic programs') }}</span>
+                        </a>
+                        @endcan
+                        @can('index_research_group')
+                        <a href="{{ route('nodes.educational-institutions.faculties.research-groups.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="research_groups" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1" style="width: 18px;">
+                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-700">{{ __('Research groups') }}</span>
+                        </a>
+                        @endcan
+                        @can('index_educational_environment')
+                        <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="educational_environments" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1" style="width: 18px;">
+                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-700">{{ __('Educational environments') }}</span>
+                        </a>
+                        @endcan
+                        @can('index_educational_institution_user')
+                        <a href="{{ route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="users" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1" style="width: 18px;">
+                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-700">{{ __('Users') }}</span>
+                        </a>
+                        @endcan
+                    @endif
                 @endif
             @endif
 
             {{-- dropdown component para administrar datos de cada facultad --}}
             @if( !Auth::user()->hasRole(4) )
-                <x-drop-down-educational-institution-faculties />
+                {{-- <x-drop-down-educational-institution-faculties /> --}}
             @endif
 
             {{-- dropdown ini --}}

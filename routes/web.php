@@ -28,6 +28,7 @@ use App\Http\Controllers\NodeEventController;
 use App\Http\Controllers\LegalInformationController;
 use App\Http\Controllers\AnnualNodeEventController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
 use App\Http\Livewire\ModelForm;
 use App\Models\NodeEvent;
 
@@ -74,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/nodes/{node}/explorer/projects/{project}', [AppController::class, 'showProject'])->name('nodes.explorer.searchProjects.showProject');
     Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'])->name('nodes.explorer.nodeInfo');
     Route::get('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification');
-    Route::post('/notifications/sendToParticipe', [NotificationController::class, 'sendToParticipe'])->name('notifications.sendToParticipe');
+    Route::post('/notifications/send-to-participate', [NotificationController::class, 'sendToParticipate'])->name('notifications.sendToParticipate');
     Route::post('/notifications/sendProjectToEvent', [NotificationController::class, 'sendProjectToEvent'])->name('notifications.sendProjectToEvent');
     Route::post('/notifications/acceptStudent', [NotificationController::class, 'acceptStudent'])->name('notifications.acceptStudent');
     Route::post('/annual-node-events/register-annual-node-events/{node}',[AnnualNodeEventController::class, 'registerAnnualNodeEvents'])->name('annualNodeEvent.registerAnnualNodeEvents');
@@ -86,7 +87,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}', [EducationalInstitutionFacultyController::class, 'dashboard'])->name('nodes.educational-institutions.faculties.dashboard');
 
-    Route::get('nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}/research-groups/{research_group}/research-teams/{research_team}/my-projects',[ProjectController::class, 'myProjects'])->name('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects');
+    Route::get('/nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}/research-groups/{research_group}/research-teams/{research_team}/my-projects',[ProjectController::class, 'myProjects'])->name('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects');
 
     Route::resource('/notifications', NotificationController::class, [
         'names' => [

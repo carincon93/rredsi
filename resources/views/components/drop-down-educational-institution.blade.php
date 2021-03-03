@@ -1,11 +1,11 @@
-<div class="border-b flex mr-4">
+<div>
     <div>
         <select class="overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full pr-11" id="h_node_id" name="h_node_id" required onchange="SwitchEducationalInstitution.onChange(event)">
             <option value="">Seleccione un nodo</option>
         </select>
     </div>
 
-    <div class="ml-4">
+    <div>
         <select class="overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full pr-11" disabled id="h_educational_institution_id" name="h_educational_institution_id" required onchange="SwitchEducationalInstitution.redirect(event)">
             <option value="">Seleccione una institución educativa</option>
         </select>
@@ -18,9 +18,26 @@
         <script>
             var SwitchEducationalInstitution = (function() {
                 let nodeId                           = null;
-                const nodeSelected                   = {{ request()->route('node') != null ? request()->route('node')->id : 0 }};
-                const educationalInstitutionSelected = {{ request()->route('educational_institution') != null ? request()->route('educational_institution')->id : 0 }};
-                const nodesSelect                    = document.getElementById('h_node_id');
+                const nodeAdmin                      = {{ auth()->user()->isNodeAdmin != null ? auth()->user()->isNodeAdmin->id : 0}};
+                const educationalInstitutionAdmin    = {{ auth()->user()->isEducationalInstitutionAdmin != null ? auth()->user()->isEducationalInstitutionAdmin->id : 0}};
+                const researchTeamAdmin              = {{ auth()->user()->isResearchTeamAdmin != null ? auth()->user()->isResearchTeamAdmin->id : 0}};
+
+                if (!nodeAdmin) {
+                    nodeSelected = {{ request()->route('node') != null ? request()->route('node')->id : 0 }};
+                } else {
+                    nodeSelected = nodeAdmin;
+                }
+
+                if (!educationalInstitutionAdmin) {
+                    educationalInstitutionSelected = {{ request()->route('educational_institution') != null ? request()->route('educational_institution')->id : 0 }};
+                } else {
+                    nodeSelected                   = {{ auth()->user()->isEducationalInstitutionAdmin->node != null ? auth()->user()->isEducationalInstitutionAdmin->node->id : 0}};
+                    educationalInstitutionSelected = educationalInstitutionAdmin;
+                }
+
+                if (document.getElementById('h_node_id')) {
+                    nodesSelect = document.getElementById('h_node_id');
+                }
 
                 getAllNodes = async () => {
                     nodesSelect.innerHTML = '<option value="">Seleccione un nodo</option>';

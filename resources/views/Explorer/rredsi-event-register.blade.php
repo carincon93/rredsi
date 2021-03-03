@@ -13,10 +13,10 @@
         </x-slot>
         <x-slot name="textBase">
             XII Encuentro Departamental de semilleros de investigación de <span class="capitalize">{{ $node->state }}</span> {{ date('Y') }}
-            {{-- <?php
+            {{-- @php
             echo $annualEvent;
 
-            ?> --}}
+            @endphp --}}
         </x-slot>
         <x-slot name="actionButton">
 

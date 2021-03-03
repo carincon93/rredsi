@@ -35,29 +35,32 @@ class NotificationController extends Controller
         return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'Invitación enviada con éxito');
     }
 
-    public function sendToParticipe(Request $request) {
-        $user = auth()->user();
-        $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+    public function sendToParticipate(Request $request) {
+        $authUser = auth()->user();
 
-        if($faculty){
-            $node = $faculty->educationalInstitution->node;
+        if ( $authUser->hasRole(4) ) {
+            $educationalInstitutionFaculty = $authUser->educationalInstitutionFaculties()->where('is_principal', 1)->first();
+
+            if ($educationalInstitutionFaculty) {
+                $node = $educationalInstitutionFaculty->educationalInstitution->node;
+            }
+        } elseif ( $authUser->hasRole(3) ) {
+            $node = $authUser->isEducationalInstitutionAdmin->node;
         }
 
-        $project      = Project::findOrFail($request->get('project_id'));
-        $authors =  $project->authors;
+        $project = Project::findOrFail($request->get('project_id'));
+        $authors = $project->authors;
 
         $researchTeam = $project->researchTeams()->where('is_principal', 1)->first();
 
-        Notification::send($authors, new NotificationToParticipate($node, $project, $researchTeam, $user));
+        Notification::send($authors, new NotificationToParticipate($node, $project, $researchTeam, $authUser));
 
-        return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'Solicitud enviada con éxito');
-
-        // return $authors;
+        return redirect()->route('nodes.explorer.searchProjects.showProject', [$node, $project])->with('status', 'Solicitud enviada con éxito');
     }
 
     public function sendProjectToEvent(Request $request) {
-        $user = auth()->user();
-        $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+        $user       = auth()->user();
+        $faculty    = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
 
         if($faculty){
             $node = $faculty->educationalInstitution->node;
@@ -65,8 +68,8 @@ class NotificationController extends Controller
             $adminInstitution = $educationalInstitution->administrator;
         }
 
-        $project      = Project::findOrFail($request->get('project_id'));
-        $authors =  $project->authors;
+        $project = Project::findOrFail($request->get('project_id'));
+        $authors = $project->authors;
 
         $project->events()->attach($request->get('event_id'));
         $event = $project->events->find($request->get('event_id'));
@@ -77,15 +80,13 @@ class NotificationController extends Controller
         ];
 
         #Send authors notification
-        Notification::send($authors, new InformationNotification($project,$type));
+        Notification::send($authors, new InformationNotification($project, $type));
         #Send admin institution notification
         Notification::send($adminInstitution, new InformationNotification($project, $type));
 
-        return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'Solicitud enviada con éxito');
+        return redirect()->route('nodes.explorer.showEvent', [$node, $event])->with('status', 'Solicitud enviada con éxito');
 
     }
-
-
 
     public function makeDocInvitation($project, $researchTeam, $user)
     {
@@ -125,8 +126,8 @@ class NotificationController extends Controller
         return $storagePath;
     }
 
-    public function index() {
-
+    public function index()
+    {
         $user = auth()->user();
 
         return view('EducationalInstitutionUsers.index-notifications', compact('user'));
@@ -139,14 +140,11 @@ class NotificationController extends Controller
         $user = auth()->user();
 
         return view('EducationalInstitutionUsers.index-notifications', compact('user'));
-
     }
 
 
     public function destroy(Request $request, Notification $notification)
     {
-
-
         // $notifications = auth()->user()->notifications;
 
         // return view('EducationalInstitutionUsers.index-notifications', compact('notifications'));
@@ -187,7 +185,7 @@ class NotificationController extends Controller
         {
             // $datos es el motivo por el cual es rechazado
             $datos = $request->get('datos');
-            $response = "Rechazad@";
+            $response = "Rechazado(a)";
 
             Notification::send($user, new RequestResponse($datos, $response, $project));
             return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'Respuesta enviada con éxito');
@@ -195,7 +193,7 @@ class NotificationController extends Controller
 
 
         // En caso de ser aceptado ingresa a esta condicion
-        $response = "Aceptad@";
+        $response = "Aceptado(a)";
         $researchTeam= $project->researchTeams()->where('is_principal',1)->first();
         $team_educational_institution = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name;
 
@@ -220,7 +218,6 @@ class NotificationController extends Controller
 
         // En caso de no encontrar grupo de investigación sale mensaje de error y no guarda
         return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'El estudiante no se pudo guardar en el grupo de investigación');
-
     }
 
 }

@@ -1,11 +1,11 @@
 <x-jet-dropdown align="right" classes="flex items-center" width="48">
 
-    <?php
+    @php
         /** contamos las notificaciones sin leeer para mostarrlar en el dropdown */
         $count              = auth()->user()->unreadNotifications->count();
         /** traemos  las  notificaciones sin leer las ultimas 4 ponemos limite en ellas*/
         $notificationUnread = Auth::user()->unreadNotifications()->orderBy('created_at', 'desc')->take(4)->get();
-    ?>
+    @endphp
 
     <x-slot name="trigger">
         <div class="space-x-4 flex justify-around hover:cursor-pointer">
@@ -21,9 +21,9 @@
     <x-slot name="content">
         <div class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20" style="width:20rem;">
             <div class="py-2">
-            {{-- aca recorremos el object de notificaciones sin leer y mostramos en el dropdown --}}
-                @foreach ($notificationUnread as $notification)
-                    {{-- <?php echo $notification; ?> --}}
+                {{-- aca recorremos el object de notificaciones sin leer y mostramos en el dropdown --}}
+                @forelse ($notificationUnread as $notification)
+                    {{-- @php echo $notification; @endphp --}}
                     <div class="px-4 py-3 border-b hover:bg-gray-100 -mx-2">
                     @if( $notification->type !== 'App\Notifications\RequestResponse' && $notification->type !== 'App\Notifications\InformationNotification')
                         <a href="{{$notification->data['action']}}" class="flex items-center">
@@ -38,11 +38,12 @@
                             {{ $notification->created_at->addSeconds(5)->diffForHumans() }}.
                         </p>
                     </div>
+                @empty
+                    <p class="p-4">{{ __('No data recorded') }}</p>
+                @endforelse
 
-
-                @endforeach
             </div>
-            <a href="{{ route('notifications.index') }}" class="block bg-gray-800 text-white text-center font-bold py-2">See all notifications</a>
+            <a href="{{ route('notifications.index') }}" class="block text-center font-bold py-2">{{ __('See all notifications') }}</a>
         </div>
 
     </x-slot>

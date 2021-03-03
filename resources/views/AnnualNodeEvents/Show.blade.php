@@ -490,13 +490,13 @@
                             <div class="mt-3 max-w-xl text-sm text-gray-600">
 
                                 @if ($project->knowledgeSubareaDisciplines()->first())
-                                <p>
-                                    {{ optional($project->knowledgeSubareaDisciplines())->first()->knowledgeSubarea()->first()->knowledgeArea->name }}
-                                </p>
+                                    <p>
+                                        {{ optional($project->knowledgeSubareaDisciplines())->first()->knowledgeSubarea()->first()->knowledgeArea->name }}
+                                    </p>
                                 @else
-                                <p>
-                                    {{"No data recorded"}}
-                                </p>
+                                    <p>
+                                        {{ __('No data recorded') }}
+                                    </p>
                                 @endif
 
                             </div>

@@ -21,7 +21,7 @@
                         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                             <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-blue-900 bg-white" onclick="changeActiveTab(event,'tab-leidos')">
                                 {{ __('Leidos') }}
-                                <?php  $count = auth()->user()->readNotifications->count(); ?>
+                                @php  $count = auth()->user()->readNotifications->count(); @endphp
                                 <span class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-blue-600 rounded-full">
                                     {{$count}}
                                 </span>
@@ -29,14 +29,11 @@
                         </li>
                     </ul>
 
-
-
                     <div class="py-5 flex-auto">
                         <div class="tab-content tab-space">
                             <div class="block" id="tab-noleidos">
-
                                 <div class="py-12">
-                                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                    <div class="max-w-7xl mx-auto">
                                         <div class="bg-white shadow-xl sm:rounded-lg">
                                             <x-data-table>
                                                 <x-slot name="firstTheadTitle">

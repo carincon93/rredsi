@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 {{-- <div class="animate-pulse flex-shrink-0 flex items-center">
-                    <a href="{{ route('nodes.dashboard', [request()->route('node') ? request()->route('node')->id : 1]) }}"><!-- Quemado -->
+                    <a href="{{ route('nodes.dashboard', [request()->route('node') ? request()->route('node')->id : 1]) }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div> --}}
@@ -13,13 +13,14 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:flex">
                     @if (request()->route('node') && request()->route('educational_institution'))
+                        <!-- Id 1 Quemado -->
                         <x-jet-nav-link href="{{ route('nodes.educational-institutions.dashboard', [request()->route('node') ? request()->route('node')->id : 1, request()->route('educational_institution') ? request()->route('educational_institution')->id : 1]) }}" :active="request()->routeIs('dashboard')" class="text-gray-600 hover:text-gray-400">
                             {{ __('Dashboard') }}
                         </x-jet-nav-link>
                     @endif
                 </div>
 
-                <?php
+                @php
                     /** traemos la informacion de el nodo directamente del usuario
                  * llegado al caso que halla error se trae de la ruta
                  * luego validamos si es diferente a null para que no nos muestre error
@@ -32,7 +33,7 @@
                     }else{
                         $node = request()->route('node');
                     }
-                ?>
+                @endphp
                 @if(!is_null($node) )
                     <x-jet-nav-link href="{{ route('/', [$node]) }}" :active="request()->routeIs('/')" class="text-gray-600 hover:text-gray-400 ml-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" class="mr-2">
@@ -41,35 +42,13 @@
                         {{ __('Explorer') }}
                     </x-jet-nav-link>
                 @endif
-
-
             </div>
 
-
-
-            <!-- Settings Dropdown -->
-
-                <div class="hidden lg:flex lg:items-stretch">
-                    <x-drop-down-educational-institution />
-                </div>
-
-                <div class="hidden md:flex md:items-stretch">
-                    {{-- Opciones de notificacion --}}
-                    <x-drop-down-notification />
-                </div>
-
-                <div class="hidden md:flex md:items-stretch">
-                    {{-- Opciones de perfil muestra y administracion --}}
-                    <x-drop-down-profile />
-                </div>
-
-                {{-- <div class="hidden md:flex md:items-stretch"">
-                    <x-jet-nav-link href="{{ route('notifications.index') }}" :active="request()->routeIs('notifications')" class="text-gray-600 hover:text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
-                    </x-jet-nav-link>
-                </div> --}}
+            <div class="hidden md:flex md:justify-around" style="flex-basis: 160px">
+                <x-drop-down-notification />
+                {{-- Opciones de perfil muestra y administracion --}}
+                <x-drop-down-profile />
+            </div>
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">

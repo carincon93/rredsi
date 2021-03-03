@@ -24,7 +24,7 @@ class Node extends Model
     }
 
     public function administrator() {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'administrator_id');
     }
 
     public function nodeEvents() {
