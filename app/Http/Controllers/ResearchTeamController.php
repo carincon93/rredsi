@@ -184,6 +184,16 @@ class ResearchTeamController extends Controller
     {
         $this->authorize('delete', [ResearchTeam::class , $educationalInstitution]);
 
+        if(!is_null($researchTeam->administrator)){
+            $message = 'No es posible eliminar el semillero esta unido a un administrador';
+            return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
+        }
+
+        if(!is_null($researchTeam->studentLeader)){
+            $message = 'No es posible eliminar el semillero está unido a un estudiante líder';
+            return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.index', [$node, $educationalInstitution, $faculty, $researchGroup])->with('status', $message);
+        }
+
         if($researchTeam->delete()){
             $message = 'Your delete processed correctly';
         }

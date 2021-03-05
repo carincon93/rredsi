@@ -1,3 +1,4 @@
+<title>{{'Disciplinas de sub-áreas de conocimiento'}}</title>
 <x-app-layout>
 
     <x-slot name="header">

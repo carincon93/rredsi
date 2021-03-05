@@ -8,6 +8,7 @@
     }
 </style>
 
+<title>{{'Sub-áreas de conocimiento'}}</title>
 <x-app-layout>
 
     <x-slot name="header">

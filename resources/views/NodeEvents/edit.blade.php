@@ -1,3 +1,4 @@
+<title>{{"Editar la información del evento de nodo $event->name"}}</title>
 <x-app-layout>
 
     <x-slot name="header">

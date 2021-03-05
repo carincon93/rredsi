@@ -21,7 +21,7 @@ class ProjectPolicy
      */
     public function viewAny(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('index_project')){
@@ -50,7 +50,7 @@ class ProjectPolicy
      */
     public function view(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('show_project')){
@@ -82,7 +82,7 @@ class ProjectPolicy
      */
     public function create(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('create_project')){
@@ -110,7 +110,7 @@ class ProjectPolicy
      */
     public function update(User $user, EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('edit_project')){
@@ -142,10 +142,10 @@ class ProjectPolicy
      */
     public function delete(User $user, EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
-        
+
         $admin = $educationalInstitution->administrator->id;
         if($admin == $user->id){
             return true;

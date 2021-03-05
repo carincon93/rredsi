@@ -16,7 +16,7 @@ class NodePolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user,Node $node)
+    public function viewAny(User $user)
     {
         if($user->hasRole(1)){
             return true;
@@ -80,7 +80,7 @@ class NodePolicy
      * @param  \App\Models\Node  $node
      * @return mixed
      */
-    public function update(User $user, Node $node)
+    public function update(User $user)
     {
         if($user->hasRole(1)){
             return true;
@@ -105,9 +105,6 @@ class NodePolicy
     public function delete(User $user)
     {
         if($user->hasRole(1)){
-            return true;
-        }
-        if($user->hasPermissionTo('destroy_node')){
             return true;
         }
         return false;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\EducationalInstitutionFaculty;
-
+use Exception;
 use Illuminate\Http\Request;
 
 class EducationalInstitutionFacultyController extends Controller
@@ -118,6 +118,7 @@ class EducationalInstitutionFacultyController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
+
         $this->authorize('delete',[EducationalInstitutionFaculty::class, $educationalInstitution]);
 
         if ($faculty->delete()) {

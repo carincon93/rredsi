@@ -24,12 +24,12 @@ class UserAcademicWorkRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'                     => 'required|string|max:191',
-            'type'                      => 'required|string|max:191',
-            'authors'                   => 'required|json',
-            'grade'                     => 'required|between:0,99.99|max:9999999999',
-            'mentors'                   => 'required|json',
-            'knowledge_area_id'         => 'required|integer|min:0|max:9999999999|exists:knowledge_areas,id',
+            'title'                             => 'required|string|max:191',
+            'type'                              => 'required|string|max:191',
+            'authors'                           => 'required|json',
+            'grade'                             => 'required|between:0,99.99|max:9999999999',
+            'mentors'                           => 'required|json',
+            'knowledge_subarea_discipline_id'   => 'required|integer|min:0|max:9999999999|exists:knowledge_subarea_disciplines,id',
         ];
     }
 

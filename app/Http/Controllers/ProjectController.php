@@ -5,6 +5,7 @@ use App\Models\ProjectType;
 Use App\Models\KnowledgeArea;
 Use App\Models\KnowledgeSubarea;
 use App\Models\Node;
+use App\Models\User;
 use App\Models\EducationalInstitution;
 use App\Models\EducationalInstitutionFaculty;
 use App\Models\ResearchGroup;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -240,7 +242,7 @@ class ProjectController extends Controller
             $project->file  = "projects/$fileName";
         }
 
-        if($project->save()){
+        if($project->update()){
             if ($request->has('research_team_id')) {
                 $arrayResearchTeamsIds = $request->get('research_team_id');
                 $request->get('principal_research_team_id');
@@ -258,7 +260,9 @@ class ProjectController extends Controller
             $message = 'Your update processed correctly';
         }
 
-        if(Auth()->user()->hasRole('Estudiante')){
+        $user = Auth::user();
+
+        if($user->hasRole(4)){
             return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$faculty,$researchGroup,$researchTeam])->with('status', $message);
         }
 
@@ -275,11 +279,18 @@ class ProjectController extends Controller
     {
         $this->authorize('delete', [Project::class , $educationalInstitution , $researchTeam, $project]);
 
+        if(!is_null($project->projectType)){
+            $message ="No es posible eliminar el proyecto ya que está unido a un tipo de proyecto.";
+            return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);
+        }
+
         if($project->delete()){
             $message = 'Your delete processed correctly';
         }
 
-        if(Auth()->user()->hasRole('Estudiante')){
+        $user = Auth::user();
+
+        if($user->hasRole(4)){
             return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$faculty,$researchGroup,$researchTeam])->with('status', $message);
         }
 

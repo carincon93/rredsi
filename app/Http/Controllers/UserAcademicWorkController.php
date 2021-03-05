@@ -18,7 +18,7 @@ class UserAcademicWorkController extends Controller
      */
     public function index(UserGraduation $userGraduation)
     {
-        $this->authorize('viewAny', UserAcademicWork::class, $userGraduation);
+        $this->authorize('viewAny', [UserAcademicWork::class, $userGraduation]);
 
         $userAcademicWork = $userGraduation->userAcademicWork()->orderBy('title')->first();
 
@@ -32,7 +32,7 @@ class UserAcademicWorkController extends Controller
      */
     public function create(UserGraduation $userGraduation)
     {
-        $this->authorize('create', UserAcademicWork::class, $userGraduation);
+        $this->authorize('create', [UserAcademicWork::class, $userGraduation]);
 
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
@@ -47,7 +47,9 @@ class UserAcademicWorkController extends Controller
      */
     public function store(UserAcademicWorkRequest $request, UserGraduation $userGraduation)
     {
-        $this->authorize('create', UserAcademicWork::class, $userGraduation);
+        // return $request;
+
+        $this->authorize('create', [UserAcademicWork::class, $userGraduation]);
 
         $userAcademicWork = new UserAcademicWork();
         $userAcademicWork->title                    = $request->get('title');
@@ -55,7 +57,7 @@ class UserAcademicWorkController extends Controller
         $userAcademicWork->authors                  = $request->get('authors');
         $userAcademicWork->grade                    = $request->get('grade');
         $userAcademicWork->mentors                  = $request->get('mentors');
-        $userAcademicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
+        $userAcademicWork->knowledgeSubareaDiscipline()->associate($request->get('knowledge_subarea_discipline_id'));
         $userAcademicWork->userGraduation()->associate($userGraduation);
 
         if($userAcademicWork->save()){
@@ -73,7 +75,7 @@ class UserAcademicWorkController extends Controller
      */
     public function show(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
-        $this->authorize('view', UserAcademicWork::class, $userGraduation, $userAcademicWork);
+        $this->authorize('view', [UserAcademicWork::class, $userAcademicWork]);
 
         return view('AcademicWorks.show', compact('userGraduation', 'userAcademicWork'));
     }
@@ -86,7 +88,7 @@ class UserAcademicWorkController extends Controller
      */
     public function edit(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
-        $this->authorize('update', UserAcademicWork::class, $userGraduation, $userAcademicWork);
+        $this->authorize('update', [UserAcademicWork::class, $userAcademicWork]);
 
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
 
@@ -102,14 +104,14 @@ class UserAcademicWorkController extends Controller
      */
     public function update(UserAcademicWorkRequest $request, UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
-        $this->authorize('update', UserAcademicWork::class, $userGraduation, $userAcademicWork);
+        $this->authorize('update', [UserAcademicWork::class, $userAcademicWork]);
 
-        $userAcademicWork->title                    = $request->get('title');
-        $userAcademicWork->type                     = $request->get('type');
-        $userAcademicWork->authors                  = $request->get('authors');
-        $userAcademicWork->grade                    = $request->get('grade');
-        $userAcademicWork->mentors                  = $request->get('mentors');
-        $userAcademicWork->knowledgeArea()->associate($request->get('knowledge_area_id'));
+        $userAcademicWork->title                            = $request->get('title');
+        $userAcademicWork->type                             = $request->get('type');
+        $userAcademicWork->authors                          = $request->get('authors');
+        $userAcademicWork->grade                            = $request->get('grade');
+        $userAcademicWork->mentors                          = $request->get('mentors');
+        $userAcademicWork->KnowledgeSubareaDiscipline()->associate($request->get('knowledge_subarea_discipline_id'));
         $userAcademicWork->userGraduation()->associate($userGraduation);
 
         if($userAcademicWork->save()){
@@ -127,10 +129,10 @@ class UserAcademicWorkController extends Controller
      */
     public function destroy(UserGraduation $userGraduation, UserAcademicWork $userAcademicWork)
     {
-        $this->authorize('delete', UserAcademicWork::class, $userGraduation, $userAcademicWork);
+        $this->authorize('delete', [UserAcademicWork::class, $userAcademicWork]);
 
         if($userAcademicWork->delete()) {
-            $message = 'Your update processed correctly';
+            $message = 'Your delete processed correctly';
         }
 
         return redirect()->route('user.profile.user-graduations.user-academic-works.index', [$userGraduation])->with('status', $message);

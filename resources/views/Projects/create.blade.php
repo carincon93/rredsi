@@ -1,10 +1,7 @@
+<title>{{'Crear proyecto'}}</title>
 <x-app-layout>
     <x-slot name="header">
-
-
-
         <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 lg:ml-16 xl:ml-80 xl:col-end-12 xl:col-span-2 m-auto">
-
             <div class="mx-auto md:mx-0 grid grid-cols-6 gap-4   xl:grid-cols-9 xl:gap-3">
                 <div class="col-start-1 col-span-5 ml-5 md:ml-0 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
@@ -176,7 +173,7 @@
                         <x-jet-input-error for="academic_program_id" class="mt-2" />
                     </div>
 
-                    <x-drop-down-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="null" />
+                    <x-checkbox-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="null" />
 
                     <div class="mt-4">
                         <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />

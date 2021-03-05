@@ -1,3 +1,4 @@
+<title>{{"Editar la información del área de conocimiento $knowledgeArea->name"}}</title>
 <x-app-layout>
     <x-slot name="header">
          <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">

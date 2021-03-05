@@ -1,3 +1,5 @@
+@props(['nodes'=> null , 'academicProgram'=>null])
+
 <div class="mt-4">
     <x-jet-label for="node_id" value="{{ __('Node') }}" />
     <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="node_id" name="node_id" required onchange="AcademicProgramsFilter.onChangeNodeSelect(event)">
@@ -49,18 +51,16 @@
                 const academicProgramsSpin          = document.querySelector('.academic_program_id_spin');
 
                 getEducationalInstitutions = async (nodeId, educationalInstitutionId) => {
-                    educationalInstitutionsSelect.setAttribute('disabled', 'disabled');
-                    academicProgramsSelect.setAttribute('disabled', 'disabled');
                     educationalInstitutionsSelect.innerHTML = '<option value="">Seleccione una institución educativa</option>';
-                    academicProgramsSelect.innerHTML        = '<option value="">Seleccione un programa de formación</option>';
 
                     if (nodeId != null && nodeId != '') {
                         educationalInstitutionsSpin.classList.remove('hidden');
                         educationalInstitutionsSpin.classList.add('inline');
                         try {
-                            const uri       = `/api/nodes/${nodeId}/educational-institutions`;
+                            const uri       = `/api/nodes/${nodeId}/educational-institutions/`;
                             const response  = await fetch(uri);
                             const result    = await response.json();
+
 
                             result.educationalInstitutions.map(function(educationalInstitution) {
                                 educationalInstitutionsSelect.removeAttribute('disabled');
@@ -83,7 +83,6 @@
                 }
 
                 getAcademicPrograms = async (nodeId, educationalInstitutionId, academicProgramId) => {
-                    academicProgramsSelect.setAttribute('disabled', 'disabled');
                     academicProgramsSelect.innerHTML = '<option value="">Seleccione un programa de formación</option>';
 
                     console.log(nodeId);
@@ -137,6 +136,7 @@
                 return {
                     onChangeNodeSelect: function(e) {
                         nodeId = e.target.value;
+                        // var node = document.getElementById('node_id');
                         getEducationalInstitutions(nodeId, null);
                     },
                     onChangeEducationalInstitutionSelect: function(e) {

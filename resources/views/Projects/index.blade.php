@@ -1,3 +1,4 @@
+<title>{{'Proyectos'}}</title>
 <x-app-layout>
     <x-slot name="header">
         <div class="mx-auto md:mx-0 grid grid-cols-6 gap-4   xl:grid-cols-9 xl:gap-3">

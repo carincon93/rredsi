@@ -7,7 +7,7 @@ use App\Models\AcademicProgram;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\EducationalInstitutionFaculty;
-
+use Exception;
 use Illuminate\Http\Request;
 
 class AcademicProgramController extends Controller
@@ -126,12 +126,28 @@ class AcademicProgramController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, AcademicProgram $academicProgram)
     {
-        $this->authorize('delete', [AcademicProgram::class,$educationalInstitution]);
+        try {
 
-        if($academicProgram->delete()){
-            $message = 'Your delete processed correctly';
+            $this->authorize('delete', [AcademicProgram::class,$educationalInstitution]);
+
+
+            if(!is_null($academicProgram->userGraduation)){
+                return redirect()->route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $faculty])
+                ->with('status', "No es posible eliminar el programa académico porque está unido a la información de grado de varios estudiantes.");
+            }
+
+            if($academicProgram->delete()){
+                $message = 'Your delete processed correctly';
+            }
+
+            return redirect()->route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $faculty])->with('status', $message);
+
+        } catch (Exception $e) {
+            return [
+                'error' => $e->getMessage()
+            ];
         }
 
-        return redirect()->route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $faculty])->with('status', $message);
+
     }
 }

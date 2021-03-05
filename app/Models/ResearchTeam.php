@@ -38,9 +38,9 @@ class ResearchTeam extends Model
         return $this->belongsTo('App\Models\ResearchGroup');
     }
 
-    // public function studentLeader() {
-    //     return $this->belongsTo('App\Models\Student');
-    // }
+    public function studentLeader() {
+        return $this->belongsTo('App\Models\User');
+    }
 
     public function academicPrograms() {
         return $this->belongsToMany('App\Models\AcademicProgram', 'research_team_academic_program', 'research_team_id', 'academic_program_id');

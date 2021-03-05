@@ -114,13 +114,7 @@ class EducationalInstitutionPolicy
         if($user->hasRole(1)){
             return true;
         }
-        if(!$user->hasPermissionTo('destroy_educational_institution')){
-            return false;
-        }
-        $admin = $node->administrator->id;
-        if($admin == $user->id){
-            return true;
-        }
+
         return false;
     }
 

@@ -1,3 +1,4 @@
+<title>{{"Crear información de grado"}}</title>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
@@ -29,7 +30,7 @@
             <div class="mt-5 md:mt-0 md:col-span-2">
                 <form method="POST" action="{{ route('user.profile.user-graduations.store') }}">
                     @csrf
-        
+
                     <div>
                         <x-jet-label for="year" value="{{ __('Year') }}" />
                         <x-jet-input id="year" class="block mt-1 w-full" type="number" min="1900" max="{{ date('Y') + 10 }}" name="year" value="{{ old('year') }}" required />
@@ -39,15 +40,15 @@
                     <div class="mt-4">
                         <x-drop-down-academic-program :nodes="$nodes" :academicProgram="null" />
                     </div>
-                    
+
                     <p class="mt-4">{{ __('Is graduated?') }}</p>
                     <div class="mt-4">
                         <input id="yes" class="form-checkbox" type="checkbox" name="is_graduated" {{ old('is_graduated') == 1 ? 'checked' : '' }} value="1" required />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="yes" >Si</label>
                         <x-jet-input-error for="is_graduated" class="mt-2" />
                     </div>
-        
-                    <div class="flex items-center justify-end mt-4">        
+
+                    <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Create') }}
                         </x-jet-button>

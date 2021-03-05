@@ -6,6 +6,7 @@
         overflow: hidden;
     }
 </style>
+<title>{{'Información legal'}}</title>
 <x-app-layout>
 
     <x-slot name="header">

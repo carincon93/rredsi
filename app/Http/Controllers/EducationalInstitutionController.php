@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\InformationNotification;
-
+use Exception;
 use Illuminate\Support\Facades\Storage;
 
 class EducationalInstitutionController extends Controller
@@ -152,13 +152,22 @@ class EducationalInstitutionController extends Controller
      */
     public function destroy(Node $node, EducationalInstitution $educationalInstitution)
     {
+
         $this->authorize('delete', [EducationalInstitution::class, $node]);
+
+        if(!is_null($educationalInstitution->administrator)){
+            $message ="No es posible eliminar la institución educativa ya que tiene de coordinador(a) a  ".$educationalInstitution->administrator->name;
+            return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);
+        }
 
         if($educationalInstitution->delete()){
             $message = 'Your delete processed correctly';
         }
 
         return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);
+
+
+
     }
 
     /**
