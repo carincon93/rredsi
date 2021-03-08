@@ -18,7 +18,7 @@ class UserAcademicWorkPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('index_academic_work')){
@@ -36,7 +36,7 @@ class UserAcademicWorkPolicy
      */
     public function view(User $user, UserAcademicWork $userAcademicWork)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('show_academic_work')){
@@ -53,7 +53,7 @@ class UserAcademicWorkPolicy
      */
     public function create(User $user)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('create_academic_work')){
@@ -71,7 +71,7 @@ class UserAcademicWorkPolicy
      */
     public function update(User $user, UserAcademicWork $userAcademicWork)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('edit_academic_work')){
@@ -89,7 +89,7 @@ class UserAcademicWorkPolicy
      */
     public function delete(User $user, UserAcademicWork $userAcademicWork)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('destroy_academic_work')){

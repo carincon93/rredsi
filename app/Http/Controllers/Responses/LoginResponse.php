@@ -22,7 +22,9 @@ class LoginResponse implements LoginResponseContract
 
         switch ($authUser) {
             case $authUser->hasRole(1):
-                return redirect()->route('nodes.dashboard', [$authUser->my_projects['node']]);
+                if ( !is_null($authUser->my_projects ) ) {
+                    return redirect()->route('nodes.dashboard', [$authUser->my_projects['node']]);
+                }
             break;
 
             case $authUser->hasRole(2):

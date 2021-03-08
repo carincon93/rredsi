@@ -30,6 +30,9 @@ use App\Http\Controllers\AnnualNodeEventController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\ModelForm;
 use App\Models\NodeEvent;
+use Illuminate\Support\Facades\Auth;
+
+$authUser = Auth::user();
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +46,14 @@ use App\Models\NodeEvent;
 */
 
 Route::get('/', function() {
-    return redirect()->route('/', 1);
-    // Quemado
+
+    if ( request()->route('node') ) {
+        $node = request()->route('node');
+        return redirect()->route('/', $node);
+    }else{
+        $node = $this->authUser->my_projects['node'];
+        return redirect()->route('/', $node);
+    }
 });
 
 
@@ -62,8 +71,14 @@ Route::middleware(['auth'])->group(function () {
 
     // ? ruta para la dashboard o panel de delegado de nodo por defecto caldas //
     Route::get('/dashboard', function() {
-        return redirect()->route('nodes.dashboard', 1);
-        // Quemado
+        if ( request()->route('node') ) {
+            $node = request()->route('node');
+            return redirect()->route('nodes.dashboard', $node);
+
+        }else{
+            $node = $this->authUser->my_projects['node'];
+            return redirect()->route('nodes.dashboard', $node);
+        }
     });
 
     Route::get('/model-form', function () {
