@@ -8,16 +8,25 @@
 
 <div class="ml-4">
     <select class="mr-10 focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="knowledge_subarea_id" name="knowledge_subarea_id" required onchange="SwitchknowledgeSubareasDisciplines.onChangeDisciplines(event)">
-        <option value="">Seleccione un knowledge subarea</option>
+        <option value="">Seleccione un sub-area de conocimiento</option>
     </select>
     <x-jet-input-error for="knowledge_subarea_id" class="mt-2" />
 </div>
 
 <textarea id="subAreaOldId" class="hidden"></textarea>
 
-<div class="mt-4" id="check">
-    <x-jet-input-error for="knowledge_subarea_dicipline_id" class="mt-2" />
+
+<div class="ml-4">
+    <select class="mr-10 focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="knowledge_subarea_discipline_id" name="knowledge_subarea_discipline_id" required>
+        <option value="">Seleccione una disciplina de sub-area de conocimiento</option>
+    </select>
+    <x-jet-input-error for="knowledge_subarea_discipline_id" class="mt-2" />
 </div>
+
+
+{{-- <div class="mt-4" id="check">
+    <x-jet-input-error for="knowledge_subarea_discipline_id" class="mt-2" />
+</div> --}}
 
 <textarea id="subAreaDiciplineOldId" class="hidden"></textarea>
 
@@ -58,7 +67,7 @@
 
                 getAllknowledgeAreas = async (knowledgeAreaselected) => {
                 const knowledgeAreasSelect                     = document.getElementById('knowledge_area_id');
-                knowledgeAreasSelect.innerHTML = '<option value="">Seleccione un knowledge area</option>';
+                knowledgeAreasSelect.innerHTML = '<option value="">Seleccione un area de conocimiento</option>';
 
                 try {
                         const uri       = `/api/knowledge-areas`;
@@ -82,7 +91,7 @@
 
                 getAllknowledgeSubareas  = async (knowledgeArea, knowledgeSubareaId) => {
                     const knowledgeSubareaidSelect   = document.getElementById('knowledge_subarea_id');
-                    knowledgeSubareaidSelect.innerHTML = '<option value="">Seleccione un knowledge subarea</option>';
+                    knowledgeSubareaidSelect.innerHTML = '<option value="">Seleccione un sub-area de conocimiento</option>';
 
                     if (knowledgeArea != 0) {
                         try {
@@ -107,7 +116,7 @@
                 }
 
                 getAllknowledgeSubareaDisciplines  = async (knowledgeArea, knowledgeSubarea, knowledgeSubareaDiciplineId) => {
-                    const knowledgeSubareaDiciplineidSelect   = document.getElementById('check');
+                    const knowledgeSubareaDiciplineidSelect   = document.getElementById('knowledge_subarea_discipline_id');
 
                     if (knowledgeArea != 0 && knowledgeSubarea != 0 ) {
                         try {
@@ -116,10 +125,9 @@
                             const result    = await response.json();
 
                             result.KnowledgeSubareaDiscipline.map(function(KnowledgeSubareaDiscipline) {
-                                let check = ` <input class="form-check-input" type="checkbox" name="knowledge_subarea_dicipline_id[]" id="Knowledge-subarea-discipline-${KnowledgeSubareaDiscipline.id}[]" value="${KnowledgeSubareaDiscipline.id } required"/>
-                                <label   label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="Knowledge-subarea-discipline-${KnowledgeSubareaDiscipline.id}">${KnowledgeSubareaDiscipline.name }</label>`;
-
-                                knowledgeSubareaDiciplineidSelect.innerHTML += check;
+                                knowledgeSubareaDiciplineidSelect.removeAttribute('disabled');
+                                let option = `<option value="${KnowledgeSubareaDiscipline.id}">${KnowledgeSubareaDiscipline.name}</option>`;
+                                knowledgeSubareaDiciplineidSelect.innerHTML += option;
                             })
 
                             // if (knowledgeSubareaDiciplineId != 0) {

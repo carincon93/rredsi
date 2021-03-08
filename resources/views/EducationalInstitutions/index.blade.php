@@ -7,9 +7,8 @@
         margin-bottom: 10px;
     }
 </style>
-
+<title>{{ "Instituciones educativas"}}</title>
 <x-app-layout>
-
     <x-slot name="header">
         <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">

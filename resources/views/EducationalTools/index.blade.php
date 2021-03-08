@@ -1,3 +1,4 @@
+<title>{{ "Herramientas educativas"}}</title>
 <x-app-layout>
 
     <x-slot name="header">

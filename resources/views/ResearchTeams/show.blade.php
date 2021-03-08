@@ -1,3 +1,4 @@
+<title>{{"Detalles del semillero de investigación $researchTeam->name"}}</title>
 <x-app-layout>
     <x-slot name="header">
         <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
@@ -75,7 +76,7 @@
                     <h3 class="text-lg font-medium text-gray-900">{{ __('Student leader') }}</h3>
                     <div class="mt-3 max-w-xl text-sm text-gray-600">
                         <p>
-                            {{-- {{ $researchTeam->studentLeader->name }} --}}
+                            {{ $researchTeam->studentLeader->name }}
                         </p>
                     </div>
                 </div>

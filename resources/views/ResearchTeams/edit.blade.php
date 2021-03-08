@@ -1,3 +1,4 @@
+<title>{{"Editar la información del semillero de investigación $researchTeam->name"}}</title>
 <x-app-layout>
     <x-slot name="header">
         <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
@@ -127,7 +128,7 @@
                         <x-jet-input-error for="research_line_id" class="mt-2" />
                     </div>
 
-                    <x-drop-down-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="$researchTeam" />
+                    <x-checkbox-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="$researchTeam" />
 
                     <p class="mt-4">{{ __('Academic programs') }}</p>
                     <div class="block mt-4">

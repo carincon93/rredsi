@@ -1,3 +1,4 @@
+<title>{{"Editar la información del sub-área de conocimiento $knowledgeSubarea->name "}}</title>
 <x-app-layout>
     <x-slot name="header">
 

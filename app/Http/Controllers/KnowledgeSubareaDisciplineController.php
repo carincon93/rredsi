@@ -6,6 +6,7 @@ use App\Models\KnowledgeSubarea;
 use App\Models\KnowledgeSubareaDiscipline;
 
 use App\Http\Requests\KnowledgeSubareaDiciplineRequest;
+use Exception;
 use Illuminate\Http\Request;
 
 class KnowledgeSubareaDisciplineController extends Controller
@@ -116,12 +117,22 @@ class KnowledgeSubareaDisciplineController extends Controller
      */
     public function destroy(KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
-        $this->authorize('delete', [KnowledgeSubareaDiscipline::class]);
 
-        if($knowledgeSubareaDiscipline->delete()){
-            $message = 'Your delete processed correctly';
+        try {
+
+            $this->authorize('delete', [KnowledgeSubareaDiscipline::class]);
+
+            if($knowledgeSubareaDiscipline->delete()){
+                $message = 'Your delete processed correctly';
+            }
+
+            return redirect()->route('knowledge-subarea-disciplines.index')->with('status', $message);
+
+        } catch (Exception $e) {
+            return [
+                'error'=>$e->getMessage()
+            ];
         }
 
-        return redirect()->route('knowledge-subarea-disciplines.index')->with('status', $message);
     }
 }

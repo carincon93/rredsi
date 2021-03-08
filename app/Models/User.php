@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -66,7 +67,28 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'my_projects'
     ];
+
+    public function getMyProjectsAttribute(){
+        $authUser = Auth::user();
+
+        $researchTeam = $authUser->researchTeams->first();
+        if ( !is_null($authUser->researchTeams->first()) ) {
+            $node                             = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->node;
+            $educationalInstitution           = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution;
+            $educationalInstitutionFaculty    = $researchTeam->researchGroup->educationalInstitutionFaculty;
+            $researchGroup                    = $researchTeam->researchGroup;
+        }
+
+         return [
+            "node" => $node,
+            "educationalInstitution" => $educationalInstitution,
+            "educationalInstitutionFaculty" => $educationalInstitutionFaculty,
+            "researchGroup" => $researchGroup,
+            "researchTeam" => $researchTeam
+         ];
+    }
 
     public function isNodeAdmin() {
         return $this->hasOne('App\Models\Node', 'administrator_id');
@@ -105,4 +127,6 @@ class User extends Authenticatable
                 'is_principal'
             ]);
     }
+
+
 }

@@ -1,3 +1,4 @@
+<title>{{'Crear rol'}}</title>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-display text-white text-left text-2xlleading-9 font-semibold sm:text-3xl sm:leading-9">

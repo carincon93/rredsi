@@ -1,3 +1,4 @@
+<title>{{'Crear evento de nodo'}}</title>
 <x-app-layout>
 
     <x-slot name="header">

@@ -118,9 +118,14 @@ class RoleController extends Controller
     {
         $this->authorize('delete',[Role::class]);
 
-        if($role->delete()) {
-            $message = 'Your delete processed correctly';
+        if($role->id >= 1 && $role->id <= 4 ){
+            $message = 'Este rol es predefinido no es posible borrarlo';
+        }else{
+            if($role->delete()) {
+                $message = 'Your delete processed correctly';
+            }
         }
+
 
         return redirect()->route('roles.index')->with('status', $message);
     }

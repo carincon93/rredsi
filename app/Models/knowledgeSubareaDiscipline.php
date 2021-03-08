@@ -25,4 +25,9 @@ class KnowledgeSubareaDiscipline extends Model
     public function knowledgeSubarea() {
         return $this->belongsTo('App\Models\KnowledgeSubarea');
     }
+
+    public function userAcademicWorks()
+    {
+        return $this->hasMany('App\Models\UserAcademicWork');
+    }
 }

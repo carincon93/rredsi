@@ -18,8 +18,10 @@ class AppController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard(Node $node)
+    public function dashboard(User $user,Node $node)
     {
+        $this->authorize('dashboardNode', [User::class, $node]);
+
         return view('dashboard', compact('node'));
     }
 

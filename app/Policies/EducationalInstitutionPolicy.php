@@ -19,7 +19,7 @@ class EducationalInstitutionPolicy
      */
     public function viewAny(User $user, Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('index_educational_institution')){
@@ -27,6 +27,7 @@ class EducationalInstitutionPolicy
         }
 
         $admin = $node->administrator->id;
+
         if($admin == $user->id){
             return true;
         }
@@ -42,7 +43,7 @@ class EducationalInstitutionPolicy
      */
     public function view(User $user, Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('show_educational_institution')){
@@ -50,6 +51,7 @@ class EducationalInstitutionPolicy
         }
 
         $admin = $node->administrator->id;
+
         if($admin == $user->id){
             return true;
         }
@@ -65,7 +67,7 @@ class EducationalInstitutionPolicy
      */
     public function create(User $user, Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('create_educational_institution')){
@@ -87,7 +89,7 @@ class EducationalInstitutionPolicy
      */
     public function update(User $user, Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('edit_educational_institution')){
@@ -109,12 +111,23 @@ class EducationalInstitutionPolicy
      */
     public function delete(User $user, Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
-        if(!$user->hasPermissionTo('destroy_educational_institution')){
-            return false;
+
+        return false;
+    }
+
+    public function isAdmin(User $user, Node $node, EducationalInstitution $educationalInstitution)
+    {
+        if($user->hasRole(1)){
+            return true;
         }
+
+        if($educationalInstitution->administrator_id == $user->id){
+            return true;
+        }
+
         $admin = $node->administrator->id;
         if($admin == $user->id){
             return true;

@@ -1,3 +1,4 @@
+<title>{{ "Crear un trabajo académico"}}</title>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
@@ -73,18 +74,7 @@
                         <x-jet-input-error for="mentors" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
-                        <select id="knowledge_area_id" name="knowledge_area_id" class="form-select w-full" required >
-                            <option value="">Seleccione una área de conocimiento</option>
-                            @forelse ($knowledgeAreas as $knowledgeArea)
-                                <option value="{{ $knowledgeArea->id }}" {{ old('knowledge_area_id') == $knowledgeArea->id ? "selected" : "" }}>{{ $knowledgeArea->name }}</option>
-                            @empty
-                                <option value="">{{ __('No data recorded') }}</option>
-                            @endforelse
-                        </select>
-                        <x-jet-input-error for="knowledge_area_id" class="mt-2" />
-                    </div>
+                    <x-drop-down-knowledge-subarea-dicipline />
 
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">

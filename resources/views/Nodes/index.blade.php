@@ -1,3 +1,4 @@
+<title>{{'Nodos'}}</title>
 <x-app-layout>
     <x-slot name="header">
         <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
@@ -75,7 +76,7 @@
                                         </div>
 
 
-                                        <div class="hidden lg:table-cel">
+                                        <div class="hidden lg:table-cell">
                                             <x-jet-dropdown align="right" width="48">
                                                 <x-slot name="trigger">
                                                     <button class="flex items-center text-sm font-medium text-gray hover:text-blue-900 hover:border-gray-300 focus:outline-none focus:text-black focus:border-gray-300 transition duration-150 ease-in-out">

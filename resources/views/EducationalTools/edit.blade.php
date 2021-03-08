@@ -1,3 +1,4 @@
+<title>{{ "Editar la información de la herramienta educativa ".$educationalTool->educationalEnvironment->name}}</title>
 <x-app-layout>
     <x-slot name="header">
         <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
@@ -77,7 +78,7 @@
                         <x-jet-input-error for="is_available" class="mt-2" />
                     </div>
 
-                    <x-drop-down-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="$educationalTool" />
+                    <x-checkbox-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="$educationalTool" />
 
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">

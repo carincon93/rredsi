@@ -7,6 +7,7 @@
         margin-bottom: 10px;
     }
 </style>
+<title>{{ "Eventos anuales de nodo"}}</title>
 <x-app-layout>
 
     <x-slot name="header">

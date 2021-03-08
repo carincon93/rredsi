@@ -1,3 +1,4 @@
+<title>{{"Editar la información del proyecto $project->title"}}</title>
 <x-app-layout>
     <x-slot name="header">
     <div class="mx-auto md:mx-0 grid grid-cols-6 gap-4   xl:grid-cols-9 xl:gap-3">
@@ -199,7 +200,7 @@
                         <x-jet-input-error for="academic_program_id" class="mt-2" />
                     </div>
 
-                    <x-drop-down-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="$project" />
+                    <x-checkbox-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="$project" />
 
                     <div class="mt-4">
                         <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />

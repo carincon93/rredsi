@@ -1,3 +1,4 @@
+<title>{{"Editar de la información de grado de ".$userGraduation->academicProgram->name}}</title>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
@@ -32,7 +33,7 @@
                 <form method="POST" action="{{ route('user.profile.user-graduations.update', [$userGraduation]) }}">
                     @csrf
                     @method('PUT')
-        
+
                     <div>
                         <x-jet-label for="year" value="{{ __('Year') }}" />
                         <x-jet-input id="year" class="block mt-1 w-full" type="number" min="1900" max="{{ date('Y') + 10 }}" name="year" value="{{ old('year') ?? $userGraduation->year }}" required />
@@ -42,15 +43,15 @@
                     <div class="mt-4">
                         <x-drop-down-academic-program :nodes="$nodes" :academicProgram="$userGraduation->academicProgram" />
                     </div>
-                    
+
                     <p class="mt-4">{{ __('Is graduated?') }}</p>
                     <div class="mt-4">
                         <input id="yes" class="form-checkbox" type="checkbox" name="is_graduated" {{ old('is_graduated') == 1 || $userGraduation->is_graduated ? 'checked' : '' }} value="1" required />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="yes" >Si</label>
                         <x-jet-input-error for="is_graduated" class="mt-2" />
                     </div>
-        
-                    <div class="flex items-center justify-end mt-4">        
+
+                    <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Edit') }}
                         </x-jet-button>

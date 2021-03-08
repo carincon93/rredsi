@@ -8,7 +8,13 @@ use App\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use Exception;
+
+use App\Exceptions\InvalidOrderException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -25,6 +31,9 @@ class UserController extends Controller
         $users = User::orderBy('name', 'ASC')->paginate(100);
 
         return view('Users.index', compact('users'));
+        // $user = auth()->user();
+
+        // return  $user;
     }
 
     /**
@@ -133,21 +142,24 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+
         $this->authorize('delete-user', [User::class]);
 
-        try {
-            if ( !$user->delete() ) {
-                return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
-            }
-
-            return redirect()->route('users.index')->with('status', __('The resource has been deleted successfully.'));
-
-        } catch (Exception $e) {
-            return response()->json([
-                'errors' => $e->getMessage(),
-                'e' => $e
-            ]);
+        if(!is_null($user->isNodeAdmin) ){
+            return redirect()->route('users.index')->with('status', "No es posible eliminar el usuario porque es coordinador(a) del nodo ".$user->isNodeAdmin->state);
         }
+
+        if(!is_null($user->isEducationalInstitutionAdmin) ){
+            return redirect()->route('users.index')->with('status', "No es posible eliminar el usuario porque es delegado(a) de la institución educativa ".$user->isEducationalInstitutionAdmin->name);
+        }
+
+        if ( !$user->delete() ) {
+            return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
+        }
+
+        return redirect()->route('users.index')->with('status', __('The resource has been deleted successfully.'));
+
+
 
 
     }

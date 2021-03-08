@@ -26,7 +26,7 @@ class UserAcademicWork extends Model
         'graduation_id',
     ];
 
-    public function knowledgeArea() {
+    public function knowledgeSubareaDiscipline() {
         return $this->belongsTo('App\Models\KnowledgeSubareaDiscipline');
     }
 

@@ -1,3 +1,4 @@
+<title>{{'Semilleros de investigación'}}</title>
 <x-app-layout>
 
     <x-slot name="header">
