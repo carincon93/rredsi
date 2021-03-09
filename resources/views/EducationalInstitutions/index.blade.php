@@ -87,7 +87,7 @@
                                                         </svg>
                                                     </x-jet-dropdown-link>
                                                 @endcan
-                                                    <x-jet-dropdown-link class="modal-open inline-block" href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}">
+                                                    <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}">
                                                         <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
                                                         </svg>

@@ -31,9 +31,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Livewire\ModelForm;
 use App\Models\NodeEvent;
 use Illuminate\Support\Facades\Auth;
-
-$authUser = Auth::user();
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,20 +43,14 @@ $authUser = Auth::user();
 */
 
 Route::get('/', function() {
+     return redirect()->route('login');
 
-    if ( request()->route('node') ) {
-        $node = request()->route('node');
-        return redirect()->route('/', $node);
-    }else{
-        $node = $this->authUser->my_projects['node'];
-        return redirect()->route('/', $node);
-    }
 });
 
 
 // ? ruta que define el explorador de la plataforma
 // * inicio ruta
-    Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('/');
+    Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('nodes.explorer');
     Route::get('/nodes/{node}/explorer/roles', [AppController::class, 'roles'])->name('nodes.explorer.roles');
     Route::get('/nodes/{node}/explorer/events', [AppController::class, 'events'])->name('nodes.explorer.events');
 // * fin ruta
@@ -76,7 +67,8 @@ Route::middleware(['auth'])->group(function () {
             return redirect()->route('nodes.dashboard', $node);
 
         }else{
-            $node = $this->authUser->my_projects['node'];
+            $authUser = Auth::user();
+            $node = $authUser->my_projects['node'];
             return redirect()->route('nodes.dashboard', $node);
         }
     });

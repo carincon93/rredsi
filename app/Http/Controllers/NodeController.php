@@ -17,9 +17,9 @@ class NodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Node $node,User $user)
     {
-        $this->authorize('viewAny', [Node::class]);
+        $this->authorize('viewAny', [Node::class,$node]);
 
         $nodes = Node::orderBy('state')->get();
         return view('Nodes.index', compact('nodes'));
@@ -30,9 +30,9 @@ class NodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(User $user)
     {
-        $this->authorize('create', Node::class);
+        $this->authorize('create', [Node::class, $user]);
 
         $users = User::orderBy('name')->get();
 
@@ -45,9 +45,9 @@ class NodeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NodeRequest $request)
+    public function store(NodeRequest $request,User $user)
     {
-        $this->authorize('create',[Node::class]);
+        $this->authorize('create',[Node::class,$user]);
 
         $node        = new Node();
         $node->state = $request->get('state');
@@ -76,9 +76,9 @@ class NodeController extends Controller
      * @param  \App\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function show(Node $node)
+    public function show(Node $node,User $user)
     {
-        $this->authorize('view', [Node::class, $node]);
+        $this->authorize('view', [Node::class, $user]);
 
         return view('Nodes.show', compact('node'));
     }
@@ -89,9 +89,9 @@ class NodeController extends Controller
      * @param  \App\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function edit(Node $node)
+    public function edit(Node $node,User $user)
     {
-        $this->authorize('update', Node::class ,$node);
+        $this->authorize('update', Node::class ,$user);
 
         $users = User::orderBy('name')->get();
 
@@ -105,9 +105,9 @@ class NodeController extends Controller
      * @param  \App\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function update(NodeRequest $request, Node $node)
+    public function update(NodeRequest $request, Node $node,User $user)
     {
-        $this->authorize('update', Node::class ,$node);
+        $this->authorize('update', [Node::class ,$user]);
 
         $node->state = $request->get('state');
         if ($request->hasFile('logo')) {
@@ -136,9 +136,9 @@ class NodeController extends Controller
      * @param  \App\Node  $node
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Node $node)
+    public function destroy(Node $node,User $user)
     {
-        $this->authorize('delete', [Node::class]);
+        $this->authorize('delete', [Node::class,$user]);
 
         if(!is_null($node->administrator)){
             $message ="No es posible eliminar la institución educativa ya que tiene de delegado(a) a  ".$node->administrator->name;

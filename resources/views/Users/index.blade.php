@@ -10,7 +10,7 @@
                     </span>
                 </h2>
             </div>
-            <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 xl:col-end-10 xl:col-span-2 m-auto">
+            <div class="col-start-9 col-end-9 md:col-end-8 md:col-span-3 xl:col-end-10 xl:col-span-2 m-auto">
                 @can('create_educational_institution_user')
                 <a href="{{ route('users.create') }}">
                     <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
@@ -41,7 +41,7 @@
                         <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                             <td>
                                 <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Name') }}</span>
-                                <p>{{ $user->name }}</p>
+                                <p class="row-2">{{ $user->name }}</p>
                             </td>
 
                             <td>
