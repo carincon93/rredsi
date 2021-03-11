@@ -13,6 +13,8 @@ class CrudGenerator extends Command
      *
      * @var string
      */
+
+
     protected $signature = 'make:crud {className : Class name}';
 
     /**
