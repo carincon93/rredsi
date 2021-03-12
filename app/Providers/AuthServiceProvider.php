@@ -40,6 +40,8 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\KnowledgeArea' => 'App\policies\KnowledgeAreaPolicy',
         'App\Models\KnowledgeSubarea' => 'App\policies\KnowledgeSubareaPolicy',
         'App\Models\KnowledgeSubareaDiscipline' => 'App\policies\KnowledgeSubareaDisciplinePolicy',
+        'App\Models\Test' => 'App\Policies\TestPolicy',
+
     ];
 
     /**

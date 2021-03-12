@@ -55,6 +55,7 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->description    = $request->get('description');
         $educationalEnvironment->is_enabled     = $request->get('is_enabled');
         $educationalEnvironment->is_available   = $request->get('is_available');
+            // ? asociamos el ambiente de formacion con la facultad
         $educationalEnvironment->educationalInstitutionFaculty()->associate($faculty);
 
         if($educationalEnvironment->save()){
@@ -107,6 +108,7 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->description    = $request->get('description');
         $educationalEnvironment->is_enabled     = $request->get('is_enabled');
         $educationalEnvironment->is_available   = $request->get('is_available');
+            // ? asociamos el ambiente de formacion con la facultad
         $educationalEnvironment->educationalInstitutionFaculty()->associate($faculty);
 
         if($educationalEnvironment->save()) {

@@ -31,6 +31,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Livewire\ModelForm;
 use App\Models\NodeEvent;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\TestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -159,6 +160,7 @@ Route::middleware(['auth'])->group(function () {
         ]
     ]);
 
+
     // ! rutas resources de acceso rapido a tablas//
     Route::resources([
         // ? rutas  de usuarios de sistema//
@@ -201,6 +203,8 @@ Route::middleware(['auth'])->group(function () {
         // ? rutas de los roles de sistema//
         'roles'                             => RoleController::class,
         // ? rutas de la información legal de la plataforma//
-        'legal-informations'                => LegalInformationController::class
+        'legal-informations'                => LegalInformationController::class,
+        // ? rutas prueba Tests make:crud//
+        'tests'                             => TestController::class
     ]);
 });

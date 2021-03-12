@@ -139,7 +139,7 @@ class NodeController extends Controller
     public function destroy(Node $node,User $user)
     {
         $this->authorize('delete', [Node::class,$user]);
-
+         // ? avalidamos si el nodo tiene un delegado si es asi no es posible eliminarlo
         if(!is_null($node->administrator)){
             $message ="No es posible eliminar la institución educativa ya que tiene de delegado(a) a  ".$node->administrator->name;
             return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);

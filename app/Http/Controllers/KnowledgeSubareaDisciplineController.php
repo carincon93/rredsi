@@ -51,6 +51,7 @@ class KnowledgeSubareaDisciplineController extends Controller
 
         $knowledgeSubareaDiscipline          = new KnowledgeSubareaDiscipline();
         $knowledgeSubareaDiscipline->name    = $request->get('name');
+         // ? asociamos la disciplina al sub area
         $knowledgeSubareaDiscipline->knowledgeSubarea()->associate($request->get('knowledge_subarea_id'));
 
         if($knowledgeSubareaDiscipline->save()){
@@ -100,6 +101,7 @@ class KnowledgeSubareaDisciplineController extends Controller
         $this->authorize('update', [KnowledgeSubareaDiscipline::class]);
 
         $knowledgeSubareaDiscipline->name = $request->get('name');
+         // ? asociamos la disciplina al sub area
         $knowledgeSubareaDiscipline->knowledgeSubarea()->associate($request->get('knowledge_subarea_id'));
 
         if($knowledgeSubareaDiscipline->save()){

@@ -63,13 +63,15 @@ class EducationalInstitutionUserController extends Controller
         $user->cellphone_number   = $request->get('cellphone_number');
         $user->interests          = $request->get('interests');
         $user->is_enabled         = $request->get('is_enabled');
+            // ? asignamos el rol a el usuario de la facultad
         $user->assignRole($request->get('role_id'));
 
         if($user->save()){
             $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true]);
 
-            // Send notification student create researchTeam
-            if($user->hasRole('Estudiante')){
+            // ? Send notification student create researchTeam
+            if($user->hasRole(4)){
+                // ? si el rol es estudiante le notificamos al coordinador de la institucion el nuevo estudiante
                 $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
                 $educationalInstitution = $faculty->educationalInstitution;
                 $adminInstitution = $educationalInstitution->administrator;
@@ -133,6 +135,7 @@ class EducationalInstitutionUserController extends Controller
         $user->is_enabled         = $request->get('is_enabled');
 
         if($user->update()){
+            // ? sincronisamos si hay nuevos roles
             $user->syncRoles($request->get('role_id'));
             $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true] );
             $message = 'Your update processed correctly';
