@@ -46,7 +46,7 @@ use App\Http\Controllers\TestController;
 Route::get('/', function() {
      return redirect()->route('login');
 
-});
+})->name('/');
 
 
 // ? ruta que define el explorador de la plataforma
@@ -58,21 +58,8 @@ Route::get('/', function() {
 
 Route::middleware(['auth'])->group(function () {
 
-    // ? ruta para la dashboard o panel de delegado de nodo //
+    // ? ruta para la dashboard o panel de coordinador de nodo //
     Route::get('/nodes/{node}/dashboard', [AppController::class, 'dashboard'])->name('nodes.dashboard');
-
-    // ? ruta para la dashboard o panel de delegado de nodo por defecto caldas //
-    Route::get('/dashboard', function() {
-        if ( request()->route('node') ) {
-            $node = request()->route('node');
-            return redirect()->route('nodes.dashboard', $node);
-
-        }else{
-            $authUser = Auth::user();
-            $node = $authUser->my_projects['node'];
-            return redirect()->route('nodes.dashboard', $node);
-        }
-    });
 
     Route::get('/model-form', function () {
         return view('livewire.model-form');

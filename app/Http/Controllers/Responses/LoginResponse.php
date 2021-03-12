@@ -17,7 +17,6 @@ class LoginResponse implements LoginResponseContract
         // the user can be located with Auth facade
 
         $authUser = Auth::user();
-
         // dd($authUser->isNodeAdmin);
 
         switch ($authUser) {
@@ -40,7 +39,7 @@ class LoginResponse implements LoginResponseContract
                     $educationalInstitution           = $authUser->my_projects['educationalInstitution'];
                     $educationalInstitutionFaculty    = $authUser->my_projects['educationalInstitutionFaculty'];
                     $researchGroup                    = $authUser->my_projects['researchGroup'];
-                    $researchTeam                    = $authUser->my_projects['researchTeam'];
+                    $researchTeam                     = $authUser->my_projects['researchTeam'];
                 }
 
                 return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects', [$node, $educationalInstitution, $educationalInstitutionFaculty, $researchGroup, $researchTeam]);
