@@ -63,21 +63,24 @@ class EducationalInstitutionController extends Controller
         $educationalInstitution->city           = $request->get('city');
         $educationalInstitution->phone_number   = $request->get('phone_number');
         $educationalInstitution->website        = $request->get('website');
+            // ? asociamos la institucion con el nodo
         $educationalInstitution->node()->associate($node);
 
         if($educationalInstitution->save()){
-
+            // ? asociamos el administrador a la institucion
             $educationalInstitution->administrator()->associate($request->get('administrator_id'));
 
             $intitutions = $node->educationalInstitutions;
             $users = [];
 
+            // ? se recorren las intituciones y se guardan los administradores
             foreach ($intitutions as $intitution) {
                 if(!is_null($intitution->administrator) ){
                     array_push($users,$intitution->administrator);
                 }
             }
 
+            // ? le notificamos a los administradores de una nueva institucion creada
             $type = "Institución educativa";
             Notification::send($users, new InformationNotification($educationalInstitution,$type));
 
@@ -155,6 +158,7 @@ class EducationalInstitutionController extends Controller
 
         $this->authorize('delete', [EducationalInstitution::class, $node]);
 
+            // ? validamos si la institucion esta asociada a un coordinador de ser a si no es posible eliminarla
         if(!is_null($educationalInstitution->administrator)){
             $message ="No es posible eliminar la institución educativa ya que tiene de coordinador(a) a  ".$educationalInstitution->administrator->name;
             return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);

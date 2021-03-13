@@ -56,6 +56,7 @@ class AcademicProgramController extends Controller
         $academicProgram->daytime           = $request->get('daytime');
         $academicProgram->start_date        = $request->get('start_date');
         $academicProgram->end_date          = $request->get('end_date');
+        // ? asociacion de el programa academico con la facultad
         $academicProgram->educationalInstitutionFaculty()->associate($faculty);
 
         if($academicProgram->save()) {
@@ -109,6 +110,7 @@ class AcademicProgramController extends Controller
         $academicProgram->daytime           = $request->get('daytime');
         $academicProgram->start_date        = $request->get('start_date');
         $academicProgram->end_date          = $request->get('end_date');
+        // ? asociacion de el programa academico con la facultad
         $academicProgram->educationalInstitutionFaculty()->associate($faculty);
 
         if($academicProgram->save()) {
@@ -130,7 +132,7 @@ class AcademicProgramController extends Controller
 
             $this->authorize('delete', [AcademicProgram::class,$educationalInstitution]);
 
-
+            // ? validamos que el programa no este asociado a una graduacion si es a si no es posible eliminar el programa
             if(!is_null($academicProgram->userGraduation)){
                 return redirect()->route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $faculty])
                 ->with('status', "No es posible eliminar el programa académico porque está unido a la información de grado de varios estudiantes.");

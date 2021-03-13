@@ -38,7 +38,7 @@ class AnnualNodeEventController extends Controller
             $node = $faculty->educationalInstitution->node;
         }
 
-
+        // ? traemos el evento anual de el nodo
         $nodeEvents = $node->nodeEvents->where('is_annual_event',1)->first();
         $annualNodeEvent = $nodeEvents->annualNodeEvent;
 
@@ -98,7 +98,7 @@ class AnnualNodeEventController extends Controller
         $annualNodeEvent = $nodeEvent->annualNodeEvent()->where('project_id',$project->id)->first();
 
          foreach ($project->authors as $author ) {
-
+            // ? traemos la infromacion de los dos ponentes
             if($author->id == $annualNodeEvent->first_speaker_id ){
                 $first_speaker = $author;
             }
@@ -109,8 +109,6 @@ class AnnualNodeEventController extends Controller
 
         }
 
-
-        // return $project->knowledgeSubareaDisciplines()->first()->knowledgeSubarea()->first()->knowledgeArea;
 
         return view('AnnualNodeEvents.show', compact('project','annualNodeEvent','first_speaker','second_speaker'));
 
@@ -154,8 +152,9 @@ class AnnualNodeEventController extends Controller
             $first_speaker =  User::findOrFail($annualNodeEvent->first_speaker_id);
             $second_speaker =  User::findOrFail($annualNodeEvent->second_speaker_id);
 
+            // ? condicion en caso de rechazar la participacion del proyecto
             if(!is_null($request->get('comments'))){
-
+                // ? tipo de notificacion
                 $type = [
                     "case" => "Respuesta a su solicitud de participación en el evento anual",
                     "comments" => $request->get('comments'),
@@ -175,6 +174,7 @@ class AnnualNodeEventController extends Controller
                 return redirect()->route('annualNodeEvent.index')->with('status', $message);
 
             }else{
+                // ? condicion en caso de aceptar la participacion del proyecto
                 $type = [
                     "case" => "Respuesta a su solicitud de participación en el evento anual",
                     "comments" => "de cumplir los requerimientos",
@@ -235,6 +235,7 @@ class AnnualNodeEventController extends Controller
             $project      = Project::findOrFail($request->get('project_id'));
             $eventNew     = Event::findOrFail($request->get('event_id'));
 
+            // ? condicion para validar si el proyecto a registrar ya se encuentra registrado
             if($annualNodeEventRegister){
                 // proyectos  ya registrados en el evento
                 $projectsRegister = $annualNodeEventRegister->nodeEvent->event->projects;
@@ -257,7 +258,7 @@ class AnnualNodeEventController extends Controller
 
             }
 
-
+            // ? registramos el proyecto al evento anual
             $annualNodeEvent = new AnnualNodeEvent();
             $annualNodeEvent->presentation_type      = $request->get('presentation_type');
             $annualNodeEvent->project_status         = $request->get('project_status');
@@ -265,6 +266,7 @@ class AnnualNodeEventController extends Controller
             $annualNodeEvent->first_speaker_id       = $request->get('first_speaker_id');
             $annualNodeEvent->second_speaker_id      = $request->get('second_speaker_id');
 
+            // ? guardamos los archivos
             if ($request->hasFile('endorsement_letter')) {
                 $file       = $request->file('endorsement_letter');
                 $extension  = $file->extension();
@@ -277,7 +279,7 @@ class AnnualNodeEventController extends Controller
                 $annualNodeEvent->endorsement_letter  = "annual-events/$fileName";
 
             }
-
+            // ? guardamos los archivos
             if ($request->hasFile('project_article')) {
                 $file       = $request->file('project_article');
                 $extension  = $file->extension();
@@ -291,9 +293,11 @@ class AnnualNodeEventController extends Controller
                 $annualNodeEvent->project_article  = "annual-events/$fileName";
             }
 
+            // ? asociamos el registro al evento de nodo
             $annualNodeEvent->nodeEvent()->associate($request->get('event_id'));
 
             if($annualNodeEvent->save()){
+                // ? asociamos el projecto al evento
                 $project->events()->attach($request->get('event_id'));
                 $message = 'El registro a el evento fue correcto';
 
@@ -310,6 +314,7 @@ class AnnualNodeEventController extends Controller
                     $adminInstitution = $educationalInstitution->administrator;
                 }
 
+                // ? tipo de notificacion
                 $type =[
                     "type" => "registrar un proyecto a el evento anual",
                     "name_event" => $event->name

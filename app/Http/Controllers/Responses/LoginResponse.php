@@ -17,12 +17,11 @@ class LoginResponse implements LoginResponseContract
         // the user can be located with Auth facade
 
         $authUser = Auth::user();
-
         // dd($authUser->isNodeAdmin);
 
         switch ($authUser) {
             case $authUser->hasRole(1):
-                return redirect()->route('nodes.dashboard', [$authUser->my_projects['node']]);
+                return redirect()->route('nodes.index');
             break;
 
             case $authUser->hasRole(2):
@@ -40,7 +39,7 @@ class LoginResponse implements LoginResponseContract
                     $educationalInstitution           = $authUser->my_projects['educationalInstitution'];
                     $educationalInstitutionFaculty    = $authUser->my_projects['educationalInstitutionFaculty'];
                     $researchGroup                    = $authUser->my_projects['researchGroup'];
-                    $researchTeam                    = $authUser->my_projects['researchTeam'];
+                    $researchTeam                     = $authUser->my_projects['researchTeam'];
                 }
 
                 return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects', [$node, $educationalInstitution, $educationalInstitutionFaculty, $researchGroup, $researchTeam]);

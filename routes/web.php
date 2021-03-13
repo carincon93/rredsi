@@ -31,7 +31,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\ModelForm;
 use App\Models\NodeEvent;
-
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\TestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,28 +45,22 @@ use App\Models\NodeEvent;
 */
 
 Route::get('/', function() {
-    return redirect()->route('/', 1);
-    // Quemado
-});
+     return redirect()->route('login');
+
+})->name('/');
 
 
 // ? ruta que define el explorador de la plataforma
 // * inicio ruta
-    Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('/');
+    Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('nodes.explorer');
     Route::get('/nodes/{node}/explorer/roles', [AppController::class, 'roles'])->name('nodes.explorer.roles');
     Route::get('/nodes/{node}/explorer/events', [AppController::class, 'events'])->name('nodes.explorer.events');
 // * fin ruta
 
 Route::middleware(['auth'])->group(function () {
 
-    // ? ruta para la dashboard o panel de delegado de nodo //
+    // ? ruta para la dashboard o panel de coordinador de nodo //
     Route::get('/nodes/{node}/dashboard', [AppController::class, 'dashboard'])->name('nodes.dashboard');
-
-    // ? ruta para la dashboard o panel de delegado de nodo por defecto caldas //
-    Route::get('/dashboard', function() {
-        return redirect()->route('nodes.dashboard', 1);
-        // Quemado
-    });
 
     Route::get('/model-form', function () {
         return view('livewire.model-form');
@@ -153,6 +148,7 @@ Route::middleware(['auth'])->group(function () {
         ]
     ]);
 
+
     // ! rutas resources de acceso rapido a tablas//
     Route::resources([
         // ? rutas  de usuarios de sistema//
@@ -195,6 +191,8 @@ Route::middleware(['auth'])->group(function () {
         // ? rutas de los roles de sistema//
         'roles'                             => RoleController::class,
         // ? rutas de la información legal de la plataforma//
-        'legal-informations'                => LegalInformationController::class
+        'legal-informations'                => LegalInformationController::class,
+        // ? rutas prueba Tests make:crud//
+        'tests'                             => TestController::class
     ]);
 });

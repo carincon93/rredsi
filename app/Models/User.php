@@ -79,15 +79,18 @@ class User extends Authenticatable
             $educationalInstitution           = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution;
             $educationalInstitutionFaculty    = $researchTeam->researchGroup->educationalInstitutionFaculty;
             $researchGroup                    = $researchTeam->researchGroup;
+
+            return [
+                "node" => $node,
+                "educationalInstitution" => $educationalInstitution,
+                "educationalInstitutionFaculty" => $educationalInstitutionFaculty,
+                "researchGroup" => $researchGroup,
+                "researchTeam" => $researchTeam
+             ];
         }
 
-         return [
-            "node" => $node,
-            "educationalInstitution" => $educationalInstitution,
-            "educationalInstitutionFaculty" => $educationalInstitutionFaculty,
-            "researchGroup" => $researchGroup,
-            "researchTeam" => $researchTeam
-         ];
+
+
     }
 
     public function isNodeAdmin() {

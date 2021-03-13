@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\KnowledgeSubarea;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\Test;
+use App\Models\User;
 
-class KnowledgeSubareaPolicy
+class TestPolicy
 {
     use HandlesAuthorization;
 
@@ -18,31 +18,23 @@ class KnowledgeSubareaPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole(1)){
+        if ( $user->hasPermissionTo('index_test') ) {
             return true;
         }
-        if($user->hasPermissionTo('index_knowledge_subarea')){
-            return true;
-        }
-        return false;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\KnowledgeSubarea  $knowledgeSubarea
+     * @param  \App\Models\Test  $test
      * @return mixed
      */
-    public function view(User $user)
+    public function view(User $user, Test $test)
     {
-        if($user->hasRole(1)){
+        if ( $user->hasPermissionTo('show_test') ) {
             return true;
         }
-        if($user->hasPermissionTo('show_knowledge_subarea')){
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -53,59 +45,47 @@ class KnowledgeSubareaPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole(1)){
+        if ( $user->hasPermissionTo('create_test') ) {
             return true;
         }
-        if($user->hasPermissionTo('create_knowledge_subarea')){
-            return true;
-        }
-        return false;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\KnowledgeSubarea  $knowledgeSubarea
+     * @param  \App\Models\Test  $test
      * @return mixed
      */
-    public function update(User $user)
+    public function update(User $user, Test $test)
     {
-        if($user->hasRole(1)){
+        if ( $user->hasPermissionTo('edit_test') ) {
             return true;
         }
-        if($user->hasPermissionTo('edit_knowledge_subarea')){
-            return true;
-        }
-        return false;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\KnowledgeSubarea  $knowledgeSubarea
+     * @param  \App\Models\Test  $test
      * @return mixed
      */
-    public function delete(User $user)
+    public function delete(User $user, Test $test)
     {
-        if($user->hasRole(1)){
+        if ( $user->hasPermissionTo('delete_test') ) {
             return true;
         }
-        if($user->hasPermissionTo('destroy_knowledge_subarea')){
-            return true;
-        }
-        return false;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\KnowledgeSubarea  $knowledgeSubarea
+     * @param  \App\Models\Test  $test
      * @return mixed
      */
-    public function restore(User $user, KnowledgeSubarea $knowledgeSubarea)
+    public function restore(User $user, Test $test)
     {
         //
     }
@@ -114,10 +94,10 @@ class KnowledgeSubareaPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\KnowledgeSubarea  $knowledgeSubarea
+     * @param  \App\Models\Test  $test
      * @return mixed
      */
-    public function forceDelete(User $user, KnowledgeSubarea $knowledgeSubarea)
+    public function forceDelete(User $user, Test $test)
     {
         //
     }

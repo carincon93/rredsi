@@ -33,7 +33,7 @@
                         {{ __('Type') }}
                     </x-slot>
                     <x-slot name="thirdTheadTitle">
-                        {{ __('Keywords') }}
+                        {{ __('Execution dates') }}
                     </x-slot>
                     <x-slot name="fourthTheadTitle">
                         {{ __('Is privated?') }}
@@ -48,7 +48,7 @@
                                 </td>
 
                                 <td class="hidden sm:table-cell">
-                                    <span>{{ optional($project->projectType)->type }}</span>
+                                    <p>{{ optional($project->projectType)->type }}</p>
                                 </td>
 
                                 <td>

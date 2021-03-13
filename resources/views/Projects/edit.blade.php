@@ -214,7 +214,7 @@
                         <x-jet-input-error for="principal_research_team_id" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <p>{{ __('Research teams' ) }} </p>
                         @forelse ($researchTeams as $researchTeam)
                             <div class="mt-4">
@@ -225,7 +225,7 @@
                             <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="research_team_id" class="mt-2" />
-                    </div>
+                    </div> --}}
 
                     <div class="mt-4">
                         <p>{{ __('Research lines' ) }} </p>

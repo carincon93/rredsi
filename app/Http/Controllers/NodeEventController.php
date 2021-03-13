@@ -68,6 +68,7 @@ class NodeEventController extends Controller
         $event->info_link       = $request->get('info_link');
         $event->save();
 
+         // ? asociamos el evento al node event
         $event->nodeEvent()->create([
             'id'        => $event->id,
             'node_id'   => $node->id,
@@ -130,7 +131,7 @@ class NodeEventController extends Controller
         $event->info_link       = $request->get('info_link');
         $event->is_annual_event = $request->get('is_annual_event');
 
-
+         // ? asociamos el evento al node event
         $event->nodeEvent()->update([
             'node_id'   => $node->id
         ]);
@@ -178,6 +179,7 @@ class NodeEventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+         // ? index para registro de evento
     public function rredsiEventRegister(Node $node)
     {
         $knowledgeAreas = KnowledgeArea::orderBy('name')->get();

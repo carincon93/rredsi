@@ -18,7 +18,7 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('index_role')){
@@ -36,7 +36,7 @@ class RolePolicy
      */
     public function view(User $user)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('show_role')){
@@ -53,7 +53,7 @@ class RolePolicy
      */
     public function create(User $user)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('create_role')){
@@ -71,7 +71,7 @@ class RolePolicy
      */
     public function update(User $user)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('edit_role')){
@@ -89,7 +89,7 @@ class RolePolicy
      */
     public function delete(User $user)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if($user->hasPermissionTo('destroy_role')){

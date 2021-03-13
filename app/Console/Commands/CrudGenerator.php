@@ -13,6 +13,8 @@ class CrudGenerator extends Command
      *
      * @var string
      */
+
+
     protected $signature = 'make:crud {className : Class name}';
 
     /**
@@ -25,6 +27,7 @@ class CrudGenerator extends Command
     protected $className;
     protected $folderName;
     protected $pageTitle;
+    protected $permission;
 
     /**
      * Create a new command instance.
@@ -49,8 +52,9 @@ class CrudGenerator extends Command
     protected function gatherParameters()
     {
         $this->className    = $this->argument('className');
-        $this->folderName   = $this->ask('What is the folder name (in lowercase, slug and plural)?');
-        $this->pageTitle    = $this->ask('What is the name for the page title (in lowercase and singular)?');
+        $this->folderName   = $this->ask('What is the folder name views (in camelcase, and plural)?');
+        $this->pageTitle    = $this->ask('What is the name for the page title (in capitalize, spaces and singular)?');
+        $this->permission   = $this->ask('What is the name for the permission (in lowercase underline and singular for example test_prueba)?');
 
         Artisan::call("make:model $this->className -c -r");
         Artisan::call("make:request $this->className"."Request");
@@ -66,5 +70,13 @@ class CrudGenerator extends Command
         $this->info('Copy and paste the following code in web.php:');
         $this->info(__('use App\Http\Controllers\:controllerName', ['controllerName' => $this->className.'Controller;']));
         $this->info("Route::resource('/{$this->folderName}', {$this->className}Controller::class);");
+        $this->info('Add this routes in the permissions table:');
+        $this->info("index_{$this->permission}");
+        $this->info("show_{$this->permission}");
+        $this->info("create_{$this->permission}");
+        $this->info("edit_{$this->permission}");
+        $this->info("delete_{$this->permission}");
+        $this->info('Execute the following comand: php artisan cache:clear');
     }
+
 }

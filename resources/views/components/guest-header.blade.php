@@ -6,12 +6,12 @@
                 <polygon points="50,0 100,0 50,100 0,100" />
             </svg>
             @endif
-            
+
             <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
                 <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
                     <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                         <div class="flex items-center justify-between w-full md:w-auto">
-                            <a href="{{ route('/', [$node]) }}">
+                            <a href="{{ route('nodes.explorer', [$node]) }}">
                                 <span class="sr-only">Workflow</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.78" height="36.859" viewBox="0 0 9.78 36.859" class="h-8 w-auto sm:h-10">
                                     <defs>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                         <a href="{{ route('nodes.explorer.nodeInfo', [$node]) }}" class="font-medium text-gray-500 hover:text-gray-900">RREDSI <span class="capitalize">{{ $node->state }}</span></a>
-                        
+
                         @if (Route::has('login'))
                             @auth
                                 <a href="{{ route('nodes.dashboard', [$node]) }}" class="font-medium text-blue-900 hover:text-indigo-500">{{ __('Dashboard') }}</a>
@@ -51,10 +51,10 @@
                     </div>
                 </nav>
             </div>
-            
+
             <!--
                 Mobile menu, show/hide based on menu open state.
-                
+
                 Entering: "duration-150 ease-out"
                 From: "opacity-0 scale-95"
                 To: "opacity-100 scale-100"
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div role="menu" aria-orientation="vertical" aria-labelledby="main-menu">
-                        <div class="px-2 pt-2 pb-3 space-y-1" role="none">                            
+                        <div class="px-2 pt-2 pb-3 space-y-1" role="none">
                             <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" role="menuitem">RREDSI Caldas</a>
                         </div>
                         @if (Route::has('login'))
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28{{ !$image ? ' p-24' : '' }}" style="{{ !$image ? 'background:url(/storage/images/net.png);' : ''}}">
                 <div class="sm:text-center lg:text-left" style="{{ !$image ? 'background:url(/storage/images/dots.png);background-size: cover;background-position: right;background-repeat: no-repeat;' : ''}}">
                     {{ $title }}

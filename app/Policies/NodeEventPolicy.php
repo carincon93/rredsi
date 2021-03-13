@@ -19,7 +19,7 @@ class NodeEventPolicy
      */
     public function viewAny(User $user,Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('index_node_event')){
@@ -41,7 +41,7 @@ class NodeEventPolicy
      */
     public function view(User $user,Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('show_node_event')){
@@ -62,7 +62,7 @@ class NodeEventPolicy
      */
     public function create(User $user,Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('create_node_event')){
@@ -85,7 +85,7 @@ class NodeEventPolicy
      */
     public function update(User $user,Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('edit_node_event')){
@@ -107,7 +107,7 @@ class NodeEventPolicy
      */
     public function delete(User $user,Node $node)
     {
-        if($user->hasRole('Administrador')){
+        if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('destroy_node_event')){

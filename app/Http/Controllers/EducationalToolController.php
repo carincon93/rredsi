@@ -60,6 +60,7 @@ class EducationalToolController extends Controller
         $educationalTool->qty           = $request->get('qty');
         $educationalTool->is_available  = $request->get('is_available');
         $educationalTool->is_enabled    = $request->get('is_enabled');
+         // ? asociamos la herramienta educativa al ambiente de formación
         $educationalTool->educationalEnvironment()->associate($educationalEnvironment);
 
         if ($educationalTool->save()) {
@@ -114,6 +115,7 @@ class EducationalToolController extends Controller
         $educationalTool->qty           = $request->get('qty');
         $educationalTool->is_available  = $request->get('is_available');
         $educationalTool->is_enabled    = $request->get('is_enabled');
+         // ? asociamos la herramienta educativa al ambiente de formación
         $educationalTool->educationalEnvironment()->associate($educationalEnvironment);
 
         if ($educationalTool->save()) {

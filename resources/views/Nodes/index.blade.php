@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
-            <div class="col-start-3 col-span-3 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+            <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Nodes') }}
                     <span class="text-base sm:text-3xl block text-purple-300">
@@ -10,7 +10,7 @@
                     </span>
                 </h2>
             </div>
-            <div class="col-start-2 col-end-7 md:col-end-9 md:col-span-3 xl:col-end-13 xl:col-span-1 m-auto">
+            <div class="col-start-9 col-end-9 md:col-end-9 md:col-span-3 xl:col-end-13 xl:col-span-1 m-auto">
                 @can('create_node')
                 <a href="{{route('nodes.create')}}">
                     <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
@@ -38,10 +38,10 @@
                             <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                                 <td class="pp0">
                                     <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('State') }}</span>
-                                    <p>{{ $node->state }}</p>
+                                    <p class="ml-2">{{ $node->state }}</p>
                                 </td>
                                 <td class="pp0">
-                                    <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Administrator') }}</span>
+                                    <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Administrator') }}</span>
                                     <p class="row-2">{{ $node->administrator->name }}</p>
                                 </td>
 
@@ -72,6 +72,11 @@
                                                     </svg>
                                                 </x-jet-dropdown-link>
                                             @endcan
+                                            <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.educational-institutions.index', [$node]) }}">
+                                                <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                                                </svg>
+                                            </x-jet-dropdown-link>
 
                                         </div>
 
@@ -104,6 +109,9 @@
                                                         {{ __('Delete') }}
                                                     </x-jet-dropdown-link>
                                                     @endcan
+                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.index', [$node]) }}">
+                                                        {{ __('Manage educational institutions') }}
+                                                    </x-jet-dropdown-link>
                                                 </x-slot>
                                             </x-jet-dropdown>
                                         </div>

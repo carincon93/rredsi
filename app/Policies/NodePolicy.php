@@ -16,7 +16,7 @@ class NodePolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user,Node $node)
     {
         if($user->hasRole(1)){
             return true;
@@ -80,7 +80,7 @@ class NodePolicy
      * @param  \App\Models\Node  $node
      * @return mixed
      */
-    public function update(User $user)
+    public function update(User $user, Node $node)
     {
         if($user->hasRole(1)){
             return true;

@@ -20,7 +20,7 @@ class ResearchGroupPolicy
      */
     public function viewAny(User $user,EducationalInstitution $educationalInstitution)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('index_research_group')){
@@ -44,7 +44,7 @@ class ResearchGroupPolicy
      */
     public function view(User $user,EducationalInstitution $educationalInstitution)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('show_research_group')){
@@ -65,7 +65,7 @@ class ResearchGroupPolicy
      */
     public function create(User $user,EducationalInstitution $educationalInstitution)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('create_research_group')){
@@ -87,7 +87,7 @@ class ResearchGroupPolicy
      */
     public function update(User $user, EducationalInstitution $educationalInstitution)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('edit_research_group')){
@@ -109,7 +109,7 @@ class ResearchGroupPolicy
      */
     public function delete(User $user, EducationalInstitution $educationalInstitution)
     {
-         if($user->hasRole('Administrador')){
+         if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('destroy_research_group')){

@@ -22,7 +22,7 @@ class ResearchOutputPolicy
      */
     public function viewAny(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-       if($user->hasRole('Administrador')){
+       if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('index_research_output')){
@@ -55,7 +55,7 @@ class ResearchOutputPolicy
      */
     public function view(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-       if($user->hasRole('Administrador')){
+       if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('show_research_output')){
@@ -87,7 +87,7 @@ class ResearchOutputPolicy
      */
     public function create(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-       if($user->hasRole('Administrador')){
+       if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('create_research_output')){
@@ -118,7 +118,7 @@ class ResearchOutputPolicy
      */
     public function update(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-       if($user->hasRole('Administrador')){
+       if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('edit_research_output')){
@@ -149,7 +149,7 @@ class ResearchOutputPolicy
      */
     public function delete(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-       if($user->hasRole('Administrador')){
+       if($user->hasRole(1)){
             return true;
         }
         if(!$user->hasPermissionTo('destroy_research_output')){

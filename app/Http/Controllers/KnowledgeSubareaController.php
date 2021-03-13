@@ -50,6 +50,7 @@ class KnowledgeSubareaController extends Controller
 
         $knowledgeSubarea          = new KnowledgeSubarea();
         $knowledgeSubarea->name    = $request->get('name');
+         // ? asociamos la sub area al area de conocimiento
         $knowledgeSubarea->knowledgeArea()->associate($request->get('knowledge_area_id'));
 
         if($knowledgeSubarea->save()){
@@ -100,6 +101,7 @@ class KnowledgeSubareaController extends Controller
         $this->authorize('update', [KnowledgeSubarea::class] );
 
         $knowledgeSubarea->name = $request->get('name');
+         // ? asociamos la sub area al area de conocimiento
         $knowledgeSubarea->KnowledgeArea()->associate($request->get('knowledge_area_id'));
 
         if($knowledgeSubarea->save()){

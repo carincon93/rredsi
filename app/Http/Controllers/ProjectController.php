@@ -121,15 +121,15 @@ class ProjectController extends Controller
         }
 
         if($project->save()){
-            if ($request->has('research_team_id')) {
-                $arrayResearchTeamsIds = $request->get('research_team_id');
-                if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
-                    unset($arrayResearchTeamsIds[$key]);
-                }
-            }
+            // if ($request->has('research_team_id')) {
+            //     $arrayResearchTeamsIds = $request->get('research_team_id');
+            //     if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+            //         unset($arrayResearchTeamsIds[$key]);
+            //     }
+            // }
 
             $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
-            $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
+            // $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
             $project->researchLines()->attach($request->get('research_line_id'));
             $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
             $project->academicPrograms()->attach($request->get('academic_program_id'));
@@ -242,17 +242,17 @@ class ProjectController extends Controller
             $project->file  = "projects/$fileName";
         }
 
-        if($project->update()){
-            if ($request->has('research_team_id')) {
-                $arrayResearchTeamsIds = $request->get('research_team_id');
-                $request->get('principal_research_team_id');
-                if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
-                    unset($arrayResearchTeamsIds[$key]);
-                }
-            }
+        if($project->save()){
+            // if ($request->has('research_team_id')) {
+            //     $arrayResearchTeamsIds = $request->get('research_team_id');
+            //     $request->get('principal_research_team_id');
+            //     if (($key = array_search($request->get('principal_research_team_id'), $arrayResearchTeamsIds)) !== false) {
+            //         unset($arrayResearchTeamsIds[$key]);
+            //     }
+            // }
 
             $project->researchTeams()->sync($request->get('principal_research_team_id'), ['is_principal' => true]);
-            $project->researchTeams()->sync($arrayResearchTeamsIds, ['is_principal' => false]);
+            // $project->researchTeams()->sync($arrayResearchTeamsIds, ['is_principal' => false]);
             $project->researchLines()->sync($request->get('research_line_id'));
             $project->knowledgeSubareaDisciplines()->sync($request->get('knowledge_subarea_dicipline_id'));
             $project->academicPrograms()->sync($request->get('academic_program_id'));

@@ -51,6 +51,7 @@ class EducationalInstitutionFacultyController extends Controller
         $faculty->email         = $request->get('email');
         $faculty->phone_number  = $request->get('phone_number');
         $faculty->ext           = $request->get('ext');
+            // ? asociamos la facultad a una institucion
         $faculty->educationalInstitution()->associate($educationalInstitution);
 
         if ($faculty->save()) {
@@ -101,6 +102,7 @@ class EducationalInstitutionFacultyController extends Controller
         $faculty->email         = $request->get('email');
         $faculty->phone_number  = $request->get('phone_number');
         $faculty->ext           = $request->get('ext');
+            // ? asociamos la faculdad a la institucion
         $faculty->educationalInstitution()->associate($educationalInstitution);
 
         if ($faculty->save()) {
