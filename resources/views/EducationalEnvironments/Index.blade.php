@@ -1,25 +1,21 @@
 <title>{{ "Ambientes de formación"}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
-            <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
-                <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-                    {{ __('Educational environments') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
-                        Add educational environment
-                    </span>
-                </h2>
-            </div>
-            <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 xl:col-end-10 xl:col-span-2 m-auto">
-                @can('create_educational_environment')
-                <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.create', [$node, $educationalInstitution, $faculty]) }}">
-                    <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 grgroup-hover:text-blue-500t-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                        {{ __('Create educational environment')}}
-                    </div>
-                </a>
-                @endcan
-            </div>
+        <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+            <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+                {{ __('Educational environments') }}
+                <span class="text-base sm:text-2xl block text-purple-300">
+                    Lista de ambientes
+                </span>
+            </h2>
         </div>
+        @can('create_educational_environment')
+        <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.create', [$node, $educationalInstitution, $faculty]) }}">
+            <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 grgroup-hover:text-blue-500t-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                {{ __('Create educational environment')}}
+            </div>
+        </a>
+        @endcan
     </x-slot>
 
     <div class="py-12">
@@ -48,7 +44,7 @@
                                 </td>
                                 <td>
                                     <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Type') }}</span>
-                                    <p class="row-auto">{{ $educationalEnvironment->type }}</p>
+                                    <p class="">{{ $educationalEnvironment->type }}</p>
                                 </td>
                                 <td class="py-2 text-left">
                                     <div class="lg:flex items-center lg:justify-around">

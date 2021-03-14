@@ -88,9 +88,6 @@ class User extends Authenticatable
                 "researchTeam" => $researchTeam
              ];
         }
-
-
-
     }
 
     public function isNodeAdmin() {
@@ -101,8 +98,8 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\EducationalInstitution', 'administrator_id');
     }
 
-    public function isResearchTeamAdmin() {
-        return $this->hasOne('App\Models\ResearchTeam', 'administrator_id');
+    public function isStudentLeader() {
+        return $this->hasOne('App\Models\ResearchTeam', 'student_leader_id');
     }
 
     public function userGraduations() {

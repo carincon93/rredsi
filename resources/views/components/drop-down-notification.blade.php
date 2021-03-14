@@ -1,4 +1,4 @@
-<x-jet-dropdown align="right" classes="flex items-center" width="48">
+<x-jet-dropdown align="right" classes="flex items-center">
 
     @php
         /** contamos las notificaciones sin leeer para mostarrlar en el dropdown */
@@ -19,7 +19,7 @@
     </x-slot>
 
     <x-slot name="content">
-        <div class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20" style="width:20rem;">
+        <div class="right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20 w-80">
             <div class="py-2">
                 {{-- aca recorremos el object de notificaciones sin leer y mostramos en el dropdown --}}
                 @forelse ($notificationUnread as $notification)

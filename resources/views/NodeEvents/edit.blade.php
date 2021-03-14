@@ -2,11 +2,11 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+        <div >
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Node events') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
+                    <span class="text-base sm:text-2xl block text-purple-300">
                         Update node event info
                     </span>
                 </h2>
@@ -40,48 +40,48 @@
                     @method('PUT')
 
                     <div>
-                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') ?? $event->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="location" value="{{ __('Location') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="location" value="{{ __('Location') }}" />
                         <x-jet-input id="location" class="block mt-1 w-full" type="text" max="191" name="location" value="{{ old('location') ?? $event->location }}" required />
                         <x-jet-input-error for="location" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="description" value="{{ __('Description') }}" />
-                        <textarea id="description" name="description" class="form-textarea border-0 w-full" required >{{ old('description') ?? $event->description }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="description" value="{{ __('Description') }}" />
+                        <textarea rows="20" id="description" name="description" class="form-textarea border-0 w-full" required >{{ old('description') ?? $event->description }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="start_date" value="{{ __('Start date') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="start_date" value="{{ __('Start date') }}" />
                         <x-jet-input id="start_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }} " name="start_date" value="{{ old('start_date') ?? $event->start_date }}" required />
                         <x-jet-input-error for="start_date" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="end_date" value="{{ __('End date') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="end_date" value="{{ __('End date') }}" />
                         <x-jet-input id="end_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }} " name="end_date" value="{{ old('end_date') ?? $event->end_date }}" required />
                         <x-jet-input-error for="end_date" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="register_link" value="{{ __('Register link') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="register_link" value="{{ __('Register link') }}" />
                         <x-jet-input id="register_link" class="block mt-1 w-full" type="url" max="191" name="register_link" value="{{ old('register_link') ?? $event->register_link }}" required />
                         <x-jet-input-error for="register_link" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="info_link" value="{{ __('Info link') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="info_link" value="{{ __('Info link') }}" />
                         <x-jet-input id="info_link" class="block mt-1 w-full" type="url" max="191" name="info_link" value="{{ old('info_link') ?? $event->info_link }}" required />
                         <x-jet-input-error for="info_link" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Is annual event?') }} </p>
+                    <p class="mt-1/6">{{ __('Is annual event?') }} </p>
                     <div class="block mt-4">
                         <label for="is_annual_event_yes" class="flex items-center">
                             <input id="is_annual_event_yes" value="1" type="radio" class="form-radio" name="is_annual_event" {{ old('is_annual_event') == 1 || $event->is_annual_event == 1 ? "checked" : "" }}}>

@@ -19,9 +19,6 @@ class EducationalInstitutionUserPolicy
      */
     public function viewAny(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_educational_institution_user')){
             return false;
         }
@@ -43,9 +40,6 @@ class EducationalInstitutionUserPolicy
      */
     public function view(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('show_educational_institution_user')){
             return false;
         }
@@ -66,9 +60,7 @@ class EducationalInstitutionUserPolicy
      */
     public function create(User $user, EducationalInstitution $educationalInstitution)
     {
-           if($user->hasRole(1)){
-            return true;
-        }
+
         if(!$user->hasPermissionTo('create_educational_institution_user')){
             return false;
         }
@@ -90,9 +82,7 @@ class EducationalInstitutionUserPolicy
      */
     public function update(User $user, EducationalInstitution $educationalInstitution)
     {
-           if($user->hasRole(1)){
-            return true;
-        }
+
         if(!$user->hasPermissionTo('edit_educational_institution_user')){
             return false;
         }
@@ -114,9 +104,6 @@ class EducationalInstitutionUserPolicy
      */
     public function delete(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('destroy_educational_institution_user')){
             return false;
         }
@@ -131,9 +118,6 @@ class EducationalInstitutionUserPolicy
 
     public function dashboardNode(User $user, Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
 
         $admin = $node->administrator_id;
         if($admin == $user->id){

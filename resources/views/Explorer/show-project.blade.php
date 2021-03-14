@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="flex-grow ">
 
-                                        <h2 class=" text-xl title-font font-medium mb-3">
+                                        <h2 class="text-xl title-font font-medium mb-3">
                                             <a href="{{ route('nodes.explorer.searchRoles.showUser', [$node, $author]) }}" target="_blank">{{ $author->name }}</a>
                                         </h2>
                                         <p class="leading-relaxed text-sm text-justify">

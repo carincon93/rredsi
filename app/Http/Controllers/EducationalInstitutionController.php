@@ -82,7 +82,7 @@ class EducationalInstitutionController extends Controller
 
             // ? le notificamos a los administradores de una nueva institucion creada
             $type = "Institución educativa";
-            Notification::send($users, new InformationNotification($educationalInstitution,$type));
+            Notification::send($users, new InformationNotification($educationalInstitution, $type));
 
             $message = 'Your store processed correctly';
         }

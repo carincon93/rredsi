@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+
 use App\Http\Controllers\AcademicProgramController;
 use App\Http\Controllers\EducationalInstitutionFacultyController;
 use App\Http\Controllers\UserGraduationController;
@@ -31,8 +34,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\ModelForm;
 use App\Models\NodeEvent;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\TestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,26 +47,21 @@ use App\Http\Controllers\TestController;
 */
 
 Route::get('/', function() {
-     return redirect()->route('login');
-
+    return redirect()->route('login');
 })->name('/');
 
 
-// ? ruta que define el explorador de la plataforma
-// * inicio ruta
+Route::middleware(['auth'])->group(function () {
+
+    // ? ruta que define el explorador de la plataforma
+    // * inicio ruta
     Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('nodes.explorer');
     Route::get('/nodes/{node}/explorer/roles', [AppController::class, 'roles'])->name('nodes.explorer.roles');
     Route::get('/nodes/{node}/explorer/events', [AppController::class, 'events'])->name('nodes.explorer.events');
-// * fin ruta
-
-Route::middleware(['auth'])->group(function () {
+    // * fin ruta
 
     // ? ruta para la dashboard o panel de coordinador de nodo //
     Route::get('/nodes/{node}/dashboard', [AppController::class, 'dashboard'])->name('nodes.dashboard');
-
-    Route::get('/model-form', function () {
-        return view('livewire.model-form');
-    })->name('model-form');
 
     // ? ruta para ver cada notificacion expecifica para aceptar o denegar participacion en proyecto //
     // ? se manda aparte de el resource para evitar problemas en envio de datos//
@@ -106,6 +103,9 @@ Route::middleware(['auth'])->group(function () {
 
     // ? ruta para ver los proyectos de cada estudiante //
     Route::get('/nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}/research-groups/{research_group}/research-teams/{research_team}/my-projects',[ProjectController::class, 'myProjects'])->name('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects');
+
+    Route::get('/privacy-policy', [LegalInformationController::class, 'showPrivacyPolicy'])->name('showPrivacyPolicy');
+    Route::get('/terms-and-conditions', [LegalInformationController::class, 'showTermsConditions'])->name('showTermsConditions');
 
     // ? rutas de notificaciones //
     Route::resource('/notifications', NotificationController::class, [
@@ -192,7 +192,5 @@ Route::middleware(['auth'])->group(function () {
         'roles'                             => RoleController::class,
         // ? rutas de la información legal de la plataforma//
         'legal-informations'                => LegalInformationController::class,
-        // ? rutas prueba Tests make:crud//
-        'tests'                             => TestController::class
     ]);
 });

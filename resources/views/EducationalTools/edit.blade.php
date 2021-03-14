@@ -1,7 +1,7 @@
 <title>{{ "Editar la información de la herramienta educativa ".$educationalTool->educationalEnvironment->name}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+        <div >
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
                 <h2 class="font-display text-white text-center md:text-left text-lg leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Educational tools') }}
@@ -39,25 +39,25 @@
                     @method('PUT')
 
                     <div>
-                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') ?? $educationalTool->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="description" value="{{ __('Description') }}" />
-                        <textarea id="description" name="description" class="form-textarea border-0 w-full" value="{{ old('description') ?? old('description') }}" required >{{ old('description') ?? $educationalTool->description }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="description" value="{{ __('Description') }}" />
+                        <textarea rows="20" id="description" name="description" class="form-textarea border-0 w-full" value="{{ old('description') ?? old('description') }}" required >{{ old('description') ?? $educationalTool->description }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="qty" value="{{ __('Qty') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="qty" value="{{ __('Qty') }}" />
                         <x-jet-input id="qty" class="block mt-1 w-full" type="number" max="9999999999" name="qty" value="{{ old('qty') ?? $educationalTool->qty }}" required />
                         <x-jet-input-error for="qty" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Is enabled?') }} </p>
-                    <div class="mt-4">
+                    <p class="mt-1/6">{{ __('Is enabled?') }} </p>
+                    <div class="mt-1/6">
                         <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" {{ old('is_enabled') == 1 || $educationalTool->is_enabled == 1 ? "checked" : "" }} value="1" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enable_yes">Si</label>
 
@@ -67,8 +67,8 @@
                         <x-jet-input-error for="is_enabled" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Is available?') }}</p>
-                    <div class="mt-4">
+                    <p class="mt-1/6">{{ __('Is available?') }}</p>
+                    <div class="mt-1/6">
                         <input class="form-check-input" type="radio" name="is_available" id="is_available_yes" {{ old('is_available') == 1 || $educationalTool->is_available == 1 ? "checked" : "" }} value="1" />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_yes">Si</label>
 

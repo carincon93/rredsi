@@ -57,7 +57,7 @@ class UserRequest extends FormRequest
     {
         if($this->interests != null) {
             $this->merge([
-                'interests' => json_encode(explode(',', $this->interests, true)),
+                'interests' => json_encode(explode(',', $this->interests), true),
             ]);
         }
     }

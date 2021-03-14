@@ -24,15 +24,10 @@ class ResearchTeam extends Model
         'regional_projection',
         'knowledge_production_strategy',
         'thematic_research',
-        'administrator_id',
         'research_group_id',
         'student_leader_id',
         'cretead_at'
     ];
-
-    public function administrator() {
-        return $this->belongsTo('App\Models\User', 'administrator_id');
-    }
 
     public function researchGroup() {
         return $this->belongsTo('App\Models\ResearchGroup');

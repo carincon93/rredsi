@@ -1,25 +1,21 @@
 <title>{{'Proyectos'}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <div class="mx-auto md:mx-0 grid grid-cols-6 gap-4   xl:grid-cols-9 xl:gap-3">
-            <div class="col-start-1 col-span-5 ml-5 md:ml-0 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
-                <h2 class="font-display text-white text-center md:text-left text-2xl  leading-9 font-semibold sm:text-3xl sm:leading-9">
-                    {{ __('Projects') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
-                        Projects info
-                    </span>
-                </h2>
-            </div>
-            <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 lg:ml-16 xl:ml-80 xl:col-end-12 xl:col-span-2 m-auto">
-                @can('create_project')
-                <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.create', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
-                    <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                        {{ __('Create project')}}
-                    </div>
-                </a>
-                @endcan
-            </div>
+        <div class="col-start-1 col-span-5 ml-5 md:ml-0 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+            <h2 class="font-display text-white text-center md:text-left text-2xl  leading-9 font-semibold sm:text-3xl sm:leading-9">
+                {{ __('Projects') }}
+                <span class="text-base sm:text-2xl block text-purple-300">
+                    Lista de proyectos
+                </span>
+            </h2>
         </div>
+        @can('create_project')
+        <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.create', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
+            <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                {{ __('Create project')}}
+            </div>
+        </a>
+        @endcan
     </x-slot>
 
     <div class="py-12">
@@ -53,12 +49,12 @@
 
                                 <td>
                                     <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Keywords') }}</span>
-                                    <p class="row-auto">{{ $project->datesForHumans }}</p>
+                                    <p class="text-xs">{{ $project->datesForHumans }}</p>
                                 </td>
 
                                 <td>
                                     <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Is privated?') }}</span>
-                                    <p class="row-auto">{{ $project->is_privated ? __('Yes') : __('No') }}</p>
+                                    <p class="">{{ $project->is_privated ? __('Yes') : __('No') }}</p>
                                 </td>
 
                                 <td class="py-2 text-left">
@@ -67,6 +63,11 @@
 
                                         <div class="lg:hidden">
                                             <span class="lg:hidden top-0 left-0 ml-2  px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Actions') }}</span>
+                                            <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
+                                                <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z"/> <path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />  <line x1="8" y1="8" x2="12" y2="8" />  <line x1="8" y1="12" x2="12" y2="12" />  <line x1="8" y1="16" x2="12" y2="16" />
+                                                </svg>
+                                            </x-jet-dropdown-link>
                                             @can('show_project')
                                                 <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.educational-institutions.show', [$node, $educationalInstitution]) }}">
                                                     <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,15 +89,7 @@
                                                     </svg>
                                                 </x-jet-dropdown-link>
                                             @endcan
-                                            <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
-                                                <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z"/> <path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" />  <line x1="8" y1="8" x2="12" y2="8" />  <line x1="8" y1="12" x2="12" y2="12" />  <line x1="8" y1="16" x2="12" y2="16" />
-                                                </svg>
-                                            </x-jet-dropdown-link>
                                         </div>
-
-                                        {{------------------------------------------------------------------------------------------------------- --}}
-                                        {{-- //**********------------------------------------------------------------------------**************// --}}
 
                                         <div class="hidden lg:table-cell">
                                             <x-jet-dropdown align="right" width="48">
@@ -111,6 +104,10 @@
                                                 </x-slot>
 
                                                 <x-slot name="content">
+                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
+                                                        {{ __('Manage research outputs') }}
+                                                    </x-jet-dropdown-link>
+                                                    <hr>
                                                     @can('show_project')
                                                     <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.show', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
                                                         {{ __('Show') }}
@@ -126,9 +123,6 @@
                                                         {{ __('Delete') }}
                                                     </x-jet-dropdown-link>
                                                     @endcan
-                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
-                                                        {{ __('Manage research outputs') }}
-                                                    </x-jet-dropdown-link>
                                                 </x-slot>
                                             </x-jet-dropdown>
                                         </div>

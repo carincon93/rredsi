@@ -20,10 +20,6 @@ class ResearchTeamPolicy
      */
     public function viewAny(User $user,EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
-
         $admin = $educationalInstitution->administrator->id;
         if($admin == $user->id){
             return true;
@@ -32,9 +28,6 @@ class ResearchTeamPolicy
         if(!$user->hasPermissionTo('index_research_team')){
             return false;
         }
-
-
-
 
         return false;
     }
@@ -48,9 +41,6 @@ class ResearchTeamPolicy
      */
     public function view(User $user,EducationalInstitution $educationalInstitution,ResearchTeam $researchTeam)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('show_research_team')){
             return false;
         }
@@ -76,9 +66,7 @@ class ResearchTeamPolicy
      */
     public function create(User $user,EducationalInstitution $educationalInstitution)
     {
-          if($user->hasRole(1)){
-            return true;
-        }
+
 
         $admin = $educationalInstitution->administrator->id;
         if($admin == $user->id){
@@ -102,9 +90,7 @@ class ResearchTeamPolicy
      */
     public function update(User $user,EducationalInstitution $educationalInstitution,ResearchTeam $researchTeam)
     {
-          if($user->hasRole(1)){
-            return true;
-        }
+
 
         $admin = $educationalInstitution->administrator->id;
         if($admin == $user->id){
@@ -134,9 +120,6 @@ class ResearchTeamPolicy
      */
     public function delete(User $user,EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
 
         $admin = $educationalInstitution->administrator->id;
         if($admin == $user->id){

@@ -28,7 +28,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añadir un evento</x-slot>
+                    <x-slot name="description">Crear un evento</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -36,7 +36,7 @@
                     @csrf
 
                     <div class="mt-1/12">
-                        <x-jet-label for="presentation_type" value="{{ __('Presentation type') }}" />
+                        <x-jet-label class="mb-4" for="presentation_type" value="{{ __('Presentation type') }}" />
                         <select id="presentation_type" name="presentation_type" class="form-select w-full" required >
                             <option value="">Seleccione el tipo de presentación</option>
                             <option {{ old('presentation_type') == "Ponencia oral" ? "selected" : ""  }} value="Ponencia oral">Ponencia oral</option>
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="mt-1/12">
-                        <x-jet-label for="project_status" value="{{ __('Project type') }}" />
+                        <x-jet-label class="mb-4" for="project_status" value="{{ __('Project type') }}" />
                         <select id="project_status" name="project_status" class="form-select w-full" required >
                             <option value="">Seleccione el tipo de proyecto</option>
                             <option {{ old('project_status') == "Proyecto en curso" ? "selected" : ""  }} value="Proyecto en curso">Proyecto en curso</option>
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="mt-1/12">
-                        <x-jet-label for="project_id" value="{{ __('Projects') }}" />
+                        <x-jet-label class="mb-4" for="project_id" value="{{ __('Projects') }}" />
                         <select id="project_id" name="project_id" class="form-select w-full" required  onchange="SwitchProject.onChange(event)">
                             <option value="">Seleccione el proyecto</option>
                             @forelse ($projects as $project)
@@ -79,7 +79,7 @@
                         </div>
 
                         <div class="ml-4">
-                            <select class=" overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="second_speaker_id" name="second_speaker_id">
+                            <select class="overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="second_speaker_id" name="second_speaker_id">
                                 <option value="">Seleccione el ponente 2</option>
                             </select>
                             <x-jet-input-error for="second_speaker_id" class="mt-2" />
@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="mt-1/12">
-                        <x-jet-label for="academic_program_id" value="{{ __('Academic programs') }}" />
+                        <x-jet-label class="mb-4" for="academic_program_id" value="{{ __('Academic programs') }}" />
                         <select id="academic_program_id" name="academic_program_id" class="form-select w-full" required >
                             <option value="">Seleccione el programa de formación</option>
                             @forelse ($educationalInstitutionFacultiesacademicPrograms as $educationalInstitutionFaculty)
@@ -119,7 +119,7 @@
                     </div>
 
                     <div class="mt-1/12">
-                        <x-jet-label for="research_team_id" value="{{ __('Research teams') }}" />
+                        <x-jet-label class="mb-4" for="research_team_id" value="{{ __('Research teams') }}" />
                         <select id="research_team_id" name="research_team_id" class="form-select w-full" required >
                             <option value="">Seleccione el semillero de investigación</option>
                             @forelse ($researchTeams as $researchTeam)
@@ -135,7 +135,7 @@
                         <p>
                             Adjunte en este espacio el archivo que corresponde a la carta de aval del tutor de su semillero (Ver punto 6 de la guía de Inscripción. El archivo debe ser PDF y su tamaño de debe sobrepasar los 500kb)
                         </p>
-                        <x-jet-label for="endorsement_letter" value="{{ __('Endorsement letter') }}" />
+                        <x-jet-label class="mb-4" for="endorsement_letter" value="{{ __('Endorsement letter') }}" />
                         <x-jet-input id="endorsement_letter" class="block mt-1 w-full" type="file" accept="application/pdf" name="endorsement_letter" value="{{ old('endorsement_letter') }}" />
                         <x-jet-input-error for="endorsement_letter" class="mt-2" />
                     </div>
@@ -144,7 +144,7 @@
                         <p>
                             Adjunte en este espacio el documento completo para la elaboración de las memorias (Ver punto 6 de la guía de Inscripción, El archivo debe ser PDF y su tamaño de debe sobrepasar los 500kb)
                         </p>
-                        <x-jet-label for="project_article" value="{{ __('Research doc') }}" />
+                        <x-jet-label class="mb-4" for="project_article" value="{{ __('Research doc') }}" />
                         <x-jet-input id="project_article" class="block mt-1 w-full" type="file" accept="application/pdf" name="project_article" value="{{ old('project_article') }}" />
                         <x-jet-input-error for="project_article" class="mt-2" />
                     </div>
@@ -165,7 +165,7 @@
     @push('scripts')
         <script>
             var SwitchProject = (function() {
-                let project_id                           = null;
+                let project_id = null;
 
                 getAllAuthors = async (project_id) => {
                     var first_speaker_id    = document.getElementById("first_speaker_id");
@@ -176,9 +176,6 @@
                             const uri       = `/api/projects/${project_id}/authors/`;
                             const response  = await fetch(uri);
                             const result    = await response.json();
-
-                            console.log(result);
-
 
                             result.authors.map(function(author) {
                                 first_speaker_id.removeAttribute('disabled');
@@ -201,8 +198,6 @@
                             const uri       = `/api/projects/${project_id}/authors/`;
                             const response  = await fetch(uri);
                             const result    = await response.json();
-
-                            console.log(SpeakerOne);
 
                             result.authors.map(function(author) {
                                 second_speaker_id.removeAttribute('disabled');

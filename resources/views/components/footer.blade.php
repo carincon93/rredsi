@@ -36,20 +36,20 @@
                             <h4 class="mb-4 text-gray-600 mr-3">LEGAL</h4>
                         </li>
                         <li>
-                            <a href="https://laravel.bigcartel.com" class="underline text-gray-600">
-                                Términos
+                            <a href="{{ route('showTermsConditions') }}" class="underline text-gray-600">
+                                Términos y condiciones
                             </a>
                         </li>
                         <li class="mt-4">
-                            <a href="https://laravel.bigcartel.com" class="underline text-gray-600">
+                            <a href="{{ route('showPrivacyPolicy') }}" class="underline text-gray-600">
                                 Privacidad
                             </a>
                         </li>
-                        <li class="mt-4">
-                            <a href="https://laravel.bigcartel.com" class="underline text-gray-600">
+                        {{-- <li class="mt-4">
+                            <a href="{{ route('') }}" class="underline text-gray-600">
                                 Derechos de autor
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
                 <div class="mt-3 mb-4 md:mt-0 md:mb-0">

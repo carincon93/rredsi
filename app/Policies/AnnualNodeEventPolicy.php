@@ -19,9 +19,6 @@ class AnnualNodeEventPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('index_annual_node_events')){
             return true;
         }
@@ -37,9 +34,6 @@ class AnnualNodeEventPolicy
      */
     public function view(User $user, Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_annual_node_events')){
             return false;
         }
@@ -58,9 +52,6 @@ class AnnualNodeEventPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('create_annual_node_events')){
             return false;
         }
@@ -77,9 +68,6 @@ class AnnualNodeEventPolicy
      */
     public function update(User $user, Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('edit_annual_node_events')){
             return false;
         }
@@ -99,9 +87,6 @@ class AnnualNodeEventPolicy
      */
     public function delete(User $user, AnnualNodeEvent $annualNodeEvent)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('destroy_annual_node_events')){
             return false;
         }

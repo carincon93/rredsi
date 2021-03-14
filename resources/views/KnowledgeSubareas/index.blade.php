@@ -1,22 +1,22 @@
-<style>
-    .line-clamp{
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        margin-bottom: 10px;
-    }
-</style>
-
 <title>{{'Sub-áreas de conocimiento'}}</title>
 <x-app-layout>
-
+    @push('styles')
+    <style>
+        .line-clamp{
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+    </style>
+    @endpush
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+        <div >
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-4">
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Knowledge subareas') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
+                    <span class="text-base sm:text-2xl block text-purple-300">
                         Add knowledge subareas areas info
                     </span>
                 </h2>

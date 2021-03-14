@@ -24,7 +24,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añadir un trabajo académico</x-slot>
+                    <x-slot name="description">Crear un trabajo académico</x-slot>
                 </x-jet-section-title>
             </div>
 
@@ -33,13 +33,13 @@
                     @csrf
 
                     <div>
-                        <x-jet-label for="title" value="{{ __('Title') }}" />
+                        <x-jet-label class="mb-4" for="title" value="{{ __('Title') }}" />
                         <x-jet-input id="title" class="block mt-1 w-full" type="text" min="" max="" name="title" value="{{ old('title') }}" required />
                         <x-jet-input-error for="title" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="type" value="{{ __('Type') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="type" value="{{ __('Type') }}" />
                         <select id="type" name="type" class="form-select w-full" required >
                             <option value="">Seleccione un tipo de trabajo académico</option>
                             <option {{ old('type') == "tesis de doctorado" ? "selected" : "" }} value="tesis de doctorado">Tesis de doctorado</option>
@@ -51,14 +51,14 @@
                         <x-jet-input-error for="type" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="authors" value="{{ __('Authors') }}" />
-                        <textarea id="authors" name="authors" class="form-textarea border-0 w-full" required >{{ old('authors')}}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="authors" value="{{ __('Authors') }}" />
+                        <textarea rows="20" id="authors" name="authors" class="form-textarea border-0 w-full" required >{{ old('authors')}}</textarea>
                         <x-jet-input-error for="authors" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="grade" value="{{ __('Grade') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="grade" value="{{ __('Grade') }}" />
                         <select id="grade" name="grade" class="form-select w-full" required >
                             <option value="">Seleccione una nota</option>
                             @for ($i = 0; $i < 5; $i+=0.1)
@@ -68,13 +68,13 @@
                         <x-jet-input-error for="grade" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="mentors" value="{{ __('Mentors') }}" />
-                        <textarea id="mentors" name="mentors" class="form-textarea border-0 w-full" required >{{ old('mentors') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="mentors" value="{{ __('Mentors') }}" />
+                        <textarea rows="20" id="mentors" name="mentors" class="form-textarea border-0 w-full" required >{{ old('mentors') }}</textarea>
                         <x-jet-input-error for="mentors" class="mt-2" />
                     </div>
 
-                    <x-drop-down-knowledge-subarea-dicipline />
+                    <x-drop-down-knowledge-subarea-discipline />
 
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">

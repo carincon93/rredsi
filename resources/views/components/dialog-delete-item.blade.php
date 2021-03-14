@@ -1,6 +1,6 @@
 @props(['id' => null ,'code' => null, 'href' => null, 'open' => null ])
 
-<div class="z-50 modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+<div class="z-50 modal d-none opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
     <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
     <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -35,7 +35,7 @@
 
         <!--Footer-->
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <form method="POST" action="" id="form">
+            <form method="POST" action="" id="form" class="mb-0">
                 @csrf()
                 @method('DELETE')
 
@@ -50,67 +50,72 @@
 @once
     @push('scripts')
         <script>
-            // toma el valor de el boton o enalce con la clase modal open
-            var openmodal = document.getElementsByClassName('modal-open')
-            var id = null;
-
             // se manda la ruta por un evento onclick se pone id pero es la ruta completa de cada delete
             function modal(id){
                 //se agrega el value que es la ruta y el id que es el dato que se desea borrar
                 var input = document.getElementById('code');
                 input.setAttribute('value',id);
-
             }
 
-            for (var i = 0; i < openmodal.length; i++) {
-                openmodal[i].addEventListener('click', function(event){
-                    event.preventDefault()
-                    toggleModal()
+            document.addEventListener(
+                "DOMContentLoaded",
+                function() {
+                    // toma el valor del boton o enalce con la clase modal open
+                    var openmodal = document.getElementsByClassName('modal-open')
+                    var id = null;
 
-                })
-            }
+                    for (var i = 0; i < openmodal.length; i++) {
+                        openmodal[i].addEventListener('click', function(event){
+                            event.preventDefault()
+                            toggleModal()
 
-            const overlay = document.querySelector('.modal-overlay')
-            overlay.addEventListener('click', toggleModal)
+                        })
+                    }
 
-            var closemodal = document.querySelectorAll('.modal-close')
-            for (var i = 0; i < closemodal.length; i++) {
-                closemodal[i].addEventListener('click', toggleModal)
-            }
+                    const overlay = document.querySelector('.modal-overlay')
+                    overlay.addEventListener('click', toggleModal)
 
-            document.onkeydown = function(evt) {
-                evt = evt || window.event
-                var isEscape = false
-                if ("key" in evt) {
-                    isEscape = (evt.key === "Escape" || evt.key === "Esc")
-                } else {
-                    isEscape = (evt.keyCode === 27)
-                }
-                if (isEscape && document.body.classList.contains('modal-active')) {
-                    toggleModal()
-                }
-            };
+                    var closemodal = document.querySelectorAll('.modal-close')
+                    for (var i = 0; i < closemodal.length; i++) {
+                        closemodal[i].addEventListener('click', toggleModal)
+                    }
+
+                    document.onkeydown = function(evt) {
+                        evt = evt || window.event
+                        var isEscape = false
+                        if ("key" in evt) {
+                            isEscape = (evt.key === "Escape" || evt.key === "Esc")
+                        } else {
+                            isEscape = (evt.keyCode === 27)
+                        }
+                        if (isEscape && document.body.classList.contains('modal-active')) {
+                            toggleModal()
+                        }
+                    };
 
 
-            function toggleModal () {
-                //se dan los estilos al abrir y cerrar para dar efectos de demora y duracion
-                const body  = document.querySelector('body')
-                const modal = document.querySelector('.modal')
-                const form  = document.querySelector('#form')
-                const input = document.getElementById('code');
+                    function toggleModal () {
+                        //se dan los estilos al abrir y cerrar para dar efectos de demora y duracion
+                        const body  = document.querySelector('body')
+                        const modal = document.querySelector('.modal')
+                        const form  = document.querySelector('#form')
+                        const input = document.getElementById('code')
 
-                modal.classList.toggle('opacity-0')
-                modal.classList.toggle('pointer-events-none')
-                modal.classList.toggle('transition')
-                modal.classList.toggle('delay-400')
-                modal.classList.toggle('duration-500')
-                modal.classList.toggle('ease-in-out')
+                        modal.classList.toggle('opacity-0')
+                        modal.classList.toggle('d-none')
+                        modal.classList.toggle('pointer-events-none')
+                        modal.classList.toggle('transition')
+                        modal.classList.toggle('delay-400')
+                        modal.classList.toggle('duration-500')
+                        modal.classList.toggle('ease-in-out')
 
-                body.classList.toggle('modal-active')
+                        body.classList.toggle('modal-active')
 
-                //al activarse el toggle modal se setea el action de el form y se le agrega la ruta guardada en el input
-                form.setAttribute('action', input.value)
-            }
+                        //al activarse el toggle modal se setea el action del form y se le agrega la ruta guardada en el input
+                        form.setAttribute('action', input.value)
+                    }
+                }, false
+            )
         </script>
     @endpush
 @endonce

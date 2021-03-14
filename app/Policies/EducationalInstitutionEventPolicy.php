@@ -20,9 +20,6 @@ class EducationalInstitutionEventPolicy
      */
     public function viewAny(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_educational_institution_event')){
             return false;
         }
@@ -48,9 +45,6 @@ class EducationalInstitutionEventPolicy
      */
     public function view(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_educational_institution_event')){
             return false;
         }
@@ -75,9 +69,6 @@ class EducationalInstitutionEventPolicy
      */
     public function create(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_educational_institution_event')){
             return false;
         }
@@ -103,9 +94,6 @@ class EducationalInstitutionEventPolicy
      */
     public function update(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_educational_institution_event')){
             return false;
         }
@@ -131,9 +119,6 @@ class EducationalInstitutionEventPolicy
      */
     public function delete(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_educational_institution_event')){
             return false;
         }

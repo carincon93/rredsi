@@ -1,11 +1,11 @@
 <title>{{"Editar la información del área de conocimiento $knowledgeArea->name"}}</title>
 <x-app-layout>
     <x-slot name="header">
-         <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+         <div >
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Knowledge area') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
+                    <span class="text-base sm:text-2xl block text-purple-300">
                         Update knowledge area info
                     </span>
                 </h2>
@@ -45,7 +45,7 @@
                     @method('PUT')
 
                     <div>
-                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ $knowledgeArea->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>

@@ -42,13 +42,13 @@ class UserAcademicWorkRequest extends FormRequest
     {
         if ($this->authors != null) {
             $this->merge([
-                'authors' => json_encode(explode(',', $this->authors, true)),
+                'authors' => json_encode(explode(',', $this->authors), true),
             ]);
         }
 
         if ($this->mentors != null) {
             $this->merge([
-                'mentors' => json_encode(explode(',', $this->mentors, true)),
+                'mentors' => json_encode(explode(',', $this->mentors), true),
             ]);
         }
     }

@@ -3,29 +3,6 @@
     <div class="border-b border-indigo-600 xl:px-8 max-w-7xl mx-auto px-2">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
-                <div class="animate-pulse flex-shrink-0 flex items-center">
-                    <?php
-                        $authUser = Auth::user();
-
-                        if ( request()->route('node') ) {
-                            $node = request()->route('node');
-                        }else{
-                            $node = $authUser->my_projects['node'];
-                        }
-                    ?>
-
-                    @if ( $node && $authUser->hasRole(2) )
-                        <a class="m-auto pl-14 md:pl-0 md:pr-0 md:justify-center py-3" href="{{ route('nodes.dashboard', [$node]) }}">
-                            <x-jet-application-mark class="block h-9 w-auto" />
-                        </a>
-                    @elseif ( $node && $authUser->hasRole(3) )
-                        <a class="m-auto pl-14 md:pl-0 md:pr-0 md:justify-center py-3" href="{{ route('nodes.educational-institutions.dashboard', [$node, $user->isEducationalInstitutionAdmin->id]) }}">
-                            <x-jet-application-mark class="block h-9 w-auto" />
-                        </a>
-                    @endif
-                </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:flex">
                     @if (request()->route('node') && request()->route('educational_institution'))

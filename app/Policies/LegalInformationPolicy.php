@@ -18,12 +18,9 @@ class LegalInformationPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole(['Administrador','Coordinador'])){
+        if($user->hasPermissionTo('index_legal_information')){
             return true;
         }
-        // if($user->hasPermissionTo('Administrador')){
-        //     return true;
-        // }
         return false;
     }
 
@@ -36,7 +33,7 @@ class LegalInformationPolicy
      */
     public function view(User $user)
     {
-        if($user->hasRole(['Administrador','Coordinador'])){
+        if($user->hasPermissionTo('show_legal_information')){
             return true;
         }
         return false;
@@ -50,7 +47,7 @@ class LegalInformationPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole(['Administrador','Coordinador'])){
+        if($user->hasPermissionTo('create_legal_information')){
             return true;
         }
         return false;
@@ -65,7 +62,7 @@ class LegalInformationPolicy
      */
     public function update(User $user)
     {
-        if($user->hasRole(['Administrador','Coordinador'])){
+        if($user->hasPermissionTo('edit_legal_information')){
             return true;
         }
         return false;
@@ -80,7 +77,7 @@ class LegalInformationPolicy
      */
     public function delete(User $user)
     {
-        if($user->hasRole(['Administrador','Coordinador'])){
+        if($user->hasPermissionTo('destroy_legal_information')){
             return true;
         }
         return false;

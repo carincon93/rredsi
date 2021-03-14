@@ -6,19 +6,17 @@
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Nodes') }}
                     <span class="text-base sm:text-3xl block text-purple-300">
-                        Add nodes info
+                        Lista de los nodos RREDSI
                     </span>
                 </h2>
             </div>
-            <div class="col-start-9 col-end-9 md:col-end-9 md:col-span-3 xl:col-end-13 xl:col-span-1 m-auto">
-                @can('create_node')
-                <a href="{{route('nodes.create')}}">
-                    <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                        {{ __('Create node') }}
-                    </div>
-                </a>
-                @endcan
-            </div>
+            @can('create_node')
+            <a href="{{route('nodes.create')}}">
+                <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    {{ __('Create node') }}
+                </div>
+            </a>
+            @endcan
         </div>
     </x-slot>
 

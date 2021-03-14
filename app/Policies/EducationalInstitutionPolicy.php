@@ -19,9 +19,6 @@ class EducationalInstitutionPolicy
      */
     public function viewAny(User $user, Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_educational_institution')){
             return false;
         }
@@ -43,9 +40,6 @@ class EducationalInstitutionPolicy
      */
     public function view(User $user, Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('show_educational_institution')){
             return false;
         }
@@ -67,9 +61,6 @@ class EducationalInstitutionPolicy
      */
     public function create(User $user, Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('create_educational_institution')){
             return false;
         }
@@ -89,9 +80,6 @@ class EducationalInstitutionPolicy
      */
     public function update(User $user, Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('edit_educational_institution')){
             return false;
         }
@@ -111,18 +99,12 @@ class EducationalInstitutionPolicy
      */
     public function delete(User $user, Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
 
         return false;
     }
 
     public function isAdmin(User $user, Node $node, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
 
         if($educationalInstitution->administrator_id == $user->id){
             return true;

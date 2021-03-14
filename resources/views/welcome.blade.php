@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-guest-header :node="$node" image="images/AdobeStock_hero.jpeg">
         <x-slot name="title">
-            <h1 class=" mt-48 text-3xl text-left md:text-left md:mt-0 md:text-4xl tracking-tight font-extrabold leading-none">
+            <h1 class="mt-48 text-3xl text-left md:text-left md:mt-0 md:text-4xl tracking-tight font-extrabold leading-none">
                 <span class="block text-blue-900 xl:inline">
                     RREDSI-Ibis: La plataforma que busca el fortalecimiento de la investigación académica de {{ $node->state }}
                 </span>
@@ -21,7 +21,7 @@
     <div class="mt-2/12 overflow-hidden relative" style="background: url(/storage/images/net.png)">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-14 pt-4">
             <div class="mt-4 md:mt-8 dark:bg-gray-800 overflow-hidden sm:rounded-lg h-64"  style="background: url(/storage/images/dots.png); background-size: cover; background-position: right; background-repeat: no-repeat;">
-                <div class=" p-1 md:p-6">
+                <div class="p-1 md:p-6">
                     <div class="flex items-center mt-0 md:mt-4">
                         <div>
                             <h1 class="text-3xl md:text-5xl ml-1/6 leading-none">

@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @stack('styles')
 
         @livewireStyles
         <!-- Scripts -->
@@ -36,7 +37,7 @@
                  <!-- Page Heading -->
                 <header class="bg-gradient-to-l pt-5 md:pt-0 from-blue-900 to-blue-900 shadow">
 
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-14 flex justify-between items-center">
                         {{ $header }}
                     </div>
                 </header>
@@ -49,7 +50,6 @@
         </div>
 
         @stack('modals')
-
         @livewireScripts
         @stack('scripts')
     </body>

@@ -2,6 +2,67 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+.d-none {
+    display: none;
+}
+
+p {
+    white-space: pre-line;
+}
+.permissions tbody tr td {
+    position: relative;
+}
+
+.permissions tbody tr td:nth-child(1):before {
+    content: "Listar";
+    position: absolute;
+    top: 26px;
+    left: 0;
+    right: 0;
+    font-size: 1.2rem;
+    opacity: 0.2;
+}
+
+.permissions tbody tr td:nth-child(2):before {
+    content: "Consultar";
+    position: absolute;
+    top: 26px;
+    left: 0;
+    right: 0;
+    font-size: 1.2rem;
+    opacity: 0.2;
+}
+
+.permissions tbody tr td:nth-child(3):before {
+    content: "Crear";
+    position: absolute;
+    top: 26px;
+    left: 0;
+    right: 0;
+    font-size: 1.2rem;
+    opacity: 0.2;
+}
+
+.permissions tbody tr td:nth-child(4):before {
+    content: "Editar";
+    position: absolute;
+    top: 26px;
+    left: 0;
+    right: 0;
+    font-size: 1.2rem;
+    opacity: 0.2;
+}
+
+.permissions tbody tr td:nth-child(5):before {
+    content: "Eliminar";
+    position: absolute;
+    top: 26px;
+    left: 0;
+    right: 0;
+    font-size: 1.2rem;
+    opacity: 0.2;
+}
+
 /* Gradients */
 .to-color-1 {
     --gradient-to-color: #5850ec;
@@ -98,8 +159,12 @@ td {
     padding: 20px 0;
 }
 
-tr td:first-child {
+table:not(.permissions) tr td:first-child {
     padding: 0 10px;
+}
+
+tr.odd {
+    background: #f4f5f7;
 }
 
 /* -------------------------------------------------------------

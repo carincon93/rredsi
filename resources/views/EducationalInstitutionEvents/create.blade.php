@@ -24,7 +24,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añadir un evento</x-slot>
+                    <x-slot name="description">Crear un evento</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -32,43 +32,43 @@
                     @csrf
 
                     <div>
-                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="location" value="{{ __('Location') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="location" value="{{ __('Location') }}" />
                         <x-jet-input id="location" class="block mt-1 w-full" type="text" max="191" name="location" value="{{ old('location') }}" required />
                         <x-jet-input-error for="location" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="description" value="{{ __('Description') }}" />
-                        <textarea id="description" name="description" class="form-textarea border-0 w-full" required >{{ old('description') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="description" value="{{ __('Description') }}" />
+                        <textarea rows="20" id="description" name="description" class="form-textarea border-0 w-full" required >{{ old('description') }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="start_date" value="{{ __('Start date') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="start_date" value="{{ __('Start date') }}" />
                         <x-jet-input id="start_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }} " name="start_date" value="{{ old('start_date') }}" required />
                         <x-jet-input-error for="start_date" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="end_date" value="{{ __('End date') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="end_date" value="{{ __('End date') }}" />
                         <x-jet-input id="end_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }} " name="end_date" value="{{ old('end_date') }}" required />
                         <x-jet-input-error for="end_date" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="register_link" value="{{ __('Register link') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="register_link" value="{{ __('Register link') }}" />
                         <x-jet-input id="register_link" class="block mt-1 w-full" type="url" max="191" name="register_link" value="{{ old('register_link') }}" required />
                         <x-jet-input-error for="register_link" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="info_link" value="{{ __('Info link') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="info_link" value="{{ __('Info link') }}" />
                         <x-jet-input id="info_link" class="block mt-1 w-full" type="url" max="191" name="info_link" value="{{ old('info_link') }}" required />
                         <x-jet-input-error for="info_link" class="mt-2" />
                     </div>

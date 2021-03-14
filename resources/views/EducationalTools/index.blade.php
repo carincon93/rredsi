@@ -2,7 +2,7 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+        <div >
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
                 <h2 class="font-display text-white text-center md:text-left text-lg leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Educational tools') }}
@@ -46,11 +46,11 @@
                                 </td>
                                 <td>
                                     <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Description') }}</span>
-                                    <p class="row-auto" >{{ $educationalTool->description }}</p>
+                                    <p class="" >{{ $educationalTool->description }}</p>
                                 </td>
                                 <td>
                                     <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Qty') }}</span>
-                                    <p class="row-auto">{{ $educationalTool->qty }}</p>
+                                    <p class="">{{ $educationalTool->qty }}</p>
                                 </td>
 
                                 <td class="py-2 text-left">

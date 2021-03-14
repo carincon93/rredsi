@@ -13,27 +13,34 @@
             </svg>
         </label>
     </div>
-
-<script>
-    // ! el evento se repite indefinidamente para verificar en todo momento si existe una session status que mostrar
-    /* ! se demora unos segundos y lo cierra automaticamento este evento solo se muestra una vez al validar el evento
-    */
-    var cont = 0;
-    var input = document.getElementById('footeralert');
-
-    var id = setInterval(function(){
-        cont++;
-        if(cont == 10)
-        {
-            input.setAttribute('checked','checked');
-            clearInterval(id);
-        }
-    }, 1000);
-
-    function closeAlert(event){
-        let element = event.target;
-
-    }
-</script>
-
 </div>
+
+@push('scripts')
+    <script>
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+                // ! el evento se repite indefinidamente para verificar en todo momento si existe una session status que mostrar
+                /* ! se demora unos segundos y lo cierra automaticamento este evento solo se muestra una vez al validar el evento
+                */
+                var cont = 0;
+                var input = document.getElementById('footeralert');
+
+                var id = setInterval(function(){
+                    cont++;
+                    if(cont == 10)
+                    {
+                        input.setAttribute('checked','checked');
+                        clearInterval(id);
+                    }
+                }, 1000);
+
+                function closeAlert(event){
+                    let element = event.target;
+
+                }
+            }, false
+        )
+    </script>
+@endpush
+

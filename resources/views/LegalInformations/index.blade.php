@@ -1,39 +1,32 @@
-<style>
-    .line-clamp{
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 11;
-        overflow: hidden;
-    }
-</style>
 <title>{{'Información legal'}}</title>
 <x-app-layout>
-
+    @push('styles')
+    <style>
+        .line-clamp{
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 11;
+            overflow: hidden;
+        }
+    </style>
+    @endpush
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
-            <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
-                <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-                    {{__('Legal information')}}
-                    <span class="text-base sm:text-3xl block text-purple-300">
-                        Add legal information
-                    </span>
-                </h2>
-            </div>
-            <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 xl:col-end-10 xl:col-span-2 m-auto">
-                <a href="{{ route('legal-informations.create') }}">
-                    <div class="w-auto text-center text-base items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-2 sm:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                        {{ __('Create legal information') }}
-                    </div>
-                </a>
-            </div>
+        <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+            <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+                {{__('Legal information')}}
+                <span class="text-base sm:text-2xl block text-purple-300">
+                    Lista de la información legal
+                </span>
+            </h2>
         </div>
-
+        @can('crate_legal_information')
+        <a href="{{ route('legal-informations.create') }}">
+            <div class="w-auto text-center text-base items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-2 sm:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                {{ __('Create legal information') }}
+            </div>
+        </a>
+        @endcan
     </x-slot>
-
-
-
-
-
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -52,7 +45,18 @@
                         <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                             <td class="w-60 h-10">
                                 <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Type') }}</span>
-                                <p>{{ $legalInformation->type }}</p>
+                                <p>
+                                    @switch($legalInformation->type)
+                                        @case(1)
+                                            Políticas de privacidad
+                                            @break
+                                        @case(2)
+                                            Términos y condiciones
+                                            @break
+                                        @default
+
+                                    @endswitch
+                                </p>
                             </td>
                             <td>
                                 <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Description') }}</span>
@@ -60,6 +64,7 @@
                             </td>
 
                             <td class="py-2 text-left">
+                                @canany (['show_legal_information', 'edit_legal_information', 'destroy_legal_information'])
                                 <div class="lg:flex items-center lg:justify-around">
                                     {{-- ICONOS SOLO VISIBLE EN MOVIL DE PANTALLA -> XS.. A.. MD  --}}
 
@@ -99,19 +104,28 @@
                                                 </button>
                                             </x-slot>
                                             <x-slot name="content">
+                                                @can('show_legal_information')
                                                 <x-jet-dropdown-link href="{{ route('legal-informations.show', [$legalInformation]) }}">
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('edit_legal_information')
                                                 <x-jet-dropdown-link href="{{ route('legal-informations.edit', [$legalInformation]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
+                                                @can('destroy_legal_information')
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('legal-informations.destroy', [$legalInformation]) }}')">
                                                     {{ __('Delete') }}
                                                 </x-jet-dropdown-link>
+                                                @endcan
                                             </x-slot>
                                         </x-jet-dropdown>
                                     </div>
                                 </div>
+                                @else
+                                    <p>{{ __('Without permissions') }}</p>
+                                @endcanany
                             </td>
                         </tr>
                         @endforeach

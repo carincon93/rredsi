@@ -73,19 +73,19 @@ class ProjectRequest extends FormRequest
     {
         if($this->keywords != null) {
             $this->merge([
-                'keywords' => json_encode(explode(',', $this->keywords, true)),
+                'keywords' => json_encode(explode(',', $this->keywords), true),
             ]);
         }
 
         if($this->roles_requirements != null) {
             $this->merge([
-                'roles_requirements' => json_encode(explode(',', $this->roles_requirements, true)),
+                'roles_requirements' => json_encode(explode(',', $this->roles_requirements), true),
             ]);
         }
 
         if($this->tools_requirements != null) {
             $this->merge([
-                'tools_requirements' => json_encode(explode(',', $this->tools_requirements, true)),
+                'tools_requirements' => json_encode(explode(',', $this->tools_requirements), true),
             ]);
         }
     }

@@ -1,11 +1,11 @@
 <title>{{'Crear sub-área de conocimiento'}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+        <div >
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-4">
                     <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                         {{ __('Knowledge subareas') }}
-                        <span class="text-base sm:text-3xl block text-purple-300">
+                        <span class="text-base sm:text-2xl block text-purple-300">
                             Add knowledge subarea
                         </span>
                     </h2>
@@ -30,7 +30,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añadir una sub-área de conocimiento</x-slot>
+                    <x-slot name="description">Crear una sub-área de conocimiento</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -38,13 +38,13 @@
                     @csrf
 
                     <div>
-                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="knowledge_area_id" value="{{ __('Knowledge area') }}" />
                         <select id="knowledge_area_id" name="knowledge_area_id" class="text-sm mr-10 focus:outline-none rounded-md border-0 p-3.5 shadow-sm block w-full" required >
                             <option value="">Seleccione una área de conocimiento</option>
                             @forelse ($knowledgeAreas as $knowledgeArea)

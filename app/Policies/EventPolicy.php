@@ -19,9 +19,6 @@ class EventPolicy
      */
     public function viewAny(User $user,Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_events')){
             return false;
         }
@@ -41,9 +38,6 @@ class EventPolicy
      */
     public function view(User $user,Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('index_events')){
             return false;
         }
@@ -62,9 +56,6 @@ class EventPolicy
      */
     public function create(User $user,Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('create_events')){
             return false;
         }
@@ -84,9 +75,6 @@ class EventPolicy
      */
     public function update(User $user,Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('edit_events')){
             return false;
         }
@@ -106,9 +94,6 @@ class EventPolicy
      */
     public function delete(User $user,Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('destroy_events')){
             return false;
         }

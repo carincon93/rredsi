@@ -20,10 +20,6 @@ class EducationalInstitutionFacultyPolicy
      */
     public function viewAny(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
-
         if(!$user->hasPermissionTo('index_educational_institution_faculty')){
             return false;
         }
@@ -45,9 +41,6 @@ class EducationalInstitutionFacultyPolicy
      */
     public function view(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('show_educational_institution_faculty')){
             return false;
         }
@@ -68,9 +61,6 @@ class EducationalInstitutionFacultyPolicy
      */
     public function create(User $user,EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('create_educational_institution_faculty')){
             return false;
         }
@@ -92,9 +82,6 @@ class EducationalInstitutionFacultyPolicy
      */
     public function update(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('edit_educational_institution_faculty')){
             return false;
         }
@@ -116,9 +103,6 @@ class EducationalInstitutionFacultyPolicy
      */
     public function delete(User $user, EducationalInstitution $educationalInstitution)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('destroy_educational_institution_faculty')){
             return false;
         }

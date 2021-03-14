@@ -1,6 +1,6 @@
 @foreach ($knowledgeAreas as $knowledgeArea)
     <div>
-        <p class="p-2">Área de conocimiento: {{ $knowledgeArea->name }}</p>
+        <h4 class="p-2 text-center">Área de conocimiento: {{ $knowledgeArea->name }}</h4>
         <p class="p-2 text-gray-400">Sub-áreas de concimiento:</p>
         @foreach ($knowledgeArea->knowledgeSubareas as $knowledgeSubarea)
             <button type="button" class="accordion focus:outline-none bg-white hover:bg-gray-200">{{ $knowledgeSubarea->name }}</button>
@@ -21,20 +21,25 @@
 @once
     @push('scripts')
     <script>
-        var acc = document.getElementsByClassName('accordion');
-        var i;
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+                var acc = document.getElementsByClassName('accordion');
+                var i;
 
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener('click', function() {
-            this.classList.toggle('active');
-            var panel = this.nextElementSibling;
-            if (panel.style.display === 'block') {
-                panel.style.display = 'none';
-            } else {
-                panel.style.display = 'block';
-            }
-            });
-        }
+                for (i = 0; i < acc.length; i++) {
+                    acc[i].addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === 'block') {
+                        panel.style.display = 'none';
+                    } else {
+                        panel.style.display = 'block';
+                    }
+                    });
+                }
+            }, false
+        )
     </script>
     @endpush
 @endonce

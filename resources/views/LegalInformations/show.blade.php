@@ -1,24 +1,19 @@
 <title>{{"Detalles de la  información legal $legalInformation->type"}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
-            <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
-                <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-                    {{ __('Legal information') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
-                        Show legal information info
-                    </span>
-                </h2>
-            </div>
-            <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 xl:col-end-10 xl:col-span-2 m-auto">
-                <a href="{{ route('legal-informations.edit', $legalInformation) }}">
-                    <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 sm:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                        {{ __('Edit legal information') }}
-                    </div>
-                </a>
-            </div>
+        <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+            <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+                {{ __('Legal information') }}
+                <span class="text-base sm:text-2xl block text-purple-300">
+                    Detalles de la información legal
+                </span>
+            </h2>
         </div>
-
+        <a href="{{ route('legal-informations.edit', $legalInformation) }}">
+            <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 sm:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                {{ __('Edit legal information') }}
+            </div>
+        </a>
     </x-slot>
 
     <div>

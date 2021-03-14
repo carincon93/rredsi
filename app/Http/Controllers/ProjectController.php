@@ -12,15 +12,15 @@ use App\Models\ResearchGroup;
 use App\Models\ResearchTeam;
 use App\Models\Project;
 
-
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\InformationNotification;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -37,19 +37,6 @@ class ProjectController extends Controller
 
         return view('Projects.index',  compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projects'));
     }
-
-
-    public function myProjects(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam,Project $project)
-    {
-        // $this->authorize('view', [Project::class , $educationalInstitution , $researchTeam, $project]);
-
-        $projects = auth()->user()->projects;
-
-
-        return view('Projects.index',  compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projects'));
-    }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -101,7 +88,7 @@ class ProjectController extends Controller
         if ($request->hasFile('main_image')) {
             $file       = $request->file('main_image');
             $extension  = $file->extension();
-            $fileName   = "$project->id-RREDSI-$end_date-main-image.$extension";
+            $fileName   = Str::slug(substr($project->title, 0, 20))."-RREDSI-$end_date-main-image.$extension";
             Storage::putFileAs(
                 'public/project-main-images', $file, $fileName
             );
@@ -112,7 +99,7 @@ class ProjectController extends Controller
         if ($request->hasFile('file')) {
             $file       = $request->file('file');
             $extension  = $file->extension();
-            $fileName   = "$project->id-RREDSI-$end_date-file.$extension";
+            $fileName   = Str::slug(substr($project->title, 0, 20))."-RREDSI-$end_date-file.$extension";
             Storage::putFileAs(
                 'public/projects', $file, $fileName
             );
@@ -127,34 +114,34 @@ class ProjectController extends Controller
             //         unset($arrayResearchTeamsIds[$key]);
             //     }
             // }
+            // $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
 
             $project->researchTeams()->attach($request->get('principal_research_team_id'), ['is_principal' => true]);
-            // $project->researchTeams()->attach($arrayResearchTeamsIds, ['is_principal' => false]);
             $project->researchLines()->attach($request->get('research_line_id'));
-            $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_dicipline_id'));
+            $project->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $project->academicPrograms()->attach($request->get('academic_program_id'));
             $project->authors()->attach($request->get('user_id'));
 
             // Send notification student create researchTeam
-            $user = auth()->user();
-            $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
-            $educationalInstitution = $faculty->educationalInstitution;
-            $adminInstitution = $educationalInstitution->administrator;
+            $user       = auth()->user();
+            $faculty    = $user->educationalInstitutionFaculties()->where('is_principal', 1)->first();
 
-            $type = "Proyecto";
-            Notification::send($adminInstitution, new InformationNotification($project,$type));
+            if ($faculty) {
+                $educationalInstitution = $faculty->educationalInstitution;
+                $adminInstitution       = $educationalInstitution->administrator;
+
+                $type = 'Proyecto';
+                Notification::send($adminInstitution, new InformationNotification($project, $type));
+            }
 
             $message = 'Your store processed correctly';
         }
 
-
-
-        if(Auth()->user()->hasRole('Estudiante')){
+        if(auth()->user()->hasRole(4)){
             return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$faculty,$researchGroup,$researchTeam])->with('status', $message);
         }
 
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);
-
     }
 
     /**
@@ -222,7 +209,7 @@ class ProjectController extends Controller
             Storage::delete("public/$project->main_image");
             $file       = $request->file('main_image');
             $extension  = $file->extension();
-            $fileName   = "$project->id-RREDSI-$end_date-main-image.$extension";
+            $fileName   = Str::slug(substr($project->title, 0, 20))."-RREDSI-$end_date-main-image.$extension";
             Storage::putFileAs(
                 'public/project-main-images', $file, $fileName
             );
@@ -234,7 +221,7 @@ class ProjectController extends Controller
             Storage::delete("public/$project->file");
             $file       = $request->file('file');
             $extension  = $file->extension();
-            $fileName   = "$project->id-RREDSI-$end_date-file.$extension";
+            $fileName   = Str::slug(substr($project->title, 0, 20))."-RREDSI-$end_date-file.$extension";
             Storage::putFileAs(
                 'public/projects', $file, $fileName
             );
@@ -250,11 +237,11 @@ class ProjectController extends Controller
             //         unset($arrayResearchTeamsIds[$key]);
             //     }
             // }
+            // $project->researchTeams()->sync($arrayResearchTeamsIds, ['is_principal' => false]);
 
             $project->researchTeams()->sync($request->get('principal_research_team_id'), ['is_principal' => true]);
-            // $project->researchTeams()->sync($arrayResearchTeamsIds, ['is_principal' => false]);
             $project->researchLines()->sync($request->get('research_line_id'));
-            $project->knowledgeSubareaDisciplines()->sync($request->get('knowledge_subarea_dicipline_id'));
+            $project->knowledgeSubareaDisciplines()->sync($request->get('knowledge_subarea_discipline_id'));
             $project->academicPrograms()->sync($request->get('academic_program_id'));
             $project->authors()->sync($request->get('user_id'));
             $message = 'Your update processed correctly';
@@ -279,11 +266,6 @@ class ProjectController extends Controller
     {
         $this->authorize('delete', [Project::class , $educationalInstitution , $researchTeam, $project]);
 
-        if(!is_null($project->projectType)){
-            $message ="No es posible eliminar el proyecto ya que está unido a un tipo de proyecto.";
-            return redirect()->route('nodes.educational-institutions.index', [$node])->with('status', $message);
-        }
-
         if($project->delete()){
             $message = 'Your delete processed correctly';
         }
@@ -295,5 +277,26 @@ class ProjectController extends Controller
         }
 
         return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam])->with('status', $message);
+    }
+
+
+    /**
+     * myProjects
+     *
+     * @param  mixed $node
+     * @param  mixed $educationalInstitution
+     * @param  mixed $faculty
+     * @param  mixed $researchGroup
+     * @param  mixed $researchTeam
+     * @param  mixed $project
+     * @return void
+     */
+    public function myProjects(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup, ResearchTeam $researchTeam, Project $project)
+    {
+        // $this->authorize('view', [Project::class , $educationalInstitution , $researchTeam, $project]);
+
+        $projects = auth()->user()->projects;
+
+        return view('Projects.index',  compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projects'));
     }
 }

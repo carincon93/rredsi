@@ -15,9 +15,10 @@ class LegalInformationController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', [legalInformation::class]);
+        $this->authorize('viewAny', [LegalInformation::class]);
 
         $legalInformations = legalInformation::orderBy('type')->get();
+
         return view('LegalInformations.index', compact('legalInformations'));
     }
 
@@ -28,7 +29,7 @@ class LegalInformationController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', [legalInformation::class]);
+        $this->authorize('create', [LegalInformation::class]);
 
         return view('LegalInformations.create');
     }
@@ -41,7 +42,7 @@ class LegalInformationController extends Controller
      */
     public function store(LegalInformationRequest $request)
     {
-        $this->authorize('create', [legalInformation::class]);
+        $this->authorize('create', [LegalInformation::class]);
 
         $legalInformation                 = new legalInformation();
         $legalInformation->type           = $request->get('type');
@@ -62,7 +63,7 @@ class LegalInformationController extends Controller
      */
     public function show(LegalInformation $legalInformation)
     {
-        $this->authorize('view', [legalInformation::class]);
+        $this->authorize('view', [LegalInformation::class]);
 
         return view('LegalInformations.show', compact('legalInformation'));
     }
@@ -89,7 +90,7 @@ class LegalInformationController extends Controller
      */
     public function update(LegalInformationRequest $request, LegalInformation $legalInformation)
     {
-        $this->authorize('update', [legalInformation::class]);
+        $this->authorize('update', [LegalInformation::class]);
 
         $legalInformation->type = $request->get('type');
         $legalInformation->description = $request->get('description');
@@ -109,11 +110,30 @@ class LegalInformationController extends Controller
      */
     public function destroy(LegalInformation $legalInformation)
     {
-        $this->authorize('delete', [legalInformation::class]);
+        $this->authorize('delete', [LegalInformation::class]);
 
         if($legalInformation->delete()){
             $message = 'Your delete processed correctly';
         }
         return redirect()->route('legal-informations.index')->with('status', $message);
+    }
+
+    /**
+     * showPrivacyPolicy
+     *
+     * @return void
+     */
+    public function showPrivacyPolicy()
+    {
+        $privacyPolicy = LegalInformation::where('type', 1)->firstOrFail();
+
+        return view('Explorer.show-privacy-policy', compact('privacyPolicy'));
+    }
+
+    public function showTermsConditions()
+    {
+        $termsConditions = LegalInformation::where('type', 2)->firstOrFail();
+
+        return view('Explorer.show-terms-conditions', compact('termsConditions'));
     }
 }

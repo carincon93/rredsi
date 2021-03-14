@@ -1,27 +1,24 @@
 <title>{{'Crear proyecto'}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 lg:ml-16 xl:ml-80 xl:col-end-12 xl:col-span-2 m-auto">
-            <div class="mx-auto md:mx-0 grid grid-cols-6 gap-4   xl:grid-cols-9 xl:gap-3">
-                <div class="col-start-1 col-span-5 ml-5 md:ml-0 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
-                <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-                    {{ __('Projects') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
-                        Add project info
-                    </span>
-                </h2>
-            </div>
-            <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 lg:ml-16 xl:ml-80 xl:col-end-12 xl:col-span-2 m-auto">
-                <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
-                    <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
-                            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                        </svg>
-                        {{ __('Back')}}
-                    </div>
-                </a>
-            </div>
+        <div class="col-start-1 col-span-5 ml-5 md:ml-0 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+            <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+                {{ __('Projects') }}
+                <span class="text-base sm:text-2xl block text-purple-300">
+                    Crear proyecto
+                </span>
+            </h2>
         </div>
+        @can('index_project')
+        <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
+            <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
+                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                {{ __('Back')}}
+            </div>
+        </a>
+        @endcan
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -29,15 +26,26 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añadir un proyecto de investigación</x-slot>
+                    <x-slot name="description">Crear un proyecto de investigación</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
                 <form method="POST" action="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.store', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}" enctype="multipart/form-data" id="create-project">
                     @csrf
 
-                    <div class="mt-4">
-                        <x-jet-label for="project_type_id" value="{{ __('Project type') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="principal_research_team_id" value="{{ __('Principal research team') }}" />
+                        <select id="principal_research_team_id" name="principal_research_team_id" class="form-select w-full" required >
+                            <option value="">Seleccione un semillero de investigación principal</option>
+                            @foreach ($educationalInstitutionFacultyResearchTeams as $educationalInstitutionFacultyResearchTeam)
+                                <option {{ old('principal_research_team_id') == $educationalInstitutionFacultyResearchTeam->id ? "selected" : ""  }} value="{{ $educationalInstitutionFacultyResearchTeam->id }}">{{ $educationalInstitutionFacultyResearchTeam->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-jet-input-error for="principal_research_team_id" class="mt-2" />
+                    </div>
+
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="project_type_id" value="{{ __('Project type') }}" />
                         <select id="project_type_id" name="project_type_id" class="form-select w-full" required >
                             <option value="">Seleccione un tipo de proyecto</option>
                             @forelse ($projectTypes as $projectType)
@@ -49,79 +57,79 @@
                         <x-jet-input-error for="project_type_id" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="main_image" value="{{ __('Main image') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="main_image" value="{{ __('Main image') }}" />
                         <x-jet-input id="main_image" class="block mt-1 w-full overflow-hidden" type="file" accept="image/*" name="main_image" value="{{ old('main_image') }}" />
                         <x-jet-input-error for="main_image" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="title" value="{{ __('Title') }}" />
-                        <textarea id="title" name="title" max="255" class="form-textarea border-0 w-full" rows="8" required >{{ old('title') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="title" value="{{ __('Title') }}" />
+                        <textarea rows="20" id="title" name="title" max="255" class="form-textarea border-0 w-full" rows="8" required >{{ old('title') }}</textarea>
                         <x-jet-input-error for="title" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="start_date" value="{{ __('Start date') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="start_date" value="{{ __('Start date') }}" />
                         <x-jet-input id="start_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }}" name="start_date" value="{{ old('start_date') }}" required />
                         <x-jet-input-error for="start_date" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="end_date" value="{{ __('End date') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="end_date" value="{{ __('End date') }}" />
                         <x-jet-input id="end_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }}" name="end_date" value="{{ old('end_date') }}" required />
                         <x-jet-input-error for="end_date" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="abstract" value="{{ __('Abstract') }}" />
-                        <textarea id="abstract" name="abstract" class="form-textarea border-0 w-full" rows="8" required >{{ old('abstract') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="abstract" value="{{ __('Abstract') }}" />
+                        <textarea rows="20" id="abstract" name="abstract" class="form-textarea border-0 w-full" rows="8" required >{{ old('abstract') }}</textarea>
                         <x-jet-input-error for="abstract" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="overall_objective" value="{{ __('Overall objective') }}" />
-                        <textarea id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full" rows="8" required >{{ old('overall_objective') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="overall_objective" value="{{ __('Overall objective') }}" />
+                        <textarea rows="20" id="overall_objective" name="overall_objective" class="form-textarea border-0 w-full" rows="8" required >{{ old('overall_objective') }}</textarea>
                         <x-jet-input-error for="overall_objective" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="keywords" value="{{ __('Keywords') }}" />
-                        <textarea id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="8" required >{{ old('keywords') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="keywords" value="{{ __('Keywords') }}" />
+                        <textarea rows="20" id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="8" required >{{ old('keywords') }}</textarea>
                         <x-jet-input-error for="keywords" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="roles_requirements_description" value="{{ __('Roles requirements description') }}" />
-                        <textarea id="roles_requirements_description" name="roles_requirements_description" class="form-textarea border-0 w-full" rows="8" >{{ old('roles_requirements_description') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="roles_requirements_description" value="{{ __('Roles requirements description') }}" />
+                        <textarea rows="20" id="roles_requirements_description" name="roles_requirements_description" class="form-textarea border-0 w-full" rows="8" >{{ old('roles_requirements_description') }}</textarea>
                         <x-jet-input-error for="roles_requirements_description" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="roles_requirements" value="{{ __('Roles requirements') }}" />
-                        <textarea id="roles_requirements" name="roles_requirements" class="form-textarea border-0 w-full" rows="8" >{{ old('roles_requirements') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="roles_requirements" value="{{ __('Roles requirements') }}" />
+                        <textarea rows="20" id="roles_requirements" name="roles_requirements" class="form-textarea border-0 w-full" rows="8" >{{ old('roles_requirements') }}</textarea>
                         <x-jet-input-error for="roles_requirements" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="tools_requirements_description" value="{{ __('Tools requirements description') }}" />
-                        <textarea id="tools_requirements_description" name="tools_requirements_description" class="form-textarea border-0 w-full" rows="8" >{{ old('tools_requirements_description') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="tools_requirements_description" value="{{ __('Tools requirements description') }}" />
+                        <textarea rows="20" id="tools_requirements_description" name="tools_requirements_description" class="form-textarea border-0 w-full" rows="8" >{{ old('tools_requirements_description') }}</textarea>
                         <x-jet-input-error for="tools_requirements_description" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="tools_requirements" value="{{ __('Tools requirements') }}" />
-                        <textarea id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" rows="8" >{{ old('tools_requirements') }}</textarea>
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="tools_requirements" value="{{ __('Tools requirements') }}" />
+                        <textarea rows="20" id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" rows="8" >{{ old('tools_requirements') }}</textarea>
                         <x-jet-input-error for="tools_requirements" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="file" value="{{ __('File') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="file" value="{{ __('File') }}" />
                         <x-jet-input id="file" class="block mt-1 w-full overflow-hidden" type="file" accept="application/pdf" name="file" value="{{ old('file') }}" />
                         <x-jet-input-error for="file" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Is privated?') }} </p>
+                    <p class="mt-1/6">{{ __('Is privated?') }} </p>
                     <div class="block mt-4">
                         <label for="is_privated_yes" class="flex items-center">
                             <input id="is_privated_yes" value="1" type="radio" class="form-radio" name="is_privated" {{ old('is_privated') == 1 ? "checked" : "" }}>
@@ -134,7 +142,7 @@
                         <x-jet-input-error for="is_privated" class="mt-2" />
                     </div>
 
-                    <p class="mt-4">{{ __('Is published?') }} </p>
+                    <p class="mt-1/6">{{ __('Is published?') }} </p>
                     <div class="block mt-4">
                         <label for="is_published_yes" class="flex items-center">
                             <input id="is_published_yes" value="1" type="radio" class="form-radio" name="is_published" {{ old('is_published') == 1 ? "checked" : "" }}>
@@ -147,7 +155,7 @@
                         <x-jet-input-error for="is_published" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-1/6">
                         <p>{{ __('Authors') }}</p>
                         @forelse ($authors as $author)
                             <div class="mt-4">
@@ -160,8 +168,8 @@
                         <x-jet-input-error for="user_id" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <p>{{ __('Academic programs') }} </p>
+                    <div class="mt-1/6">
+                        <p>{{ __('Academic programs') }} asociados</p>
                         @forelse ($academicPrograms as $academicProgram)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="academic_program_id[]" @if(is_array(old('academic_program_id')) && in_array($academicProgram->id , old('academic_program_id'))) checked @endif id="{{ "academic-program-$academicProgram->id" }}" value="{{ $academicProgram->id }}" />
@@ -173,21 +181,21 @@
                         <x-jet-input-error for="academic_program_id" class="mt-2" />
                     </div>
 
-                    <x-checkbox-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="null" />
-
-                    <div class="mt-4">
-                        <x-jet-label for="principal_research_team_id" value="{{ __('Principal research team') }}" />
-                        <select id="principal_research_team_id" name="principal_research_team_id" class="form-select w-full" required >
-                            <option value="">Seleccione un semillero de investigación principal</option>
-                            @foreach ($educationalInstitutionFacultyResearchTeams as $educationalInstitutionFacultyResearchTeam)
-                                <option {{ old('principal_research_team_id') == $educationalInstitutionFacultyResearchTeam->id ? "selected" : ""  }} value="{{ $educationalInstitutionFacultyResearchTeam->id }}">{{ $educationalInstitutionFacultyResearchTeam->name }}</option>
-                            @endforeach
-                        </select>
-                        <x-jet-input-error for="principal_research_team_id" class="mt-2" />
+                    <div class="mt-1/6">
+                        <p>{{ __('Research lines') }} asociadas</p>
+                        @forelse ($researchLines as $researchLine)
+                            <div class="mt-4">
+                                <input class="form-check-input" type="checkbox" name="research_line_id[]" @if(is_array(old('research_line_id')) && in_array($researchLine->id , old('research_line_id'))) checked @endif id="{{ "research-line-$researchLine->id" }}" value="{{ $researchLine->id }}" />
+                                <label label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-line-$researchLine->id" }}">{{ $researchLine->name }}</label>
+                            </div>
+                        @empty
+                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
+                        @endforelse
+                        <x-jet-input-error for="research_line_id" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <p>{{ __('Research teams') }}</p>
+                    <div class="mt-1/6">
+                        <p>{{ __('Research teams') }} asociados</p>
                         @forelse ($researchTeams as $researchTeam)
                             <div class="mt-4">
                                 <input class="form-check-input" type="checkbox" name="research_team_id[]"  @if(is_array(old('research_team_id')) && in_array($researchTeam->id , old('research_team_id'))) checked @endif id="{{ "research-team-$researchTeam->id" }}" value="{{ $researchTeam->id }}" />
@@ -199,18 +207,11 @@
                         <x-jet-input-error for="research_team_id" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <p>{{ __('Research lines') }}</p>
-                        @forelse ($researchLines as $researchLine)
-                            <div class="mt-4">
-                                <input class="form-check-input" type="checkbox" name="research_line_id[]" @if(is_array(old('research_line_id')) && in_array($researchLine->id , old('research_line_id'))) checked @endif id="{{ "research-line-$researchLine->id" }}" value="{{ $researchLine->id }}" />
-                                <label label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ "research-line-$researchLine->id" }}">{{ $researchLine->name }}</label>
-                            </div>
-                        @empty
-                            <p class="mt-4 text-gray-700 text-sm ml-1">{{ __('No data recorded') }}</p>
-                        @endforelse
-                        <x-jet-input-error for="research_line_id" class="mt-2" />
-                    </div>
+                    <hr class="mt-1/6 mb-1/6">
+
+                    <p>A continuación, debe seleccionar una o varias disciplinas de subáreas de conocimiento. Diríjase a la área de conocimiento y luego de clic en una subárea de conocimiento para que se listen las disciplinas.</p>
+
+                    <x-checkbox-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="null" />
 
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button id="modal-open" type="button" class="ml-4 modal-open">
@@ -253,30 +254,35 @@
 
     @push('scripts')
         <script>
-            document.getElementById('modal-open').onclick = function(event)
-            {
-                var privated_yes = document.getElementById('is_privated_yes');
-                var privated_no  = document.getElementById('is_privated_no');
-                var project_privacy_activated = document.getElementsByClassName('project-privacy-activated');
+            document.addEventListener(
+                "DOMContentLoaded",
+                function() {
+                    document.getElementById('modal-open').onclick = function(event)
+                    {
+                        var privated_yes = document.getElementById('is_privated_yes');
+                        var privated_no  = document.getElementById('is_privated_no');
+                        var project_privacy_activated = document.getElementsByClassName('project-privacy-activated');
 
-                if (privated_yes.checked) {
-                    document.querySelector('.project-privacy').innerHTML = 'activada';
+                        if (privated_yes.checked) {
+                            document.querySelector('.project-privacy').innerHTML = 'activada';
 
-                    for (const iterator of project_privacy_activated) {
-                        iterator.classList.add('block');
-                        iterator.classList.remove('hidden');
+                            for (const iterator of project_privacy_activated) {
+                                iterator.classList.add('block');
+                                iterator.classList.remove('hidden');
+                            }
+
+                        } else if (privated_no.checked) {
+
+                            for (const iterator of project_privacy_activated) {
+                                iterator.classList.add('hidden');
+                                iterator.classList.remove('block');
+                            }
+
+                            document.querySelector('.project-privacy').innerHTML = 'desactivada';
+                        }
                     }
-
-                } else if (privated_no.checked) {
-
-                    for (const iterator of project_privacy_activated) {
-                        iterator.classList.add('hidden');
-                        iterator.classList.remove('block');
-                    }
-
-                    document.querySelector('.project-privacy').innerHTML = 'desactivada';
-                }
-            }
+                }, false
+            )
         </script>
     @endpush
 

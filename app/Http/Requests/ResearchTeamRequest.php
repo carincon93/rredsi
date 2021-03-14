@@ -34,7 +34,6 @@ class ResearchTeamRequest extends FormRequest
             'regional_projection'           => 'required',
             'knowledge_production_strategy' => 'required',
             'thematic_research'             => 'required|json',
-            'administrator_id'              => 'required|integer|min:0|max:9999999999|exists:users,id',
             'academic_program_id.*'         => 'required|integer|min:0|max:9999999999|exists:academic_programs,id',
             'knowledge_area_id.*'           => 'required|integer|min:0|max:9999999999|exists:knowledge_areas,id',
             'research_line_id.*'            => 'required|integer|min:0|max:9999999999|exists:research_lines,id',
@@ -51,8 +50,8 @@ class ResearchTeamRequest extends FormRequest
     {
         if($this->thematic_research != null) {
             $this->merge([
-                'thematic_research' => json_encode(explode(',', $this->thematic_research, true)),
+                'thematic_research' => json_encode(explode(',', $this->thematic_research), true),
             ]);
         }
-    }    
+    }
 }

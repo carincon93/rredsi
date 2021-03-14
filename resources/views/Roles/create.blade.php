@@ -3,7 +3,7 @@
     <x-slot name="header">
         <h2 class="font-display text-white text-left text-2xlleading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Roles') }}
-            <span class="text-base sm:text-3xl block text-purple-300">
+            <span class="text-base sm:text-2xl block text-purple-300">
                 Add role
             </span>
         </h2>
@@ -32,21 +32,21 @@
                     @csrf
 
                     <div>
-                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" maxlength="255" name="name" value="{{ old('name') }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="description" value="{{ __('Description') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="description" value="{{ __('Description') }}" />
                         <textarea name="description" id="description" class="form-input rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" required>{{ old('description') }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-1/6">
                         <p>{{ __('Permissions') }}</p>
                         @forelse ($permissions->chunk(5) as $chunk)
-                            <div class="mt-4">
+                            <div class="mt-1/6">
                                 @foreach ($chunk as $permission)
                                     <div>
                                         <input id="{{ $permission->name }}" class="form-checkbox" type="checkbox" name="permissions[]" {{ old('permissions') == $permission->id ? 'checked' : '' }} value="{{ $permission->id }}" />
@@ -71,7 +71,7 @@
                                 @endforeach
                             </div>
                         @empty
-                            <div class="mt-4">
+                            <div class="mt-1/6">
                                 <p>{{ __('No data recorded') }}</p>
                             </div>
                         @endforelse

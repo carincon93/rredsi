@@ -18,9 +18,6 @@ class KnowledgeAreaPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('index_knowledge_area')){
             return true;
         }
@@ -36,9 +33,6 @@ class KnowledgeAreaPolicy
      */
     public function view(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('show_knowledge_area')){
             return true;
         }
@@ -53,9 +47,6 @@ class KnowledgeAreaPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('create_knowledge_area')){
             return true;
         }
@@ -71,9 +62,6 @@ class KnowledgeAreaPolicy
      */
     public function update(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('edit_knowledge_area')){
             return true;
         }
@@ -89,9 +77,6 @@ class KnowledgeAreaPolicy
      */
     public function delete(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('destroy_knowledge_area')){
             return true;
         }

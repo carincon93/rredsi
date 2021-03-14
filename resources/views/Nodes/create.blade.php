@@ -4,19 +4,19 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Nodes') }}
             <span class="sm:block text-purple-300">
-                Add node info
+                Crear nodo
             </span>
         </h2>
-        <div>
-            <a href="{{ route('nodes.index') }}">
-                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
-                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                    </svg>
-                    {{ __('Back')}}
-                </div>
-            </a>
-        </div>
+        @can('index_node')
+        <a href="{{ route('nodes.index') }}">
+            <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
+                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                {{ __('Back')}}
+            </div>
+        </a>
+        @endcan
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -32,19 +32,19 @@
                     @csrf
 
                     <div>
-                        <x-jet-label for="state" value="{{ __('State') }}" />
+                        <x-jet-label class="mb-4" for="state" value="{{ __('State') }}" />
                         <x-jet-input id="state" class="block mt-1 w-full" type="text" min="" max="" name="state" value="{{ old('state') }}" required />
                         <x-jet-input-error for="state" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="logo" value="{{ __('Logo') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="logo" value="{{ __('Logo') }}" />
                         <x-jet-input id="logo" class="block mt-1 w-full overflow-hidden" type="file" accept="image/*" name="logo" value="{{ old('logo') }}" />
                         <x-jet-input-error for="logo" class="mt-2" />
                     </div>
 
                     <div class="mt-2">
-                        <x-jet-label for="administrator_id" value="{{ __('Node admin') }}" />
+                        <x-jet-label class="mb-4" for="administrator_id" value="{{ __('Node admin') }}" />
                         <select id="administrator_id" name="administrator_id" class="form-select w-full" required >
                             <option value="">Seleccione un administrador de nodo</option>
                             @forelse ($users as $user)

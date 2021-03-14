@@ -1,11 +1,11 @@
 <title>{{ "Crear un programa académico"}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+        <div >
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Academic programs') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
+                    <span class="text-base sm:text-2xl block text-purple-300">
                         Add academic program info
                     </span>
                 </h2>
@@ -28,7 +28,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añadir programa académico</x-slot>
+                    <x-slot name="description">Crear programa académico</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -36,19 +36,19 @@
                     @csrf
 
                     <div>
-                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="code" value="{{ __('Code') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="code" value="{{ __('Code') }}" />
                         <x-jet-input id="code" class="block mt-1 w-full" type="number"  maxlength="191" name="code" value="{{ old('code') }}" required />
                         <x-jet-input-error for="code" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="academic_level" value="{{ __('Academic level') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="academic_level" value="{{ __('Academic level') }}" />
                         <select id="academic_level" name="academic_level" class="form-select w-full" value="{{ old('academic_level') }}" required >
                             <option value="">Seleccione el nivel académico</option>
                             <option {{ old('academic_level') == "Técnico profesional" ? "selected" : "" }} value="Técnico profesional">Técnico profesional</option>
@@ -62,20 +62,20 @@
                         <x-jet-input-error for="academic_level" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="start_date" value="{{ __('Start date') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="start_date" value="{{ __('Start date') }}" />
                         <x-jet-input id="start_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }}" name="start_date" value="{{ old('start_date') }}" required />
                         <x-jet-input-error for="start_date" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="end_date" value="{{ __('End date') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="end_date" value="{{ __('End date') }}" />
                         <x-jet-input id="end_date" class="block mt-1 w-full" type="date" min="1900" max="{{ date('Y') + 10 }}" name="end_date" value="{{ old('end_date') }}" required />
                         <x-jet-input-error for="end_date" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="modality" value="{{ __('Modality') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="modality" value="{{ __('Modality') }}" />
                         <select id="modality" name="modality" class="form-select w-full" value="{{ old('modality') }}" required >
                             <option value="">Seleccione la modalidad</option>
                             <option {{ old('modality') == "Presencial" ? "selected" : "" }} value="Presencial">Presencial</option>
@@ -84,8 +84,8 @@
                         <x-jet-input-error for="modality" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="daytime" value="{{ __('Daytime') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="daytime" value="{{ __('Daytime') }}" />
                         <select id="daytime" name="daytime" class="form-select w-full" value="{{ old('daytime') }}" required >
                             <option value="">Seleccione la jornada</option>
                             <option {{ old('daytime') == "Mixta" ? "selected" : "" }} value="Mixta">Mixta</option>

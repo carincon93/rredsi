@@ -18,9 +18,6 @@ class EducationalToolPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('index_educational_tool')){
             return true;
         }
@@ -36,9 +33,6 @@ class EducationalToolPolicy
      */
     public function view(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('show_educational_tool')){
             return true;
         }
@@ -53,9 +47,6 @@ class EducationalToolPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('create_educational_tool')){
             return true;
         }
@@ -71,9 +62,6 @@ class EducationalToolPolicy
      */
     public function update(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('edit_educational_tool')){
             return true;
         }
@@ -89,9 +77,6 @@ class EducationalToolPolicy
      */
     public function delete(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('destroy_educational_tool')){
             return true;
         }

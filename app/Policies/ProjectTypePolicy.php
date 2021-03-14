@@ -18,12 +18,9 @@ class ProjectTypePolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(1)){
             return true;
         }
-        // if($user->hasPermissionTo('index_project')){
-        //     return true;
-        // }
         return false;
     }
 
@@ -36,7 +33,7 @@ class ProjectTypePolicy
      */
     public function view(User $user, ProjectType $projectType)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(1)){
             return true;
         }
         return false;
@@ -50,7 +47,7 @@ class ProjectTypePolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(1)){
             return true;
         }
         return false;
@@ -65,7 +62,7 @@ class ProjectTypePolicy
      */
     public function update(User $user, ProjectType $projectType)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(1)){
             return true;
         }
         return false;
@@ -80,7 +77,7 @@ class ProjectTypePolicy
      */
     public function delete(User $user, ProjectType $projectType)
     {
-        if($user->hasRole('Administrador','Coordinador')){
+        if($user->hasRole(1)){
             return true;
         }
         return false;

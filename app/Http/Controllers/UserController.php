@@ -5,16 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use Exception;
-
-use App\Exceptions\InvalidOrderException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -31,9 +23,6 @@ class UserController extends Controller
         $users = User::orderBy('name', 'ASC')->paginate(100);
 
         return view('Users.index', compact('users'));
-        // $user = auth()->user();
-
-        // return  $user;
     }
 
     /**
@@ -45,7 +34,9 @@ class UserController extends Controller
     {
         $this->authorize('create-user', [User::class]);
 
-        return view('Users.create');
+        $roles = Role::orderBy('name')->get();
+
+        return view('Users.create', compact('roles'));
     }
 
     /**
@@ -121,9 +112,8 @@ class UserController extends Controller
         $user->interests          = $request->get('interests');
         $user->is_enabled         = $request->get('is_enabled');
 
-        if($user->update()){
+        if($user->save()){
             $user->syncRoles($request->get('role_id'));
-            // $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true] );
             $message = 'Your update processed correctly';
         }
 

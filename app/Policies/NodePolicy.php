@@ -18,9 +18,6 @@ class NodePolicy
      */
     public function viewAny(User $user,Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
 
         if(!$user->hasPermissionTo('index_node')){
             return false;
@@ -43,9 +40,6 @@ class NodePolicy
      */
     public function view(User $user,Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('show_node')){
             return false;
         }
@@ -64,9 +58,6 @@ class NodePolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if(!$user->hasPermissionTo('create_node')){
             return false;
         }
@@ -82,9 +73,6 @@ class NodePolicy
      */
     public function update(User $user, Node $node)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('edit_node')){
             return true;
         }
@@ -104,9 +92,6 @@ class NodePolicy
      */
     public function delete(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         return false;
     }
 

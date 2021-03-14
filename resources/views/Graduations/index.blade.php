@@ -44,12 +44,12 @@
 
                                 <td>
                                     <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Educational institution') }}</span>
-                                    <p class="row-auto">{{ $userGraduation->academicProgram->educationalInstitutionFaculty->educationalInstitution->name }}</p>
+                                    <p class="">{{ $userGraduation->academicProgram->educationalInstitutionFaculty->educationalInstitution->name }}</p>
                                 </td>
 
                                 <td>
                                     <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Year') }}</span>
-                                    <p class="row-auto">{{ $userGraduation->year }}</p>
+                                    <p class="">{{ $userGraduation->year }}</p>
                                 </td>
 
                                 <td class="py-2 text-left">

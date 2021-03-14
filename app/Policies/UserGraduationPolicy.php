@@ -18,9 +18,6 @@ class UserGraduationPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('index_graduation')){
             return true;
         }
@@ -36,9 +33,6 @@ class UserGraduationPolicy
      */
     public function view(User $user, UserGraduation $userGraduation)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('show_graduation')){
             return true;
         }
@@ -53,9 +47,6 @@ class UserGraduationPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('create_graduation')){
             return true;
         }
@@ -71,9 +62,6 @@ class UserGraduationPolicy
      */
     public function update(User $user, UserGraduation $userGraduation)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('edit_graduation')){
             return true;
         }
@@ -89,9 +77,6 @@ class UserGraduationPolicy
      */
     public function delete(User $user, UserGraduation $userGraduation)
     {
-        if($user->hasRole(1)){
-            return true;
-        }
         if($user->hasPermissionTo('destroy_graduation')){
             return true;
         }

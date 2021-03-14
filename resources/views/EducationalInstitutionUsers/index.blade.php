@@ -1,11 +1,11 @@
 <title>{{ "Usuarios de la institución educativa"}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+        <div >
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Educational institution users') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
+                    <span class="text-base sm:text-2xl block text-purple-300">
                         Add educational institution user
                     </span>
                 </h2>
@@ -46,12 +46,12 @@
 
                             <td>
                                 <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Email') }}</span>
-                                <p class="row-auto">{{ $user->email }}</p>
+                                <p class="">{{ $user->email }}</p>
                             </td>
 
                             <td>
                                 <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Cellphone number') }}</span>
-                                <p class="row-auto">{{ $user->cellphone_number }}</p>
+                                <p class="">{{ $user->cellphone_number }}</p>
                             </td>
 
                             <td class="py-2 text-left">

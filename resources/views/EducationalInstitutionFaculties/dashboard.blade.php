@@ -1,7 +1,7 @@
 <title>{{ "Panel de control de facultad / Centro de formación"}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-display text-center text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+        <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ $educationalInstitution->name }}
             <span class="sm:block text-purple-300">
 

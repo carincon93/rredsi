@@ -1,7 +1,7 @@
 @props(['nodes'=> null , 'academicProgram'=>null])
 
 <div class="mt-4">
-    <x-jet-label for="node_id" value="{{ __('Node') }}" />
+    <x-jet-label class="mb-4" for="node_id" value="{{ __('Node') }}" />
     <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="node_id" name="node_id" required onchange="AcademicProgramsFilter.onChangeNodeSelect(event)">
         <option value="">Seleccione un nodo</option>
         @foreach ($nodes as $node)
@@ -15,7 +15,7 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <x-jet-label for="educational_institution_id" value="{{ __('Educational institution') }}" />
+        <x-jet-label class="mb-4" for="educational_institution_id" value="{{ __('Educational institution') }}" />
     </div>
     <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="educational_institution_id" name="educational_institution_id" required onchange="AcademicProgramsFilter.onChangeEducationalInstitutionSelect(event)">
         <option value="">Seleccione una institución educativa</option>
@@ -27,7 +27,7 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <x-jet-label for="academic_program_id" value="{{ __('Academic program') }}" />
+        <x-jet-label class="mb-4" for="academic_program_id" value="{{ __('Academic program') }}" />
     </div>
     <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="academic_program_id" name="academic_program_id" required>
         <option value="">Seleccione un programa de formación</option>
@@ -38,7 +38,7 @@
 @once
     @push('scripts')
         <script>
-            let academicProgramEdit            = {{ $academicProgram ? $academicProgram->id : 0 }};
+            let academicProgramEdit           = {{ $academicProgram ? $academicProgram->id : 0 }};
             let nodeIdOld                     = {{ old('node_id') != '' ? old('node_id') : 0 }};
             let educationalInstitutionIdOld   = {{ old('educational_institution_id') != '' ? old('educational_institution_id') : 0 }};
             let academicProgramIdOld          = {{ old('academic_program_id') != '' ? old('academic_program_id') : 0 }};
@@ -84,10 +84,6 @@
 
                 getAcademicPrograms = async (nodeId, educationalInstitutionId, academicProgramId) => {
                     academicProgramsSelect.innerHTML = '<option value="">Seleccione un programa de formación</option>';
-
-                    console.log(nodeId);
-                    console.log(educationalInstitutionId);
-                    console.log(academicProgramId);
 
                     if (nodeId != null && educationalInstitutionId != null && nodeId != '' && educationalInstitutionId != '') {
                         academicProgramsSpin.classList.remove('hidden');

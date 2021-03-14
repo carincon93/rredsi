@@ -1,11 +1,11 @@
 <title>{{ "Crear Facultad / Centro de formación"}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <div class="grid grid-cols-6 gap-4  xl:grid-cols-9 xl:gap-3">
+        <div >
             <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Educational institution faculties') }}
-                    <span class="text-base sm:text-3xl block text-purple-300">
+                    <span class="text-base sm:text-2xl block text-purple-300">
                         Add educational institution faculty
                     </span>
                 </h2>
@@ -28,7 +28,7 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Añadir facultad</x-slot>
+                    <x-slot name="description">Crear facultad</x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -36,25 +36,25 @@
                     @csrf
 
                     <div>
-                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" min="" max="" name="name" value="{{ old('name') }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="email" value="{{ __('Email') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="email" value="{{ __('Email') }}" />
                         <x-jet-input id="email" class="block mt-1 w-full" type="email" min="" max="" name="email" value="{{ old('email') }}" required />
                         <x-jet-input-error for="email" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="phone_number" value="{{ __('Phone number') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="phone_number" value="{{ __('Phone number') }}" />
                         <x-jet-input id="phone_number" class="block mt-1 w-full" type="number" min="" max="" name="phone_number" value="{{ old('phone_number') }}" required />
                         <x-jet-input-error for="phone_number" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="ext" value="{{ __('Ext') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="ext" value="{{ __('Ext') }}" />
                         <x-jet-input id="ext" class="block mt-1 w-full" type="number" min="" max="" name="ext" value="{{ old('ext') }}" />
                         <x-jet-input-error for="ext" class="mt-2" />
                     </div>

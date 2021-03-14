@@ -13,12 +13,12 @@
             <img class="h-40 w-40 rounded-full mx-auto" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
         </x-slot>
         <x-slot name="actionButton">
-            
+
         </x-slot>
     </x-guest-header>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-8 mt-4">
 
                 <h1 class="text-2xl">{{ __('Biography') }}</h1>
@@ -69,7 +69,7 @@
                     </a>
                     <x-jet-section-border />
                 @endif
-        
+
                 <h1 class="text-2xl mt-12 ml-16">{{ __('Graduations') }}</h1>
                 @forelse ($user->userGraduations->chunk(3) as $chunk)
                     <div class="mt-4 md:grid md:grid-cols-3 md:gap-4">
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow ">
-                                        <h2 class=" text-xl title-font font-medium mb-3">
+                                        <h2 class="text-xl title-font font-medium mb-3">
                                             {{ $graduation->academicProgram->academic_level }} en {{ optional($graduation->academicProgram)->name }}
                                         </h2>
                                     </div>
@@ -118,7 +118,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow ">
-                                        <h2 class=" text-xl title-font font-medium mb-3">
+                                        <h2 class="text-xl title-font font-medium mb-3">
                                             {{ $researchTeam->name }}
                                         </h2>
                                         <p class="leading-relaxed text-sm text-justify">
@@ -153,7 +153,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow ">
-                                        <h2 class=" text-xl title-font font-medium mb-3">
+                                        <h2 class="text-xl title-font font-medium mb-3">
                                             <a href="{{ route('nodes.explorer.searchProjects.showProject', [$node, $project]) }}" target="_blank">
                                                 {{ $project->title }}
                                             </a>
@@ -191,7 +191,7 @@
                     <p class="mt-4 mb-4">A continuación se listan los proyectos</p>
                     <form method="POST" action="{{ route('nodes.explorer.sendRoleNotification', [$node, $user]) }}">
                         @csrf
-    
+
                         <div>
                             <select id="project_id" name="project_id" class="form-select w-full" required >
                                 <option value="">Seleccione un proyecto</option>
@@ -201,11 +201,11 @@
                             </select>
                             <x-jet-input-error for="project_id" class="mt-2" />
                         </div>
-    
+
                         <div class="flex items-center justify-end mt-4">
                             <x-jet-button class="ml-4">
                                 {{ __('Contact') }}
-    
+
                                 <div class="ml-1 text-white">
                                     <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                 </div>

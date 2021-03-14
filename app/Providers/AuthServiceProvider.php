@@ -40,8 +40,6 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\KnowledgeArea' => 'App\policies\KnowledgeAreaPolicy',
         'App\Models\KnowledgeSubarea' => 'App\policies\KnowledgeSubareaPolicy',
         'App\Models\KnowledgeSubareaDiscipline' => 'App\policies\KnowledgeSubareaDisciplinePolicy',
-        'App\Models\Test' => 'App\Policies\TestPolicy',
-
     ];
 
     /**
@@ -53,8 +51,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole(1) ? true : null;
+        });
+
         // ! User controller policy
-       //* inicio Policy
         Gate::define('index-users', function ($user) {
             if($user->hasRole(1)){
                 return true;

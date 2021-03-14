@@ -81,7 +81,7 @@ class RoleController extends Controller
     {
         $this->authorize('update', [Role::class]);
 
-        $permissions = Permission::orderBy('model')->get();
+        $permissions = Permission::orderBy('id')->get();
 
         return view('Roles.edit', compact('role', 'permissions'));
     }

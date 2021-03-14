@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KnowledgeSubarea;
 use App\Models\KnowledgeSubareaDiscipline;
 
-use App\Http\Requests\KnowledgeSubareaDiciplineRequest;
+use App\Http\Requests\KnowledgeSubareaDisciplineRequest;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -45,7 +45,7 @@ class KnowledgeSubareaDisciplineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(KnowledgeSubareaDiciplineRequest $request)
+    public function store(KnowledgeSubareaDisciplineRequest $request)
     {
         $this->authorize('create', [KnowledgeSubareaDiscipline::class]);
 
@@ -96,7 +96,7 @@ class KnowledgeSubareaDisciplineController extends Controller
      * @param  \App\Models\KnowledgeSubareaDiscipline  $knowledgeSubareaDiscipline
      * @return \Illuminate\Http\Response
      */
-    public function update(KnowledgeSubareaDiciplineRequest $request, KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
+    public function update(KnowledgeSubareaDisciplineRequest $request, KnowledgeSubareaDiscipline $knowledgeSubareaDiscipline)
     {
         $this->authorize('update', [KnowledgeSubareaDiscipline::class]);
 

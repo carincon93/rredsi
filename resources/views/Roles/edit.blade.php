@@ -3,8 +3,8 @@
     <x-slot name="header">
         <h2 class="font-display text-white text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Roles') }}
-            <span class="text-base sm:text-3xl block text-purple-300">
-                Update role
+            <span class="text-base sm:text-2xl block text-purple-300">
+                Editar rol
             </span>
         </h2>
         <div>
@@ -35,50 +35,68 @@
                     @method('PUT')
 
                     <div>
-                        <x-jet-label for="name" value="{{ __('Name') }}" />
+                        <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" maxlength="255" name="name" value="{{ old('name') ?? $role->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
-                        <x-jet-label for="description" value="{{ __('Description') }}" />
+                    <div class="mt-1/6">
+                        <x-jet-label class="mb-4" for="description" value="{{ __('Description') }}" />
                         <textarea name="description" id="description" class="form-input rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" required>{{ old('description') ?? $role->description }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-1/6">
                         <p>{{ __('Permissions') }}</p>
-                        @forelse ($permissions->chunk(5) as $chunk)
-                            <div class="mt-4">
-                                @foreach ($chunk as $permission)
-                                    <div>
-                                        <input id="{{ $permission->name }}" class="form-checkbox" type="checkbox" name="permissions[]" @if(is_array(old('permissions')) && in_array($permission->id, old('permissions'))) checked @elseif($role->permissions->pluck('id')->contains($permission->id)) checked  @endif value="{{ $permission->id }}" />
-                                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="{{ $permission->name }}" >
-                                            @if (explode('_', $permission->name)[0] == 'index')
-                                                Listar {{ __(str_replace('_', ' ', $permission->model)) }}
-                                            @endif
-                                            @if (explode('_', $permission->name)[0] == 'show')
-                                                Consultar {{ __(str_replace('_', ' ', $permission->model)) }}
-                                            @endif
-                                            @if (explode('_', $permission->name)[0] == 'create')
-                                                Crear {{ __(str_replace('_', ' ', $permission->model)) }}
-                                            @endif
-                                            @if (explode('_', $permission->name)[0] == 'edit')
-                                                Editar {{ __(str_replace('_', ' ', $permission->model)) }}
-                                            @endif
-                                            @if (explode('_', $permission->name)[0] == 'destroy')
-                                                Eliminar {{ __(str_replace('_', ' ', $permission->model)) }}
-                                            @endif
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @empty
-                            <div class="mt-4">
-                                <p>{{ __('No data recorded') }}</p>
-                            </div>
-                        @endforelse
-                        <x-jet-input-error for="permissions" class="mt-2" />
+                        <div class="bg-white shadow-xl sm:rounded-lg mt-4">
+                            <table class="min-w-full table-auto permissions">
+                                <thead class="justify-between">
+                                    <tr>
+                                        <th class="pr-2 py-2 text-left focus:outline-none text-center hidden lg:table-cell">Listar</th>
+                                        <th class="pr-2 py-2 text-left focus:outline-none text-center hidden lg:table-cell">Consultar</th>
+                                        <th class="pr-2 py-2 text-left focus:outline-none text-center hidden lg:table-cell">Crear</th>
+                                        <th class="pr-2 py-2 text-left focus:outline-none text-center hidden lg:table-cell">Editar</th>
+                                        <th class="pr-2 py-2 text-left focus:outline-none text-center hidden lg:table-cell">Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($permissions->chunk(5) as $chunk)
+                                        <tr>
+                                            @foreach ($chunk as $permission)
+                                                <td class="text-center">
+                                                    <div class="mt-4/12">
+                                                        <input id="{{ $permission->name }}" class="form-checkbox" type="checkbox" name="permissions[]" @if(is_array(old('permissions')) && in_array($permission->id, old('permissions'))) checked @elseif($role->permissions->pluck('id')->contains($permission->id)) checked  @endif value="{{ $permission->id }}" />
+                                                    </div>
+                                                    <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1 text-center mt-4" for="{{ $permission->name }}" >
+                                                        @if (explode('_', $permission->name)[0] == 'index')
+                                                        {{ __(str_replace('_', ' ', $permission->model)) }}
+                                                        @endif
+                                                        @if (explode('_', $permission->name)[0] == 'show')
+                                                            {{ __(str_replace('_', ' ', $permission->model)) }}
+                                                        @endif
+                                                        @if (explode('_', $permission->name)[0] == 'create')
+                                                            {{ __(str_replace('_', ' ', $permission->model)) }}
+                                                        @endif
+                                                        @if (explode('_', $permission->name)[0] == 'edit')
+                                                            {{ __(str_replace('_', ' ', $permission->model)) }}
+                                                        @endif
+                                                        @if (explode('_', $permission->name)[0] == 'destroy')
+                                                            {{ __(str_replace('_', ' ', $permission->model)) }}
+                                                        @endif
+                                                    </label>
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td>{{ __('No data recorded') }}</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+
+                            <x-jet-input-error for="permissions" class="mt-2" />
+                        </div>
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
