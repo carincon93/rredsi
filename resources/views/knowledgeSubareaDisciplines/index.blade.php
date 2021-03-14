@@ -2,26 +2,21 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <div >
-            <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
-                <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-                    {{ __('Knowledge subarea disciplines') }}
-                    <span class="text-base sm:text-2xl block text-purple-300">
-                        Add knowledge subarea disciplines info
-                    </span>
-                </h2>
-            </div>
-            <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 xl:col-end-10 xl:col-span-2 m-auto">
-                @can('create_knowledge_subarea_discipline')
-                    <a href="{{route('knowledge-subarea-disciplines.create') }}">
-                        <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 sm:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                            {{ __('Create knowledge subarea discipline') }}
-                        </div>
-                    </a>
-                @endcan
-            </div>
+        <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+            <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+                {{ __('Knowledge subarea disciplines') }}
+                <span class="text-base sm:text-2xl block text-purple-300">
+                    Lista de disciplinas de subárea de concimiento
+                </span>
+            </h2>
         </div>
-
+        @can('create_knowledge_subarea_discipline')
+            <a href="{{route('knowledge-subarea-disciplines.create') }}">
+                <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-purple-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 sm:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                    {{ __('Create knowledge subarea discipline') }}
+                </div>
+            </a>
+        @endcan
     </x-slot>
 
     <div class="py-12">

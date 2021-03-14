@@ -19,7 +19,7 @@
                 </span>
             </h2>
         </div>
-        @can('crate_legal_information')
+        @can('create_legal_information')
         <a href="{{ route('legal-informations.create') }}">
             <div class="w-auto text-center text-base items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-2 sm:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                 {{ __('Create legal information') }}

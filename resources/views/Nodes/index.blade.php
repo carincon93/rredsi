@@ -6,7 +6,7 @@
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Nodes') }}
                     <span class="text-base sm:text-3xl block text-purple-300">
-                        Lista de los nodos RREDSI
+                        Lista de los nodos
                     </span>
                 </h2>
             </div>

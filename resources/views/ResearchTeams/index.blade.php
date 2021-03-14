@@ -1,6 +1,5 @@
 <title>{{'Semilleros de investigación'}}</title>
 <x-app-layout>
-
     <x-slot name="header">
         <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">

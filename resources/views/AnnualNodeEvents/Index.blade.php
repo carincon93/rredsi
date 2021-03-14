@@ -17,18 +17,18 @@
                 <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                     {{ __('Annual node events') }}
                     <span class="text-base sm:text-2xl block text-purple-300">
-                        View annual node events
+                        Lista de eventos anuales de nodo
                     </span>
                 </h2>
             </div>
             <div class="col-start-1 col-end-7 md:col-end-8 md:col-span-3 xl:col-end-10 xl:col-span-2 m-auto">
-                {{-- @can('create_node_event')
+                {@can('create_node_event')
                 <a href="{{ route('nodes.events.create', [$node]) }}">
                     <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                         {{ __('Create node event')}}
                     </div>
                 </a>
-                @endcan --}}
+                @endcan
             </div>
         </div>
     </x-slot>

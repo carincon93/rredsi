@@ -5,7 +5,7 @@
             <h2 class="font-display text-white text-center md:text-left text-xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Educational institution faculties') }}
                 <span class="text-base sm:text-2xl block text-purple-300">
-                   Editar información de la facultad / centro de formación
+                   Detalles de la facultad / centro de formación
                 </span>
             </h2>
         </div>

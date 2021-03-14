@@ -4,18 +4,16 @@
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Educational institution events') }}
             <span class="sm:block text-purple-300">
-                Add educational institution event
+                Lista de eventos de institución educativa
             </span>
         </h2>
-        <div>
-            @can('create_educational_institution_event')
-            <a href="{{ route('nodes.educational-institutions.events.create', [$node, $educationalInstitution]) }}">
-                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Create educational institution event')}}
-                </div>
-            </a>
-            @endcan
-        </div>
+        @can('create_educational_institution_event')
+        <a href="{{ route('nodes.educational-institutions.events.create', [$node, $educationalInstitution]) }}">
+            <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                {{ __('Create educational institution event')}}
+            </div>
+        </a>
+        @endcan
     </x-slot>
 
     <div class="py-12">

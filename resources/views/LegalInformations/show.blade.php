@@ -9,11 +9,13 @@
                 </span>
             </h2>
         </div>
+        @can('edit_legal_information')
         <a href="{{ route('legal-informations.edit', $legalInformation) }}">
             <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 sm:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                 {{ __('Edit legal information') }}
             </div>
         </a>
+        @endcan
     </x-slot>
 
     <div>
