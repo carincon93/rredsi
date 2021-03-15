@@ -4,12 +4,12 @@
         <div class="col-start-1 col-span-5 ml-5 md:ml-0 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Projects') }}
-                <span class="text-base sm:text-2xl block text-purple-300">
-                    Crear proyecto
+                <span class="text-base sm:text-lg block text-purple-300">
+                    <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}" class="text-white font-weight underline">Lista de proyectos</a> / Crear proyecto
                 </span>
             </h2>
         </div>
-        @can('index_project')
+        {{-- @can('index_project')
         <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}">
             <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
@@ -18,7 +18,7 @@
                 {{ __('Back')}}
             </div>
         </a>
-        @endcan
+        @endcan --}}
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -288,5 +288,11 @@
             )
         </script>
     @endpush
+
+
+    {{--Alert component --}}
+    @if (session('status') || !is_null($errors) && $errors->any() > 0)
+        <x-data-alert />
+    @endif
 
 </x-app-layout>

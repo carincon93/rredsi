@@ -4,12 +4,12 @@
         <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Research outputs') }}
-                <span class="text-base sm:text-2xl block text-purple-300">
-                    Editar producto de investigación
+                <span class="text-base sm:text-lg block text-purple-300">
+                    <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}" class="text-white font-weight underline">Crear producto de investigación</a> / Editar producto de investigación
                 </span>
             </h2>
         </div>
-        @can('index_research_output')
+        {{-- @can('index_research_output')
         <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam, $project]) }}">
             <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
@@ -18,7 +18,7 @@
                 {{ __('Back')}}
             </div>
         </a>
-        @endcan
+        @endcan --}}
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -92,4 +92,10 @@
             }
         </script>
     @endpush
+
+    {{--Alert component --}}
+    @if (session('status') || !is_null($errors) && $errors->any() > 0)
+        <x-data-alert />
+    @endif
+
 </x-app-layout>

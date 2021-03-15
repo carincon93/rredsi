@@ -4,8 +4,8 @@
         <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Node events') }}
-                <span class="text-base sm:text-2xl block text-purple-300">
-                    Detalles del evento de nodo
+                <span class="text-base sm:text-lg block text-purple-300">
+                    <a class="text-white font-weight underline" href="{{ route('nodes.events.index', [$node]) }}">Lista de eventos de nodo</a> / Detalles del evento de nodo
                 </span>
             </h2>
         </div>

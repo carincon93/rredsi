@@ -4,7 +4,7 @@
         <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('User graduations') }}
-                <span class="sm:block text-purple-300">
+                <span class="sm:block text-lg text-purple-300">
                     Lista de información de grado
                 </span>
             </h2>

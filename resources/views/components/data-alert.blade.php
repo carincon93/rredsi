@@ -4,7 +4,12 @@
     <div class="flex items-center justify-between w-full p-2 px-6 py-4 bg-blue-900 shadow text-white">
         <span class="inline-block align-middle mr-8">
             {{--  imprimimos el mensaje que llega del controlador --}}
-            <p> {{ session('status') }}</p>
+            @if (session('status'))
+                <p> {{ session('status') }}</p>
+            @else
+                <p>Tiene errores en algunos campos. Por favor revise nuevamente el formulario.</p>
+            @endif
+
         </span>
 
         <label class="close cursor-pointer" title="close" for="footeralert">

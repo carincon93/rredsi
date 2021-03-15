@@ -5,7 +5,7 @@
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Users') }}
                 <span class="text-base sm:text-2xl block text-purple-300">
-                    Detalles del usuario
+                    <a class="text-white font-weight underline" href="{{ route('users.index') }}" >Lista de usuarios</a> / Detalles del usuario
                 </span>
             </h2>
         </div>

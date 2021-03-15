@@ -5,7 +5,7 @@
             <h2 class="font-display text-white text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Roles') }}
                 <span class="text-base sm:text-2xl block text-purple-300">
-                    Detalles del rol
+                    <a class="text-white font-weight underline" href="{{ route('roles.index') }}" >Lista de roles</a> / Detalles del rol
                 </span>
             </h2>
         </div>

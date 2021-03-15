@@ -3,11 +3,11 @@
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Educational institution events') }}
-            <span class="sm:block text-purple-300">
-                Crear evento de institución educativa
+            <span class="sm:block text-lg text-purple-300">
+                <a class="text-white font-weight underline" href="{{ route('nodes.educational-institutions.events.index', [$node, $educationalInstitution]) }}">Lista de eventos de institución educativa</a> / Crear evento de institución educativa
             </span>
         </h2>
-        @can('index_educational_institution_event')
+        {{-- @can('index_educational_institution_event')
         <a href="{{ route('nodes.educational-institutions.events.index', [$node, $educationalInstitution]) }}">
             <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
@@ -16,7 +16,7 @@
                 {{ __('Back')}}
             </div>
         </a>
-        @endcan
+        @endcan --}}
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -84,4 +84,11 @@
             </div>
         </div>
     </div>
+
+
+    {{--Alert component --}}
+    @if (session('status') || !is_null($errors) && $errors->any() > 0)
+        <x-data-alert />
+    @endif
+
 </x-app-layout>
