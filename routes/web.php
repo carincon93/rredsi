@@ -33,7 +33,6 @@ use App\Http\Controllers\AnnualNodeEventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\ModelForm;
-use App\Models\NodeEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
     // * fin ruta
 
     // ? ruta para la dashboard o panel de coordinador de nodo //
-    Route::get('/nodes/{node}/dashboard', [AppController::class, 'dashboard'])->name('nodes.dashboard');
+    Route::get('/dashboard', [AppController::class, 'dashboard'])->name('dashboard');
 
     // ? ruta para ver cada notificacion expecifica para aceptar o denegar participacion en proyecto //
     // ? se manda aparte de el resource para evitar problemas en envio de datos//

@@ -47,18 +47,6 @@
                     </div>
 
                     <div class="mt-1/6">
-                        <x-jet-label class="mb-4" for="password" value="{{ __('Password') }}" />
-                        <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-                        <x-jet-input-error for="password" class="mt-2" />
-                    </div>
-
-                    <div class="mt-1/6">
-                        <x-jet-label class="mb-4" for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                        <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-                        <x-jet-input-error for="password_confirmation" class="mt-2" />
-                    </div>
-
-                    <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="document_type" value="{{ __('Document type') }}" />
                         <select id="document_type" class="form-select w-full" name="document_type" required>
                             <option value="">Seleccione un tipo de documento</option>
@@ -83,6 +71,7 @@
 
                     <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="interests" value="{{ __('Interests') }}" />
+                        <small class="inline-block text-gray-500">Separe con comas cada interés</small>
                         <textarea rows="20" id="interests" name="interests" class="form-textarea border-0 w-full" value="{{ old('interests') }}" required >{{ old('interests') }}</textarea>
                         <x-jet-input-error for="interests" class="mt-2" />
                     </div>
@@ -90,11 +79,11 @@
                     <p class="mt-1/6">{{ __('Is enabled?') }} </p>
                     <div class="block mt-4">
                         <label for="is_enabled_yes" class="flex items-center">
-                            <input id="is_enabled_yes" value="1" type="radio" class="form-radio" name="is_enabled" {{ old('is_enabled') == 1 ? "checked" : "" }}>
+                            <input id="is_enabled_yes" value="1" type="radio" class="form-radio" name="is_enabled" {{ old('is_enabled') == 1 ? 'checked' : '' }}>
                             <span class="ml-2 text-sm text-gray-600">{{ __('Yes') }}</span>
                         </label>
                         <label for="is_enabled_no" class="flex items-center">
-                            <input id="is_enabled_no" value="0" type="radio" class="form-radio" name="is_enabled" {{ old('is_enabled') != null && old('is_enabled')  == 0 ? "checked" : "" }}>
+                            <input id="is_enabled_no" value="0" type="radio" class="form-radio" name="is_enabled" {{ old('is_enabled') != null && old('is_enabled')  == 0 ? 'checked' : '' }}>
                             <span class="ml-2 text-sm text-gray-600">{{ __('No') }}</span>
                         </label>
                         <x-jet-input-error for="is_enabled" class="mt-2" />
@@ -104,7 +93,7 @@
                     <div class="block mt-4">
                         @foreach ($roles as $role)
                             <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox" name="role_id[]" value="{{ $role->id }}" {{ old('role_id') == $role->id ? "checked" : "" }}>
+                                <input type="checkbox" class="form-checkbox" name="role_id[]" value="{{ $role->id }}" {{ is_array(old('role_id')) && in_array($role->id, old('role_id')) ? 'checked' : '' }}>
                                 <span class="ml-2 text-sm text-gray-600">{{ $role->name }}</span>
                             </label>
                         @endforeach

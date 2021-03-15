@@ -95,6 +95,7 @@
 
                     <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="keywords" value="{{ __('Keywords') }}" />
+                        <small class="inline-block text-gray-500">Separe con comas cada palabra clave</small>
                         <textarea rows="20" id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="8" required >{{ old('keywords') }}</textarea>
                         <x-jet-input-error for="keywords" class="mt-2" />
                     </div>
@@ -107,6 +108,7 @@
 
                     <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="roles_requirements" value="{{ __('Roles requirements') }}" />
+                        <small class="inline-block text-gray-500">Separe con comas cada requerimiento de rol</small>
                         <textarea rows="20" id="roles_requirements" name="roles_requirements" class="form-textarea border-0 w-full" rows="8" >{{ old('roles_requirements') }}</textarea>
                         <x-jet-input-error for="roles_requirements" class="mt-2" />
                     </div>
@@ -119,6 +121,7 @@
 
                     <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="tools_requirements" value="{{ __('Tools requirements') }}" />
+                        <small class="inline-block text-gray-500">Separe con comas cada requerimiento de herramienta / equipo</small>
                         <textarea rows="20" id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" rows="8" >{{ old('tools_requirements') }}</textarea>
                         <x-jet-input-error for="tools_requirements" class="mt-2" />
                     </div>

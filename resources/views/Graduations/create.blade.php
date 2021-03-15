@@ -45,7 +45,7 @@
                     </div>
 
                     <p class="mt-1/6">{{ __('Is graduated?') }}</p>
-                    <div class="mt-1/6">
+                    <div class="mt-4">
                         <input id="yes" class="form-checkbox" type="checkbox" name="is_graduated" {{ old('is_graduated') == 1 ? 'checked' : '' }} value="1" required />
                         <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="yes" >Si</label>
                         <x-jet-input-error for="is_graduated" class="mt-2" />

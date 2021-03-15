@@ -51,9 +51,11 @@
 
                         <select id="principal_research_team_id" name="principal_research_team_id" class="form-select w-full" required >
                             <option value="">Seleccione un semillero de investigación principal</option>
-                            @foreach ($educationalInstitutionFacultyResearchTeams as $educationalInstitutionFacultyResearchTeam)
+                            @forelse ($educationalInstitutionFacultyResearchTeams as $educationalInstitutionFacultyResearchTeam)
                                 <option {{ old('principal_research_team_id') == $educationalInstitutionFacultyResearchTeam->id || $project->researchTeams()->where('is_principal', 1)->first()->id == $educationalInstitutionFacultyResearchTeam->id ? "selected" : ""  }} value="{{ $educationalInstitutionFacultyResearchTeam->id }}">{{ $educationalInstitutionFacultyResearchTeam->name }}</option>
-                            @endforeach
+                            @empty
+                                <p>{{ __('No data recorded') }}</p>
+                            @endforelse
                         </select>
                         <x-jet-input-error for="principal_research_team_id" class="mt-2" />
                     </div>
@@ -113,7 +115,8 @@
 
                     <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="keywords" value="{{ __('Keywords') }}" />
-                        <textarea rows="20" id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="8" required >@if(old('keywords')){{ old('keywords')}}@else @foreach(json_decode($project->keywords) as $keyword){{ $keyword }}@endforeach @endif</textarea>
+                        <small class="inline-block text-gray-500">Separe con comas cada palabra clave</small>
+                        <textarea rows="20" id="keywords" name="keywords" class="form-textarea border-0 w-full" rows="8" required >@if(old('keywords')){{ old('keywords')}}@else @forelse(json_decode($project->keywords) as $keyword){{ $keyword }}@empty @endforelse @endif</textarea>
                         <x-jet-input-error for="keywords" class="mt-2" />
                     </div>
 
@@ -125,7 +128,8 @@
 
                     <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="roles_requirements" value="{{ __('Roles requirements') }}" />
-                        <textarea rows="20" id="roles_requirements" name="roles_requirements" class="form-textarea border-0 w-full" >@if(old('roles_requirements')){{ old('roles_requirements')}}@else @foreach(json_decode($project->roles_requirements) as $roles_requirement){{ $roles_requirement }}@endforeach @endif</textarea>
+                        <small class="inline-block text-gray-500">Separe con comas cada requerimiento de rol</small>
+                        <textarea rows="20" id="roles_requirements" name="roles_requirements" class="form-textarea border-0 w-full" >@if(old('roles_requirements')){{ old('roles_requirements')}}@else @if($project->roles_requirements) @forelse(json_decode($project->roles_requirements) as $roles_requirement){{ $roles_requirement }}@empty @endforelse @endif @endif</textarea>
                         <x-jet-input-error for="roles_requirements" class="mt-2" />
                     </div>
 
@@ -137,7 +141,8 @@
 
                     <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="tools_requirements" value="{{ __('Tools requirements') }}" />
-                        <textarea rows="20" id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" >@if(old('tools_requirements')){{ old('tools_requirements')}}@else @foreach(json_decode($project->tools_requirements) as $tools_requirement){{ $tools_requirement }}@endforeach @endif</textarea>
+                        <small class="inline-block text-gray-500">Separe con comas cada requerimiento de herramienta / equipo</small>
+                        <textarea rows="20" id="tools_requirements" name="tools_requirements" class="form-textarea border-0 w-full" >@if(old('tools_requirements')){{ old('tools_requirements')}}@else @if($project->tools_requirements) @forelse(json_decode($project->tools_requirements) as $tool_requirement){{ $tool_requirement }}@empty @endforelse @endif @endif</textarea>
                         <x-jet-input-error for="tools_requirements" class="mt-2" />
                     </div>
 

@@ -66,4 +66,17 @@ class ResearchTeam extends Model
                 'authorization_letter',
             ]);
     }
+
+
+    public static function filterProjects()
+    {
+        $authUser = auth()->user();
+
+        if ($authUser->projects() && $authUser->hasRole(4)) {
+            return $authUser->projects();
+        }
+
+        $_this = new self;
+        return $_this->first()->projects();
+    }
 }

@@ -47,18 +47,6 @@
                     </div>
 
                     <div class="mt-1/6">
-                        <x-jet-label class="mb-4" for="password" value="{{ __('Password') }}" />
-                        <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-                        <x-jet-input-error for="password" class="mt-2" />
-                    </div>
-
-                    <div class="mt-1/6">
-                        <x-jet-label class="mb-4" for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                        <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-                        <x-jet-input-error for="password_confirmation" class="mt-2" />
-                    </div>
-
-                    <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="document_type" value="{{ __('Document type') }}" />
                         <select id="document_type" class="form-select w-full" name="document_type" required>
                             <option value="">Seleccione un tipo de documento</option>
@@ -83,6 +71,7 @@
 
                     <div class="mt-1/6">
                         <x-jet-label class="mb-4" for="interests" value="{{ __('Interests') }}" />
+                        <small class="inline-block text-gray-500">Separe con comas cada interés</small>
                         <textarea rows="20" id="interests" name="interests" class="form-textarea border-0 w-full" value="{{ old('interests') }}" required >@if(old('interests')){{ old('interests') }}@else @foreach(explode(',', implode(json_decode($user->interests))) as $interest){{$interest}}@endforeach @endif</textarea>
                         <x-jet-input-error for="interests" class="mt-2" />
                     </div>

@@ -30,7 +30,7 @@ Route::apiResources([
     'nodes' => NodeController::class,
     'nodes.educational-institutions' => EducationalInstitutionController::class,
     'nodes.educational-institutions.faculties' => EducationalInstitutionFacultyController::class,
-    'nodes.educational-institutions.academic-programs' => AcademicProgramController::class,
+    'nodes.educational-institutions.faculties.academic-programs' => AcademicProgramController::class,
     'knowledge-areas' => KnowledgeAreaController::class,
     'knowledge-areas.knowledge-subareas' => KnowledgeSubareaController::class,
     'knowledge-areas.knowledge-subareas.knowledge-subarea-disciplines' => KnowledgeSubareaDisciplineController::class,

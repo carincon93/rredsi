@@ -27,7 +27,7 @@ class ResearchTeamController extends Controller
      */
     public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, ResearchGroup $researchGroup)
     {
-        $this->authorize('viewAny', [ResearchTeam::class , $educationalInstitution]);
+        $this->authorize('viewAny', [ResearchTeam::class, $educationalInstitution]);
 
         $researchTeams = $researchGroup->researchTeams()->orderBy('name')->get();
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Node;
 use App\Models\EducationalInstitution;
+use App\Models\EducationalInstitutionFaculty;
 use App\Models\AcademicProgram;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,9 @@ class AcademicProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Node $node, EducationalInstitution $educationalInstitution)
+    public function index(Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
-        $academicPrograms = $educationalInstitution->academicPrograms()->get();
+        $academicPrograms = $faculty->academicPrograms()->get();
 
         return response(['academicPrograms' => $academicPrograms]);
     }

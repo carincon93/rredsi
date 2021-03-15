@@ -21,17 +21,16 @@ class ProjectPolicy
      */
     public function viewAny(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam)
     {
-        if(!$user->hasPermissionTo('index_project')){
-            return false;
-        }
-
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        $adminTeam = $researchTeam->administrator->id;
+        $adminTeam = optional($researchTeam->administrator)->id;
         if($adminTeam == $user->id){
+            return true;
+        }
+        if($user->hasPermissionTo('index_project')){
             return true;
         }
 
@@ -47,21 +46,21 @@ class ProjectPolicy
      */
     public function view(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-        if(!$user->hasPermissionTo('show_project')){
-            return false;
-        }
-
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        $adminTeam = $researchTeam->administrator->id;
+        $adminTeam = optional($researchTeam->administrator)->id;
         if($adminTeam == $user->id){
             return true;
         }
 
         if($project->authors()->where('user_id', $user->id)->first()){
+            return true;
+        }
+
+        if($user->hasPermissionTo('show_project')){
             return true;
         }
 
@@ -76,16 +75,17 @@ class ProjectPolicy
      */
     public function create(User $user,EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam)
     {
-        if($user->hasPermissionTo('create_project')){
-            return true;
-        }
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        $adminTeam = $researchTeam->administrator->id;
+        $adminTeam = optional($researchTeam->administrator)->id;
         if($adminTeam == $user->id){
+            return true;
+        }
+
+        if($user->hasPermissionTo('create_project')){
             return true;
         }
 
@@ -101,20 +101,17 @@ class ProjectPolicy
      */
     public function update(User $user, EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-        if(!$user->hasPermissionTo('edit_project')){
-            return false;
-        }
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        $adminTeam = $researchTeam->administrator->id;
+        $adminTeam = optional($researchTeam->administrator)->id;
         if($adminTeam == $user->id){
             return true;
         }
 
-        if($project->authors()->where('user_id', $user->id)->first()){
+        if($project->authors()->where('user_id', $user->id)->first() && $user->hasPermissionTo('edit_project')){
             return true;
         }
 
@@ -130,16 +127,11 @@ class ProjectPolicy
      */
     public function delete(User $user, EducationalInstitution $educationalInstitution, ResearchTeam $researchTeam, Project $project)
     {
-
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        $adminTeam = $researchTeam->administrator->id;
-        if($adminTeam == $user->id){
-            return true;
-        }
         return false;
     }
 

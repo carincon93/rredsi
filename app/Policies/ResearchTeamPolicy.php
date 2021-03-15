@@ -18,18 +18,16 @@ class ResearchTeamPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user,EducationalInstitution $educationalInstitution)
+    public function viewAny(User $user, EducationalInstitution $educationalInstitution)
     {
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        if(!$user->hasPermissionTo('index_research_team')){
-            return false;
+        if($user->hasPermissionTo('index_research_team')){
+            return true;
         }
-
-        return false;
     }
 
     /**
@@ -41,17 +39,17 @@ class ResearchTeamPolicy
      */
     public function view(User $user,EducationalInstitution $educationalInstitution,ResearchTeam $researchTeam)
     {
-        if(!$user->hasPermissionTo('show_research_team')){
-            return false;
-        }
-
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        $adminTeam = $researchTeam->administrator->id;
+        $adminTeam = optional($researchTeam->administrator)->id;
         if($adminTeam == $user->id){
+            return true;
+        }
+
+        if($user->hasPermissionTo('show_research_team')){
             return true;
         }
 
@@ -66,17 +64,14 @@ class ResearchTeamPolicy
      */
     public function create(User $user,EducationalInstitution $educationalInstitution)
     {
-
-
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        if(!$user->hasPermissionTo('create_research_team')){
-            return false;
+        if($user->hasPermissionTo('create_research_team')){
+            return true;
         }
-
 
         return false;
     }
@@ -90,23 +85,19 @@ class ResearchTeamPolicy
      */
     public function update(User $user,EducationalInstitution $educationalInstitution,ResearchTeam $researchTeam)
     {
-
-
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        $adminTeam = $researchTeam->administrator->id;
+        $adminTeam = optional($researchTeam->administrator)->id;
         if($adminTeam == $user->id){
             return true;
         }
 
-        if(!$user->hasPermissionTo('edit_research_team')){
-            return false;
+        if($user->hasPermissionTo('edit_research_team')){
+            return true;
         }
-
-
 
         return false;
     }
@@ -120,17 +111,14 @@ class ResearchTeamPolicy
      */
     public function delete(User $user,EducationalInstitution $educationalInstitution)
     {
-
-        $admin = $educationalInstitution->administrator->id;
+        $admin = optional($educationalInstitution->administrator)->id;
         if($admin == $user->id){
             return true;
         }
 
-        if(!$user->hasPermissionTo('destroy_research_team')){
-            return false;
+        if($user->hasPermissionTo('destroy_research_team')){
+            return true;
         }
-
-
 
         return false;
     }

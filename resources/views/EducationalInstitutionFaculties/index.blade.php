@@ -100,6 +100,7 @@
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.dashboard', [$node, $educationalInstitution, $faculty]) }}">
                                                     {{ __('Dashboard') }}
                                                 </x-jet-dropdown-link>
+                                                <hr>
                                                 @can('show_educational_institution_faculty')
                                                 <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.show', [$node, $educationalInstitution, $faculty]) }}">
                                                     {{ __('Show') }}

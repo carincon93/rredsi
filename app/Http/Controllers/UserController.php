@@ -50,11 +50,17 @@ class UserController extends Controller
         $this->authorize('create-user', [User::class]);
 
         $user = new User();
-        $user->fieldName = $request->get('fieldName');
-        $user->fieldName = $request->get('fieldName');
-        $user->fieldName = $request->get('fieldName');
+        $user->name               = $request->get('name');
+        $user->email              = $request->get('email');
+        $user->password           = bcrypt("rredsi".$request->get('document_number')."*");
+        $user->document_type      = $request->get('document_type');
+        $user->document_number    = $request->get('document_number');
+        $user->cellphone_number   = $request->get('cellphone_number');
+        $user->interests          = $request->get('interests');
+        $user->is_enabled         = $request->get('is_enabled');
 
         if ( !$user->save() ) {
+            $user->syncRoles($request->get('role_id'));
             return redirect()->route('users.create')->withInput()->with('status', __('An error has ocurred. Please try again later.'));
         }
 
@@ -105,7 +111,7 @@ class UserController extends Controller
 
         $user->name               = $request->get('name');
         $user->email              = $request->get('email');
-        $user->password           = bcrypt($request->get('password'));
+        $user->password           = bcrypt("rredsi".$request->get('document_number')."*");
         $user->document_type      = $request->get('document_type');
         $user->document_number    = $request->get('document_number');
         $user->cellphone_number   = $request->get('cellphone_number');
@@ -117,7 +123,7 @@ class UserController extends Controller
             $message = 'Your update processed correctly';
         }
 
-        if ( !$user->update() ) {
+        if ( !$user->save() ) {
             return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
         }
 

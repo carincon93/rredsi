@@ -18,7 +18,7 @@ class ResearchGroupPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user,EducationalInstitution $educationalInstitution)
+    public function viewAny(User $user, EducationalInstitution $educationalInstitution)
     {
         if(!$user->hasPermissionTo('index_research_group')){
             return false;

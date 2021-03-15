@@ -73,19 +73,15 @@ class User extends Authenticatable
     public function getMyProjectsAttribute(){
         $authUser = Auth::user();
 
-        $researchTeam = $authUser->researchTeams->first();
-        if ( !is_null($authUser->researchTeams->first()) ) {
-            $node                             = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->node;
-            $educationalInstitution           = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution;
-            $educationalInstitutionFaculty    = $researchTeam->researchGroup->educationalInstitutionFaculty;
-            $researchGroup                    = $researchTeam->researchGroup;
+        $educationalInstitutionFaculty = $authUser->educationalInstitutionFaculties()->where('is_principal', 1)->first();
+        if ( $educationalInstitutionFaculty ) {
+            $node                             = $educationalInstitutionFaculty->educationalInstitution->node;
+            $educationalInstitution           = $educationalInstitutionFaculty->educationalInstitution;
 
             return [
-                "node" => $node,
-                "educationalInstitution" => $educationalInstitution,
+                "node"                          => $node,
+                "educationalInstitution"        => $educationalInstitution,
                 "educationalInstitutionFaculty" => $educationalInstitutionFaculty,
-                "researchGroup" => $researchGroup,
-                "researchTeam" => $researchTeam
              ];
         }
     }
@@ -127,6 +123,4 @@ class User extends Authenticatable
                 'is_principal'
             ]);
     }
-
-
 }

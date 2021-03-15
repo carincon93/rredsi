@@ -1,21 +1,21 @@
 <title>{{ "Trabajos académicos"}}</title>
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{ __('Academic works') }}
-            <span class="sm:block text-purple-300">
-                Add academic work info
-            </span>
-        </h2>
-        <div>
-            @can('create_academic_work')
-            <a href="{{ route('user.profile.user-graduations.user-academic-works.create', [$userGraduation]) }}">
-                <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
-                    {{ __('Create academic work') }}
-                </div>
-            </a>
-            @endcan
+        <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
+            <h2 class="font-semibold text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
+                {{ __('Academic works') }}
+                <span class="sm:block text-purple-300">
+                    Lista de trabajos académicos
+                </span>
+            </h2>
         </div>
+        @can('create_academic_work')
+        <a href="{{ route('user.profile.user-graduations.user-academic-works.create', [$userGraduation]) }}">
+            <div class="w-full sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
+                {{ __('Create academic work') }}
+            </div>
+        </a>
+        @endcan
     </x-slot>
 
     <div class="py-12">
@@ -31,9 +31,6 @@
                     <x-slot name="thirdTheadTitle">
                         {{ __('Type') }}
                     </x-slot>
-                    <x-slot name="fourthTheadTitle">
-                        {{ __('Authors') }}
-                    </x-slot>
 
                     <x-slot name="tbodyData">
                         @if ($userAcademicWork)
@@ -42,13 +39,10 @@
                                     <span>{{ $userAcademicWork->title }}</span>
                                 </td>
                                 <td>
-                                    <span>{{ optional($userAcademicWork->knowledgeArea)->name }}</span>
+                                    <span>{{ optional($userAcademicWork->knowledgeSubareaDiscipline)->name }}</span>
                                 </td>
                                 <td>
                                     <span>{{ $userAcademicWork->type }}</span>
-                                </td>
-                                <td>
-                                    <span>{{ $userAcademicWork->authors }}</span>
                                 </td>
 
                                 <td class="py-2 text-left">

@@ -40,7 +40,7 @@
 
                         @if (Route::has('login'))
                             @auth
-                                <a href="{{ route('nodes.dashboard', [$node]) }}" class="font-medium text-blue-900 hover:text-indigo-500">{{ __('Dashboard') }}</a>
+                                <a href="{{ route('dashboard', [$node]) }}" class="font-medium text-blue-900 hover:text-indigo-500">{{ __('Dashboard') }}</a>
                             @else
                                 <a href="{{ route('login') }}" class="font-medium text-blue-900 hover:text-indigo-500">{{ __('Login') }}</a>
                                 @if (Route::has('register'))
@@ -85,7 +85,7 @@
                         @if (Route::has('login'))
                             @auth
                                 <div role="none">
-                                    <a href="{{ route('nodes.dashboard', [$node]) }}" class="block w-full px-5 py-3 text-center font-medium text-blue-900 bg-gray-50 hover:bg-gray-100" role="menuitem">{{ __('Dashboard') }}</a>
+                                    <a href="{{ route('dashboard') }}" class="block w-full px-5 py-3 text-center font-medium text-blue-900 bg-gray-50 hover:bg-gray-100" role="menuitem">{{ __('Dashboard') }}</a>
                                 </div>
                             @else
                                 <div role="none">

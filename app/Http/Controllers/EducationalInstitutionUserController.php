@@ -11,7 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\InformationNotification;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\EducationalInstitutionUserRequest;
 use Illuminate\Http\Request;
 
 class EducationalInstitutionUserController extends Controller
@@ -50,14 +50,14 @@ class EducationalInstitutionUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
+    public function store(EducationalInstitutionUserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty)
     {
         $this->authorize('create', [ User::class, $educationalInstitution]);
 
         $user = new User();
         $user->name               = $request->get('name');
         $user->email              = $request->get('email');
-        $user->password           = bcrypt($request->get('password'));
+        $user->password           = bcrypt("rredsi".$request->get('document_number')."*");
         $user->document_type      = $request->get('document_type');
         $user->document_number    = $request->get('document_number');
         $user->cellphone_number   = $request->get('cellphone_number');
@@ -121,23 +121,22 @@ class EducationalInstitutionUserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
+    public function update(EducationalInstitutionUserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
         $this->authorize('update', [ User::class, $educationalInstitution]);
 
         $user->name               = $request->get('name');
         $user->email              = $request->get('email');
-        $user->password           = bcrypt($request->get('password'));
+        $user->password           = bcrypt("rredsi".$request->get('document_number')."*");
         $user->document_type      = $request->get('document_type');
         $user->document_number    = $request->get('document_number');
         $user->cellphone_number   = $request->get('cellphone_number');
         $user->interests          = $request->get('interests');
         $user->is_enabled         = $request->get('is_enabled');
 
-        if($user->update()){
+        if($user->save()){
             // ? sincronisamos si hay nuevos roles
             $user->syncRoles($request->get('role_id'));
-            $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true] );
             $message = 'Your update processed correctly';
         }
 

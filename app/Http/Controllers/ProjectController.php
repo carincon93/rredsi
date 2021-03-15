@@ -33,7 +33,7 @@ class ProjectController extends Controller
     {
         $this->authorize('viewAny', [Project::class , $educationalInstitution , $researchTeam]);
 
-        $projects = $researchTeam->projects()->orderBy('title')->get();
+        $projects = ResearchTeam::filterProjects()->get();
 
         return view('Projects.index',  compact('node', 'educationalInstitution', 'faculty', 'researchGroup', 'researchTeam', 'projects'));
     }
