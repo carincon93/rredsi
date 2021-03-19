@@ -100,6 +100,11 @@
                         <x-jet-input-error for="role_id" class="mt-2" />
                     </div>
 
+                    <p class="mt-1/6">{{ __('Educational institution faculty') }} </p>
+                    <div class="block mt-4">
+                        <x-drop-down-educational-institution-faculties :form="'yes'" />
+                    </div>
+
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Edit') }}

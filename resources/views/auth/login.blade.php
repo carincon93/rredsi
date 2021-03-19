@@ -45,5 +45,13 @@
             </div>
         </form>
 
+          {{--Alert component --}}
+            @if (session('status'))
+                <x-data-alert />
+            @endif
+
     </x-jet-authentication-card>
+
+
+
 </x-guest-layout>

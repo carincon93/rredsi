@@ -66,6 +66,37 @@
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
+
+        <!-- Cellphone number-->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label class="mb-4" for="cellphone_number" value="{{ __('Cellphone number') }}" />
+            <x-jet-input id="cellphone_number" class="mt-1 block w-full" type="number" wire:model.defer="state.cellphone_number" autocomplete="cellphone_number"/>
+            <x-jet-input-error for="cellphone_number" class="mt-2" />
+        </div>
+
+        <!-- Biography -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label class="mb-4" for="biography" value="{{ __('biography') }}" />
+            {{-- <small class="inline-block text-gray-500">Separe con comas cada interés</small> --}}
+            <textarea rows="20" id="biography" name="biography" class="form-textarea border-1 w-full" wire:model.defer="state.biography" autocomplete="biography" ></textarea>
+            <x-jet-input-error for="biography" class="mt-2" />
+        </div>
+
+        <!-- cvlac -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label class="mb-4" for="cvlac " value="{{ __('cvlac') }}" />
+            <x-jet-input id="cvlac " class="mt-1 block w-full" type="url" max="191" wire:model.defer="state.cvlac" autocomplete="cvlac"/>
+            <x-jet-input-error for="cvlac " class="mt-2" />
+        </div>
+
+        <!-- cv -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label class="mb-4" for="cv" value="{{ __('Hoja de vida') }}" />
+            <small class="inline-block text-gray-500">Solo admite pdf</small>
+            <x-jet-input id="cv" class="mt-1 block w-full" type="file" accept="application/pdf" wire:model.defer="state.cv" autocomplete="cv" />
+            <x-jet-input-error for="cv" class="mt-2" />
+        </div>
+
     </x-slot>
 
     <x-slot name="actions">

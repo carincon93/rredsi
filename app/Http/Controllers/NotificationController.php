@@ -24,6 +24,8 @@ use App\Notifications\RequestResponse;
 
 class NotificationController extends Controller
 {
+    // ? Envio de invitacion para participar en un proyecto
+    //**esta la envian los autores invitando a participar a un estudiante */
     public function sendRoleNotification(Request $request , Node $node,User $user ) {
         $project      = Project::findOrFail($request->get('project_id'));
         $researchTeam = $project->researchTeams()->where('is_principal', 1)->first();
@@ -35,6 +37,8 @@ class NotificationController extends Controller
         return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'Invitación enviada con éxito');
     }
 
+    // ? Envio de solicitud para participar en un proyecto
+    //** esta la envia un estudiante a los autores del proyecto para poder participar */
     public function sendToParticipate(Request $request) {
         $authUser = auth()->user();
 
@@ -58,6 +62,7 @@ class NotificationController extends Controller
         return redirect()->route('nodes.explorer.searchProjects.showProject', [$node, $project])->with('status', 'Solicitud enviada con éxito');
     }
 
+    // ? metodo de solicitud para un proyecto poder ingresar en un evento
     public function sendProjectToEvent(Request $request) {
         $user       = auth()->user();
         $faculty    = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
@@ -79,8 +84,10 @@ class NotificationController extends Controller
             "name_event" => $event->name
         ];
 
+        // ^ notificamos a los autores de la participacion del proyecto en el evento
         #Send authors notification
         Notification::send($authors, new InformationNotification($project, $type));
+        // ^ notificamos a delegado(a) de la institucion del registro del proyecto al evento
         #Send admin institution notification
         Notification::send($adminInstitution, new InformationNotification($project, $type));
 
@@ -126,6 +133,7 @@ class NotificationController extends Controller
         return $storagePath;
     }
 
+    // ^? index de notificaciones
     public function index()
     {
         $user = auth()->user();
@@ -133,6 +141,7 @@ class NotificationController extends Controller
         return view('EducationalInstitutionUsers.index-notifications', compact('user'));
     }
 
+    // ^? este metodo me marca como leidos las notificaciones que llegaron a un correo o se les da clic en el dropdown
     public function indexResponseSend($id)
     {
         $notification = auth()->user()->notifications->find($id);

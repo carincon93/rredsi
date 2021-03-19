@@ -18,14 +18,26 @@
                         $node = request()->route('node');
                     }
                 @endphp
-                @if(!is_null($node) )
+                {{-- @if(!is_null($node) )
                     <x-jet-nav-link href="{{ route('nodes.explorer', [$node]) }}" :active="request()->routeIs('/')" class="text-gray-600 hover:text-gray-400 ml-5">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" class="mr-2">
                             <path regular" d="M14.03,12.914l-5.82,2.66a1.288,1.288,0,0,0-.636.636l-2.66,5.82A.8.8,0,0,0,5.97,23.086l5.82-2.66a1.288,1.288,0,0,0,.636-.636l2.66-5.82a.8.8,0,0,0-1.056-1.056Zm-3.119,6a1.288,1.288,0,1,1,0-1.821A1.288,1.288,0,0,1,10.91,18.91ZM10,8A10,10,0,1,0,20,18,10,10,0,0,0,10,8Zm0,18.065A8.065,8.065,0,1,1,18.065,18,8.074,8.074,0,0,1,10,26.065Z" transform="translate(0 -8)"/>
                         </svg>
                         {{ __('Explorer') }}
                     </x-jet-nav-link>
-                @endif
+                @endif --}}
+
+                   {{-- dropdown para listar cada explorer de nodo --}}
+                        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                            <span>{{ __('Explorer') }}</span>
+                            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-auto mt-2 origin-top-right rounded-md shadow-lg z-10">
+                                <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800" id="nodeSelect"> </div>
+                            </div>
+                        </div>
+
             </div>
 
             <div class="hidden md:flex md:justify-around" style="flex-basis: 160px">
@@ -124,4 +136,31 @@
     </div>
 </nav>
 
+@once
+    @push('scripts')
+        <script>
+            // ? traemos de la api todos los nodos y agregamos cada ruta explorer al dropdown de explorer
+            getAllNodes = async () =>{
+                            const nodesSelect                     = document.getElementById('nodeSelect');
+
+                            try {
+                            const uri       = `/api/nodes`;
+                            const response  = await fetch(uri);
+                            const result    = await response.json();
+
+                            console.log(result);
+                            result.nodes.map(function(node) {
+                                let option = `<a href="nodes/${node.id}/explorer" class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">${node.state}</a> <div class="border-t border-gray-100"></div>`;
+                                nodesSelect.innerHTML += option;
+                            })
+
+                        } catch (error) {
+                            console.log(error);
+                        }
+            }
+
+            getAllNodes();
+        </script>
+    @endpush
+@endonce
 
