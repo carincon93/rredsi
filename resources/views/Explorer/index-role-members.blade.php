@@ -7,7 +7,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20" class="inline mb-2">
                         <path regular" d="M14.03,12.914l-5.82,2.66a1.288,1.288,0,0,0-.636.636l-2.66,5.82A.8.8,0,0,0,5.97,23.086l5.82-2.66a1.288,1.288,0,0,0,.636-.636l2.66-5.82a.8.8,0,0,0-1.056-1.056Zm-3.119,6a1.288,1.288,0,1,1,0-1.821A1.288,1.288,0,0,1,10.91,18.91ZM10,8A10,10,0,1,0,20,18,10,10,0,0,0,10,8Zm0,18.065A8.065,8.065,0,1,1,18.065,18,8.074,8.074,0,0,1,10,26.065Z" transform="translate(0 -8)" fill="#233876" />
                     </svg>
-                    Explorer: Conecte con jóvenes investigadores
+                    Connect: Conecte con jóvenes investigadores
                 </span>
             </h1>
         </x-slot>
@@ -38,10 +38,10 @@
                         @endif
                         <div class="ml-8 w-full">
                             <div>
-                                <p class="text-2xl mb-4">
+                                <p class="pre-line-initial text-2xl mb-4">
                                     <a href="{{ route('nodes.explorer.searchRoles.showUser', [$node, $roleMember]) }}">{{ $roleMember->name }}</a>
                                 </p>
-                                <p class="text-justify mb-2">
+                                <p class="pre-line-initial text-justify mb-2">
                                     {{ __('Biography') }}:
                                     <br>
                                     <small>
@@ -52,7 +52,7 @@
                                         @endif
                                     </small>
                                 </p>
-                                <p class="mt-2 mb-2">
+                                <p class="pre-line-initial mt-2 mb-2">
                                     {{ __('Interests') }}:
                                     <br>
                                     <small>
@@ -63,7 +63,7 @@
                                         @endforelse
                                     </small>
                                 </p>
-                                <p class="mt-2 mb-2">
+                                <p class="pre-line-initial mt-2 mb-2">
                                     {{ __('CvLac') }}:
                                     <br>
                                     <small>
@@ -79,7 +79,7 @@
                                         @endif
                                     </small>
                                 </p>
-                                <p class="mt-2">Información académica:</p>
+                                <p class="pre-line-initial mt-2">Información académica:</p>
                                 @forelse (optional($roleMember->userGraduations)->take(3)->chunk(3) as $chunk)
                                     <div class="mt-4 md:grid md:grid-cols-3 md:gap-4">
                                         @foreach ($chunk as $graduation)
@@ -97,7 +97,7 @@
                                         @endforeach
                                     </div>
                                 @empty
-                                    <p class="mt-12 ml-16">{{ __('No data recorded') }}</p>
+                                    <p class="pre-line-initial mt-12 ml-16">{{ __('No data recorded') }}</p>
                                 @endforelse
                             </div>
                         </div>

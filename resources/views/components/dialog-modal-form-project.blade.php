@@ -43,20 +43,20 @@
 
             <!--Body-->
             <div class="px-5 py-2 text-gray-600">
-                Si esta seguro de cumplir los requerimientos y desea participar en el proyecto envie su solicitud.
+                Si está seguro de cumplir los requerimientos y desea participar en el proyecto envie su solicitud.
             </div>
 
             <!--Footer-->
             <div class="flex justify-end pt-2">
                 <form method="POST" action="{{ route('notifications.sendToParticipate') }}">
                     @csrf()
-                    {{-- Guardamos el projecto en el que el aprendiz desea participar --}}
+                    {{-- Guardamos el proyecto en el que el aprendiz desea participar --}}
                     <input hidden id="project_id" name="project_id" value="{{$project->id}}">
 
                     <button type="submit" class="px-4 bg-transparent p-3 rounded-lg text-white bg-blue-900 hover:bg-blue-800 mr-2">Enviar solicitud</button>
                 </form>
 
-                <button class="modal-close px-4 bg-white p-3 rounded-lg text-blue-900 hover:text-gray-500">Close</button>
+                <button class="modal-close px-4 bg-white p-3 rounded-lg text-blue-900 hover:text-gray-500">{{ __('Close') }}</button>
             </div>
         </div>
     </div>
@@ -64,41 +64,46 @@
 
 @push('scripts')
 <script>
-    var openmodal = document.querySelectorAll('.modal-open')
-    for (var i = 0; i < openmodal.length; i++) {
-        openmodal[i].addEventListener('click', function(event){
-    	    event.preventDefault()
-    	    toggleModal()
-        })
-    }
+    document.addEventListener(
+        "DOMContentLoaded",
+            function() {
+                var openmodal = document.querySelectorAll('.modal-open')
+                for (var i = 0; i < openmodal.length; i++) {
+                    openmodal[i].addEventListener('click', function(event){
+                        event.preventDefault()
+                        toggleModal()
+                    })
+                }
 
-    const overlay = document.querySelector('.modal-overlay')
-    overlay.addEventListener('click', toggleModal)
+                const overlay = document.querySelector('.modal-overlay')
+                overlay.addEventListener('click', toggleModal)
 
-    var closemodal = document.querySelectorAll('.modal-close')
-    for (var i = 0; i < closemodal.length; i++) {
-        closemodal[i].addEventListener('click', toggleModal)
-    }
+                var closemodal = document.querySelectorAll('.modal-close')
+                for (var i = 0; i < closemodal.length; i++) {
+                    closemodal[i].addEventListener('click', toggleModal)
+                }
 
-    document.onkeydown = function(evt) {
-        evt = evt || window.event
-        var isEscape = false
-        if ("key" in evt) {
-    	    isEscape = (evt.key === "Escape" || evt.key === "Esc")
-        } else {
-    	    isEscape = (evt.keyCode === 27)
-        }
-        if (isEscape && document.body.classList.contains('modal-active')) {
-    	    toggleModal()
-        }
-    };
+                document.onkeydown = function(evt) {
+                    evt = evt || window.event
+                    var isEscape = false
+                    if ("key" in evt) {
+                        isEscape = (evt.key === "Escape" || evt.key === "Esc")
+                    } else {
+                        isEscape = (evt.keyCode === 27)
+                    }
+                    if (isEscape && document.body.classList.contains('modal-active')) {
+                        toggleModal()
+                    }
+                };
 
-    function toggleModal () {
-        const body = document.querySelector('body')
-        const modal = document.querySelector('.modal')
-        modal.classList.toggle('opacity-0')
-        modal.classList.toggle('pointer-events-none')
-        body.classList.toggle('modal-active')
-    }
+                function toggleModal () {
+                    const body = document.querySelector('body')
+                    const modal = document.querySelector('.modal')
+                    modal.classList.toggle('opacity-0')
+                    modal.classList.toggle('pointer-events-none')
+                    body.classList.toggle('modal-active')
+                }
+            }, false
+    )
 </script>
 @endpush

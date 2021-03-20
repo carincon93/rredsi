@@ -3,7 +3,7 @@
         <x-slot name="title">
             <h1 class="mt-48 text-3xl text-left md:text-left md:mt-0 md:text-4xl tracking-tight font-extrabold leading-none">
                 <span class="block text-blue-900 xl:inline">
-                    RREDSI-Ibis: La plataforma que busca el fortalecimiento de la investigación académica de {{ $node->state }}
+                    RREDSI-Ibis: La plataforma para el fortalecimiento de la investigación académica de {{ $node->state }}
                 </span>
             </h1>
         </x-slot>
@@ -28,7 +28,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20" class="inline mb-2">
                                     <path regular" d="M14.03,12.914l-5.82,2.66a1.288,1.288,0,0,0-.636.636l-2.66,5.82A.8.8,0,0,0,5.97,23.086l5.82-2.66a1.288,1.288,0,0,0,.636-.636l2.66-5.82a.8.8,0,0,0-1.056-1.056Zm-3.119,6a1.288,1.288,0,1,1,0-1.821A1.288,1.288,0,0,1,10.91,18.91ZM10,8A10,10,0,1,0,20,18,10,10,0,0,0,10,8Zm0,18.065A8.065,8.065,0,1,1,18.065,18,8.074,8.074,0,0,1,10,26.065Z" transform="translate(0 -8)" fill="#000" />
                                 </svg>
-                                Explorer: ¿Necesita apoyo para el desarrollo de su proyecto?
+                                Connect: ¿Necesita apoyo para el desarrollo de su proyecto?
                             </h1>
                             <p class="ml-1/6 mt-1 md:mt-4">Fortalezca los resultados de su proyecto conectando con jóvenes investigadores de otras áreas de conocimiento y de diferentes instituciones educativas.</p>
                             <a href="{{ route('nodes.explorer.roles', $node) }}" class="ml-1/6 mt-4 active:bg-blue-900 bg-blue-900 text-white inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
@@ -178,7 +178,7 @@
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden text-center mb-8">
                 <h1 class="text-xl md:text-4xl text-gray-400 leading-10">#EventosRREDSI<strong>Caldas{{ date('Y') }}</strong></h1>
-                <p class="text-gray-800 leading-10">Consulte los eventos <strong>{{ date('Y') }}</strong> de las diferentes instituciones educativas e inscriba un proyecto para participar</p>
+                <p class="text-gray-800 leading-10">Consulte los eventos <strong>{{ date('Y') }}</strong> de las diferentes instituciones educativas, inscriba sus proyectos y divulgue los resultados.</p>
                 <a href="{{ route('nodes.explorer.events', [$node]) }}" class="mt-4 active:bg-blue-900 bg-blue-900 hover:bg-blue-900 text-white inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información de próximos eventos</a>
             </div>
         </div>

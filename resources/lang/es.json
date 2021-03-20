@@ -292,5 +292,9 @@
     "Manage research outputs": "Productos de investigación",
     "User graduations": "Información de grado",
     "Create graduation": "Crear información de grado",
-    "Is graduated?": "¿Obtuvo grado?"
+    "Is graduated?": "¿Obtuvo grado?",
+    "cv": "Hoja de vida",
+    "Your store processed correctly": "La información se ha registrado con éxito",
+    "Your update processed correctly": "La información se ha modificado con éxito",
+    "Your delete processed correctly": "La información se ha eliminado con éxito"
 }

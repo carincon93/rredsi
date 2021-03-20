@@ -105,7 +105,7 @@
             <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28{{ !$image ? ' p-24' : '' }}" style="{{ !$image ? 'background:url(/storage/images/net.png);' : ''}}">
                 <div class="sm:text-center lg:text-left" style="{{ !$image ? 'background:url(/storage/images/dots.png);background-size: cover;background-position: right;background-repeat: no-repeat;' : ''}}">
                     {{ $title }}
-                    <p class="mt-3 text-base text-gray-500 sm:mt-5 md:mt-5 lg:mx-0{{ !$image ? ' text-center text-2xl w-full' : ' sm:text-lg sm:max-w-xl sm:mx-auto' }}">
+                    <p class="pre-line-initial mt-3 text-base text-gray-500 sm:mt-5 md:mt-5 lg:mx-0{{ !$image ? ' text-center text-2xl w-full' : ' sm:text-lg sm:max-w-xl sm:mx-auto' }}">
                         {{ $textBase }}
                     </p>
                     <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">

@@ -1,5 +1,4 @@
 <x-guest-layout>
-
     <x-guest-header :node="$node" :image="$project->main_image">
         <x-slot name="title">
             <h1 class="text-3xl sm:text-3xl tracking-tight font-extrabold leading-none">
@@ -51,7 +50,7 @@
                                     <div class="flex-grow ">
 
                                         <h2 class="text-xl title-font font-medium mb-3">
-                                            <a href="{{ route('nodes.explorer.searchRoles.showUser', [$node, $author]) }}" target="_blank">{{ $author->name }}</a>
+                                            <a href="{{ route('nodes.explorer.searchRoles.showUser', [$node, $author]) }}" class="capitalize" target="_blank">{{ $author->name }}</a>
                                         </h2>
                                         <p class="leading-relaxed text-sm text-justify">
                                             <small></small>
@@ -63,8 +62,8 @@
                                     </div>
                                 </div>
                                 <div class="rounded bg-white p-4 transform translate-x-6 -translate-y-6 shadow">
-                                    <p class="text-gray-400"><small>Institución educativa: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->educationalInstitution->name }}</small></p>
-                                    <p class="text-gray-400"><small>Grupo de investigación: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->name }}</small></p>
+                                    <p class="text-gray-400"><small>Institución educativa: {{ optional(optional(optional($researchTeam->researchGroup)->educationalInstitutionFaculty)->educationalInstitution)->name }}</small></p>
+                                    <p class="text-gray-400"><small>Grupo de investigación: {{ optional($researchTeam->researchGroup)->name }}</small></p>
                                     <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
                                 </div>
                             </div>
@@ -82,11 +81,11 @@
                 <x-jet-section-border />
 
                 <h1 class="text-2xl">{{ __('Keywords') }}</h1>
-                <p class="mt-4 text-gray-400">
+                <div class="mt-4 text-gray-400">
                     @foreach (explode(',', implode(json_decode($project->keywords))) as $keyword)
                         <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $keyword]) }}" class="ml-1 underline">{{ $keyword }}</a>
                     @endforeach
-                </p>
+                </div>
 
                 <x-jet-section-border />
 

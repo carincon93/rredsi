@@ -20,7 +20,7 @@ class LoginResponse implements LoginResponseContract
 
         switch ($authUser) {
             case $authUser->hasRole(1):
-                return redirect()->route('nodes.index');
+                return redirect()->route('dashboard');
             break;
 
             case $authUser->hasRole(2):
@@ -33,17 +33,18 @@ class LoginResponse implements LoginResponseContract
 
             case $authUser->hasRole(4):
 
-                if ( !is_null($authUser->my_projects ) ) {
-                    $node                             = $authUser->my_projects['node'];
-                    $educationalInstitution           = $authUser->my_projects['educationalInstitution'];
-                    $educationalInstitutionFaculty    = $authUser->my_projects['educationalInstitutionFaculty'];
-                    $researchGroup                    = $authUser->my_projects['researchGroup'];
-                    $researchTeam                     = $authUser->my_projects['researchTeam'];
-                }
+                // if ( !is_null($authUser->my_projects ) ) {
+                //     $node                             = $authUser->my_projects['node'];
+                //     $educationalInstitution           = $authUser->my_projects['educationalInstitution'];
+                //     $educationalInstitutionFaculty    = $authUser->my_projects['educationalInstitutionFaculty'];
+                //     $researchGroup                    = $authUser->my_projects['researchGroup'];
+                //     $researchTeam                     = $authUser->my_projects['researchTeam'];
+                // }
+
+                // return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects', [$node, $educationalInstitution, $educationalInstitutionFaculty, $researchGroup, $researchTeam]);
 
                 return '/dashboard';
 
-                // return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects', [$node, $educationalInstitution, $educationalInstitutionFaculty, $researchGroup, $researchTeam]);
 
             break;
 

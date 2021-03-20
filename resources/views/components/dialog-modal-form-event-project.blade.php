@@ -45,69 +45,72 @@
         <form method="POST" action="{{ route('notifications.sendProjectToEvent') }}" id="form-event-project">
             @csrf()
 
-            <div class="px-5 py-2 text-gray-600">
-                Seleccione de nuevo el proyecto con el cual desea participar y envie su solicitud.
-            </div>
+            <label class="mb-2 inline-block text-gray-600" id="project_id">
+                Seleccione un proyecto con el cual desea participar y posteriormente será redirigido al sitio web del evento para que continue con el proceso de inscripción.
+            </label>
 
             {{-- Guardo en un input el id del evento al caul desea registrarse--}}
             <input hidden id="event_id" name="event_id" value="{{$eventId}}">
 
             <select id="project_id" name="project_id" class="form-select w-full" required >
                 <option value="">Seleccione un proyecto</option>
-                {{-- Recorro los projectos de el usuario--}}
-                @forelse ($projects as $project)
+                {{-- Recorro los proyectos de el usuario--}}
+                @foreach ($projects as $project)
                     <option value="{{ $project->id }}" {{ old('project_id') == $project->id ? "selected" : "" }}>{{ $project->title }}</option>
-                @empty
-                    <option value="">{{ __('No data recorded') }}</option>
-                @endforelse
+                @endforeach
             </select>
         </form>
 
         <!--Footer-->
         <div class="flex justify-end pt-2">
             <button type="submit" class="px-4 bg-transparent p-3 rounded-lg text-white bg-blue-900 hover:bg-blue-800 mr-2" form="form-event-project">Enviar solicitud</button>
-            <button class="modal-close px-4 bg-white p-3 rounded-lg text-blue-900 hover:text-gray-500">Close</button>
+            <button class="modal-close px-4 bg-white p-3 rounded-lg text-blue-900 hover:text-gray-500">{{ __('Close') }}</button>
         </div>
     </div>
 </div>
 
 @push('scripts')
 <script>
-    var openmodal = document.querySelectorAll('.modal-open')
-    for (var i = 0; i < openmodal.length; i++) {
-        openmodal[i].addEventListener('click', function(event){
-    	    event.preventDefault()
-    	    toggleModal()
-        })
-    }
+    document.addEventListener(
+        "DOMContentLoaded",
+            function() {
+            var openmodal = document.querySelectorAll('.modal-open')
+            for (var i = 0; i < openmodal.length; i++) {
+                openmodal[i].addEventListener('click', function(event){
+                    event.preventDefault()
+                    toggleModal()
+                })
+            }
 
-    const overlay = document.querySelector('.modal-overlay')
-    overlay.addEventListener('click', toggleModal)
+            const overlay = document.querySelector('.modal-overlay')
+            overlay.addEventListener('click', toggleModal)
 
-    var closemodal = document.querySelectorAll('.modal-close')
-    for (var i = 0; i < closemodal.length; i++) {
-        closemodal[i].addEventListener('click', toggleModal)
-    }
+            var closemodal = document.querySelectorAll('.modal-close')
+            for (var i = 0; i < closemodal.length; i++) {
+                closemodal[i].addEventListener('click', toggleModal)
+            }
 
-    document.onkeydown = function(evt) {
-        evt = evt || window.event
-        var isEscape = false
-        if ("key" in evt) {
-    	    isEscape = (evt.key === "Escape" || evt.key === "Esc")
-        } else {
-    	    isEscape = (evt.keyCode === 27)
-        }
-        if (isEscape && document.body.classList.contains('modal-active')) {
-    	    toggleModal()
-        }
-    }
+            document.onkeydown = function(evt) {
+                evt = evt || window.event
+                var isEscape = false
+                if ("key" in evt) {
+                    isEscape = (evt.key === "Escape" || evt.key === "Esc")
+                } else {
+                    isEscape = (evt.keyCode === 27)
+                }
+                if (isEscape && document.body.classList.contains('modal-active')) {
+                    toggleModal()
+                }
+            }
 
-    function toggleModal () {
-        const body = document.querySelector('body')
-        const modal = document.querySelector('.modal')
-        modal.classList.toggle('opacity-0')
-        modal.classList.toggle('pointer-events-none')
-        body.classList.toggle('modal-active')
-    }
+            function toggleModal () {
+                const body = document.querySelector('body')
+                const modal = document.querySelector('.modal')
+                modal.classList.toggle('opacity-0')
+                modal.classList.toggle('pointer-events-none')
+                body.classList.toggle('modal-active')
+            }
+        }, false
+    )
 </script>
 @endpush

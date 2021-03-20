@@ -9,6 +9,11 @@
 p {
     white-space: pre-line;
 }
+
+.pre-line-initial {
+    white-space: initial !important;
+}
+
 .permissions tbody tr td {
     position: relative;
 }

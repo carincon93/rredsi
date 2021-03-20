@@ -3,14 +3,14 @@
     <x-guest-header :node="$node" image="">
         <x-slot name="title">
             <h1 class="text-3xl text-center sm:text-3xl tracking-tight font-extrabold leading-none">
-                <span class="block text-blue-900 xl:inline">
+                <span class="block text-blue-900 xl:inline capitalize">
                     {{ $user->name }}
                 </span>
             </h1>
         </x-slot>
         <x-slot name="textBase">
-            {{ $memberEducationalInstitution->name ?? '' }}
             <img class="h-40 w-40 rounded-full mx-auto" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
+            {{ $memberEducationalInstitution->name ?? '' }}
         </x-slot>
         <x-slot name="actionButton">
 
@@ -22,7 +22,7 @@
             <div class="p-8 mt-4">
 
                 <h1 class="text-2xl">{{ __('Biography') }}</h1>
-                <p class="mt-4 whitespace-pre-line">{{ $user->biography }}</p>
+                <p class="mt-4 whitespace-pre-line">{{ $user->biography ?? __('No data recorded') }}</p>
 
                 <x-jet-section-border />
 
@@ -51,7 +51,7 @@
                 <x-jet-section-border />
 
                 <h1 class="text-2xl">{{ __('Interests') }}</h1>
-                <p class="mt-4 text-gray-400 capitalize">
+                <p class="pre-line-initial mt-4 text-gray-400 capitalize">
                     @foreach (explode(',', implode(json_decode($user->interests))) as $interest)
                         {{ $interest }}
                     @endforeach
@@ -59,8 +59,8 @@
 
                 <x-jet-section-border />
 
+                <h1 class="text-2xl">{{ __('cv') }}</h1>
                 @if (Storage::disk('public')->exists($user->file))
-                    <h1 class="text-2xl">{{ __('File') }}</h1>
                     <a href="{{ url("storage/$user->file") }}" class="mt-4 underline" target="_blank" download>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 inline-flex">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -68,9 +68,13 @@
                         Descargar hoja de vida
                     </a>
                     <x-jet-section-border />
+                @else
+                    <p>{{ __('No data recorded') }}</p>
                 @endif
 
-                <h1 class="text-2xl mt-12 ml-16">{{ __('Graduations') }}</h1>
+                <x-jet-section-border />
+
+                <h1 class="text-2xl mt-12{{ count($user->userGraduations) > 0 ? ' ml-16' : '' }}">{{ __('Graduations') }}</h1>
                 @forelse ($user->userGraduations->chunk(3) as $chunk)
                     <div class="mt-4 md:grid md:grid-cols-3 md:gap-4">
                         @foreach ($chunk as $graduation)
@@ -99,12 +103,12 @@
                         @endforeach
                     </div>
                 @empty
-                    <p class="mt-12 ml-16">{{ __('No data recorded') }}</p>
+                    <p class="mt-12">{{ __('No data recorded') }}</p>
                 @endforelse
 
                 <x-jet-section-border />
 
-                <h1 class="text-2xl mt-12 ml-16">{{ __('Research teams') }}</h1>
+                <h1 class="text-2xl mt-12{{ count($user->researchTeams) > 0 ? ' ml-16' : '' }}">{{ __('Research teams') }}</h1>
                 @forelse ($user->researchTeams->chunk(3) as $chunk)
                     <div class="mt-4 md:grid md:grid-cols-3 md:gap-4">
                         @foreach ($chunk as $researchTeam)
@@ -134,7 +138,7 @@
                         @endforeach
                     </div>
                 @empty
-                    <p class="mt-12 ml-16">{{ __('No data recorded') }}</p>
+                    <p class="mt-12">{{ __('No data recorded') }}</p>
                 @endforelse
 
                 <x-jet-section-border />
@@ -185,8 +189,8 @@
         <div class="mx-auto">
             <div class="relative pl-4 z-10 lg:max-w-2xl flex items-center h-64 lg:w-full">
                 <div>
-                    <h1 class="inline-flex text-4xl tracking-tight font-extrabold leading-none mt-2">
-                        <span class="block xl:inline">Invite a este joven investigador para que participe en uno de sus proyectos</span>
+                    <h1 class="inline-flex text-2xl tracking-tight font-extrabold leading-none mt-2">
+                        <span class="block xl:inline">Invite a <span class="capitalize">{{$user->name}}</span> para que participe en uno de sus proyectos</span>
                     </h1>
                     <p class="mt-4 mb-4">A continuación se listan los proyectos</p>
                     <form method="POST" action="{{ route('nodes.explorer.sendRoleNotification', [$node, $user]) }}">

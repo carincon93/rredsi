@@ -30,10 +30,9 @@ class AppController extends Controller
      */
     public function welcome(Node $node)
     {
-        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
-
-        $node->shuffleProjects = $node->shuffleProjects();
-        $node->shuffleEducationalInstitutionEvents = $node->educationalInstitutionAndNodeEvents()->shuffle()->take(2);
+        $knowledgeAreas                             = KnowledgeArea::orderBy('name')->get();
+        $node->shuffleProjects                      = $node->shuffleProjects();
+        $node->shuffleEducationalInstitutionEvents  = $node->educationalInstitutionAndNodeEvents()->shuffle()->take(2);
 
         return view('welcome', compact('node', 'knowledgeAreas'));
     }

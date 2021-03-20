@@ -130,7 +130,7 @@ class ProjectController extends Controller
                 $educationalInstitution = $faculty->educationalInstitution;
                 $adminInstitution       = $educationalInstitution->administrator;
 
-                $type = 'Proyecto';
+                $type = 'proyecto';
                 Notification::send($adminInstitution, new InformationNotification($project, $type));
             }
 

@@ -2,8 +2,8 @@
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Notifications') }}
-            <span class="sm:block text-purple-300">
-                Show all notifications
+            <span class="text-base sm:text-2xl block text-purple-300">
+                Lista de notificationes
             </span>
         </h2>
     </x-slot>
@@ -47,7 +47,7 @@
                                                             <td>
                                                                 <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('subject') }}</span>
                                                                 <div class="ml-2 w-auto text-gray-400 mt-4">
-                                                                    {{ $notification->data['subject'].' (Fechay  hora: '.$notification->created_at.')' }}
+                                                                    {{ $notification->data['subject'].' (Fecha y hora: '.$notification->created_at.')' }}
                                                                 </div>
 
                                                                 <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('message') }}</span>
@@ -80,16 +80,13 @@
                                                                                 </svg>
                                                                             </x-jet-dropdown-link>
                                                                         @endif
-                                                                        <x-jet-dropdown-link class="modal-open inline-block" onclick="modal('{{ route('notifications.destroy', [$notification]) }}')">
+                                                                        {{-- <x-jet-dropdown-link class="modal-open inline-block" onclick="modal('{{ route('notifications.destroy', [$notification]) }}')">
                                                                             <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                                             </svg>
-                                                                        </x-jet-dropdown-link>
-
+                                                                        </x-jet-dropdown-link> --}}
                                                                     </div>
 
-                                                                    {{------------------------------------------------------------------------------------------------------- --}}
-                                                                    {{-- //**********------------------------------------------------------------------------**************// --}}
                                                                     <div class="hidden lg:table-cell">
                                                                         <x-jet-dropdown align="right" width="48">
                                                                             <x-slot name="trigger">
@@ -108,9 +105,9 @@
                                                                                     {{ __('Show') }}
                                                                                 </x-jet-dropdown-link>
                                                                                 @endif
-                                                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('notifications.destroy', [$notification]) }}')">
+                                                                                {{-- <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('notifications.destroy', [$notification]) }}')">
                                                                                     {{ __('Delete') }}
-                                                                                </x-jet-dropdown-link>
+                                                                                </x-jet-dropdown-link> --}}
                                                                             </x-slot>
                                                                         </x-jet-dropdown>
                                                                     </div>
@@ -123,7 +120,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="hidden" id="tab-leidos">
@@ -142,7 +138,7 @@
                                                             <td>
                                                                 <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('subject') }}</span>
                                                                 <div class="w-auto text-gray-400 mt-4">
-                                                                    {{ $notification->data['subject'].' (Fechay  hora: '.$notification->created_at.')' }}
+                                                                    {{ $notification->data['subject'].' (Fecha y hora: '.$notification->created_at.')' }}
                                                                 </div>
 
                                                                 <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('message') }}</span>
@@ -175,16 +171,13 @@
                                                                                 </svg>
                                                                             </x-jet-dropdown-link>
                                                                         @endif
-                                                                        <x-jet-dropdown-link class="modal-open inline-block" onclick="modal('{{ route('notifications.destroy', [$notification]) }}')">
+                                                                        {{-- <x-jet-dropdown-link class="modal-open inline-block" onclick="modal('{{ route('notifications.destroy', [$notification]) }}')">
                                                                             <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                                             </svg>
-                                                                        </x-jet-dropdown-link>
-
+                                                                        </x-jet-dropdown-link> --}}
                                                                     </div>
 
-                                                                    {{------------------------------------------------------------------------------------------------------- --}}
-                                                                    {{-- //**********------------------------------------------------------------------------**************// --}}
                                                                     <div class="hidden lg:table-cell">
                                                                         <x-jet-dropdown align="right" width="48">
                                                                             <x-slot name="trigger">
@@ -203,9 +196,9 @@
                                                                                     {{ __('Show') }}
                                                                                 </x-jet-dropdown-link>
                                                                                 @endif
-                                                                                <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('notifications.destroy', [$notification]) }}')">
+                                                                                {{-- <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('notifications.destroy', [$notification]) }}')">
                                                                                     {{ __('Delete') }}
-                                                                                </x-jet-dropdown-link>
+                                                                                </x-jet-dropdown-link> --}}
                                                                             </x-slot>
                                                                         </x-jet-dropdown>
                                                                     </div>

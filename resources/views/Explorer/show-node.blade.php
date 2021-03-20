@@ -36,16 +36,16 @@
             <img class="full mx-auto" src="{{ url("storage/$node->logo") }}">
         </x-slot>
         <x-slot name="textBase">
-            
+
         </x-slot>
         <x-slot name="actionButton">
-            
+
         </x-slot>
     </x-guest-header>
 
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-8 mt-4">
                 <h1 class="leading-none text-center text-4xl mt-1/12 mb-28">¿Quiénes somos?</h1>
                 <p>
@@ -59,7 +59,7 @@
     </div>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">           
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-8 mt-4">
                 <div>
                     <h1 class="leading-none text-center text-4xl mt-1/12 mb-28">¿Cómo está RREDSI Caldas en investigación académica?</h1>
@@ -118,7 +118,7 @@
         </div>
     </div>
 
-    <h1 class="leading-none text-center text-4xl mt-2/12 mb-28">Instituciones educativas adscritos - RREDSI Nodo <span class="capitaliz">{{ $node->state }}</span></h1>
+    <h1 class="leading-none text-center text-4xl mt-2/12 mb-28">Instituciones educativas adscritas - RREDSI Nodo <span class="capitaliz">{{ $node->state }}</span></h1>
     <div id="org_chart" class="mb-1/12 mx-auto w-11/12"></div>
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="mt-8 dark:bg-gray-800 overflow-hidden">

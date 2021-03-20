@@ -96,8 +96,8 @@ class ResearchTeamController extends Controller
                 }
             }
 
-            $type = "Semillero de investigación";
-            Notification::send($users, new InformationNotification($researchTeam,$type));
+            $type = 'semillero de investigación';
+            Notification::send($users, new InformationNotification($researchTeam, $type));
 
             $message = 'Your store processed correctly';
         }
