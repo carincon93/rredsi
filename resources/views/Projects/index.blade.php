@@ -4,7 +4,7 @@
         <div class="col-start-1 col-span-5 ml-5 md:ml-0 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-center md:text-left text-2xl  leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Projects') }}
-                <span class="text-base sm:text-2xl block text-purple-300">
+                <span class="text-base sm:text-lg block text-purple-300">
                     Lista de proyectos
                 </span>
             </h2>

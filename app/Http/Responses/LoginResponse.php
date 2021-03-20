@@ -18,6 +18,15 @@ class LoginResponse implements LoginResponseContract
 
         $authUser = Auth::user();
 
+
+        // ? Validamos si el usuario esta activo o inactivo para ingresar en la plataforma
+        if($authUser->is_enabled == false){
+            // ! si esta desactivado el usuario lo sacamos del sistema y notificamos el motivo
+            Auth::logout();
+
+            return redirect()->route('login')->with('status', __('El usuario se ha desactivado.'));
+        }
+
         switch ($authUser) {
             case $authUser->hasRole(1):
                 return redirect()->route('dashboard');
@@ -43,7 +52,7 @@ class LoginResponse implements LoginResponseContract
 
                 // return redirect()->route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects', [$node, $educationalInstitution, $educationalInstitutionFaculty, $researchGroup, $researchTeam]);
 
-                return '/dashboard';
+                return redirect()->route('dashboard');
 
 
             break;

@@ -3,8 +3,8 @@
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Educational institution event') }}
-            <span class="sm:block text-purple-300">
-                Detalles del evento de institución educativa
+            <span class="sm:block text-lg text-purple-300">
+                <a class="text-white font-weight underline" href="{{ route('nodes.educational-institutions.events.index', [$node, $educationalInstitution]) }}">Lista de eventos de institución educativa</a> / Detalles del evento de institución educativa
             </span>
         </h2>
         @can('edit_educational_institution_event')

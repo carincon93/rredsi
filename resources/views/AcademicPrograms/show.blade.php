@@ -5,17 +5,17 @@
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Academic programs') }}
                 <span class="text-base sm:text-2xl block text-purple-300">
-                    Detalles del programa académico
+                    <a  class="text-white font-weight underline" href="{{ route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $faculty])  }}" >Lista de programas academicos </a> / Detalles del programa académico
                 </span>
             </h2>
         </div>
-        @can('edit_academic_program')
+        {{-- @can('edit_academic_program')
         <a href="{{ route('nodes.educational-institutions.faculties.academic-programs.edit', [$node, $educationalInstitution, $faculty, $academicProgram]) }}">
             <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-3 md:px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                 {{__('Edit academic program') }}
             </div>
         </a>
-        @endcan
+        @endcan --}}
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">

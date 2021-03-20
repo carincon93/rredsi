@@ -89,6 +89,7 @@
                     {{ __('Logout Other Browser Sessions') }}
                 </x-jet-button>
             </x-slot>
+
         </x-jet-dialog-modal>
     </x-slot>
 </x-jet-action-section>

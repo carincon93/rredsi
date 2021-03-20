@@ -5,8 +5,8 @@
         <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Academic works') }}
-                <span class="sm:block text-purple-300">
-                    Detalles del trabajo académico
+                <span class="sm:block text-lg text-purple-300">
+                    <a  class="text-white font-weight underline" href="{{ route('user.profile.user-graduations.user-academic-works.index', [$userGraduation]) }}">Lista de trabajos académicos</a> / Detalles del trabajo académico
                 </span>
             </h2>
         </div>

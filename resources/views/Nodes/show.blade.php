@@ -3,8 +3,8 @@
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ __('Nodes') }}
-            <span class="sm:block text-purple-300">
-                Detalles del nodo
+            <span class="sm:block text-lg text-purple-300">
+                <a class="text-white font-weight underline" href="{{ route('nodes.index') }}">Lista de los nodos</a> / Detalles del nodo
             </span>
         </h2>
         @can('edit_node')

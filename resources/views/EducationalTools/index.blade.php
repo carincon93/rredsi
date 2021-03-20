@@ -4,8 +4,8 @@
         <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-center md:text-left text-lg leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Educational tools') }}
-                <span class="text-sm sm:text-3xl block text-purple-300">
-                    Lista de herramientas / equipos
+                <span class="text-sm sm:text-lg block text-purple-300">
+                    Lista de herramientas - equipos
                 </span>
             </h2>
         </div>

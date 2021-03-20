@@ -5,7 +5,7 @@
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Users') }}
                 <span class="text-base sm:text-2xl block text-purple-300">
-                    Crear usuario
+                    <a class="text-white font-weight underline" href="{{ route('users.index') }}" >Lista de usuarios</a> / Crear usuario
                 </span>
             </h2>
         </div>
@@ -99,6 +99,10 @@
                         <x-jet-input-error for="role_id" class="mt-2" />
                     </div>
 
+                    <div class="block mt-4">
+                        <x-drop-down-educational-institution-faculties :form="'yes'" />
+                    </div>
+
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Create') }}
@@ -108,4 +112,10 @@
             </div>
         </div>
     </div>
+
+    {{--Alert component --}}
+    @if (session('status') || !is_null($errors) && $errors->any() > 0)
+        <x-data-alert />
+    @endif
+
 </x-app-layout>

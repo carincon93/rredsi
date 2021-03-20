@@ -4,8 +4,12 @@
         <div class="col-start-1 col-span-5 ml-5 md:ml-0 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Project') }}
-                <span class="text-base sm:text-2xl block text-purple-300">
-                    Detalles del proyecto
+                <span class="text-base sm:text-lg block text-purple-300">
+                    @if( Auth::user()->hasRole(4) )
+                    <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects',[$node,$educationalInstitution,$faculty,$researchGroup,$researchTeam]) }}" class="text-white font-weight underline">Lista de proyectos</a> / Detalles del proyecto
+                    @else
+                    <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.projects.index', [$node, $educationalInstitution, $faculty, $researchGroup, $researchTeam]) }}" class="text-white font-weight underline">Lista de proyectos</a> / Detalles del proyecto
+                    @endif
                 </span>
             </h2>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Actions\Jetstream;
 
+use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 
 class DeleteUser implements DeletesUsers
@@ -14,8 +15,15 @@ class DeleteUser implements DeletesUsers
      */
     public function delete($user)
     {
-        $user->deleteProfilePhoto();
-        $user->tokens->each->delete();
-        $user->delete();
+        // ? desactivamos el usuario para no eliminarlo mandamos el status por una session  y actualizamos su estado
+        $User = Auth::user();
+
+        $User->tokens->each->delete();
+
+        $User->is_enabled = false;
+
+        $User->save();
+
+        session(['status'=> 'El usuario ha sido desactivado.']);
     }
 }

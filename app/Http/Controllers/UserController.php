@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\EducationalInstitutionFaculty;
+
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\InformationNotification;
 
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -59,8 +64,21 @@ class UserController extends Controller
         $user->interests          = $request->get('interests');
         $user->is_enabled         = $request->get('is_enabled');
 
-        if ( !$user->save() ) {
+        if ($user->save() ) {
             $user->syncRoles($request->get('role_id'));
+            $user->educationalInstitutionFaculties()->attach($request->get('educational_institutions_faculties_id'),['is_principal'=>true]);
+
+            // ? Send notification student create researchTeam
+            if($user->hasRole(4)){
+                // ? si el rol es estudiante le notificamos al coordinador de la institucion el nuevo estudiante
+                $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+                $educationalInstitution = $faculty->educationalInstitution;
+                $adminInstitution = $educationalInstitution->administrator;
+
+                $type = "Estudiante";
+                Notification::send($adminInstitution, new InformationNotification($user,$type));
+            }
+        }else{
             return redirect()->route('users.create')->withInput()->with('status', __('An error has ocurred. Please try again later.'));
         }
 
@@ -88,7 +106,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-
         $this->authorize('update-user', [User::class]);
 
         $roles = Role::orderBy('name')->get();
@@ -154,9 +171,6 @@ class UserController extends Controller
         }
 
         return redirect()->route('users.index')->with('status', __('The resource has been deleted successfully.'));
-
-
-
 
     }
 }
