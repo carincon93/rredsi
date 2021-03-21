@@ -27,8 +27,6 @@ class EducationalEnvironmentRequest extends FormRequest
             'name'                          => 'required|string|max:191 ',
             'type'                          => 'required|string|max:191',
             'capacity_aprox'                => 'required|integer|min:0|max:9999999999',
-            'is_enabled'                    => 'required|boolean',
-            'is_available'                  => 'required|boolean',
             'educational_institution_id'    => 'integer|min:0|max:9999999999',
         ];
     }
@@ -55,18 +53,6 @@ class EducationalEnvironmentRequest extends FormRequest
         if($this->capacity_aprox != null) {
             $this->merge([
                 'capacity_aprox' => (integer) filter_var(trim($this->capacity_aprox), FILTER_SANITIZE_NUMBER_INT),
-            ]);
-        }
-
-        if($this->is_enabled != null) {
-            $this->merge([
-                'is_enabled' => (boolean) $this->is_enabled,
-            ]);
-        }
-
-        if($this->is_available != null) {
-            $this->merge([
-                'is_available' => (boolean) $this->is_available,
             ]);
         }
 

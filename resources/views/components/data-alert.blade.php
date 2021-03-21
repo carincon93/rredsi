@@ -5,7 +5,7 @@
         <span class="inline-block align-middle mr-8">
             {{--  imprimimos el mensaje que llega del controlador --}}
             @if (session('status'))
-                <p> {{ session('status') }}</p>
+                <p> {{ __(session('status')) }}</p>
             @else
                 <p>Tiene errores en algunos campos. Por favor revise nuevamente el formulario.</p>
             @endif

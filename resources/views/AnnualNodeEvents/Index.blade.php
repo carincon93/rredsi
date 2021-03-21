@@ -63,7 +63,7 @@
                                 <td >
                                     <span class="ml-2 lg:hidden top-0 left-0 px-2 text-gray-400 text-xs font-bold uppercase block">{{ __('Presentation type') }}</span>
                                     <p>{{ $project->events->where('project_id',$project->id)->first() }}</p>
-                                    {{-- >nodeEvent()->where('is_annual_event',1)->first()->annualNodeEvent->presentation_type --}}
+
                                 </td>
 
                                 <td class="py-2 text-left">
@@ -72,28 +72,27 @@
 
                                          <div class="lg:hidden">
                                             <span class="lg:hidden top-0 left-0 ml-2  px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Actions') }}</span>
-                                                @can('show_node_event')
-                                                    <x-jet-dropdown-link class="inline-block" href="{{ route('annualNodeEvent.show', [$project])}}">
-                                                        <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
-                                                        </svg>
-                                                    </x-jet-dropdown-link>
-                                                @endcan
-                                                {{-- @can('edit_node_event')
-                                                    <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.events.edit', [$node, $event]) }}">
-                                                        <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                        </svg>
-                                                    </x-jet-dropdown-link>
-                                                @endcan --}}
-                                                {{-- @can('destroy_node_event')
-                                                    <x-jet-dropdown-link class="modal-open inline-block" onclick="modal('{{ route('nodes.events.destroy', [$node, $event]) }}')">
-                                                        <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                        </svg>
-                                                    </x-jet-dropdown-link>
-                                                @endcan --}}
-
+                                            @can('show_node_event')
+                                                <x-jet-dropdown-link class="inline-block" href="{{ route('annualNodeEvent.show', [$project])}}">
+                                                    <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+                                                    </svg>
+                                                </x-jet-dropdown-link>
+                                            @endcan
+                                            {{-- @can('edit_node_event')
+                                                <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.events.edit', [$node, $event]) }}">
+                                                    <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
+                                                </x-jet-dropdown-link>
+                                            @endcan --}}
+                                            {{-- @can('destroy_node_event')
+                                                <x-jet-dropdown-link class="modal-open inline-block" onclick="modal('{{ route('nodes.events.destroy', [$node, $event]) }}')">
+                                                    <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </x-jet-dropdown-link>
+                                            @endcan --}}
                                         </div>
 
                                         {{------------------------------------------------------------------------------------------------------- --}}

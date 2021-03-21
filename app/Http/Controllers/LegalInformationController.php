@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\legalInformation;
 use App\Http\Requests\LegalInformationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LegalInformationController extends Controller
 {
@@ -17,7 +18,7 @@ class LegalInformationController extends Controller
     {
         $this->authorize('viewAny', [LegalInformation::class]);
 
-        $legalInformations = legalInformation::orderBy('type')->get();
+        $legalInformations = legalInformation::orderBy('title')->get();
 
         return view('LegalInformations.index', compact('legalInformations'));
     }
@@ -44,9 +45,10 @@ class LegalInformationController extends Controller
     {
         $this->authorize('create', [LegalInformation::class]);
 
-        $legalInformation                 = new legalInformation();
-        $legalInformation->type           = $request->get('type');
-        $legalInformation->description    = $request->get('description');
+        $legalInformation               = new legalInformation();
+        $legalInformation->title        = $request->get('title');
+        $legalInformation->slug         = Str::slug($request->get('title'));
+        $legalInformation->description  = $request->get('description');
 
         if($legalInformation->save()){
             $message = 'Your store processed correctly';
@@ -92,8 +94,9 @@ class LegalInformationController extends Controller
     {
         $this->authorize('update', [LegalInformation::class]);
 
-        $legalInformation->type = $request->get('type');
-        $legalInformation->description = $request->get('description');
+        $legalInformation->title        = $request->get('title');
+        $legalInformation->slug         = Str::slug($request->get('title'));
+        $legalInformation->description  = $request->get('description');
 
         if($legalInformation->save()){
             $message = 'Your update processed correctly';
@@ -119,21 +122,16 @@ class LegalInformationController extends Controller
     }
 
     /**
-     * showPrivacyPolicy
+     * showLegalInformation
      *
      * @return void
      */
-    public function showPrivacyPolicy()
+    public function showLegalInformation($slug)
     {
-        $privacyPolicy = LegalInformation::where('type', 1)->firstOrFail();
+        $legalInformation = LegalInformation::where('slug', Str::slug($slug))->firstOrFail();
 
-        return view('Explorer.show-privacy-policy', compact('privacyPolicy'));
-    }
+        $legalInformations = legalInformation::orderBy('title')->get();
 
-    public function showTermsConditions()
-    {
-        $termsConditions = LegalInformation::where('type', 2)->firstOrFail();
-
-        return view('Explorer.show-terms-conditions', compact('termsConditions'));
+        return view('Explorer.show-legal-information', compact('legalInformation', 'legalInformations'));
     }
 }

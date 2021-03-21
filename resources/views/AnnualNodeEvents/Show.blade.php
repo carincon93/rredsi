@@ -492,11 +492,11 @@
 
             <div class="flex items-center justify-center mt-2">
                 <x-jet-button type="submit">
-                    {{ __('Aceptar') }}
+                    {{ __('Accept') }}
                 </x-jet-button>
 
                 <x-jet-button class="modal-open ml-4">
-                    {{ __('Denegar') }}
+                    {{ __('Denied') }}
                 </x-jet-button>
             </div>
         </form>

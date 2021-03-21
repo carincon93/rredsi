@@ -24,11 +24,11 @@
             <div class="md:col-span-1">
                 <x-jet-section-title>
                     <x-slot name="title">Descripción</x-slot>
-                    <x-slot name="description">Crear un evento</x-slot>
+                    <x-slot name="description"></x-slot>
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ route('annualNodeEvent.registerAnnualNodeEvents', [$node]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('annualNodeEvent.registerAnnualNodeEvents', [$node, $annualNodeEvent]) }}" enctype="multipart/form-data" novalidate>
                     @csrf
 
                     <div class="mt-1/12">
@@ -69,20 +69,18 @@
                         <p>{{ __('Speakers') }}</p>
                         <div class="ml-4">
                             <select onchange="SwitchProject.SpeakersTwo(event)" id="first_speaker_id" name="first_speaker_id" class="overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" required disabled>
-                                <option value="">Seleccione el proyecto</option>
+                                <option value="">Seleccione el primer ponente</option>
                             </select>
                             <x-jet-input-error for="first_speaker_id" class="mt-2" />
                         </div>
 
                         <div class="ml-4">
                             <select class="overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="second_speaker_id" name="second_speaker_id">
-                                <option value="">Seleccione el ponente 2</option>
+                                <option value="">Seleccione el segundo ponente</option>
                             </select>
                             <x-jet-input-error for="second_speaker_id" class="mt-2" />
                         </div>
                     </div>
-
-
 
                     <div class="mt-1/12">
                         <p>{{ __('Knowledge areas') }}</p>
@@ -145,8 +143,6 @@
                         <x-jet-input-error for="project_article" class="mt-2" />
                     </div>
 
-                    <input hidden name="event_id" id="event_id" value="{{$annualEvent->id}}">
-
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Register event') }}
@@ -165,7 +161,7 @@
 
                 getAllAuthors = async (project_id) => {
                     var first_speaker_id    = document.getElementById("first_speaker_id");
-                    first_speaker_id.innerHTML = '<option value="">Seleccione el ponente 1</option>';
+                    first_speaker_id.innerHTML = '<option value="">Seleccione el primer ponente</option>';
 
                     if (project_id != 0) {
                         try {
@@ -187,7 +183,7 @@
 
                 getAllAuthorsTwo = async (project_id,SpeakerOne) => {
                     var second_speaker_id   = document.getElementById("second_speaker_id");
-                    second_speaker_id.innerHTML = '<option value="">Seleccione el ponente 2</option>';
+                    second_speaker_id.innerHTML = '<option value="">Seleccione el segundo ponente</option>';
 
                     if (project_id != 0) {
                         try {

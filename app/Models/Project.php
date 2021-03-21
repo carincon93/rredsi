@@ -10,6 +10,8 @@ class Project extends Model
 {
     public static $projects;
 
+    protected $appends = ['datesForHumans', 'keywordsArray', 'rolesRequirementsArray'];
+
     use HasFactory;
     /**
      * The attributes that are mass assignable.
@@ -33,8 +35,6 @@ class Project extends Model
         'main_image',
         'project_type_id',
     ];
-
-    protected $appends = ['datesForHumans'];
 
     public function researchOutputs() {
         return $this->hasMany('App\Models\ResearchOutput');
@@ -113,5 +113,23 @@ class Project extends Model
         }
 
         return $allKeyWords->filter()->unique();
+    }
+
+    public function getKeywordsArrayAttribute()
+    {
+        if($this->keywords) {
+            return explode(',', implode(json_decode($this->keywords)));
+        } else {
+            return [];
+        }
+    }
+
+    public function getRolesRequirementsArrayAttribute()
+    {
+        if($this->roles_requirements) {
+            return explode(',', implode(json_decode($this->roles_requirements)));
+        } else {
+            return [];
+        }
     }
 }

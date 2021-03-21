@@ -17,8 +17,6 @@ class EducationalTool extends Model
         'name',
         'description',
         'qty',
-        'is_available',
-        'is_enabled',
         'educational_environment_id',
     ];
 

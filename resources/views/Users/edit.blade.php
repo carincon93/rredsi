@@ -83,7 +83,7 @@
                             <span class="ml-2 text-sm text-gray-600">{{ __('Yes') }}</span>
                         </label>
                         <label for="is_enabled_no" class="flex items-center">
-                            <input id="is_enabled_no" value="0" type="radio" class="form-radio" name="is_enabled" {{ old('is_enabled') != null && old('is_enabled') == 0 || $user->is_enabled != null && $user->is_enabled == 0 ? "checked" : "" }} />
+                            <input id="is_enabled_no" value="0" type="radio" class="form-radio" name="is_enabled" {{ old('is_enabled') != null && old('is_enabled') == 0 || $user->is_enabled == 0 ? "checked" : "" }} />
                             <span class="ml-2 text-sm text-gray-600">{{ __('No') }}</span>
                         </label>
                         <x-jet-input-error for="is_enabled" class="mt-2" />

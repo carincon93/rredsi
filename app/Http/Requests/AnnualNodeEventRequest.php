@@ -25,10 +25,16 @@ class AnnualNodeEventRequest extends FormRequest
     public function rules()
     {
         return [
-            'presentation_type'                   => 'required|string|max:191',
-            'project_status'                      => 'required|string|max:191',
-            'endorsement_letter'                  => 'required|file|mimetypes:application/pdf|max:512000',
-            'project_article'                     => 'required|file|mimetypes:application/pdf|max:512000',
+            'presentation_type'     => 'required|string|max:191',
+            'project_status'        => 'required|string|max:191',
+            'project_id'            => 'required',
+            'first_speaker_id'      => 'required',
+            'second_speaker_id'     => 'required',
+            'knowledge_area_id.*'   => 'required',
+            'research_team_id'      => 'required',
+            'academic_program_id'   => 'required',
+            'endorsement_letter'    => 'required|file|mimetypes:application/pdf|max:512000',
+            'project_article'       => 'required|file|mimetypes:application/pdf|max:512000',
         ];
     }
 

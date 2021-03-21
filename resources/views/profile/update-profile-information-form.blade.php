@@ -76,7 +76,7 @@
 
         <!-- Biography -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label class="mb-4" for="biography" value="{{ __('biography') }}" />
+            <x-jet-label class="mb-4" for="biography" value="{{ __('Biography') }}" />
             {{-- <small class="inline-block text-gray-500">Separe con comas cada interés</small> --}}
             <textarea rows="20" id="biography" name="biography" class="form-textarea border-1 w-full" wire:model.defer="state.biography" autocomplete="biography" ></textarea>
             <x-jet-input-error for="biography" class="mt-2" />
@@ -91,7 +91,7 @@
 
         <!-- cv -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label class="mb-4" for="cv" value="{{ __('Hoja de vida') }}" />
+            <x-jet-label class="mb-4" for="cv" value="{{ __('cv') }}" />
             <small class="inline-block text-gray-500">Solo admite pdf</small>
             <x-jet-input id="cv" class="mt-1 block w-full" type="file" accept="application/pdf" wire:model.defer="state.cv" autocomplete="cv" />
             <x-jet-input-error for="cv" class="mt-2" />

@@ -297,5 +297,7 @@
     "Your store processed correctly": "La información se ha registrado con éxito",
     "Your update processed correctly": "La información se ha modificado con éxito",
     "Your delete processed correctly": "La información se ha eliminado con éxito",
-    "Edit educational environment": "Editar ambiente de formación"
+    "Edit educational environment": "Editar ambiente de formación",
+    "The user has been deactivated correctly": "El usuario ha sido desactivado con éxito",
+    "Deactivate": "Desactivar"
 }

@@ -179,46 +179,23 @@ class NodeEventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-         // ? index para registro de evento
-    public function rredsiEventRegister(Node $node)
+    // ? index para registro de evento
+    public function showRREDSIEventRegisterForm(Node $node)
     {
-        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
-        $events = Event::orderBy('name')->get();
-        $annualEvent ="";
+        $knowledgeAreas     = KnowledgeArea::orderBy('name')->get();
+        $events             = Event::orderBy('name')->get();
+        $annualNodeEvent    = $node->nodeEvents()->where('node_events.is_annual_event', 1)->with('event')->first();
 
-        foreach ($events as $event ) {
+        if (date('Y', strtotime($annualNodeEvent->event->end_date)) == date('Y') ) {
+            $projects                                           = auth()->user()->projects;
+            $researchTeams                                      = auth()->user()->researchTeams;
+            $educationalInstitutionFacultiesacademicPrograms    = auth()->user()->educationalInstitutionFaculties()->with('academicPrograms')->get();
+            $educationalInstitutionFacultiesUsers               = auth()->user()->educationalInstitutionFaculties()->with('members')->get()->pluck('members')->flatten();
 
-            $dateEvent = strtotime($event->start_date);
-            $yearEvent = date("Y", $dateEvent);
-
-
-            if($yearEvent == date('Y') ){
-
-                if($event->nodeEvent()->where('is_annual_event',1)){
-                    // return $annualEvent;
-
-                    $annualEvent = $event->nodeEvent()->where('is_annual_event',1)->first();
-
-                    $projects           = auth()->user()->projects;
-                    $researchTeams      = auth()->user()->researchTeams;
-                    $educationalInstitutionFacultiesacademicPrograms   = auth()->user()->educationalInstitutionFaculties()->with('academicPrograms')->get();
-                    $educationalInstitutionFacultiesUsers              = auth()->user()->educationalInstitutionFaculties()->with('members')->get();
-
-                     return view('Explorer.rredsi-event-register', compact('node', 'knowledgeAreas', 'educationalInstitutionFacultiesUsers', 'projects', 'researchTeams', 'educationalInstitutionFacultiesacademicPrograms','annualEvent'));
-
-                }
-            }
-
+            return view('Explorer.rredsi-event-register', compact('node', 'knowledgeAreas', 'educationalInstitutionFacultiesUsers', 'projects', 'researchTeams', 'educationalInstitutionFacultiesacademicPrograms', 'annualNodeEvent'));
+        } else {
+            dd('no');
         }
-
-
-
-
     }
-
-
-
-
-
 }
 

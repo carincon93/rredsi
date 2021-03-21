@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class LegalInformation extends Model
 {
     use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'type',
+        'title',
         'description',
+        'slug'
     ];
 }

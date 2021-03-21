@@ -24,7 +24,7 @@ class LegalInformationRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required|string|max:191',
+            'title' => 'required|string|max:191',
             'description' => 'required|string|max:999999',
         ];
     }
@@ -36,9 +36,9 @@ class LegalInformationRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if($this->type != null) {
+        if($this->title != null) {
             $this->merge([
-                'type' => filter_var($this->type, FILTER_SANITIZE_STRING),
+                'title' => filter_var($this->title, FILTER_SANITIZE_STRING),
             ]);
         }
     }

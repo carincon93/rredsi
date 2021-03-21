@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnnualNodeEvent extends Model
 {
+    protected $table = 'project_annual_node_event';
+
     use HasFactory;
     /**
     * The attributes that are mass assignable.

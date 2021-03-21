@@ -1,4 +1,4 @@
-<title>{{"Detalles de la  información legal $legalInformation->type"}}</title>
+<title>{{"Detalles de la  información legal $legalInformation->title"}}</title>
 <x-app-layout>
     <x-slot name="header">
         <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
@@ -26,10 +26,10 @@
                 </div>
                 <div>
                     <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
-                        <h3 class="text-lg font-medium text-gray-900">{{ __('Type') }}</h3>
+                        <h3 class="text-lg font-medium text-gray-900">{{ __('Title') }}</h3>
                         <div class="mt-3 max-w-xl text-sm text-gray-600">
                             <p>
-                                {{ $legalInformation->type }}
+                                {{ $legalInformation->title }}
                             </p>
                         </div>
                     </div>

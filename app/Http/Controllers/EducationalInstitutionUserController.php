@@ -54,36 +54,40 @@ class EducationalInstitutionUserController extends Controller
     {
         $this->authorize('create', [ User::class, $educationalInstitution]);
 
-        $user = new User();
-        $user->name               = $request->get('name');
-        $user->email              = $request->get('email');
-        $user->password           = bcrypt("rredsi".$request->get('document_number')."*");
-        $user->document_type      = $request->get('document_type');
-        $user->document_number    = $request->get('document_number');
-        $user->cellphone_number   = $request->get('cellphone_number');
-        $user->interests          = $request->get('interests');
-        $user->is_enabled         = $request->get('is_enabled');
-            // ? asignamos el rol a el usuario de la facultad
-        $user->assignRole($request->get('role_id'));
+        if ( $request->get('role_id') != 1 && $request->get('role_id') != 2 && $request->get('role_id') != 3 ) {
+            $user = new User();
+            $user->name               = $request->get('name');
+            $user->email              = $request->get('email');
+            $user->password           = bcrypt("rredsi".$request->get('document_number')."*");
+            $user->document_type      = $request->get('document_type');
+            $user->document_number    = $request->get('document_number');
+            $user->cellphone_number   = $request->get('cellphone_number');
+            $user->interests          = $request->get('interests');
+            $user->is_enabled         = $request->get('is_enabled');
+                // ? asignamos el rol al usuario de la facultad
+            $user->assignRole($request->get('role_id'));
 
-        if($user->save()){
-            $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true]);
+            if($user->save()){
+                $user->educationalInstitutionFaculties()->attach($faculty->id,['is_principal'=>true]);
 
-            // ? Send notification student create researchTeam
-            if($user->hasRole(4)){
-                // ? si el rol es estudiante le notificamos al coordinador de la institucion el nuevo estudiante
-                $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
-                $educationalInstitution = $faculty->educationalInstitution;
-                $adminInstitution = $educationalInstitution->administrator;
+                // ? Send notification student create researchTeam
+                if($user->hasRole(4)){
+                    // ? si el rol es estudiante le notificamos al coordinador de la institucion el nuevo estudiante
+                    $faculty = $user->educationalInstitutionFaculties()->where('is_principal', 1)->first();
+                    $educationalInstitution = $faculty->educationalInstitution;
+                    $adminInstitution = $educationalInstitution->administrator;
 
-                $type = "Estudiante";
-                Notification::send($adminInstitution, new InformationNotification($user,$type));
+                    $type = "Estudiante";
+                    Notification::send($adminInstitution, new InformationNotification($user,$type));
+                }
+
+                $message = 'Your store processed correctly';
             }
 
-            $message = 'Your store processed correctly';
+            return redirect()->route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty])->with('status', $message);
+        } else {
+            return redirect()->back()->with('status', 'Tiene errores en algunos campos. Por favor revise nuevamente el formulario.');
         }
-
-        return redirect()->route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty])->with('status', $message);
     }
 
     /**
@@ -109,7 +113,7 @@ class EducationalInstitutionUserController extends Controller
     {
         $this->authorize('update',[ User::class, $educationalInstitution]);
 
-        $roles = Role::orderBy('name')->get();
+        $roles = Role::orderBy('name')->where('id', '<>', 1)->where('id', '<>', 2)->where('id', '<>', 3)->get();
 
         return view('EducationalInstitutionUsers.edit', compact('node', 'educationalInstitution', 'faculty', 'user', 'roles'));
     }
@@ -124,23 +128,26 @@ class EducationalInstitutionUserController extends Controller
     public function update(EducationalInstitutionUserRequest $request, Node $node, EducationalInstitution $educationalInstitution, EducationalInstitutionFaculty $faculty, User $user)
     {
         $this->authorize('update', [ User::class, $educationalInstitution]);
+        if ( $request->get('role_id') != 1 && $request->get('role_id') != 2 && $request->get('role_id') != 3 ) {
+            $user->name               = $request->get('name');
+            $user->email              = $request->get('email');
+            $user->password           = bcrypt("rredsi".$request->get('document_number')."*");
+            $user->document_type      = $request->get('document_type');
+            $user->document_number    = $request->get('document_number');
+            $user->cellphone_number   = $request->get('cellphone_number');
+            $user->interests          = $request->get('interests');
+            $user->is_enabled         = $request->get('is_enabled');
 
-        $user->name               = $request->get('name');
-        $user->email              = $request->get('email');
-        $user->password           = bcrypt("rredsi".$request->get('document_number')."*");
-        $user->document_type      = $request->get('document_type');
-        $user->document_number    = $request->get('document_number');
-        $user->cellphone_number   = $request->get('cellphone_number');
-        $user->interests          = $request->get('interests');
-        $user->is_enabled         = $request->get('is_enabled');
+            if($user->save()){
+                // ? sincronisamos si hay nuevos roles
+                $user->syncRoles($request->get('role_id'));
+                $message = 'Your update processed correctly';
+            }
 
-        if($user->save()){
-            // ? sincronisamos si hay nuevos roles
-            $user->syncRoles($request->get('role_id'));
-            $message = 'Your update processed correctly';
+            return redirect()->route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty])->with('status', $message);
+        } else {
+            return redirect()->back()->with('status', 'Tiene errores en algunos campos. Por favor revise nuevamente el formulario.');
         }
-
-        return redirect()->route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty])->with('status', $message);
     }
 
     /**
@@ -153,8 +160,9 @@ class EducationalInstitutionUserController extends Controller
     {
         $this->authorize('delete', [ User::class, $educationalInstitution]);
 
-        if($user->delete()){
-            $message = 'Your delete processed correctly';
+        $user->is_enabled = 0;
+        if($user->save()) {
+            $message = 'The user has been deactivated correctly';
         }
 
         return redirect()->route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty])->with('status', $message);

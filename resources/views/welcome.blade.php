@@ -98,7 +98,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[1]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[1]->id])  : '#'}}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->title  : __('No data recorded') }}</a></div>
+                                    <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[1]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[1]->id])  : '#'}}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->title  : __('No data recorded') }}</a></div>
                             </div>
 
                             <div class="ml-12">
@@ -177,7 +177,7 @@
     <div class="p-6 mt-40">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden text-center mb-8">
-                <h1 class="text-xl md:text-4xl text-gray-400 leading-10">#EventosRREDSI<strong>Caldas{{ date('Y') }}</strong></h1>
+                <h1 class="text-xl md:text-4xl text-gray-400 leading-10">#EventosRREDSI<strong>{{ $node->state.date('Y') }}</strong></h1>
                 <p class="text-gray-800 leading-10">Consulte los eventos <strong>{{ date('Y') }}</strong> de las diferentes instituciones educativas, inscriba sus proyectos y divulgue los resultados.</p>
                 <a href="{{ route('nodes.explorer.events', [$node]) }}" class="mt-4 active:bg-blue-900 bg-blue-900 hover:bg-blue-900 text-white inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información de próximos eventos</a>
             </div>
@@ -186,18 +186,22 @@
     <div class="text-left px-4 md:px-0 bg-gray-100 h-64 p-0 md:p-11 md:pl-1/6 shadow" style="background: #f7f7f7 url(/storage/images/dots.png);background-size: cover;background-position: right;background-repeat: no-repeat;">
         <h1 class="text-2xl md:text-4xl text-gray-900 leading-10">XII Encuentro departamental de semilleros de investigación <span class="capitalize">{{ $node->state }}</span></h1>
         <p class="leading-10">Del 18 al 19 de agosto de {{ date('Y') }}</p>
-        <a href="{{ route('nodes.explorer.events.rredsiEventRegister', [$node]) }}" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
+        <a href="{{ route('nodes.explorer.events.showRREDSIEventRegisterForm', [$node]) }}" class="mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="h-auto md:h-64 bg-cool-gray-600 p-9 md:p-11" style="background: #475569 url(/storage/images/rectangles.png); background-repeat: no-repeat; background-position: 400px; background-blend-mode: color-burn;">
             <h1 class="text-2xl md:text-4xl text-gray-300 leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->name : __('No data recorded') }}</h1>
             <p class="text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->datesForHumans : __('No data recorded') }}</p>
-            <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[0]->id]) }}" class="mt-1 md:mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-1 md:px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
+            @if (isset($node->shuffleEducationalInstitutionEvents[0]))
+                <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[0]->id]) }}" class="mt-1 md:mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-1 md:px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a> --}}
+            @endif
         </div>
         <div class="h-auto md:h-64 bg-cool-gray-700 p-9 md:p-11">
             <h1 class="text-2xl md:text-4xl text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[1]) ? $node->shuffleEducationalInstitutionEvents[1]->name : __('No data recorded') }}</h1>
             <p class="text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[1]) ? $node->shuffleEducationalInstitutionEvents[1]->datesForHumans : __('No data recorded') }}</p>
-            <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[1]->id]) }}" class="mt-1 md:mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-1 md:px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
+            @if (isset($node->shuffleEducationalInstitutionEvents[1]))
+                <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[1]->id]) }}" class="mt-1 md:mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-1 md:px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
+            @endif
         </div>
     </div>
 
@@ -209,6 +213,6 @@
         </div>
     </div>
 
-    <x-footer />
+    <x-footer :legalInformations="$legalInformations" />
 
 </x-guest-layout>

@@ -52,7 +52,7 @@ class RoleInvitation extends Notification
         return (new MailMessage)
                     ->subject("Invitación de participación en proyecto de {$this->project->projectType->type} - Ibis")
                     ->greeting("¡Hola {$this->user->name}!")
-                    ->line("El semillero de investigación {$this->researchTeam->name} de la institución educativa {$this->researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name} quiere invitarlo para que participe en el desarrollo del proyecto {$this->project->title}. Por favor revise el documento adjunto, si esta de acuerdo firme y posteriormente cargar el documento en pdf en la sección 'Enviar respuesta' haciendo clic en 'Más información del proyecto'.")
+                    ->line("El semillero de investigación {$this->researchTeam->name} de la institución educativa {$this->researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name} quiere invitarlo para que participe en el desarrollo del proyecto {$this->project->title}. Por favor revise el documento adjunto, si esta de acuerdo firme y posteriormente cargue el documento en pdf en la sección 'Enviar respuesta' haciendo clic en 'Más información del proyecto'.")
                     ->action('Más información del proyecto', route('nodes.explorer.searchProjects.showProject', [$this->node, $this->project]))
                     ->line('Gracias y esperamos su pronta respuesta')
                     ->attach($this->file);
@@ -68,7 +68,7 @@ class RoleInvitation extends Notification
     {
         return [
             "subject"       => "Invitación de participación en proyecto de {$this->project->projectType->type} - Ibis",
-            "message"       => "El semillero de investigación {$this->researchTeam->name} de la institución educativa {$this->researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name} quiere invitarlo para que participe en el desarrollo del proyecto {$this->project->title}. Por favor revise el documento adjunto, si esta de acuerdo firme y posteriormente cargar el documento en pdf en la sección 'Enviar respuesta' haciendo clic en 'Más información del proyecto'.",
+            "message"       => "El semillero de investigación {$this->researchTeam->name} de la institución educativa {$this->researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name} quiere invitarlo para que participe en el desarrollo del proyecto {$this->project->title}. Por favor revise el documento adjunto, si esta de acuerdo firme y posteriormente cargue el documento en pdf en la sección 'Enviar respuesta' haciendo clic en 'Más información del proyecto'.",
             "action"        => route('nodes.explorer.searchProjects.showProject', [$this->node, $this->project]),
             "thanksMessage" => "Gracias y esperamos su pronta respuesta!'"
         ];

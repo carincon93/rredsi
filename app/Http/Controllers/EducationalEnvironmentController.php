@@ -53,9 +53,7 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->type           = $request->get('type');
         $educationalEnvironment->capacity_aprox = $request->get('capacity_aprox');
         $educationalEnvironment->description    = $request->get('description');
-        $educationalEnvironment->is_enabled     = $request->get('is_enabled');
-        $educationalEnvironment->is_available   = $request->get('is_available');
-            // ? asociamos el ambiente de formacion con la facultad
+        // ? asociamos el ambiente de formacion con la facultad
         $educationalEnvironment->educationalInstitutionFaculty()->associate($faculty);
 
         if($educationalEnvironment->save()){
@@ -106,9 +104,7 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->type           = $request->get('type');
         $educationalEnvironment->capacity_aprox = $request->get('capacity_aprox');
         $educationalEnvironment->description    = $request->get('description');
-        $educationalEnvironment->is_enabled     = $request->get('is_enabled');
-        $educationalEnvironment->is_available   = $request->get('is_available');
-            // ? asociamos el ambiente de formacion con la facultad
+        // ? asociamos el ambiente de formacion con la facultad
         $educationalEnvironment->educationalInstitutionFaculty()->associate($faculty);
 
         if($educationalEnvironment->save()) {

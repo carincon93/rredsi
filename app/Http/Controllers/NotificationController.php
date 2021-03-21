@@ -163,14 +163,13 @@ class NotificationController extends Controller
 
     public function show($id)
     {
-        $notification = auth()->user()->notifications->find($id);
-
-        $user= User::find($notification->data['student_id']);
-        $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
-        $userGraduations = $user->userGraduations;
+        $notification       = auth()->user()->notifications->find($id);
+        $user               = User::find(33);
+        $faculty            = $user->educationalInstitutionFaculties()->where('is_principal', 1)->first();
+        $userGraduations    = $user->userGraduations;
         $notification->markAsRead();
 
-        return view('EducationalInstitutionUsers.show-notifications', compact('notification','user','faculty','userGraduations'));
+        return view('EducationalInstitutionUsers.show-notifications', compact('notification', 'user', 'faculty', 'userGraduations'));
 
     }
 
@@ -216,7 +215,7 @@ class NotificationController extends Controller
 
             // se agrega a autores de el proyecto
             $project->authors()->attach($request->get('student_id'));
-            // se agrega a el grupo de investigación
+            // se agrega al grupo de investigación
             $researchTeam->members()->attach($request->get('student_id'), array('is_external' => $external,'accepted_at'=> date("Y-m-d H:i:s")) );
             // se notifica de su aceptación
             Notification::send($user, new RequestResponse($datos, $response, $project));

@@ -52,6 +52,12 @@
 
                                         <div class="lg:hidden">
                                                 <span class="lg:hidden top-0 left-0 ml-2  px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Actions') }}</span>
+                                                <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.educational-institutions.faculties.educational-environments.educational-tools.index', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
+                                                    <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z"/>
+                                                        <path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6-6a6 6 0 0 1 -8 -8l3.5 3.5" />
+                                                    </svg>
+                                                </x-jet-dropdown-link>
                                                 @can('show_educational_environment')
                                                     <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.educational-institutions.show', [$node, $educationalInstitution]) }}">
                                                         <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,12 +79,6 @@
                                                         </svg>
                                                     </x-jet-dropdown-link>
                                                 @endcan
-                                                <x-jet-dropdown-link class="inline-block" href="{{ route('nodes.educational-institutions.faculties.educational-environments.educational-tools.index', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
-                                                    <svg class="inline p-0 m-0 h-5 w-6 mb-2 hover:cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z"/>
-                                                        <path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6-6a6 6 0 0 1 -8 -8l3.5 3.5" />
-                                                    </svg>
-                                                </x-jet-dropdown-link>
                                             </div>
 
                                         {{------------------------------------------------------------------------------------------------------- --}}
@@ -95,6 +95,10 @@
                                                     </button>
                                                 </x-slot>
                                                 <x-slot name="content">
+                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.educational-environments.educational-tools.index', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
+                                                        {{ __('Manage educational tools') }}
+                                                    </x-jet-dropdown-link>
+                                                    <hr>
                                                     @can('show_educational_environment')
                                                     <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.educational-environments.show', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
                                                         {{ __('Show') }}
@@ -110,9 +114,6 @@
                                                         {{ __('Delete') }}
                                                     </x-jet-dropdown-link>
                                                     @endcan
-                                                    <x-jet-dropdown-link href="{{ route('nodes.educational-institutions.faculties.educational-environments.educational-tools.index', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
-                                                        {{ __('Manage educational tools') }}
-                                                    </x-jet-dropdown-link>
                                                 </x-slot>
                                             </x-jet-dropdown>
                                         </div>

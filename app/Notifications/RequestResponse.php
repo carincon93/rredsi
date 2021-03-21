@@ -48,9 +48,9 @@ class RequestResponse extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject("Respuesta a solicitud de participación en proyecto de {$this->project->projectType->type} - Ibis")
+            ->subject("Respuesta a la solicitud de participación en proyecto de {$this->project->projectType->type} - Ibis")
             ->greeting("¡Hola {$notifiable->name} !")
-            ->line("Le informamos que a la solicitud de participacion realizada al proyecto {$this->project->title}  usted fue {$this->response}. $this->datos.")
+            ->line("Le informamos que su solicitud de participacion realizada al proyecto {$this->project->title} fue {$this->response}. $this->datos.")
             ->action('Más información de la respuesta', route('notifications.indexResponseSend', [$this->id]))
             ->line('Gracias por enviarnos la solicitud.');
     }
@@ -65,7 +65,7 @@ class RequestResponse extends Notification
     {
         return [
             "subject"       => "Respuesta a solicutud de participación en proyecto de {$this->project->projectType->type} - Ibis",
-            "message"       => "Le informamos que a la solicitud de participacion realizada al proyecto {$this->project->title} usted fue {$this->response}. $this->datos.",
+            "message"       => "Le informamos que su solicitud de participacion realizada al proyecto {$this->project->title} fue {$this->response}. $this->datos.",
             "action"        => route('notifications.indexResponseSend', [$this->id]),
             "thanksMessage" => "Gracias por enviarnos la solicitud."
         ];

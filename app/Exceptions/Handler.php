@@ -33,25 +33,25 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->renderable(function (QueryException $e, $request) {
-            switch ($e->getCode()) {
-                case '23503':
-                    return back()->with('status', 'Error');
-                    break;
-                case '23505':
-                    return abort(500, $e->getMessage());
-                    break;
-                case '08006':
-                    return view('errors.timeout');
-                    break;
-                case '22P02':
-                    abort(404);
-                    break;
-                // case '7':
-                //     abort(500);
-                default:
-                    break;
-            }
-        });
+        // $this->renderable(function (QueryException $e, $request) {
+        //     switch ($e->getCode()) {
+        //         case '23503':
+        //             return back()->with('status', 'Error');
+        //             break;
+        //         case '23505':
+        //             return abort(500, $e->getMessage());
+        //             break;
+        //         case '08006':
+        //             return view('errors.timeout');
+        //             break;
+        //         case '22P02':
+        //             return abort(404);
+        //             break;
+        //         case '08006':
+        //             return abort(500, $e->getMessage());
+        //         default:
+        //             break;
+        //     }
+        // });
     }
 }

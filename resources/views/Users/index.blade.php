@@ -81,7 +81,7 @@
                                                 @endcan
                                                 @can('destroy_user')
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('users.destroy', [$user]) }}')">
-                                                    {{ __('Delete') }}
+                                                    {{ __('Deactivate') }}
                                                 </x-jet-dropdown-link>
                                                 @endcan
                                             </x-slot>

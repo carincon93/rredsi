@@ -107,7 +107,7 @@
                                                 @endcan
                                                 @can('destroy_educational_institution_user')
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('nodes.educational-institutions.faculties.users.destroy', [$node, $educationalInstitution, $faculty, $user]) }}')">
-                                                    {{ __('Delete') }}
+                                                    {{ __('Deactivate') }}
                                                 </x-jet-dropdown-link>
                                                 @endcan
                                             </x-slot>

@@ -51,7 +51,6 @@ Route::get('/', function() {
 
 
 Route::middleware(['auth'])->group(function () {
-
     // ? ruta que define el explorador de la plataforma
     // * inicio ruta
     Route::get('/nodes/{node}/explorer', [AppController::class, 'welcome'])->name('nodes.explorer');
@@ -66,8 +65,10 @@ Route::middleware(['auth'])->group(function () {
     // ? se manda aparte de el resource para evitar problemas en envio de datos//
     // Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications');
     Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+    // ? ruta para envio de notificacion de registrar en el evento anual//
+    Route::post('nodes/{node}/annual-node-event/{annualNodeEventID}', [AnnualNodeEventController::class, 'registerAnnualNodeEvents'])->name('annualNodeEvent.registerAnnualNodeEvents');
     // ? ruta para ver evento anual y su crud//
-    Route::get('/nodes/{node}/explorer/node-events/rredsi-event', [NodeEventController::class, 'rredsiEventRegister'])->name('nodes.explorer.events.rredsiEventRegister');
+    Route::get('/nodes/{node}/explorer/annual-node-event', [NodeEventController::class, 'showRREDSIEventRegisterForm'])->name('nodes.explorer.events.showRREDSIEventRegisterForm');
     // ? ruta para ver los eventos y su crud//
     Route::get('/nodes/{node}/explorer/events/{event}', [AppController::class, 'showEvent'])->name('nodes.explorer.showEvent');
     // ? ruta envio registro de un proyecto a un evento //
@@ -88,12 +89,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/notifications/send-project-to-event', [NotificationController::class, 'sendProjectToEvent'])->name('notifications.sendProjectToEvent');
     // ? ruta para envio de notificacion de participacion aceptar o denegar estudiante en proyecto //
     Route::post('/notifications/to-accept-student', [NotificationController::class, 'acceptStudent'])->name('notifications.acceptStudent');
-    // ? ruta para envio de notificacion de registrar en el evento anual//
-    Route::post('/annual-node-events/register-annual-node-events/{node}',[AnnualNodeEventController::class, 'registerAnnualNodeEvents'])->name('annualNodeEvent.registerAnnualNodeEvents');
     // ? ruta para cambiar a leida notificaicon de correo//
     Route::get('/all-notifications/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend');
-    // ? ruta para ver cada proyecto registrado en evento anual y denegar o aceptar parcipacion//
-    Route::get('/annual-node-event/{project}', [AnnualNodeEventController::class, 'show'])->name('annualNodeEvent.show');
     // ? ruta de dashboard de instituciones educativas//
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');
@@ -103,8 +100,7 @@ Route::middleware(['auth'])->group(function () {
     // ? ruta para ver los proyectos de cada estudiante //
     Route::get('/nodes/{node}/educational-institutions/{educational_institution}/faculties/{faculty}/research-groups/{research_group}/research-teams/{research_team}/my-projects',[ProjectController::class, 'myProjects'])->name('nodes.educational-institutions.faculties.research-groups.research-teams.my-projects');
 
-    Route::get('/privacy-policy', [LegalInformationController::class, 'showPrivacyPolicy'])->name('showPrivacyPolicy');
-    Route::get('/terms-and-conditions', [LegalInformationController::class, 'showTermsConditions'])->name('showTermsConditions');
+    Route::get('/legal-information/{slug}', [LegalInformationController::class, 'showLegalInformation'])->name('showLegalInformation');
 
     // ? rutas de notificaciones //
     Route::resource('/notifications', NotificationController::class, [

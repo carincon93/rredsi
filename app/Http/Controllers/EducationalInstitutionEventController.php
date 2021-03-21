@@ -123,7 +123,7 @@ class EducationalInstitutionEventController extends Controller
         $event->register_link   = $request->get('register_link');
         $event->info_link       = $request->get('info_link');
 
-            // ? asociamos la institucion al evento
+        // ? asociamos la institucion al evento
         $event->educationalInstitutionEvent()->update([
             'educational_institution_id' => $educationalInstitution->id
         ]);

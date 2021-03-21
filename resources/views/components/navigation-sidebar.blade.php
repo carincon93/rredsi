@@ -26,17 +26,8 @@
 
     if ( $authUser->hasRole(4) ) {
         /**
-        * Traemos la informacion del nodo de la institucion y facultad para los enlaces de redireccion
-        * para Mis proyectos de estudiantes
+        * Traemos los semilleros a los que pertenece el estudiante
         */
-        // if ( !is_null($authUser->my_projects ) ) {
-        //     $node                             = $authUser->my_projects['node'] ?? null;
-        //     $educationalInstitution           = $authUser->my_projects['educationalInstitution'] ?? null;
-        //     $educationalInstitutionFaculty    = $authUser->my_projects['educationalInstitutionFaculty'] ?? null;
-        //     $researchGroup                    = $authUser->my_projects['researchGroup'] ?? null;
-        //     $researchTeam                     = $authUser->my_projects['researchTeam'] ?? null;
-        // }
-
         $authUserResearchTeams = $authUser->researchTeams()->get() ?? null;
     }
 

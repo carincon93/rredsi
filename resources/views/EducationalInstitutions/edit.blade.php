@@ -10,7 +10,7 @@
                 </span>
             </h2>
         </div>
-        {{-- @can('index_educational_institution')
+        @can('index_educational_institution')
         <a href="{{ route('nodes.educational-institutions.index', [$node]) }}">
             <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
@@ -19,7 +19,7 @@
                 {{ __('Back')}}
             </div>
         </a>
-        @endcan --}}
+        @endcan
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">

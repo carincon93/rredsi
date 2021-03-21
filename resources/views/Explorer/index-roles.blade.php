@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <x-footer />
+    <x-footer :legalInformations="$legalInformations" />
 
     @if (session('status'))
         <x-data-alert />

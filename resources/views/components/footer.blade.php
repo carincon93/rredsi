@@ -35,21 +35,15 @@
                         <li>
                             <h4 class="mb-4 text-gray-600 mr-3">LEGAL</h4>
                         </li>
-                        <li>
-                            <a href="{{ route('showTermsConditions') }}" class="underline text-gray-600">
-                                Términos y condiciones
+                        @forelse ($legalInformations as $legalInformation)
+                        <li class="mb-4">
+                            <a href="{{ route('showLegalInformation', [$legalInformation->slug]) }}" class="underline text-gray-600">
+                                {{ $legalInformation->title }}
                             </a>
                         </li>
-                        <li class="mt-4">
-                            <a href="{{ route('showPrivacyPolicy') }}" class="underline text-gray-600">
-                                Privacidad
-                            </a>
-                        </li>
-                        {{-- <li class="mt-4">
-                            <a href="{{ route('') }}" class="underline text-gray-600">
-                                Derechos de autor
-                            </a>
-                        </li> --}}
+                        @empty
+                            <li>{{ __('No data recorded') }}</li>
+                        @endforelse
                     </ul>
                 </div>
                 <div class="mt-3 mb-4 md:mt-0 md:mb-0">

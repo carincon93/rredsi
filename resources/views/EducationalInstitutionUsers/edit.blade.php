@@ -9,8 +9,8 @@
                 </span>
             </h2>
         </div>
-        {{-- @can('index_educational_institution_user') --}}
-        {{-- <a href="{{ route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty]) }}">
+        @can('index_educational_institution_user')
+        <a href="{{ route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $faculty]) }}">
             <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
                     <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
@@ -18,7 +18,7 @@
                 {{ __('Back')}}
             </div>
         </a>
-        @endcan --}}
+        @endcan
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -83,7 +83,7 @@
                             <span class="ml-2 text-sm text-gray-600">{{ __('Yes') }}</span>
                         </label>
                         <label for="is_enabled_no" class="flex items-center">
-                            <input id="is_enabled_no" value="0" type="radio" class="form-radio" name="is_enabled" {{ old('is_enabled') != null && old('is_enabled') == 0 || $user->is_enabled != null && $user->is_enabled == 0 ? "checked" : "" }} />
+                            <input id="is_enabled_no" value="0" type="radio" class="form-radio" name="is_enabled" {{ old('is_enabled') != null && old('is_enabled') == 0 || $user->is_enabled == 0 ? "checked" : "" }} />
                             <span class="ml-2 text-sm text-gray-600">{{ __('No') }}</span>
                         </label>
                         <x-jet-input-error for="is_enabled" class="mt-2" />

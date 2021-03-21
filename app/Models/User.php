@@ -66,25 +66,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $appends = [
-        'profile_photo_url',
-        'my_projects'
+        'profile_photo_url'
     ];
-
-    public function getMyProjectsAttribute(){
-        $authUser = Auth::user();
-
-        $educationalInstitutionFaculty = $authUser->educationalInstitutionFaculties()->where('is_principal', 1)->first();
-        if ( $educationalInstitutionFaculty ) {
-            $node                             = $educationalInstitutionFaculty->educationalInstitution->node;
-            $educationalInstitution           = $educationalInstitutionFaculty->educationalInstitution;
-
-            return [
-                "node"                          => $node,
-                "educationalInstitution"        => $educationalInstitution,
-                "educationalInstitutionFaculty" => $educationalInstitutionFaculty,
-             ];
-        }
-    }
 
     public function isNodeAdmin() {
         return $this->hasOne('App\Models\Node', 'administrator_id');

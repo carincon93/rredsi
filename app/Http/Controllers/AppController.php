@@ -8,6 +8,7 @@ use App\Models\KnowledgeArea;
 use App\Models\AcademicProgram;
 use App\Models\Project;
 use App\Models\Event;
+use App\Models\LegalInformation;
 
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class AppController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard(User $user,Node $node)
+    public function dashboard(User $user, Node $node)
     {
         return view('dashboard');
     }
@@ -33,8 +34,9 @@ class AppController extends Controller
         $knowledgeAreas                             = KnowledgeArea::orderBy('name')->get();
         $node->shuffleProjects                      = $node->shuffleProjects();
         $node->shuffleEducationalInstitutionEvents  = $node->educationalInstitutionAndNodeEvents()->shuffle()->take(2);
+        $legalInformations                          = LegalInformation::orderBy('title')->get();
 
-        return view('welcome', compact('node', 'knowledgeAreas'));
+        return view('welcome', compact('node', 'knowledgeAreas', 'legalInformations'));
     }
 
     /**
@@ -45,8 +47,9 @@ class AppController extends Controller
     public function roles(Node $node)
     {
         $node->academicPrograms = AcademicProgram::select('academic_programs.id', 'academic_programs.name', 'educational_institution_faculties.name as educationalInstitutionFacultyName', 'educational_institutions.name as educationalInstitutionName')->join('educational_institution_faculties', 'academic_programs.educational_institution_faculty_id', 'educational_institution_faculties.id')->join('educational_institutions', 'educational_institution_faculties.educational_institution_id', 'educational_institutions.id')->where('educational_institutions.node_id', $node->id)->get();
+        $legalInformations      = LegalInformation::orderBy('title')->get();
 
-        return view('Explorer.index-roles', compact('node'));
+        return view('Explorer.index-roles', compact('node', 'legalInformations'));
     }
 
     /**
@@ -61,7 +64,9 @@ class AppController extends Controller
         })->get();
         $projects = auth()->user()->projects;
 
-        return view('Explorer.index-role-members', compact('node', 'academicProgram', 'projects'));
+        $legalInformations = LegalInformation::orderBy('title')->get();
+
+        return view('Explorer.index-role-members', compact('node', 'academicProgram', 'projects', 'legalInformations'));
     }
 
     /**
@@ -71,10 +76,11 @@ class AppController extends Controller
      */
     public function showUser(Node $node, User $user)
     {
-        $projects = auth()->user()->projects;
-        $memberEducationalInstitution = $user->educationalInstitutionFaculties()->where('is_principal', true)->first();
+        $projects                       = auth()->user()->projects;
+        $memberEducationalInstitution   = $user->educationalInstitutionFaculties()->where('is_principal', 1)->first();
+        $legalInformations              = LegalInformation::orderBy('title')->get();
 
-        return view('Explorer.show-user', compact('node', 'user', 'memberEducationalInstitution', 'projects'));
+        return view('Explorer.show-user', compact('node', 'user', 'memberEducationalInstitution', 'projects', 'legalInformations'));
     }
 
     /**
@@ -98,7 +104,9 @@ class AppController extends Controller
      */
     public function showProject(Node $node, Project $project)
     {
-        return view('Explorer.show-project', compact('node', 'project'));
+        $legalInformations = LegalInformation::orderBy('title')->get();
+
+        return view('Explorer.show-project', compact('node', 'project', 'legalInformations'));
     }
 
     /**
@@ -108,12 +116,12 @@ class AppController extends Controller
      */
     public function events(Request $request, Node $node)
     {
-        $search     = $request->get('search') ?? null;
-        $projects   = auth()->user()->projects;
+        $search             = $request->get('search') ?? null;
+        $projects           = auth()->user()->projects;
+        $node->events       = $node->educationalInstitutionAndNodeEvents($search);
+        $legalInformations  = LegalInformation::orderBy('title')->get();
 
-        $node->events = $node->educationalInstitutionAndNodeEvents($search);
-
-        return view('Explorer.index-events', compact('node', 'projects', 'search'));
+        return view('Explorer.index-events', compact('node', 'projects', 'search', 'legalInformations'));
     }
 
     /**
@@ -124,9 +132,10 @@ class AppController extends Controller
      */
     public function showEvent(Request $request, Node $node, Event $event)
     {
-        $projects = auth()->user()->projects;
+        $projects           = auth()->user()->projects;
+        $legalInformations  = LegalInformation::orderBy('title')->get();
 
-        return view('Explorer.show-event', compact('node', 'event', 'projects'));
+        return view('Explorer.show-event', compact('node', 'event', 'projects', 'legalInformations'));
     }
 
      /**
@@ -156,6 +165,8 @@ class AppController extends Controller
             $node->qtyProjectsPensilvania   = 0;
         }
 
-        return view('Explorer.show-node', compact('node'));
+        $legalInformations  = LegalInformation::orderBy('title')->get();
+
+        return view('Explorer.show-node', compact('node', 'legalInformations'));
     }
 }

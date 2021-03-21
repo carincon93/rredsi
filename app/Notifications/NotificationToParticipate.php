@@ -16,7 +16,6 @@ class NotificationToParticipate extends Notification
     private $researchTeam;
     private $user;
     private $file;
-    /**
 
     /**
      * Create a new notification instance.
@@ -52,7 +51,7 @@ class NotificationToParticipate extends Notification
     public function toMail($notifiable)
     {
         if ( $this->user->hasRole(4) ) {
-            $educationalInstitutionFaculty  = $this->user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+            $educationalInstitutionFaculty  = $this->user->educationalInstitutionFaculties()->where('is_principal', 1)->first();
             $educationalInstitution         = $educationalInstitutionFaculty->educationalInstitution->name;
         } elseif ( $this->user->hasRole(3) ) {
             $educationalInstitution = $this->user->isEducationalInstitutionAdmin;
@@ -75,7 +74,7 @@ class NotificationToParticipate extends Notification
     public function toArray($notifiable)
     {
         if ( $this->user->hasRole(4) ) {
-            $educationalInstitutionFaculty  = $this->user->educationalInstitutionFaculties()->where('is_principal',1)->first();
+            $educationalInstitutionFaculty  = $this->user->educationalInstitutionFaculties()->where('is_principal', 1)->first();
             $educationalInstitution         = $educationalInstitutionFaculty->educationalInstitution->name;
         } elseif ( $this->user->hasRole(3) ) {
             $educationalInstitution = $this->user->isEducationalInstitutionAdmin;
@@ -83,7 +82,7 @@ class NotificationToParticipate extends Notification
 
         return [
             "subject"       => "Solicutud de participación en proyecto de {$this->project->projectType->type} - Ibis",
-            "message"       => "El estudiante {$this->user->name} de la institución educativa {$educationalInstitution} quiere solicitar la participación en el desarrollo del proyecto {$this->project->title}'.",
+            "message"       => "El estudiante {$this->user->name} de la institución educativa {$educationalInstitution} quiere participar en el desarrollo del proyecto {$this->project->title}'.",
             "action"        => route('notifications.indexResponseSend', [$this->id]),
             "student_id"    => $this->user->id,
             "project_id"    => $this->project->id,

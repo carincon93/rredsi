@@ -155,20 +155,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-
         $this->authorize('delete-user', [User::class]);
 
-        if(!is_null($user->isNodeAdmin) ){
-            return redirect()->route('users.index')->with('status', "No es posible eliminar el usuario porque es coordinador(a) del nodo ".$user->isNodeAdmin->state);
-        }
-
-        if(!is_null($user->isEducationalInstitutionAdmin) ){
-            return redirect()->route('users.index')->with('status', "No es posible eliminar el usuario porque es delegado(a) de la institución educativa ".$user->isEducationalInstitutionAdmin->name);
-        }
-
-        if ( !$user->delete() ) {
-            return redirect()->route('users.index', [$user])->withInput()->with('status', __('An error has ocurred. Please try again later.'));
-        }
+        $user->update(['is_enabled', 0]);
 
         return redirect()->route('users.index')->with('status', __('The resource has been deleted successfully.'));
 

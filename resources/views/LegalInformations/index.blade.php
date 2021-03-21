@@ -46,16 +46,7 @@
                             <td class="w-60 h-10">
                                 <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Type') }}</span>
                                 <p>
-                                    @switch($legalInformation->type)
-                                        @case(1)
-                                            Políticas de privacidad
-                                            @break
-                                        @case(2)
-                                            Términos y condiciones
-                                            @break
-                                        @default
-
-                                    @endswitch
+                                    {{ $legalInformation->title }}
                                 </p>
                             </td>
                             <td>

@@ -122,7 +122,7 @@
         </div>
     </div>
 
-    <x-footer />
+    <x-footer :legalInformations="$legalInformations" />
 
     @if(isset($event))
         <x-dialog-modal-form-event-project :eventId="$event->id" :projects="$projects" />

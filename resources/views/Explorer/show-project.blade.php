@@ -33,7 +33,7 @@
                 <h1 class="text-2xl mt-12 ml-16">{{ __('Authors') }}</h1>
                 @forelse ($project->authors->chunk(3) as $chunk)
                     <div class="md:grid md:grid-cols-3 md:gap-4">
-                        @foreach ($chunk as $author)
+                        @forelse ($chunk as $author)
                             <div class="p-10 md:mb-0 mb-6 flex flex-col">
                                 <div class="rounded bg-gray-50 p-4 transform translate-x-6 -translate-y-6 shadow">
                                     <div class="flex items-center">
@@ -67,7 +67,9 @@
                                     <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <p>{{ __('No data recorded') }}</p>
+                        @endforelse
                     </div>
                 @empty
                     <p>{{ __('No data recorded') }}</p>
@@ -82,9 +84,11 @@
 
                 <h1 class="text-2xl">{{ __('Keywords') }}</h1>
                 <div class="mt-4 text-gray-400">
-                    @foreach (explode(',', implode(json_decode($project->keywords))) as $keyword)
+                    @forelse ($project->keywordsArray as $keyword)
                         <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $keyword]) }}" class="ml-1 underline">{{ $keyword }}</a>
-                    @endforeach
+                    @empty
+                        <p>{{ __('No data recorded') }}</p>
+                    @endforelse
                 </div>
 
                 <x-jet-section-border />
@@ -138,9 +142,11 @@
                 <div>
                     <h1 class="text-2xl text-center mb-12 mt-12">{{ __('Roles requirements') }}</h1>
                     <ul class="pl-1/3" style="list-style: circle;">
-                        @foreach (explode(',', implode(json_decode($project->roles_requirements))) as $roles_requirement)
+                        @forelse ($project->rolesRequirementsArray as $roles_requirement)
                             <li>{{ $roles_requirement }}</li>
-                        @endforeach
+                        @empty
+                            <p>{{ __('No data recorded') }}</p>
+                        @endforelse
                     </ul>
                 </div>
 
@@ -158,7 +164,7 @@
         </div>
     </div>
 
-    <x-footer />
+    <x-footer :legalInformations="$legalInformations" />
 
     <x-dialog-modal-form-project :node="$node" :project="$project"/>
 

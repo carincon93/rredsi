@@ -58,7 +58,7 @@ class InformationNotification extends Notification
         if($this->type == "proyecto" || $this->type == "producto de investigación"){
             $name = $this->data->title;
             $message = " el nuevo ";
-        }else if($this->type =="institución educativa"){
+        }else if($this->type == "institución educativa"){
             $name = $this->data->name;
             $message = " la nueva ";
         }else{
@@ -81,7 +81,7 @@ class InformationNotification extends Notification
         }else{
             return [
                 "subject"       => "Se acaba de crear {$message} {$this->type} - Ibis",
-                "message"       => "Hola {$notifiable->name} te invitamos a que conozcas {$message} {$this->type} {$name}.",
+                "message"       => "Hola {$notifiable->name} lo invitamos a que conozca {$message} {$this->type} {$name}.",
                 "thanksMessage" => "Gracias por su atención."
             ];
         }

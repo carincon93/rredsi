@@ -33,9 +33,9 @@
                     @method('PUT')
 
                     <div>
-                        <x-jet-label class="mb-4" for="type" value="{{ __('Type') }}" />
-                        <x-jet-input id="type" class="block mt-1 w-full" type="text" min="" max="191" name="type" value="{{ $legalInformation->type }}" required />
-                        <x-jet-input-error for="type" class="mt-2" />
+                        <x-jet-label class="mb-4" for="title" value="{{ __('Title') }}" />
+                        <x-jet-input id="title" class="block mt-1 w-full" type="text" max="191" name="title" value="{{ $legalInformation->title }}" required />
+                        <x-jet-input-error for="title" class="mt-2" />
                     </div>
 
                     <div class="mt-1/6">

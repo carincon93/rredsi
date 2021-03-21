@@ -9,7 +9,7 @@
                 </span>
             </h2>
         </div>
-        {{-- @can('index_educational_tool')
+        @can('index_educational_tool')
         <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.educational-tools.index', [$node, $educationalInstitution, $faculty, $educationalEnvironment]) }}">
             <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline">
@@ -18,7 +18,7 @@
                 {{ __('Back') }}
             </div>
         </a>
-        @endcan --}}
+        @endcan
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -51,27 +51,7 @@
                         <x-jet-input-error for="qty" class="mt-2" />
                     </div>
 
-                    <p class="mt-1/6">{{ __('Is enabled?' ) }} </p>
-                    <div class="mt-1/6">
-                        <input class="form-check-input" type="radio" name="is_enabled" id="is_enable_yes" {{ old('is_enabled') == 1 ? "checked" : "" }} value="1" />
-                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enable_yes">Si</label>
-
-                        <input class="form-check-input" type="radio" name="is_enabled" id="is_enabled_no" {{ old('is_enabled') == 0 ? "checked" : "" }} value="0" />
-                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_enabled_no">No</label>
-
-                        <x-jet-input-error for="is_enabled" class="mt-2" />
-                    </div>
-
-                    <p class="mt-1/6">{{ __('Is available?') }}</p>
-                    <div class="mt-1/6">
-                        <input class="form-check-input" type="radio" name="is_available" id="is_available_yes" {{ old('is_available') == 1 ? "checked" : "" }} value="1" />
-                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_yes">Si</label>
-
-                        <input class="form-check-input" type="radio" name="is_available" id="is_available_no" {{ old('is_available') == 0 ? "checked" : "" }} value="0" />
-                        <label class="font-medium inline inline-flex text-gray-700 text-sm ml-1" for="is_available_no">No</label>
-
-                        <x-jet-input-error for="is_available" class="mt-2" />
-                    </div>
+                    <hr class="mb-1/12">
 
                     <x-checkbox-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="null" />
 

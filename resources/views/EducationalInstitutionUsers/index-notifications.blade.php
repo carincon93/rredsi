@@ -191,7 +191,7 @@
                                                                             </x-slot>
 
                                                                             <x-slot name="content">
-                                                                                @if( $notification->type !== 'App\Notifications\RequestResponse'&& $notification->type !== 'App\Notifications\InformationNotification')
+                                                                                @if( $notification->type !== 'App\Notifications\RequestResponse' || $notification->type !== 'App\Notifications\InformationNotification')
                                                                                 <x-jet-dropdown-link href="{{ route('notifications.show', [$notification->id])}}">
                                                                                     {{ __('Show') }}
                                                                                 </x-jet-dropdown-link>
@@ -213,13 +213,8 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>

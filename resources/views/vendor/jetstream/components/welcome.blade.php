@@ -26,12 +26,11 @@
         </div>
 
         <div class="ml-12">
-            <div class="mt-2 text-sm text-gray-500">
-                Revise cuales son los próximos eventos que las instituciones educativas van a celebrar. Si tiene proyectos que coincidan con el área de conocimiento del evento por favor participe, de esta manera se contribuye a la investigación académica de {{ optional(optional(Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first()->educationalInstitution)->node)->state }}. Valide la información y por favor haga el proceso de inscripción
-            </div>
-
             @if (Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first())
-            <a href="{{ route('nodes.explorer.events', [optional(Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first()->educationalInstitution)->node]) }}">
+            <div class="mt-2 text-sm text-gray-500">
+                Revise cuales son los próximos eventos que las instituciones educativas van a celebrar. Si tiene proyectos que coincidan con el área de conocimiento del evento por favor participe, de esta manera se contribuye a la investigación académica de {{ Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first()->educationalInstitution->node->state }}. Valide la información y por favor haga el proceso de inscripción.
+            </div>
+            <a href="{{ route('nodes.explorer.events', [Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first()->educationalInstitution->node]) }}">
                 <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                     <div>Explorar los eventos de nodo</div>
 
@@ -41,7 +40,10 @@
                 </div>
             </a>
             @else
-                <p>No tiene asociado un nodo. Contáctese con el administrador del sistema.</p>
+            <div class="mt-2 mb-2 text-sm text-gray-500">
+                Revise cuales son los próximos eventos que las instituciones educativas van a celebrar. Si tiene proyectos que coincidan con el área de conocimiento del evento por favor participe, de esta manera se contribuye a la investigación académica. Valide la información y por favor haga el proceso de inscripción.
+            </div>
+            <a href="#">Seleccione un nodo en la opción Explorer</a>
             @endif
         </div>
     </div>
@@ -71,6 +73,7 @@
         </div>
     </div>
 
+
     <div class="p-6 border-t border-gray-200">
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">
@@ -83,8 +86,8 @@
             <div class="mt-2 text-sm text-gray-500">
                 {{ config('app.name') }} permite la búsqueda de jóvenes investigadores que estén asociados a los semilleros de las demás instituciones educativas y solicitar su apoyo para el desarrollo de sus proyectos.
             </div>
-
-            <a href="{{ route('nodes.explorer.roles', [optional(Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first()->educationalInstitution)->node]) }}">
+            @if (Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first())
+            <a href="{{ route('nodes.explorer.roles', [Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first()->educationalInstitution->node]) }}">
                 <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                     <div>Contactar jóvenes investigadores</div>
 
@@ -93,7 +96,9 @@
                     </div>
                 </div>
             </a>
-
+            @else
+                <a href="#">Seleccione un nodo en la opción Explorer</a>
+            @endif
         </div>
     </div>
 

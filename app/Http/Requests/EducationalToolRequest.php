@@ -27,8 +27,6 @@ class EducationalToolRequest extends FormRequest
             'name'                          => 'required|string|max:191',
             'description'                   => 'required',
             'qty'                           => 'required|integer|min:0|max:9999999999',
-            'is_available'                  => 'required|boolean',
-            'is_enabled'                    => 'required|boolean',
         ];
     }
 

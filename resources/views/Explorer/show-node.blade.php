@@ -128,5 +128,5 @@
         </div>
     </div>
 
-    <x-footer />
+    <x-footer :legalInformations="$legalInformations" />
 </x-guest-layout>
