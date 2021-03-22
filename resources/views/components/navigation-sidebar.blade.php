@@ -122,7 +122,7 @@
 
         </div>
         {{-- links_sidebar --}}
-        <nav :class="{'block': open, 'hidden': !open}" class="scroll flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
+        <nav :class="{'block': open, 'hidden': !open}" class="scroll flex-grow md:block pb-4 md:pb-0 md:overflow-y-auto">
             {{-- Administrar perfil en dispositivo movil --}}
             <div class="block overflow-auto md:hidden mt-1">
             {{-- <x-drop-down-profile /> --}}
@@ -172,7 +172,7 @@
                 </div>
             @endif
 
-            <a href="{{ route('dashboard') }}" class="w-full flex items-center md:mt-1/6 py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+            <a href="{{ route('dashboard') }}" class="w-full flex items-center md:mt-1/6 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                 <svg xmlns="http://www.w3.org/2000/svg"class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 32 32">
                     <g >
                       <rect width="32" height="32" fill="none"/>
@@ -186,8 +186,10 @@
             <hr class="mb-1/6 mt-1/6">
 
             @if( $authUser->hasRole(4))
+                <p class="bg-gray-100 p-4 text-center"><strong>Semilleros de investigación a los que pertenezco</strong></p>
+
                 @foreach ($authUserResearchTeams as $authUserResearchTeam)
-                <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.index',[$authUserResearchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->node, $authUserResearchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution, $authUserResearchTeam->researchGroup->educationalInstitutionFaculty, $authUserResearchTeam->researchGroup]) }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+                <a href="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.index',[$authUserResearchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->node, $authUserResearchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution, $authUserResearchTeam->researchGroup->educationalInstitutionFaculty, $authUserResearchTeam->researchGroup]) }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 26 23.116">
                         <path d="M24.709.415A.7.7,0,0,0,23.432.361a7.741,7.741,0,0,1-6.767,3.95H13.053a8.67,8.67,0,0,0-8.667,8.667,8.926,8.926,0,0,0,.068.925,21.6,21.6,0,0,1,12.934-3.815.722.722,0,0,1,0,1.445C6.038,11.534,1.226,18.491.161,21.1a1.447,1.447,0,0,0,2.677,1.1,11.877,11.877,0,0,1,3.246-4.09,8.648,8.648,0,0,0,7.9,3.485c7.087-.515,12.076-6.871,12.076-14.653A16.416,16.416,0,0,0,24.709.415Z" transform="translate(-0.055 0.024)"/>
                     </svg>
@@ -198,7 +200,7 @@
 
             {{-- dropdown que  que puede visualizar el admin del sistema --}}
             @can('index_user')
-            <a href="{{ route('users.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+            <a href="{{ route('users.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -206,7 +208,7 @@
             </a>
             @endcan
             @can('index_role')
-            <a href="{{ route('roles.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+            <a href="{{ route('roles.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 26.233 25.233">
                     <g transform="translate(-1197 -1921)">
                       <path d="M16,7a4,4,0,1,1-4-4A4,4,0,0,1,16,7Zm-4,7a7,7,0,0,0-7,7H19a7,7,0,0,0-7-7Z" transform="translate(1193 1919)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
@@ -220,7 +222,7 @@
             </a>
             @endcan
             @can('index_nodes')
-            <a href="{{ route('nodes.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+            <a href="{{ route('nodes.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 19.004 24.697">
                     <g transform="translate(0 0)">
                       <g transform="translate(0 0)">
@@ -232,7 +234,7 @@
             </a>
             @endcan
             @can('index_legal_information')
-            <a href="{{ route('legal-informations.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+            <a href="{{ route('legal-informations.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="mr-1/12 ml-1 text-black" style="width: 18px;" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
@@ -240,7 +242,7 @@
             </a>
             @endcan
             @can('index_knowledge_area')
-            <a href="{{ route('knowledge-areas.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+            <a href="{{ route('knowledge-areas.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 26.465 19.941">
                     <g transform="translate(0 -44.37)">
                       <path d="M26.086,63.615H21.713l1.548-.445a.983.983,0,0,0,.592-.454.853.853,0,0,0,.069-.706L18.152,45.02a.994.994,0,0,0-.959-.65,1.084,1.084,0,0,0-.3.042l-3.547,1.02c-.034.01-.067.021-.1.034v-.134a.968.968,0,0,0-1-.925H8.5a1.054,1.054,0,0,0-.627.2,1.057,1.057,0,0,0-.628-.2H3.5a.969.969,0,0,0-1.006.925V63.615H.378a.349.349,0,1,0,0,.7H26.086a.349.349,0,1,0,0-.7Zm-2.9-1.222a.244.244,0,0,1-.147.113l-3.547,1.02a.266.266,0,0,1-.074.01.251.251,0,0,1-.239-.162L14.923,50.848l4.023-1.156L23.2,62.218A.211.211,0,0,1,23.183,62.393ZM18.721,49.028,14.7,50.184l-.46-1.355,4.023-1.156ZM13.571,46.1l3.548-1.02a.268.268,0,0,1,.074-.011.246.246,0,0,1,.237.161l.605,1.782-4.023,1.156-.6-1.781A.228.228,0,0,1,13.571,46.1Zm4.9,17.519H13.247V48.244ZM8.254,52.482H12.49v.969H8.254Zm4.237-.7H8.254v-3.4h4.237ZM7.5,49.305H3.253v-.924H7.5ZM3.253,50H7.5v.924H3.253Zm5,4.145H12.49v9.469H8.254ZM8.5,45.1h3.74a.24.24,0,0,1,.249.229v2.354H8.254V45.332A.24.24,0,0,1,8.5,45.1Zm-5,0H7.247a.241.241,0,0,1,.251.229v2.354H3.253V45.332A.241.241,0,0,1,3.5,45.1Zm-.25,6.519H7.5V63.615H3.253Z"/>
@@ -250,7 +252,7 @@
             </a>
             @endcan
             @can('index_knowledge_subarea')
-            <a href="{{ route('knowledge-subareas.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+            <a href="{{ route('knowledge-subareas.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 26.465 19.941">
                     <g transform="translate(0 -44.37)">
                       <path d="M26.086,63.615H21.713l1.548-.445a.983.983,0,0,0,.592-.454.853.853,0,0,0,.069-.706L18.152,45.02a.994.994,0,0,0-.959-.65,1.084,1.084,0,0,0-.3.042l-3.547,1.02c-.034.01-.067.021-.1.034v-.134a.968.968,0,0,0-1-.925H8.5a1.054,1.054,0,0,0-.627.2,1.057,1.057,0,0,0-.628-.2H3.5a.969.969,0,0,0-1.006.925V63.615H.378a.349.349,0,1,0,0,.7H26.086a.349.349,0,1,0,0-.7Zm-2.9-1.222a.244.244,0,0,1-.147.113l-3.547,1.02a.266.266,0,0,1-.074.01.251.251,0,0,1-.239-.162L14.923,50.848l4.023-1.156L23.2,62.218A.211.211,0,0,1,23.183,62.393ZM18.721,49.028,14.7,50.184l-.46-1.355,4.023-1.156ZM13.571,46.1l3.548-1.02a.268.268,0,0,1,.074-.011.246.246,0,0,1,.237.161l.605,1.782-4.023,1.156-.6-1.781A.228.228,0,0,1,13.571,46.1Zm4.9,17.519H13.247V48.244ZM8.254,52.482H12.49v.969H8.254Zm4.237-.7H8.254v-3.4h4.237ZM7.5,49.305H3.253v-.924H7.5ZM3.253,50H7.5v.924H3.253Zm5,4.145H12.49v9.469H8.254ZM8.5,45.1h3.74a.24.24,0,0,1,.249.229v2.354H8.254V45.332A.24.24,0,0,1,8.5,45.1Zm-5,0H7.247a.241.241,0,0,1,.251.229v2.354H3.253V45.332A.241.241,0,0,1,3.5,45.1Zm-.25,6.519H7.5V63.615H3.253Z"/>
@@ -260,7 +262,7 @@
             </a>
             @endcan
             @can('index_knowledge_subarea_discipline')
-            <a href="{{ route('knowledge-subarea-disciplines.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+            <a href="{{ route('knowledge-subarea-disciplines.index') }}" class="w-full flex items-center md:mt-4 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-1/12 ml-1 text-black" style="width: 18px; flex-basis: 26px;" viewBox="0 0 26.465 19.941">
                     <g transform="translate(0 -44.37)">
                       <path d="M26.086,63.615H21.713l1.548-.445a.983.983,0,0,0,.592-.454.853.853,0,0,0,.069-.706L18.152,45.02a.994.994,0,0,0-.959-.65,1.084,1.084,0,0,0-.3.042l-3.547,1.02c-.034.01-.067.021-.1.034v-.134a.968.968,0,0,0-1-.925H8.5a1.054,1.054,0,0,0-.627.2,1.057,1.057,0,0,0-.628-.2H3.5a.969.969,0,0,0-1.006.925V63.615H.378a.349.349,0,1,0,0,.7H26.086a.349.349,0,1,0,0-.7Zm-2.9-1.222a.244.244,0,0,1-.147.113l-3.547,1.02a.266.266,0,0,1-.074.01.251.251,0,0,1-.239-.162L14.923,50.848l4.023-1.156L23.2,62.218A.211.211,0,0,1,23.183,62.393ZM18.721,49.028,14.7,50.184l-.46-1.355,4.023-1.156ZM13.571,46.1l3.548-1.02a.268.268,0,0,1,.074-.011.246.246,0,0,1,.237.161l.605,1.782-4.023,1.156-.6-1.781A.228.228,0,0,1,13.571,46.1Zm4.9,17.519H13.247V48.244ZM8.254,52.482H12.49v.969H8.254Zm4.237-.7H8.254v-3.4h4.237ZM7.5,49.305H3.253v-.924H7.5ZM3.253,50H7.5v.924H3.253Zm5,4.145H12.49v9.469H8.254ZM8.5,45.1h3.74a.24.24,0,0,1,.249.229v2.354H8.254V45.332A.24.24,0,0,1,8.5,45.1Zm-5,0H7.247a.241.241,0,0,1,.251.229v2.354H3.253V45.332A.241.241,0,0,1,3.5,45.1Zm-.25,6.519H7.5V63.615H3.253Z"/>
@@ -274,27 +276,27 @@
             @if ($node)
                 @if( $authUser->hasRole(2) )
                     <div @click.away="open = false" class="static" x-data="{ open: false }">
-                        <button @click="open = !open" class="flex flex-row items-center justify-between w-full py-2 mt-2 text-sm font-semibold text-left bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+                        <button @click="open = !open" class="flex flex-row items-center justify-between w-full py-2 mt-2 text-sm font-semibold text-left bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                             <span class="capitalize">Nodo {{ $node->state }}</span>
                             <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         </button>
                         <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg z-10">
                             <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
-                                <a href="{{ route('dashboard') }}" class="ml-2 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+                                <a href="{{ route('dashboard') }}" class="ml-2 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
                                         <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
                                     </svg>
                                     <span class="text-gray-700">{{ __('Dashboard') }}</span>
                                 </a>
 
-                                <a href="{{ route('nodes.events.index', [$node]) }}" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+                                <a href="{{ route('nodes.events.index', [$node]) }}" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
                                         <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
                                     </svg>
                                     <span class="text-gray-700">{{ __('Node events') }}</span>
                                 </a>
                                 @can('index_annual_node_event')
-                                <a href="{{ route('annualNodeEvent.index', [$node]) }}" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+                                <a href="{{ route('annualNodeEvent.index', [$node]) }}" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
                                         <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
                                     </svg>
@@ -302,7 +304,7 @@
                                 </a>
                                 @endcan
                                 @can('index_educational_institution')
-                                <a href="{{ route('nodes.educational-institutions.index', [$node]) }}" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+                                <a href="{{ route('nodes.educational-institutions.index', [$node]) }}" class="ml-2 mr-2 w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
                                         <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
                                     </svg>
@@ -325,39 +327,53 @@
 
                     <hr class="mt-4 mb-4"> --}}
 
-                    <a href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}" id="faculties" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
-                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                    <a href="{{ route('nodes.educational-institutions.faculties.index', [$node, $educationalInstitution]) }}" id="faculties" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
                         <span class="text-gray-700">{{ __('Faculties') }}</span>
                     </a>
 
-                    @if ($node && $educationalInstitutionFaculty)
-                        <p class="mt-4 mb-4 text-center"><strong>{{ $educationalInstitutionFaculty->name }}</strong></p>
+                    @if ( request()->route('faculty') )
+                        <p class="bg-gray-100 mt-4 p-4 text-center"><strong>{{ $educationalInstitutionFaculty->name }}</strong></p>
                         @can('index_academic_program')
-                        <a href="{{ route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="academic_programs" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
-                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                        <a href="{{ route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="academic_programs" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 bg-gray-100 px-4">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512; width: 18px;" xml:space="preserve" class="mr-1/12 ml-1 text-black">
+                            <g>
+                                <g>
+                                    <path d="M480.813,221.945v-42.138H512V95.229h-53.029L255.999,13.103L53.029,95.229H0v84.579h31.187v42.138h15.209V372.18H31.187
+                                        v42.138H0v84.579h512v-84.579h-31.187V372.18h-15.209V221.945H480.813z M255.999,45.916l121.874,49.312H134.127L255.999,45.916z
+                                        M480.813,444.734h0.77v23.745H30.417v-23.745h0.77H480.813z M379.021,191.529H354.73h-86.584h-24.292H157.27h-24.291H61.604
+                                        v-11.721h388.792v11.721H379.021z M435.187,221.945v150.234h-25.749V221.945H435.187z M379.02,221.945v150.234h-24.291V221.945
+                                        H379.02z M324.313,221.945v150.234h-25.749V221.945H324.313z M243.854,221.945h24.292v150.234h-24.292V221.945z M213.437,221.945
+                                        v150.234h-25.749V221.945H213.437z M157.27,221.945v150.234h-24.291V221.945H157.27z M102.562,221.945v150.234H76.813V221.945
+                                        H102.562z M132.979,402.596h24.291h86.584h24.292h86.584h24.291h71.375v11.721H61.604v-11.721H132.979z M31.187,149.391h-0.77
+                                        v-23.745h451.166v23.745h-0.77H31.187z"/>
+                                </g>
+                            </g>
                             </svg>
                             <span class="text-gray-700">{{ __('Academic programs') }}</span>
                         </a>
                         @endcan
                         @can('index_research_group')
-                        <a href="{{ route('nodes.educational-institutions.faculties.research-groups.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="research_groups" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
-
+                        <a href="{{ route('nodes.educational-institutions.faculties.research-groups.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="research_groups" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 bg-gray-100 px-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17.216" height="15.209" viewBox="0 0 17.216 15.209" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                                <path id="Path_109" data-name="Path 109" d="M16.531,13.434a1.651,1.651,0,0,0-.844-.452l-1.971-.394a4.953,4.953,0,0,0-3.187.427l-.263.13a4.953,4.953,0,0,1-3.187.427l-1.594-.319A1.651,1.651,0,0,0,4,13.706M7.1,4h6.6l-.826.826V9.1a1.651,1.651,0,0,0,.484,1.167l4.128,4.128a1.651,1.651,0,0,1-1.168,2.818H4.478A1.651,1.651,0,0,1,3.311,14.39l4.128-4.128A1.651,1.651,0,0,0,7.923,9.1V4.826Z" transform="translate(-1.791 -3)" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
                             <span class="text-gray-700">{{ __('Research groups') }}</span>
                         </a>
                         @endcan
                         @can('index_educational_environment')
-                        <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="educational_environments" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
-                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                        <a href="{{ route('nodes.educational-institutions.faculties.educational-environments.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="educational_environments" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 bg-gray-100 px-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
                             <span class="text-gray-700">{{ __('Educational environments') }}</span>
                         </a>
                         @endcan
                         @can('index_educational_institution_user')
-                        <a href="{{ route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="users" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+                        <a href="{{ route('nodes.educational-institutions.faculties.users.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="users" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 bg-gray-100 px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
@@ -375,15 +391,15 @@
 
             {{-- dropdown ini --}}
             {{-- <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200">
+                <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                 <span>Dropdown</span>
                 <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </button>
                 <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg z-10">
                 <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
-                    <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200" href="#">Link #1</a>
-                    <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200" href="#">Link #2</a>
-                    <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200" href="#">Link #3</a>
+                    <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4" href="#">Link #1</a>
+                    <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4" href="#">Link #2</a>
+                    <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4" href="#">Link #3</a>
                 </div>
                 </div>
             </div> --}}

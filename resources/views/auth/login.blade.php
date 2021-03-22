@@ -43,6 +43,14 @@
                     {{ __('Login') }}
                 </x-jet-button>
             </div>
+
+            <x-jet-section-border />
+
+            <p>Si aún no tiene una cuenta.</p>
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                {{ __('Register') }}
+            </a>
+
         </form>
 
           {{--Alert component --}}

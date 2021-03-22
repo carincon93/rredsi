@@ -266,6 +266,10 @@ class ProjectController extends Controller
     {
         $this->authorize('delete', [Project::class , $educationalInstitution , $researchTeam, $project]);
 
+        if ($project->events()->count() > 0) {
+            return redirect()->back()->with('status', 'El proyecto no se puede eliminar porque está registrado a uno o varios eventos.');
+        }
+
         if($project->delete()){
             $message = 'Your delete processed correctly';
         }

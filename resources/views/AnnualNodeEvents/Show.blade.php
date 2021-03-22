@@ -1,4 +1,4 @@
-<title>{{ "Detalles del proyecto $project->title"}}</title>
+<title>{{ "Detalles del proyecto $project->title - ".config('app.name') }}</title>
 <x-app-layout>
     @push('styles')
     <style>

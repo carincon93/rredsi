@@ -40,7 +40,7 @@
                     </svg>
                 </div>
             </div>
-            <form method="POST" action="{{ route('notifications.acceptStudent') }}">
+            <form method="POST" action="{{ route('notifications.acceptStudentInProject') }}">
                 @csrf()
                 <!--Body-->
                 <div class="px-5 py-2 text-gray-600">

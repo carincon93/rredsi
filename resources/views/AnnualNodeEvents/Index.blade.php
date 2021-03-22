@@ -1,4 +1,4 @@
-<title>{{ "Eventos anuales de nodo"}}</title>
+<title>{{ "Eventos anuales de nodo - ".config('app.name') }}</title>
 <x-app-layout>
     @push('styles')
     <style>

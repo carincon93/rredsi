@@ -169,12 +169,12 @@ class NotificationController extends Controller
         $userGraduations    = $user->userGraduations;
         $notification->markAsRead();
 
-        return view('EducationalInstitutionUsers.show-notifications', compact('notification', 'user', 'faculty', 'userGraduations'));
+        return view('EducationalInstitutionUsers.accept-student-project', compact('notification', 'user', 'faculty', 'userGraduations'));
 
     }
 
 
-    public function acceptStudent(Request $request)
+    public function acceptStudentInProject(Request $request)
     {
         $project      = Project::findOrFail($request->get('project_id'));
 
@@ -202,18 +202,18 @@ class NotificationController extends Controller
 
         // En caso de ser aceptado ingresa a esta condicion
         $response = "Aceptado(a)";
-        $researchTeam= $project->researchTeams()->where('is_principal',1)->first();
+        $researchTeam= $project->researchTeams()->where('is_principal', 1)->first();
         $team_educational_institution = $researchTeam->researchGroup->educationalInstitutionFaculty->educationalInstitution->name;
 
         if($researchTeam){
 
-            // validamos si usuario pertenece a una institucion diferente a la de el grupo de investigación
+            // validamos si usuario pertenece a una institucion diferente a la del grupo de investigación
             $external = false;
             if($user_educational_institution != $team_educational_institution ){
                 $external = true;
             }
 
-            // se agrega a autores de el proyecto
+            // se agrega a autores del proyecto
             $project->authors()->attach($request->get('student_id'));
             // se agrega al grupo de investigación
             $researchTeam->members()->attach($request->get('student_id'), array('is_external' => $external,'accepted_at'=> date("Y-m-d H:i:s")) );

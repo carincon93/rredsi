@@ -1,4 +1,4 @@
-<title>{{ "Crear un programa académico"}}</title>
+<title>{{ "Crear un programa académico - ".config('app.name') }}</title>
 <x-app-layout>
     <x-slot name="header">
         <div >
@@ -32,7 +32,7 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form novalidate method="POST" action="{{ route('nodes.educational-institutions.faculties.academic-programs.store', [$node, $educationalInstitution, $faculty]) }}">
+                <form method="POST" action="{{ route('nodes.educational-institutions.faculties.academic-programs.store', [$node, $educationalInstitution, $faculty]) }}">
                     @csrf
 
                     <div>

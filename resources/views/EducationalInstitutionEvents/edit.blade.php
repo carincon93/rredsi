@@ -1,4 +1,4 @@
-<title>{{ "Editar información del evento $event->name"}}</title>
+<title>{{ "Editar información del evento $event->name - ".config('app.name') }}</title>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">

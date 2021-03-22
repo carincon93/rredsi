@@ -1,4 +1,4 @@
-<title>{{ "Editar información de la institución educativa $educationalInstitution->name "}}</title>
+<title>{{ "Editar información de la institución educativa $educationalInstitution->name  - ".config('app.name') }}</title>
 
 <x-app-layout>
     <x-slot name="header">

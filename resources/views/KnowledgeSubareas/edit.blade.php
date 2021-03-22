@@ -1,4 +1,4 @@
-<title>{{"Editar la información del sub-área de conocimiento $knowledgeSubarea->name "}}</title>
+<title>{{"Editar la información del sub-área de conocimiento $knowledgeSubarea->name  - ".config('app.name') }}</title>
 <x-app-layout>
     <x-slot name="header">
         <div class="m-auto col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-4">

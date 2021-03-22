@@ -1,3 +1,5 @@
+<title>{{ "Detalles del nodo - ".config('app.name') }}</title>
+
 <x-guest-layout>
 
     <x-guest-header :node="$node" image="images/node-info.jpg">

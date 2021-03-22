@@ -1,4 +1,4 @@
-<title>{{ "Detalles de $userAcademicWork->title"}}</title>
+<title>{{ "Detalles de $userAcademicWork->title - ".config('app.name') }}</title>
 
 <x-app-layout>
     <x-slot name="header">

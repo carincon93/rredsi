@@ -81,7 +81,7 @@ class InformationNotification extends Notification
         }else{
             return [
                 "subject"       => "Se acaba de crear {$message} {$this->type} - Ibis",
-                "message"       => "Hola {$notifiable->name} lo invitamos a que conozca {$message} {$this->type} {$name}.",
+                "message"       => "Hola {$notifiable->name}. Tenemos un nuevo {$message} {$this->type} {$name}.",
                 "thanksMessage" => "Gracias por su atención."
             ];
         }

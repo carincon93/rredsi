@@ -79,6 +79,7 @@ class Project extends Model
 
     public function scopeSearchProjects($query, $titleOrKeyword) {
         $titleOrKeyword = mb_strtolower($titleOrKeyword);
+
         return $query->select('projects.*', 'project_types.type')
             ->join('project_types', 'projects.project_type_id', 'project_types.id')
             ->join('project_knowledge_subarea_discipline', 'projects.id', 'project_knowledge_subarea_discipline.project_id')
@@ -86,8 +87,8 @@ class Project extends Model
             ->join('knowledge_subareas', 'knowledge_subarea_disciplines.knowledge_subarea_id', 'knowledge_subareas.id')
             ->join('knowledge_areas', 'knowledge_subareas.knowledge_area_id', 'knowledge_areas.id')
             ->whereRaw('lower(projects.title) LIKE (?)', "%$titleOrKeyword%")
-            ->orWhereRaw('(select lower(jsonb_array_elements_text(projects.keywords::jsonb))) LIKE (?)', "%$titleOrKeyword%")
             ->orWhereRaw('lower(knowledge_areas.name) LIKE (?)', "%$titleOrKeyword%")
+            ->orWhereRaw('lower(projects.keywords::text) LIKE (?)', "%$titleOrKeyword%")
             ->where('projects.is_privated', 0)
             ->orWhere('project_types.type', $titleOrKeyword);
     }
@@ -118,7 +119,7 @@ class Project extends Model
     public function getKeywordsArrayAttribute()
     {
         if($this->keywords) {
-            return explode(',', implode(json_decode($this->keywords)));
+            return json_decode($this->keywords);
         } else {
             return [];
         }
@@ -127,7 +128,7 @@ class Project extends Model
     public function getRolesRequirementsArrayAttribute()
     {
         if($this->roles_requirements) {
-            return explode(',', implode(json_decode($this->roles_requirements)));
+            return json_decode($this->roles_requirements);
         } else {
             return [];
         }

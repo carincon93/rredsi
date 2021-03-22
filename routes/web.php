@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/nodes/{node}/explorer/events/{event}', [NodeEventController::class, 'sendProjectToEvent'])->name('nodes.explorer.sendProjectToEvent');
     // ? explorador de roles //
     Route::get('/nodes/{node}/explorer/roles/{academicProgram}', [AppController::class, 'searchRoles'])->name('nodes.explorer.searchRoles');
-    Route::get('/nodes/{node}/explorer/roles/show-user/{user}', [AppController::class, 'showUser'])->name('nodes.explorer.searchRoles.showUser');
+    Route::get('/nodes/{node}/explorer/roles/show-role/{user}', [AppController::class, 'showUser'])->name('nodes.explorer.searchRoles.showUser');
     // ? ruta para ver los proyectos activos y aplicar a ellos//
     Route::get('/nodes/{node}/explorer/projects', [AppController::class, 'searchProjects'])->name('nodes.explorer.searchProjects');
     Route::get('/nodes/{node}/explorer/projects/{project}', [AppController::class, 'showProject'])->name('nodes.explorer.searchProjects.showProject');
@@ -88,7 +88,7 @@ Route::middleware(['auth'])->group(function () {
     // ? ruta para envio de notificacion de participacion de proyecto en un evento//
     Route::post('/notifications/send-project-to-event', [NotificationController::class, 'sendProjectToEvent'])->name('notifications.sendProjectToEvent');
     // ? ruta para envio de notificacion de participacion aceptar o denegar estudiante en proyecto //
-    Route::post('/notifications/to-accept-student', [NotificationController::class, 'acceptStudent'])->name('notifications.acceptStudent');
+    Route::post('/notifications/to-accept-student', [NotificationController::class, 'acceptStudentInProject'])->name('notifications.acceptStudentInProject');
     // ? ruta para cambiar a leida notificaicon de correo//
     Route::get('/all-notifications/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend');
     // ? ruta de dashboard de instituciones educativas//

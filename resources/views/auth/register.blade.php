@@ -50,11 +50,10 @@
 
             <p class="mt-4">{{ __('Interests') }}</p>
             <div class="mt-4">
-                <input id="investigar" class="form-checkbox" type="checkbox" name="interests[]" value="investigar" required />
-                <label class="font-medium inline inline-flex text-gray-700 text-sm" for="investigar" >Investigar</label>
+                <small class="inline-block text-gray-500">Separe con comas cada interés</small>
+                <textarea rows="4" id="interests" name="interests" class="form-textarea border w-full" value="{{ old('interests') }}" required >{{ old('interests') }}</textarea>
+                <x-jet-input-error for="interests" class="mt-2" />
             </div>
-
-            {{-- <input class="hidden" id="status" name="status" :value="1"> --}}
 
             <x-drop-down-educational-institution-faculties :form="'yes'" />
 

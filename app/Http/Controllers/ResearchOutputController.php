@@ -77,7 +77,7 @@ class ResearchOutputController extends Controller
 
             // Send notification authors create researchOutput
             $authors = $project->authors;
-            $type = "Producto de investigación";
+            $type = "producto de investigación";
             Notification::send($authors, new InformationNotification($researchOutput,$type));
 
             $message = 'Your store processed correctly';

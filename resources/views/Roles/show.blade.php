@@ -1,4 +1,4 @@
-<title>{{"Detalles del rol $role->name "}}</title>
+<title>{{"Detalles del rol $role->name  - ".config('app.name') }}</title>
 <x-app-layout>
     <x-slot name="header">
         <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">

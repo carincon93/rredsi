@@ -1,4 +1,4 @@
-<title>{{ "Instituciones educativas"}}</title>
+<title>{{ "Instituciones educativas - ".config('app.name') }}</title>
 <x-app-layout>
     @push('styles')
     <style>

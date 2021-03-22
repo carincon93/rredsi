@@ -192,9 +192,9 @@ class NodeEventController extends Controller
             $educationalInstitutionFacultiesacademicPrograms    = auth()->user()->educationalInstitutionFaculties()->with('academicPrograms')->get();
             $educationalInstitutionFacultiesUsers               = auth()->user()->educationalInstitutionFaculties()->with('members')->get()->pluck('members')->flatten();
 
-            return view('Explorer.rredsi-event-register', compact('node', 'knowledgeAreas', 'educationalInstitutionFacultiesUsers', 'projects', 'researchTeams', 'educationalInstitutionFacultiesacademicPrograms', 'annualNodeEvent'));
+            return view('Explorer.Events.rredsi-event-register', compact('node', 'knowledgeAreas', 'educationalInstitutionFacultiesUsers', 'projects', 'researchTeams', 'educationalInstitutionFacultiesacademicPrograms', 'annualNodeEvent'));
         } else {
-            dd('no');
+            return redirect()->back()->with('status', 'Aún no hay un evento de RREDSI disponible');
         }
     }
 }

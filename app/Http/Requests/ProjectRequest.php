@@ -38,7 +38,7 @@ class ProjectRequest extends FormRequest
                 'project_type_id'       => 'required|min:0|max:9999999999|exists:project_types,id',
                 'research_team_id.*'    => 'min:0|max:9999999999|exists:research_teams,id',
                 'research_line_id.*'    => 'required|min:0|max:9999999999|exists:research_lines,id',
-                'knowledge_area_id.*'   => 'required|min:0|max:9999999999|exists:knowledge_areas,id',
+                'knowledge_subarea_discipline_id.*'   => 'required|min:0|max:9999999999|exists:knowledge_subarea_disciplines,id',
                 'academic_program_id.*' => 'required|min:0|max:9999999999|exists:academic_programs,id',
                 'user_id.*'             => 'required|min:0|max:9999999999|exists:users,id',
             ];
@@ -57,7 +57,7 @@ class ProjectRequest extends FormRequest
                 'project_type_id'       => 'required|min:0|max:9999999999|exists:project_types,id',
                 'research_team_id.*'    => 'min:0|max:9999999999|exists:research_teams,id',
                 'research_line_id.*'    => 'required|min:0|max:9999999999|exists:research_lines,id',
-                'knowledge_area_id.*'   => 'required|min:0|max:9999999999|exists:knowledge_areas,id',
+                'knowledge_subarea_discipline_id.*'   => 'required|min:0|max:9999999999|exists:knowledge_subarea_disciplines,id',
                 'academic_program_id.*' => 'required|min:0|max:9999999999|exists:academic_programs,id',
                 'user_id.*'             => 'required|min:0|max:9999999999|exists:users,id',
             ];
@@ -72,8 +72,10 @@ class ProjectRequest extends FormRequest
     protected function prepareForValidation()
     {
         if($this->keywords != null) {
+            $keywordsSanitize = trim(strtolower($this->keywords));
+
             $this->merge([
-                'keywords' => json_encode(explode(',', $this->keywords), true),
+                'keywords' => json_encode(explode(',', $keywordsSanitize), true),
             ]);
         }
 

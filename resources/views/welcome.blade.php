@@ -1,3 +1,5 @@
+<title>{{ "Explorer - ".config('app.name') }}</title>
+
 <x-guest-layout>
     <x-guest-header :node="$node" image="images/AdobeStock_hero.jpeg">
         <x-slot name="title">
@@ -42,8 +44,7 @@
     </div>
 
     <div class="py-12 bg-cool-gray-100">
-        <p class="text-center mt-8 mb-6">o</p>
-        <p class="text-center mb-8">realice una búsqueda de proyectos de su interés y trabaje de forma colaborativa con otros semilleros de investigación</p>
+        <p class="text-center mb-8">Realice una búsqueda de proyectos de su interés y trabaje de forma colaborativa con otros semilleros de investigación</p>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-4">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
@@ -56,105 +57,49 @@
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22.083" height="21" viewBox="0 0 22.083 21">
-                                    <g id="project" transform="translate(13.455)">
-                                        <g id="Grupo_2813" data-name="Grupo 2813" transform="translate(-13.455)">
-                                        <g id="Grupo_2812" data-name="Grupo 2812" transform="translate(0)">
-                                            <path id="Trazado_80" data-name="Trazado 80" d="M50.586,0H35.379a.344.344,0,0,0-.338.35V5.6h.676V.7H50.248V19.95a.34.34,0,0,1-.311.35c-.029,0-.058,0-.087,0-.06,0-.12,0-.178-.009a.037.037,0,0,1-.015,0,2.412,2.412,0,0,1-2.1-2.17.115.115,0,0,0,0-.015q-.012-.125-.012-.25v-.7a.344.344,0,0,0-.338-.35H35.717V10.5h-.676v6.3h-2.7a.344.344,0,0,0-.338.35v.7A3.1,3.1,0,0,0,35.041,21h14.9a1.026,1.026,0,0,0,.98-1.05V.35A.344.344,0,0,0,50.586,0ZM35.041,20.3a2.412,2.412,0,0,1-2.365-2.45V17.5H46.869v.35a3.347,3.347,0,0,0,.019.345c0,.03.009.06.013.09.011.085.025.169.043.252.006.029.014.058.021.087.021.084.044.167.071.249.008.023.016.047.024.07.031.087.066.172.1.255.008.017.016.035.024.051q.064.133.14.259l.02.035q.083.134.178.259l.011.015a3.192,3.192,0,0,0,.237.274A3.017,3.017,0,0,0,48,20.3Z" transform="translate(-28.841)"/>
-                                            <path id="Trazado_81" data-name="Trazado 81" d="M11.55,3.5a.35.35,0,0,0,.247-.1L13.2,2a.35.35,0,0,0,0-.495L11.8.1A.35.35,0,0,0,11.55,0H1.75a1.75,1.75,0,1,0,0,3.5ZM11.46.755l1,1-1,1-.249-1ZM2.8.7h7.952l-.175.7H3.5v.7h7.077l.175.7H2.8ZM.7,1.75A1.05,1.05,0,0,1,1.75.7H2.1V2.8H1.75A1.05,1.05,0,0,1,.7,1.75Z" transform="translate(0 8.439) rotate(-20)"/>
-                                            <path id="Trazado_82" data-name="Trazado 82" d="M176.352,99.2h10.5a.35.35,0,0,0,.35-.35v-10.5a.35.35,0,0,0-.6-.247L176.1,98.6a.35.35,0,0,0,.247.6ZM186.5,89.2V90.1h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7V95h.7v.7h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7H183v-.7h-.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7H177.2Z" transform="translate(-167.219 -84.152)"/>
-                                            <path id="Trazado_83" data-name="Trazado 83" d="M292.232,207.912h3.33a.35.35,0,0,0,.35-.35v-3.33a.35.35,0,0,0-.6-.247l-3.33,3.33a.35.35,0,0,0,.247.6Zm2.98-2.835v2.135h-2.135Z" transform="translate(-278.029 -194.962)"/>
-                                            <rect id="Rectángulo_542" data-name="Rectángulo 542" width="7" height="1" transform="translate(10.455 2)"/>
-                                            <rect id="Rectángulo_543" data-name="Rectángulo 543" width="9" transform="translate(9.455 4)"/>
-                                        </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[0]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[0]->id ]) : '#' }}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->title  : __('No data recorded') }}</a></div>
+                        <div class="{{ isset($node->shuffleProjects[0]) ? 'project-image' : '' }} p-6 text-white"  style="position: relative;background: url(/storage/{{ isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->main_image : '' }}) center center;">
+                            <div class="flex items-center relative z-10">
+                                <div class="text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[0]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[0]->id ]) : '#' }}" class="underline text-white block" style="max-width: 340px;">{{ isset($node->shuffleProjects[0]) ? $node->shuffleProjects[0]->title  : __('No data recorded') }}</a></div>
                             </div>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <div class="relative z-10 text-white">
+                                <div class="mt-2 text-white text-sm" style="max-width: 340px;">
                                     {{ isset($node->shuffleProjects[0]) ? substr($node->shuffleProjects[0]->abstract, 0, 250).'...' : __('No data recorded') }}
                                 </div>
                             </div>
                         </div>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22.083" height="21" viewBox="0 0 22.083 21">
-                                    <g id="project" transform="translate(13.455)">
-                                        <g id="Grupo_2813" data-name="Grupo 2813" transform="translate(-13.455)">
-                                        <g id="Grupo_2812" data-name="Grupo 2812" transform="translate(0)">
-                                            <path id="Trazado_80" data-name="Trazado 80" d="M50.586,0H35.379a.344.344,0,0,0-.338.35V5.6h.676V.7H50.248V19.95a.34.34,0,0,1-.311.35c-.029,0-.058,0-.087,0-.06,0-.12,0-.178-.009a.037.037,0,0,1-.015,0,2.412,2.412,0,0,1-2.1-2.17.115.115,0,0,0,0-.015q-.012-.125-.012-.25v-.7a.344.344,0,0,0-.338-.35H35.717V10.5h-.676v6.3h-2.7a.344.344,0,0,0-.338.35v.7A3.1,3.1,0,0,0,35.041,21h14.9a1.026,1.026,0,0,0,.98-1.05V.35A.344.344,0,0,0,50.586,0ZM35.041,20.3a2.412,2.412,0,0,1-2.365-2.45V17.5H46.869v.35a3.347,3.347,0,0,0,.019.345c0,.03.009.06.013.09.011.085.025.169.043.252.006.029.014.058.021.087.021.084.044.167.071.249.008.023.016.047.024.07.031.087.066.172.1.255.008.017.016.035.024.051q.064.133.14.259l.02.035q.083.134.178.259l.011.015a3.192,3.192,0,0,0,.237.274A3.017,3.017,0,0,0,48,20.3Z" transform="translate(-28.841)"/>
-                                            <path id="Trazado_81" data-name="Trazado 81" d="M11.55,3.5a.35.35,0,0,0,.247-.1L13.2,2a.35.35,0,0,0,0-.495L11.8.1A.35.35,0,0,0,11.55,0H1.75a1.75,1.75,0,1,0,0,3.5ZM11.46.755l1,1-1,1-.249-1ZM2.8.7h7.952l-.175.7H3.5v.7h7.077l.175.7H2.8ZM.7,1.75A1.05,1.05,0,0,1,1.75.7H2.1V2.8H1.75A1.05,1.05,0,0,1,.7,1.75Z" transform="translate(0 8.439) rotate(-20)"/>
-                                            <path id="Trazado_82" data-name="Trazado 82" d="M176.352,99.2h10.5a.35.35,0,0,0,.35-.35v-10.5a.35.35,0,0,0-.6-.247L176.1,98.6a.35.35,0,0,0,.247.6ZM186.5,89.2V90.1h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7V95h.7v.7h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7H183v-.7h-.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7H177.2Z" transform="translate(-167.219 -84.152)"/>
-                                            <path id="Trazado_83" data-name="Trazado 83" d="M292.232,207.912h3.33a.35.35,0,0,0,.35-.35v-3.33a.35.35,0,0,0-.6-.247l-3.33,3.33a.35.35,0,0,0,.247.6Zm2.98-2.835v2.135h-2.135Z" transform="translate(-278.029 -194.962)"/>
-                                            <rect id="Rectángulo_542" data-name="Rectángulo 542" width="7" height="1" transform="translate(10.455 2)"/>
-                                            <rect id="Rectángulo_543" data-name="Rectángulo 543" width="9" transform="translate(9.455 4)"/>
-                                        </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                    <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[1]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[1]->id])  : '#'}}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->title  : __('No data recorded') }}</a></div>
+                        <div class="{{ isset($node->shuffleProjects[1]) ? 'project-image' : '' }} p-6 text-white border-t border-gray-200 md:border-t-0 md:border-l" style="position: relative;background: url(/storage/{{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->main_image : '' }}) center center;">
+                            <div class="flex items-center relative z-10">
+                                <div class="text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[1]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[1]->id])  : '#'}}" class="underline text-white block" style="max-width: 340px;">{{ isset($node->shuffleProjects[1]) ? $node->shuffleProjects[1]->title  : __('No data recorded') }}</a></div>
                             </div>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <div class="relative z-10">
+                                <div class="mt-2 text-white text-sm" style="max-width: 340px;">
                                     {{ isset($node->shuffleProjects[1]) ? substr($node->shuffleProjects[1]->abstract, 0, 250).'...' : __('No data recorded') }}
                                 </div>
                             </div>
                         </div>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22.083" height="21" viewBox="0 0 22.083 21">
-                                    <g id="project" transform="translate(13.455)">
-                                        <g id="Grupo_2813" data-name="Grupo 2813" transform="translate(-13.455)">
-                                        <g id="Grupo_2812" data-name="Grupo 2812" transform="translate(0)">
-                                            <path id="Trazado_80" data-name="Trazado 80" d="M50.586,0H35.379a.344.344,0,0,0-.338.35V5.6h.676V.7H50.248V19.95a.34.34,0,0,1-.311.35c-.029,0-.058,0-.087,0-.06,0-.12,0-.178-.009a.037.037,0,0,1-.015,0,2.412,2.412,0,0,1-2.1-2.17.115.115,0,0,0,0-.015q-.012-.125-.012-.25v-.7a.344.344,0,0,0-.338-.35H35.717V10.5h-.676v6.3h-2.7a.344.344,0,0,0-.338.35v.7A3.1,3.1,0,0,0,35.041,21h14.9a1.026,1.026,0,0,0,.98-1.05V.35A.344.344,0,0,0,50.586,0ZM35.041,20.3a2.412,2.412,0,0,1-2.365-2.45V17.5H46.869v.35a3.347,3.347,0,0,0,.019.345c0,.03.009.06.013.09.011.085.025.169.043.252.006.029.014.058.021.087.021.084.044.167.071.249.008.023.016.047.024.07.031.087.066.172.1.255.008.017.016.035.024.051q.064.133.14.259l.02.035q.083.134.178.259l.011.015a3.192,3.192,0,0,0,.237.274A3.017,3.017,0,0,0,48,20.3Z" transform="translate(-28.841)"/>
-                                            <path id="Trazado_81" data-name="Trazado 81" d="M11.55,3.5a.35.35,0,0,0,.247-.1L13.2,2a.35.35,0,0,0,0-.495L11.8.1A.35.35,0,0,0,11.55,0H1.75a1.75,1.75,0,1,0,0,3.5ZM11.46.755l1,1-1,1-.249-1ZM2.8.7h7.952l-.175.7H3.5v.7h7.077l.175.7H2.8ZM.7,1.75A1.05,1.05,0,0,1,1.75.7H2.1V2.8H1.75A1.05,1.05,0,0,1,.7,1.75Z" transform="translate(0 8.439) rotate(-20)"/>
-                                            <path id="Trazado_82" data-name="Trazado 82" d="M176.352,99.2h10.5a.35.35,0,0,0,.35-.35v-10.5a.35.35,0,0,0-.6-.247L176.1,98.6a.35.35,0,0,0,.247.6ZM186.5,89.2V90.1h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7V95h.7v.7h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7H183v-.7h-.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7H177.2Z" transform="translate(-167.219 -84.152)"/>
-                                            <path id="Trazado_83" data-name="Trazado 83" d="M292.232,207.912h3.33a.35.35,0,0,0,.35-.35v-3.33a.35.35,0,0,0-.6-.247l-3.33,3.33a.35.35,0,0,0,.247.6Zm2.98-2.835v2.135h-2.135Z" transform="translate(-278.029 -194.962)"/>
-                                            <rect id="Rectángulo_542" data-name="Rectángulo 542" width="7" height="1" transform="translate(10.455 2)"/>
-                                            <rect id="Rectángulo_543" data-name="Rectángulo 543" width="9" transform="translate(9.455 4)"/>
-                                        </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[2]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[2]->id])  : '#'}}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->title  : __('No data recorded') }}</a></div>
+                        <div class="{{ isset($node->shuffleProjects[2]) ? 'project-image' : '' }} p-6 text-white border-t border-gray-200" style="position: relative;background: url(/storage/{{ isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->main_image : '' }}) center center;">
+                            <div class="flex items-center relative z-10">
+                                <div class="text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[2]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[2]->id])  : '#'}}" class="underline text-white block" style="max-width: 340px;">{{ isset($node->shuffleProjects[2]) ? $node->shuffleProjects[2]->title  : __('No data recorded') }}</a></div>
                             </div>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <div class="relative z-10">
+                                <div class="mt-2 text-white text-sm" style="max-width: 340px;">
                                     {{ isset($node->shuffleProjects[2]) ? substr($node->shuffleProjects[2]->abstract, 0, 250).'...' : __('No data recorded') }}
                                 </div>
                             </div>
                         </div>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                            <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22.083" height="21" viewBox="0 0 22.083 21">
-                                    <g id="project" transform="translate(13.455)">
-                                        <g id="Grupo_2813" data-name="Grupo 2813" transform="translate(-13.455)">
-                                        <g id="Grupo_2812" data-name="Grupo 2812" transform="translate(0)">
-                                            <path id="Trazado_80" data-name="Trazado 80" d="M50.586,0H35.379a.344.344,0,0,0-.338.35V5.6h.676V.7H50.248V19.95a.34.34,0,0,1-.311.35c-.029,0-.058,0-.087,0-.06,0-.12,0-.178-.009a.037.037,0,0,1-.015,0,2.412,2.412,0,0,1-2.1-2.17.115.115,0,0,0,0-.015q-.012-.125-.012-.25v-.7a.344.344,0,0,0-.338-.35H35.717V10.5h-.676v6.3h-2.7a.344.344,0,0,0-.338.35v.7A3.1,3.1,0,0,0,35.041,21h14.9a1.026,1.026,0,0,0,.98-1.05V.35A.344.344,0,0,0,50.586,0ZM35.041,20.3a2.412,2.412,0,0,1-2.365-2.45V17.5H46.869v.35a3.347,3.347,0,0,0,.019.345c0,.03.009.06.013.09.011.085.025.169.043.252.006.029.014.058.021.087.021.084.044.167.071.249.008.023.016.047.024.07.031.087.066.172.1.255.008.017.016.035.024.051q.064.133.14.259l.02.035q.083.134.178.259l.011.015a3.192,3.192,0,0,0,.237.274A3.017,3.017,0,0,0,48,20.3Z" transform="translate(-28.841)"/>
-                                            <path id="Trazado_81" data-name="Trazado 81" d="M11.55,3.5a.35.35,0,0,0,.247-.1L13.2,2a.35.35,0,0,0,0-.495L11.8.1A.35.35,0,0,0,11.55,0H1.75a1.75,1.75,0,1,0,0,3.5ZM11.46.755l1,1-1,1-.249-1ZM2.8.7h7.952l-.175.7H3.5v.7h7.077l.175.7H2.8ZM.7,1.75A1.05,1.05,0,0,1,1.75.7H2.1V2.8H1.75A1.05,1.05,0,0,1,.7,1.75Z" transform="translate(0 8.439) rotate(-20)"/>
-                                            <path id="Trazado_82" data-name="Trazado 82" d="M176.352,99.2h10.5a.35.35,0,0,0,.35-.35v-10.5a.35.35,0,0,0-.6-.247L176.1,98.6a.35.35,0,0,0,.247.6ZM186.5,89.2V90.1h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7V95h.7v.7h-.7v.7h.7v.7h-.7v.7h.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7H183v-.7h-.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7h-.7v-.7h-.7v.7H177.2Z" transform="translate(-167.219 -84.152)"/>
-                                            <path id="Trazado_83" data-name="Trazado 83" d="M292.232,207.912h3.33a.35.35,0,0,0,.35-.35v-3.33a.35.35,0,0,0-.6-.247l-3.33,3.33a.35.35,0,0,0,.247.6Zm2.98-2.835v2.135h-2.135Z" transform="translate(-278.029 -194.962)"/>
-                                            <rect id="Rectángulo_542" data-name="Rectángulo 542" width="7" height="1" transform="translate(10.455 2)"/>
-                                            <rect id="Rectángulo_543" data-name="Rectángulo 543" width="9" transform="translate(9.455 4)"/>
-                                        </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[3]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[3]->id])  : '#'}}" class="underline text-gray-900 dark:text-white">{{ isset($node->shuffleProjects[3]) ? $node->shuffleProjects[3]->title  : __('No data recorded') }}</a></div>
+                        <div class="{{ isset($node->shuffleProjects[3]) ? 'project-image' : '' }} p-6 text-white border-t border-gray-200 md:border-l" style="position: relative;background: url(/storage/{{ isset($node->shuffleProjects[3]) ? $node->shuffleProjects[3]->main_image : '' }}) center center;">
+                            <div class="flex items-center relative z-10">
+                                <div class="text-lg leading-7 font-semibold"><a href="{{ isset($node->shuffleProjects[3]) ? route('nodes.explorer.searchProjects.showProject', [$node, $node->shuffleProjects[3]->id])  : '#'}}" class="underline text-white block" style="max-width: 340px;">{{ isset($node->shuffleProjects[3]) ? $node->shuffleProjects[3]->title  : __('No data recorded') }}</a></div>
                             </div>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <div class="relative z-10">
+                                <div class="mt-2 text-white text-sm" style="max-width: 340px;">
                                     {{ isset($node->shuffleProjects[3]) ? substr($node->shuffleProjects[3]->abstract, 0, 250).'...' : __('No data recorded') }}
                                 </div>
                             </div>
@@ -171,6 +116,34 @@
                         @endforeach
                     </div>
                 @endforeach
+            </div>
+        </div>
+
+        <x-jet-section-border />
+
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-4">
+                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+                    <form class="flex-1 ml-1/12 mt-2 shadow" method="GET" action="">
+                        <div>
+                            <x-jet-input id="search" class="block w-full" type="search" name="search" value="{{ old('search') }}" placeholder="Busque proyectos por: título, palabras clave" required />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <x-jet-section-border />
+
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-4">
+                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+                    <form class="flex-1 ml-1/12 mt-2 shadow" method="GET" action="">
+                        <div>
+                            <x-jet-input id="search" class="block w-full" type="search" name="search" value="{{ old('search') }}" placeholder="Busque proyectos por: título, palabras clave" required />
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -193,7 +166,7 @@
             <h1 class="text-2xl md:text-4xl text-gray-300 leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->name : __('No data recorded') }}</h1>
             <p class="text-white leading-10">{{ isset($node->shuffleEducationalInstitutionEvents[0]) ? $node->shuffleEducationalInstitutionEvents[0]->datesForHumans : __('No data recorded') }}</p>
             @if (isset($node->shuffleEducationalInstitutionEvents[0]))
-                <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[0]->id]) }}" class="mt-1 md:mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-1 md:px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a> --}}
+                <a href="{{ route('nodes.explorer.showEvent', [$node, $node->shuffleEducationalInstitutionEvents[0]->id]) }}" class="mt-1 md:mt-4 active:bg-white bg-white hover:bg-white text-gray-400 inline-flex items-center px-1 md:px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Más información</a>
             @endif
         </div>
         <div class="h-auto md:h-64 bg-cool-gray-700 p-9 md:p-11">
