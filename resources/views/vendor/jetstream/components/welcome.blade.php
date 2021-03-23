@@ -115,7 +115,7 @@
                 {{ config('app.name') }} le permite consultar sobre infraestructura y/o equipos especializados, de esta manera, si uno de sus proyectos requiere de algún laboratorio, ambiente, o equipo especializado, puede hacer una búsqueda y gestionar con los delegados de las instituciones de la red para hacer uso de ellos.
             </div>
             @if (Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first())
-            <a href="{{ route('nodes.explorer.roles', [Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first()->educationalInstitution->node]) }}">
+            <a href="{{ route('nodes.explorer', [Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first()->educationalInstitution->node]) }}">
                 <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                     <div>Consultar infraestructura / Equipos especializados</div>
 
