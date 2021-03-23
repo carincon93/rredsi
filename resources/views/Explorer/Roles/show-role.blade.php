@@ -226,6 +226,10 @@
         </div>
     </div>
 
+    @if (session('status'))
+        <x-data-alert />
+    @endif
+
     <x-footer :legalInformations="$legalInformations" />
 
 </x-guest-layout>

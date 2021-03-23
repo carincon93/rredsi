@@ -9,6 +9,8 @@ use App\Models\AcademicProgram;
 use App\Models\Project;
 use App\Models\Event;
 use App\Models\LegalInformation;
+use App\Models\EducationalEnvironment;
+use App\Models\EducationalTool;
 
 use Illuminate\Http\Request;
 
@@ -107,6 +109,57 @@ class AppController extends Controller
         $legalInformations = LegalInformation::orderBy('title')->get();
 
         return view('Explorer.Projects.show-project', compact('node', 'project', 'legalInformations'));
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchEducationalEnvironments(Request $request, Node $node)
+    {
+        $search                     = $request->get('search-educational-environment');
+        $educationalEnvironments    = EducationalEnvironment::searchEducationalEnvironments($search)->get();
+
+        return view('Explorer.EducationalEnvironments.index-educational-environments', compact('node', 'educationalEnvironments', 'search'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showEducationalEnvironment(Node $node, EducationalEnvironment $educationalEnvironment)
+    {
+        $legalInformations = LegalInformation::orderBy('title')->get();
+
+        return view('Explorer.EducationalEnvironments.show-educational-environment', compact('node', 'educationalEnvironment', 'legalInformations'));
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchEducationalTools(Request $request, Node $node)
+    {
+        $search              = $request->get('search-educational-tool');
+        $educationalTools    = EducationalTool::searchEducationalTools($search)->get();
+
+        return view('Explorer.EducationalTools.index-educational-tools', compact('node', 'educationalTools', 'search'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showEducationalTool(Node $node, EducationalTool $educationalTool)
+    {
+        $legalInformations = LegalInformation::orderBy('title')->get();
+
+        return view('Explorer.EducationalTools.show-educational-tool', compact('node', 'educationalTool', 'legalInformations'));
     }
 
     /**

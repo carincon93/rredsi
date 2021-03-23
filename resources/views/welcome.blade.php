@@ -45,7 +45,7 @@
 
     <div class="py-12 bg-cool-gray-100">
         <p class="text-center mb-8">Realice una búsqueda de proyectos de su interés y trabaje de forma colaborativa con otros semilleros de investigación</p>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-1/12">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-4">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                     <form class="flex-1 ml-1/12 mt-2 shadow" method="GET" action="{{ route('nodes.explorer.searchProjects', [$node]) }}">
@@ -121,29 +121,57 @@
 
         <x-jet-section-border />
 
+        <h1 class="text-xl md:text-4xl text-gray-400 leading-10 text-center mb-1/12">Infraestructura / Ambientes</h1>
+
+        <p class="text-center mb-8">Realice una consulta de la infraestructura o ambientes que se disponen en las instituciones educativas de la red.</p>
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-4">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <form class="flex-1 ml-1/12 mt-2 shadow" method="GET" action="">
+                    <form class="flex-1 ml-1/12 mt-2 shadow" method="GET" action="{{ route('nodes.explorer.searchEducationalEnvironments', [$node]) }}">
                         <div>
-                            <x-jet-input id="search" class="block w-full" type="search" name="search" value="{{ old('search') }}" placeholder="Busque proyectos por: título, palabras clave" required />
+                            <x-jet-input id="search-educational-environment" class="block w-full" type="search" name="search-educational-environment" value="{{ old('search-educational-environment') }}" placeholder="Busque infraestructura por: palabras clave" required />
                         </div>
                     </form>
                 </div>
+
+                @foreach ($knowledgeAreas->chunk(5) as $chunk)
+                    <div class="flex justify-around mt-4 sm:items-center sm:justify-around text-center text-sm text-gray-500 sm:text-left">
+                        @foreach ($chunk as $knowledgeArea)
+                            <a href="{{ route('nodes.explorer.searchEducationalEnvironments', [$node, 'search-educational-environment' => $knowledgeArea->name]) }}" class="ml-1 underline">
+                                {{ $knowledgeArea->name }}
+                            </a>
+                        @endforeach
+                    </div>
+                @endforeach
             </div>
         </div>
 
         <x-jet-section-border />
 
+        <h1 class="text-xl md:text-4xl text-gray-400 leading-10 text-center mb-1/12">Equipos especializados</h1>
+
+        <p class="text-center mb-8">Realice una búsqueda de herramientas / equipos especializados que se disponen en las instituciones educativas de la red.</p>
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 pb-4">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <form class="flex-1 ml-1/12 mt-2 shadow" method="GET" action="">
+                    <form class="flex-1 ml-1/12 mt-2 shadow" method="GET" action="{{ route('nodes.explorer.searchEducationalTools', [$node]) }}">
                         <div>
-                            <x-jet-input id="search" class="block w-full" type="search" name="search" value="{{ old('search') }}" placeholder="Busque proyectos por: título, palabras clave" required />
+                            <x-jet-input id="search-educational-tool" class="block w-full" type="search" name="search-educational-tool" value="{{ old('search-educational-tool') }}" placeholder="Busque herramientas / equipos especializados por: palabras clave" required />
                         </div>
                     </form>
                 </div>
+
+                @foreach ($knowledgeAreas->chunk(5) as $chunk)
+                    <div class="flex justify-around mt-4 sm:items-center sm:justify-around text-center text-sm text-gray-500 sm:text-left">
+                        @foreach ($chunk as $knowledgeArea)
+                            <a href="{{ route('nodes.explorer.searchEducationalTools', [$node, 'search-educational-tool' => $knowledgeArea->name]) }}" class="ml-1 underline">
+                                {{ $knowledgeArea->name }}
+                            </a>
+                        @endforeach
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

@@ -58,6 +58,10 @@
                         <x-jet-input-error for="capacity_aprox" class="mt-2" />
                     </div>
 
+                    <hr>
+
+                    <x-checkbox-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="$educationalEnvironment" />
+
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Edit') }}

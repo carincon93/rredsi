@@ -17,7 +17,7 @@
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="40" viewBox="0 0 38 40" class="w-8 h-8 text-gray-400">
                 <g transform="translate(-1654 -467)">
-                  <path  d="M8.556,7.444V3m8.889,4.444V3m-10,8.889H18.556M5.222,23H20.778A2.222,2.222,0,0,0,23,20.778V7.444a2.222,2.222,0,0,0-2.222-2.222H5.222A2.222,2.222,0,0,0,3,7.444V20.778A2.222,2.222,0,0,0,5.222,23Z" transform="translate(1660 465)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                  <path  d="M8.556,7.444V3m8.889,4.444V3m-10,8.889H18.556M5.222,23H20.778A2.222,2.222,0,0,0,23,20.778V7.444a2.222,2.222,0,0,0-2.222-2.222H5.222A2.222,2.222,0,0,0,3,7.444V20.778A2.222,2.222,0,0,0,5.222,23Z" transform="translate(1660 465)" fill="none" stroke="#9fa6b2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                   <text transform="translate(1654 504)" fill="#707070" font-size="11" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Eventos</tspan></text>
                 </g>
             </svg>
@@ -76,7 +76,7 @@
 
     <div class="p-6 border-t border-gray-200">
         <div class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"  class="w-8 h-8 text-gray-400">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
             <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Connect</div>
@@ -104,14 +104,29 @@
 
     <div class="p-6 border-t border-gray-200 md:border-l">
         <div class="flex items-center">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-400"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Authentication</div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8 text-gray-400">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Infraestructura / Equipos especializados</div>
         </div>
 
         <div class="ml-12">
             <div class="mt-2 text-sm text-gray-500">
-                Authentication and registration views are included with Laravel {{ config('app.name') }}, as well as support for user email verification and resetting forgotten passwords. So, you're free to get started what matters most: building your application.
+                {{ config('app.name') }} le permite consultar sobre infraestructura y/o equipos especializados, de esta manera, si uno de sus proyectos requiere de algún laboratorio, ambiente, o equipo especializado, puede hacer una búsqueda y gestionar con los delegados de las instituciones de la red para hacer uso de ellos.
             </div>
+            @if (Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first())
+            <a href="{{ route('nodes.explorer.roles', [Auth::user()->educationalInstitutionFaculties()->where('is_principal', 1)->first()->educationalInstitution->node]) }}">
+                <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
+                    <div>Consultar infraestructura / Equipos especializados</div>
+
+                    <div class="ml-1 text-blue-900">
+                        <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </div>
+                </div>
+            </a>
+            @else
+                <a href="#">Seleccione un nodo en la opción Explorer</a>
+            @endif
         </div>
     </div>
 </div>

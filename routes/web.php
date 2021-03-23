@@ -76,13 +76,22 @@ Route::middleware(['auth'])->group(function () {
     // ? explorador de roles //
     Route::get('/nodes/{node}/explorer/roles/{academicProgram}', [AppController::class, 'searchRoles'])->name('nodes.explorer.searchRoles');
     Route::get('/nodes/{node}/explorer/roles/show-role/{user}', [AppController::class, 'showUser'])->name('nodes.explorer.searchRoles.showUser');
+
+    // ? ruta para ver los proyectos activos y aplicar a ellos//
+    Route::get('/nodes/{node}/explorer/educational-environments', [AppController::class, 'searcheducationalEnvironments'])->name('nodes.explorer.searchEducationalEnvironments');
+    Route::get('/nodes/{node}/explorer/educational-environments/{educationalEnvironment}', [AppController::class, 'showEducationalEnvironment'])->name('nodes.explorer.searchEducationalEnvironments.showEducationalEnvironment');
+
+    // ? ruta para ver los proyectos activos y aplicar a ellos//
+    Route::get('/nodes/{node}/explorer/educational-tools', [AppController::class, 'searchEducationalTools'])->name('nodes.explorer.searchEducationalTools');
+    Route::get('/nodes/{node}/explorer/educational-tools/{educationalTool}', [AppController::class, 'showEducationalTool'])->name('nodes.explorer.searchEducationalTools.showEducationalTool');
+
     // ? ruta para ver los proyectos activos y aplicar a ellos//
     Route::get('/nodes/{node}/explorer/projects', [AppController::class, 'searchProjects'])->name('nodes.explorer.searchProjects');
     Route::get('/nodes/{node}/explorer/projects/{project}', [AppController::class, 'showProject'])->name('nodes.explorer.searchProjects.showProject');
     // ? ruta para informacion de nodo //
     Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'])->name('nodes.explorer.nodeInfo');
     // ? ruta notificacion para aplicar colaborar en un proyecto //
-    Route::get('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification');
+    Route::post('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification');
     // ? ruta para envio de notificacion de participacion en proyecto //
     Route::post('/notifications/send-to-participate', [NotificationController::class, 'sendToParticipate'])->name('notifications.sendToParticipate');
     // ? ruta para envio de notificacion de participacion de proyecto en un evento//

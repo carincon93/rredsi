@@ -57,6 +57,10 @@
                         <x-jet-input-error for="capacity_aprox" class="mt-2" />
                     </div>
 
+                    <hr class="mb-1/12">
+
+                    <x-checkbox-knowledge-subarea-discipline :knowledgeAreas="$knowledgeAreas" :model="null" />
+
                     <div class="flex items-center justify-end mt-4">
                         <x-jet-button class="ml-4">
                             {{ __('Create') }}
@@ -66,7 +70,6 @@
             </div>
         </div>
     </div>
-
 
     {{--Alert component --}}
     @if (session('status') || !is_null($errors) && $errors->any() > 0)

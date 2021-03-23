@@ -24,10 +24,12 @@ class EducationalEnvironmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                          => 'required|string|max:191 ',
-            'type'                          => 'required|string|max:191',
-            'capacity_aprox'                => 'required|integer|min:0|max:9999999999',
-            'educational_institution_id'    => 'integer|min:0|max:9999999999',
+            'name'                                  => 'required|string|max:191 ',
+            'type'                                  => 'required|string|max:191',
+            'capacity_aprox'                        => 'required|integer|min:0|max:9999999999',
+            'educational_institution_id'            => 'integer|min:0|max:9999999999',
+            'knowledge_subarea_discipline_id.*'     => 'required|min:0|max:9999999999|exists:knowledge_subarea_disciplines,id',
+
         ];
     }
 

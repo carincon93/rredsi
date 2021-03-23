@@ -338,20 +338,8 @@
                         <p class="bg-gray-100 mt-4 p-4 text-center"><strong>{{ $educationalInstitutionFaculty->name }}</strong></p>
                         @can('index_academic_program')
                         <a href="{{ route('nodes.educational-institutions.faculties.academic-programs.index', [$node, $educationalInstitution, $educationalInstitutionFaculty]) }}" id="academic_programs" class="w-full flex items-center py-2  text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 bg-gray-100 px-4">
-                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512; width: 18px;" xml:space="preserve" class="mr-1/12 ml-1 text-black">
-                            <g>
-                                <g>
-                                    <path d="M480.813,221.945v-42.138H512V95.229h-53.029L255.999,13.103L53.029,95.229H0v84.579h31.187v42.138h15.209V372.18H31.187
-                                        v42.138H0v84.579h512v-84.579h-31.187V372.18h-15.209V221.945H480.813z M255.999,45.916l121.874,49.312H134.127L255.999,45.916z
-                                        M480.813,444.734h0.77v23.745H30.417v-23.745h0.77H480.813z M379.021,191.529H354.73h-86.584h-24.292H157.27h-24.291H61.604
-                                        v-11.721h388.792v11.721H379.021z M435.187,221.945v150.234h-25.749V221.945H435.187z M379.02,221.945v150.234h-24.291V221.945
-                                        H379.02z M324.313,221.945v150.234h-25.749V221.945H324.313z M243.854,221.945h24.292v150.234h-24.292V221.945z M213.437,221.945
-                                        v150.234h-25.749V221.945H213.437z M157.27,221.945v150.234h-24.291V221.945H157.27z M102.562,221.945v150.234H76.813V221.945
-                                        H102.562z M132.979,402.596h24.291h86.584h24.292h86.584h24.291h71.375v11.721H61.604v-11.721H132.979z M31.187,149.391h-0.77
-                                        v-23.745h451.166v23.745h-0.77H31.187z"/>
-                                </g>
-                            </g>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
                             </svg>
                             <span class="text-gray-700">{{ __('Academic programs') }}</span>
                         </a>

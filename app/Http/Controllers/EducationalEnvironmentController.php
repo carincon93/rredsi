@@ -6,6 +6,7 @@ use App\Models\Node;
 use App\Models\EducationalInstitution;
 use App\Models\EducationalEnvironment;
 use App\Models\EducationalInstitutionFaculty;
+use App\Models\KnowledgeArea;
 
 use App\Http\Requests\EducationalEnvironmentRequest;
 use Illuminate\Http\Request;
@@ -35,7 +36,9 @@ class EducationalEnvironmentController extends Controller
     {
         $this->authorize('create', [EducationalEnvironment::class, $educationalInstitution]);
 
-        return view('EducationalEnvironments.create', compact('node', 'educationalInstitution', 'faculty'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        return view('EducationalEnvironments.create', compact('node', 'educationalInstitution', 'faculty', 'knowledgeAreas'));
     }
 
     /**
@@ -57,6 +60,7 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->educationalInstitutionFaculty()->associate($faculty);
 
         if($educationalEnvironment->save()){
+            $educationalEnvironment->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your store processed correctly';
         }
 
@@ -86,7 +90,9 @@ class EducationalEnvironmentController extends Controller
     {
         $this->authorize('update', [EducationalEnvironment::class, $educationalInstitution]);
 
-        return view('EducationalEnvironments.edit', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment'));
+        $knowledgeAreas = KnowledgeArea::orderBy('name')->get();
+
+        return view('EducationalEnvironments.edit', compact('node', 'educationalInstitution', 'faculty', 'educationalEnvironment', 'knowledgeAreas'));
     }
 
     /**
@@ -108,6 +114,7 @@ class EducationalEnvironmentController extends Controller
         $educationalEnvironment->educationalInstitutionFaculty()->associate($faculty);
 
         if($educationalEnvironment->save()) {
+            $educationalEnvironment->knowledgeSubareaDisciplines()->sync($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your update processed correctly';
         }
 

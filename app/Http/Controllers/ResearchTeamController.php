@@ -162,9 +162,9 @@ class ResearchTeamController extends Controller
         $researchTeam->researchGroup()->associate($researchGroup);
 
         if($researchTeam->save()){
-            $researchTeam->academicPrograms()->attach($request->get('academic_program_id'));
-            $researchTeam->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
-            $researchTeam->researchLines()->attach($request->get('research_line_id'));
+            $researchTeam->academicPrograms()->sync($request->get('academic_program_id'));
+            $researchTeam->knowledgeSubareaDisciplines()->sync($request->get('knowledge_subarea_discipline_id'));
+            $researchTeam->researchLines()->sync($request->get('research_line_id'));
             $message = 'Your update processed correctly';
         }
 

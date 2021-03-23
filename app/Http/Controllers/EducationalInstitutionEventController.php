@@ -129,7 +129,7 @@ class EducationalInstitutionEventController extends Controller
         ]);
 
         if( $event->save()) {
-            $event->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
+            $event->knowledgeSubareaDisciplines()->sync($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your update processed correctly';
         }
 

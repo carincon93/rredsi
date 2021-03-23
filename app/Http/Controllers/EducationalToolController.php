@@ -115,7 +115,7 @@ class EducationalToolController extends Controller
         $educationalTool->educationalEnvironment()->associate($educationalEnvironment);
 
         if ($educationalTool->save()) {
-            $educationalTool->knowledgeSubareaDisciplines()->attach($request->get('knowledge_subarea_discipline_id'));
+            $educationalTool->knowledgeSubareaDisciplines()->sync($request->get('knowledge_subarea_discipline_id'));
             $message = 'Your update processed correctly';
         }
 

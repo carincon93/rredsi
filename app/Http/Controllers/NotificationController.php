@@ -34,7 +34,7 @@ class NotificationController extends Controller
 
         Notification::send($user, new RoleInvitation($node, $project, $researchTeam, $user, $file));
 
-        return redirect()->route('nodes.explorer.roles', [$node])->with('status', 'Invitación enviada con éxito');
+        return redirect()->back()->with('status', 'Invitación enviada con éxito');
     }
 
     // ? Envio de solicitud para participar en un proyecto
@@ -172,7 +172,6 @@ class NotificationController extends Controller
         return view('EducationalInstitutionUsers.accept-student-project', compact('notification', 'user', 'faculty', 'userGraduations'));
 
     }
-
 
     public function acceptStudentInProject(Request $request)
     {

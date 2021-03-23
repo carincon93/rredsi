@@ -24,9 +24,10 @@ class EducationalToolRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                          => 'required|string|max:191',
-            'description'                   => 'required',
-            'qty'                           => 'required|integer|min:0|max:9999999999',
+            'name'                                  => 'required|string|max:191',
+            'description'                           => 'required',
+            'qty'                                   => 'required|integer|min:0|max:9999999999',
+            'knowledge_subarea_discipline_id.*'     => 'required|min:0|max:9999999999|exists:knowledge_subarea_disciplines,id',
         ];
     }
 
