@@ -35,6 +35,8 @@ class AnnualNodeEventController extends Controller
 
         if($faculty){
             $node = $faculty->educationalInstitution->node;
+        }else if($user->isNodeAdmin){
+            $node = $user->isNodeAdmin;
         }
 
         // ? traemos el evento anual del nodo
@@ -80,13 +82,16 @@ class AnnualNodeEventController extends Controller
             $dateEvent = strtotime($event->start_date);
             $yearEvent = date("Y", $dateEvent);
 
+
             if($yearEvent == date('Y') ){
+
                 if($event->nodeEvent()->where('is_annual_event', 1)){
                     $nodeEvent = $event->nodeEvent;
                 }
             }
 
         }
+
 
         $annualNodeEvent = $nodeEvent->annualNodeEvent()->where('project_id',$project->id)->first();
 
@@ -246,7 +251,7 @@ class AnnualNodeEventController extends Controller
             // ? asociamos el projecto al evento
             $project = Project::findOrFail($request->get('project_id'));
             $project->events()->attach($annualNodeEventID);
-            $message = 'El registro al evento fue exitoso';
+            $message = 'Se registro el proyecto correctamente';
 
             // project authors
             $authors =  $project->authors;

@@ -12,7 +12,7 @@ class RequestResponse extends Notification
     use Queueable;
 
     private $project;
-    private $datos;
+    private $comment;
     private $response;
 
     /**
@@ -20,9 +20,9 @@ class RequestResponse extends Notification
      *
      * @return void
      */
-    public function __construct($datos, $response, $project)
+    public function __construct($comment, $response, $project)
     {
-        $this->datos         = "Motivos :".$datos;
+        $this->comment         = "Motivos : ".$comment;
         $this->response      = $response;
         $this->project       = $project;
 
@@ -50,7 +50,7 @@ class RequestResponse extends Notification
         return (new MailMessage)
             ->subject("Respuesta a la solicitud de participación en proyecto de {$this->project->projectType->type} - Ibis")
             ->greeting("¡Hola {$notifiable->name} !")
-            ->line("Le informamos que su solicitud de participacion realizada al proyecto {$this->project->title} fue {$this->response}. $this->datos.")
+            ->line("Le informamos que su solicitud de participacion realizada al proyecto {$this->project->title} fue {$this->response}. $this->comment.")
             ->action('Más información de la respuesta', route('notifications.indexResponseSend', [$this->id]))
             ->line('Gracias por enviarnos la solicitud.');
     }
@@ -65,7 +65,7 @@ class RequestResponse extends Notification
     {
         return [
             "subject"       => "Respuesta a solicutud de participación en proyecto de {$this->project->projectType->type} - Ibis",
-            "message"       => "Le informamos que su solicitud de participacion realizada al proyecto {$this->project->title} fue {$this->response}. $this->datos.",
+            "message"       => "Le informamos que su solicitud de participacion realizada al proyecto {$this->project->title} fue {$this->response}. $this->comment.",
             "action"        => route('notifications.indexResponseSend', [$this->id]),
             "thanksMessage" => "Gracias por enviarnos la solicitud."
         ];

@@ -69,13 +69,27 @@
                     <div class="mt-1/12"">
                         <p>{{ __('Speakers') }}</p>
                         <div class="ml-4">
+                            <div class="flex">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-400 first_speaker_id_spin hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                {{-- <x-jet-label class="mb-4" for="first_speaker_id" value="{{ __('first speaker') }}" /> --}}
+                            </div>
                             <select onchange="SwitchProject.SpeakersTwo(event)" id="first_speaker_id" name="first_speaker_id" class="overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" required disabled>
-                                <option value="">Seleccione el primer ponente</option>
+                                <option value="">Para seleccionar un ponente debe seleccionar el proyecto</option>
                             </select>
                             <x-jet-input-error for="first_speaker_id" class="mt-2" />
                         </div>
 
                         <div class="ml-4">
+                            <div class="flex">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-400 second_speaker_id_spin hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                {{-- <x-jet-label class="mb-4" for="second_speaker_id" value="{{ __('second speaker') }}" /> --}}
+                            </div>
                             <select class="overflow-hidden bg-transparent focus:outline-none form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" disabled id="second_speaker_id" name="second_speaker_id">
                                 <option value="">Seleccione el segundo ponente</option>
                             </select>
@@ -145,7 +159,7 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
-                        <x-jet-button class="ml-4">
+                        <x-jet-button onclick="resetStorage()" class="ml-4">
                             {{ __('Register event') }}
                         </x-jet-button>
                     </div>
@@ -157,14 +171,37 @@
     @once
     @push('scripts')
         <script>
+            document.addEventListener(
+                "DOMContentLoaded",
+                    function() {
+                        window.firstSpeakerSpin       = document.querySelector('.first_speaker_id_spin');
+                        window.secondSpeakerSpin      = document.querySelector('.second_speaker_id_spin');
+
+                        if(sessionStorage.getItem('project_id')){
+                            var project_id            = sessionStorage.getItem('project_id');
+                            SwitchProject.oldValues(project_id);
+                        }
+
+                        // LIMPIAR local storage si status de validiacion existe
+                        var sessionStatus="<?php echo session('status');?>";
+                        if(sessionStatus){
+                            sessionStorage.clear();
+                        }
+
+            }, false)
+
             var SwitchProject = (function() {
                 let project_id = null;
 
                 getAllAuthors = async (project_id) => {
+                    sessionStorage.setItem('project_id', project_id);
+
                     var first_speaker_id    = document.getElementById("first_speaker_id");
                     first_speaker_id.innerHTML = '<option value="">Seleccione el primer ponente</option>';
 
                     if (project_id != 0) {
+                        firstSpeakerSpin.classList.remove('hidden');
+                        firstSpeakerSpin.classList.add('inline');
                         try {
                             const uri       = `/api/projects/${project_id}/authors/`;
                             const response  = await fetch(uri);
@@ -176,6 +213,17 @@
                                 first_speaker_id.innerHTML += option;
                             })
 
+                            if (result.authors.length > 0) {
+                                firstSpeakerSpin.classList.remove('inline');
+                                firstSpeakerSpin.classList.add('hidden');
+                            }
+
+                            if(sessionStorage.getItem('SpeakerOne')){
+                                let SpeakerOne = sessionStorage.getItem('SpeakerOne');
+                                first_speaker_id.querySelector(`option[value="${SpeakerOne}"]`).setAttribute('selected', 'selected');
+                                getAllAuthorsTwo(project_id,SpeakerOne);
+                            }
+
                         } catch (error) {
                             console.log(error);
                         }
@@ -183,10 +231,13 @@
                 }
 
                 getAllAuthorsTwo = async (project_id,SpeakerOne) => {
+                    sessionStorage.setItem('SpeakerOne', SpeakerOne);
                     var second_speaker_id   = document.getElementById("second_speaker_id");
                     second_speaker_id.innerHTML = '<option value="">Seleccione el segundo ponente</option>';
 
                     if (project_id != 0) {
+                        secondSpeakerSpin.classList.remove('hidden');
+                        secondSpeakerSpin.classList.add('inline');
                         try {
                             const uri       = `/api/projects/${project_id}/authors/`;
                             const response  = await fetch(uri);
@@ -201,13 +252,28 @@
 
                             })
 
+                            if (result.authors.length > 0) {
+                                secondSpeakerSpin.classList.remove('inline');
+                                secondSpeakerSpin.classList.add('hidden');
+                            }
+
+                            if(sessionStorage.getItem('SpeakerTwo')){
+                                let SpeakerTwo = sessionStorage.getItem('SpeakerTwo');
+                                second_speaker_id.querySelector(`option[value="${SpeakerTwo}"]`).setAttribute('selected', 'selected');
+                            }
+
                         } catch (error) {
                             console.log(error);
                         }
                     }
                 }
 
+
                 return {
+                    oldValues: function(e) {
+                        project_id = e;
+                        getAllAuthors(project_id);
+                    },
                     onChange: function(e) {
                         project_id = e.target.value;
                         getAllAuthors(project_id);
@@ -220,9 +286,37 @@
                 }
             })();
 
-            // SwitchEducationalInstitution.getAllNodes();
+            function resetStorage() {
+
+                if(!sessionStorage.getItem('clickCount')){
+                    sessionStorage.setItem('clickCount', 0);
+                }
+
+                var SpeakerTwo    = document.getElementById('second_speaker_id').value;
+
+                if(SpeakerTwo > 0){
+                    sessionStorage.setItem('SpeakerTwo', SpeakerTwo);
+                }
+
+                if(sessionStorage.getItem('clickCount') == 1){
+                    sessionStorage.clear();
+                }
+
+                if(sessionStorage.getItem('clickCount') == 0){
+                    sessionStorage.setItem('clickCount', 1);
+                }
+
+            }
+
+
         </script>
     @endpush
 @endonce
+
+
+  {{--Alert component --}}
+  @if (session('status'))
+    <x-data-alert />
+@endif
 
 </x-guest-layout>

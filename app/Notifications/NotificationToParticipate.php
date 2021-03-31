@@ -22,12 +22,13 @@ class NotificationToParticipate extends Notification
      *
      * @return void
      */
-    public function __construct($node, $project, $researchTeam, $user)
+    public function __construct($node, $project, $researchTeam, $user, $requests)
     {
-        $this->node         = $node;
-        $this->project      = $project;
-        $this->researchTeam = $researchTeam;
-        $this->user         = $user;
+        $this->node             = $node;
+        $this->project          = $project;
+        $this->researchTeam     = $researchTeam;
+        $this->user             = $user;
+        $this->requests         = $requests;
     }
 
     /**
@@ -84,6 +85,7 @@ class NotificationToParticipate extends Notification
             "subject"       => "Solicutud de participación en proyecto de {$this->project->projectType->type} - Ibis",
             "message"       => "El estudiante {$this->user->name} de la institución educativa {$educationalInstitution} quiere participar en el desarrollo del proyecto {$this->project->title}'.",
             "action"        => route('notifications.indexResponseSend', [$this->id]),
+            "request_id"    => $this->requests->id,
             "student_id"    => $this->user->id,
             "project_id"    => $this->project->id,
             "thanksMessage" => "Gracias y espero su pronta respuesta!'"

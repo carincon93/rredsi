@@ -19,7 +19,12 @@ class AnnualNodeEventPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasPermissionTo('index_annual_node_events')){
+        // if(!$user->hasPermissionTo('index_annual_node_events')){
+        //     return false;
+        // }
+        // $admin = $node->administrator->id;
+
+        if($user->isNodeAdmin){
             return true;
         }
         return false;

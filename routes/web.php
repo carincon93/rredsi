@@ -61,10 +61,15 @@ Route::middleware(['auth'])->group(function () {
     // ? ruta para la dashboard o panel de coordinador de nodo //
     Route::get('/dashboard', [AppController::class, 'dashboard'])->name('dashboard');
 
-    // ? ruta para ver cada notificacion expecifica para aceptar o denegar participacion en proyecto //
     // ? se manda aparte de el resource para evitar problemas en envio de datos//
     // Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications');
-    Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+
+    // ? ruta para ver cada notificacion especifica //
+    Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+
+    // ? ruta para ver cada solicitud de participacion expecifica para aceptar o denegar participacion en proyecto //
+    Route::get('/request/{id}', [NotificationController::class, 'showRequest'])->name('requests.show');
+
     // ? ruta para envio de notificacion de registrar en el evento anual//
     Route::post('nodes/{node}/annual-node-event/{annualNodeEventID}', [AnnualNodeEventController::class, 'registerAnnualNodeEvents'])->name('annualNodeEvent.registerAnnualNodeEvents');
     // ? ruta para ver evento anual y su crud//
@@ -111,17 +116,23 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/legal-information/{slug}', [LegalInformationController::class, 'showLegalInformation'])->name('showLegalInformation');
 
+    // ? rutas de solicitudes de participacion en projectos para el delegado de institucion//
+    Route::get('/request-project-participation', [NotificationController::class, 'indexAdminInstitution'])->name('notifications.indexAdminInstitution');
+    // ? rutas de solicitudes de participacion de cada estudiante//
+    Route::get('/request-student', [NotificationController::class, 'indexRequestStudent'])->name('notifications.indexRequestStudent');
+
     // ? rutas de notificaciones //
     Route::resource('/notifications', NotificationController::class, [
         'names' => [
-            'index'           => 'notifications.index',
-            'destroy'         => 'notifications.destroy'
+            'index'                           => 'notifications.index',
+            'destroy'                         => 'notifications.destroy',
         ]
     ]);
     // ? rutas de eventos anuales index y actualizacion de estado aceptado rechazado//
     Route::resource('/annual-node-event', AnnualNodeEventController::class,[
         'names'=>[
             'index'   => 'annualNodeEvent.index',
+            'show'    => 'annualNodeEvent.show',
             'update'  => 'annualNodeEvent.update'
         ]
     ]);

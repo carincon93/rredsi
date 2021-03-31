@@ -108,6 +108,12 @@ class AppController extends Controller
     {
         $legalInformations = LegalInformation::orderBy('title')->get();
 
+
+        //  return [
+        //     'node' => $node,
+        //     'project' => $project
+        // ];
+
         return view('Explorer.Projects.show-project', compact('node', 'project', 'legalInformations'));
     }
 

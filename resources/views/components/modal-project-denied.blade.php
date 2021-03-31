@@ -1,4 +1,4 @@
-@props(['student' => null, 'project'=> null])
+@props(['student' => null, 'project'=> null , 'requestForm' => null ])
 
 @push('styles')
 <style>
@@ -40,12 +40,12 @@
                     </svg>
                 </div>
             </div>
-            <form method="POST" action="{{ route('notifications.acceptStudentInProject') }}">
+            <form method="POST" id="form-denied" action="{{ route('notifications.acceptStudentInProject') }}">
                 @csrf()
                 <!--Body-->
                 <div class="px-5 py-2 text-gray-600">
-                    <label for="datos">Escriba los motivos de rechazo de la solicitud.</label>
-                    <textarea class="form-control border border-gray-300" rows="2" cols="40" id="datos" name="datos"></textarea>
+                    <label for="comment">Escriba los motivos de rechazo de la solicitud.</label>
+                    <textarea required class="form-control border border-gray-300" rows="8" cols="40" id="comment" name="comment"></textarea>
                 </div>
 
                 <!--Footer-->
@@ -53,6 +53,7 @@
                     {{-- guardamos los datos de el estudiante y el projecto al que aplica tambien se envian los motivos de el porque en el textarea datos --}}
                     <input hidden id="project_id" name="project_id" value="{{$project}}">
                     <input hidden id="student_id" name="student_id" value="{{$student}}">
+                    <input hidden id="request_id" name="request_id" value="{{$requestForm}}">
 
                     <button type="submit" class="px-4 bg-transparent p-3 rounded-lg text-white bg-blue-900 hover:bg-blue-800 mr-2">Enviar</button>
                 </div>

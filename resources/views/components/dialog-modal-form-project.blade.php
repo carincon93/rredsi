@@ -52,6 +52,7 @@
                     @csrf()
                     {{-- Guardamos el proyecto en el que el aprendiz desea participar --}}
                     <input hidden id="project_id" name="project_id" value="{{$project->id}}">
+                    <input hidden id="node" name="node" value="{{$node}}">
 
                     <button type="submit" class="px-4 bg-transparent p-3 rounded-lg text-white bg-blue-900 hover:bg-blue-800 mr-2">Enviar solicitud</button>
                 </form>

@@ -55,7 +55,7 @@
                 <x-jet-input-error for="interests" class="mt-2" />
             </div>
 
-            <x-drop-down-educational-institution-faculties :form="'yes'" />
+            <x-drop-down-research-team :form="'yes'" />
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
