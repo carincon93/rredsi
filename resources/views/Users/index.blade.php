@@ -99,7 +99,7 @@
     </div>
 
     {{-- #Component modal --}}
-    <x-dialog-delete-item />
+    <x-dialog-desactivate-user />
 
     {{--Alert component --}}
     @if (session('status'))

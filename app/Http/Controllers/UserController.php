@@ -157,9 +157,15 @@ class UserController extends Controller
     {
         $this->authorize('delete-user', [User::class]);
 
-        $user->update(['is_enabled', 0]);
+        $user->tokens->each->delete();
 
-        return redirect()->route('users.index')->with('status', __('The resource has been deleted successfully.'));
+        $user->is_enabled = false;
+
+        $user->save();
+
+        // $user->update(['is_enabled', 0]);
+
+        return redirect()->route('users.index')->with('status', __('The user has been deactivated correctly'));
 
     }
 }

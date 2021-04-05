@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\KnowledgeSubareaDisciplineController;
 use App\Http\Controllers\Api\EducationalInstitutionController;
 use App\Http\Controllers\Api\AcademicProgramController;
 use App\Http\Controllers\Api\EducationalInstitutionFacultyController;
+use App\Http\Controllers\Api\ResearchTeamController;
 use App\Http\Controllers\Api\ProjectController;
 
 /*
@@ -30,6 +31,7 @@ Route::apiResources([
     'nodes' => NodeController::class,
     'nodes.educational-institutions' => EducationalInstitutionController::class,
     'nodes.educational-institutions.faculties' => EducationalInstitutionFacultyController::class,
+    'nodes.educational-institutions.faculties.research-teams' => ResearchTeamController::class,
     'nodes.educational-institutions.faculties.academic-programs' => AcademicProgramController::class,
     'knowledge-areas' => KnowledgeAreaController::class,
     'knowledge-areas.knowledge-subareas' => KnowledgeSubareaController::class,

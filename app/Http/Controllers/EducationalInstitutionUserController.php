@@ -160,7 +160,10 @@ class EducationalInstitutionUserController extends Controller
     {
         $this->authorize('delete', [ User::class, $educationalInstitution]);
 
-        $user->is_enabled = 0;
+        $user->tokens->each->delete();
+
+        $user->is_enabled = false;
+
         if($user->save()) {
             $message = 'The user has been deactivated correctly';
         }

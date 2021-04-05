@@ -186,6 +186,14 @@
             <hr class="mb-1/6 mt-1/6">
 
             @if( $authUser->hasRole(4))
+
+                <a href="{{ route('notifications.indexRequestStudent') }}" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <span class="text-gray-700">{{ __('Solicitudes realizadas') }}</span>
+                </a>
+
                 <p class="bg-gray-100 p-4 text-center"><strong>Semilleros de investigación a los que pertenezco</strong></p>
 
                 @foreach ($authUserResearchTeams as $authUserResearchTeam)
@@ -333,6 +341,16 @@
                         </svg>
                         <span class="text-gray-700">{{ __('Faculties') }}</span>
                     </a>
+
+                    <a href="{{ route('notifications.indexAdminInstitution') }}" id="faculties" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        <span class="text-gray-700">{{ __('Solicitudes participancion proyectos') }}</span>
+                    </a>
+
+
+
 
                     @if ( request()->route('faculty') )
                         <p class="bg-gray-100 mt-4 p-4 text-center"><strong>{{ $educationalInstitutionFaculty->name }}</strong></p>
