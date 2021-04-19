@@ -190,6 +190,18 @@ class NotificationController extends Controller
         return view('EducationalInstitutionUsers.index-notifications', compact('user'));
     }
 
+    // ^? este metodo activa el usuario tipo empresa no es una ruta protegida para poder tener acceso a ella
+    public function activateUserBusiness($id)
+    {
+        $user = User::find($id);
+
+        $user->is_enabled = true;
+        $user->save();
+
+        return redirect('login')->with('status', 'Usuario activado con exito.');
+
+    }
+
 
     public function destroy(Request $request, Notification $notification)
     {

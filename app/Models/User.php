@@ -81,6 +81,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\ResearchTeam', 'student_leader_id');
     }
 
+    public function business() {
+        return $this->belongsTo('App\Models\Business','nit_business', 'nit');
+    }
+
     public function userGraduations() {
         return $this->hasMany('App\Models\UserGraduation');
     }

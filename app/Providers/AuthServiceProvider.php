@@ -67,6 +67,7 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
             return false;
+
         });
         Gate::define('create-user', function ($user) {
             if($user->hasRole(1)){

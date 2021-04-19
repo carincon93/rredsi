@@ -49,6 +49,9 @@ Route::get('/', function() {
     return redirect()->route('login');
 })->name('/');
 
+// ? ruta para activar el usuario tipo empresa por correo//
+Route::get('/activateUserBusiness/{id}', [NotificationController::class, 'activateUserBusiness'])->name('notifications.activateUserBusiness');
+
 
 Route::middleware(['auth'])->group(function () {
     // ? ruta que define el explorador de la plataforma
@@ -105,6 +108,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/notifications/to-accept-student', [NotificationController::class, 'acceptStudentInProject'])->name('notifications.acceptStudentInProject');
     // ? ruta para cambiar a leida notificaicon de correo//
     Route::get('/all-notifications/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend');
+
     // ? ruta de dashboard de instituciones educativas//
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');

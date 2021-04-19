@@ -28,6 +28,8 @@ class UserController extends Controller
         $users = User::orderBy('name', 'ASC')->paginate(100);
 
         return view('Users.index', compact('users'));
+
+
     }
 
     /**
