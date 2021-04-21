@@ -35,7 +35,7 @@
 
                     <div>
                         <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') }}" required />
+                        <x-jet-input id="name" class="block mt-1 w-full @error('name') border-red-500 @enderror" type="text" max="191" name="name" value="{{ old('name') }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
 

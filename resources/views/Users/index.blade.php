@@ -74,11 +74,11 @@
                                                     {{ __('Show') }}
                                                 </x-jet-dropdown-link>
                                                 @endcan
-                                                @can('edit_user')
+                                                {{-- @can('edit_user') --}}
                                                 <x-jet-dropdown-link href="{{ route('users.edit', [$user]) }}">
                                                     {{ __('Edit') }}
                                                 </x-jet-dropdown-link>
-                                                @endcan
+                                                {{-- @endcan --}}
                                                 @can('destroy_user')
                                                 <x-jet-dropdown-link class="modal-open hover:cursor-pointer" onclick="modal('{{ route('users.destroy', [$user]) }}')">
                                                     {{ __('Deactivate') }}
