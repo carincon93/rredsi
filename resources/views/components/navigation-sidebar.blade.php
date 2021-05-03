@@ -409,6 +409,42 @@
                 </div>
                 </div>
             </div> --}}
+            {{-- links del sidebar que se muestran al usuario tipo empresa --}}
+            @if( Auth::user()->hasRole(5) )
+                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg"class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 32 32">
+                        <g >
+                          <rect width="32" height="32" fill="none"/>
+                          <path d="M406-333.194h8.645V-344H406v10.806Zm0,8.645h8.645v-6.484H406v6.484Zm10.806,0h8.645v-10.806h-8.645v10.806Zm0-19.452v6.484h8.645V-344Z" transform="translate(-399.516 350.484)" fill-rule="evenodd"/>
+                        </g>
+                    </svg>
+                    <span class="text-gray-700">{{ __('Observatorio') }}</span>
+                </a>
+                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <span class="text-gray-700">{{ __('Ideas empresariales') }}</span>
+                </a>
+                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="text-gray-700">{{ __('Blog de experiencias') }}</span>
+                </a>
+                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17.216" height="15.209" viewBox="0 0 17.216 15.209" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                        <path id="Path_109" data-name="Path 109" d="M16.531,13.434a1.651,1.651,0,0,0-.844-.452l-1.971-.394a4.953,4.953,0,0,0-3.187.427l-.263.13a4.953,4.953,0,0,1-3.187.427l-1.594-.319A1.651,1.651,0,0,0,4,13.706M7.1,4h6.6l-.826.826V9.1a1.651,1.651,0,0,0,.484,1.167l4.128,4.128a1.651,1.651,0,0,1-1.168,2.818H4.478A1.651,1.651,0,0,1,3.311,14.39l4.128-4.128A1.651,1.651,0,0,0,7.923,9.1V4.826Z" transform="translate(-1.791 -3)" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </svg>
+                    <span class="text-gray-700">{{ __('Proveedores') }}</span>
+                </a>
+                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span class="text-gray-700">{{ __('Perfil') }}</span>
+                </a>
+            @endif
         </nav>
     </div>
 </div>

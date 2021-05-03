@@ -27,6 +27,19 @@ class AppController extends Controller
     }
 
     /**
+     * Display the dashboard company view
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function companyDashboard(User $user, Node $node, Request $request)
+    {
+        $search         = $request->get('search');
+        $projects       = Project::searchProjects($search)->get();
+        $allKeywords    = Project::allKeywords($node);
+
+        return view('dashboard-company', compact('node', 'projects', 'search', 'allKeywords'));
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
