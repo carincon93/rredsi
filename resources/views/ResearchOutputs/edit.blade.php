@@ -50,9 +50,11 @@
                         <x-jet-label class="mb-4" for="typology" value="{{ __('Minciencias typology') }}" />
                         <select id="typology" name="typology" class="form-select w-full" required >
                             <option value="">Seleccione una sub-tipología Minciencias</option>
-                            @foreach ($mincienciasTypologies as $mincienciasTypology)
+                            @forelse ($mincienciasTypologies as $mincienciasTypology)
                                 <option value="{{ $mincienciasTypology['name'] }}"  {{ old('typology') == $mincienciasTypology['name'] || $researchOutput->typology == $mincienciasTypology['name'] ? "selected" : "" }}>{{ $mincienciasTypology['name'] }}</option>
-                            @endforeach
+                                @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                            @endforelse
                         </select>
                         <x-jet-input-error for="typology" class="mt-2" />
                     </div>

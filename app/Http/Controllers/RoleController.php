@@ -121,9 +121,9 @@ class RoleController extends Controller
         if($role->id >= 1 && $role->id <= 4 ){
             $message = 'Este rol es predefinido no es posible borrarlo';
         }else{
-            if($role->delete()) {
+             if($role->delete()) {
                 $message = 'Your delete processed correctly';
-            }
+             }
         }
 
 

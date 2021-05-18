@@ -31,7 +31,7 @@
                     </x-slot>
 
                     <x-slot name="tbodyData">
-                        @foreach ($knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
+                        @forelse ($knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
 
                         <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                             <td>
@@ -104,11 +104,14 @@
                                             </x-slot>
                                         </x-jet-dropdown>
                                     </div>
-
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                            </tr>
+                        @endforelse
                     </x-slot>
                 </x-data-table>
             </div>

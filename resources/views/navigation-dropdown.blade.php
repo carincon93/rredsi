@@ -11,7 +11,6 @@
                  */
                     $user = auth()->user();
                     $faculty = $user->educationalInstitutionFaculties()->where('is_principal',1)->first();
-
                     if($faculty){
                         $node = $faculty->educationalInstitution->node;
                     }else{
@@ -23,6 +22,12 @@
                 <x-drop-down-node />
 
             </div>
+            <div class="hidden md:flex md:justify-around" style="flex-basis: 160px">
+                <x-drop-down-notification />
+                {{-- Opciones de perfil muestra y administracion --}}
+                <x-drop-down-profile />
+            </div>
+            <!-- navigation links -->
 
             <div class="hidden md:flex md:justify-around" style="flex-basis: 160px">
                 <x-drop-down-notification />
@@ -68,7 +73,7 @@
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
-
+                
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
@@ -119,3 +124,4 @@
 
     </div>
 </nav>
+

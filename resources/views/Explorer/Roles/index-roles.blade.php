@@ -14,9 +14,11 @@
         </x-slot>
         <x-slot name="textBase">
             Fortalezca los resultados de su proyecto conectando con jóvenes investigadores de otras áreas de conocimiento y de instituciones educativas cómo:
-            @foreach (optional($node->educationalInstitutions)->shuffle()->take(10) as $educationalInstitution)
+            @forelse (optional($node->educationalInstitutions)->shuffle()->take(10) as $educationalInstitution)
                 {{ $educationalInstitution->name }},
-            @endforeach
+                @empty
+                    <p class="p-4">{{ __('No data recorded') }}
+            @endforelse
         </x-slot>
         <x-slot name="actionButton">
             <a href="#test" class="w-full flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-900 hover:bg-blue-800 md:text-lg md:px-10">
@@ -39,10 +41,16 @@
                                     <p class="text-gray-400"><small>{{ $academicProgram->educationalInstitutionName }}</small></p>
                                 </a>
                             </div>
-                        @endforeach
+                            @empty
+                            <tr>
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                            </tr>
+                        @endforelse
                     </div>
-                @empty
-                    <p>{{ __('No data recorded') }}</p>
+                    @empty
+                        <tr>
+                            <p class="p-4">{{ __('No data recorded') }}</p>
+                        </tr>
                 @endforelse
             </div>
         </div>

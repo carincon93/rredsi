@@ -6,6 +6,11 @@
         /** traemos  las  notificaciones sin leer las ultimas 4 ponemos limite en ellas*/
         $notificationUnread = Auth::user()->unreadNotifications()->orderBy('created_at', 'desc')->take(4)->get();
     @endphp
+    <?php
+        $authUser           = Auth::user();
+        $count              = $authUser->unreadNotifications->count();
+        $notificationUnread = $authUser->unreadNotifications()->orderBy('created_at', 'desc')->take(4)->get();
+    ?>
 
     <x-slot name="trigger">
         <div class="space-x-4 flex justify-around hover:cursor-pointer">
@@ -24,6 +29,11 @@
                 {{-- aca recorremos el object de notificaciones sin leer y mostramos en el dropdown --}}
                 @forelse ($notificationUnread as $notification)
                     {{-- @php echo $notification; @endphp --}}
+                {{-- <?php
+                    echo $notificationUnread;
+                ?> --}}
+                @forelse ($notificationUnread as $notification)
+                    {{-- <?php echo $notification; ?> --}}
                     <div class="px-4 py-3 border-b hover:bg-gray-100 -mx-2">
                     @if( $notification->type !== 'App\Notifications\RequestResponse' && $notification->type !== 'App\Notifications\InformationNotification')
                         <a href="{{route('notifications.show', [$notification->id])}}" class="flex items-center">

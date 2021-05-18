@@ -25,7 +25,7 @@
             <div class="p-6 mt-4">
                 @forelse ($projects->chunk(3) as $chunk)
                     <div class="md:grid md:grid-cols-3 md:gap-4">
-                        @foreach ($chunk as $project)
+                        @forelse ($chunk as $project)
                             <div class="p-10 md:mb-0 mb-6 flex flex-col">
                                 <div class="rounded bg-gray-50 p-4 transform translate-x-6 -translate-y-6 shadow">
                                     <div class="flex items-center">
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="flex-grow ">
                                         <a href="{{ route('nodes.explorer.searchProjects.showProject', [$node, $project]) }}" class="text-center">
-                                            <h2 class="text-xl title-font font-medium mb-3">{{ $project->title }}</h2>
+                                            <h2 class=" text-xl title-font font-medium mb-3">{{ $project->title }}</h2>
 
                                             <p class="leading-relaxed text-sm text-justify">
                                                 <small>{{ substr($project->abstract, 0, 250) }}...</small>
@@ -69,7 +69,9 @@
                                 </div>
                                 @endif
                             </div>
-                        @endforeach
+                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                        @endforelse
                     </div>
                 @empty
                     <p>{{ __('No data recorded') }}</p>
@@ -79,12 +81,16 @@
     </div>
     <div class="py-2 border-t">
         <div class="p-6 mt-4">
-            @foreach ($allKeywords->chunk(5) as $chunk)
+            @forelse ($allKeywords->chunk(5) as $chunk)
                 <div class="flex justify-around mt-4 sm:items-center sm:justify-around text-center text-sm text-gray-500 sm:text-left">
-                    @foreach ($chunk as $keyword)
+                    @forelse ($chunk as $keyword)
                         <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $keyword]) }}" class="ml-1 underline">{{ $keyword }}</a>
+                        @empty
+                            <p class="p-4">{{ __('No data recorded') }}
                     @endforeach
                 </div>
+                @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
             @endforeach
         </div>
     </div>

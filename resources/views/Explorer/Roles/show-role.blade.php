@@ -56,7 +56,9 @@
                 <p class="pre-line-initial mt-4 text-gray-400 capitalize">
                     @foreach (explode(',', implode(json_decode($user->interests))) as $interest)
                         {{ $interest }}
-                    @endforeach
+                        @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                    @endforelse
                 </p>
 
                 <x-jet-section-border />
@@ -79,7 +81,7 @@
                 <h1 class="text-2xl mt-12{{ count($user->userGraduations) > 0 ? ' ml-16' : '' }}">{{ __('Graduations') }}</h1>
                 @forelse ($user->userGraduations->chunk(3) as $chunk)
                     <div class="mt-4 md:grid md:grid-cols-3 md:gap-4">
-                        @foreach ($chunk as $graduation)
+                        @forelse ($chunk as $graduation)
                             <div class="p-10 md:mb-0 mb-6 flex flex-col">
                                 <div class="rounded bg-gray-50 p-4 transform translate-x-6 -translate-y-6 shadow">
                                     <div class="flex items-center">
@@ -102,7 +104,9 @@
                                     </p>
                                 </div>
                             </div>
-                        @endforeach
+                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                        @endforelse
                     </div>
                 @empty
                     <p class="mt-12">{{ __('No data recorded') }}</p>
@@ -113,7 +117,7 @@
                 <h1 class="text-2xl mt-12{{ count($user->researchTeams) > 0 ? ' ml-16' : '' }}">{{ __('Research teams') }}</h1>
                 @forelse ($user->researchTeams->chunk(3) as $chunk)
                     <div class="mt-4 md:grid md:grid-cols-3 md:gap-4">
-                        @foreach ($chunk as $researchTeam)
+                        @forelse ($chunk as $researchTeam)
                             <div class="p-10 md:mb-0 mb-6 flex flex-col">
                                 <div class="rounded bg-gray-50 p-4 transform translate-x-6 -translate-y-6 shadow">
                                     <div class="flex items-center">
@@ -137,7 +141,9 @@
                                     <p class="text-gray-400"><small>Grupo de investigación: {{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->name }}</small></p>
                                 </div>
                             </div>
-                        @endforeach
+                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}
+                        @endforelse
                     </div>
                 @empty
                     <p class="mt-12">{{ __('No data recorded') }}</p>
@@ -148,7 +154,7 @@
                 <h1 class="text-2xl mt-12 ml-16">{{ __('Projects') }}</h1>
                 @forelse ($user->projects->chunk(3) as $chunk)
                     <div class="mt-4 md:grid md:grid-cols-3 md:gap-4">
-                        @foreach ($chunk as $project)
+                        @forelse ($chunk as $project)
                             <div class="p-10 md:mb-0 mb-6 flex flex-col">
                                 <div class="rounded bg-gray-50 p-4 transform translate-x-6 -translate-y-6 shadow">
                                     <div class="flex items-center">
@@ -178,7 +184,9 @@
                                     <p class="text-gray-400"><small>Semillero de investigación: {{ $researchTeam->name }}</small></p>
                                 </div>
                             </div>
-                        @endforeach
+                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}
+                        @endforelse
                     </div>
                 @empty
                     <p class="mt-12 ml-16">{{ __('No data recorded') }}</p>
@@ -201,9 +209,11 @@
                         <div>
                             <select id="project_id" name="project_id" class="form-select w-full" required >
                                 <option value="">Seleccione un proyecto</option>
-                                @foreach ($projects as $project)
+                                @forelse ($projects as $project)
                                     <option value="{{ $project->id }}" {{ old('project_id') == $project->id ? "selected" : "" }}>{{ $project->title }}</option>
-                                @endforeach
+                                    @empty
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                                @endforelse
                             </select>
                             <x-jet-input-error for="project_id" class="mt-2" />
                         </div>

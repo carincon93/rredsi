@@ -107,15 +107,19 @@
                     </div>
                 </div>
 
-                @foreach ($knowledgeAreas->chunk(5) as $chunk)
+                @forelse ($knowledgeAreas->chunk(5) as $chunk)
                     <div class="flex justify-around mt-4 sm:items-center sm:justify-around text-center text-sm text-gray-500 sm:text-left">
-                        @foreach ($chunk as $knowledgeArea)
+                        @forelse ($chunk as $knowledgeArea)
                             <a href="{{ route('nodes.explorer.searchProjects', [$node, 'search' => $knowledgeArea->name]) }}" class="ml-1 underline">
                                 {{ $knowledgeArea->name }}
                             </a>
-                        @endforeach
+                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                        @endforelse
                     </div>
-                @endforeach
+                    @empty
+                        <p class="p-4">{{ __('No data recorded') }}</p>
+                @endforelse
             </div>
         </div>
 

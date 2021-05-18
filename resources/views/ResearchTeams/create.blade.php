@@ -33,16 +33,6 @@
                 <form method="POST" action="{{ route('nodes.educational-institutions.faculties.research-groups.research-teams.store', [$node, $educationalInstitution, $faculty, $researchGroup]) }}">
                     @csrf
 
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
                     <div>
                         <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text"  max="191" name="name" value="{{ old('name') }}" required />
@@ -117,8 +107,8 @@
                                 <input @if(is_array(old('research_line_id')) && in_array($researchLine->id, old('research_line_id'))) checked @endif id="{{ "research-line-$researchLine->id" }}" value="{{ $researchLine->id }}" type="checkbox" class="form-checkbox" name="research_line_id[]">
                                 <span class="ml-2 text-sm text-gray-600">{{ $researchLine->name }}</span>
                             </label>
-                        @empty
-                            <p>{{ __('No data recorded') }}</p>
+                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="research_line_id" class="mt-2" />
                     </div>
@@ -130,8 +120,8 @@
                                 <input @if(is_array(old('academic_program_id')) && in_array($academicProgram->id , old('academic_program_id'))) checked @endif id="{{ "academic-program-$academicProgram->id" }}" value="{{ $academicProgram->id }}" type="checkbox" class="form-checkbox" name="academic_program_id[]">
                                 <span class="ml-2 text-sm text-gray-600">{{ $academicProgram->name }}</span>
                             </label>
-                        @empty
-                            <p>{{ __('No data recorded') }}</p>
+                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="academic_program_id" class="mt-2" />
                     </div>

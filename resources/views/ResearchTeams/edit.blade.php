@@ -108,8 +108,8 @@
                                 <input @if(is_array(old('user_id')) && in_array($researchLine->id, old('user_id'))) checked @elseif($researchTeam->researchLines->pluck('id')->contains($researchLine->id)) checked  @endif id="{{ "research-line-$researchLine->id" }}" value="{{ $researchLine->id }}" type="checkbox" class="form-checkbox" name="research_line_id[]">
                                 <span class="ml-2 text-sm text-gray-600">{{ $researchLine->name }}</span>
                             </label>
-                        @empty
-                            <p>{{ __('No data recorded') }}</p>
+                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="research_line_id" class="mt-2" />
                     </div>
@@ -121,8 +121,8 @@
                                 <input @if(is_array(old('academic_program_id')) && in_array($academicProgram->id, old('academic_program_id'))) checked @elseif($researchTeam->academicPrograms->pluck('id')->contains($academicProgram->id)) checked  @endif   id="{{ "academic-program-$academicProgram->id" }}" value="{{ $academicProgram->id }}" type="checkbox" class="form-checkbox" name="academic_program_id[]">
                                 <span class="ml-2 text-sm text-gray-600">{{ $academicProgram->name }}</span>
                             </label>
-                        @empty
-                            <p>{{ __('No data recorded') }}</p>
+                            @empty
+                            <p class="p-4">{{ __('No data recorded') }}</p>
                         @endforelse
                         <x-jet-input-error for="academic_program_id" class="mt-2" />
                     </div>

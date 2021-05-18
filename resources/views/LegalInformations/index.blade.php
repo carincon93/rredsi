@@ -40,7 +40,7 @@
                     </x-slot>
 
                     <x-slot name="tbodyData">
-                        @foreach ($legalInformations as $legalInformation)
+                        @forelse ($legalInformations as $legalInformation)
 
                         <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                             <td class="w-60 h-10">
@@ -119,7 +119,11 @@
                                 @endcanany
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                            </tr>
+                        @endforelse
                     </x-slot>
                 </x-data-table>
             </div>

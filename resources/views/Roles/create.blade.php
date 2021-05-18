@@ -70,7 +70,9 @@
                                             @endif
                                         </label>
                                     </div>
-                                @endforeach
+                                    @empty
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                                @endforelse
                             </div>
                         @empty
                             <div class="mt-1/6">

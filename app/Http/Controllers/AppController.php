@@ -108,12 +108,6 @@ class AppController extends Controller
     {
         $legalInformations = LegalInformation::orderBy('title')->get();
 
-
-        //  return [
-        //     'node' => $node,
-        //     'project' => $project
-        // ];
-
         return view('Explorer.Projects.show-project', compact('node', 'project', 'legalInformations'));
     }
 
@@ -155,7 +149,7 @@ class AppController extends Controller
 
         return view('Explorer.EducationalTools.index-educational-tools', compact('node', 'educationalTools', 'search'));
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -227,5 +221,9 @@ class AppController extends Controller
         $legalInformations  = LegalInformation::orderBy('title')->get();
 
         return view('Explorer.show-node', compact('node', 'legalInformations'));
+    }
+    public function dashboard2(User $user, Node $node)
+    {
+        return view('dashboard2');
     }
 }

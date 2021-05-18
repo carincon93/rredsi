@@ -30,9 +30,12 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NodeEventController;
 use App\Http\Controllers\LegalInformationController;
 use App\Http\Controllers\AnnualNodeEventController;
+use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\ModelForm;
+use App\Http\Controllers\ObservatoryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -100,15 +103,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'])->name('nodes.explorer.nodeInfo');
     // ? ruta notificacion para aplicar colaborar en un proyecto //
     Route::post('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification');
+    
+    Route::put('company/{business}', [CompanyProfileController::class, 'update'])->name('company.update');
+    
     // ? ruta para envio de notificacion de participacion en proyecto //
     Route::post('/notifications/send-to-participate', [NotificationController::class, 'sendToParticipate'])->name('notifications.sendToParticipate');
     // ? ruta para envio de notificacion de participacion de proyecto en un evento//
     Route::post('/notifications/send-project-to-event', [NotificationController::class, 'sendProjectToEvent'])->name('notifications.sendProjectToEvent');
     // ? ruta para envio de notificacion de participacion aceptar o denegar estudiante en proyecto //
     Route::post('/notifications/to-accept-student', [NotificationController::class, 'acceptStudentInProject'])->name('notifications.acceptStudentInProject');
+    // ? ruta para envio de interes de proyecto //
+    Route::post('/notifications/interes/{id}', [NotificationController::class, 'interes'])->name('notifications.interes');
     // ? ruta para cambiar a leida notificaicon de correo//
     Route::get('/all-notifications/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend');
-
     // ? ruta de dashboard de instituciones educativas//
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}', [EducationalInstitutionController::class, 'dashboard'])->name('nodes.educational-institutions.dashboard');
     Route::get('/dashboard/nodes/{node}/educational-institutions/{educational_institution}/bi', [EducationalInstitutionController::class, 'bi'])->name('nodes.educational-institutions.dashboard.bi');
@@ -211,5 +218,9 @@ Route::middleware(['auth'])->group(function () {
         'roles'                             => RoleController::class,
         // ? rutas de la información legal de la plataforma//
         'legal-informations'                => LegalInformationController::class,
+        // ? rutas para el observatorio de proyectos//
+        'observatories'                     => ObservatoryController::class,
+        // ? ruta para el perfil empresarial //
+        'company-profile'                 => CompanyProfileController::class,
     ]);
 });

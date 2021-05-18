@@ -42,7 +42,7 @@
                     </x-slot>
 
                     <x-slot name="tbodyData">
-                        @foreach ($knowledgeSubareas as $knowledgeSubarea)
+                        @forelse ($knowledgeSubareas as $knowledgeSubarea)
                         {{-- w-60 lg:w-96 truncate --}}
                             <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                                 <td>
@@ -119,7 +119,11 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                            <tr>
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                            </tr>
+                        @endforelse
                     </x-slot>
                 </x-data-table>
             </div>

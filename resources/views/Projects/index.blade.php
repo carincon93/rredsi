@@ -36,7 +36,7 @@
                     </x-slot>
 
                     <x-slot name="tbodyData">
-                        @foreach ($projects as $project)
+                        @forelse ($projects as $project)
                             <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                                 <td>
                                     <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('Title') }}</span>
@@ -129,7 +129,11 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                            <tr>
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                            </tr>
+                        @endforelse
                     </x-slot>
                 </x-data-table>
             </div>

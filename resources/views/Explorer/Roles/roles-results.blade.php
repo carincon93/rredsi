@@ -83,7 +83,7 @@
                                 <p class="pre-line-initial mt-2">Información académica:</p>
                                 @forelse (optional($roleMember->userGraduations)->take(3)->chunk(3) as $chunk)
                                     <div class="mt-4 md:grid md:grid-cols-3 md:gap-4">
-                                        @foreach ($chunk as $graduation)
+                                        @forelse ($chunk as $graduation)
                                             <div class="md:mb-0 mb-6 flex flex-col">
                                                 <div class="rounded bg-gray-50 p-4 transform shadow">
                                                     <div class="flex-grow ">
@@ -95,7 +95,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 @empty
                                     <p class="pre-line-initial mt-12 ml-16">{{ __('No data recorded') }}</p>
@@ -103,8 +105,10 @@
                             </div>
                         </div>
                     </div>
-                @empty
-                    <p>{{ __('No data recorded') }}</p>
+                    @empty
+                        <tr>
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                        </tr>
                 @endforelse
             </div>
         </div>

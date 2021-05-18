@@ -70,8 +70,8 @@
                                     </div>
                                 @endif
                             </div>
-                        @empty
-                            <p>{{ __('No data recorded') }}</p>
+                            @empty
+                            <p class="p-4">{{ __('No data recorded') }}</p>
                         @endforelse
                     </div>
                 @empty

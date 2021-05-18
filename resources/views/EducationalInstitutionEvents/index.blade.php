@@ -31,7 +31,7 @@
                     </x-slot>
 
                     <x-slot name="tbodyData">
-                        @foreach ($events as $event)
+                        @forelse ($events as $event)
 
                             <tr class="bg-white">
 
@@ -81,7 +81,11 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                            <tr>
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                            </tr>
+                        @endforelse
                     </x-slot>
                 </x-data-table>
             </div>

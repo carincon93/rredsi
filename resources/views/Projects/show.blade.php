@@ -306,7 +306,7 @@
                                         <div class="md:col-span-1">
                                             <h3 class="text-lg font-medium text-gray-900">Información de <br> productos de investigación</h3>
                                         </div>
-                                        @foreach ($project->researchOutputs as $researchOutput)
+                                        @forelse ($project->researchOutputs as $researchOutput)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
 
@@ -328,7 +328,9 @@
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        @endforeach
+                                        @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -340,7 +342,7 @@
                                             <h3 class="text-lg font-medium text-gray-900">Información de <br> las disciplinas de sub-área de conocimiento</h3>
                                         </div>
 
-                                        @foreach ($project->knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
+                                        @forelse ($project->knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
 
@@ -362,7 +364,9 @@
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        @endforeach
+                                        @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -373,7 +377,7 @@
                                         <div class="md:col-span-1">
                                             <h3 class="text-lg font-medium text-gray-900">Información de los eventos</h3>
                                         </div>
-                                        @foreach ($project->events as $event)
+                                        @forelse ($project->events as $event)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
 
@@ -394,8 +398,9 @@
                                             <div class="py-8">
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
-                                        </div>
-                                        @endforeach
+                                            @empty
+                                            <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +412,7 @@
                                             <h3 class="text-lg font-medium text-gray-900">Información de las líneas de investigación</h3>
                                         </div>
 
-                                        @foreach ($project->researchLines as $researchLine)
+                                        @forelse ($project->researchLines as $researchLine)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
 
@@ -429,7 +434,9 @@
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        @endforeach
+                                        @empty
+                                        <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 </div>
 
@@ -442,7 +449,7 @@
                                             <h3 class="text-lg font-medium text-gray-900">Información de los semilleros de investigación</h3>
                                         </div>
 
-                                        @foreach ($project->researchTeams as $researchTeam)
+                                        @forelse ($project->researchTeams as $researchTeam)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
 
@@ -464,7 +471,9 @@
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        @endforeach
+                                        @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -476,7 +485,7 @@
                                             <h3 class="text-lg font-medium text-gray-900">Información de los programas académicos</h3>
                                         </div>
 
-                                        @foreach ($project->academicPrograms as $academicProgram)
+                                        @forelse ($project->academicPrograms as $academicProgram)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
 
@@ -498,7 +507,9 @@
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        @endforeach
+                                        @empty
+                                        <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -510,7 +521,7 @@
                                             <h3 class="text-lg font-medium text-gray-900">Información de los autores</h3>
                                         </div>
 
-                                        @foreach ($project->authors as $author)
+                                        @forelse ($project->authors as $author)
                                         <div class="md:grid md:grid-cols-2 md:gap-4">
                                             <div class="md:col-span-1">
 
@@ -532,7 +543,9 @@
                                                 <div class="border-t border-gray-200"></div>
                                             </div>
                                         </div>
-                                        @endforeach
+                                        @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>

@@ -111,7 +111,7 @@
                                             <h3 class="text-lg font-medium text-gray-900">Información de los semilleros de investigación</h3>
                                         </div>
 
-                                        @foreach ($knowledgeSubareaDiscipline->researchTeams as $researchTeam)
+                                        @forelse ($knowledgeSubareaDiscipline->researchTeams as $researchTeam)
                                             <div class="md:grid md:grid-cols-2 md:gap-4">
                                                 <div class="md:col-span-1">
 
@@ -133,7 +133,9 @@
                                                     <div class="border-t border-gray-200"></div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +147,7 @@
                                             <h3 class="text-lg font-medium text-gray-900">Información de proyectos asociados</h3>
                                         </div>
 
-                                        @foreach ($knowledgeSubareaDiscipline->projects as $project)
+                                        @forelse ($knowledgeSubareaDiscipline->projects as $project)
                                             <div class="md:grid md:grid-cols-2 md:gap-4">
                                                 <div class="md:col-span-1">
 
@@ -167,7 +169,9 @@
                                                     <div class="border-t border-gray-200"></div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>

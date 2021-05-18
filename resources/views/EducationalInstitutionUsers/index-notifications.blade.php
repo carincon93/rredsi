@@ -41,7 +41,7 @@
                                                 </x-slot>
 
                                                 <x-slot name="tbodyData">
-                                                    @foreach ($user->unreadNotifications as $notification)
+                                                    @forelse ($user->unreadNotifications as $notification)
 
                                                         <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                                                             <td>
@@ -104,7 +104,11 @@
 
                                                             </td>
                                                         </tr>
-                                                    @endforeach
+                                                        @empty
+                                                        <tr>
+                                                            <p class="p-4">{{ __('No data recorded') }}</p>
+                                                        </tr>
+                                                    @endforelse
                                                 </x-slot>
                                             </x-data-table>
                                         </div>
@@ -123,7 +127,7 @@
                                                     </x-slot>
 
                                                     <x-slot name="tbodyData">
-                                                        @foreach ($user->readNotifications as $notification)
+                                                        @forelse ($user->readNotifications as $notification)
                                                         <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
                                                             <td>
                                                                 <span class="lg:hidden top-0 left-0 px-2 text-gray-400 py-1 text-xs font-bold uppercase block">{{ __('subject') }}</span>
@@ -189,10 +193,12 @@
                                                                             </x-jet-dropdown>
                                                                         </div>
                                                                     </div>
-
+                                                                </div>
+                                                                @empty
+                                                                    <p class="p-4">{{ __('No data recorded') }}</p>
                                                             </td>
                                                         </tr>
-                                                        @endforeach
+                                                        @endforelse
                                                     </x-slot>
                                                 </x-data-table>
                                             </div>

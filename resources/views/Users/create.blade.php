@@ -90,12 +90,14 @@
 
                     <p class="mt-1/6">{{ __('Roles') }} </p>
                     <div class="block mt-4">
-                        @foreach ($roles as $role)
+                        @forelse ($roles as $role)
                             <label class="flex items-center">
                                 <input type="checkbox" class="form-checkbox" name="role_id[]" value="{{ $role->id }}" {{ old('role_id') == $role->id ? "checked" : "" }}>
                                 <span class="ml-2 text-sm text-gray-600">{{ $role->name }}</span>
                             </label>
-                        @endforeach
+                            @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                        @endforelse
                         <x-jet-input-error for="role_id" class="mt-2" />
                     </div>
 

@@ -15,7 +15,7 @@
         @if (count($this->sessions) > 0)
             <div class="mt-5 space-y-6">
                 <!-- Other Browser Sessions -->
-                @foreach ($this->sessions as $session)
+                @forelse ($this->sessions as $session)
                     <div class="flex items-center">
                         <div>
                             @if ($session->agent->isDesktop())
@@ -47,7 +47,9 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                @endforelse
             </div>
         @endif
 

@@ -100,7 +100,7 @@
                                         </div>
 
                                         <div>
-                                            @foreach ($knowledgeSubarea->knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
+                                            @forelse ($knowledgeSubarea->knowledgeSubareaDisciplines as $knowledgeSubareaDiscipline)
                                                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                                                     <h3 class="text-lg font-medium text-gray-900">{{ __('Name') }}</h3>
                                                     <div class="mt-3 max-w-xl text-sm text-gray-600">
@@ -115,7 +115,9 @@
                                                         <div class="border-t border-gray-200"></div>
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                                @empty
+                                <p class="p-4">{{ __('No data recorded') }}</p>
+                                            @endforelse
                                         </div>
                                     </div>
                                 </div>

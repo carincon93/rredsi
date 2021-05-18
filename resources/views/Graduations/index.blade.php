@@ -34,7 +34,7 @@
                     </x-slot>
 
                     <x-slot name="tbodyData">
-                        @foreach ($userGraduations as $userGraduation)
+                        @forelse ($userGraduations as $userGraduation)
 
                             <tr class="bg-white flex flex-col flex-no wrap lg:table-row mb-2 lg:mb-0">
 
@@ -133,7 +133,11 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                            <tr>
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                            </tr>
+                        @endforelse
                     </x-slot>
                 </x-data-table>
             </div>

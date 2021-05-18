@@ -4,9 +4,11 @@
     <x-jet-label class="mb-4" for="node_id" value="{{ __('Node') }}" />
     <select class="form-select rounded-md border-0 p-3.5 shadow-sm block mt-1 w-full" id="node_id" name="node_id" required onchange="AcademicProgramsFilter.onChangeNodeSelect(event)">
         <option value="">Seleccione un nodo</option>
-        @foreach ($nodes as $node)
-            <option value="{{ $node->id }}" {{ old('node_id') == $node->id || optional(optional(optional(optional($academicProgram)->educationalInstitutionFaculty)->educationalInstitution)->node)->id == $node->id ? 'selected' : '' }}>{{ $node->state }}</option>
-        @endforeach
+        @forelse ($nodes as $node)
+            <option value="{{ $node->id }}" {{ old('node_id') == $node->id || optional(optional(optional($academicProgram)->educationalInstitution)->node)->id == $node->id ? 'selected' : '' }}>{{ $node->state }}</option>
+            @empty
+                <p class="p-4">{{ __('No data recorded') }}</p>
+            @endforelse
     </select>
 </div>
 <div class="mt-4">

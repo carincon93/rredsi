@@ -20,6 +20,8 @@ use App\Notifications\RoleInvitation;
 use App\Notifications\InformationNotification;
 use App\Notifications\NotificationToParticipate;
 use App\Notifications\RequestResponse;
+use App\Notifications\NotificationInteres;
+
 
 
 class NotificationController extends Controller
@@ -309,5 +311,29 @@ class NotificationController extends Controller
 
 
     }
+    public function interes($id){
 
+        $user = auth()->user();
+        $business = $user->business()->first();
+       
+        $project = Project::find($id);
+        $authors = $project->authors()->get();
+
+        $researchGroup  = $project->researchTeams()->where('is_principal', 1)->first()->researchGroup;
+        
+        $faculty        = $researchGroup->educationalInstitutionFaculty;
+        
+
+        if($faculty){
+            $node = $faculty->educationalInstitution->node;
+            $educationalInstitution = $faculty->educationalInstitution;
+            
+            $adminInstitution = $educationalInstitution->administrator;
+            // return $adminInstitution;
+            Notification::send($adminInstitution, New NotificationInteres($user,$business,$project,$authors));
+            
+        }
+
+        return redirect()->back()->with('status', 'Alerta generada con exito');
+    } 
 }
