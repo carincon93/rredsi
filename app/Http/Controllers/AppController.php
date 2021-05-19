@@ -31,13 +31,13 @@ class AppController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function companyDashboard(User $user, Node $node, Request $request)
+    public function companyDashboard(Node $node, Request $request)
     {
         $search         = $request->get('search');
-        $projects       = Project::searchProjects($search)->get();
-        $allKeywords    = Project::allKeywords($node);
+        $projects       = Project::all();
+        //$allKeywords    = Project::allKeywords($node);
 
-        return view('dashboard-company', compact('node', 'projects', 'search', 'allKeywords'));
+        return view('dashboard-company', compact('node', 'projects', 'search'));
     }
     /**
      * Display a listing of the resource.

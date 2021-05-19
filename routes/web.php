@@ -65,6 +65,8 @@ Route::middleware(['auth'])->group(function () {
     // ? ruta para acceder al dashboard u observatorio del usuario tipo empresa //
     Route::get('/dashboard-company', [AppController::class, 'companyDashboard'])->name('dashboard-company');
 
+    // ? ruta para acceder a las ideas empresariales //
+
     // ? se manda aparte de el resource para evitar problemas en envio de datos//
     // Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications');
 

@@ -62,7 +62,7 @@ class LoginResponse implements LoginResponseContract
 
             case $authUser->hasRole(5):
 
-                return redirect()->route('dashboard');
+                return redirect()->route('dashboard-company');
 
             break;
 

@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-display text-white text-3xl leading-9 font-semibold sm:text-3xl sm:leading-9">
-            {{ __('Observatorio') }}
+            {{ __('Dashboard') }}
             <span class="sm:block text-purple-300">
             </span>
         </h2>
@@ -25,7 +25,11 @@
                                 $researchTeam = $project->researchTeams()->where('is_principal', 1)->first() ?? null;
                             @endphp
                             <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
+                                @if($researchTeam)
                                 <h1 class="text-gray-300 font-bold">{{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->educationalInstitution->name }}</h1>
+                                @else
+                                <h1 class="text-gray-300 font-bold">No disponible</h1>
+                                @endif
                                 <a href="#" class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">Explorar</a>
                             </div>
                         </div>
