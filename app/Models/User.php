@@ -83,11 +83,7 @@ class User extends Authenticatable
 
     public function business() {
         return $this->belongsTo('App\Models\Business','nit_business', 'nit');
-    }
-
-    public function business() {
-        return $this->belongsTo('App\Models\Business','nit_business', 'nit');
-    }
+    }    
     
     public function userGraduations() {
         return $this->hasMany('App\Models\UserGraduation');

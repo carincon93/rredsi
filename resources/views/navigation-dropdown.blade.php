@@ -21,14 +21,8 @@
                 {{-- dropdown para listar cada explorer de nodo --}}
                 <x-drop-down-node />
 
-            </div>
-            <div class="hidden md:flex md:justify-around" style="flex-basis: 160px">
-                <x-drop-down-notification />
-                {{-- Opciones de perfil muestra y administracion --}}
-                <x-drop-down-profile />
-            </div>
+            </div>            
             <!-- navigation links -->
-
             <div class="hidden md:flex md:justify-around" style="flex-basis: 160px">
                 <x-drop-down-notification />
                 {{-- Opciones de perfil muestra y administracion --}}
