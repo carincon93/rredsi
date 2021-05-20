@@ -39,6 +39,21 @@ class AppController extends Controller
 
         return view('dashboard-company', compact('node', 'projects', 'search'));
     }
+
+    /**
+     * Display the dashboard company view
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function businessObservatory(Node $node, Request $request)
+    {
+        $search         = $request->get('search');
+        $projects       = Project::all();
+        //$allKeywords    = Project::allKeywords($node);
+
+        return view('business-observatory', compact('node', 'projects', 'search'));
+    }
+
     /**
      * Display a listing of the resource.
      *

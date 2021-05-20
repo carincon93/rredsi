@@ -33,6 +33,7 @@ use App\Http\Controllers\AnnualNodeEventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\BusinessIdeasController;
 use App\Http\Livewire\ModelForm;
 
 /*
@@ -65,8 +66,8 @@ Route::middleware(['auth'])->group(function () {
     // ? ruta para acceder al dashboard u observatorio del usuario tipo empresa //
     Route::get('/dashboard-company', [AppController::class, 'companyDashboard'])->name('dashboard-company');
 
-    // ? ruta para acceder a las ideas empresariales //
-
+    // ? ruta para acceder al observatorio //
+    Route::get('/business-observatory', [AppController::class, 'businessObservatory'])->name('business-observatory');
     // ? se manda aparte de el resource para evitar problemas en envio de datos//
     // Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications');
 
@@ -215,5 +216,10 @@ Route::middleware(['auth'])->group(function () {
         'legal-informations'                => LegalInformationController::class,
         // ? rutas de dashboard empresa //
         //'dashboard-company'                 => CompanyController::class,//
+        // ? ruta para acceder a las ideas empresariales //
+        'business-ideas'                    => BusinessIdeasController::class,
+
+
+
     ]);
 });

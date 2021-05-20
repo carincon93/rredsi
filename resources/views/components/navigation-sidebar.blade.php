@@ -97,7 +97,6 @@
                     <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                 </svg>
             </button>
-
             <a class="m-auto pl-14 md:pl-0 md:pr-0 md:justify-center py-3" href="#">
                 <x-jet-application-mark class="block h-9 w-auto" />
             </a>
@@ -122,6 +121,7 @@
 
         </div>
         {{-- links_sidebar --}}
+
         <nav :class="{'block': open, 'hidden': !open}" class="scroll flex-grow md:block pb-4 md:pb-0 md:overflow-y-auto">
             {{-- Administrar perfil en dispositivo movil --}}
             <div class="block overflow-auto md:hidden mt-1">
@@ -189,7 +189,7 @@
 
             @if( $authUser->hasRole(5))
 
-                <a href="{{ route('dashboard-company') }}" class="w-full flex items-center md:mt-1/6 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                <a href="{{ route('business-observatory') }}" class="w-full flex items-center md:mt-1/6 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                     <svg xmlns="http://www.w3.org/2000/svg"class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 32 32">
                         <g >
                         <rect width="32" height="32" fill="none"/>
@@ -430,7 +430,7 @@
             </div> --}}
             {{-- links del sidebar que se muestran al usuario tipo empresa --}}
             @if( Auth::user()->hasRole(5) )
-                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                <a href="{{ route('business-ideas.index') }}" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
