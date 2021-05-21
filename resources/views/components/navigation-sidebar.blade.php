@@ -189,17 +189,13 @@
 
             @if( $authUser->hasRole(5))
 
-                <a href="{{ route('business-observatory') }}" class="w-full flex items-center md:mt-1/6 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
-                    <svg xmlns="http://www.w3.org/2000/svg"class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 32 32">
-                        <g >
-                        <rect width="32" height="32" fill="none"/>
-                        <path d="M406-333.194h8.645V-344H406v10.806Zm0,8.645h8.645v-6.484H406v6.484Zm10.806,0h8.645v-10.806h-8.645v10.806Zm0-19.452v6.484h8.645V-344Z" transform="translate(-399.516 350.484)" fill-rule="evenodd"/>
-                        </g>
+                <a href="{{ route('dashboard-company') }}" class="w-full flex items-center md:mt-1/6 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg class="mr-1/12 ml-1 text-black"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor" style="width: 18px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />  
+                        <polyline points="9 22 9 12 15 12 15 22" />
                     </svg>
-
-                    <span class="text-gray-700">{{ __('Observatorio') }}</span>
+                    <span class="text-gray-700">{{ __('Home empresarial') }}</span>
                 </a>
-
             @endif
 
             <hr class="mb-1/6 mt-1/6">
@@ -430,6 +426,12 @@
             </div> --}}
             {{-- links del sidebar que se muestran al usuario tipo empresa --}}
             @if( Auth::user()->hasRole(5) )
+                <a href="{{ route('business-observatory') }}" class="w-full flex items-center md:mt-1/6 py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg"class="mr-1/12 ml-1 text-black" style="width: 18px;" viewBox="0 0 32 32">
+                        <path d="M406-333.194h8.645V-344H406v10.806Zm0,8.645h8.645v-6.484H406v6.484Zm10.806,0h8.645v-10.806h-8.645v10.806Zm0-19.452v6.484h8.645V-344Z" transform="translate(-399.516 350.484)" fill-rule="evenodd"/>
+                    </svg>
+                    <span class="text-gray-700">{{ __('Observatorio') }}</span>
+                </a>                
                 <a href="{{ route('business-ideas.index') }}" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -447,13 +449,7 @@
                         <path id="Path_109" data-name="Path 109" d="M16.531,13.434a1.651,1.651,0,0,0-.844-.452l-1.971-.394a4.953,4.953,0,0,0-3.187.427l-.263.13a4.953,4.953,0,0,1-3.187.427l-1.594-.319A1.651,1.651,0,0,0,4,13.706M7.1,4h6.6l-.826.826V9.1a1.651,1.651,0,0,0,.484,1.167l4.128,4.128a1.651,1.651,0,0,1-1.168,2.818H4.478A1.651,1.651,0,0,1,3.311,14.39l4.128-4.128A1.651,1.651,0,0,0,7.923,9.1V4.826Z" transform="translate(-1.791 -3)" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                     </svg>
                     <span class="text-gray-700">{{ __('Proveedores') }}</span>
-                </a>
-                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mr-1/12 ml-1 text-black" style="width: 18px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span class="text-gray-700">{{ __('Perfil') }}</span>
-                </a>
+                </a>                
             @endif
         </nav>
     </div>
