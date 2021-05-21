@@ -33,6 +33,8 @@ use App\Http\Controllers\AnnualNodeEventController;
 use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\BusinessIdeasController;
 use App\Http\Livewire\ModelForm;
 use App\Http\Controllers\ObservatoryController;
 
@@ -52,9 +54,6 @@ Route::get('/', function() {
     return redirect()->route('login');
 })->name('/');
 
-// ? ruta para activar el usuario tipo empresa por correo//
-Route::get('/activateUserBusiness/{id}', [NotificationController::class, 'activateUserBusiness'])->name('notifications.activateUserBusiness');
-
 
 Route::middleware(['auth'])->group(function () {
     // ? ruta que define el explorador de la plataforma
@@ -67,6 +66,11 @@ Route::middleware(['auth'])->group(function () {
     // ? ruta para la dashboard o panel de coordinador de nodo //
     Route::get('/dashboard', [AppController::class, 'dashboard'])->name('dashboard');
 
+    // ? ruta para acceder al dashboard u observatorio del usuario tipo empresa //
+    Route::get('/dashboard-company', [AppController::class, 'companyDashboard'])->name('dashboard-company');
+
+    // ? ruta para acceder al observatorio //
+    Route::get('/business-observatory', [AppController::class, 'businessObservatory'])->name('business-observatory');
     // ? se manda aparte de el resource para evitar problemas en envio de datos//
     // Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications');
 
@@ -222,5 +226,12 @@ Route::middleware(['auth'])->group(function () {
         'observatories'                     => ObservatoryController::class,
         // ? ruta para el perfil empresarial //
         'company-profile'                 => CompanyProfileController::class,
+        // ? rutas de dashboard empresa //
+        //'dashboard-company'                 => CompanyController::class,//
+        // ? ruta para acceder a las ideas empresariales //
+        'business-ideas'                    => BusinessIdeasController::class,
+
+
+
     ]);
 });
