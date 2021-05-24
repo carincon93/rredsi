@@ -98,7 +98,7 @@
         <tbody>
             <tr>
                 <td>
-                    <a href="{{ route('observatories.index') }}">
+                    <a href="{{ route('business-observatory') }}">
                     <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                         <div class="flex justify-center content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="transform transition-transform duration-500 ease-in-out" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">

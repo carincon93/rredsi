@@ -31,7 +31,7 @@
                                     @else
                                     <h1 class="text-gray-300 font-bold">No disponible</h1>
                                     @endif
-                                    <a href="#" class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">Explorar</a>
+                                    <a href="{{ route('observatories.show', [$project]) }}" class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">Explorar</a>
                                 </div>
                             </div>
                         @endif
