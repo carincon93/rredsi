@@ -31,16 +31,21 @@
                                     @else
                                     <h1 class="text-gray-300 font-bold">No disponible</h1>
                                     @endif
-                                    <a href="#" class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">Explorar</a>
+                                    <a href="#" class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">Ver mas</a>
                                 </div>
                             </div>
                         @endif
-                        <!-- determina el número de cards que se muestran comenzando en cero -->
-                        @break($loop->index == 6)
+                        <!-- determina el número de cards que se muestran -->
+                        @break($loop->iteration == 6)
                     @endforeach
+                    <!-- muentra un mensaje en caso de que no haya proyectos vigentes -->
+                    @if($projects == [])
+                        <div class="px-4 py-4">
+                            <h1 class="text-gray-900 text-base text-lg mt-3">No hay proyectos a visualizar. Ingrese a la sección de búsqueda de proyectos</h1>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
 </x-app-layout>

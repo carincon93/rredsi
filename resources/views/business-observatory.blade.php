@@ -35,11 +35,15 @@
                                     @else
                                     <h1 class="text-gray-300 font-bold">No disponible</h1>
                                     @endif
-                                    <a href="#" class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded ">Explorar</a>
+                                    <a href="#" class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded ">Ver mas</a>
                                 </div>
                             </div>
                         @endif
                     @endforeach
+                </div>
+                <!-- Links de paginación -->
+                <div class="px-4 py-2 mx-auto">
+                    <?php echo $projects->links(); ?>
                 </div>
             </div>
         </div>
