@@ -35,6 +35,8 @@
                                 </div>
                             </div>
                         @endif
+                        <!-- determina el número de cards que se muestran comenzando en cero -->
+                        @break($loop->index == 6)
                     @endforeach
                 </div>
             </div>
