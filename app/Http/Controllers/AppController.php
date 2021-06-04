@@ -51,7 +51,7 @@ class AppController extends Controller
     {
         $search         = $request->get('search');
         //Paginar por grupos de N projectos
-        $projects       = Project::simplePaginate(3);
+        $projects       = Project::Paginate(9);
 
         return view('business-observatory', compact('node', 'projects', 'search'));
     }

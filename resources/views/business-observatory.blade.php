@@ -16,20 +16,33 @@
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="ml-20 bg-white bg-opacity-25 grid grid-cols-1 md:grid-cols-2">
+                <div class="block m-5 object-center">
+                    <div class="inline-block m-4">
+                        <input class="appearance-none block bg-gray-100 text-gray-700 border border-blue-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Texto a buscar">
+                    </div>
+                    <div class="inline-block ,-4">
+                        <a href="{{ route('business-observatory') }}" class="text-center bg-transparent hover:bg-blue-900 text-blue-800 font-semibold hover:text-white py-2 px-4 border border-blue-900 hover:border-transparent rounded">
+                        Filtrar
+                        </a>
+                    </div>
+                    <div class="inline-block m-4">
+                        <a class="text-blue-800">Limpiar</a>
+                    </div>
+                </div>
+                <div class="ml-20 bg-white bg-opacity-25 grid grid-cols-1 md:grid-cols-3 block">
                     <!-- Crea una card por cada uno de los projectos activos y -->
                     @foreach ($projects as $project)
                         @if(!$project->is_privated)
-                            <div class="max-w-xs bg-gray-50 shadow-lg rounded-lg overflow-hidden my-10 ">
-                                <div class="px-4 py-2">
-                                    <h1 class="text-gray-900 font-bold text-lg mt-3"><?php echo($project->title)?></h1>
-                                    <p class="text-gray-600 text-base mt-3">{{ substr($project->abstract, 0 ,250) }}@if(count_chars($project->abstract) > 250)...@endif</p>
+                            <div class="max-w-xs bg-gray-50 shadow-lg rounded-lg overflow-hidden m-5 block ">
+                                <div class="px-4 py-2 h-35">
+                                    <h1 class="h-15 text-justify block text-gray-900 font-bold text-lg mt-3">{{ substr($project->title, 0 ,50) }}@if(count_chars($project->title) > 50)...@endif</h1>
+                                    <p class="h-15 text-justify block text-gray-600 text-base mt-3">{{ substr($project->abstract, 0 ,250) }}@if(count_chars($project->abstract) > 250)...@endif</p>
                                 </div>
                                 <img class="h-56 w-full object-cover mt-2" src="https://picsum.photos/200/300" alt="">
                                 @php
                                     $researchTeam = $project->researchTeams()->where('is_principal', 1)->first() ?? null;
                                 @endphp
-                                <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
+                                <div class="flex items-center justify-between px-4 py-2 bg-blue-900">
                                     @if($researchTeam)
                                     <h1 class="text-gray-300 font-bold">{{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->educationalInstitution->name }}</h1>
                                     @else
@@ -42,8 +55,8 @@
                     @endforeach
                 </div>
                 <!-- Links de paginación -->
-                <div class="px-4 py-2 mx-auto">
-                    <?php echo $projects->links(); ?>
+                <div class="block m-5 object-center grid">
+                    {{ $projects->onEachSide(5)->links() }}
                 </div>
             </div>
         </div>
