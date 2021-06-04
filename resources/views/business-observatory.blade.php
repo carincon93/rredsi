@@ -41,6 +41,10 @@
                         @endif
                     @endforeach
                 </div>
+                <!-- Links de paginación -->
+                <div class="px-4 py-2 mx-auto">
+                    <?php echo $projects->links(); ?>
+                </div>
             </div>
         </div>
     </div>

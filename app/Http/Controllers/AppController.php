@@ -34,8 +34,10 @@ class AppController extends Controller
     public function companyDashboard(Node $node, Request $request)
     {
         $search         = $request->get('search');
-        $projects       = Project::all();
-        //$allKeywords    = Project::allKeywords($node);
+
+        //Ordenar los proyectos desde el más reciente
+        $projects       = Project::all()->sortBy('created_at', SORT_REGULAR, true);
+        //$projects       = [];
 
         return view('dashboard-company', compact('node', 'projects', 'search'));
     }
@@ -48,8 +50,8 @@ class AppController extends Controller
     public function businessObservatory(Node $node, Request $request)
     {
         $search         = $request->get('search');
-        $projects       = Project::all();
-        //$allKeywords    = Project::allKeywords($node);
+        //Paginar por grupos de N projectos
+        $projects       = Project::simplePaginate(3);
 
         return view('business-observatory', compact('node', 'projects', 'search'));
     }
