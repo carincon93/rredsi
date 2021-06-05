@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Node;
 
 
 
@@ -51,6 +52,22 @@ class observatoryController extends Controller
         }
 
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  string  $buscar
+     * @return \Illuminate\Http\Response
+     */
+    public function result(Node $node, Request $request)
+    {        
+        $search= $request->get('txt-search');        
+        //Paginar por grupos de N projectos
+        $projects = Project::where('title','ILIKE','%'.$search.'%')->orwhere('abstract','ILIKE','%'.$search.'%')->orwhere('keywords','ILIKE','%'.$search.'%')->orderby('title')->get();
+        
+        return view('observatories.result', compact('node', 'projects','search'));
+    }
+
 
     /**
      * Display the specified resource.
@@ -125,5 +142,5 @@ class observatoryController extends Controller
             ->details('this is awesome')
             ->button('Go back to the home page', '#', 'primary');
         return view('test');
-    }
+    }    
 }

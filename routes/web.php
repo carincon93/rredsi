@@ -73,7 +73,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/business-observatory', [AppController::class, 'businessObservatory'])->name('business-observatory');
     // ? se manda aparte de el resource para evitar problemas en envio de datos//
     // Route::get('/notifications', [NotificationController::class, 'getAllNotifications'])->name('notifications');
-
+    
+    // ? ruta para acceder al observatorio //
+    Route::get('/result-observatory', [ObservatoryController::class, 'result'])->name('result-observatory');
+    
     // ? ruta para ver cada notificacion especifica //
     Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('notifications.show');
 

@@ -12,14 +12,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                 <div class="mt-8 text-2xl">
-                    Proyectos públicos
+                    Resultados de busqueda para: "{{$search}}"
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="block m-5 object-center">
                 <form method="GET" action="{{ route('result-observatory') }}">
                     <div class="inline-block m-4">
-                        <input class="appearance-none block bg-gray-100 text-gray-700 border border-blue-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" minlength="3" maxlength="30" id="txt-search" name="txt-search"type="text" placeholder="Texto a buscar" required>
+                        <input class="appearance-none block bg-gray-100 text-gray-700 border border-blue-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="txt-search" name="txt-search"type="text" placeholder="Texto a buscar" required>
                     </div>
                     <div class="inline-block m-4">
                         <button class="text-center bg-transparent hover:bg-blue-900 text-blue-800 font-semibold hover:text-white py-2 px-4 border border-blue-900 hover:border-transparent rounded">
@@ -52,10 +52,6 @@
                             </div>
                         @endif
                     @endforeach
-                </div>
-                <!-- Links de paginación -->
-                <div class="block m-5 object-center grid">
-                    {{ $projects->onEachSide(5)->links() }}
                 </div>
             </div>
         </div>
