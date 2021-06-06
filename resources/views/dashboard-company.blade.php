@@ -32,7 +32,7 @@
                                     @php
                                         $researchTeam = $project->researchTeams()->where('is_principal', 1)->first() ?? null;
                                     @endphp
-                                    <div class="flex items-center justify-between px-2 py-2 bg-gray-900">
+                                    <div class="flex items-center justify-between px-2 py-2 bg-blue-900">
                                         @if($researchTeam)
                                         <h1 class="text-gray-300 font-bold">{{ optional($researchTeam->researchGroup)->educationalInstitutionFaculty->educationalInstitution->name }}</h1>
                                         @else

@@ -60,12 +60,16 @@ class observatoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function result(Node $node, Request $request)
-    {        
-        $search= $request->get('txt-search');        
-        //Paginar por grupos de N projectos
-        $projects = Project::where('title','ILIKE','%'.$search.'%')->orwhere('abstract','ILIKE','%'.$search.'%')->orwhere('keywords','ILIKE','%'.$search.'%')->orderby('title')->get();
-        
+    {   
+        $search= $request->get('txt-search');
+        if (!is_null($search)) {                  
+            //Paginar por grupos de N projectos
+            $projects = Project::where('title','ILIKE','%'.$search.'%')->orwhere('abstract','ILIKE','%'.$search.'%')->orwhere('keywords','ILIKE','%'.$search.'%')->orderby('title')->get();
+        }else{
+            $projects =[];
+        }
         return view('observatories.result', compact('node', 'projects','search'));
+        
     }
 
 
