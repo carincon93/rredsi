@@ -444,12 +444,47 @@
                     </svg>
                     <span class="text-gray-700">{{ __('Blog de experiencias') }}</span>
                 </a>
-                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+
+
+
+                
+                <div x-data="{ open: false }">
+                <a @click="open = !open" class=" cursor-pointer mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    
                     <svg xmlns="http://www.w3.org/2000/svg" width="17.216" height="15.209" viewBox="0 0 17.216 15.209" class="mr-1/12 ml-1 text-black" style="width: 18px;">
                         <path id="Path_109" data-name="Path 109" d="M16.531,13.434a1.651,1.651,0,0,0-.844-.452l-1.971-.394a4.953,4.953,0,0,0-3.187.427l-.263.13a4.953,4.953,0,0,1-3.187.427l-1.594-.319A1.651,1.651,0,0,0,4,13.706M7.1,4h6.6l-.826.826V9.1a1.651,1.651,0,0,0,.484,1.167l4.128,4.128a1.651,1.651,0,0,1-1.168,2.818H4.478A1.651,1.651,0,0,1,3.311,14.39l4.128-4.128A1.651,1.651,0,0,0,7.923,9.1V4.826Z" transform="translate(-1.791 -3)" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                     </svg>
-                    <span class="text-gray-700">{{ __('Proveedores') }}</span>
-                </a>                
+                        <span class="text-gray-700">{{ __('Proveedores') }}</span>
+
+                    <span>
+                            <svg class="h-4 w-4" viewBox="-10 0 30 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path x-show="! open" d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;" ></path>
+                                <path x-show="open" d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                    </span>
+                    
+                </a>      
+
+                <div x-show="open" class="bg-gray-100">
+                
+
+                <a href="{{ route('products.index') }}" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17.216" height="15.209" viewBox="0 0 17.216 15.209" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                    </svg>
+                    <span class="text-gray-700">{{ __('Mis productos y servicios') }}</span>
+                </a>
+
+                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17.216" height="15.209" viewBox="0 0 17.216 15.209" class="mr-1/12 ml-1 text-black" style="width: 18px;">
+                    </svg>
+                    <span class="text-gray-700">{{ __('Buscar proveedores') }}</span>
+                </a>
+
+                </div>   
+            </div>
+                
+          
+
             @endif
         </nav>
     </div>

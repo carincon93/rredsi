@@ -37,7 +37,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BusinessIdeasController;
 use App\Http\Livewire\ModelForm;
 use App\Http\Controllers\ObservatoryController;
-
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/nodes/{node}/explorer/roles', [AppController::class, 'roles'])->name('nodes.explorer.roles');
     Route::get('/nodes/{node}/explorer/events', [AppController::class, 'events'])->name('nodes.explorer.events');
     // * fin ruta
+
 
     // ? ruta para la dashboard o panel de coordinador de nodo //
     Route::get('/dashboard', [AppController::class, 'dashboard'])->name('dashboard');
@@ -230,7 +231,9 @@ Route::middleware(['auth'])->group(function () {
         //'dashboard-company'                 => CompanyController::class,//
         // ? ruta para acceder a las ideas empresariales //
         'business-ideas'                    => BusinessIdeasController::class,
-
+        // ? ruta para acceder a mis productos y servicios //
+        'products'                          => ProductController::class,
+        
 
 
     ]);
