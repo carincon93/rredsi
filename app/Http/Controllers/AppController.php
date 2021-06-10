@@ -177,7 +177,7 @@ class AppController extends Controller
 
         return view('Explorer.EducationalTools.index-educational-tools', compact('node', 'educationalTools', 'search'));
     }
-    
+
     /**
      * Display a listing of the resource.
      *

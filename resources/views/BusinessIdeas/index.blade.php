@@ -15,7 +15,6 @@
             </div>
         </a>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg">
@@ -26,8 +25,54 @@
                     <x-slot name="secondTheadTitle">
                         {{ __('Descripción') }}
                     </x-slot>
+                    <x-slot name="thirdTheadTitle">
+                        {{ __('Empresa') }}
+                    </x-slot>
                     <x-slot name="tbodyData">
-
+                        @forelse ($business_ideas as $idea)
+                            <tr class="bg-white">
+                                <td>
+                                    <span>{{ $idea->name }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ substr($idea->description, 0 ,80) }}@if(count_chars($idea->description) > 80)...@endif</span>
+                                </td>
+                                <td>
+                                    <span>{{ optional($idea->business)->name }}</span>
+                                </td>
+                                <td class="py-2 text-left">
+                                    <div class="hidden sm:flex sm:items-center justify-around">
+                                        <x-jet-dropdown align="right" width="48">
+                                            <x-slot name="trigger">
+                                                <button class="flex items-center text-sm font-medium text-gray hover:text-blue-900 hover:border-gray-300 focus:outline-none focus:text-black focus:border-gray-300 transition duration-150 ease-in-out">
+                                                    <div class="ml-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-4 w-4">
+                                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                            </x-slot>
+                                            <!-- Editar permisos can y rutas Show,Edit,Delete -->
+                                            <x-slot name="content">
+                                                <x-jet-dropdown-link href="#">
+                                                    {{ __('Show') }}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="#">
+                                                    {{ __('Edit') }}
+                                                </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link onclick="#">
+                                                    {{ __('Delete') }}
+                                                </x-jet-dropdown-link>
+                                            </x-slot>
+                                        </x-jet-dropdown>
+                                    </div>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                    <p class="p-4">{{ __('No data recorded') }}</p>
+                            </tr>
+                        @endforelse
                     </x-slot>
                 </x-data-table>
             </div>
