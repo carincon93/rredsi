@@ -19,7 +19,14 @@
     </x-slot>
 
 
-    @if(Session::has('mensaje'))
+    
+
+
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
+
+        @if(Session::has('mensaje'))
     <div x-data="{ show: true }" x-show="show" class="container" id="alertbox">
         <div class="container flex items-center text-sm px-4 py-3 relative bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
             <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -44,10 +51,8 @@
     </div>
     @endif
 
+    <br>
 
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
             <div class="bg-white shadow-xl sm:rounded-lg ">
                 <x-data-table >
 
@@ -74,9 +79,6 @@
                     <x-slot name="tbodyData">
 
                     @foreach( $products as $product)
-
-              
-                    
 
 
                     <tr class="border-b border-gray-200 hover:bg-gray-100 text-sm text-gray-600" >

@@ -13,7 +13,7 @@
     </x-slot>
     
 
-    
+    <div class="max-w-7 mx-auto sm:px-6 lg:px-8 ">
     <div class=" content-center">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
