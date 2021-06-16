@@ -52,6 +52,9 @@
                 <x-data-table >
 
                 <div class="flex items-center justify-center">
+
+                
+                <div class="flex items-center justify-center">
                 
                     <x-slot name="firstTheadTitle" >
                     {{ __('Nombre') }}
@@ -72,10 +75,15 @@
 
                     @foreach( $products as $product)
 
+              
+                    
 
 
                     <tr class="border-b border-gray-200 hover:bg-gray-100 text-sm text-gray-600" >
-                                <td class="py-3 px-6 text-rig whitespace-nowrap " >
+
+                                
+
+                                <td class="py-3 px-2 text-rig whitespace-nowrap " >
                                     <div >
                                         
                                         <span>{{$product->Nombre}}</span>
@@ -152,8 +160,8 @@
     
     
     
+            {!! $products->links()!!}
 
-{!! $products->links()!!}
 </div>
 </div>
 </div>

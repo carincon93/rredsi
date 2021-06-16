@@ -78,6 +78,9 @@
     <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
           <div class="grid grid-cols-2">
+
+
+          <input type="hidden"  value="{{ $business->id }}" name="id_business" id="id_business">
             
               <div class="flex-auto w-full mb-1 text-xs space-y-2">
                 <label for="Nombre" class="block text-sm font-medium text-gray-700">
@@ -85,13 +88,12 @@
                 </label>
                 <div class="h-8 mt-1 flex rounded-md shadow-sm">
                   
-                  <input  class=" appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4" placeholder="Nombre del producto" name="Nombre" value="{{ isset($product->Nombre)?$product->Nombre:old('Nombre') }}" id="Nombre">
+                  <input  class=" appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4" placeholder="Nombre del producto" name="Nombre" value="{{ isset($product->Nombre)?$product->Nombre:old('Nombre') }}" data-error="" minlength="5" id="Nombre">
                 </div>
               </div>
               </div>
             
-
-
+                      
               <div class="col-span-3 sm:col-span-2">
               <div class="grid grid-cols-2 ">
                 <div class="flex-auto w-full mb-1 text-xs space-y-2">
@@ -99,7 +101,7 @@
 
                   <div class="  mt-1 flex rounded-md shadow-sm">
 
-                  <Textarea class=" text-justify w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4" placeholder="Descripción del producto" name="Descripcion" id="Descripcion" >{{isset($product->Descripcion)?$product->Descripcion:old('Descripcion')}}</Textarea>
+                  <Textarea class=" text-justify w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4" placeholder="Descripción del producto" name="Descripcion" data-error="" minlength="10" id="Descripcion" >{{isset($product->Descripcion)?$product->Descripcion:old('Descripcion')}}</Textarea>
 
 								</div>
               </div>
@@ -188,7 +190,7 @@
         
          
          
-        
+         
 
 
           <div class="flex justify-center content-center">

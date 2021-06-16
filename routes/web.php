@@ -38,6 +38,7 @@ use App\Http\Controllers\BusinessIdeasController;
 use App\Http\Livewire\ModelForm;
 use App\Http\Controllers\ObservatoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchProvidersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -233,6 +234,8 @@ Route::middleware(['auth'])->group(function () {
         'business-ideas'                    => BusinessIdeasController::class,
         // ? ruta para acceder a mis productos y servicios //
         'products'                          => ProductController::class,
+        // ? ruta para acceder a mis buscar proveedores //
+        'searchproviders'                   => SearchProvidersController::class,
         
 
 

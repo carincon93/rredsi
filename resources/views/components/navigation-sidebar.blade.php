@@ -474,7 +474,7 @@
                     <span class="text-gray-700">{{ __('Mis productos y servicios') }}</span>
                 </a>
 
-                <a href="#" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
+                <a href="{{ route('searchproviders.index') }}" class="mt-4 mb-4 mr-2 w-full flex items-center py-2 text-sm text-blue-900 hover:bg-gray-200 px-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 px-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17.216" height="15.209" viewBox="0 0 17.216 15.209" class="mr-1/12 ml-1 text-black" style="width: 18px;">
                     </svg>
                     <span class="text-gray-700">{{ __('Buscar proveedores') }}</span>

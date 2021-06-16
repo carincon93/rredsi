@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -18,12 +19,48 @@ class ProductController extends Controller
 
     public function index()
     {
-        $datos['products']=Product::paginate(10);
-        return view('Products.index',$datos);
+        
+        
+        $user = auth()->user();
+        $business = $user->business()->first();
+
+
+        $datos['products'] = DB::table('products')
+        ->join('businesses', 'businesses.id', '=', 'products.id_business')
+        ->select('products.*', 'businesses.name', 'businesses.cellphone_number', 'businesses.email', 'businesses.address')
+        ->where('products.id_business', '=', $business->id)
+        ->paginate(10);
+        
+        return view('Products.index',$datos, compact('business'));
+
+        
+
+
+        // $datos['products']=Product::paginate(10);
+
+        // $user = auth()->user();
+        // $business = $user->business()->first();
+        // return view('Products.index',$datos, compact('business'));
+       
+        
+        
+       
     }
 
     
-    
+      /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        
+        $product=Product::findOrFail($id);
+        return view('products.show', compact('product', ));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +68,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('Products.create');
+        // return view('Products.create');
+
+        $user = auth()->user();
+        $business = $user->business()->first();
+        return view('Products.create',compact('business'));
     }
 
     /**
@@ -72,17 +113,7 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $product=Product::findOrFail($id);
-        return view('products.show', compact('product'));
-    }
+  
 
     /**
      * Show the form for editing the specified resource.
@@ -92,8 +123,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $user = auth()->user();
+        $business = $user->business()->first();
         $product=Product::findOrFail($id);
-        return view('products.edit', compact('product'));
+        return view('products.edit', compact('product', 'business'));
     }
 
     /**
