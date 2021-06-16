@@ -107,9 +107,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'])->name('nodes.explorer.nodeInfo');
     // ? ruta notificacion para aplicar colaborar en un proyecto //
     Route::post('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification');
-    
+
     Route::put('company/{business}', [CompanyProfileController::class, 'update'])->name('company.update');
-    
+
+    // ? ruta para crear una nueva idea empresarial de la empresa logueada//
+    Route::put('business-ideas/create', [BusinessIdeas::class, 'create'])->name('businessIdea.create');
+
     // ? ruta para envio de notificacion de participacion en proyecto //
     Route::post('/notifications/send-to-participate', [NotificationController::class, 'sendToParticipate'])->name('notifications.sendToParticipate');
     // ? ruta para envio de notificacion de participacion de proyecto en un evento//
@@ -226,10 +229,9 @@ Route::middleware(['auth'])->group(function () {
         'observatories'                     => ObservatoryController::class,
         // ? ruta para el perfil empresarial //
         'company-profile'                 => CompanyProfileController::class,
-        // ? rutas de dashboard empresa //
-        //'dashboard-company'                 => CompanyController::class,//
         // ? ruta para acceder a las ideas empresariales //
         'business-ideas'                    => BusinessIdeasController::class,
+
 
 
 

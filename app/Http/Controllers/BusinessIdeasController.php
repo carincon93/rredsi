@@ -19,10 +19,27 @@ class BusinessIdeasController extends Controller
      */
     public function index()
     {
-        $user       = auth()->user();
-        $business_ideas      = BusinessIdeas::All();
+        $user                = auth()->user();
+        $business_ideas      = BusinessIdeas::Paginate(10);
         $business            = Business::All();
 
         return view('BusinessIdeas.index', compact('business_ideas','business'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $user                = auth()->user();
+        $user->business()->get();
+        $user_business = $user->business()->first();
+
+        return view('BusinessIdeas.create', compact('user_business'));
+    }
+
+
+
 }

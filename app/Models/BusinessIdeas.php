@@ -15,7 +15,7 @@ class BusinessIdeas extends Model
      * @var array
      */
     protected $fillable = [
-        'nit_business',
+        'business_id',
         'name',
         'description',
         'type',
@@ -31,7 +31,7 @@ class BusinessIdeas extends Model
     }
 
     public function business() {
-        return $this->belongsTo('App\Models\Business','nit_business', 'nit');
+        return $this->belongsTo('App\Models\Business','business_id', 'id');
     }
 
     public function replaceWithRelationshipModelName()
