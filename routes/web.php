@@ -39,6 +39,8 @@ use App\Http\Livewire\ModelForm;
 use App\Http\Controllers\ObservatoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchProvidersController;
+use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\ShowExperiencesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -227,7 +229,7 @@ Route::middleware(['auth'])->group(function () {
         // ? rutas para el observatorio de proyectos//
         'observatories'                     => ObservatoryController::class,
         // ? ruta para el perfil empresarial //
-        'company-profile'                 => CompanyProfileController::class,
+        'company-profile'                   => CompanyProfileController::class,
         // ? rutas de dashboard empresa //
         //'dashboard-company'                 => CompanyController::class,//
         // ? ruta para acceder a las ideas empresariales //
@@ -236,6 +238,11 @@ Route::middleware(['auth'])->group(function () {
         'products'                          => ProductController::class,
         // ? ruta para acceder a mis buscar proveedores //
         'searchproviders'                   => SearchProvidersController::class,
+
+        // ? ruta para acceder a Blog de experiencias //
+        'experiences'                   => ExperienceController::class,
+
+        'showexperiences'                   => ShowExperiencesController::class,
         
 
 

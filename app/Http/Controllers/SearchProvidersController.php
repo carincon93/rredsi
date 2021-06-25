@@ -29,7 +29,6 @@ class SearchProvidersController extends Controller
     
 
         $datos['products'] = DB::table('products')
-            
             ->join('businesses', 'businesses.id', '=', 'products.id_business')
             ->select('products.*', 'businesses.name', 'businesses.cellphone_number', 'businesses.email', 'businesses.address')
             ->paginate(10);
@@ -47,7 +46,6 @@ class SearchProvidersController extends Controller
      */
     public function show($id)
     { 
-        
         $product=Product::findOrFail($id);
         $business = Business::where('businesses.id','=', $product->id_business)->first();
         return view('searchproviders.show', compact('product','business'));

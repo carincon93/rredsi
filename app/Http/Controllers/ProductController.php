@@ -8,6 +8,8 @@ use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class ProductController extends Controller
 {
@@ -81,35 +83,31 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
 
-        $campos=[
-            'Nombre'=>'required|string|max:100',
-            'Descripcion'=>'required|string|max:100',
-            'Foto'=>'max:10000|mimes:jpg,png,',
-        ];
+        $product = new Product();
+        $product->Nombre                            = $request->get('Nombre');
+        $product->Descripcion                       = $request->get('Descripcion');
+        $product->id_business                       = $request->get('id_business');
 
-        $mensaje=[
-            'Descripcion.required'=>'La Descripción es requerida',
-            'Nombre.required'=>'El nombre es requerido'
-            
-        ];
-
-        $this->validate($request, $campos, $mensaje);
-
-
-        $datosProduct = request()->except('_token');
+        $file = $request->get('Foto');
 
         if ($request->hasFile('Foto')){
-            $datosProduct['Foto']=$request->file('Foto')->store('uploads','public');
+
+            $file=$request->file('Foto')->store('product-images','public');
+            $product->Foto = $file;
         }
-        Product::insert($datosProduct);
-        //return response()->json($datosProduct);
 
-        return redirect('products/create')->with('mensaje','Producto agregado con éxito');
+        
+      
+        if($product->save()){ 
 
+            return redirect()->back()->with('mensaje','Producto agregado con exito'); 
+        }else{
 
+            return redirect()->back()->with('mensaje','Hubo un error al agregar el producto');
+        }
 
     }
 
@@ -136,38 +134,33 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, Product $product)
     {
 
-        $campos=[
-            'Nombre'=>'required|string|max:100',
-            'Descripcion'=>'required|string|max:100',
-            'Foto'=>'max:10000|mimes:jpg,png,',
-        ];
-
-        $mensaje=[
-            'Descripcion.required'=>'La Descripción es requerida',
-            'Nombre.required'=>'El nombre es requerido'
-            
-        ];
-
-        $this->validate($request, $campos, $mensaje);
+        $product->Nombre                            = $request->get('Nombre');
+        $product->Descripcion                       = $request->get('Descripcion');
         
-        $datosProduct = request()->except('_token','_method');
+        $file = $request->get('Foto');
 
         if ($request->hasFile('Foto')){
-            $product=Product::findOrFail($id);
-            Storage::delete('public/'.$product->Foto);
-            $datosProduct['Foto']=$request->file('Foto')->store('uploads','public');
+            Storage::delete("public/$product->Foto");
+            $file=$request->file('Foto')->store('product-images','public');
+            $product->Foto = $file;
         }
 
-        Product::where('id','=',$id)->update($datosProduct);
-
-        $product=Product::findOrFail($id);
-        // return view('products.edit', compact('product'));
+        
 
 
-        return redirect('products')->with('mensaje','Producto editado con éxito');
+
+        if($product->save()){ 
+
+
+            return redirect()->back()->with('mensaje','Producto editado con éxito'); 
+        }else{
+
+            return redirect()->back()->with('mensaje','Hubo un error al editar el producto');
+        }
+
        
     }
 
@@ -183,12 +176,10 @@ class ProductController extends Controller
 
         $product=Product::findOrFail($id);
 
-        if(Storage::delete('public/'.$product->Foto)){
-            Product::destroy($id);
+        Storage::delete('public/'.$product->Foto);
 
-        }
+        Product::destroy($id);
 
-        
-       return redirect('products')->with('mensaje','Producto borrado con éxito');
+        return redirect('products')->with('mensaje','Producto borrado con éxito');
     }
 }

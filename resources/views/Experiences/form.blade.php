@@ -1,11 +1,11 @@
-<title>{{'Mis productos y servicios'}}</title>
+<title>{{'Mis experiencias'}}</title>
 <x-app-layout>
     <x-slot name="header">
         <div class="col-start-2 col-span-4 md:col-start-1 md:col-span-3 xl:col-start-1 xl:col-span-3">
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
             {{ $business->name }}
                 <span class="text-base sm:text-2xl block text-purple-300">
-                {{$modo}} producto o servicio
+                {{$modo}} experiencia
                 </span>
             </h2>
         </div>
@@ -17,6 +17,7 @@
     
     <div class="content-center">
     <div class="max-w-7 mx-auto sm:px-6 lg:px-8 ">
+
 
     @if(Session::has('mensaje'))
     <br>
@@ -43,7 +44,7 @@
         </div>
     </div>
     @endif
-
+  
 
     
 
@@ -72,7 +73,7 @@
             </span>
         </div>
     </div>
-   
+    
 
     @endforeach
     @endif
@@ -84,15 +85,15 @@
           <div class="grid grid-cols-2">
 
 
-          <input  type="hidden" value="{{ $business->id }}" name="id_business" id="id_business">
+          <input type="hidden"  value="{{ $business->id }}" name="id_business" id="id_business">
             
               <div class="flex-auto w-full mb-1 text-xs space-y-2">
-                <label for="Nombre" class="block text-sm font-medium text-gray-700">
-                  Nombre
+                <label for="Title" class="block text-sm font-medium text-gray-700">
+                  Titulo
                 </label>
                 <div class="h-8 mt-1 flex rounded-md shadow-sm">
                   
-                  <input  class=" appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4" placeholder="Nombre del producto" name="Nombre" value="{{ isset($product->Nombre)?$product->Nombre:old('Nombre') }}" id="Nombre">
+                  <input  class=" appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4" placeholder="Titulo de la experiencia" name="Title" value="{{ isset($experience->Title)?$experience->Title:old('Title') }}" data-error="" minlength="5" id="Title">
                 </div>
               </div>
               </div>
@@ -101,11 +102,11 @@
               <div class="col-span-3 sm:col-span-2">
               <div class="grid grid-cols-2 ">
                 <div class="flex-auto w-full mb-1 text-xs space-y-2">
-									<label for="Descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+									<label for="Description" class="block text-sm font-medium text-gray-700">Descripción</label>
 
                   <div class="  mt-1 flex rounded-md shadow-sm">
 
-                  <Textarea class=" text-justify w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4" placeholder="Descripción del producto" name="Descripcion" id="Descripcion" >{{isset($product->Descripcion)?$product->Descripcion:old('Descripcion')}}</Textarea>
+                  <Textarea class=" text-justify w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4" placeholder="Descripción de la experiencia" name="Description" data-error="" minlength="10" id="Description" >{{isset($experience->Description)?$experience->Description:old('Description')}}</Textarea>
 
 								</div>
               </div>
@@ -117,20 +118,20 @@
  
             <div>
               <label class="block text-sm font-medium text-gray-700">
-                Foto
+                Imagen
               </label>
   
               
       
-                  @if(isset($product->Foto))
+                  @if(isset($experience->Image))
            
                   <div class="flex space-x-3 justifycontent-center" >
               <div class="mt-1 w-40  flex justify-center px-3 pt-3 pb-3 border-2 border-gray-300 border rounded-md">
                   <p class="text-xs text-gray-500 ">  
                         <div class="m-auto">
                             <div  class="text-center text-xs text-gray-500 flex-auto w-full mb-1 space-y-2 ">
-                              <img  src="{{asset('storage/').'/'.$product->Foto}}">
-                              <span class=" inline-block align-text-bottom ...">Foto actual</span>
+                              <img  src="{{asset('storage').'/'.$experience->Image}}">
+                              <span class=" inline-block align-text-bottom ...">Imagen actual</span>
                             </div>
                         </div>
                   </p>
@@ -145,7 +146,7 @@
                         <div class="m-auto">
                               <div  class="text-center text-xs text-gray-500 flex-auto w-full mb-1 space-y-2 ">
                                   <img id="preimage">
-                                  <span class=" inline-block align-text-bottom ...">Previsualización de nueva foto</span>
+                                  <span class=" inline-block align-text-bottom ...">Previsualización de nueva Imagen</span>
                               </div>
                         </div>
                         </div>
@@ -175,10 +176,10 @@
                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                   <div class="flex text-sm text-gray-600">
-                    <label for="Foto" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                    <label for="Image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                       <span >Cargar archivo</span>  
 
-                      <input id="Foto" name="Foto" type="file" class="sr-only" onchange="loadfile(event)">                      
+                      <input id="Image" name="Image" type="file" class="sr-only" accept=".jpg,.png" onchange="loadfile(event)">                      
                      
                     </label>
                   </div>
@@ -202,7 +203,7 @@
         <tbody>
             <tr>
                 <td>
-                    <a href="{{url('products/')}}">
+                    <a href="{{url('experiences/')}}">
                     <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-900 group-hover:text-blue-500 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                         <div class="flex justify-center content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="transform transition-transform duration-500 ease-in-out" width="24" height="15" fill="currentColor" viewBox="0 -2 24 24" stroke="currentColor">
@@ -217,6 +218,7 @@
   
                             <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-400 group-hover:text-blue-300 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">   
                                 <div class="flex justify-center content-center">
+                                    
                                 <button type="submit"> {{$modo}} </button>
                                 </div>    
                             </div>                            
