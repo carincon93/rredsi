@@ -111,7 +111,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('company/{business}', [CompanyProfileController::class, 'update'])->name('company.update');
 
     // ? ruta para crear una nueva idea empresarial de la empresa logueada//
-    Route::put('business-ideas/create', [BusinessIdeas::class, 'create'])->name('businessIdea.create');
+    //Route::put('business-ideas/create', [BusinessIdeas::class, 'create'])->name('businessIdea.create');
 
     // ? ruta para envio de notificacion de participacion en proyecto //
     Route::post('/notifications/send-to-participate', [NotificationController::class, 'sendToParticipate'])->name('notifications.sendToParticipate');
@@ -230,10 +230,11 @@ Route::middleware(['auth'])->group(function () {
         // ? ruta para el perfil empresarial //
         'company-profile'                 => CompanyProfileController::class,
         // ? ruta para acceder a las ideas empresariales //
-        'business-ideas'                    => BusinessIdeasController::class,
-
-
-
+        //'business-ideas'                    => BusinessIdeasController::class,
 
     ]);
+
+    // ? rutas para acceder a las ideas empresariales //
+    Route::resource('business-ideas', BusinessIdeasController::class);
+
 });
