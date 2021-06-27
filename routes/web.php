@@ -110,9 +110,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('company/{business}', [CompanyProfileController::class, 'update'])->name('company.update');
 
-    // ? ruta para crear una nueva idea empresarial de la empresa logueada//
-    //Route::put('business-ideas/create', [BusinessIdeas::class, 'create'])->name('businessIdea.create');
-
     // ? ruta para envio de notificacion de participacion en proyecto //
     Route::post('/notifications/send-to-participate', [NotificationController::class, 'sendToParticipate'])->name('notifications.sendToParticipate');
     // ? ruta para envio de notificacion de participacion de proyecto en un evento//
@@ -235,6 +232,19 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     // ? rutas para acceder a las ideas empresariales //
-    Route::resource('business-ideas', BusinessIdeasController::class);
+    Route::resource('business-ideas', BusinessIdeasController::class, [
+        'names'=>[
+            'index'   => 'business-ideas.index',
+            'show'    => 'business-ideas.show',
+            'edit'    => 'business-ideas.edit',
+            'update'  => 'business-ideas.update',
+            'create'  => 'business-ideas.create',
+            'store'   => 'business-ideas.store',
+            ]
+        ]);
+
+    // ? ruta para guardar una nueva idea empresarial de la empresa logueada//
+    // Route::post('business-ideas/store', [BusinessIdeasController::class, 'store'])->name('business-ideas.store');
+
 
 });

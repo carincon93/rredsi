@@ -28,10 +28,10 @@ class BusinessIdeasRequest extends FormRequest
             'name'              => 'required|string|max:191',
             'description'       => 'required|string|max:5000',
             'type'              => 'required|string|max:191',
-            'have_tools'        => 'boolean',
-            'how_many_tools'    => 'required|integer|min:0|max:9999999999',
-            'have_money'        => 'boolean',
-            'how_many_money'    => 'required|integer|min:0|max:9999999999',
+            //'have_tools'        => 'boolean',
+            //'how_many_tools'    => 'required|integer|min:0|max:9999999999',
+            //'have_money'        => 'boolean',
+            //'how_many_money'    => 'required|integer|min:0|max:9999999999',
             'condition'         => 'required|string|max:191',
         ];
     } else {
@@ -39,10 +39,10 @@ class BusinessIdeasRequest extends FormRequest
             'name'              => 'required|string|max:191',
             'description'       => 'required|string|max:5000',
             'type'              => 'required|string|max:191',
-            'have_tools'        => 'boolean',
-            'how_many_tools'    => 'required|integer|min:0|max:9999999999',
-            'have_money'        => 'boolean',
-            'how_many_money'    => 'required|integer|min:0|max:9999999999',
+            //'have_tools'        => 'boolean',
+            //'how_many_tools'    => 'required|integer|min:0|max:9999999999',
+            //'have_money'        => 'boolean',
+            //'how_many_money'    => 'required|integer|min:0|max:9999999999',
             'condition'         => 'required|string|max:191',
         ];
     }

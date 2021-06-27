@@ -19,7 +19,7 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ Route ('business-ideas.store')}}">
+                <form method="POST" action="{{ Route ('business-ideas.store',[$user_business->id])}}">
                     @csrf
 
                     <div class="mt-4">

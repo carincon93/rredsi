@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Business;
 use App\Models\User;
-use App\Models\Businessideas;
+use App\Models\BusinessIdeas;
 use App\Http\Requests\BusinessIdeasRequest;
 
 
@@ -46,8 +46,13 @@ class BusinessIdeasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(BusinessIdeasRequest $request, BusinessIdeas $business_idea)
+    public function store(BusinessIdeasRequest $request)
     {
+
+        $user          = auth()->user();
+        $user_business = $user->business()->first();
+
+        $business_idea = New BusinessIdeas;
 
         $business_idea->business_id     = $user_business->id;
         $business_idea->name            = $request->get('name');
@@ -59,10 +64,12 @@ class BusinessIdeasController extends Controller
         $business_idea->how_many_money  = null;
         $business_idea->condition       = $request->get('condition');
 
-        $business_idea->save();
 
-        return redirect()->route('business-ideas.index')
-        ->with('success', 'La idea fue creada correctamente');
+        if($business_idea->save()){
+            return redirect()->route('business-ideas.index')->with('success', 'La idea fue creada correctamente');
+        } else{
+            return redirect()->route('business-ideas.create')->with('success', 'Hubo un error al momento de crear la idea');
+        }
 
     }
 
