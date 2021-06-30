@@ -20,21 +20,28 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        $datos['experiences'] = DB::table('experiences')
-            
-            ->join('businesses', 'businesses.id', '=', 'experiences.id_business')
-            ->select('experiences.*', 'businesses.name', 'businesses.cellphone_number', 'businesses.email', 'businesses.address')
-            ->paginate(10);
+          
+        $user = auth()->user();
+        $business = $user->business()->first();
 
-        return view('experiences.index',$datos);
+
+        $datos['experiences'] = DB::table('experiences')
+        ->join('businesses', 'businesses.id', '=', 'experiences.id_business')
+        ->select('experiences.*', 'businesses.name', 'businesses.cellphone_number', 'businesses.email', 'businesses.address')
+        ->where('experiences.id_business', '=', $business->id)
+        ->paginate(10);
+        
+        return view('experiences.index',$datos, compact('business'));
+
     }
 
 
     public function show($id)
     { 
-        
+
         $experience=Experience::findOrFail($id);
         $business = Business::where('businesses.id','=', $experience->id_business)->first();
+
         return view('experiences.show', compact('experience','business'));
     }
 

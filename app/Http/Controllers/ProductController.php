@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 
 class ProductController extends Controller
@@ -35,18 +36,13 @@ class ProductController extends Controller
         
         return view('Products.index',$datos, compact('business'));
 
-        
-
-
+    
         // $datos['products']=Product::paginate(10);
 
         // $user = auth()->user();
         // $business = $user->business()->first();
         // return view('Products.index',$datos, compact('business'));
-       
-        
-        
-       
+        //    
     }
 
     
