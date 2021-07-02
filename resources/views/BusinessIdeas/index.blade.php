@@ -5,7 +5,7 @@
             <h2 class="font-display text-white text-center md:text-left text-2xl leading-9 font-semibold sm:text-3xl sm:leading-9">
                 {{ __('Mis ideas') }}
                 <span class="text-base sm:text-2xl block text-purple-300">
-                    Lista de ideas empresariales
+                    Lista de ideas empresariales de {{$business->name}}
                 </span>
             </h2>
         </div>
@@ -26,10 +26,10 @@
                         {{ __('Descripción') }}
                     </x-slot>
                     <x-slot name="thirdTheadTitle">
-                        {{ __('Empresa') }}
+                        {{ __('Condición') }}
                     </x-slot>
                     <x-slot name="tbodyData">
-                        @forelse ($business_ideas as $idea)
+                        @forelse ($ideas as $idea)
                             <tr class="bg-white">
                                 <td>
                                     <span>{{ $idea->name }}</span>
@@ -38,7 +38,8 @@
                                     <span>{{ substr($idea->description, 0 ,80) }}@if(count_chars($idea->description) > 80)...@endif</span>
                                 </td>
                                 <td>
-                                    <span>{{ optional($idea->business)->name }}</span>
+                                    <span>{{ $idea->condition }}</span>
+                                    {{-- optional($idea->business)->name --}}
                                 </td>
                                 <td class="py-2 text-left">
                                     <div class="hidden sm:flex sm:items-center justify-around">
@@ -75,7 +76,7 @@
                         @endforelse
                     </x-slot>
                 </x-data-table>
-                {{ $business_ideas->links()}}
+                {{ $ideas->links()}}
             </div>
         </div>
     </div>

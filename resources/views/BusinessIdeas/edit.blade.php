@@ -19,21 +19,22 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="#">
+                <form method="POST" action="{{ Route ('business-ideas.update',[$idea->id])}}">
                     @csrf
-
+                    @method('PUT')
+                    {{--Nombre --}}
                     <div class="mt-4">
                         <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block mt-1 w-full" type="text" max="191" name="name" value="{{ old('name') ?? $idea->name }}" required />
                         <x-jet-input-error for="name" class="mt-2" />
                     </div>
-
+                    {{--Descripcion --}}
                     <div class="mt-4">
                         <x-jet-label class="mb-4" for="description" value="{{ __('Description') }}" />
                         <textarea rows="20" id="description" name="description" class="form-textarea border-0 w-full" value="{{ old('description') }}" >{{ old('description') ?? $idea->description }}</textarea>
                         <x-jet-input-error for="description" class="mt-2" />
                     </div>
-
+                    {{--Tipo --}}
                     <div class="mt-4">
                         <x-jet-label class="mb-4" for="type" value="{{ __('Type') }}" />
                         <select id="type" name="type" class="form-select w-full" required >
@@ -44,7 +45,45 @@
                         </select>
                         <x-jet-input-error for="type" class="mt-2" />
                     </div>
-
+                    {{--Tiene o no herramientas --}}
+                    <div class="block mt-4">
+                        <x-jet-label class="mb-4" for="have_tools" value="{{ __('Tiene herramientas') }}" />
+                        <label for="have_tools_yes" class="flex items-center">
+                            <input id="have_tools_yes" value="1" type="radio" class="form-radio" name="have_tools" {{ old('have_tools') == 1 ? 'checked' : '' }}>
+                            <span class="ml-2 text-sm text-gray-600">{{ __('Yes') }}</span>
+                        </label>
+                        <label for="have_tools_no" class="flex items-center">
+                            <input id="have_tools_no" value="0" type="radio" class="form-radio" name="have_tools" {{ old('have_tools') != null && old('have_tools')  == 0 ? 'checked' : '' }}>
+                            <span class="ml-2 text-sm text-gray-600">{{ __('No') }}</span>
+                        </label>
+                        <x-jet-input-error for="is_enabled" class="mt-2" />
+                    </div>
+                    {{--Cuantas herramientas tiene --}}
+                    <div class="mt-4">
+                        <x-jet-label class="mb-4" for="tools" value="{{ __('Con cuántas herramientas cuenta') }}" />
+                        <x-jet-input id="tools" class="block mt-1 w-full" type="number" max="191" name="tools" value="{{ old('tools') ?? $idea->how_many_tools }}"/>
+                        <x-jet-input-error for="tools" class="mt-2" />
+                    </div>
+                    {{--Tiene o no presupuesto --}}
+                    <div class="block mt-4">
+                        <x-jet-label class="mb-4" for="have_money" value="{{ __('Tiene Presupuesto') }}" />
+                        <label for="have_money_yes" class="flex items-center">
+                            <input id="have_money_yes" value="1" type="radio" class="form-radio" name="have_money" {{ old('have_money') == 1 ? 'checked' : '' }}>
+                            <span class="ml-2 text-sm text-gray-600">{{ __('Yes') }}</span>
+                        </label>
+                        <label for="have_money_no" class="flex items-center">
+                            <input id="have_money_no" value="0" type="radio" class="form-radio" name="have_money" {{ old('have_money') != null && old('have_money')  == 0 ? 'checked' : '' }}>
+                            <span class="ml-2 text-sm text-gray-600">{{ __('No') }}</span>
+                        </label>
+                        <x-jet-input-error for="is_enabled" class="mt-2" />
+                    </div>
+                    {{--De cuanto es el presupuesto --}}
+                    <div class="mt-4">
+                        <x-jet-label class="mb-4" for="money" value="{{ __('Monto para desarrollar la idea') }}" />
+                        <x-jet-input id="money" class="block mt-1 w-full" type="number" name="money" value="{{ old('money') ?? $idea->how_many_money }}"/>
+                        <x-jet-input-error for="money" class="mt-2" />
+                    </div>
+                    {{--Condición --}}
                     <div class="mt-4">
                         <x-jet-label class="mb-4" for="condition" value="{{ __('Condición') }}" />
                         <select id="condition" name="condition" class="form-select w-full" required >

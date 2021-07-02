@@ -20,11 +20,12 @@ class BusinessIdeasController extends Controller
      */
     public function index()
     {
-        $user                = auth()->user();
-        $business_ideas      = BusinessIdeas::Paginate(10);
-        $business            = Business::All();
+        $user       = auth()->user();
+        $business   = $user->business()->first();;
+        $ideas      = BusinessIdeas::where('business_id','=',$business->id)->Paginate(10);
 
-        return view('BusinessIdeas.index', compact('business_ideas','business'));
+
+        return view('BusinessIdeas.index', compact('ideas','business'));
     }
 
     /**
@@ -58,10 +59,10 @@ class BusinessIdeasController extends Controller
         $business_idea->name            = $request->get('name');
         $business_idea->description     = $request->get('description');
         $business_idea->type            = $request->get('type');
-        $business_idea->have_tools      = null;
-        $business_idea->how_many_tools  = null;
-        $business_idea->have_money      = null;
-        $business_idea->how_many_money  = null;
+        $business_idea->have_tools      = $request->get('have_tools');
+        $business_idea->how_many_tools  = $request->get('tools');
+        $business_idea->have_money      = $request->get('have_money');
+        $business_idea->how_many_money  = $request->get('money');
         $business_idea->condition       = $request->get('condition');
 
 
@@ -88,6 +89,30 @@ class BusinessIdeasController extends Controller
         return view('BusinessIdeas.edit', compact('idea','user_business'));
     }
 
+
+    public function update(BusinessIdeasRequest $request, BusinessIdeas $idea)
+    {
+        $user          = auth()->user();
+        $user_business = $user->business()->first();
+
+        $idea->business_id     = $user_business->id;
+        $idea->name            = $request->get('name');
+        $idea->description     = $request->get('description');
+        $idea->type            = $request->get('type');
+        $idea->have_tools      = $request->get('have_tools');
+        $idea->how_many_tools  = $request->get('tools');
+        $idea->have_money      = $request->get('have_money');
+        $idea->how_many_money  = $request->get('money');
+        $idea->condition       = $request->get('condition');
+
+
+        if($idea->save()){
+
+        return redirect()->back()->with('status', 'Actualización exitosa');
+        }else{
+            return redirect()->back()->with('status','Hubo probema al guardar');
+        }
+    }
     /**
      * Display a listing of the resource.
      *
