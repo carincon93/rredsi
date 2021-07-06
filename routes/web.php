@@ -203,6 +203,25 @@ Route::middleware(['auth'])->group(function () {
         ]
     ]);
 
+    // ? ruta para acceder a mis experiencias//  
+    Route::resource('/experiences', ExperienceController::class,[
+        'names'=>[
+            'edit'   => 'experiences.edit',
+            'show'   => 'experiences.show',
+            'destroy'   => 'experiences.destroy',
+            'index'  => 'experiences.index',
+            'store'  => 'experiences.store',
+        ]
+    ]);
+
+    // ? ruta para acceder a buscador de experiencias //  
+    Route::resource('/showexperiences', ShowExperiencesController::class,[
+        'names'=>[
+            'show'   => 'showexperiences.show',
+            'index'  => 'showexperiences.index',
+        ]
+    ]);
+
 
     // ! rutas resources de acceso rapido a tablas//
     Route::resources([
@@ -254,8 +273,5 @@ Route::middleware(['auth'])->group(function () {
         //'dashboard-company'                 => CompanyController::class,//
         // ? ruta para acceder a las ideas empresariales //
         'business-ideas'                    => BusinessIdeasController::class,
-        // ? ruta para acceder a Blog de experiencias //
-        'experiences'                   => ExperienceController::class,
-        'showexperiences'                   => ShowExperiencesController::class,  
     ]);
 });

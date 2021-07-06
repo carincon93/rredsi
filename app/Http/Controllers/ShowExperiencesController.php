@@ -21,20 +21,17 @@ class ShowExperiencesController extends Controller
     public function index()
     {
 
-        // $datos['experiences']=experience::paginate(10);
-        
-        // $user = auth()->user();
-        // $business = $user->business()->first();
-        // return view('ShowExperiences.index',$experience);
-
-    
+        $user = auth()->user();
+        $business = $user->business()->first();
+        $experience = new Experience();
+        $this->authorize('viewAny',[Experience::class, $experience]);
 
         $datos['experiences'] = DB::table('experiences')
             ->join('businesses', 'businesses.id', '=', 'experiences.id_business')
             ->select('experiences.*', 'businesses.name', 'businesses.cellphone_number', 'businesses.email', 'businesses.address')
             ->paginate(10);
 
-            return view('showexperiences.index',$datos);
+        return view('showexperiences.index',$datos);
        
     }
   
@@ -47,7 +44,10 @@ class ShowExperiencesController extends Controller
      */
     public function show($id)
     { 
-        $experience=experience::findOrFail($id);
+        $user = auth()->user();
+        $business = $user->business()->first();
+        $experience=Experience::findOrFail($id);
+        $this->authorize('view',[Experience::class, $experience]);
         $business = Business::where('businesses.id','=', $experience->id_business)->first();
         return view('ShowExperiences.show', compact('experience','business'));
     }

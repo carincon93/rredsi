@@ -39,8 +39,7 @@ class Experience extends Model
         //
     ];
 
-    public function replaceWithRelationshipModelName()
-    {
-        return $this->belongsTo('App\Models\replaceWithRelationshipModelName');
+    public function authors($id_experience,$id_business) {
+        return $this->where([['id','=',$id_experience], ['id_business','=',$id_business]])->exists();
     }
 }

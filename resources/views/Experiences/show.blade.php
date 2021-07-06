@@ -11,7 +11,7 @@
         </div>
         
     </x-slot>
-    
+    @can('show_experience')    
 
     <div class="max-w-7 mx-auto sm:px-6 lg:px-8 ">
     <div class=" content-center">
@@ -128,6 +128,7 @@
                     </form>
    
 </div>
+@endcan
 
 
 

@@ -21,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Node' => 'App\Policies\NodePolicy',
         'App\Models\Project' => 'App\Policies\ProjectPolicy',
         'App\Models\Product' => 'App\Policies\ProductPolicy',
+        'App\Models\Experience' => 'App\Policies\ExperiencePolicy',
         'App\Models\ProjectType' => 'App\Policies\ProjectTypePolicy',
         'App\Models\ResearchGroup' => 'App\Policies\ResearchGroupPolicy',
         'App\Models\ResearchLine' => 'App\Policies\ResearchLinePolicy',

@@ -20,28 +20,21 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-          
         $user = auth()->user();
         $business = $user->business()->first();
-
-
-        $datos['experiences'] = DB::table('experiences')
-        ->join('businesses', 'businesses.id', '=', 'experiences.id_business')
-        ->select('experiences.*', 'businesses.name', 'businesses.cellphone_number', 'businesses.email', 'businesses.address')
-        ->where('experiences.id_business', '=', $business->id)
-        ->paginate(10);
-        
-        return view('experiences.index',$datos, compact('business'));
-
+        $experience = new Experience();
+        $this->authorize('viewAny',[Experience::class, $experience]); 
+        $experiences = Experience::where('id_business', '=', $business->id)->paginate(10);         
+        return view('experiences.index', compact('business', 'experiences'));
     }
 
 
-    public function show($id)
-    { 
+    public function show(Experience $experience)    { 
 
-        $experience=Experience::findOrFail($id);
+        $user = auth()->user();
+        $business = $user->business()->first();
+        $this->authorize('view', [Experience::class, $experience]);         
         $business = Business::where('businesses.id','=', $experience->id_business)->first();
-
         return view('experiences.show', compact('experience','business'));
     }
 
@@ -86,19 +79,19 @@ class ExperienceController extends Controller
 
     }
 
-  
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $experience=Experience::findOrFail($id);
-        $business = Business::where('businesses.id','=', $experience->id_business)->first();
-        return view('experiences.edit', compact('experience','business'));
+    public function edit(Experience $experience)
+    {        
+        $user = auth()->user();
+        $business = $user->business()->first();     
+        //error_log('aqui llego 1 ');
+        $this->authorize('update', [Experience::class, $experience]);      
+        return view('experiences.edit', compact('experience', 'business'));
     }
 
     /**
@@ -141,17 +134,16 @@ class ExperienceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\experience  $experience
+     * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Experience $experience)
     {
-
-        $experience=Experience::findOrFail($id);
-
+        $user = auth()->user();
+        $business = $user->business()->first();
+        $this->authorize('delete', [Experience::class, $experience]);
         Storage::delete('public/'.$experience->Image);
-        Experience::destroy($id);
-
+        Experience::destroy($experience->id);
        return redirect('experiences')->with('mensaje','experiencia borrada con éxito');
     }
 }
