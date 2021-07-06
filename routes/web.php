@@ -37,7 +37,10 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BusinessIdeasController;
 use App\Http\Livewire\ModelForm;
 use App\Http\Controllers\ObservatoryController;
-
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchProvidersController;
+use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\ShowExperiencesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/nodes/{node}/explorer/roles', [AppController::class, 'roles'])->name('nodes.explorer.roles');
     Route::get('/nodes/{node}/explorer/events', [AppController::class, 'events'])->name('nodes.explorer.events');
     // * fin ruta
+
 
     // ? ruta para la dashboard o panel de coordinador de nodo //
     Route::get('/dashboard', [AppController::class, 'dashboard'])->name('dashboard');
@@ -182,6 +186,46 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
 
+    // ? ruta para acceder a mis productos y servicios //  
+    Route::resource('/products', ProductController::class,[
+        'names'=>[
+            'edit'   => 'products.edit',
+            'show'   => 'products.show',
+            'destroy'   => 'products.destroy',
+            'index'  => 'products.index',
+            'store'  => 'products.store'
+
+        ]
+    ]);
+
+    // ? ruta para acceder a mis productos y servicios //  
+    Route::resource('/searchproviders', SearchProvidersController::class,[
+        'names'=>[
+            'show'   => 'searchproviders.show',
+            'index'  => 'searchproviders.index',
+        ]
+    ]);
+
+    // ? ruta para acceder a mis experiencias//  
+    Route::resource('/experiences', ExperienceController::class,[
+        'names'=>[
+            'edit'   => 'experiences.edit',
+            'show'   => 'experiences.show',
+            'destroy'   => 'experiences.destroy',
+            'index'  => 'experiences.index',
+            'store'  => 'experiences.store',
+        ]
+    ]);
+
+    // ? ruta para acceder a buscador de experiencias //  
+    Route::resource('/showexperiences', ShowExperiencesController::class,[
+        'names'=>[
+            'show'   => 'showexperiences.show',
+            'index'  => 'showexperiences.index',
+        ]
+    ]);
+
+
     // ! rutas resources de acceso rapido a tablas//
     Route::resources([
         // ? rutas  de usuarios de sistema//
@@ -214,7 +258,6 @@ Route::middleware(['auth'])->group(function () {
         'nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs' => ResearchOutputController::class,
         // ? rutas de usuarios pertenecientes a cada facultad//
         'nodes.educational-institutions.faculties.users'                                                    => EducationalInstitutionUserController::class,
-
         // ? rutas de areas de conocimiento//
         'knowledge-areas'                   => KnowledgeAreaController::class,
         // ? rutas de sub-areas de conocimiento//
@@ -228,13 +271,10 @@ Route::middleware(['auth'])->group(function () {
         // ? rutas para el observatorio de proyectos//
         'observatories'                     => ObservatoryController::class,
         // ? ruta para el perfil empresarial //
-        'company-profile'                 => CompanyProfileController::class,
+        'company-profile'                   => CompanyProfileController::class,
         // ? rutas de dashboard empresa //
         //'dashboard-company'                 => CompanyController::class,//
         // ? ruta para acceder a las ideas empresariales //
         'business-ideas'                    => BusinessIdeasController::class,
-
-
-
     ]);
 });

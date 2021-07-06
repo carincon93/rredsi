@@ -24,8 +24,5 @@ class Business extends Model
         'data_authorization',
     ];
 
-
-    public function user() {
-        return $this->hasOne('App\Models\User', 'nit_business');
-    }
+   
 }
