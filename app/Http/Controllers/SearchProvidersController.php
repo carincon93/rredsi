@@ -18,23 +18,16 @@ class SearchProvidersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-
-        // $datos['products']=Product::paginate(10);
-        
-        // $user = auth()->user();
-        // $business = $user->business()->first();
-        // return view('searchproviders.index',$product);
-
-    
-
+    { 
+        $user = auth()->user();
+        $business = $user->business()->first();
+        $product = new Product();
+        $this->authorize('viewAny',[Product::class, $product]); 
         $datos['products'] = DB::table('products')
-            ->join('businesses', 'businesses.id', '=', 'products.id_business')
-            ->select('products.*', 'businesses.name', 'businesses.cellphone_number', 'businesses.email', 'businesses.address')
-            ->paginate(10);
-
-            return view('searchproviders.index',$datos);
-       
+        ->join('businesses', 'businesses.id', '=', 'products.id_business')
+        ->select('products.*', 'businesses.name', 'businesses.cellphone_number', 'businesses.email', 'businesses.address')
+        ->paginate(10);
+        return view('searchproviders.index',$datos);      
     }
   
 
@@ -45,8 +38,11 @@ class SearchProvidersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    { 
+    {
+        $user = auth()->user();
+        $business = $user->business()->first();
         $product=Product::findOrFail($id);
+        $this->authorize('view',[Product::class, $product]); 
         $business = Business::where('businesses.id','=', $product->id_business)->first();
         return view('searchproviders.show', compact('product','business'));
     }

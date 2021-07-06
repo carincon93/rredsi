@@ -22,6 +22,8 @@ class Product extends Model
         
         ];
     
-   
+    public function authors($id_product,$id_business) {
+        return $this->where([['id','=',$id_product], ['id_business','=',$id_business]])->exists();
+    }
 
 }

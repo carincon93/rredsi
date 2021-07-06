@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Product;
 use App\Models\User;
 
+
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProductPolicy
@@ -17,44 +18,21 @@ class ProductPolicy
      * @return mixed
      */
     public function viewAny(User $user)
-    {
-       
+    {       
         if($user->hasPermissionTo('index_product')){
             return true;
-        }
-        
+        }        
         return false;
     }
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
-     * @return mixed
-     */
-    public function view(User $user, Product $product)
-    {
-        if($product->authors()->where('user_id', $user->id)->first()){
-            return true;
-        }
-
-        if($user->hasPermissionTo('show_product')){
-            return true;
-        }
-            return false;
-        
-    }
-
+    
     /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
-    {
-        
-
+    public function create(User $user, Product $product)
+    {        
         if($user->hasPermissionTo('create_product')){
             return true;
         }
@@ -71,14 +49,42 @@ class ProductPolicy
      */
     public function update(User $user, Product $product)
     {
-       
-        if($product->authors()->where('user_id', $user->id)->first() && $user->hasPermissionTo('edit_product')){
+        $business = $user->business()->first(); 
+        if($product->authors($product->id,$business->id) && $user->hasPermissionTo('edit_product')){
             return true;
         }
+        return false;
+    }
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Product  $Product
+     * @return mixed
+     */
+    public function view(User $user, Product $product)
+    {
+        if($user->hasPermissionTo('show_product')){
+            return true;
+        }
+            return false;
+        
+    }
 
+    /**
+     * Determine whether the user can destroy the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Product  $Product
+     * @return mixed
+     */
+    public function delete(User $user, Product $product)
+    {
+        $business = $user->business()->first(); 
+        if($product->authors($product->id,$business->id) && $user->hasPermissionTo('destroy_product')){
+            return true;
+        }
         return false;
     }
 
-
-   
 }

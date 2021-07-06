@@ -183,6 +183,27 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
 
+    // ? ruta para acceder a mis productos y servicios //  
+    Route::resource('/products', ProductController::class,[
+        'names'=>[
+            'edit'   => 'products.edit',
+            'show'   => 'products.show',
+            'destroy'   => 'products.destroy',
+            'index'  => 'products.index',
+            'store'  => 'products.store'
+
+        ]
+    ]);
+
+    // ? ruta para acceder a mis productos y servicios //  
+    Route::resource('/searchproviders', SearchProvidersController::class,[
+        'names'=>[
+            'show'   => 'searchproviders.show',
+            'index'  => 'searchproviders.index',
+        ]
+    ]);
+
+
     // ! rutas resources de acceso rapido a tablas//
     Route::resources([
         // ? rutas  de usuarios de sistema//
@@ -215,7 +236,6 @@ Route::middleware(['auth'])->group(function () {
         'nodes.educational-institutions.faculties.research-groups.research-teams.projects.research-outputs' => ResearchOutputController::class,
         // ? rutas de usuarios pertenecientes a cada facultad//
         'nodes.educational-institutions.faculties.users'                                                    => EducationalInstitutionUserController::class,
-
         // ? rutas de areas de conocimiento//
         'knowledge-areas'                   => KnowledgeAreaController::class,
         // ? rutas de sub-areas de conocimiento//
@@ -234,17 +254,8 @@ Route::middleware(['auth'])->group(function () {
         //'dashboard-company'                 => CompanyController::class,//
         // ? ruta para acceder a las ideas empresariales //
         'business-ideas'                    => BusinessIdeasController::class,
-        // ? ruta para acceder a mis productos y servicios //
-        'products'                          => ProductController::class,
-        // ? ruta para acceder a mis buscar proveedores //
-        'searchproviders'                   => SearchProvidersController::class,
-
         // ? ruta para acceder a Blog de experiencias //
         'experiences'                   => ExperienceController::class,
-
-        'showexperiences'                   => ShowExperiencesController::class,
-        
-
-
+        'showexperiences'                   => ShowExperiencesController::class,  
     ]);
 });
