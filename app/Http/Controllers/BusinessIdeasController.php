@@ -8,7 +8,9 @@ use App\Models\Business;
 use App\Models\User;
 use App\Models\BusinessIdeas;
 use App\Http\Requests\BusinessIdeasRequest;
-
+use Illuminate\Support\Facades\Bus;
+use PharIo\Manifest\Author;
+use Illuminate\Support\Facades\Auth;
 
 
 class BusinessIdeasController extends Controller
@@ -21,9 +23,10 @@ class BusinessIdeasController extends Controller
     public function index()
     {
         $user       = auth()->user();
-        $business   = $user->business()->first();;
+        $business   = $user->business()->first();
+        //$idea       = new BusinessIdeas();
+        //$this->authorize('viewAny',[BusinessIdeas::class, $idea]);
         $ideas      = BusinessIdeas::where('business_id','=',$business->id)->Paginate(10);
-
 
         return view('BusinessIdeas.index', compact('ideas','business'));
     }
@@ -33,10 +36,23 @@ class BusinessIdeasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function show($id)
+    {
+        $user           = auth()->user();
+        $user_business  = $user->business()->first();
+        $idea           = BusinessIdeas::find($id);
+        //$this->authorize('view',[BusinessIdeas::class, $idea]);
+
+        return view('BusinessIdeas.show', compact('idea','user_business'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        $user                = auth()->user();
-        $user->business()->get();
+        $user = auth()->user();
         $user_business = $user->business()->first();
 
         return view('BusinessIdeas.create', compact('user_business'));
@@ -60,11 +76,12 @@ class BusinessIdeasController extends Controller
         $business_idea->description     = $request->get('description');
         $business_idea->type            = $request->get('type');
         $business_idea->have_tools      = $request->get('have_tools');
-        $business_idea->how_many_tools  = $request->get('tools');
+        $business_idea->tools           = $request->get('tools');
         $business_idea->have_money      = $request->get('have_money');
-        $business_idea->how_many_money  = $request->get('money');
+        $business_idea->money           = $request->get('money');
         $business_idea->condition       = $request->get('condition');
 
+        //$this->authorize('create', [BusinessIdeas::class, $business_idea]);
 
         if($business_idea->save()){
             return redirect()->route('business-ideas.index')->with('success', 'La idea fue creada correctamente');
@@ -82,50 +99,39 @@ class BusinessIdeasController extends Controller
     public function edit($id)
     {
         $user           = auth()->user();
-        $user->business()->get();
         $user_business  = $user->business()->first();
         $idea           = BusinessIdeas::find($id);
+        //$this->authorize('update', [BusinessIdeas::class, $idea]);
 
         return view('BusinessIdeas.edit', compact('idea','user_business'));
     }
 
-
-    public function update(BusinessIdeasRequest $request, BusinessIdeas $idea)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\BusinessIdeas  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function update(BusinessIdeasRequest $request, $id)
     {
-        $user          = auth()->user();
-        $user_business = $user->business()->first();
+        $idea = BusinessIdeas::find($id);
 
-        $idea->business_id     = $user_business->id;
         $idea->name            = $request->get('name');
         $idea->description     = $request->get('description');
         $idea->type            = $request->get('type');
         $idea->have_tools      = $request->get('have_tools');
-        $idea->how_many_tools  = $request->get('tools');
+        $idea->tools           = $request->get('tools');
         $idea->have_money      = $request->get('have_money');
-        $idea->how_many_money  = $request->get('money');
+        $idea->money           = $request->get('money');
         $idea->condition       = $request->get('condition');
-
+        //$this->authorize('update', [BusinessIdeas::class, $idea]);
 
         if($idea->save()){
-
-        return redirect()->back()->with('status', 'Actualización exitosa');
+            return redirect()->route('business-ideas.index')->with('success', 'La idea fue editada correctamente');;
         }else{
-            return redirect()->back()->with('status','Hubo probema al guardar');
+            return redirect()->back()->with('status','Hubo un probema al guardar');
         }
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user           = auth()->user();
-        $user->business()->get();
-        $user_business  = $user->business()->first();
-        $idea           = BusinessIdeas::find($id);
-
-        return view('BusinessIdeas.show', compact('idea','user_business'));
     }
 
     /**
@@ -135,6 +141,7 @@ class BusinessIdeasController extends Controller
      */
     public function destroy($id)
     {
+        //$this->authorize('delete', [BusinessIdeas::class, $idea]);
         $idea = BusinessIdeas::find($id)->delete();
 
         return redirect()->route('business-ideas.index')

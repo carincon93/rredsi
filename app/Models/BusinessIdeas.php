@@ -20,9 +20,9 @@ class BusinessIdeas extends Model
         'description',
         'type',
         'have_tools',
-        'how_many_tools',
+        'tools',
         'have_money',
-        'how_many_money',
+        'money',
         'condition',
     ];
 
@@ -37,5 +37,8 @@ class BusinessIdeas extends Model
     public function replaceWithRelationshipModelName()
     {
         return $this->belongsTo('App\Models\replaceWithRelationshipModelName');
+    }
+    public function authors($idea_id,$business_id) {
+        return $this->where([['id','=',$idea_id], ['business_id','=',$id_business]])->exists();
     }
 }

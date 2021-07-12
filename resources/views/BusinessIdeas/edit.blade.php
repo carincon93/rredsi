@@ -19,9 +19,20 @@
                 </x-jet-section-title>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="{{ Route ('business-ideas.update',[$idea->id])}}">
+                <form method="POST" action="{{ route ('business-ideas.update', [$idea->id])}}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
+                    <div class="mt-4" hidden>
+                        <x-jet-label class="mb-4" for="id" value="{{ __('Name') }}" />
+                        <x-jet-input id="id" class="block mt-1 w-full" type="number" name="id" value="{{ old('id') ?? $idea->id }}"/>
+                        <x-jet-input-error for="id" class="mt-2" />
+                    </div>
+                    <div class="mt-4" hidden>
+                        <x-jet-label class="mb-4" for="business_id" value="{{ __('Name') }}" />
+                        <x-jet-input id="business_id" class="block mt-1 w-full" type="number" name="business_id" value="{{ old('business_id') ?? $idea->business_id }}"/>
+                        <x-jet-input-error for="business_id" class="mt-2" />
+                    </div>
                     {{--Nombre --}}
                     <div class="mt-4">
                         <x-jet-label class="mb-4" for="name" value="{{ __('Name') }}" />
@@ -60,8 +71,8 @@
                     </div>
                     {{--Cuantas herramientas tiene --}}
                     <div class="mt-4">
-                        <x-jet-label class="mb-4" for="tools" value="{{ __('Con cuántas herramientas cuenta') }}" />
-                        <x-jet-input id="tools" class="block mt-1 w-full" type="number" max="191" name="tools" value="{{ old('tools') ?? $idea->how_many_tools }}"/>
+                        <x-jet-label class="mb-4" for="tools" value="{{ __('Con cuáles herramientas cuenta (Separar por comas)') }}" />
+                        <x-jet-input id="tools" class="block mt-1 w-full" type="text" max="191" name="tools" value="{{ old('tools') ?? $idea->tools }}"/>
                         <x-jet-input-error for="tools" class="mt-2" />
                     </div>
                     {{--Tiene o no presupuesto --}}
@@ -80,7 +91,7 @@
                     {{--De cuanto es el presupuesto --}}
                     <div class="mt-4">
                         <x-jet-label class="mb-4" for="money" value="{{ __('Monto para desarrollar la idea') }}" />
-                        <x-jet-input id="money" class="block mt-1 w-full" type="number" name="money" value="{{ old('money') ?? $idea->how_many_money }}"/>
+                        <x-jet-input id="money" class="block mt-1 w-full" type="number" name="money" value="{{ old('money') ?? $idea->money }}"/>
                         <x-jet-input-error for="money" class="mt-2" />
                     </div>
                     {{--Condición --}}

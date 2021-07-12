@@ -59,8 +59,8 @@
                     </div>
                     {{--Cuantas herramientas tiene --}}
                     <div class="mt-4">
-                        <x-jet-label class="mb-4" for="tools" value="{{ __('Con cuántas herramientas cuenta') }}" />
-                        <x-jet-input id="tools" class="block mt-1 w-full" type="number" max="191" name="tools" value="{{ old('tools') }}" required />
+                        <x-jet-label class="mb-4" for="tools" value="{{ __('Con cuáles herramientas cuenta (Separar por comas)') }}" />
+                        <x-jet-input id="tools" class="block mt-1 w-full" type="text" max="191" name="tools" value="{{ old('tools') }}" />
                         <x-jet-input-error for="tools" class="mt-2" />
                     </div>
                     {{--Tiene o no presupuesto --}}
@@ -79,7 +79,7 @@
                     {{--De cuanto es el presupuesto --}}
                     <div class="mt-4">
                         <x-jet-label class="mb-4" for="money" value="{{ __('Monto para desarrollar la idea') }}" />
-                        <x-jet-input id="money" class="block mt-1 w-full" type="number" name="money" value="{{ old('money') }}" required />
+                        <x-jet-input id="money" class="block mt-1 w-full" type="number" name="money" value="{{ old('money') }}" />
                         <x-jet-input-error for="money" class="mt-2" />
                     </div>
                     {{--Condición --}}
@@ -87,7 +87,7 @@
                         <x-jet-label class="mb-4" for="condition" value="{{ __('Condición') }}" />
                         <select id="condition" name="condition" class="form-select w-full" required >
                             <option value="">Seleccione una condición</option>
-                            <option value="Abierto">{{'Abierto'}}</option>
+                            <option value="Abierta">{{'Abierta'}}</option>
                             <option value="Sin respuesta">{{'Sin respuesta'}}</option>
                             <option value="Atendida">{{'Atendida'}}</option>
                             <option value="Resuelta">{{'Resuelta'}}</option>
