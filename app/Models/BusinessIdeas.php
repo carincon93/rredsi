@@ -39,6 +39,6 @@ class BusinessIdeas extends Model
         return $this->belongsTo('App\Models\replaceWithRelationshipModelName');
     }
     public function authors($idea_id,$business_id) {
-        return $this->where([['id','=',$idea_id], ['business_id','=',$id_business]])->exists();
+        return $this->where([['id','=',$idea_id], ['business_id','=',$business_id]])->exists();
     }
 }

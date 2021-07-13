@@ -33,7 +33,7 @@ class IdeaPolicy
      */
     public function create(User $user, BusinessIdeas $idea)
     {
-        if($user->hasPermissionTo('create_idea')){
+        if($user->hasPermissionTo('create_ideas')){
             return true;
         }
 
@@ -50,7 +50,7 @@ class IdeaPolicy
     public function update(User $user, BusinessIdeas $idea)
     {
         $business = $user->business()->first();
-        if($idea->authors($idea->id,$business->id) && $user->hasPermissionTo('edit_idea')){
+        if($idea->authors($idea->id,$business->id) && $user->hasPermissionTo('edit_ideas')){
             return true;
         }
         return false;
@@ -64,7 +64,8 @@ class IdeaPolicy
      */
     public function view(User $user, BusinessIdeas $idea)
     {
-        if($user->hasPermissionTo('show_idea')){
+        $business = $user->business()->first();
+        if($idea->authors($idea->id,$business->id) && $user->hasPermissionTo('show_ideas')){
             return true;
         }
             return false;
@@ -81,7 +82,7 @@ class IdeaPolicy
     public function delete(User $user, BusinessIdeas $idea)
     {
         $business = $user->business()->first();
-        if($idea->authors($idea->id,$business->id) && $user->hasPermissionTo('destroy_idea')){
+        if($idea->authors($idea->id,$business->id) && $user->hasPermissionTo('destroy_ideas')){
             return true;
         }
         return false;
