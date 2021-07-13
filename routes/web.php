@@ -118,6 +118,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/notifications/to-accept-student', [NotificationController::class, 'acceptStudentInProject'])->name('notifications.acceptStudentInProject');
     // ? ruta para envio de interes de proyecto //
     Route::post('/notifications/interes/{id}', [NotificationController::class, 'interes'])->name('notifications.interes');
+    // ? ruta para envio de notificaciones sobre la generación de una idea empresarial //
+    Route::post('/notifications/new-business-idea/{id}', [NotificationController::class, 'newBusinessIdea'])->name('notifications.new-business-idea');
     // ? ruta para cambiar a leida notificaicon de correo//
     Route::get('/all-notifications/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend');
     // ? ruta de dashboard de instituciones educativas//

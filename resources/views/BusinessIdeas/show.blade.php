@@ -44,10 +44,15 @@
                                 {{ $idea->type }}
                             </p>
                         </div>
-                        <div class="flex items-center justify-end mt-4">
-                            <a href="{{ route('business-ideas.index')}}">
+                        <div class="flex items-center justify-end">
+                            <a class="mx-4" href="{{ route('business-ideas.index')}}">
                                 <div class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150'">
                                     {{ __('Volver')}}
+                                </div>
+                            </a>
+                            <a href="{{ route('business-ideas.edit', $idea->id)}}">
+                                <div class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150'">
+                                    {{ __('Editar')}}
                                 </div>
                             </a>
                         </div>

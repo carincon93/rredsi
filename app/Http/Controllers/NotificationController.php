@@ -7,6 +7,7 @@ use App\Models\Node;
 use App\Models\Project;
 use App\Models\AcademicProgram;
 use App\Models\Request as ModelsRequest;
+use App\Models\BusinessIdeas;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 
@@ -21,6 +22,7 @@ use App\Notifications\InformationNotification;
 use App\Notifications\NotificationToParticipate;
 use App\Notifications\RequestResponse;
 use App\Notifications\NotificationInteres;
+use App\Notifications\NotificationNewBusinessIdea;
 
 
 
@@ -315,25 +317,37 @@ class NotificationController extends Controller
 
         $user = auth()->user();
         $business = $user->business()->first();
-       
+
         $project = Project::find($id);
         $authors = $project->authors()->get();
 
         $researchGroup  = $project->researchTeams()->where('is_principal', 1)->first()->researchGroup;
-        
+
         $faculty        = $researchGroup->educationalInstitutionFaculty;
-        
+
 
         if($faculty){
             $node = $faculty->educationalInstitution->node;
             $educationalInstitution = $faculty->educationalInstitution;
-            
+
             $adminInstitution = $educationalInstitution->administrator;
             // return $adminInstitution;
             Notification::send($adminInstitution, New NotificationInteres($user,$business,$project,$authors));
-            
+
         }
 
         return redirect()->back()->with('status', 'Alerta generada con exito');
-    } 
+    }
+
+    // ? este metodo envia la notificación sobre la creación de una nueva idea empresarial
+    public function newBusinessIdea($idea){
+
+        $user = auth()->user();
+        $business = $user->business()->first();
+
+        if($idea){
+            Notification::send(New NotificationNewBusinessIdea($user,$business,$idea));
+            return redirect()->back()->with('status', 'Notificación generada con exito');
+        }
+    }
 }

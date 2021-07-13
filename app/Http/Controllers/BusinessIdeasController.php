@@ -11,6 +11,8 @@ use App\Http\Requests\BusinessIdeasRequest;
 use Illuminate\Support\Facades\Bus;
 use PharIo\Manifest\Author;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\NotificationController;
+
 
 
 class BusinessIdeasController extends Controller
@@ -24,9 +26,8 @@ class BusinessIdeasController extends Controller
     {
         $user       = auth()->user();
         $business   = $user->business()->first();
-        //$idea       = new BusinessIdeas();
-        //$this->authorize('viewAny',[BusinessIdeas::class, $idea]);
         $ideas      = BusinessIdeas::where('business_id','=',$business->id)->Paginate(10);
+        //$this->authorize('viewAny',[BusinessIdeas::class, $ideas]);
 
         return view('BusinessIdeas.index', compact('ideas','business'));
     }
@@ -54,6 +55,8 @@ class BusinessIdeasController extends Controller
     {
         $user = auth()->user();
         $user_business = $user->business()->first();
+        $idea = New BusinessIdeas;
+        //$this->authorize('create', [BusinessIdeas::class, $idea]);
 
         return view('BusinessIdeas.create', compact('user_business'));
     }
@@ -84,6 +87,9 @@ class BusinessIdeasController extends Controller
         //$this->authorize('create', [BusinessIdeas::class, $business_idea]);
 
         if($business_idea->save()){
+            // ? Crea un nuevo objeto de la clase Notification y ejecuta el método newBusinesIdea para crear la notificación de la idea
+            $notification = New NotificationController;
+            $notification->newBusinessIdea($business_idea);
             return redirect()->route('business-ideas.index')->with('success', 'La idea fue creada correctamente');
         } else{
             return redirect()->route('business-ideas.create')->with('success', 'Hubo un error al momento de crear la idea');

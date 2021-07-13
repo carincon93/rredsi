@@ -8,7 +8,7 @@ use App\Models\User;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProductPolicy
+class IdeaPolicy
 {
     use HandlesAuthorization;
     /**
@@ -31,9 +31,9 @@ class ProductPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user, Product $product)
+    public function create(User $user, BusinessIdeas $idea)
     {
-        if($user->hasPermissionTo('create_product')){
+        if($user->hasPermissionTo('create_idea')){
             return true;
         }
 
@@ -44,13 +44,13 @@ class ProductPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\BusinessIdeas $idea
      * @return mixed
      */
-    public function update(User $user, Product $product)
+    public function update(User $user, BusinessIdeas $idea)
     {
         $business = $user->business()->first();
-        if($product->authors($product->id,$business->id) && $user->hasPermissionTo('edit_product')){
+        if($idea->authors($idea->id,$business->id) && $user->hasPermissionTo('edit_idea')){
             return true;
         }
         return false;
@@ -59,12 +59,12 @@ class ProductPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\BusinessIdeas $idea
      * @return mixed
      */
-    public function view(User $user, Product $product)
+    public function view(User $user, BusinessIdeas $idea)
     {
-        if($user->hasPermissionTo('show_product')){
+        if($user->hasPermissionTo('show_idea')){
             return true;
         }
             return false;
@@ -75,13 +75,13 @@ class ProductPolicy
      * Determine whether the user can destroy the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\BusinessIdeas $idea
      * @return mixed
      */
-    public function delete(User $user, Product $product)
+    public function delete(User $user, BusinessIdeas $idea)
     {
         $business = $user->business()->first();
-        if($product->authors($product->id,$business->id) && $user->hasPermissionTo('destroy_product')){
+        if($idea->authors($idea->id,$business->id) && $user->hasPermissionTo('destroy_idea')){
             return true;
         }
         return false;

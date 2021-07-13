@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-</div>  
+</div>
 
     <div class="hidden sm:block">
                 <div class="py-8">
@@ -103,9 +103,9 @@
                         <div class="flex justify-center content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="transform transition-transform duration-500 ease-in-out" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
                                 <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                            </svg>                        
+                            </svg>
                             <div>{{ __('Back')}}</div>
-                        </div> 
+                        </div>
                     </div>
                     </a>
                 </td>
@@ -113,18 +113,18 @@
                     <form id="form" action={{ route('notifications.interes',[$project->id]) }} method="POST">
                     @csrf
                         <a href="#" onclick="document.getElementById('form').submit();">
-                            <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-400 group-hover:text-blue-300 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">   
+                            <div class="w-auto text-center text-base sm:w-auto items-center justify-center text-blue-400 group-hover:text-blue-300 font-medium leading-none bg-white rounded-lg shadow-sm group-hover:shadow-lg py-3 px-5 border border-transparent transform group-hover:-translate-y-0.5 transition-all duration-150">
                                 <div class="flex justify-center content-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="transform transition-transform duration-500 ease-in-out" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
                                         <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                                     </svg>
                                     <div> {{ __('Generar Alerta de Interes')}}</div>
-                                </div>    
-                            </div>                            
+                                </div>
+                            </div>
                         </a>
                     </form>
-                </td>                
-            </ts>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
