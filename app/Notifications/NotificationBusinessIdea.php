@@ -6,21 +6,26 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
-class NotificationNewBusinessIdea extends Notification
+class NotificationBusinessIdea extends Notification
 {
     use Queueable;
+
+    private $user;
+    private $business;
+    private $businessideas;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user,$business,$idea)
+    public function __construct($user,$business,$businessideas)
     {
-        $this->user     = $user;
+        $this->user = $user;
         $this->business = $business;
-        $this->idea     = $idea;
+        $this->businessideas = $businessideas;
     }
 
     /**
@@ -43,12 +48,12 @@ class NotificationNewBusinessIdea extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject("Creación de una una nueva idea empresarial")
+            ->subject("Creación de una nueva {$this->businessideas->name} de la empresa {$this->business->name}")
             ->greeting("¡Hola {$notifiable->name} !")
             ->line("Le informamos que una nueva idea empresarial fue generada")
-            ->line("Nombre de la idea: {$idea->name}")
-            ->line("Empresa: {$business->name}")
-            ->line("Usuario encargado: {$user->name}");
+            ->line("Nombre de la idea: {$this->businessideas->name}")
+            ->line("Empresa: {$this->business->name}")
+            ->line("Usuario encargado: {$this->user->name}");
     }
 
     /**
