@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Business;
-use App\Models\User;
 use App\Models\BusinessIdeas;
 use App\Http\Requests\BusinessIdeasRequest;
 use Illuminate\Support\Facades\Bus;
