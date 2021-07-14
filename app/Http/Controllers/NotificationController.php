@@ -7,6 +7,8 @@ use App\Models\Node;
 use App\Models\Project;
 use App\Models\AcademicProgram;
 use App\Models\Request as ModelsRequest;
+use App\Models\BusinessIdeas;
+use App\Models\EducationalInstitution;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 
@@ -21,6 +23,7 @@ use App\Notifications\InformationNotification;
 use App\Notifications\NotificationToParticipate;
 use App\Notifications\RequestResponse;
 use App\Notifications\NotificationInteres;
+use App\Notifications\NotificationBusinessIdea;
 
 
 
@@ -308,32 +311,42 @@ class NotificationController extends Controller
         Notification::send($user, new RequestResponse("Fue aceptado en el proyecto.", $response, $project));
 
         return redirect()->back()->with('status', 'Respuesta enviada con éxito');
-
-
     }
-    public function interes($id){
 
+    public function interes($id){
         $user = auth()->user();
         $business = $user->business()->first();
-       
         $project = Project::find($id);
         $authors = $project->authors()->get();
-
         $researchGroup  = $project->researchTeams()->where('is_principal', 1)->first()->researchGroup;
-        
         $faculty        = $researchGroup->educationalInstitutionFaculty;
-        
 
         if($faculty){
             $node = $faculty->educationalInstitution->node;
             $educationalInstitution = $faculty->educationalInstitution;
-            
             $adminInstitution = $educationalInstitution->administrator;
             // return $adminInstitution;
             Notification::send($adminInstitution, New NotificationInteres($user,$business,$project,$authors));
-            
         }
-
         return redirect()->back()->with('status', 'Alerta generada con exito');
-    } 
+    }
+
+    // ? este metodo envia la notificación sobre la creación de una nueva idea empresarial
+    public function newBusinessIdea($businessideas){
+        
+        $user = auth()->user();
+        $business = $user->business()->first();
+        $institutions = EducationalInstitution::all();
+        if($businessideas){
+            foreach ($institutions as $institution ){
+                if($institution){
+                    error_log('aqui llego 2 notificacion');
+                    error_log($businessideas->name);
+                    $adminInstitution = $institution->administrator;
+                    Notification::send($adminInstitution, New NotificationBusinessIdea($user,$business,$businessideas));  
+                }              
+            }
+            return redirect()->back()->with('status', 'Las instituciones de educación han sido notificadas');            
+        }
+    }
 }

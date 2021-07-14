@@ -15,41 +15,30 @@ class BusinessIdeas extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
+        'business_id',
+        'name',
         'description',
         'type',
-        'person_in_charge',
         'have_tools',
         'tools',
-        'have_budget',
-        'budget',
+        'have_money',
+        'money',
         'condition',
-
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        //
-    ];
-
-    public function replaceWithRelationshipModelName(){
-        return $this->belongsTo('App\Models\replaceWithRelationshipModelName');
+    public function user() {
+        return $this->hasOne('App\Models\User', 'nit_business');
     }
 
     public function business() {
-        return $this->belongsTo('App\Models\Business');
+        return $this->belongsTo('App\Models\Business','business_id', 'id');
+    }
+
+    public function replaceWithRelationshipModelName()
+    {
+        return $this->belongsTo('App\Models\replaceWithRelationshipModelName');
+    }
+    public function authors($idea_id,$business_id) {
+        return $this->where([['id','=',$idea_id], ['business_id','=',$business_id]])->exists();
     }
 }

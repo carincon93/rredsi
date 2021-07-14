@@ -114,9 +114,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/nodes/{node}/explorer/node-info', [AppController::class, 'nodeInfo'])->name('nodes.explorer.nodeInfo');
     // ? ruta notificacion para aplicar colaborar en un proyecto //
     Route::post('/nodes/{node}/explorer/projects/{user}', [NotificationController::class, 'sendRoleNotification'])->name('nodes.explorer.sendRoleNotification');
-    
+
     Route::put('company/{business}', [CompanyProfileController::class, 'update'])->name('company.update');
-    
+
     // ? ruta para envio de notificacion de participacion en proyecto //
     Route::post('/notifications/send-to-participate', [NotificationController::class, 'sendToParticipate'])->name('notifications.sendToParticipate');
     // ? ruta para envio de notificacion de participacion de proyecto en un evento//
@@ -125,6 +125,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/notifications/to-accept-student', [NotificationController::class, 'acceptStudentInProject'])->name('notifications.acceptStudentInProject');
     // ? ruta para envio de interes de proyecto //
     Route::post('/notifications/interes/{id}', [NotificationController::class, 'interes'])->name('notifications.interes');
+    // ? ruta para envio de notificaciones sobre la generación de una idea empresarial //
+    Route::post('/notifications/new-business-idea/{id}', [NotificationController::class, 'newBusinessIdea'])->name('notifications.new-business-idea');
     // ? ruta para cambiar a leida notificaicon de correo//
     Route::get('/all-notifications/{id}', [NotificationController::class, 'indexResponseSend'])->name('notifications.indexResponseSend');
     // ? ruta de dashboard de instituciones educativas//
@@ -271,10 +273,26 @@ Route::middleware(['auth'])->group(function () {
         // ? rutas para el observatorio de proyectos//
         'observatories'                     => ObservatoryController::class,
         // ? ruta para el perfil empresarial //
-        'company-profile'                   => CompanyProfileController::class,
-        // ? rutas de dashboard empresa //
-        //'dashboard-company'                 => CompanyController::class,//
+        'company-profile'                 => CompanyProfileController::class,
         // ? ruta para acceder a las ideas empresariales //
-        'business-ideas'                    => BusinessIdeasController::class,
+        //'business-ideas'                    => BusinessIdeasController::class,
+
     ]);
+
+    // ? rutas para acceder a las ideas empresariales //
+    Route::resource('business-ideas', BusinessIdeasController::class, [
+        'names'=>[
+            'index'   => 'business-ideas.index',
+            'show'    => 'business-ideas.show',
+            'edit'    => 'business-ideas.edit',
+            'update'  => 'business-ideas.update',
+            'create'  => 'business-ideas.create',
+            'store'   => 'business-ideas.store',
+            ]
+        ]);
+
+    // ? ruta para guardar una nueva idea empresarial de la empresa logueada//
+    // Route::post('business-ideas/store', [BusinessIdeasController::class, 'store'])->name('business-ideas.store');
+
+
 });
